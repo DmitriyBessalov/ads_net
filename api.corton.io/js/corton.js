@@ -1,5 +1,3 @@
-console.log('test1');
-
 //Получение get параметров
 var get = (function() {
     var a = window.location.search;
