@@ -36,6 +36,16 @@ $(document).ready(function(){
         domen = domen.replace(/\./gi, '_');
         document.getElementById('fileadrres').innerHTML='&lt;link href="https://api.corton.io/style/'+domen+'.css.gz" rel="stylesheet"&gt;<br><br>&lt;script async src="https://api.corton.io/js/corton.js.gz"&gt;&lt;/script&gt;';
     });
+	
+//Функция для чекбокса
+	$(function()
+  {
+      var f=function()
+      {
+          $(this).next().text($(this).is(':checked') ? 'Активна' : 'На паузе');
+      };
+      $('.flipswitch').change(f).trigger('change');
+  });
 
 //Отрытие модальных окон на странице площадок
     $("#promo").click(function(){
@@ -101,15 +111,14 @@ $(document).ready(function(){
     });
 //Скрытие модальных окон
     $(".modalhide").click(function(){
-        $('.modal.promo').css("display", "none");
-        $('.modal.recomendation').css("display", "none");
-        $('.modal.zagrecom').css("display", "none");
-        $('.modal.nativepreview').css("display", "none");
-        $('.modal.zagnativepreview').css("display", "none");
-        $('.modal.nativepro').css("display", "none");
-        $('.modal.zag-nativepro').css("display", "none");
-        $('.modal.slider').css("display", "none");
+        $('.modal').css("display", "none");
         $('.black-fon').css("display", "none");
+    });
+//Открытие модальных окон на странице со статистикой площадок
+    $(".modalclick").click(function(){
+        $('.black-fon').css("display", "block");
+        $('#modalotch'+this.id.substr(9)).css("display", "block");
+
     });
 
 // При изменении виджета Promo
@@ -459,21 +468,23 @@ $(document).ready(function(){
     widget_nativepre();
 // Визуализация виджета nativepre-статья
     function widget_nativepre(){
-        var style = "#corton-nativepreview-widget{width: 100% !important; padding: 18px 0 18px 0; display: table !important; box-sizing: border-box !important; margin-bottom: 20px !important; margin-top: 20px !important;}\n";
+        var style = "#corton-nativepreview-widget{width: 100%; padding: 18px 0 18px 0; display: table !important; box-sizing: border-box; margin-bottom: 20px; margin-top: 20px;}\n";
 
-        style += "#corton-nativepreview-widget .corton-left{display: table-cell !important; vertical-align: top !important; width: 290px !important;}\n";
+        style += "#corton-nativepreview-widget .corton-left{display: table-cell !important; vertical-align: middle; width: 290px;}\n";
 
-        style += "#corton-nativepreview-widget .corton-left img{width: 100% !important; max-width: 290px; vertical-align:top !important;}\n";
+        style += "#corton-nativepreview-widget .corton-left img{width: 100%; max-width: 290px; vertical-align:top; object-fit: cover;}\n";
 
-        style += "#corton-nativepreview-widget .corton-right{display: table-cell !important; vertical-align: middle !important; padding-left: 15px !important;}\n";
-        style += "#corton-nativepreview-widget .corton-title{width: 100% !important; padding-bottom: 10px !important; font-weight: 400 !important;}\n";
+        style += "#corton-nativepreview-widget .corton-right{display: table-cell !important; vertical-align: middle; padding-left: 15px;}\n";
+        style += "#corton-nativepreview-widget .corton-title{width: 100%; padding-bottom: 10px !important; font-weight: 400;}\n";
 
         style += "#corton-nativepreview-widget .corton-link{display: inline-block !important; padding: 2px 10px !important;}\n";
 
-        style += " @media (max-width: 640px) and (min-width: 200px) { #corton-nativepreview-widget .corton-left{ float: left !important; }}";
-        style += " @media (max-width: 640px) and (min-width: 200px) { #corton-nativepreview-widget .corton-right{ padding-left: 0px !important; padding-top: 10px !important; }}";
-        style += " @media (max-width: 640px) and (min-width: 200px) { #corton-nativepreview-widget .corton-left{ width: 100% !important; }}";
-        style += " @media (max-width: 360px) and (min-width: 200px) { #corton-nativepreview-widget .corton-left img{ width: 100% !important; max-width: 360px !important; }}";
+        style += " @media (max-width: 600px) and (min-width: 200px) { #corton-nativepreview-widget .corton-left{ float: left; }}";
+        style += " @media (max-width: 600px) and (min-width: 200px) { #corton-nativepreview-widget .corton-right{ padding-left: 0px; padding-top: 10px; }}";
+		style += " @media (max-width: 640px) and (min-width: 600px) { #corton-nativepreview-widget .corton-left{ width: 230px; }}";
+        style += " @media (max-width: 600px) and (min-width: 200px) { #corton-nativepreview-widget .corton-left{ width: 100%; }}";
+		style += " @media (max-width: 440px) and (min-width: 360px) { #corton-nativepreview-widget .corton-left img{ width: 100%; max-width: 440px; height: 168px; object-fit: cover; }}";
+        style += " @media (max-width: 360px) and (min-width: 200px) { #corton-nativepreview-widget .corton-left img{ width: 100%; max-width: 360px; }}";
         var widgetfontunit=$('.widget-nativepre [name=widget-font-unit]').val();
 
         var variable = $('.widget-nativepre  [name=widget-background-block]').val();

@@ -22,13 +22,15 @@
                     $str="AND `type`!='demo'";
                 }
 
-                $sql="SELECT `id`, `domen`, `type`, `user_email`, `date_add`, `status`, `recomend_aktiv`, `natpre_aktiv`, `natpro_aktiv`, `slider_aktiv` FROM `ploshadki` WHERE `id`!=0 ".$str." ORDER BY `domen`";
+                $sql="SELECT `id`, `domen`, `type`,`otchiclen`, `user_email`, `date_add`, `status`,`otchiclen`, `recomend_aktiv`, `natpre_aktiv`, `natpro_aktiv`, `slider_aktiv` FROM `ploshadki` WHERE `id`!=0 ".$str." ORDER BY `domen`";
                 $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 echo '
 		<div class="form-block w-form">
           <div class="w-form-done"></div>
           <div class="w-form-fail"></div>
         </div>
+        <script src="https://panel.corton.io/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
+        <script src="https://panel.corton.io/js/jquery-ui.min.js" type="text/javascript"></script> 
 		<div class="table-box">
         <div class="table w-embed">
           <table>
@@ -55,7 +57,6 @@
                     if (is_null($platform['prosmotr'])){$platform['prosmotr']=$platform['click']=0;}
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
-
                     echo "<tr>
                       <td style=\"text-align: left; min-width: 280px;\">
 					  <div style=\"margin-top: 7px;\">
@@ -85,24 +86,44 @@
 					  <td style=\"width: 160px;\" >
 					     <div class=\"grafclick\"></div>
 					  </td>
-					  <td ><input type=\"range\" list=\"tickmarks\" min=\"10\" max=\"190\" step=\"10\" value=\"100\"> </td>
+					  <td id='otchic".$i['id']."'>".$i['otchiclen']."</td>
 					  <td class=\"bluetext\">" . $balans . "</td>
                       <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
-						<a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
-                           <ul class=\"sub-menu\">
-                              <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>";
+						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
+                         <ul class=\"sub-menu\">
+                              <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
+                              <a class='modalclick' id='otchiclen".$i['id']."'>Процент отчислений</a><br>";
                               if ($i['type']!='demo')
-                                  echo "<a href='#'>Вывод балансов</a><br>";
+                                  echo "<a class='modalclick' id='balans".$i['id']."'>Вывод балансов</a><br>";
                               echo "
                               <a href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
-                            </ul>
+                         </ul>
+                         <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:20%;top:300px;right:20%;display: none;\">
+                            <div class=\"div-block-78 w-clearfix\">
+                                <div class=\"div-block-132 modalhide\">
+                                    <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
+                                </div>
+                                <div class=\"polzunok-container\">
+                                    <div class=\"polzunok\" id=\"polz".$i['id']."\">
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
                       </td>
                   </tr>";
                 };
-
-                echo '
-          </table>
-        </div>
+                echo "</table>\n<script>
+                    $(\".polzunok\").slider({min:0,max:200,range:\"min\",animate:\"slow\",slide:function(event, ui){
+                        $('#'+this.id+' span').html(\"<b>&lt;</b>\"+ui.value+\"%<b>&gt;</b>\");
+                        $.get(\"https://panel.corton.io/platforms-otchicleniay?id=\"+this.id+\"&otchiclen=\"+ui.value);
+                        $('#otchic'+this.id.substr(4)).html(ui.value);
+                    }});\n";
+                foreach ($result as $i) {
+                    echo "$(\"#polz".$i['id']."\").slider(\"value\",".$i['otchiclen'].");$(\"#polz".$i['id']." span\").html(\"<b>&lt;</b>\"+$(\"#polz".$i['id']."\").slider(\"value\")+\"%<b>&gt;</b>\");\n";
+                }
+                echo '</script>
+        </div>';
+        echo '
 		<div class="table-right">
 		    <form id="email-form" action="/platforms" name="email-form" class="form-333">
 			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
@@ -142,6 +163,7 @@
             <div class="text-block-111">&gt;</div>
           </div>
         </div>
+        <div class="black-fon modalhide"></div>
 		';
                 include PANELDIR . '/views/layouts/footer.php';
                 return true;
@@ -2056,33 +2078,42 @@
                                 <div class="corton-title">Пример рекламного анонса на вашем сайте!</div>
                             </div> <span class="close-widget"></span> </div>
                     </div>
-                </div>			
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="black-fon modalhide"></div>
-  ';
+<div class="black-fon modalhide"></div>';
                 include PANELDIR . '/views/layouts/footer.php';
                 return true;
             }
 
-            //Удаляет площадку
-            public static function actionDel()
-            {
-                $db = Db::getConnection();
-                $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".addslashes($_GET['id']);
-                $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $domen = str_replace(".", "_", $domen);
-                unlink(PANELDIR.'/style/'.$domen.'.css.gz');
-                $sql="DELETE FROM `ploshadki` WHERE `ploshadki`.`id` = '".addslashes($_GET['id'])."';";
-                $sql.="DELETE FROM `style_natpre` WHERE `id` = '".addslashes($_GET['id'])."';";
-                $sql.="DELETE FROM `style_natpro` WHERE `id` = '".addslashes($_GET['id'])."';";
-                $sql.="DELETE FROM `style_promo` WHERE `id` = '".addslashes($_GET['id'])."';";
-                $sql.="DELETE FROM `style_recomend` WHERE `id` = '".addslashes($_GET['id'])."';";
-                $sql.="DELETE FROM `style_slider` WHERE `id` = '".addslashes($_GET['id'])."';";
-                $db->query($sql);
-                PloshadkiController::actionIndex();
-                return true;
-            }
-        };
+        //Меняет коэфициент отчислений для площадки
+        public static function actionOtchicleniay()
+        {
+            $db = Db::getConnection();
+            $_GET['id']= substr($_GET['id'], 4);
+            $sql="UPDATE `ploshadki` SET `otchiclen`='".$_GET['otchiclen']."' WHERE `id` = '".$_GET['id']."';";
+            $db->query($sql);
+            return true;
+        }
+
+        //Удаляет площадку
+        public static function actionDel()
+        {
+            $db = Db::getConnection();
+            $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".addslashes($_GET['id']);
+            $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $domen = str_replace(".", "_", $domen);
+            unlink(PANELDIR.'/style/'.$domen.'.css.gz');
+            $sql="DELETE FROM `ploshadki` WHERE `ploshadki`.`id` = '".addslashes($_GET['id'])."';";
+            $sql.="DELETE FROM `style_natpre` WHERE `id` = '".addslashes($_GET['id'])."';";
+            $sql.="DELETE FROM `style_natpro` WHERE `id` = '".addslashes($_GET['id'])."';";
+            $sql.="DELETE FROM `style_promo` WHERE `id` = '".addslashes($_GET['id'])."';";
+            $sql.="DELETE FROM `style_recomend` WHERE `id` = '".addslashes($_GET['id'])."';";
+            $sql.="DELETE FROM `style_slider` WHERE `id` = '".addslashes($_GET['id'])."';";
+            $db->query($sql);
+            PloshadkiController::actionIndex();
+            return true;
+        }
+    };

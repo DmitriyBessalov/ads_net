@@ -16,7 +16,7 @@ class ArticleController
               <tr class="trtop">
                 <th>ID</th>
                 <th>Заголовок</th>
-                <th><div class="tooltipinfo1">Потрачено<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
+                <th><div class="tooltipinfo1">Расход<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
                 <th><div class="tooltipinfo1">Показы<span class="tooltiptext1">Количество показов анонсов</span></div></th>
                 <th><div class="tooltipinfo1">Клики<span class="tooltiptext1">Клики на промо статью</span></div></th>
 				<th style="width: 120px;"><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей</span></div></th>
@@ -93,10 +93,13 @@ class ArticleController
                 echo '
                                 <tr>
                                   <td>' . $i['promo_id'] . '</td>
-                                  <td style="min-width: 280px; height: 94px !important; padding-top: 6px;">
+                                  <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
 								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-stat?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
 								     <div class="miniinfo"> 
-								        <div class="blockminiinfo">Активен</div>
+								        <div class="blockminiinfo">
+										   <input type="checkbox" checked="checked" class="flipswitch"/>
+                                           <span></span>
+										</div>
 										<div class="blockminiinfo"><span style="color: #768093">Бренд:</span> Namebrand</div>
 										<div class="blockminiinfo"><span style="color: #768093">Ставка:</span> ' . $i['stavka'] . '</div>
 								     </div>
@@ -104,10 +107,10 @@ class ArticleController
                                   <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                                   <td>' . $pokaz . '</td>
                                   <td>' . $promosum['clicking'] . '</td>
-								  <td class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
+								  <td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
                                   <td>' . $promosum['doread'] . '</td>
                                   <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
-                                  <td>' . $CRT . '</td>
+                                  <td style="min-width: 96px;">' . $CRT . '</td>
                                   <td style="width: 111px; text-align: right; padding-right: 20px;">
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu"> 
@@ -197,7 +200,7 @@ class ArticleController
                 <td>Превью</td>
                 <th>Заголовок</th>
             
-                <th><div class="tooltipinfo1">Потрачено<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
+                <th><div class="tooltipinfo1">Расход<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
                 <th><div class="tooltipinfo1">Показы<span class="tooltiptext1">Количество показов анонсов</span></div></th>
                 <th><div class="tooltipinfo1">Клики<span class="tooltiptext1">Клики на промо статью</span></div></th>
 				<th><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей</span></div></th>
@@ -289,21 +292,21 @@ class ArticleController
                     $sql = "SELECT `user_id`,`img_290x180`,`title` FROM `anons` WHERE `id`='" . $anons . "'";
                     $img = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
                     echo '<td>' . $anons . '</td>
-                          <td><a class="screenshot" style="text-decoration:none;" rel="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 94px !important; border-radius: 2px;" src="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
+                          <td><a class="screenshot" style="text-decoration:none;" rel="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
                     echo '<td>' . $result['promo_id'] . '</td>'; 
-                    echo '<td>Итого</td><td></td>';
+                    echo '<td></td><td></td>';
                 }
                 echo ' 
                
-               <td>' . sprintf("%.2f", $promosum['pay']) . '</td>
+               <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                <td>'.$pokaz.'</td>
                <td>' . $promosum['clicking'] . '</td>
-			   <td>' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
+			   <td class="greentext" style="width:140px;">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
                <td>' . $promosum['doread'] . '</td> 
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
-               <td>' . $CRT . '</td>
+               <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
                
                <td style="width: 111px; text-align: right; padding-right: 20px;">

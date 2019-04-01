@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_URI']=='/login'){
     $GLOBALS['user']= UsersController::checkRole();
 };
 
+
 switch ($GLOBALS['user']) {
     case 'admin':
         return array(
@@ -17,6 +18,7 @@ switch ($GLOBALS['user']) {
             'platforms-add' => 'ploshadki/add',
             'platforms-edit' => 'ploshadki/edit',
             'platforms-update' => 'ploshadki/update',
+            'platforms-otchicleniay' => 'ploshadki/otchicleniay',
             'platforms-del' => 'ploshadki/del',
 
             //Сохранение стилей виджетов

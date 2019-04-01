@@ -67,7 +67,6 @@ html.w-mod-touch * {
 }
 .w-inline-block {
   max-width: 100%;
-  display: inline-block;
 }
 .w-clearfix:before,
 .w-clearfix:after {
@@ -109,7 +108,8 @@ input.w-button {
     text-align: center;
     border: 1px solid #E0E1E5;
 	width: 198px;
-	    margin-top: 16px;
+	margin-top: 16px;
+	background: none;
 }
 }
 html[data-w-dynpage] [data-w-cloak] {

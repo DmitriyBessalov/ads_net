@@ -19,17 +19,17 @@ class FinController
         <table>
             <thead>
                 <tr class="trtop">
-                    <td>Виджет</td>
-                    <td>Целевые просмотры
+                    <td style="min-width: 230px;">Виджет</td>
+                    <td style="min-width: 210px;">Целевые просмотры
                         <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div>
                     </td>
-                    <td>CTR
+                    <td style="min-width: 110px;">CTR
                     </td>
-                    <td>eCPM
+                    <td style="min-width: 120px;">eCPM
                         <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Доход на 1000 показов анонсов</span></div>
                     </td>
-                    <td>Доход</td>
-					<td>Код виджета</td>
+                    <td style="min-width: 130px;">Доход</td>
+					<td style="min-width: 140px;">Код виджета</td>
                 </tr>
             </thead>';
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
@@ -168,7 +168,7 @@ class FinController
                 <div style="margin-top: 7px;">
                     <div class="nativepreview-mini-site"></div>
                     <div class="logominitext">
-                        <a href="http://' . $domen . '" style="text-decoration: none;">Native Preview</a>
+                        Native Preview
                         <p style="color: #768093; font-size: 12px;">Статус:
                             <span class="nowstatus">';
             if ($aktiv['natpre_aktiv']) {
@@ -212,7 +212,7 @@ class FinController
                 <div style="margin-top: 7px;">
                     <div class="slider-mini-site"></div>
                     <div class="logominitext">
-                        <a href="http://' . $domen . '" style="text-decoration: none;">Slider</a>
+                        Slider
                         <p style="color: #768093; font-size: 12px;">Статус:
                             <span class="nowstatus">';
             if ($aktiv['slider_aktiv']) {

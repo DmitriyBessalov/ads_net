@@ -8,7 +8,7 @@ $user= UsersController::getUserEmail();
   <base href="https://panel.corton.io">
   <link href="/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="/css/panel-corton-io.webflow.css" rel="stylesheet" type="text/css">
+  <link href="/css/panel-corton-io2.css" rel="stylesheet" type="text/css">
   <link href="/css/admin.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({google: {families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Inconsolata:400,700","Roboto:300,300italic,regular,italic,500,500italic,700,700italic:cyrillic,latin"]  }});</script>
@@ -42,7 +42,7 @@ $user= UsersController::getUserEmail();
             </div>
             <div class="div-block-109">
                 <div class="text-block-balans"></div>
-		        <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; text-decoration: none; color: #768093;">
+		        <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; text-decoration: none; color: #768093; float: right; padding-top: 28px;">
                     <div class="text-block-116">
                         <?
                         $string = $user;
@@ -51,12 +51,14 @@ $user= UsersController::getUserEmail();
                     </div>
                 </a>
                 <ul class="sub-menutwo">
-				    <div style="padding: 7px 0px;">
-                        <? echo $user; ?>
-                    </div>
-                    <a href="https://panel.corton.io/#">Настройки</a><br>
-                    <a href="https://panel.corton.io/logout">Выход</a>
-                </ul>
+				    <div>
+					   <span style="line-height: 35px;">
+                           <? echo $user; ?>
+                       </span><br>
+                       <a href="https://panel.corton.io/#">Настройки</a><br>
+                       <a href="https://panel.corton.io/logout">Выход</a>
+					</div>
+                </ul>			
             </div>
         </div>
 

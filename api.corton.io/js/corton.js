@@ -400,9 +400,9 @@ function corton_widget() {
     //Подгружает код виджетов при скроле
     function show_widget() {
         if (widget_load_status!=2){
-            if (wait!=25) {
+            if (wait!=200) {
                 wait++;
-                setTimeout(show_widget, 20);
+                setTimeout(show_widget, 30);
                 return false;
             }else {
                 wait!=0;
