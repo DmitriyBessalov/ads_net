@@ -79,8 +79,8 @@ function corton_promo() {
             a[i].setAttribute('href',a[i].getAttribute('href')+char+'utm_source=corton&utm_medium=CPG&utm_campaign='+result['id']+'&utm_content='+get['anons_id']+'&utm_term='+document.referrer)
             console.log('promolink',a[i].getAttribute('href'));
             a[i].onclick = function(e) {
-                console.log     ('https://stat.corton.io/promo_click.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']);
-                cxhr.open('GET', 'https://stat.corton.io/promo_click.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']);
+                console.log     ('https://stat.corton.io/promo_click.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t']);
+                cxhr.open('GET', 'https://stat.corton.io/promo_click.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t']);
                 cxhr.send();
             }
         }

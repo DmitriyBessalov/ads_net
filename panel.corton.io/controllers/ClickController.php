@@ -20,8 +20,8 @@ class ClickController
           <table>
             <thead>
               <tr class="trtop">
-                <th>Просмотр ID</th>
-                <th>Анонс ID</th>
+                <th style="min-width: 130px;">Просмотр ID</th>
+                <th style="min-width: 120px;">Анонс ID</th>
                 <th>Виджет</th>
                 <th>Referer</th>
                 <th>Прочитано</th>

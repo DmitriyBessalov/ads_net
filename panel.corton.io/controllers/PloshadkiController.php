@@ -43,7 +43,6 @@
                 <td>Клики</td>
                 <td><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей и процент от кликов</span></div></td>
                 <td style="width: 111px;"><div class="tooltipinfo1">График<span class="tooltiptext1">График по просмотрам за последние 7 дней</span></div></td>
-				<td>%&nbsp;отчислений</td>
                 <td>Балансы</td>
                 <td style="width: 110px;"></td>
               </tr> 
@@ -58,7 +57,7 @@
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
                     echo "<tr>
-                      <td style=\"text-align: left; min-width: 280px;\">
+                      <td style=\"text-align: left; min-width: 338px;\">
 					  <div style=\"margin-top: 7px;\">
 					      <div class=\"logomini\"></div>
 					      <div class=\"logominitext\">
@@ -67,6 +66,9 @@
 							 <span class=\"nowstatus\">";
                     echo $i['status'] ? 'Активна' : 'Неактивен';
                     echo " </span>
+					<span style=\"margin-left: 5px;\" class=\"nowstatus\" id='otchic".$i['id']."'>
+					%: ".$i['otchiclen']."
+                    </span>
 					</p>
 						  </div>
 					  </div>
@@ -82,28 +84,30 @@
                       <td>0</td>
                       <td>0</td>
                       <td>".$platform['click']."</td>
-                      <td class=\"greentext\" style=\"width: 160px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
+                      <td class=\"greentext\" style=\"min-width: 140px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
 					  <td style=\"width: 160px;\" >
 					     <div class=\"grafclick\"></div>
 					  </td>
-					  <td id='otchic".$i['id']."'>".$i['otchiclen']."</td>
 					  <td class=\"bluetext\">" . $balans . "</td>
                       <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
 						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                          <ul class=\"sub-menu\">
                               <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
-                              <a class='modalclick' id='otchiclen".$i['id']."'>Процент отчислений</a><br>";
-                              if ($i['type']!='demo')
-                                  echo "<a class='modalclick' id='balans".$i['id']."'>Вывод балансов</a><br>";
+                              <a class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
+                              if ($i['type']!='demo'){
+                                  echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>
+                                        <a class='modalclick' id='balans".$i['id']."'>Вывод балансов</a><br>";
+                              }
                               echo "
                               <a href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
                          </ul>
-                         <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:20%;top:300px;right:20%;display: none;\">
-                            <div class=\"div-block-78 w-clearfix\">
+                         <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
+                            <div style=\"min-width: 780px !important;\" class=\"div-block-78 w-clearfix\">
                                 <div class=\"div-block-132 modalhide\">
                                     <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
                                 </div>
                                 <div class=\"polzunok-container\">
+								    <div class=\"text-block-103\" style=\"text-align: left; margin-bottom: 40px;\">Настройка процента отчислений для площадки</div>
                                     <div class=\"polzunok\" id=\"polz".$i['id']."\">
                                     </div>
                                 </div>
@@ -2092,11 +2096,200 @@
         public static function actionOtchicleniay()
         {
             $db = Db::getConnection();
+            $dbstat = Db::getstatConnection();
             $_GET['id']= substr($_GET['id'], 4);
             $sql="UPDATE `ploshadki` SET `otchiclen`='".$_GET['otchiclen']."' WHERE `id` = '".$_GET['id']."';";
             $db->query($sql);
             return true;
         }
+
+
+
+        //Меняет коэфициент отчислений для площадки
+        public static function actionStat()
+        {
+            $title='Статистика площадки';
+            include PANELDIR.'/views/layouts/header.php';
+            if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y', strtotime("-1 month"));}
+            if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
+            $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
+            $mySQLdateend = date('Y-m-d', strtotime($dateend));
+
+            echo '
+<div class="table-box">
+    <div class="table w-embed">
+        <table>
+            <thead>
+                <tr class="trtop">
+                    <td style="min-width: 230px;">Виджет</td>
+                    <td><div class="tooltipinfo1">Показы<span class="tooltiptext1">Показы анонсов</span></div></td>
+                    <td style="min-width: 210px;">Клики</td>
+                    <td style="min-width: 110px;"><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Оплаченные просмотры (%&nbsp;кликов)</span></div></td>
+                    <td><div class="tooltipinfo1">eCPM<span class="tooltiptext1">Доход на 1000 показов анонсов</span></div></td>
+                    <td style="min-width: 120px;"><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Переходы со статей по URL (%&nbsp;просмотр&nbsp;оплаченных)</span></div></td>
+                    <td style="min-width: 130px;">Доход</td>
+                </tr>
+            </thead>';
+            if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
+                $db = Db::getConnection();
+                $dbstat = Db::getstatConnection();
+
+                $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv` FROM `ploshadki` WHERE `id`='".$_GET['id']."'";
+                $aktiv = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load', SUM(`r_promo_click`) as 'r_promo_click', SUM(`e_promo_click`) as 'e_promo_click', SUM(`s_promo_click`) as 's_promo_click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                $balansperiod = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
+                    $today = true;
+                    $redis = new Redis();
+                    $redis->connect('185.75.90.54', 6379);
+                    $redis->select(3);
+
+                    $ch=$redis->get(date('d').':'.$_GET['id'].':r');
+                    if($ch)$balansperiod['r_show_anons']+=$ch;
+                    $ch=$redis->get(date('d').':'.$_GET['id'].':e');
+                    if($ch)$balansperiod['e_show_anons']+=$ch;
+                    $ch=$redis->get(date('d').':'.$_GET['id'].':s');
+                    if($ch)$balansperiod['s_show_anons']+=$ch;
+
+                }
+
+                if (is_null($balansperiod['r'])) {
+                    $balansperiod['r'] = $balansperiod['e'] = $balansperiod['s'] = 0;
+                    $balansperiod['r_balans'] = $balansperiod['e_balans'] = $balansperiod['s_balans'] = '0.00';
+                };
+
+                echo '
+        <tbody>
+        <tr>
+            <td style="text-align: left; width: 260px;">
+                <div style="margin-top: 7px;">
+                    <div class="recommendation-mini-site"></div>
+                    <div class="logominitext">
+        Recommendation
+                        <p style="color: #768093; font-size: 12px;">Статус:
+                            <span class="nowstatus">';
+            if ($aktiv['recomend_aktiv']) {
+                echo 'Активен';
+            } else {
+                echo 'Неактивен';
+            }
+            echo '</span>
+                        </p>
+                    </div>
+                </div>
+            </td>
+            <td>'.$balansperiod['r_show_anons'].'</td>
+            <td>'.$balansperiod['r_promo_load'].'</td>
+            <td>'.$balansperiod['r'];$val=round(100/$balansperiod['r_promo_load']*$balansperiod['r'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
+            <td>';
+            if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
+                $val= round($balansperiod['r_balans']/$balansperiod['r_show_anons']*1100,2);
+                if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
+                echo $val;
+            } else {
+                echo '0.00';
+            }
+            echo'&nbsp;p</td>
+            <td>'.$balansperiod['r_promo_click'].'</td>
+            <td class="bluetext">' . $balansperiod['r_balans'] . '&nbsp;р.</td>
+        </tr>
+        <tr>
+            <td style="text-align: left; width: 260px;">
+                <div style="margin-top: 7px;">
+                    <div class="nativepreview-mini-site"></div>
+                    <div class="logominitext">
+        Native Preview
+        <p style="color: #768093; font-size: 12px;">Статус:
+                            <span class="nowstatus">';
+            if ($aktiv['natpre_aktiv']) {
+                echo 'Активен';
+            } else {
+                echo 'Неактивен';
+            }
+            echo '</span>
+                        </p>
+                    </div>
+                </div>
+            </td>
+            <td>'.$balansperiod['e_show_anons'].'</td>
+            <td>'.$balansperiod['e_promo_load'].'</td>
+            <td>'.$balansperiod['e'];$val=round(100/$balansperiod['e_promo_load']*$balansperiod['e'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
+            <td>';
+                if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
+                    $val= round($balansperiod['e_balans']/$balansperiod['e_show_anons']*1100,2);
+                    if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
+                    echo $val;
+                } else {
+                    echo '0.00';
+                }
+                echo'&nbsp;p</td>
+            <td>'.$balansperiod['e_promo_click'].'</td>
+            <td class="bluetext">' . $balansperiod['e_balans'] . '&nbsp;р.</td>
+        </tr>
+        <tr>
+            <td style="text-align: left; width: 260px;">
+                <div style="margin-top: 7px;">
+                    <div class="slider-mini-site"></div>
+                    <div class="logominitext">
+        Slider
+                        <p style="color: #768093; font-size: 12px;">Статус:
+                            <span class="nowstatus">';
+            if ($aktiv['slider_aktiv']) {
+                echo 'Активен';
+            } else {
+                echo 'Неактивен';
+            }
+            echo '</span>
+                        </p>
+                    </div>
+                </div>
+            </td>            
+            <td>'.$balansperiod['s_show_anons'].'</td>
+            <td>'.$balansperiod['s_promo_load'].'</td>
+            <td>'.$balansperiod['s'];$val=round(100/$balansperiod['s_promo_load']*$balansperiod['s'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
+            <td>';
+                if (($aktiv['slider_aktiv'])AND($balansperiod['s']!=0)) {
+                    $val= round($balansperiod['s_balans']/$balansperiod['s_show_anons']*1100,2);
+                    if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
+                    echo $val;
+                } else {
+                    echo '0.00';
+                }
+                echo'&nbsp;p</td>
+            <td>'.$balansperiod['s_promo_click'].'</td>
+            <td class="bluetext">' . $balansperiod['s_balans'] . '&nbsp;р.</td>
+        </tr>
+    <tbody>';
+            }else{echo '<tr><td colspan="7">Некоректные даты фильтра</td></tr>';}
+            echo'
+        </table>
+
+    </div>
+    <div class="table-right">
+				 <form id="right-form" name="email-form" class="form-333">
+                    <div class="html-embed-3 w-embed" style="margin-top: 40px;">
+                         <input type="hidden" name="id" value="'.$_GET['id'].'" id="" class="form-radio">
+                        <input type="text" name="datebegin" class="tcal tcalInput" value="'.$datebegin.'">
+                        <div class="text-block-128">-</div>
+                        <input type="text" name="dateend" class="tcal tcalInput" value="'.$dateend.'">
+                        <input type="submit" value="Применить" class="submit-button-addkey w-button">
+                    </div>
+		        </form>
+	</div>      
+</div>';
+
+            include PANELDIR . '/views/layouts/footer.php';
+            return true;
+        }
+
+
+
+
+
+
+
 
         //Удаляет площадку
         public static function actionDel()

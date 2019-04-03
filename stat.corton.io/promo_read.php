@@ -30,7 +30,7 @@ if ($stavka==0){
 
     if ($_GET['t']=='e'){$stavka=1.25*$stavka;}else{if($_GET['t']=='s'){$stavka==1.15*$stavka;}}
 
-    $stavka=round($stavka*$ploshadka_id['id']/100,2);
+    $stavka=round($stavka*$ploshadka_id['otchiclen']/100,2);
 
     $sql = "UPDATE `balans_ploshadki` SET `balans` = `balans` + ".$stavka.", `".$_GET['t']."`=".$_GET['t']."+1, `".$_GET['t']."_balans`=".$_GET['t']."_balans+".$stavka."  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id['id']."'";
     if (!$dbstat->exec($sql)){

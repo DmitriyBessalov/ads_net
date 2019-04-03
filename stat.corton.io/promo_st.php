@@ -27,7 +27,7 @@ $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 if ($_GET['t']=='e'){$stavka=1.25*$stavka;}else{if($_GET['t']=='s'){$stavka=1.15*$stavka;}}
 
-$stavka=round($stavka*$ploshadka_id['id']/100,2);
+$stavka=round($stavka*$ploshadka_id['otchiclen']/100,2);
 
 $sql= "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka."' WHERE  `prosmotr_id` = '".addslashes($_GET['prosmort_id'])."'";
 $dbstat->query($sql);

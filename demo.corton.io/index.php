@@ -11,17 +11,22 @@ if (isset($_GET['site'])){
 <html>
     <head>
         <title>'.$_GET['site'].'</title>
+		<link href="https://corton.io/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="/scroll.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="js/jquery.fancy-scroll.js"></script>
     </head>
     <body style="overflow:hidden;margin: 0px;">
-        <div style="height: 70px;overflow: hidden;">
-            <div style="float: left; "><a href="https://corton.io/"><img style="margin: 10px;" src="https://panel.corton.io/images/logo-corton.png"></a></div>
-            <div style="float: left;margin: 24px;">CTR '.$result['CTR'].' %</div>
-            <div style="float: left;margin: 24px;">CPM '.$result['CPM'].' руб.</div>
-            <div style="float: left;margin: 24px;">CPG '.$result['CPG'].' руб.</div>
-            <a style="background-color: #116dd6;color: #fff;float: right; margin:15px;padding: 8px;">Виджет Recomendation</a>
-            <a style="background-color: #116dd6;color: #fff;float: right; margin:15px;padding: 8px;">Виджет Native Preview</a>
+        <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
+            <div style="float: left; margin-right: 14px;"><a href="https://corton.io/">
+			<a href="https://corton.io/platforms" target="_blank"><img style="margin: 15px;" src="https://panel.corton.io/images/logo-corton.png"></a></div>
+            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500;">'.$result['CTR'].' %</span></div>
+            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;">'.$result['CPM'].' руб.</span></div>
+            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>
+            <a сlass="go_to" href="#corton-nativepreview-widget" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет Recomendation</a>
+            <a сlass="go_to" href="#corton-nativepreview-widget" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px; padding: 8px 20px;  font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет Native Preview</a>
         </div>
-        <iframe id="frame" style="width: 100%;" src="iframe.php?url='.$_GET['site'].'">
+        <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
         </iframe>
     </body>
     <script>
@@ -49,27 +54,45 @@ if (isset($_GET['site'])){
     curl_setopt($ch, CURLOPT_URL, $URI);
     curl_setopt($ch, CURLOPT_ENCODING ,"UTF-8");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    $page=curl_exec($ch);
-    curl_close($ch);
+    curl_setopt($ch,CURLOPT_HEADER,true);
 
-    //Замена ссылок
-    $page= preg_replace('/<base.*?>/', '<base href="'.$outsite.'">', $page);
-    $page = str_replace($_COOKIE['scheme'].'://'.$_COOKIE['host'], $outsite, $page);
+    $response=curl_exec($ch);
+    $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+    $header = substr($response, 0, $header_size);
 
-    //Подключение скрипта
-    $host=str_replace('.','_',$_COOKIE['host']);
-    $page = str_replace('</head>', '<link href="https://api.corton.io/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.corton.io/js/corton.js" charset="UTF-8"></script></head>', $page);
+    preg_match('/Content-Type:(.*)\r\n/', $header,$ContentType);
 
-    preg_match_all("/<meta.*?>/", $page, $phones);
-    foreach ($phones[0] as $phone) {
-        $phone=mb_strtolower($phone);
-        if ((strpos($phone, 'content-type') !== false) and (strpos($phone, 'windows-1251') !== false)) {
-            header('Content-Type: text/html; windows-1251; charset=windows-1251');
+    $result = strpos ($ContentType[1], 'html');
+
+    if ($result){  //содержимое html код
+
+        $body = substr($response, $header_size);
+        curl_close($ch);
+
+        //Замена ссылок
+        $body= preg_replace('/<base.*?>/', '<base href="'.$outsite.'">', $body);
+        $body = str_replace($_COOKIE['scheme'].'://'.$_COOKIE['host'], $outsite, $body);
+
+        //Подключение скрипта
+        $host=str_replace('.','_',$_COOKIE['host']);
+        $body = str_replace('</head>', '<link href="https://api.corton.io/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.corton.io/js/corton.js" charset="UTF-8"></script></head>', $body);
+
+        preg_match_all("/<meta.*?>/", $body, $phones);
+        foreach ($phones[0] as $phone) {
+            $phone=mb_strtolower($phone);
+            if ((strpos($phone, 'content-type') !== false) and (strpos($phone, 'windows-1251') !== false)) {
+                header('Content-Type: text/html; windows-1251; charset=windows-1251');
+            }
         }
+
+        $url=str_replace('http://','',$url);
+        $url=str_replace('https://','',$url);
+        $body = str_replace('<head>', '<head><script>var corton_url="'.$url.'";</script>', $body);
+        echo $body;
+    }else{//содержимое не html код
+        header('Location: '.$url);
+        exit;
     }
 
-    $url=str_replace('http://','',$url);
-    $url=str_replace('https://','',$url);
-    $page = str_replace('<head>', '<head><script>var corton_url="'.$url.'";</script>', $page);
-    echo $page;
+
 }

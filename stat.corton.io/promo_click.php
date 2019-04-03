@@ -15,3 +15,6 @@ $db->query($sql);
 $sql = "UPDATE `stat_promo_day_count` SET `clicking` = `clicking` + 1 WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."'";
 if (!$dbstat->exec($sql)){$dbstat->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `clicking` = 1");
 }
+
+$sql ="UPDATE `balans_ploshadki` SET `".$_GET['t']."_promo_click` = `".$_GET['t']."_promo_click` + 1 WHERE `ploshadka_id`='".$ploshadka_id."' AND `date`=CURDATE();";
+$dbstat->query($sql);
