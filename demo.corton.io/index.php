@@ -5,10 +5,10 @@ if (isset($_GET['site'])){
     $parsed=parse_url($_GET['site']);
     setcookie("host", $parsed['host'],time()+72000,'/', ".corton.io");
     setcookie("scheme", $parsed['scheme'],time()+72000,'/' ,'.corton.io');
-    $sql="SELECT `CTR`,`CPM`,`CPG` FROM `ploshadki` WHERE `domen`='".$parsed['host']."'";
+    $sql="SELECT `CTR`,`CPM`,`CPG`,`recomend_aktiv`,`natpre_aktiv` FROM `ploshadki` WHERE `domen`='".$parsed['host']."'";
     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
     echo '
-<html>
+<html style="scroll-behavior: smooth;">
     <head>
         <title>'.$_GET['site'].'</title>
 		<link href="https://corton.io/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
@@ -22,16 +22,28 @@ if (isset($_GET['site'])){
 			<a href="https://corton.io/platforms" target="_blank"><img style="margin: 15px;" src="https://panel.corton.io/images/logo-corton.png"></a></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500;">'.$result['CTR'].' %</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;">'.$result['CPM'].' руб.</span></div>
-            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>
-            <a сlass="go_to" href="#corton-nativepreview-widget" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет Recomendation</a>
-            <a сlass="go_to" href="#corton-nativepreview-widget" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px; padding: 8px 20px;  font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет Native Preview</a>
-        </div>
+            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>';
+            if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет NativePreview</a>';}
+            if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет Recomendation</a>';}
+            echo '
+    </div>
         <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
         </iframe>
     </body>
     <script>
-        elem=document.getElementById("frame");
-        elem.style.height=document.body.scrollHeight-71+"px";
+        //Высота фрейма
+        iframe=document.getElementById("frame");
+        iframe.style.height=document.body.scrollHeight-71+"px";
+        
+        //Отправка события в iframe на поиск виджетов
+        function bind(eventHandler,idr) {
+            element= document.getElementById(idr);
+            if (element.addEventListener){
+                element.addEventListener(\'click\', eventHandler, false);
+            }
+        }
+        bind(function(e){iframe.contentWindow.postMessage(\'corton-recomendation-widget\',\'*\');},\'message_r\');
+        bind(function(e){iframe.contentWindow.postMessage(\'corton-nativepreview-widget\',\'*\');},\'message_e\');
     </script>
 </html>';
 }else{
@@ -87,7 +99,42 @@ if (isset($_GET['site'])){
 
         $url=str_replace('http://','',$url);
         $url=str_replace('https://','',$url);
-        $body = str_replace('<head>', '<head><script>var corton_url="'.$url.'";</script>', $body);
+        $script="<script>
+var corton_url='".$url."';
+function bindEvent(eventHandler){if(window.addEventListener){window.addEventListener('message',eventHandler,false);}}
+bindEvent(function (e) {
+    if(e.data.indexOf('corton') !== -1) {
+        if (document.readyState === \"complete\") {        
+            let element=document.getElementById(e.data);
+            if (element){
+                console.log(element.getBoundingClientRect().top);
+                window.scrollBy({top: element.getBoundingClientRect().top-200, behavior: 'smooth'});
+                //element.scrollIntoView({ behavior: 'smooth'});
+                let ch=1;let ch2=0;
+                function draw(timePassed) {
+                    if (ch<=1 && ch>=0){
+                        element.style.opacity=ch;
+                        ch=ch-0.05;
+                        setTimeout(draw,20);
+                    }else{
+                        if (ch2<1){
+                            element.style.opacity=ch2;
+                            ch2=ch2+0.05;
+                            setTimeout(draw,50);
+                        }
+                    }
+                }
+                setTimeout(draw,250)
+            }else{
+                alert('Виджета на данной странице нету');
+            }
+        }else{
+                alert('Страница ещё не загрузилась');
+        }
+    }
+});
+        </script>";
+        $body = str_replace('<head>', '<head>'.$script, $body);
         echo $body;
     }else{//содержимое не html код
         header('Location: '.$url);
