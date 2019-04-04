@@ -163,20 +163,20 @@ function corton_widget() {
     const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
 
     //console.log(recomend_algorithm_output,natpre_algorithm_output,slider_algorithm_output);
-    if (location.hostname=='demo.corton.io') {
-        if (recomend_algorithm_output === '0') {
+    if (location.hostname==='demo.corton.io') {
+        if (recomend_algorithm_output !== '1') {
             let div = document.createElement('div');
             div.id = 'corton-recomendation-widget';
             document.body.appendChild(div);
             console.log('r');
         }
-        if (natpre_algorithm_output === '0') {
+        if (natpre_algorithm_output !== '1') {
             let div = document.createElement('div');
             div.id = 'corton-nativepreview-widget';
             document.body.appendChild(div);
             console.log('e');
         }
-        if (slider_algorithm_output === '0') {
+        if (slider_algorithm_output !== '1') {
             let div = document.createElement('div');
             div.id = 'corton-slider-widget';
             document.body.appendChild(div);
@@ -210,7 +210,7 @@ function corton_widget() {
         function find(needle) {return userAgent.indexOf(needle) !== -1}
         function findMatch(arr) {for (let d = 0; d < arr.length; d++) {if (device[arr[d]]()) {return arr[d]}}return 'unknown'}
         device.type = findMatch(['mobile', 'tablet', 'desktop']);
-        if (device.type=='desktop'){
+        if (device.type==='desktop'){
             if(document.body.clientWidth<992){device.type='tablet'}
             if(document.body.clientWidth<480){device.type='mobile'}
         }
@@ -283,20 +283,33 @@ function corton_widget() {
                             if (ele.length != 0) {
                                 if (ele[0]) {
                                     widget = widget +'&r=' + count;
-                                    var children = ele[0].children;
-                                    abzats--;
-                                    if (abzats==-1){
-                                        ele[0].insertBefore(widget_recomend,children[0]);
-                                    }else {
-                                        for (var r = 0; r < children.length - 1; r++) {
-                                            if (children[r].localName == 'p') {
-                                                if (abzats == 0) {
-                                                    break;
+                                    switch (recomend_algorithm_output) {
+                                        case '3':
+                                            ele[0].parentNode.insertBefore(widget_recomend,ele[0]);
+                                            break;
+                                        case '4':
+                                            ele[0].parentNode.insertBefore(widget_recomend,ele[0]);
+                                            ele[0].remove();
+                                            break;
+                                        case '5':
+                                            ele[0].parentNode.insertBefore(widget_recomend,ele[0].nextSibling);
+                                            break;
+                                        case '0':
+                                            let children = ele[0].children;
+                                            abzats--;
+                                            if (abzats==-1){
+                                                ele[0].insertBefore(widget_recomend,children[0]);
+                                            }else {
+                                                for (var r = 0; r < children.length - 1; r++) {
+                                                    if (children[r].localName == 'p') {
+                                                        if (abzats == 0) {
+                                                            break;
+                                                        }
+                                                        abzats--;
+                                                    }
                                                 }
-                                                abzats--;
+                                                children[r].appendChild(widget_recomend);
                                             }
-                                        }
-                                        children[r].appendChild(widget_recomend);
                                     }
                                     titletext = style_r.getPropertyValue('--titletext');
                                     show_recomend = 1;
@@ -330,20 +343,33 @@ function corton_widget() {
                         if (ele.length != 0) {
                             if (ele[0]) {
                                 widget = widget + '&e=1';
-                                var children = ele[0].children;
-                                abzats--;
-                                if (abzats==-1){
-                                    ele[0].insertBefore(widget_natpre,children[0]);
-                                }else {
-                                    for (var r = 0; r < children.length - 1; r++) {
-                                        if (children[r].localName == 'p') {
-                                            if (abzats == 0) {
-                                                break;
+                                switch (natpre_algorithm_output) {
+                                    case '3':
+                                        ele[0].parentNode.insertBefore(widget_natpre,ele[0]);
+                                        break;
+                                    case '4':
+                                        ele[0].parentNode.insertBefore(widget_natpre,ele[0]);
+                                        ele[0].remove();
+                                        break;
+                                    case '5':
+                                        ele[0].parentNode.insertBefore(widget_natpre,ele[0].nextSibling);
+                                        break;
+                                    case '0':
+                                        let children = ele[0].children;
+                                        abzats--;
+                                        if (abzats==-1){
+                                            ele[0].insertBefore(widget_natpre,children[0]);
+                                        }else {
+                                            for (var r = 0; r < children.length - 1; r++) {
+                                                if (children[r].localName == 'p') {
+                                                    if (abzats == 0) {
+                                                        break;
+                                                    }
+                                                    abzats--;
+                                                }
                                             }
-                                            abzats--;
+                                            children[r].appendChild(widget_natpre);
                                         }
-                                    }
-                                    children[r].appendChild(widget_natpre);
                                 }
                                 show_natpre = 1;
                             }
@@ -732,7 +758,7 @@ function corton_delay() {
             const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
             const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
             console.log(url);
-            if (recomend_algorithm_output==='0' || natpre_algorithm_output==='0' || slider_algorithm_output==='0'){
+            if (recomend_algorithm_output!=='1' || natpre_algorithm_output!=='0' || slider_algorithm_output!=='1'){
                 corton_widget();
                 return true;
             }
@@ -755,7 +781,7 @@ function corton_delay() {
                 return true;
             }else{
                 if (document.readyState === "complete") {
-                    if (corton_complete!=15){
+                    if (corton_complete!==15){
                         setTimeout(corton_delay, 200);
                     }else{
                         corton_complete++;

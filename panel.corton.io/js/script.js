@@ -829,26 +829,32 @@ $(document).ready(function(){
     $('#textarea-nativepreview').keyup(function(){widget_nativepre();});
     $('#textarea-slider').keyup(function(){widget_slider();});
 
-    //Размещение Natpre по тегу или по абзацу
-    $('.widget-recomendation input[name=algorithm-output]').click( function() {
-        if ($(this).val() === '1'){
-            $('.widget-recomendation input[name=widget-position-p]').prop('disabled', true);
-            $('.widget-recomendation input[name=widget-parent-id]').prop('disabled', true);
-        } else {
-            $('.widget-recomendation input[name=widget-position-p]').prop('disabled', false);
-            $('.widget-recomendation input[name=widget-parent-id]').prop('disabled', false);
+    //Переключатель смены алгоритма вывода виджетов Recomendation и Natpre
+    function radioch(widget){
+        var v=$(widget+'input[name=algorithm-output]:checked').val();
+        switch(v)
+        {
+            case '1':
+                $(widget+'input[name=widget-parent-id]').prop('disabled', true);
+                $(widget+'input[name=widget-position-p]').prop('disabled', true);
+                break;
+            case '0':
+                $(widget+'input[name=widget-parent-id]').prop('disabled', false);
+                $(widget+'input[name=widget-position-p]').prop('disabled', false);
+                break;
+            default:
+                $(widget+'input[name=widget-parent-id]').prop('disabled', false);
+                $(widget+'input[name=widget-position-p]').prop('disabled', true);
         }
+    }
+    $('.widget-recomendation  input[name=algorithm-output]').click( function() {
+        radioch('.widget-recomendation ');
     });
-
     $('.widget-nativepre  input[name=algorithm-output]').click( function() {
-        if ($(this).val() === '1'){
-            $('.widget-nativepre input[name=widget-position-p]').prop('disabled', true);
-            $('.widget-nativepre input[name=widget-parent-id]').prop('disabled', true);
-        } else {
-            $('.widget-nativepre input[name=widget-position-p]').prop('disabled', false);
-            $('.widget-nativepre input[name=widget-parent-id]').prop('disabled', false);
-        }
+        radioch('.widget-nativepre ');
     });
+    radioch('.widget-recomendation ');
+    radioch('.widget-nativepre ');
 
     //События radiobutton в правом меню панели с отправкой формы
     $('label').click(function(){

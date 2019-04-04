@@ -448,9 +448,14 @@
                                 <input type="hidden" value="" name="dop-css">
                                 <input type="hidden" value="" name="adblock-css">
                                 <strong class="bold-text-10">Расположение</strong>                            
-                                <br>
-                                <input type="checkbox"'; if ($result['forcibly']) echo ' checked '; echo 'name="forcibly" style="width: 15px;"> Вывод на месте селектора
-                                <br>
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['forcibly']) echo ' checked '; echo 'name="forcibly" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Вывод на месте селектора</a>
+                                      </label>
+                                </div> 
+							                                
                                 <label>Селектор</label>
                                 <input type="text" value="'.$result['selector'].'" name="selector">
                                 <br>
@@ -474,8 +479,13 @@
                                 <input type="text" value="'.$result['widget-width-block'].'" name="widget-width-block">
                                 <br>
                                 <br>
-                                <input type="checkbox"'; if ($result['icon']) echo ' checked ';echo 'name="icon" style="width: 15px;">Иконка партнера
-                                <br>
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['icon']) echo ' checked ';echo 'name="icon" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Марка партнера</a>
+                                      </label>
+                                </div> 
+								
                                 <br>
                                 <br>
                                 <strong class="bold-text-10">Заголовок Н1</strong>
@@ -549,11 +559,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта</label>
-                                <br>
-                                <input type="checkbox"'; if ($result['widget-h1-italic']) echo ' checked '; echo'name="widget-h1-italic" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox"'; if ($result['widget-h1-underline']) echo ' checked '; echo'name="widget-h1-underline" style="width: 15px;"> Подчеркнутый
-                                <br>
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-h1-italic']) echo ' checked '; echo'name="widget-h1-italic" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                </div> 
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-h1-underline']) echo ' checked '; echo'name="widget-h1-underline" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                </div>
+								
                                 <br>
                                 <br>
                                 <strong class="bold-text-10">Заголовок Н2</strong>
@@ -617,11 +637,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта</label>
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-h2-italic']) echo ' checked '; echo ' name="widget-h2-italic" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-h2-underline']) echo ' checked '; echo ' name="widget-h2-underline" style="width: 15px;"> Подчеркнутый
-                                <br>
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-h2-italic']) echo ' checked '; echo ' name="widget-h2-italic" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                </div> 
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-h2-underline']) echo ' checked '; echo ' name="widget-h2-underline" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                </div> 
+
                                 <br>
                                 <br>
                                 <strong class="bold-text-10">Текст</strong>
@@ -675,10 +705,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта текста</label>
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-text-italic"']) echo ' checked '; echo ' name="widget-text-italic" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-text-underline']) echo ' checked '; echo ' name="widget-text-underline" style="width: 15px;"> Подчеркнутый
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-text-italic"']) echo ' checked '; echo ' name="widget-text-italic" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                </div> 
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-text-underline']) echo ' checked '; echo ' name="widget-text-underline" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                </div> 
+
                                 <br>
                                 <label>Межстрочный интервал</label>
                                 <select name="widget-type-interval-text">
@@ -1080,12 +1121,12 @@
 			   <div style="margin-bottom: 20px;"><strong class="bold-text-16">Дополнительные стили:</strong>
                     <br>
                </div>
-               <textarea id="textarea-promo" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 2px solid #E0E1E5; height: 380px; resize: vertical;">'.$result['dop-css'].'</textarea>
+               <textarea id="textarea-promo" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 1px solid #E0E1E5; height: 380px; resize: vertical;">'.$result['dop-css'].'</textarea>
                <br><br>
                <div style="margin-bottom: 20px;"><strong class="bold-text-16">Блокируемые селекторы:</strong>
                     <br>
                </div>
-               <textarea id="textarea-promo2" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 2px solid #E0E1E5; height: 180px; resize: vertical;">'.$result['adblock-css'].'</textarea>
+               <textarea id="textarea-promo2" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 1px solid #E0E1E5; height: 180px; resize: vertical;">'.$result['adblock-css'].'</textarea>
 
             </div>
             
@@ -1146,27 +1187,69 @@
                                 <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
                                 <input type="hidden" value="" name="css">
                                 <input type="hidden" value="" name="dop-css">
-                                <strong class="bold-text-10">Вид блока</strong>
+                                <strong class="bold-text-10">Вывод на устройствах</strong>
                                 <br>
-                                <label>Выводить на устройствах</label>
-                                    <input type="checkbox" '; if ($result['mobile']) echo ' checked '; echo ' name="mobile" style="width: 15px;"> Сматфон<br>
-                                    <input type="checkbox" '; if ($result['tablet']) echo ' checked '; echo ' name="tablet" style="width: 15px;"> Планшет<br>
-                                    <input type="checkbox" '; if ($result['desktop']) echo ' checked '; echo ' name="desktop" style="width: 15px;"> ПК
-                                <br>    
-                                <label>Размещение</label>
-                                <label for="radio1" style="color: #333; margin-top: 4px;"><input type="radio" '; if ($result['algorithm-output']=='1') echo ' checked '; echo ' name="algorithm-output" value="1" id="radio1"> В месте тега</label>
-                                <label for="radio2" style="color: #333; margin-top: 4px;"><input type="radio" '; if ($result['algorithm-output']=='0') echo ' checked '; echo ' name="algorithm-output" value="0" id="radio2"> По селектору и абзацу</label>
- 
-                                <label>Поставьте по номеру абзаца</label>
-                                <input type="text" value="'.$result['widget-position-p'].'"'; echo ' name="widget-position-p" required '; if ($result['algorithm-output']=='1')echo 'disabled';echo '>
+								    <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                        <input type="checkbox" '; if ($result['mobile']) echo ' checked '; echo ' name="mobile" class="form-radiozag">
+                                        <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                            <a style="color:#333;" class="link">Смартфоны</a>
+                                        </label>
+                                    </div>
+								   
+                                    <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                        <input type="checkbox" '; if ($result['tablet']) echo ' checked '; echo ' name="tablet" class="form-radiozag">
+                                        <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                            <a style="color:#333;" class="link">Планшет</a>
+                                    </label>
+                                    </div>
+                                
+                                    <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                    <input type="checkbox" '; if ($result['desktop']) echo ' checked '; echo ' name="desktop" class="form-radiozag">
+                                        <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                            <a style="color:#333;" class="link">ПК</a>
+                                        </label>
+                                   </div>      
                                 <br>
-                                <label>Идентификатор родительского элемента</label>
-                                <input type="text" value="'.$result['widget-parent-id'].'"'; echo ' name="widget-parent-id" required '; if ($result['algorithm-output']=='1')echo 'disabled';echo '>
+                                <strong class="bold-text-10">Размещение:</strong>
+								<p class="grey-color">На действующих площадках выводится только при наличии тега на странице</p>
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='1') echo ' checked '; echo ' name="algorithm-output" value="1" >
+                                   <div style="color:#333;" class="radio__text">В месте тега</div>
+                                </label>
+                                
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='0') echo ' checked '; echo ' name="algorithm-output" value="0" >
+                                   <div style="color:#333;" class="radio__text">По родительскому селектору и&nbsp;абзацу</div>
+                                </label>
+                                              
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='3') echo ' checked '; echo ' name="algorithm-output" value="3" >
+                                   <div style="color:#333;" class="radio__text">Пред cелектором</div>
+                                </label>
+                                
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='4') echo ' checked '; echo ' name="algorithm-output" value="4" >
+                                   <div style="color:#333;" class="radio__text">Вместо cелектора</div>
+                                </label>
+                                
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='5') echo ' checked '; echo ' name="algorithm-output" value="5" >
+                                   <div style="color:#333;" class="radio__text">После cелектора</div>
+                                </label>
+                                
+                                <label>Селектор</label>
+                                <input type="text" value="'.$result['widget-parent-id'].'"'; if ($result['poz-tag']) echo ' disabled'; echo ' name="widget-parent-id" required '; if ($result['algorithm-output']=='1')echo 'disabled';echo '>
                                 <br>
-                                <p class="grey-color">Например .content или #content</p>
+                                <p class="grey-color">Например: .content:nth-of-type(1) или&nbsp;#content</p>
+
+                                <label>Номер абзаца</label>
+                                <input type="text" value="'.$result['widget-position-p'].'"'; if ($result['poz-tag']) echo ' disabled'; echo ' name="widget-position-p" required '; if ($result['algorithm-output']=='1')echo 'disabled';echo '>
                                 <br>
                                 <br>
                                 <br>
+                                
+                                <strong class="bold-text-10">Конструкция:</strong>
+                                
                                 <label>Блоков по горизонтали</label>
                                 <select name="widget-format">
                                     <option '; if ($result['widget-format']=="2"){echo 'selected ';} echo 'value="2">2</option>
@@ -1299,10 +1382,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта заголовка</label>
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-type-italic-title']) echo ' checked '; echo ' name="widget-type-italic-title" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" style="width: 15px;"> Подчеркнутый
+								
+                                 <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-type-italic-title']) echo ' checked '; echo ' name="widget-type-italic-title" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                   </div> 
+								   
+								   <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                   </div> 
+								   
                                 <br>
                                 <br>
                                 <br>
@@ -1358,10 +1452,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта</label>
-                                <br>
-                                <input type="checkbox"'; if ($result['widget-type-italic-text']) echo ' checked ';echo 'name="widget-type-italic-text" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox"'; if ($result['widget-type-underline-text']) echo ' checked ';echo 'name="widget-type-underline-text" style="width: 15px;"> Подчеркнутый
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-type-italic-text']) echo ' checked ';echo 'name="widget-type-italic-text" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                </div> 
+								   
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                    <input type="checkbox" '; if ($result['widget-type-underline-text']) echo ' checked ';echo 'name="widget-type-underline-text" class="form-radiozag">
+                                    <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                    </label>
+                                </div> 
+
                                 <br>
                                 <label>Межстрочный интервал</label>
                                 <select name="widget-type-interval-text">
@@ -1380,7 +1485,7 @@
                                 <br>
                             </div>
                         </div>
-                        <input type="submit" value="Сохранить" class="button-7 w-button">
+                        <input type="submit" value="Сохранить" class="button-7">
                     </form>
                 </div>
             </div>
@@ -1390,7 +1495,7 @@
 			   <div style="margin-bottom: 20px;"><strong class="bold-text-16">Дополнительные стили:</strong>
                     <br>
                </div>
-               <textarea id="textarea-recomendation" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 2px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
+               <textarea id="textarea-recomendation" name="code" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 1px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
             </div>
 			
             <div class="div-block-118" style="overflow: auto;">
@@ -1441,7 +1546,7 @@
                 <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
                 <input type="hidden" value="zag_recomend" name="type">
                 <textarea id="js" placeholder="html код включая javascript" maxlength="5000" name="code" class="textarea-5 w-input">'.$result.'</textarea>
-                <input type="submit" value="Сохранить" style="width:120px" class="button-7 w-button">
+                <input type="submit" value="Сохранить" style="width:120px" class="button-7">
             </form>
         </div>
     </div>
@@ -1463,27 +1568,68 @@
                                 <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
                                 <input type="hidden" value="" name="css">
                                 <input type="hidden" value="" name="dop-css">
-                                <strong class="bold-text-10">Расположение</strong>
+                                <strong class="bold-text-10">Вывод на устройствах</strong>
                                 <br>
-                                <label>Выводить на устройствах</label>
-                                    <input type="checkbox" '; if ($result['mobile']) echo ' checked '; echo ' name="mobile" style="width: 15px;"> Сматфон<br>
-                                    <input type="checkbox" '; if ($result['tablet']) echo ' checked '; echo ' name="tablet" style="width: 15px;"> Планшет<br>
-                                    <input type="checkbox" '; if ($result['desktop']) echo ' checked '; echo ' name="desktop" style="width: 15px;"> ПК
- 
-                                <label>Размещение</label>
-                                <label for="radio4" style="color: #333; margin-top: 4px;"><input type="radio" '; if ($result['algorithm-output']=='1') echo ' checked '; echo ' name="algorithm-output" value="1" id="radio4"> В месте тега</label>
-                                <label for="radio5" style="color: #333; margin-top: 4px;"><input type="radio" '; if ($result['algorithm-output']=='0') echo ' checked '; echo ' name="algorithm-output" value="0" id="radio5"> По селектору и абзацу</label>
+								   <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['mobile']) echo ' checked '; echo ' name="mobile" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Смартфоны</a>
+                                      </label>
+                                   </div>
+								   
+								   <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['tablet']) echo ' checked '; echo ' name="tablet" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Планшет</a>
+                                      </label>
+                                   </div>
+								   
+								   <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['desktop']) echo ' checked '; echo ' name="desktop" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">ПК</a>
+                                      </label>
+                                   </div>      
+                                <br>
+                                <strong class="bold-text-10">Размещение:</strong>
+								<p class="grey-color">На действующих площадках выводится только при наличии тега на странице</p>
+								
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='1') echo ' checked '; echo ' name="algorithm-output" value="1" >
+                                   <div style="color:#333;" class="radio__text">В месте тега</div>
+                                </label>
                                 
-                                <label>Поставьте по номеру абзаца</label>
-                                <input type="text" value="'.$result['widget-position-p'].'"'; if ($result['poz-tag']) echo ' disabled'; echo ' name="widget-position-p" required '; if ($result['algorithm-output']=='1')echo 'disabled';echo '>
-                                <br>
-                                <label>Идентификатор родительского элемента</label>
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='0') echo ' checked '; echo ' name="algorithm-output" value="0" >
+                                   <div style="color:#333;" class="radio__text">По родительскому селектору и&nbsp;абзацу</div>
+                                </label>
+                                              
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='3') echo ' checked '; echo ' name="algorithm-output" value="3" >
+                                   <div style="color:#333;" class="radio__text">Пред cелектором</div>
+                                </label>
+
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='4') echo ' checked '; echo ' name="algorithm-output" value="4" >
+                                   <div style="color:#333;" class="radio__text">Вместо cелектора</div>
+                                </label>
+                                
+                                <label class="radio">
+                                   <input type="radio" '; if ($result['algorithm-output']=='5') echo ' checked '; echo ' name="algorithm-output" value="5" >
+                                   <div style="color:#333;" class="radio__text">После cелектора</div>
+                                </label>
+                                
+                                <label>Селектор</label>
                                 <input type="text" value="'.$result['widget-parent-id'].'"'; if ($result['poz-tag']) echo ' disabled'; echo ' name="widget-parent-id" required '; if ($result['algorithm-output']=='1')echo 'disabled';echo '>
                                 <br>
-                                <p class="grey-color">Например .content или #content</p>
+                                <p class="grey-color">Например: .content:nth-of-type(1) или&nbsp;#content</p>
+
+                                <label>Номер абзаца</label>
+                                <input type="text" value="'.$result['widget-position-p'].'"'; if ($result['poz-tag']) echo ' disabled'; echo ' name="widget-position-p" required '; if ($result['algorithm-output']=='1')echo 'disabled';echo '>
                                 <br>
                                 <br>
                                 <br>
+                                                                
                                 <strong class="bold-text-10">Общий вид</strong>
                                 <label>Единица измерения шрифта</label>
                                 <select name="widget-font-unit">
@@ -1577,10 +1723,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта</label>
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-type-italic-title']) echo ' checked '; echo ' name="widget-type-italic-title" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" style="width: 15px;"> Подчеркнутый
+								
+                                <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-type-italic-title']) echo ' checked '; echo ' name="widget-type-italic-title" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                   </div> 
+								   
+								   <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                   </div> 
+                               
                                 <br>
                                 <label>Межстрочный интервал</label>
                                 <select name="widget-type-interval-title">
@@ -1642,10 +1799,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта</label>
-                                <br>
-                                <input type="checkbox" '; if ($result['icon']) echo ' checked '; echo ' name="widget-type-italic-text" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox" '; if ($result['icon']) echo ' checked '; echo ' name="widget-type-underline-text" style="width: 15px;"> Подчеркнутый
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['icon']) echo ' checked '; echo ' name="widget-type-italic-text" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                </div> 
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['icon']) echo ' checked '; echo ' name="widget-type-underline-text" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                </div>
+            
                                 <br>
                                 <label>Межстрочный интервал</label>
                                 <select name="widget-type-interval-text">
@@ -1712,10 +1880,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта</label>
-                                <br>
-                                <input type="checkbox" '; if ($result['button-type-italic']) echo ' checked '; echo ' name="button-type-italic" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox" '; if ($result['button-type-underline']) echo ' checked '; echo ' name="button-type-underline" style="width: 15px;"> Подчеркнутый
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['button-type-italic']) echo ' checked '; echo ' name="button-type-italic" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                </div> 
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['button-type-underline']) echo ' checked '; echo ' name="button-type-underline" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                </div> 
+
                                 <br>
                                 <label>Обводка</label>
                                 <select name="button-border-type">
@@ -1749,7 +1928,7 @@
                                 </select>
                             </div>
                         </div>
-                        <input type="submit" value="Сохранить" class="button-7 w-button">
+                        <input type="submit" value="Сохранить" class="button-7">
                         </form>
                 </div>
             </div>
@@ -1758,7 +1937,7 @@
 			   <div style="margin-bottom: 20px;"><strong class="bold-text-16">Дополнительные стили:</strong>
                     <br>
                </div>
-               <textarea id="textarea-nativepreview" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 2px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
+               <textarea id="textarea-nativepreview" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 1px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
             </div>
 			
             <div class="div-block-118" style="overflow: auto;">
@@ -1799,7 +1978,7 @@
                 <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
                 <input type="hidden" value="zag_natpre" name="type">
                 <textarea placeholder="html код включая javascript" maxlength="5000" name="code" class="textarea-5 w-input">'.$result.'</textarea>
-                <input type="submit" value="Сохранить" style="width:120px" class="button-7 w-button">
+                <input type="submit" value="Сохранить" style="width:120px" class="button-7">
             </form>
         </div>
     </div>
@@ -1859,7 +2038,7 @@
 			   <div style="margin-bottom: 20px;"><strong class="bold-text-16">Дополнительные стили:</strong>
                     <br>
                </div>
-               <textarea id="textarea-nativepro" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 2px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
+               <textarea id="textarea-nativepro" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 1px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
             </div>
 			
             <div class="div-block-118" style="overflow: auto;">
@@ -1917,11 +2096,29 @@
                                 <br>
                                 <strong class="bold-text-10">Внешний вид блока</strong>
                                 <br>
-                                <label>Выводить на устройствах</label>
-                                    <input type="checkbox" '; if ($result['mobile']) echo ' checked '; echo ' name="mobile" style="width: 15px;"> Сматфон<br>
-                                    <input type="checkbox" '; if ($result['tablet']) echo ' checked '; echo ' name="tablet" style="width: 15px;"> Планшет<br>
-                                    <input type="checkbox" '; if ($result['desktop']) echo ' checked '; echo ' name="desktop" style="width: 15px;"> ПК
-                                <br>
+                                <label style="margin-bottom: 10px;">Выводить на устройствах:</label>
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['mobile']) echo ' checked '; echo ' name="mobile" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Смартфоны</a>
+                                      </label>
+                                </div>
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['tablet']) echo ' checked '; echo ' name="tablet" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Планшет</a>
+                                      </label>
+                                </div>
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['desktop']) echo ' checked '; echo ' name="desktop" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">ПК</a>
+                                      </label>
+                                </div>
+								   
                                 <label>Единица измерения шрифта</label>
                                 <select name="widget-font-unit">
                                     <option '; if ($result['widget-font-unit']=="px"){echo 'selected ';} echo 'value="px">px</option>
@@ -2036,10 +2233,21 @@
                                 </select>
                                 <br>
                                 <label>Тип шрифта</label>
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-type-italic-title']) echo ' checked '; echo ' name="widget-type-italic-title" style="width: 15px;"> Курсив
-                                <br>
-                                <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" style="width: 15px;"> Подчеркнутый
+                                
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-type-italic-title']) echo ' checked '; echo ' name="widget-type-italic-title" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Курсив</a>
+                                      </label>
+                                </div> 
+								
+								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" class="form-radiozag">
+                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                         <a style="color:#333;" class="link">Подчеркнутый</a>
+                                      </label>
+                                </div> 
+								
                                 <br>
                                 <label>Межстрочный интервал</label>
                                 <select name="widget-type-interval-title">
@@ -2051,7 +2259,7 @@
                                 </select>
                             </div>
                         </div>
-                        <input type="submit" value="Сохранить" class="button-7 w-button">
+                        <input type="submit" value="Сохранить" class="button-7">
                     </form>
                 </div>
             </div>
@@ -2060,7 +2268,7 @@
 			   <div style="margin-bottom: 20px;"><strong class="bold-text-16">Дополнительные стили:</strong>
                     <br>
                </div>
-               <textarea id="textarea-slider" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 2px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
+               <textarea id="textarea-slider" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 1px solid #E0E1E5; height: 600px; resize: vertical;">'.$result['dop-css'].'</textarea>
             </div>
 			
             <div class="div-block-118" style="overflow: auto;">

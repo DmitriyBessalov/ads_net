@@ -2589,7 +2589,7 @@ input.w-button2 {
 .checkbox-field-4 {
   position: static;
   display: block;
-  width: 150px;
+  width: 230px;
   margin-top: 0px;
   clear: none;
   font-family: 'Myriadpro Regular';
@@ -3045,7 +3045,7 @@ input.w-button2 {
   display: -ms-flexbox;
   display: flex;
   width: 260px;
-  height: 40px;
+  height: 34px;
   margin-top: 20px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -3060,6 +3060,9 @@ input.w-button2 {
   font-family: 'Myriadpro Regular';
   font-size: 16px;
   text-align: center;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 .bold-text-10 {
@@ -4776,4 +4779,47 @@ input:checked + span {
 }
 .polzunok-container .ui-slider-horizontal .ui-slider-range-max {
   right: 0;
+}
+
+
+
+
+/* Radio */
+.radio input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 10px 0 0 7px;
+}
+.radio__text {
+  position: relative;
+  padding: 0 0 0 28px;
+  cursor: pointer;
+}
+.radio__text:before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #E0E1E5;
+  border-radius: 50%;
+  background: #E0E1E5;
+}
+.radio__text:after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 10px;
+  height: 10px;
+  
+  border-radius: 50%;
+  background: #333;
+  opacity: 0;
+  transition: .2s;
+}
+.radio input:checked + .radio__text:after {
+  opacity: 1;
 }

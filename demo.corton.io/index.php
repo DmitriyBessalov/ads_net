@@ -72,7 +72,9 @@ if (isset($_GET['site'])){
     $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
     $header = substr($response, 0, $header_size);
 
-    preg_match('/Content-Type:(.*)\r\n/', $header,$ContentType);
+    $header = strtolower($header);
+
+    preg_match('/content-type(.*)\r\n/', $header,$ContentType);
 
     $result = strpos ($ContentType[1], 'html');
 
@@ -107,11 +109,10 @@ bindEvent(function (e) {
         if (document.readyState === \"complete\") {        
             let element=document.getElementById(e.data);
             if (element){
-                console.log(element.getBoundingClientRect().top);
-                window.scrollBy({top: element.getBoundingClientRect().top-200, behavior: 'smooth'});
-                //element.scrollIntoView({ behavior: 'smooth'});
+                let scrolo=element.getBoundingClientRect().top;
+                window.scrollBy({top: scrolo-200, behavior: 'smooth'});
                 let ch=1;let ch2=0;
-                function draw(timePassed) {
+                function draw() {
                     if (ch<=1 && ch>=0){
                         element.style.opacity=ch;
                         ch=ch-0.05;
@@ -124,7 +125,15 @@ bindEvent(function (e) {
                         }
                     }
                 }
-                setTimeout(draw,250)
+                function wait() {
+                    if (scrolo!=element.getBoundingClientRect().top){
+                            scrolo=element.getBoundingClientRect().top
+                            setTimeout(wait,150);
+                    }else{
+                        draw();
+                    }
+                }
+                setTimeout(wait,150);
             }else{
                 alert('Виджета на данной странице нету');
             }
