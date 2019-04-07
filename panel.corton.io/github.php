@@ -1,2 +1,2 @@
 <?php
-exec('cd /home/dmitriy/PhpstormProjects/git && git fetch');
+exec('cd ~/github/corton && git pull git@github.com:DmitriyBessalov/corton.git');
