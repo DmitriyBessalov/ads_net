@@ -10,11 +10,12 @@ if (isset($_GET['site'])){
     echo '
 <html>
     <head>
+        <meta charset="utf-8">
         <title>'.$_GET['site'].'</title>
 		<link href="https://corton.io/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
-		<script type="text/javascript" src="/scroll.js"></script>
+		<!--script type="text/javascript" src="/scroll.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="js/jquery.fancy-scroll.js"></script>
+        <script type="text/javascript" src="js/jquery.fancy-scroll.js"></script-->
     </head>
     <body style="overflow:hidden;margin: 0px;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
@@ -90,12 +91,13 @@ if (isset($_GET['site'])){
         //Подключение скрипта
         $host=str_replace('.','_',$_COOKIE['host']);
         $body = str_replace('</head>', '<link href="https://api.corton.io/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.corton.io/js/corton.js" charset="UTF-8"></script></head>', $body);
-
+        $enc='UTF8';
         preg_match_all("/<meta.*?>/", $body, $phones);
         foreach ($phones[0] as $phone) {
             $phone=mb_strtolower($phone);
             if ((strpos($phone, 'content-type') !== false) and (strpos($phone, 'windows-1251') !== false)) {
                 header('Content-Type: text/html; windows-1251; charset=windows-1251');
+                $enc='WIN1251';
             }
         }
 
@@ -135,7 +137,7 @@ bindEvent(function (e) {
                 }
                 setTimeout(wait,150);
             }else{
-                alert('Виджета на данной странице нету');
+                     alert('Виджета на данной странице нету');
             }
         }else{
                 alert('Страница ещё не загрузилась');
@@ -143,6 +145,8 @@ bindEvent(function (e) {
     }
 });
         </script>";
+        if ($enc=='WIN1251')  $script=iconv("UTF-8", "WINDOWS-1251", $script);
+
         $body = str_replace('<head>', '<head>'.$script, $body);
         echo $body;
     }else{//содержимое не html код

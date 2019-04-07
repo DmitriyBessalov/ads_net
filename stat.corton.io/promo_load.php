@@ -32,7 +32,7 @@ if (!$dbstat->exec($sql)){$dbstat->query("INSERT INTO `stat_promo_day_count` SET
 
 $sql = "UPDATE `balans_ploshadki` SET ".$_GET['t']."_promo_load=".$_GET['t']."_promo_load+1  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
 if (!$dbstat->exec($sql)){
-    $sql = "INSERT INTO `balans_ploshadki` SET ".$_GET['t']."_promo_load=".$_GET['t']."_promo_load+1  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
+    $sql = "INSERT INTO `balans_ploshadki` SET ".$_GET['t']."_promo_load=".$_GET['t']."_promo_load+1, `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
     $dbstat->query($sql);
 }
 

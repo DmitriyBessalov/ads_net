@@ -164,19 +164,19 @@ function corton_widget() {
 
     //console.log(recomend_algorithm_output,natpre_algorithm_output,slider_algorithm_output);
     if (location.hostname==='demo.corton.io') {
-        if (recomend_algorithm_output !== '1') {
+        if (recomend_algorithm_output==='0'||recomend_algorithm_output==='3'||recomend_algorithm_output==='4'||recomend_algorithm_output==='5'){
             let div = document.createElement('div');
             div.id = 'corton-recomendation-widget';
             document.body.appendChild(div);
             console.log('r');
         }
-        if (natpre_algorithm_output !== '1') {
+        if (natpre_algorithm_output!=='1'||natpre_algorithm_output!=='3'||natpre_algorithm_output!=='4'||natpre_algorithm_output!=='5'){
             let div = document.createElement('div');
             div.id = 'corton-nativepreview-widget';
             document.body.appendChild(div);
             console.log('e');
         }
-        if (slider_algorithm_output !== '1') {
+        if (slider_algorithm_output === '0') {
             let div = document.createElement('div');
             div.id = 'corton-slider-widget';
             document.body.appendChild(div);
