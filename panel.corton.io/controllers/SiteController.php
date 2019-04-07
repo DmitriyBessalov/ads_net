@@ -67,4 +67,13 @@ class SiteController
         header('Location: https://corton.io/');
         return true;
     }
+
+    public static function actionGit_pull()
+    {
+        header("HTTP/1.0 200 OK");
+        exec('cd /var/www/www-root/data/github/corton && git pull git@github.com:DmitriyBessalov/corton.git');
+        return true;
+    }
+
+
 }

@@ -89,7 +89,7 @@ switch ($GLOBALS['user']) {
         return array(
             //Авторизация
             'login' => 'users/login',
-
+            'git_pull'=>'site/git_pull',
             //Страницы сайта:
             '.+' => 'site/all',
             '' => 'site/loginform',
