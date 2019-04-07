@@ -8,7 +8,7 @@ if (isset($_GET['site'])){
     $sql="SELECT `CTR`,`CPM`,`CPG`,`recomend_aktiv`,`natpre_aktiv` FROM `ploshadki` WHERE `domen`='".$parsed['host']."'";
     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
     echo '
-<html style="scroll-behavior: smooth;">
+<html>
     <head>
         <title>'.$_GET['site'].'</title>
 		<link href="https://corton.io/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
@@ -37,8 +37,8 @@ if (isset($_GET['site'])){
         
         //Отправка события в iframe на поиск виджетов
         function bind(eventHandler,idr) {
-            element= document.getElementById(idr);
-            if (element.addEventListener){
+            let element= document.getElementById(idr);
+            if(element && element.addEventListener){
                 element.addEventListener(\'click\', eventHandler, false);
             }
         }
