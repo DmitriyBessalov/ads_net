@@ -412,7 +412,9 @@ class ArticleController
             $wordsold=explode(",", $result['words']);
 
             if (!$result['active']){array_splice($words, 0);}
+
             $words=ArticleController::miniword($words);
+            $wordsold=ArticleController::miniword($wordsold);
 
             $wordsall = array_unique(array_merge($words, $wordsold));
             foreach($wordsall as $i){
@@ -934,6 +936,7 @@ form.onsubmit = function() {
             $words[$i] = preg_replace('/ий$|ей$|ый$|ой$|й$/', "", $words[$i]);
             $words[$i] = preg_replace('/иям$|им$|ем$|ом$|ям$|ам$/', "", $words[$i]);
             $words[$i] = preg_replace('/ы$/', "", $words[$i]);
+            $words[$i] = preg_replace('/ию$|ью$|ею$|ою$|ю$/', "", $words[$i]);
             $words[$i] = preg_replace('/иях$|ях$|их$|ах$/', "", $words[$i]);
             $words[$i] = preg_replace('/ев$|ов$/', "", $words[$i]);
             $words[$i] = preg_replace('/у$/', "", $words[$i]);
