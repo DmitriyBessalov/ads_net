@@ -500,7 +500,10 @@ class ArticleController
                     $filename180[$i]=", `img_180x180`='" . $hash180 . '.' . $extension180 . "'";
                 }
                 if($_POST['anons_ids'][$i]=="new"){
-                    $sql = "INSERT INTO `anons` SET `promo_id`=".$_POST['id'].", `user_id`='".$user_id."' ,`title`='" . $_POST['title'][$i] . "',`snippet`='" . $_POST['opisanie'][$i] . "'".$filename290[$i].$filename180[$i];
+                    $sql = "SELECT MAX(`id`) FROM `anons`";
+                    $maxid = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $maxid+=random_int ( 1 , 60 );
+                    $sql = "INSERT INTO `anons` SET `id`=".$maxid.", `promo_id`=".$_POST['id'].", `user_id`='".$user_id."' ,`title`='" . $_POST['title'][$i] . "',`snippet`='" . $_POST['opisanie'][$i] . "'".$filename290[$i].$filename180[$i];
                     $db->query($sql);
                     $anon[]=$db->lastInsertId();
                     $img[]=$hash290.'.'.$extension290;
