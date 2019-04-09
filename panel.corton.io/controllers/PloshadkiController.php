@@ -2342,7 +2342,7 @@
                 $db = Db::getConnection();
                 $dbstat = Db::getstatConnection();
 
-                $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv` FROM `ploshadki` WHERE `id`='".$_GET['id']."'";
+                $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv`, `domen` FROM `ploshadki` WHERE `id`='".$_GET['id']."'";
                 $aktiv = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load', SUM(`r_promo_click`) as 'r_promo_click', SUM(`e_promo_click`) as 'e_promo_click', SUM(`s_promo_click`) as 's_promo_click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
@@ -2473,7 +2473,6 @@
             }else{echo '<tr><td colspan="7">Некоректные даты фильтра</td></tr>';}
             echo'
         </table>
-
     </div>
     <div class="table-right">
 				 <form id="right-form" name="email-form" class="form-333">
@@ -2485,7 +2484,10 @@
                         <input type="submit" value="Применить" class="submit-button-addkey w-button">
                     </div>
 		        </form>
-	</div>      
+	</div>
+    <script>
+        document.getElementById("title2").innerHTML="Статистика по площадки:<span class=titlepromo>' . $aktiv['domen'] . '</span>";
+    </script>     
 </div>';
 
             include PANELDIR . '/views/layouts/footer.php';
