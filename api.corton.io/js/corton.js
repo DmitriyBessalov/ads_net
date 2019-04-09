@@ -226,36 +226,61 @@ function corton_widget() {
 
     function words() {
         // Слова исключения в этой строке
-        var exclude = ['автор','более','будет','было','важные','ведь','весь','влияет','вообще','время','всемирный','всех','встретить','далее','действительно','делать',
-            'дело','делу','день','другие','если','есть','здесь','имеет','именно','иной','когда','комментарий','конгресс','контакты','которые','который','куда','лишь','любят',
-            'меня','много','может','можно','надо','наша','наше','неделю','неделя','некоторые','никак','нужно','очень','перед','поиск','портфолио','после','поэтому','привет',
-            'работая','раннее','реклама','рубрика','рубрики','своего','своей','свои','своим','своими','своих','сентября','следует','также','таких','течение','типа','того','тоже','только',
-            'туда','часа','часто','чаще','чтобы','этого','этой','этот'];
+        var exclude = {'автор':'','боле':'','будет':'','был':'','важны':'','вед':'','вес':'','влияет':'','вообщ':'','врем':'','всемирн':'','всех':'','встретит':'','дал':'',
+            'действительн':'','делат':'','дел':'','ден':'','друг':'', 'есл':'','ест':'','здес':'','имеет':'','именн':'','ин':'','когд':'','комментар':'','конгресс':'','контакт':'',
+            'котор':'','куд':'','лиш':'','любят':'','мен':'','мн':'','может':'','можн':'','над':'','наш':'','недел':'','некотор':'', 'никак':'','нужн':'','очен':'','перед':'',
+            'поиск':'','портфоли':'','посл':'','поэт':'','привет':'','работ':'','ранн':'','реклам':'','рубрик':'','сво':'','сентябр':'','следует':'','такж':'','так':'','течен':'',
+            'тип':'', 'т':'','тож':'','тольк':'','туд':'','час':'','част':'','чащ':'','чтоб':'','эт':'','этот':''};
 
-        var p  = document.getElementsByTagName("p"); var pList  = Array.prototype.slice.call(p);
-        var h1 = document.getElementsByTagName("h1");var h1List = Array.prototype.slice.call(h1);
-        var h2 = document.getElementsByTagName("h2");var h2List = Array.prototype.slice.call(h2);
-        var h3 = document.getElementsByTagName("h3");var h3List = Array.prototype.slice.call(h3);
-        var h4 = document.getElementsByTagName("h4");var h4List = Array.prototype.slice.call(h4);
-        var allElem = pList.concat(h1List, h2List, h3List, h4List);
-        var exploded_words = [];
-        allElem.forEach(function (item, i, allElem) {
-            var text = item.innerText;
-            var text = text.replace(/[^а-яё]+/gi, " ");
-            exploded_words = exploded_words.concat(text.split(" "));
-        });
+        let top10=[];
+        let val;
+        function splitword(wordsss){
+            let arr = wordsss.toLowerCase().match(/[а-яё]{4,}/g)
+            if (arr !== null)
+            for (val of arr){
+                const lastchar= val.slice(-1);
+                switch (lastchar) {
+                    case 'я':val = val.replace(/ья$|яя$|ая$|ия$|я$/, "");break;
+                    case 'е':val = val.replace(/ое$|ее$|ие$|ые$|е$/, "");break;
+                    case 'а':val = val.replace(/а$/, "");break;
+                    case 'и':val = val.replace(/иями$|ями$|ьми$|еми$|ами$|ии$|и$/, "");break;
+                    case 'ь':val = val.replace(/ь$/, "");break;
+                    case 'о':val = val.replace(/его$|ого$|о$/, "");break;
+                    case 'й':val = val.replace(/ий$|ей$|ый$|ой$|й$/, "");break;
+                    case 'м':val = val.replace(/иям$|им$|ем$|ом$|ям$|ам$/, "");break;
+                    case 'ы':val = val.replace(/ы$/, "");break;
+                    case 'ю':val = val.replace(/ию$|ью$|ею$|ою$|ю$/, "");break;
+                    case 'х':val = val.replace(/иях$|ях$|их$|ах$/, "");break;
+                    case 'в':val = val.replace(/ев$|ов$/, "");break;
+                    case 'у':val = val.replace(/у$/, "");
+                }
+                if (top10[val]){top10[val]++;}else{top10[val]=1;}
+            }
+        }
 
-        var top10 = [];
-        exploded_words.forEach(function (item, i, exploded_words) {
-            if (item.length <= 3) return;
-            item = item.toLowerCase();
-            if (exclude.indexOf(item) != -1) return;
-            top10.push(item);
-        });
+        splitword(document.title);
+        splitword(document.head.querySelector("meta[name='description']").content);
+        const p  = document.getElementsByTagName("p" );for (const val of p ){splitword(val.innerText);}
+        const h1 = document.getElementsByTagName("h1");for (const val of h1){splitword(val.innerText);}
+        const h2 = document.getElementsByTagName("h2");for (const val of h2){splitword(val.innerText);}
+        const h3 = document.getElementsByTagName("h3");for (const val of h3){splitword(val.innerText);}
+        const h4 = document.getElementsByTagName("h4");for (const val of h4){splitword(val.innerText);}
 
-        var top10 = top10.reduce(function (acc, el) {acc[el] = (acc[el] || 0) + 1; return acc;}, {});
+        console.log(top10);
+
         top10 = Object.keys(top10).sort(function (a, b){return top10[b] - top10[a]});
+            top10 = top10.slice(0, 15);
+        let top15 = top10.slice(0, 15);
+
+        for (val of top15){
+            if (val in exclude){
+                top10.splice(top10.indexOf(val), 1);
+            }
+        }
+
         top10 = top10.slice(0, 10);
+        console.log(top10);
+
         return top10;
     }
 
@@ -270,7 +295,7 @@ function corton_widget() {
                 var width = style_r.getPropertyValue('--wsize');
                 if (width == "") width = 0;
                 count = parseInt(width) * parseInt(height);
-                if (count != 0) {
+                if (count !== 0) {
                     if (recomend_algorithm_output === '1') {
                         widget = widget +'&r=' + count;
                         titletext = style_r.getPropertyValue('--titletext');
@@ -280,7 +305,7 @@ function corton_widget() {
                         var abzats = style_r.getPropertyValue('--widgetpositionp');
                         if (selector != "") {
                             var ele = document.querySelectorAll(selector);
-                            if (ele.length != 0) {
+                            if (ele.length !== 0) {
                                 if (ele[0]) {
                                     widget = widget +'&r=' + count;
                                     switch (recomend_algorithm_output) {
@@ -340,7 +365,7 @@ function corton_widget() {
                     var abzats = style_e.getPropertyValue('--widgetpositionp');
                     if (selector != "") {
                         var ele = document.querySelectorAll(selector);
-                        if (ele.length != 0) {
+                        if (ele.length !== 0) {
                             if (ele[0]) {
                                 widget = widget + '&e=1';
                                 switch (natpre_algorithm_output) {

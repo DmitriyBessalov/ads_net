@@ -407,9 +407,13 @@ class ArticleController
             $words = array_unique(explode(",", $strtolow));
             asort($words);
             $strtolow=implode(',', $words);
-            $sql="SELECT `words` FROM `promo` WHERE `id`='".$_POST['id']."';";
-            $wordold = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            $wordsold=explode(",", $wordold);
+            $sql="SELECT `active`,`words` FROM `promo` WHERE `id`='".$_POST['id']."';";
+            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $wordsold=explode(",", $result['words']);
+
+            if (!$result['active']){array_splice($words, 0);}
+            $words=ArticleController::miniword($words);
+
             $wordsall = array_unique(array_merge($words, $wordsold));
             foreach($wordsall as $i){
                 if ($i!="")
@@ -447,9 +451,7 @@ class ArticleController
                         }
                     }
             }
-            $sql="UPDATE `promo` SET `words`='".$strtolow."' WHERE `id`='".$_POST['id']."';";
-            $sql.="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
-            $db->query($sql);
+
             break;
         }case 'анонсы':{
             //Список старых анонсов
@@ -845,9 +847,6 @@ form.onsubmit = function() {
   return true;
 };
 </script>
-
-
-
 ';
         include PANELDIR . '/views/layouts/footer.php';
         return true;
@@ -863,6 +862,7 @@ form.onsubmit = function() {
             $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
             $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
             $words=explode(',',$word);
+            $words=ArticleController::miniword($words);
             foreach ($words as $word){
                 $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
 
@@ -876,7 +876,6 @@ form.onsubmit = function() {
 
                 $db->query($sql);
             }
-
 
             $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".addslashes($_GET['id'])."';";
             $db->query($sql);
@@ -895,6 +894,7 @@ form.onsubmit = function() {
             $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
             $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
             $words=explode(',',$word);
+            $words=ArticleController::miniword($words);
             foreach ($words as $word){
                 $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
                 $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
@@ -914,6 +914,28 @@ form.onsubmit = function() {
             return true;
         }
     }
+
+
+    //функцию обрезает оконкания слов
+    public static function miniword($words)
+        {
+            $count = count($words);
+            for ($i = 0; $i < $count; $i++) {
+                $words[$i] = preg_replace('/ья$|яя$|ая$|ия$|я$/', "", $words[$i]);
+                $words[$i] = preg_replace('/ое$|ее$|ие$|ые$|е$/', "", $words[$i]);
+                $words[$i] = preg_replace('/а$/', "", $words[$i]);
+                $words[$i] = preg_replace('/иями$|ями$|ьми$|еми$|ами$|ии$|и$/', "", $words[$i]);
+                $words[$i] = preg_replace('/ь$/', "", $words[$i]);
+                $words[$i] = preg_replace('/его$|ого$|о$/', "", $words[$i]);
+                $words[$i] = preg_replace('/ий$|ей$|ый$|ой$|й$/', "", $words[$i]);
+                $words[$i] = preg_replace('/иям$|им$|ем$|ом$|ям$|ам$/', "", $words[$i]);
+                $words[$i] = preg_replace('/ы$/', "", $words[$i]);
+                $words[$i] = preg_replace('/иях$|ях$|их$|ах$/', "", $words[$i]);
+                $words[$i] = preg_replace('/ев$|ов$/', "", $words[$i]);
+                $words[$i] = preg_replace('/у$/', "", $words[$i]);
+            }
+            return array_unique($words);
+        }
 
     //функцию очистки от лишних анонсов
     public static function actionDel(){
