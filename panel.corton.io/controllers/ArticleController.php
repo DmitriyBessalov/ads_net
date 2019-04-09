@@ -295,7 +295,7 @@ class ArticleController
                           <td><a class="screenshot" style="text-decoration:none;" rel="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
-                    echo '<td>' . $result['promo_id'] . '</td>'; 
+                    echo '<td>' . $result['promo_id'] . '</td>';
                     echo '<td></td><td></td>';
                 }
                 echo ' 
@@ -451,6 +451,10 @@ class ArticleController
                         }
                     }
             }
+
+            $sql="UPDATE `promo` SET `words`='".$strtolow."' WHERE `id`='".$_POST['id']."';";
+            $sql.="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
+            $db->query($sql);
 
             break;
         }case 'анонсы':{
@@ -611,7 +615,7 @@ body {
 }
 </style>
 <div class="w-tabs" id="tab0">';
-if($title=='Редактирование статьи')echo '
+        if($title=='Редактирование статьи')echo '
     <div class="tabs-menu w-tab-menu">
         <a class="tab-link-tab-4 w-inline-block w-tab-link w--current" id="tab1">
             <div class="text-block-142">Базовые настройки</div>
@@ -629,7 +633,7 @@ if($title=='Редактирование статьи')echo '
             <div class="text-block-142">Руководство</div>
         </a>
     </div>';
-    echo'
+        echo'
     <div class="w-tab-content">';
         if($title=='Редактирование статьи'){echo '
         <div class="tab-pane-tab-4 w-tab-pane w--tab-active" id="tab1block">
@@ -649,17 +653,17 @@ if($title=='Редактирование статьи')echo '
                             </div>
                         </div>
                         <div class="div-block-84">';
-                            if ($result['words']!=""){
-                            $word=explode(",", $result['words']);
-                                foreach($word as $i) {
-                                    echo'
+            if ($result['words']!=""){
+                $word=explode(",", $result['words']);
+                foreach($word as $i) {
+                    echo'
                                         <div class="div-block-86" >
                                             <div class="text-block-114" >'.$i.'</div >
                                             <div class="text-block-98" > Удалить</div >
                                         </div>';
-                                    };
-                                };
-                            echo'
+                };
+            };
+            echo'
                         </div>
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
@@ -668,9 +672,9 @@ if($title=='Редактирование статьи')echo '
 					<div class="text-block-103">Ставка</div>
                         <div class="div-block-85">
                             <div>';
-                                $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
-                                $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                                echo'
+            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
+            $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            echo'
                                 <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
                             </div>
                             <div>
@@ -691,18 +695,18 @@ if($title=='Редактирование статьи')echo '
                     <input type="hidden" name="tab" value="анонсы">
                     <input type="hidden" name="id" value="'.$id.'">
                     <div id="anonses">';
-                    $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$id."'";
-                    $anons_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    if ($anons_ids!='') {
-                        $anons = explode(",", $anons_ids);
-                        foreach ($anons as $i) {
-                            $sql = "SELECT * FROM `anons` WHERE `id`='" . $i . "'";
-                            $anon = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$id."'";
+            $anons_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            if ($anons_ids!='') {
+                $anons = explode(",", $anons_ids);
+                foreach ($anons as $i) {
+                    $sql = "SELECT * FROM `anons` WHERE `id`='" . $i . "'";
+                    $anon = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-                            $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
-                            $dir = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                            $imgdir = '//api.corton.io/img/' . $dir . '/a/';
-                            echo '
+                    $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
+                    $dir = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $imgdir = '//api.corton.io/img/' . $dir . '/a/';
+                    echo '
                                 <div class="div-block-97-copy">
 								<div class="text-block-103">Настройка анонса</div>
                                     <input type="hidden" name="anons_ids[]" value="' . $anon['id'] . '">
@@ -729,9 +733,9 @@ if($title=='Редактирование статьи')echo '
                                     </div>
                                     <a class="button-10 w-button delanons">Удалить анонс</a>
                                 </div>';
-                        };
-                    };
-                    echo '
+                };
+            };
+            echo '
                     </div>
                     <input type="hidden" name="del_id" value="">
 					<div style="border-top: 0px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
@@ -748,10 +752,10 @@ if($title=='Редактирование статьи')echo '
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
                     <div class="div-block-97">';
-					
-					if($title!='Редактирование статьи')
-					echo '<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: -60px;"></div>';
-					echo '
+
+        if($title!='Редактирование статьи')
+            echo '<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: -60px;"></div>';
+        echo '
 					<div class="text-block-103">Контент статьи</div>
                         <input type="text" class="text-field-4 w-input" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
                         <input name="formtext" type="hidden">
@@ -816,7 +820,7 @@ if($title=='Редактирование статьи')echo '
                 tab3block.style.display="block";
             </script>';
         };
-    echo'
+        echo'
     </div>
 </div>
 
@@ -918,24 +922,24 @@ form.onsubmit = function() {
 
     //функцию обрезает оконкания слов
     public static function miniword($words)
-        {
-            $count = count($words);
-            for ($i = 0; $i < $count; $i++) {
-                $words[$i] = preg_replace('/ья$|яя$|ая$|ия$|я$/', "", $words[$i]);
-                $words[$i] = preg_replace('/ое$|ее$|ие$|ые$|е$/', "", $words[$i]);
-                $words[$i] = preg_replace('/а$/', "", $words[$i]);
-                $words[$i] = preg_replace('/иями$|ями$|ьми$|еми$|ами$|ии$|и$/', "", $words[$i]);
-                $words[$i] = preg_replace('/ь$/', "", $words[$i]);
-                $words[$i] = preg_replace('/его$|ого$|о$/', "", $words[$i]);
-                $words[$i] = preg_replace('/ий$|ей$|ый$|ой$|й$/', "", $words[$i]);
-                $words[$i] = preg_replace('/иям$|им$|ем$|ом$|ям$|ам$/', "", $words[$i]);
-                $words[$i] = preg_replace('/ы$/', "", $words[$i]);
-                $words[$i] = preg_replace('/иях$|ях$|их$|ах$/', "", $words[$i]);
-                $words[$i] = preg_replace('/ев$|ов$/', "", $words[$i]);
-                $words[$i] = preg_replace('/у$/', "", $words[$i]);
-            }
-            return array_unique($words);
+    {
+        $count = count($words);
+        for ($i = 0; $i < $count; $i++) {
+            $words[$i] = preg_replace('/ья$|яя$|ая$|ия$|я$/', "", $words[$i]);
+            $words[$i] = preg_replace('/ое$|ее$|ие$|ые$|е$/', "", $words[$i]);
+            $words[$i] = preg_replace('/а$/', "", $words[$i]);
+            $words[$i] = preg_replace('/иями$|ями$|ьми$|еми$|ами$|ии$|и$/', "", $words[$i]);
+            $words[$i] = preg_replace('/ь$/', "", $words[$i]);
+            $words[$i] = preg_replace('/его$|ого$|о$/', "", $words[$i]);
+            $words[$i] = preg_replace('/ий$|ей$|ый$|ой$|й$/', "", $words[$i]);
+            $words[$i] = preg_replace('/иям$|им$|ем$|ом$|ям$|ам$/', "", $words[$i]);
+            $words[$i] = preg_replace('/ы$/', "", $words[$i]);
+            $words[$i] = preg_replace('/иях$|ях$|их$|ах$/', "", $words[$i]);
+            $words[$i] = preg_replace('/ев$|ов$/', "", $words[$i]);
+            $words[$i] = preg_replace('/у$/', "", $words[$i]);
         }
+        return array_unique($words);
+    }
 
     //функцию очистки от лишних анонсов
     public static function actionDel(){
