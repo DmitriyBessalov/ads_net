@@ -831,7 +831,7 @@ body {
 var quill = new Quill(\'#editor-container\', {
   modules: {
     toolbar: [
-      [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link"]
+      [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
     ]
   },
   scrollingContainer: "#scrolling-container",
