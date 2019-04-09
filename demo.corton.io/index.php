@@ -10,12 +10,13 @@ if (isset($_GET['site'])){
     echo '
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>'.$_GET['site'].'</title>
+       <title>Демонстрация: '.$_GET['site'].'</title>
 		<link href="https://corton.io/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
 		<!--script type="text/javascript" src="/scroll.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="js/jquery.fancy-scroll.js"></script-->
+		<link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc4dc77d1f61f6d0f03cc_favicon.png" rel="shortcut icon" type="image/x-icon"/>
+        <link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc55977d1f6922c0f0715_faviconbig.png" rel="apple-touch-icon"/></head>
     </head>
     <body style="overflow:hidden;margin: 0px;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
