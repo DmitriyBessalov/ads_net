@@ -259,7 +259,7 @@ function corton_widget() {
         }
 
         splitword(document.title);
-        splitword(document.head.querySelector("meta[name='description']").content);
+        const head  = document.head.querySelector("meta[name='description']"); if (head) {splitword(head.content);}
         const p  = document.getElementsByTagName("p" );for (const val of p ){splitword(val.innerText);}
         const h1 = document.getElementsByTagName("h1");for (const val of h1){splitword(val.innerText);}
         const h2 = document.getElementsByTagName("h2");for (const val of h2){splitword(val.innerText);}
