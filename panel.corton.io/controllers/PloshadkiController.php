@@ -131,18 +131,19 @@
         </div>';
         echo '
 		<div class="table-right">
-		    <form id="email-form" action="/platforms" name="email-form" class="form-333">
+		    <form id="right-form" action="/platforms" name="email-form" class="form-333">
 			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
 			<a href="/platforms-edit?id=0" class="button-css-edit w-button">Стандартные стили</a>
 			<br><br>
-			<p class="filtermenu"><input type="radio" name="status" value="all"  id="radio-one" class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';} echo'><label for="radio-one"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="text-decoration: underline;"';} echo'>Все статусы площадок</label></p>
-            <p class="filtermenu"><input type="radio" name="status" value="1"  id="radio-f" class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'><label for="radio-f"'; if ($_GET['status']=='1'){echo ' style="text-decoration: underline;"';} echo'>Активные площадки</label></p>
-            <p class="filtermenu"><input type="radio" name="status" value="0"  id="radio-s" class="form-radio"'; if ($_GET['status']=='0'){echo ' checked';} echo'><label for="radio-s"'; if ($_GET['status']=='0'){echo ' style="text-decoration: underline;"';} echo'>Неактивные площадки</label></p>
+			<p class="filtermenu"><label'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="all"class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';}  echo'>Все статусы площадок</label></p>
+            <p class="filtermenu"><label'; if ($_GET['status']=='1'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="1"  class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'>Активные площадки</label></p>
+            <p class="filtermenu"><label'; if ($_GET['status']=='0'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="0"  class="form-radio"'; if ($_GET['status']=='0'){echo ' checked';} echo'>Неактивные площадки</label></p>
             <br>
-            <p class="filtermenu"><input type="radio" name="type" value="all"  id="radio-o" class="form-radio"'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' checked';} echo'><label for="radio-o"'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' style="text-decoration: underline;"';} echo'>Все типы площадок</label></p>
-			<p class="filtermenu"><input type="radio" name="type" value="info" id="radio-two" class="form-radio"'; if ($_GET['type']=='info'){echo ' checked';} echo'><label for="radio-two"'; if ($_GET['type']=='info'){echo ' style="text-decoration: underline;"';} echo'>Информационные</label></p>
-			<p class="filtermenu"><input type="radio" name="type" value="news" id="radio-three" class="form-radio"'; if ($_GET['type']=='news'){echo ' checked';} echo'><label for="radio-three"'; if ($_GET['type']=='news'){echo ' style="text-decoration: underline;"';} echo'>Новостные</label></p>
-			<p class="filtermenu"><input type="radio" name="type" value="demo" id="radio-four" class="form-radio"'; if ($_GET['type']=='demo'){echo ' checked';} echo'><label for="radio-four"'; if ($_GET['type']=='demo'){echo ' style="text-decoration: underline;"';} echo'>Демонстрационные</label></p>
+            <p class="filtermenu"><label'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="all"  class="form-radio"'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' checked';} echo'>Все типы площадок</label></p>
+			<p class="filtermenu"><label'; if ($_GET['type']=='info'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="info" class="form-radio"'; if ($_GET['type']=='info'){echo ' checked';} echo'>Информационные</label></p>
+			<p class="filtermenu"><label'; if ($_GET['type']=='news'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="news" class="form-radio"'; if ($_GET['type']=='news'){echo ' checked';} echo'>Новостные</label></p>
+			<p class="filtermenu"><label'; if ($_GET['type']=='demo'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="demo" class="form-radio"'; if ($_GET['type']=='demo'){echo ' checked';} echo'>Демонстрационные</label></p>
+            
 
 			<div class="html-embed-3 w-embed" style="margin-top: 40px;">
             <input type="text" name="datebegin" class="tcal tcalInput" value="'.$datebegin.'">

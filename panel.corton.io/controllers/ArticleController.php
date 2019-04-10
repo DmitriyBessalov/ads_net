@@ -141,9 +141,9 @@ class ArticleController
 		    <form id="right-form" class="form-333">
 			<a href="/article-edit" class="button-add-site w-button">Создать статью</a>
 			
-			<p class="filtermenu"><label><input type="radio" name="active" value="all" id="radio-one" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'><label for="radio-one">Все статьи</label></p>
-			<p class="filtermenu"><label><input type="radio" name="active" value="1" id="radio-two" class="form-radio"'; if ($_GET['active']==1){echo ' checked';} echo'><label for="radio-two">Активные статьи</label></p>
-			<p class="filtermenu"><label><input type="radio" name="active" value="0" id="radio-three" class="form-radio"'; if ($_GET['active']==0){echo ' checked';} echo'><label for="radio-three">Статьи на паузе</label></p>
+			<p class="filtermenu"><label><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
+			<p class="filtermenu"><label><input type="radio" name="active" value="1" class="form-radio"'; if ($_GET['active']==1){echo ' checked';} echo'>Активные статьи</label></p>
+			<p class="filtermenu"><label><input type="radio" name="active" value="0" class="form-radio"'; if ($_GET['active']==0){echo ' checked';} echo'>Статьи на паузе</label></p>
 			
             <div class="html-embed-3 w-embed" style="margin-top: 40px;">
              <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off"  value="'.$datebegin.'">
