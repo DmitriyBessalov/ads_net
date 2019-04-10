@@ -1,10 +1,10 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
-
+$_GET = array_map('addslashes', $_GET);
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 $y=0;
-$words=str_replace(',', '\',\'', addslashes($_GET['words']));
+$words=str_replace(',', '\',\'', $_GET['words']);
 //Найдем ID статей
 $sql="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."')";
 $result = $db->query($sql)->fetchALL(PDO::FETCH_COLUMN);

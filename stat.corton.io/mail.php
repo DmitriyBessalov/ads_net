@@ -1,15 +1,16 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+$_GET = array_map('addslashes', $_GET);
 $to = "orders@corton.io";
 $subject = "Corton promo form";
 
-if (htmlspecialchars($_GET['host'])==""){
+if ($_GET['host']==""){
     $host=$_SERVER['HTTP_HOST'];
 }else{
-    $host=htmlspecialchars($_GET['host']);
+    $host=$_GET['host'];
 }
-$name=htmlspecialchars($_GET['name']);
-$phone=htmlspecialchars($_GET['phone']);
+$name=$_GET['name'];
+$phone=$_GET['phone'];
 
 $message = '
  <h3>Получена новая заявка</h3> </br>

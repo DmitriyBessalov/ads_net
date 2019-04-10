@@ -1,5 +1,7 @@
-<?php $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
-$data= $db->query("SELECT `code` FROM `zag_".addslashes($_GET['tizer'])."` WHERE `id`='".addslashes($_GET['id'])."'")->fetch(PDO::FETCH_COLUMN);
+<?php
+$_GET = array_map('addslashes', $_GET);
+$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+$data= $db->query("SELECT `code` FROM `zag_".$_GET['tizer']."` WHERE `id`='".$_GET['id']."'")->fetch(PDO::FETCH_COLUMN);
 echo
 '<!DOCTYPE html>
 <html>

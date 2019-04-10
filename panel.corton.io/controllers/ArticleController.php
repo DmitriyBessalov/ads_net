@@ -362,7 +362,7 @@ class ArticleController
         switch ($_POST['tab']){
             case 'статья' :{
                 $data_add = date('Y-m-d');
-                if (addslashes($_POST['id']) == "new"){$id='-';}else{$id=addslashes($_POST['id']);};
+                if ($_POST['id'] == "new"){$id='-';}else{$id=$_POST['id'];};
                 $role=UsersController::checkRole();
                 if (($role=='admin') AND ($id!="")){
                     $sql="SELECT `user_id` FROM `promo` WHERE `id`=".$id;
@@ -394,7 +394,7 @@ class ArticleController
                     $sql = "INSERT INTO `promo` SET `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."';";
                     $db->query($sql);
                 }
-                if (addslashes($_POST['id']) == "new") {
+                if ($_POST['id'] == "new") {
                     $id=$db->lastInsertId();
                     $sql = "INSERT INTO `anons_index` SET `promo_id`='".$id."';";
                     $db->query($sql);
@@ -502,7 +502,7 @@ class ArticleController
                 if($_POST['anons_ids'][$i]=="new"){
                     $sql = "SELECT MAX(`id`) FROM `anons`";
                     $maxid = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    $maxid+=random_int ( 1 , 60 );
+                    $maxid+=random_int ( 1 , 105 );
                     $sql = "INSERT INTO `anons` SET `id`=".$maxid.", `promo_id`=".$_POST['id'].", `user_id`='".$user_id."' ,`title`='" . $_POST['title'][$i] . "',`snippet`='" . $_POST['opisanie'][$i] . "'".$filename290[$i].$filename180[$i];
                     $db->query($sql);
                     $anon[]=$db->lastInsertId();
@@ -865,7 +865,7 @@ form.onsubmit = function() {
     public static function actionStart(){
         {
             $db = Db::getConnection();
-            $id=addslashes($_GET['id']);
+            $id=$_GET['id'];
 
             //Добавление индексов слов
             $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
@@ -886,7 +886,7 @@ form.onsubmit = function() {
                 $db->query($sql);
             }
 
-            $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".addslashes($_GET['id'])."';";
+            $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$_GET['id']."';";
             $db->query($sql);
             ArticleController::actionIndex();
             return true;
@@ -897,7 +897,7 @@ form.onsubmit = function() {
     public static function actionStop($del){
         {
             $db = Db::getConnection();
-            $id=addslashes($_GET['id']);
+            $id=$_GET['id'];
 
             //Очиста индексов слов
             $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
@@ -916,7 +916,7 @@ form.onsubmit = function() {
                 $db->query($sql);
             }
 
-            $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".addslashes($_GET['id'])."';";
+            $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$_GET['id']."';";
             $db->query($sql);
             if ($del) return true;
             ArticleController::actionIndex();
@@ -951,13 +951,12 @@ form.onsubmit = function() {
     public static function actionDel(){
         {
             $db = Db::getConnection();
-            $id=addslashes($_GET['id']);
 
             ArticleController::actionStop(1);
 
             //Написать функцию очистки от лишних анонсов
-            $sql ="DELETE FROM `promo` WHERE `id` = '".$id."';";
-            $sql.="DELETE FROM `anons_index` WHERE `anons_index`.`promo_id` = '".$id."'";
+            $sql ="DELETE FROM `promo` WHERE `id` = '".$_GET['id']."';";
+            $sql.="DELETE FROM `anons_index` WHERE `anons_index`.`promo_id` = '".$_GET['id']."'";
 
             $db->query($sql);
             ArticleController::actionIndex();

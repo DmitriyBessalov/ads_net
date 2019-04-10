@@ -13,6 +13,10 @@ error_reporting(E_ALL & ~E_WARNING & ~E_DEPRECATED & ~E_NOTICE);
 
 session_start();
 
+$_POST = array_map('addslashes', $_POST);
+$_GET = array_map('addslashes', $_GET);
+$_COOKIE = array_map('addslashes', $_COOKIE);
+
 // Подключение файлов системы
 define('PANELDIR', '/var/www/www-root/data/www/panel.corton.io');
 define('APIDIR', '/var/www/www-root/data/www/api.corton.io');

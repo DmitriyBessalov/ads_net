@@ -1,6 +1,8 @@
 <?php
 if ($_SERVER['REQUEST_URI']=='/robots.txt'){echo "User-agent: *\nDisallow: /";exit;}
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+$_GET = array_map('addslashes', $_GET);
+$_COOKIE = array_map('addslashes', $_COOKIE);
 if (isset($_GET['site'])){
     $parsed=parse_url($_GET['site']);
     setcookie("host", $parsed['host'],time()+72000,'/', ".corton.io");
@@ -12,9 +14,6 @@ if (isset($_GET['site'])){
     <head>
        <title>Демонстрация: '.$_GET['site'].'</title>
 		<link href="https://corton.io/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
-		<!--script type="text/javascript" src="/scroll.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="js/jquery.fancy-scroll.js"></script-->
 		<link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc4dc77d1f61f6d0f03cc_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc55977d1f6922c0f0715_faviconbig.png" rel="apple-touch-icon"/></head>
     </head>

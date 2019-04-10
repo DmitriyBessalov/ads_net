@@ -35,7 +35,7 @@ class FinController
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
             $db = Db::getConnection();
             $dbstat = Db::getstatConnection();
-            $sql = "SELECT p.`id`, p.`domen` FROM `ploshadki` p JOIN `users` u ON p.`user_email`=u.`email` WHERE `phpsession`='" . addslashes($_COOKIE['PHPSESSID']) . "'";
+            $sql = "SELECT p.`id`, p.`domen`, u.`email` FROM `ploshadki` p JOIN `users` u ON p.`user_email`=u.`email` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $balansall = 0;
             foreach ($result as $i) {
@@ -291,8 +291,25 @@ class FinController
                     </div>
 		        </form>
 		    </div>
-			
-						<div id="openaddsite" class="modalDialog2">
+		
+    <script>
+        function AjaxFormRequest(result_id,formMain,url) {
+            jQuery.ajax({
+                url:     url,
+                type:     "POST",
+                dataType: "html",
+                data: jQuery("#"+formMain).serialize(),
+                success: function(response) {
+                    document.getElementById(result_id).innerHTML = response;
+                },
+                error: function(response) {
+                    document.getElementById(result_id).innerHTML = "<p>Сообщение отправлено, скоро с Вами свяжется менежер</p>";
+                }
+            });
+            $(\':input\',\'#formMain\') .prop(\'disabled\',true)
+        }
+    </script>
+<div id="openaddsite" class="modalDialog2">
     <div>
         <a href="/finance#close" title="Закрыть" class="close">
             <img src="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c25ef6677f283ad129ce5fe_close.png">
@@ -301,11 +318,12 @@ class FinController
             <div class="text-block-82-copy" style="">Добавить новую площадку</div>
 			<p style="margin-top: 10px; color: #768093; font-weight: 400 !important; font-size: 16px; line-height: 20px; font-family: \'Myriadpro Regular\';">Укажите URL площадки которую хотите добавить в систему, после чего личный менеджер свяжется с вами.</p>
             <div class="w-form">
-                <form method="post" class="form-3" style="margin-right: 0px !important;">
-                    <input type="url" maxlength="50" placeholder="URL площадки" required="" style="background: #f4f6f9; color: #768093; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 260px; height: 34px; margin-right: 20px;">
-                    <input style="margin-top: 4px !important; color: #fff; border: 0px;" type="submit" value="Добавить площадку" data-wait="Пожалуйста ожидайте..."
-                           class="button-add-site w-button">
-                </form>
+                <form method="post" id="formMain" action="https://corton.io/contact-form2.php" class="form-3" style="margin-right: 0px !important;">
+                    <input type="text" name="host" maxlength="50" placeholder="URL площадки" required="" style="background: #f4f6f9; color: #768093; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 260px; height: 34px; margin-right: 20px;">
+                    <input type="hidden" name="email" value="'.$platform['email'].'">
+                    <input style="margin-top: 4px !important; color: #fff; border: 0px;" type="submit" value="Добавить площадку" onclick="AjaxFormRequest(\'messegeResult\', \'formMain\', \'https://corton.io/contact-form2.php\')" class="button-add-site">
+                 </form>
+                <div id="messegeResult"></div>
             </div>
         </div>
     </div>

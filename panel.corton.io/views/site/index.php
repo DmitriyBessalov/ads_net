@@ -7,8 +7,8 @@ if (isset($_POST['login-form']['login'])){
     $session=substr(sha1(rand()), 0, 26);
     setcookie ( 'PHPSESSID', $session, time () + 10000000 );
     $db = Db::getConnection();
-    $email=addslashes($_POST['login-form']['login']);
-    $password=md5(addslashes($_POST['login-form']['password']));
+    $email=$_POST['login-form']['login'];
+    $password=md5($_POST['login-form']['password']);
     $ip=$_SERVER['REMOTE_ADDR'];
     $sql="SELECT `password_md5` FROM `user` WHERE `email`='".$email."' LIMIT 1;";
     $result=$db->query($sql);
@@ -27,10 +27,10 @@ if (isset($_POST['login-form']['login'])){
     $_SESSION = array();
     $session=session_id();
     $db = Db::getConnection();
-    $fio=addslashes($_POST['ContactForm']['name']);
-    $email=addslashes($_POST['ContactForm']['email']);
-    $phone=addslashes($_POST['ContactForm']['phone']);
-    $url=addslashes($_POST['ContactForm']['url']);
+    $fio=$_POST['ContactForm']['name'];
+    $email=$_POST['ContactForm']['email'];
+    $phone=$_POST['ContactForm']['phone'];
+    $url=$_POST['ContactForm']['url'];
     $ip=$_SERVER['REMOTE_ADDR'];
     $sql="INSERT INTO `user` SET `email` = `".$email."`, `fio` = `".$fio."`, `role`=`moderator`, `phone` = `".$phone."`, `phpsession` = '".$session."'`,`url` = `".$url."`, `registration_ip` = `".$ip."`, `last_ip` = `".$ip."`;";
     $db->query($sql);
@@ -51,9 +51,9 @@ if (isset($_POST['login-form']['login'])){
     $_SESSION = array();
     $session=session_id();
     $db = Db::getConnection();
-    $fio=addslashes($_POST['ContactFormtwo']['name']);
-    $email=addslashes($_POST['ContactFormtwo']['email']);
-    $phone=addslashes($_POST['ContactFormtwo']['phone']);
+    $fio=$_POST['ContactFormtwo']['name'];
+    $email=$_POST['ContactFormtwo']['email'];
+    $phone=$_POST['ContactFormtwo']['phone'];
     $ip=$_SERVER['REMOTE_ADDR'];
     $sql="INSERT INTO `user` SET `email` = '".$email."', `fio` = '".$fio."', `role`='reklamodatel', `phone` = '".$phone."', `phpsession` = '".$session."', `registration_ip` = '".$ip."', `last_ip` = '".$ip."';";
     $db->query($sql);

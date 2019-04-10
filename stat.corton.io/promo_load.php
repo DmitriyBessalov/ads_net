@@ -1,8 +1,9 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+$_GET = array_map('addslashes', $_GET);
 
-$prosmort_id=(int)addslashes($_GET['prosmort_id']);if ($prosmort_id==0)exit;
-if ((addslashes($_GET['ref'])=="") OR (!isset($_GET['anons_id'])) OR (addslashes($_GET['anons_id'])==""))exit;
+$prosmort_id=(int)$_GET['prosmort_id'];if ($prosmort_id==0)exit;
+if (($_GET['ref']=="") OR (!isset($_GET['anons_id'])) OR ($_GET['anons_id']==""))exit;
 
 $domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
@@ -18,11 +19,11 @@ SET
     `date` = '".date('Y-m-d')."',
     `ploshadka_id` = ".$ploshadka_id.",
     `prosmotr_id` = '".$prosmort_id."',
-    `anon_id` = '".addslashes($_GET['anons_id'])."',
-    `url_ref` = '".addslashes($_GET['ref'])."',
-    `ip` = '".addslashes($_SERVER['REMOTE_ADDR'])."',
-    `tizer` = '".addslashes($_GET['t'])."',
-    `user-agent`= '".addslashes($_SERVER['HTTP_USER_AGENT'])."',
+    `anon_id` = '".$_GET['anons_id']."',
+    `url_ref` = '".$_GET['ref']."',
+    `ip` = '".$_SERVER['REMOTE_ADDR']."',
+    `tizer` = '".$_GET['t']."',
+    `user-agent`= '".$_SERVER['HTTP_USER_AGENT']."',
     `timestamp` = '".date('H:i:s')."'";
 $dbstat->query($sql);
 

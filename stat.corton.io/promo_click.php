@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-
-$prosmort_id=(int)addslashes($_GET['prosmort_id']);if ($prosmort_id==0)exit;
+$_GET = array_map('addslashes', $_GET);
+$prosmort_id=(int)$_GET['prosmort_id'];if ($prosmort_id==0)exit;
 
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 $dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
@@ -9,7 +9,7 @@ $dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5
 $sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
 $ploshadka_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-$sql = "UPDATE `stat_promo_prosmotr` SET `click` = '1' WHERE `prosmotr_id` = '" . addslashes($_GET['prosmort_id']) . "'";
+$sql = "UPDATE `stat_promo_prosmotr` SET `click` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
 $db->query($sql);
 
 $sql = "UPDATE `stat_promo_day_count` SET `clicking` = `clicking` + 1 WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."'";

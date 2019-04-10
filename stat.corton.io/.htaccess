@@ -1,0 +1,4 @@
+# Запрет запуска скриптов и отображения каталогов
+Options -ExecCGI -Indexes
+AddDefaultCharset utf-8
+php_value default_charset utf-8

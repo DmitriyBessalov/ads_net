@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
-
+$_GET = array_map('addslashes', $_GET);
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 
 preg_match('/host=(.*?);/', $_GET['host'], $referer);

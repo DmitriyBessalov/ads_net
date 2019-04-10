@@ -7,17 +7,17 @@ class UsersController
         include PANELDIR.'/views/layouts/header.php';
         $db = Db::getConnection();
         if (isset($_POST['email'])){
-            if (addslashes($_POST['aktiv'])=="on"){$_POST['aktiv']=1;}else{$_POST['aktiv']=0;};
+            if ($_POST['aktiv']=="on"){$_POST['aktiv']=1;}else{$_POST['aktiv']=0;};
             if ($_POST['id']!=""){
-                $id=addslashes($_POST['id']);
-                $sql="UPDATE `users` SET `email`='".addslashes($_POST['email'])."', `password_md5`='".md5(addslashes($_POST['password']))."',`fio`='".addslashes($_POST['fio'])."',`role`='".addslashes($_POST['role'])."',`phone`='".addslashes($_POST['phone'])."',  `aktiv`='".addslashes($_POST['aktiv'])."' WHERE `id`='".$id."';";
+                $id=$_POST['id'];
+                $sql="UPDATE `users` SET `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`phone`='".$_POST['phone']."',  `aktiv`='".$_POST['aktiv']."' WHERE `id`='".$id."';";
                 $db->query($sql);
             }else{
                 $data=date('Y-m-d');
                 $phpsession= substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 26);
-                $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".addslashes($_POST['email'])."', `password_md5`='".md5(addslashes($_POST['password']))."',`fio`='".addslashes($_POST['fio'])."',`role`='".addslashes($_POST['role'])."',`phone`='".addslashes($_POST['phone'])."',`phpsession`='".$phpsession."',`aktiv`='".addslashes($_POST['aktiv'])."';";
+                $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`phone`='".$_POST['phone']."',`phpsession`='".$phpsession."',`aktiv`='".$_POST['aktiv']."';";
                 $db->query($sql);
-                if (addslashes($_POST['role'])=='advertiser'){
+                if ($_POST['role']=='advertiser'){
                     $id=$db->lastInsertId();
                     $dirName=PANELDIR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
                     mkdir($dirName);
@@ -28,7 +28,7 @@ class UsersController
             }
         };
 
-        $sql="SELECT u.id, u.email, u.fio, u.role, u.phone, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR ',') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_email = u.email GROUP BY u.email";
+        $sql="SELECT u.id, u.email, u.fio, u.role, u.phone, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_email = u.email GROUP BY u.email";
 
         $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -118,7 +118,7 @@ class UsersController
     public static function checkRole()
     {
         $db = Db::getConnection();
-        $sql="SELECT `role`,`aktiv` FROM `users` WHERE `phpsession`='".addslashes($_COOKIE['PHPSESSID'])."' LIMIT 1;";
+        $sql="SELECT `role`,`aktiv` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
         $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
         if ($result['aktiv']) return $result['role'];
         // Иначе выдаём форму авторизации
@@ -130,7 +130,7 @@ class UsersController
     public static function getUserId()
     {
         $db = Db::getConnection();
-        $sql="SELECT `id` FROM `users` WHERE `phpsession`='".addslashes($_COOKIE['PHPSESSID'])."' LIMIT 1;";
+        $sql="SELECT `id` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
         return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
@@ -138,14 +138,14 @@ class UsersController
     public static function getUserRole()
     {
         $db = Db::getConnection();
-        $sql="SELECT `role` FROM `users` WHERE `phpsession`='".addslashes($_COOKIE['PHPSESSID'])."' LIMIT 1;";
+        $sql="SELECT `role` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
         return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
     public static function getUserEmail()
     {
         $db = Db::getConnection();
-        $sql="SELECT `email` FROM `users` WHERE `phpsession`='".addslashes($_COOKIE['PHPSESSID'])."' LIMIT 1;";
+        $sql="SELECT `email` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
         return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
@@ -154,7 +154,7 @@ class UsersController
 	    if (isset($_GET['id'])){
             $title='Редактирование пользователя';
             $db = Db::getConnection();
-            $sql="SELECT `email`,`fio`,`phone`,`role`,`aktiv` FROM `users` WHERE `id`='".addslashes($_GET['id'])."' LIMIT 1;";
+            $sql="SELECT `email`,`fio`,`phone`,`role`,`aktiv` FROM `users` WHERE `id`='".$_GET['id']."' LIMIT 1;";
             $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
         }else{
             $title='Добавление пользователя';
@@ -169,7 +169,7 @@ class UsersController
                 <div class="div-block-116">
 					<input type="text" class="text-field-10 w-input" maxlength="256" name="fio" value="'.$result['fio'].'" placeholder="Имя" required="">
 				</div>
-				<input type="hidden" name="id" value="'.addslashes($_GET['id']).'">
+				<input type="hidden" name="id" value="'.$_GET['id'].'">
 				<input class="text-field-10 w-input" maxlength="256" name="email" value="'.$result['email'].'" placeholder="Email" required="">
 				<input type="password" class="text-field-10 w-input" maxlength="256" name="password" value="" placeholder="Пароль" required="">
 				<input class="text-field-10 w-input" maxlength="256" name="phone" value="'.$result['phone'].'" placeholder="Телефон">
@@ -201,8 +201,8 @@ class UsersController
         $session=substr(sha1(rand()), 0, 26);
         setcookie ( 'PHPSESSID', $session, time () + 10000000 );
         $db = Db::getConnection();
-        $email=addslashes($_POST['login']);
-        $password=md5(addslashes($_POST['password']));
+        $email=$_POST['login'];
+        $password=md5($_POST['password']);
         $ip=$_SERVER['REMOTE_ADDR'];
         $sql="SELECT `password_md5`, `role` FROM `users` WHERE (`email`='".$email."') AND (`aktiv`='1') LIMIT 1;";
         $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -223,7 +223,7 @@ class UsersController
     //Удаление пользователя
     public static function actionDel(){
         //$db = Db::getConnection();
-        //$sql="DELETE FROM `users` WHERE `users`.`id` = ".addslashes($_GET['id']);
+        //$sql="DELETE FROM `users` WHERE `users`.`id` = ".$_GET['id'];
         //$db->query($sql);
 
         /* Удаление каталога c содержимым только под linux
@@ -239,7 +239,7 @@ class UsersController
     //Вход в пользователя из под админа
     public static function actionEnter(){
         $db = Db::getConnection();
-        $sql="SELECT `phpsession`,`role` FROM `users` WHERE `users`.`id` = ".addslashes($_GET['id']);
+        $sql="SELECT `phpsession`,`role` FROM `users` WHERE `users`.`id` = ".$_GET['id'];
         $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
         setcookie ( 'PHPSESSID', $user['phpsession'], time () + 10000000 );
         if ($user['role']=='advertiser'){

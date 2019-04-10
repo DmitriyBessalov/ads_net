@@ -15,12 +15,14 @@
                 $db = Db::getConnection();
                 $dbstat = Db::getstatConnection();
 
-                if ($_GET['type']!='all'){
-                    $str="AND `type`='".$_GET['type']."'";
+                $str="AND";
+                if ((isset($_GET['type'])) AND ($_GET['type']!='all')){
+                    $str.=" `type`='".$_GET['type']."' AND";
                 }
-                if (!isset($_GET['type'])){
-                    $str="AND `type`!='demo'";
+                if ((isset($_GET['status'])) AND ($_GET['status']!='all')){
+                    $str.=" `status`='".$_GET['status']."' AND";
                 }
+                $str=substr($str, 0, -3);
 
                 $sql="SELECT `id`, `domen`, `type`,`otchiclen`, `user_email`, `date_add`, `status`,`otchiclen`, `recomend_aktiv`, `natpre_aktiv`, `natpro_aktiv`, `slider_aktiv` FROM `ploshadki` WHERE `id`!=0 ".$str." ORDER BY `domen`";
                 $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -132,10 +134,16 @@
 		    <form id="email-form" action="/platforms" name="email-form" class="form-333">
 			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
 			<a href="/platforms-edit?id=0" class="button-css-edit w-button">Стандартные стили</a>
-			<p class="filtermenu"><input type="radio" name="type" value="all"  id="radio-one" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'><label for="radio-one">Все площадки</label></p>
-			<p class="filtermenu"><input type="radio" name="type" value="info" id="radio-two" class="form-radio"'; if ($_GET['active']=='info'){echo ' checked';} echo'><label for="radio-two">Информационные</label></p>
-			<p class="filtermenu"><input type="radio" name="type" value="news" id="radio-three" class="form-radio"'; if ($_GET['active']=='news'){echo ' checked';} echo'><label for="radio-three">Новостные</label></p>
-			<p class="filtermenu"><input type="radio" name="type" value="demo" id="radio-four" class="form-radio"'; if ($_GET['active']=='demo'){echo ' checked';} echo'><label for="radio-four">Демонстрационные</label></p>
+			<br><br>
+			<p class="filtermenu"><input type="radio" name="status" value="all"  id="radio-one" class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';} echo'><label for="radio-one"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="text-decoration: underline;"';} echo'>Все статусы площадок</label></p>
+            <p class="filtermenu"><input type="radio" name="status" value="1"  id="radio-f" class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'><label for="radio-f"'; if ($_GET['status']=='1'){echo ' style="text-decoration: underline;"';} echo'>Активные площадки</label></p>
+            <p class="filtermenu"><input type="radio" name="status" value="0"  id="radio-s" class="form-radio"'; if ($_GET['status']=='0'){echo ' checked';} echo'><label for="radio-s"'; if ($_GET['status']=='0'){echo ' style="text-decoration: underline;"';} echo'>Неактивные площадки</label></p>
+            <br>
+            <p class="filtermenu"><input type="radio" name="type" value="all"  id="radio-o" class="form-radio"'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' checked';} echo'><label for="radio-o"'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' style="text-decoration: underline;"';} echo'>Все типы площадок</label></p>
+			<p class="filtermenu"><input type="radio" name="type" value="info" id="radio-two" class="form-radio"'; if ($_GET['type']=='info'){echo ' checked';} echo'><label for="radio-two"'; if ($_GET['type']=='info'){echo ' style="text-decoration: underline;"';} echo'>Информационные</label></p>
+			<p class="filtermenu"><input type="radio" name="type" value="news" id="radio-three" class="form-radio"'; if ($_GET['type']=='news'){echo ' checked';} echo'><label for="radio-three"'; if ($_GET['type']=='news'){echo ' style="text-decoration: underline;"';} echo'>Новостные</label></p>
+			<p class="filtermenu"><input type="radio" name="type" value="demo" id="radio-four" class="form-radio"'; if ($_GET['type']=='demo'){echo ' checked';} echo'><label for="radio-four"'; if ($_GET['type']=='demo'){echo ' style="text-decoration: underline;"';} echo'>Демонстрационные</label></p>
+
 			<div class="html-embed-3 w-embed" style="margin-top: 40px;">
             <input type="text" name="datebegin" class="tcal tcalInput" value="'.$datebegin.'">
             <div class="text-block-128">-</div>
@@ -179,17 +187,17 @@
                 $db = Db::getConnection();
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
-                if ($_REQUEST['id']==""){
-                    $sql="INSERT INTO `ploshadki` SET `domen`='".addslashes($_POST['domen'])."',`status`='".$aktiv."',`user_email`='".addslashes($_POST['user'])."',`type`='".addslashes($_POST['type'])."', `categoriya`='".addslashes($_POST['categoriya'])."', `podcategoriya`='".addslashes($_POST['podcategoriya'])."', `promo_page`='".addslashes($_POST['promo_page'])."',`CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
+                if (addslashes($_REQUEST['id'])==""){
+                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."',`CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
                     $db->query($sql);
                     $id=$db->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
                     header('Location: /platforms-edit?id='.$id);exit;
                 } else {
                     //Обновление домена площадки
-                    $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".addslashes($_POST['id']);
+                    $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".$_POST['id'];
                     $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    if ($domen!=addslashes($_POST['domen'])) {
+                    if ($domen!=$_POST['domen']) {
                         $domen = str_replace(".", "_", $domen);
                         $domen2 = str_replace(".", "_", $_POST['domen']);
                         rename(PANELDIR . '/style/' . $domen . '.min.css', PANELDIR . '/style/' . $domen2 . '.min.css');
@@ -203,22 +211,22 @@
                     UPDATE
                         `ploshadki`
                     SET
-                        `domen` = '".addslashes($_POST['domen'])."',
-                        `type` = '".addslashes($_POST['type'])."',
-                        `categoriya` = '".addslashes($_POST['categoriya'])."',
-                        `podcategoriya` ='".addslashes($_POST['podcategoriya'])."',
-                        `promo_page`='".addslashes($_POST['promo_page'])."',
-                        `user_email` = '".addslashes($_POST['user'])."',
+                        `domen` = '".$_POST['domen']."',
+                        `type` = '".$_POST['type']."',
+                        `categoriya` = '".$_POST['categoriya']."',
+                        `podcategoriya` ='".$_POST['podcategoriya']."',
+                        `promo_page`='".$_POST['promo_page']."',
+                        `user_email` = '".$_POST['user']."',
                         `status` ='".$aktiv."',
                         `recomend_zag_aktiv` = ".$zagrecomend.",
                         `natpre_zag_aktiv` = '".$zagnatprev."',
                         `natpro_zag_aktiv` = '".$zagnatpro."',
-                        `user_email` = '".addslashes($_POST['user'])."',
+                        `user_email` = '".$_POST['user']."',
                         `demo-annons`='".$_POST['demo-annons']."',
                         `CTR`='".$_POST['CTR']."',
                         `CPM`='".$_POST['CPM']."',
                         `CPG`='".$_POST['CPG']."'
-                    WHERE `id`='".addslashes($_POST['id'])."';";
+                    WHERE `id`='".$_POST['id']."';";
 
                     $db->query($sql);
                     WidgetcssController::UpdateCSSfile($_POST['id']);
@@ -230,14 +238,12 @@
             public static function form()
             {
                 $db=Db::getConnection();
-                if ($_REQUEST['id']!='') {
+                if (addslashes($_REQUEST['id'])!='') {
                     $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_email`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='" . addslashes($_REQUEST['id']) . "';";
                     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
                 };
-
-
 
                 if ($result['status']) $status="checked=\"\"";
                 if ($result['recomend_zag_aktiv']) $zagrecomendaktiv="checked";
@@ -325,14 +331,14 @@
                 <div class="text-block-115">Создайте пустой шаблон страницы на вашем сайте без внешних скриптов и отключить функцию комментариев​. После чего разместите этот код между тегами &lt;body&gt;&lt;/body&gt; на странице:</div>
                 <div class="html-embed w-embed">&lt;div id="corton-promo"&gt;&lt;/div&gt;</div>
                 <div class="div-block-103"></div><input type="text" maxlength="256" placeholder="url promo страницы или её шаблона, (указывать без протокола)" id="url" name="promo_page" value="'.$result['promo_page'].'" class="text-field-10 w-input" '.$disabled.' required="">';
-              if ($_REQUEST['id']!='') {
+              if (addslashes($_REQUEST['id'])!='') {
                       echo '<div id="promo" class="text-block-118">Настройка статей</div></div>';
                   }
               else
                 {
                     echo '<div id="checktag" class="text-block-118">Проверка установки тегов</div></div>';
                 };
-              if ($_REQUEST['id']!='') {
+              if (addslashes($_REQUEST['id'])!='') {
                     echo '
 				</div>
                 <div class="div-block-102">
@@ -428,7 +434,7 @@
                 include PANELDIR.'/views/layouts/header.php';
                 PloshadkiController::form();
 
-                $sql="SELECT * FROM `style_promo` WHERE `id`='".$_REQUEST['id']."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql="SELECT * FROM `style_promo` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($result==false){$sql="SELECT * FROM `style_promo` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
 
                 echo '
@@ -443,7 +449,7 @@
                         <div class="widget-promo">
                             <div class="html-embed-13 w-embed">
                                 <input type="hidden" value="style_promo" name="type">
-                                <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
+                                <input type="hidden" value="'.addslashes($_REQUEST['id']).'" name="id">
                                 <input type="hidden" value="" name="css">
                                 <input type="hidden" value="" name="dop-css">
                                 <input type="hidden" value="" name="adblock-css">
@@ -1170,7 +1176,7 @@
         </div>
     </div>
 </div>';
-                $sql="SELECT * FROM `style_recomend` WHERE `id`='".$_REQUEST['id']."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql="SELECT * FROM `style_recomend` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($result==false){$sql="SELECT * FROM `style_recomend` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
 <div class="modal recomendation">
@@ -1184,7 +1190,7 @@
                         <div class="widget-recomendation" style="overflow: auto; height: 650px;">
                             <div class="html-embed-19 w-embed">
                                 <input type="hidden" value="style_recomend" name="type">
-                                <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
+                                <input type="hidden" value="'.addslashes($_REQUEST['id']).'" name="id">
                                 <input type="hidden" value="" name="css">
                                 <input type="hidden" value="" name="dop-css">
                                 <strong class="bold-text-10">Вывод на устройствах</strong>
@@ -1533,7 +1539,7 @@
         </div>
     </div>
 </div>';
-                $sql="SELECT `code` FROM `zag_recomend` WHERE `id`='".$_REQUEST['id']."';";
+                $sql="SELECT `code` FROM `zag_recomend` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                 $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $result = str_replace(array("<", ">"), $output = array("&lt;", "&gt;"), $result);
                 echo '
@@ -1543,7 +1549,7 @@
         <div class="text-block-120"><strong class="bold-text-4">Код заглушки виджета Recommendation</strong></div>
         <div class="w-form">
             <form method="post" action="/widget-update" class="form-5">
-                <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
+                <input type="hidden" value="'.addslashes($_REQUEST['id']).'" name="id">
                 <input type="hidden" value="zag_recomend" name="type">
                 <textarea id="js" placeholder="html код включая javascript" maxlength="5000" name="code" class="textarea-5 w-input">'.$result.'</textarea>
                 <input type="submit" value="Сохранить" style="width:120px" class="button-7">
@@ -1551,7 +1557,7 @@
         </div>
     </div>
 </div>';
-                $sql="SELECT * FROM `style_natpre` WHERE `id`='".$_REQUEST['id']."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql="SELECT * FROM `style_natpre` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($result==false){$sql="SELECT * FROM `style_natpre` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
 <div class="modal nativepreview">
@@ -1565,7 +1571,7 @@
                         <div class="widget-nativepre" style="overflow: auto; height: 650px;">
                             <div class="html-embed-16 w-embed">
                                 <input type="hidden" value="style_natpre" name="type">
-                                <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
+                                <input type="hidden" value="'.addslashes($_REQUEST['id']).'" name="id">
                                 <input type="hidden" value="" name="css">
                                 <input type="hidden" value="" name="dop-css">
                                 <strong class="bold-text-10">Вывод на устройствах</strong>
@@ -1965,7 +1971,7 @@
         </div>
     </div>
 </div>';
-                $sql="SELECT `code` FROM `zag_natpre` WHERE `id`='".$_REQUEST['id']."';";
+                $sql="SELECT `code` FROM `zag_natpre` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                 $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $result = str_replace(array("<", ">"), $output = array("&lt;", "&gt;"), $result);
                 echo '
@@ -1975,7 +1981,7 @@
         <div class="text-block-120"><strong class="bold-text-6">Код заглушки виджета Native Preview</strong></div>
         <div class="w-form">
             <form method="post" action="/widget-update" class="form-5">
-                <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
+                <input type="hidden" value="'.addslashes($_REQUEST['id']).'" name="id">
                 <input type="hidden" value="zag_natpre" name="type">
                 <textarea placeholder="html код включая javascript" maxlength="5000" name="code" class="textarea-5 w-input">'.$result.'</textarea>
                 <input type="submit" value="Сохранить" style="width:120px" class="button-7">
@@ -1983,7 +1989,7 @@
         </div>
     </div>
 </div>';
-                $sql="SELECT * FROM `style_natpro` WHERE `id`='".$_REQUEST['id']."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql="SELECT * FROM `style_natpro` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($result==false){$sql="SELECT * FROM `style_natpro` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
 <div class="modal nativepro">
@@ -1996,7 +2002,7 @@
                     <form method="post" action="/widget-update" class="form-6">
                         <div class="html-embed-10 w-embed">
                             <input type="hidden" value="style_natpro" name="type">
-                            <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
+                            <input type="hidden" value="'.addslashes($_REQUEST['id']).'" name="id">
                             <input type="hidden" value="" name="css">
                             <br>
                             <strong class="bold-text-10">Внешний вид блока</strong>
@@ -2058,7 +2064,7 @@
         </div>
     </div>
 </div>';
-                $sql="SELECT `code` FROM `zag_natpro` WHERE `id`='".$_REQUEST['id']."';";
+                $sql="SELECT `code` FROM `zag_natpro` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                 $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $result = str_replace(array("<", ">"), $output = array("&lt;", "&gt;"), $result);
                 echo '
@@ -2075,7 +2081,7 @@
         </div>
     </div>
 </div>';
-                $sql="SELECT * FROM `style_slider` WHERE `id`='".$_REQUEST['id']."';";
+                $sql="SELECT * FROM `style_slider` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                 $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($result==false){$sql="SELECT * FROM `style_slider` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
@@ -2090,7 +2096,7 @@
                         <div class="widget-slider" style="overflow: auto; height: 650px;">
                             <div class="html-embed-10 w-embed">
                                 <input type="hidden" value="style_slider" name="type">
-                                <input type="hidden" value="'.$_REQUEST['id'].'" name="id">
+                                <input type="hidden" value="'.addslashes($_REQUEST['id']).'" name="id">
                                 <input type="hidden" value="" name="css">
                                 <input type="hidden" value="" name="dop-css">
                                 <br>
@@ -2495,26 +2501,20 @@
         }
 
 
-
-
-
-
-
-
         //Удаляет площадку
         public static function actionDel()
         {
             $db = Db::getConnection();
-            $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".addslashes($_GET['id']);
+            $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".$_GET['id'];
             $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
             $domen = str_replace(".", "_", $domen);
             unlink(PANELDIR.'/style/'.$domen.'.css.gz');
-            $sql="DELETE FROM `ploshadki` WHERE `ploshadki`.`id` = '".addslashes($_GET['id'])."';";
-            $sql.="DELETE FROM `style_natpre` WHERE `id` = '".addslashes($_GET['id'])."';";
-            $sql.="DELETE FROM `style_natpro` WHERE `id` = '".addslashes($_GET['id'])."';";
-            $sql.="DELETE FROM `style_promo` WHERE `id` = '".addslashes($_GET['id'])."';";
-            $sql.="DELETE FROM `style_recomend` WHERE `id` = '".addslashes($_GET['id'])."';";
-            $sql.="DELETE FROM `style_slider` WHERE `id` = '".addslashes($_GET['id'])."';";
+            $sql="DELETE FROM `ploshadki` WHERE `ploshadki`.`id` = '".$_GET['id']."';";
+            $sql.="DELETE FROM `style_natpre` WHERE `id` = '".$_GET['id']."';";
+            $sql.="DELETE FROM `style_natpro` WHERE `id` = '".$_GET['id']."';";
+            $sql.="DELETE FROM `style_promo` WHERE `id` = '".$_GET['id']."';";
+            $sql.="DELETE FROM `style_recomend` WHERE `id` = '".$_GET['id']."';";
+            $sql.="DELETE FROM `style_slider` WHERE `id` = '".$_GET['id']."';";
             $db->query($sql);
             PloshadkiController::actionIndex();
             return true;

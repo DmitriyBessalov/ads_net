@@ -1,4 +1,5 @@
 <?php
+$_POST = array_map('addslashes', $_POST);
 if(!empty($_POST['role'] )){
     if(!empty($_POST['name'] )){
         if(!empty($_POST['email'] )){
@@ -19,7 +20,7 @@ if(!empty($_POST['role'] )){
                 echo "<p class=\"textgreen\">Спасибо! Мы скоро с вами свяжемся.</p>";
             }
             else{
-			echo "<p class=\"textred\">Cообщение не отправленно. Пожалуйста, попрбуйте еще раз</p>";
+			echo "<p class=\"textred\">Cообщение не отправленно. Пожалуйста, попробуйте еще раз</p>";
             }
         }else{
             echo "<p class=\"textred\">Обязательные поля не заполнены. Введите email пользователя</p>"; 

@@ -19,19 +19,19 @@ class WidgetcssController
             }
         }
 
-        $sql="REPLACE INTO `".addslashes($_POST['type'])."` SET ";
+        $sql="REPLACE INTO `".$_POST['type']."` SET ";
 
         foreach ($_POST as $key=>$value){
             if (($key!='type') and ($value!='')) {
                 if ($value=="on")$value=1;
-                $sql .= "`" . $key . "`='" . addslashes($value) . "',";
+                $sql .= "`" . $key . "`='" . $value . "',";
             }
         };
 
         $sql = substr($sql,0,-1).";";
         $db->query($sql);
 
-        WidgetcssController::UpdateCSSfile(addslashes($_POST['id']));
+        WidgetcssController::UpdateCSSfile($_POST['id']);
         header('Location: /platforms-edit?id='.$_POST['id']);
         return true;
     }
@@ -113,9 +113,9 @@ class WidgetcssController
 
     public static function actionAktiv(){
         $db = Db::getConnection();
-        $sql="UPDATE `ploshadki` SET `".addslashes($_GET['widget'])."_aktiv`='1' WHERE `id`='".addslashes($_GET['id'])."';";
+        $sql="UPDATE `ploshadki` SET `".$_GET['widget']."_aktiv`='1' WHERE `id`='".$_GET['id']."';";
         $db->query($sql);
-        WidgetcssController::UpdateCSSfile(addslashes($_GET['id']));
+        WidgetcssController::UpdateCSSfile($_GET['id']);
         return true;
     }
 }
