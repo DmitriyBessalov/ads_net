@@ -2051,7 +2051,7 @@ input.w-button2 {
   height: 34px;
   border: 1px solid #e1e2e8;
   border-radius: 4px;
-  color: #2333333;
+  color: #333333;
   font-size: 16px;
   font-family: 'Myriadpro Regular';
   line-height: 18px;
@@ -2260,7 +2260,7 @@ input.w-button2 {
 .text-block-203 {
   margin-bottom: 10px;
   margin-left: 0px;
-  color: #2333333;
+  color: #333333;
   font-size: 22px;
   line-height: 28px;
 }
@@ -2390,7 +2390,7 @@ input.w-button2 {
   margin-bottom: 0px;
   border: 1px solid #e1e2e8;
   border-radius: 4px;
-  color: #2333333;
+  color: #333333;
   font-size: 14px;
 }
 
@@ -2422,7 +2422,7 @@ input.w-button2 {
 }
 
 .text-block-113 {
-  color: #2333333;
+  color: #333333;
 }
 
 .text-block-114 {
@@ -2821,7 +2821,7 @@ input.w-button2 {
 }
 
 .bold-text-8 {
-  color: #2333333;
+  color: #333333;
   font-size: 26px;
   line-height: 30px;
   font-weight: 400;
@@ -3090,7 +3090,7 @@ input.w-button2 {
 
 .html-embed-13 {
   padding-right: 20px;
-  color: #2333333;
+  color: #333333;
   font-size: 14px;
 }
 
@@ -3365,14 +3365,14 @@ input.w-button2 {
 }
 
 .field-label {
-  color: #2333333;
+  color: #333333;
   font-size: 22px;
   line-height: 28px;
   font-weight: 400;
 }
 
 .field-label-2 {
-  color: #2333333;
+  color: #333333;
   font-size: 22px;
   line-height: 28px;
   font-weight: 400;
@@ -3433,7 +3433,7 @@ input.w-button2 {
 }
 
 .tab-link-tab-1.w--current:hover {
-  color: #2333333;
+  color: #333333;
 }
 
 .tab-link-tab-2 {
@@ -3449,7 +3449,7 @@ input.w-button2 {
 }
 
 .tab-link-tab-2:hover {
-  color: #2333333;
+  color: #333333;
 }
 
 .tab-link-tab-2.w--current {
@@ -3475,7 +3475,7 @@ input.w-button2 {
 }
 
 .tab-link-tab-4:hover {
-  color: #2333333;
+  color: #333333;
 }
 
 .tab-link-tab-4.w--current {
@@ -3501,7 +3501,7 @@ input.w-button2 {
 }
 
 .tab-link-tab-5:hover {
-  color: #2333333;
+  color: #333333;
 }
 
 .tab-link-tab-5.w--current {
@@ -3527,7 +3527,7 @@ input.w-button2 {
 }
 
 .tab-link-tab-3:hover {
-  color: #2333333;
+  color: #333333;
 }
 
 .tab-link-tab-3.w--current {
@@ -3652,7 +3652,7 @@ input.w-button2 {
 
 .text-block-147 {
   margin-top: 70px;
-  color: #2333333;
+  color: #333333;
   font-size: 14px;
   line-height: 22px;
   text-align: center;
@@ -3660,14 +3660,14 @@ input.w-button2 {
 
 .text-block-147._1 {
   margin-top: 43px;
-  color: #2333333;
+  color: #333333;
   font-size: 14px;
   line-height: 22px;
 }
 
 .text-block-147._2 {
   margin-top: 43px;
-  color: #2333333;
+  color: #333333;
   font-size: 14px;
   line-height: 22px;
 }
@@ -3777,15 +3777,15 @@ input.w-button2 {
 
 .ql-bubble .ql-tooltip {
    border-radius: 4px !important;
-   background-color: #2333333 !important;
+   background-color: #333333 !important;
 }
 
 .ql-bubble .ql-tooltip.ql-flip .ql-tooltip-arrow {
-    border-top: 6px solid #2333333 !important;
+    border-top: 6px solid #333333 !important;
 }
 
 .ql-bubble .ql-tooltip:not(.ql-flip) .ql-tooltip-arrow {
-    border-top: -6px solid #2333333 !important;
+    border-top: -6px solid #333333 !important;
 }
 .ql-editor.ql-blank::before {
    font-size: 14px; 
