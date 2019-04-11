@@ -48,11 +48,11 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id`" . $str." ORDER BY a.`promo_id` DESC ;";
+            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id`".$str." ORDER BY a.`promo_id` DESC ;";
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $i) {
                 $anons = str_replace(",", "','", $i['anons_ids']);
-                $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
+                $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('".$anons."')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
                 $promosum = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 if (is_null($promosum['doread'])){$promosum['doread']=$promosum['pay']=$promosum['perehod']=$promosum['st']=$promosum['clicking']=0;}
@@ -100,7 +100,7 @@ class ArticleController
 										   <input type="checkbox" checked="checked" class="flipswitch"/>
                                            <span></span>
 										</div>
-										<div class="blockminiinfo"><span style="color: #768093">Бренд:</span> Namebrand</div>
+										<div class="blockminiinfo"><span style="color: #768093">Бренд: </span>'.$i['namebrand'].'</div>
 										<div class="blockminiinfo"><span style="color: #768093">Ставка:</span> ' . $i['stavka'] . '</div>
 								     </div>
 								  </td>
@@ -115,13 +115,7 @@ class ArticleController
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu"> 
                                      <a href="article-edit?id=' . $i['promo_id'] . '">Редактировать</a><br>
-									 <a href="article-stat?id=' . $i['promo_id'] . '">Статистика</a><br>';
-                if ($i['active'] == 1) {
-                    echo '<a href="article-stop?id=' . $i['promo_id'] . '">Остановить</a><br>';
-                } else {
-                    echo '<a href="article-start?id=' . $i['promo_id'] . '">Запустить</a><br>';
-                };
-                echo '				     
+									 <a href="article-stat?id=' . $i['promo_id'] . '">Статистика</a><br>
                                      <a href="article-del?id=' . $i['promo_id'] . '">Удалить</a> 
                                   </ul>
                                   </td>
@@ -454,7 +448,7 @@ class ArticleController
                     }
             }
 
-            $sql="UPDATE `promo` SET `words`='".$strtolow."' WHERE `id`='".$_POST['id']."';";
+            $sql="UPDATE `promo` SET `words`='".$strtolow."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
             $sql.="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
             $db->query($sql);
 
@@ -688,7 +682,11 @@ body {
                         </div>
                         
                     </div>
+                    
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+					
+                    <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Namebrand" id="stavka" value="'.$result['namebrand'].'">
+                    					
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
                 </form>
             </div>
@@ -888,7 +886,6 @@ form.onsubmit = function() {
 
             $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$_GET['id']."';";
             $db->query($sql);
-            ArticleController::actionIndex();
             return true;
         }
     }
@@ -919,7 +916,6 @@ form.onsubmit = function() {
             $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$_GET['id']."';";
             $db->query($sql);
             if ($del) return true;
-            ArticleController::actionIndex();
             return true;
         }
     }

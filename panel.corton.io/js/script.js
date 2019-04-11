@@ -38,14 +38,20 @@ $(document).ready(function(){
     });
 	
 //Функция для чекбокса
-	$(function()
-  {
-      var f=function()
-      {
-          $(this).next().text($(this).is(':checked') ? 'Активна' : 'На паузе');
-      };
-      $('.flipswitch').change(f).trigger('change');
-  });
+    var f=function()
+    {
+        if ($(this).is(':checked')){
+            $(this).next().text('Активна');
+            var id=$(this).parents('tr:first').children('td')[0].innerHTML;
+            $.post("https://panel.corton.io/article-start?id="+id)
+        } else {
+            $(this).next().text('На паузе');
+            var id=$(this).parents('tr:first').children('td')[0].innerHTML;
+            $.post("https://panel.corton.io/article-stop?id="+id)
+        }
+    };
+    $('.flipswitch').change(f).trigger('change');
+
 
 //Отрытие модальных окон на странице площадок
     $("#promo").click(function(){

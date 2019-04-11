@@ -24,7 +24,7 @@
                 }
                 $str=substr($str, 0, -3);
 
-                $sql="SELECT `id`, `domen`, `type`,`otchiclen`, `user_email`, `date_add`, `status`,`otchiclen`, `recomend_aktiv`, `natpre_aktiv`, `natpro_aktiv`, `slider_aktiv` FROM `ploshadki` WHERE `id`!=0 ".$str." ORDER BY `domen`";
+                $sql="SELECT `id`, `domen`, `type`,`otchiclen`, `user_email`, `date_add`, `status`,`otchiclen`, `recomend_aktiv`, `natpre_aktiv`, `natpro_aktiv`, `slider_aktiv`,`favicon` FROM `ploshadki` WHERE `id`!=0 ".$str." ORDER BY `domen`";
                 $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 echo '
 		<div class="form-block w-form">
@@ -61,7 +61,7 @@
                     echo "<tr>
                       <td style=\"text-align: left; min-width: 338px;\">
 					  <div style=\"margin-top: 7px;\">
-					      <div class=\"logomini\"></div>
+					      <div class=\"logomini\""; if($i['favicon']!="")echo" style=\"background-image: url('".$i['favicon']."');\"";echo "></div>
 					      <div class=\"logominitext\">
 						     <a href='http://" . $i['domen'] . "' style='text-decoration: none;'>" . $i['domen'] . "</a>
 					         <p style=\"color: #768093; font-size: 12px;\">" . $i['user_email'] . " 
@@ -226,7 +226,8 @@
                         `demo-annons`='".$_POST['demo-annons']."',
                         `CTR`='".$_POST['CTR']."',
                         `CPM`='".$_POST['CPM']."',
-                        `CPG`='".$_POST['CPG']."'
+                        `CPG`='".$_POST['CPG']."',
+                        `favicon`='".$_POST['favicon']."'
                     WHERE `id`='".$_POST['id']."';";
 
                     $db->query($sql);
@@ -240,7 +241,7 @@
             {
                 $db=Db::getConnection();
                 if (addslashes($_REQUEST['id'])!='') {
-                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_email`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='" . addslashes($_REQUEST['id']) . "';";
+                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_email`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page`,`favicon` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
@@ -303,14 +304,15 @@
                 <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
                 <select id="podcategoriya" name="podcategoriya" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Подкатегория площадки</option>
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon" required="">
                 </select>';
-                  if ($result['type']=='demo' )
+                  if ($result['type']=='demo')
                  echo'
                 </div>
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
+                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую">
                 </div>
                 ';echo'
               <div class="div-block-102">
@@ -2381,7 +2383,7 @@
             <td style="text-align: left; width: 260px;">
                 <div style="margin-top: 7px;">
                     <div class="recommendation-mini-site"></div>
-                    <div class="logominitext">
+                    <div class="logominitext"> </div>
         Recommendation
                         <p style="color: #768093; font-size: 12px;">Статус:
                             <span class="nowstatus">';
@@ -2414,7 +2416,7 @@
             <td style="text-align: left; width: 260px;">
                 <div style="margin-top: 7px;">
                     <div class="nativepreview-mini-site"></div>
-                    <div class="logominitext">
+                    <div class="logominitext"></div>
         Native Preview
         <p style="color: #768093; font-size: 12px;">Статус:
                             <span class="nowstatus">';
@@ -2447,7 +2449,7 @@
             <td style="text-align: left; width: 260px;">
                 <div style="margin-top: 7px;">
                     <div class="slider-mini-site"></div>
-                    <div class="logominitext">
+                    <div class="logominitext"></div>
         Slider
                         <p style="color: #768093; font-size: 12px;">Статус:
                             <span class="nowstatus">';
