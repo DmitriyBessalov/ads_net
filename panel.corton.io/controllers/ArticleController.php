@@ -48,7 +48,7 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id`".$str." ORDER BY a.`promo_id` DESC ;";
+            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand`, p.`active` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id`".$str." ORDER BY a.`promo_id` DESC ;";
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $i) {
                 $anons = str_replace(",", "','", $i['anons_ids']);
@@ -97,7 +97,7 @@ class ArticleController
 								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-stat?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
 								     <div class="miniinfo"> 
 								        <div class="blockminiinfo">
-										   <input type="checkbox" checked="checked" class="flipswitch"/>
+										   <input type="checkbox" ';if ($i['active']) echo 'checked="checked "';echo'class="flipswitch"/>
                                            <span></span>
 										</div>
 										<div class="blockminiinfo"><span style="color: #768093">Бренд: </span>'.$i['namebrand'].'</div>
