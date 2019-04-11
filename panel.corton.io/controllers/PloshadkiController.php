@@ -304,7 +304,7 @@
                 <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
                 <select id="podcategoriya" name="podcategoriya" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Подкатегория площадки</option>
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon" required="">
+                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon">
                 </select>';
                   if ($result['type']=='demo')
                  echo'
@@ -312,7 +312,7 @@
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
-                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
                 </div>
                 ';echo'
               <div class="div-block-102">
