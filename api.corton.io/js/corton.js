@@ -156,6 +156,9 @@ function corton_widget() {
     var w = 0;
     var wait=0;
     var anons_ids= [];
+    var recomend_image_shape;
+    var natpre_image_shape;
+
     const corton_body2=document.getElementsByTagName("body");
 
     const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
@@ -294,6 +297,7 @@ function corton_widget() {
                 if (height == "") height = 0;
                 var width = style_r.getPropertyValue('--wsize');
                 if (width == "") width = 0;
+                recomend_image_shape = style_r.getPropertyValue('--image_shape');
                 count = parseInt(width) * parseInt(height);
                 if (count !== 0) {
                     if (recomend_algorithm_output === '1') {
@@ -357,6 +361,7 @@ function corton_widget() {
             gadget = style_e.getPropertyValue('--' + device);
             if (gadget == 1) {
                 buttontext = style_e.getPropertyValue('--buttontext');
+                recomend_image_shape = style_e.getPropertyValue('--image_shape');
                 if (natpre_algorithm_output === '1') {
                     widget = widget + '&e=1';
                     show_natpre = 1;
@@ -480,7 +485,7 @@ function corton_widget() {
                         htmll = htmll +
                             '<div class="corton-recomendation-section anons" id="anons' + result['anons'][0][w] + 'r">' +
                             '<a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=r">' +
-                            '<img src="https://api.corton.io/img/' + result['anons'][5][w] + '/a/' + result['anons'][3][w] + '">' +
+                            '<img src="https://api.corton.io/img/' + result['anons'][5][w] + '/a/' + result['anons'][recomend_image_shape][w] + '">' +
                             '<p>' + result['anons'][1][w] + '</p>' +
                             '</a>' +
                             '</div>';
@@ -507,7 +512,7 @@ function corton_widget() {
                 if (buttontext == "") buttontext = 'Подробнее';
                 var htmll =
                     '<div class="anons" id="anons' + result['anons'][0][w] + 'e">' +
-                    '<div class="corton-left"> <a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e"><img src="https://api.corton.io/img/' + result['anons'][5][w] + '/a/' + result['anons'][3][w] + '" width="290" height="180"></a> </div>' +
+                    '<div class="corton-left"> <a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e"><img src="https://api.corton.io/img/' + result['anons'][5][w] + '/a/' + result['anons'][natpre_image_shape][w] + '" width="290" height="180"></a> </div>' +
                     '<div class="corton-right">' +
                     '<a style="text-decoration: none" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e"><div class="corton-title">' + result['anons'][1][w] + '</div></a>' +
                     '<a style="text-decoration: none" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e"><p class="corton-content">' + result['anons'][2][w] + '</p></a>' +

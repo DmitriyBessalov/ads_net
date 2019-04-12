@@ -1492,6 +1492,13 @@
                                     <option '; if ($result['widget-type-align-text']=="center"){echo 'selected ';} echo 'value="center">По центру</option>
                                 </select>
                                 <br>
+                                
+                                <label>Форма изображения</label>
+                                <select name="image-shape">
+                                    <option '; if ($result['image-shape']=="3"){echo 'selected ';} echo 'value="3">Прямоугольник</option>
+                                    <option '; if ($result['image-shape']=="4"){echo 'selected ';} echo 'value="4">Квадрат</option>
+                                </select>
+                                
                             </div>
                         </div>
                         <input type="submit" value="Сохранить" class="button-7">
@@ -1935,6 +1942,13 @@
                                     <option '; if ($result['button-text']=="Подробнее"){echo 'selected ';} echo 'value="Подробнее">Подробнее</option>
                                     <option '; if ($result['button-text']=="Читать далее"){echo 'selected ';} echo 'value="Читать далее">Читать далее</option>
                                 </select>
+                                
+                                <label>Форма изображения</label>
+                                <select name="image-shape">
+                                    <option '; if ($result['image-shape']=="3"){echo 'selected ';} echo 'value="3">Прямоугольник</option>
+                                    <option '; if ($result['image-shape']=="4"){echo 'selected ';} echo 'value="4">Квадрат</option>
+                                </select>
+                                
                             </div>
                         </div>
                         <input type="submit" value="Сохранить" class="button-7">

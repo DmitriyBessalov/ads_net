@@ -56,26 +56,26 @@ class WidgetcssController
             $css.="body{--forcibly:".$css2['forcibly'].";--selector:".$css2['selector'].";--selectortitle:".$css2['selector-title'].";--promo:".$result['promo_page'].";--promo_template:".$result['promo_template'].";}";
 
             if ($result['recomend_aktiv']) {
-                $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`,`widget-text-title`,`mobile`, `tablet`, `desktop` FROM `style_recomend` WHERE `id`='".$id."'";
+                $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`,`widget-text-title`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_recomend` WHERE `id`='".$id."'";
                 $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($css2==false){
-                    $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`,`widget-text-title`,`mobile`, `tablet`, `desktop` FROM `style_recomend` WHERE `id`='0';";
+                    $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`,`widget-text-title`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_recomend` WHERE `id`='0';";
                     $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }
                 $css.=$css2['css'];
-                $css.="#corton-recomendation-widget{--mobile:".$css2['mobile'].";--tablet:".$css2['tablet'].";--desktop:".$css2['desktop'].";--titletext:".$css2['widget-text-title'].";--widgetpositionp:".$css2['widget-position-p'].";--widgetparentid:".$css2['widget-parent-id'].";}";
+                $css.="#corton-recomendation-widget{--mobile:".$css2['mobile'].";--tablet:".$css2['tablet'].";--desktop:".$css2['desktop'].";--titletext:".$css2['widget-text-title'].";--widgetpositionp:".$css2['widget-position-p'].";--widgetparentid:".$css2['widget-parent-id'].";--image_shape:".$css2['image-shape'].";}";
                 $css.="body{--recomend-algorithm-output:".$css2['algorithm-output'].";}";
             }
 
             if ($result['natpre_aktiv']) {
-                $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='".$id."'";
+                $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`,`image-shape``,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='".$id."'";
                 $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($css2==false){
-                    $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='0'";
+                    $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`,`image-shape``,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='0'";
                     $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }
                 $css.=$css2['css'];
-                $css.="#corton-nativepreview-widget{--mobile:".$css2['mobile'].";--tablet:".$css2['tablet'].";--desktop:".$css2['desktop'].";--widgetpositionp:".$css2['widget-position-p'].";--widgetparentid:".$css2['widget-parent-id'].";--buttontext:".$css2['button-text'].";}";
+                $css.="#corton-nativepreview-widget{--mobile:".$css2['mobile'].";--tablet:".$css2['tablet'].";--desktop:".$css2['desktop'].";--widgetpositionp:".$css2['widget-position-p'].";--widgetparentid:".$css2['widget-parent-id'].";--buttontext:".$css2['button-text'].";--image_shape:".$css2['image-shape'].";}";
                 $css.="body{--natpre-algorithm-output:".$css2['algorithm-output'].";}";
             }
 
