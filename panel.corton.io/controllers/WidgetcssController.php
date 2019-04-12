@@ -68,10 +68,10 @@ class WidgetcssController
             }
 
             if ($result['natpre_aktiv']) {
-                $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`,`image-shape``,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='".$id."'";
+                $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='".$id."'";
                 $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($css2==false){
-                    $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`,`image-shape``,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='0'";
+                    $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='0'";
                     $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }
                 $css.=$css2['css'];
