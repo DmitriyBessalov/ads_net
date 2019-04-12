@@ -1539,7 +1539,7 @@
                     <div class="holder" style="display: none;">
                         <div class="corton-recomendation-section">
                             <a href="#">
-                                <img src="/images/placeholder.jpg" alt="">
+                                <img src="/images/placeholder.jpg" class="recomendationimg" alt="">
                                 <p>Пример рекламной рекомендации статьи на вашем сайте!</p>
                             </a>
                         </div>
@@ -1977,7 +1977,7 @@
                     <div class="nativepre-script-container"></div>
                     <div class="#">
                         <div id="corton-nativepreview-widget" class="#">
-                            <div class="corton-left"> <img src="/images/placeholder.jpg" alt="" width="290" height="180"> </div>
+                            <div class="corton-left"> <img src="/images/placeholder.jpg" class="natpreimg" height="180"> </div>
                             <div class="corton-right">
                                 <div class="corton-title">Пример рекламного анонса на вашем сайте!</div>
                                 <p class="corton-content">Пример рекламного анонса на вашем сайте!», «Нейронные сети? Да! Биологический нейрон – это специальная клетка, которая структурно состоит из ядра, тела клетки и отростков.</p> <a class="corton-link" href="#">Подробнее</a> </div>

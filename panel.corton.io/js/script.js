@@ -465,6 +465,18 @@ $(document).ready(function(){
         $('.widget-recomendation [name=css]').val(style);
 
         $('.recomendation-script-container').html('<style>' + style + '</style>');
+
+        var variable = $('.widget-recomendation [name=image-shape]').val();
+        let n = $('.recomendationimg').length;
+        for (i = 0; i < n; i++) {
+            if (variable == 3){
+                $('.recomendationimg')[i].style.width= "270px";
+                $('.recomendationimg')[i].style.height= "180px";
+            }else {
+                $('.recomendationimg')[i].style.width= "180px";
+                $('.recomendationimg')[i].style.height= "180px";
+            }
+        }
     }
 
 // При изменении виджета nativepre
@@ -593,11 +605,17 @@ $(document).ready(function(){
         if(variable != "") {
             style += variable;
             $('.widget-nativepre [name=dop-css]').val(variable);
-        };
+        }
 
         $('.widget-nativepre [name=css]').val(style);
         $('.nativepre-script-container').html('<style>' + style + '</style>');
 
+        var variable = $('.widget-nativepre  [name=image-shape]').val();
+        if (variable == 3){
+            $('.natpreimg')[0].style.width= "270px";
+        }else{
+            $('.natpreimg')[0].style.width= "180px";
+        }
     }
 
 // При изменении виджета slider
