@@ -361,7 +361,7 @@ function corton_widget() {
             gadget = style_e.getPropertyValue('--' + device);
             if (gadget == 1) {
                 buttontext = style_e.getPropertyValue('--buttontext');
-                recomend_image_shape = style_e.getPropertyValue('--image_shape');
+                natpre_image_shape = style_e.getPropertyValue('--image_shape');
                 if (natpre_algorithm_output === '1') {
                     widget = widget + '&e=1';
                     show_natpre = 1;
