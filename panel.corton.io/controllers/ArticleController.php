@@ -876,7 +876,7 @@ form.onsubmit = function() {
                 $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $promo_ids=explode(',', $promo_id);
                 $promo_ids[]=$_GET['id'];
-                $promo_ids=array_merge($promo_ids);
+                $promo_ids=array_unique($promo_ids);
                 asort($promo_ids);
                 $promo_id=implode(',',$promo_ids);
                 $sql="UPDATE `words_index` SET `promo_ids`='".$promo_id."' WHERE `word`='".$word."'";
