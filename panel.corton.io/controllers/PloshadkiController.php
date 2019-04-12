@@ -98,11 +98,12 @@
                               <a class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
                               if ($i['type']!='demo'){
                                   echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>
-                                        <a class='modalclick' id='balans".$i['id']."'>Вывод балансов</a><br>";
+                                        <a class='modalclickb' id='balans".$i['id']."'>Вывод балансов</a><br>";
                               }
                               echo "
                               <a href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
                          </ul>
+                         
                          <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
                             <div style=\"min-width: 780px !important;\" class=\"div-block-78 w-clearfix\">
                                 <div class=\"div-block-132 modalhide\">
@@ -115,14 +116,17 @@
                                 </div>
                             </div>
                          </div>
+                         
                          <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
-                            <div style=\"min-width: 780px !important;\" class=\"div-block-78 w-clearfix\">
+                            <div style=\"min-width: 400px !important;\" class=\"div-block-78 w-clearfix\">
                                 <div class=\"div-block-132 modalhide\">
                                     <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
                                 </div>
-                                
+                            <input type=\"number\" step=\"0.01\" min=\"0\" max=\"10000\" name=\"coin\" placeholder='Сумма'>руб.
+                            <a onclick=\"alert('test')\" class=\"button-add-site w-button\">Списать с баланса</a>
                             </div>
                          </div>
+                                                  
                       </td>
                   </tr>";
                 };

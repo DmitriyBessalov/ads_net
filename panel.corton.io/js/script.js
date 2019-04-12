@@ -124,7 +124,11 @@ $(document).ready(function(){
     $(".modalclick").click(function(){
         $('.black-fon').css("display", "block");
         $('#modalotch'+this.id.substr(9)).css("display", "block");
+    });
 
+    $(".modalclickb").click(function(){
+        $('.black-fon').css("display", "block");
+        $('#spisanie'+this.id.substr(6)).css("display", "block");
     });
 
 // При изменении виджета Promo

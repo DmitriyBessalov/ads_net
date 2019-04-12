@@ -449,7 +449,8 @@ class ArticleController
             }
 
             $sql="UPDATE `promo` SET `words`='".$strtolow."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
-            $sql.="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
+            $db->query($sql);
+            $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
             $db->query($sql);
 
             break;
@@ -863,25 +864,26 @@ form.onsubmit = function() {
     public static function actionStart(){
         {
             $db = Db::getConnection();
-            $id=$_GET['id'];
 
             //Добавление индексов слов
-            $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
+            $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$_GET['id']."';";
             $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            if ($word=="")exit;
             $words=explode(',',$word);
             $words=ArticleController::miniword($words);
             foreach ($words as $word){
                 $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
-
                 $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $promo_ids=explode(',', $promo_id);
-                $promo_ids[]=$id;
+                $promo_ids[]=$_GET['id'];
+                $promo_ids=array_merge($promo_ids);
                 asort($promo_ids);
                 $promo_id=implode(',',$promo_ids);
-
                 $sql="UPDATE `words_index` SET `promo_ids`='".$promo_id."' WHERE `word`='".$word."'";
-
-                $db->query($sql);
+                if (!$db->exec($sql)){
+                    $sql="INSERT INTO `words_index` SET `promo_ids`='".$_GET['id']."', `word`='".$word."'";
+                    $db->query($sql);
+                }
             }
 
             $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$_GET['id']."';";
@@ -909,7 +911,11 @@ form.onsubmit = function() {
                 if (false !== $key)
                     unset( $promo_ids[$key]);
                 $promo_id=implode(',',$promo_ids);
-                $sql="UPDATE `words_index` SET `promo_ids`='".$promo_id."' WHERE `word`='".$word."'";
+                if ($promo_id==''){
+                    $sql = "DELETE FROM `words_index` WHERE `word`='" . $word . "'";
+                }else {
+                    $sql = "UPDATE `words_index` SET `promo_ids`='" . $promo_id . "' WHERE `word`='" . $word . "'";
+                }
                 $db->query($sql);
             }
 
