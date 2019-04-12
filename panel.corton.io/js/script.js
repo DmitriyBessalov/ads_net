@@ -613,8 +613,10 @@ $(document).ready(function(){
         var variable = $('.widget-nativepre  [name=image-shape]').val();
         if (variable == 3){
             $('.natpreimg')[0].style.width= "270px";
+            $('.corton-left')[0].style.width= "270px";
         }else{
             $('.natpreimg')[0].style.width= "180px";
+            $('.corton-left')[0].style.width= "180px";
         }
     }
 
