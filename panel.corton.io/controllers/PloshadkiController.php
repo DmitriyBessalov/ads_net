@@ -115,6 +115,14 @@
                                 </div>
                             </div>
                          </div>
+                         <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
+                            <div style=\"min-width: 780px !important;\" class=\"div-block-78 w-clearfix\">
+                                <div class=\"div-block-132 modalhide\">
+                                    <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
+                                </div>
+                                
+                            </div>
+                         </div>
                       </td>
                   </tr>";
                 };

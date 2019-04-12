@@ -610,11 +610,12 @@ $(document).ready(function(){
         $('.widget-nativepre [name=css]').val(style);
         $('.nativepre-script-container').html('<style>' + style + '</style>');
 
-        var variable = $('.widget-nativepre  [name=image-shape]').val();
+        var variable = $('.widget-nativepre [name=image-shape]').val();
         if (variable == 3){
             $('.natpreimg')[0].style.width= "270px";
             $('.corton-left')[0].style.width= "270px";
-        }else{
+        }
+        if (variable == 4){
             $('.natpreimg')[0].style.width= "180px";
             $('.corton-left')[0].style.width= "180px";
         }
@@ -629,14 +630,14 @@ $(document).ready(function(){
     function widget_slider(){
         var style = "#corton-slider-widget{width: 360px; height: 110px; display: table; position: relative; box-sizing: border-box; bottom: 0px; right: 0px; z-index: 99999;}\n";
         style += ".close-widget{display: block; position: absolute; top:0px; right: 0px; width: 15px; height: 15px;}";
-        
+
         style += ".close-widget:after{content: ''; position: absolute; left: -4px; bottom: -6px; border: 7px solid transparent;  border-top: 7px solid #cccccc; cursor: pointer;}";
         style += ".widget-slider .corton-left{display: table-cell; vertical-align: middle; width: 110px; height: 110px;}\n";
         style += ".widget-slider .corton-left img{width: 110px; height: 110px; float: left;}\n";
         style += ".widget-slider .corton-right{display: table-cell; vertical-align: middle; padding: 0 10px 10px 10px;}\n";
         style += ".widget-slider .corton-title{width: 100%; margin-top: 5px;}\n";
         style += ".widget-slider .corton-sign{font-size: 12px;}\n";
-    
+
         style += " @media (max-width: 460px) and (min-width: 220px) { #corton-slider-widget{ width: 100% !important; height: 95px !important; }}";
         style += " @media (max-width: 460px) and (min-width: 220px) { .widget-slider .corton-left img{ width: 95px; height: 95px; }}";
 
