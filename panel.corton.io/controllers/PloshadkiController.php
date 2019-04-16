@@ -248,12 +248,12 @@
                         `categoriya` = '".$_POST['categoriya']."',
                         `podcategoriya` ='".$_POST['podcategoriya']."',
                         `promo_page`='".$_POST['promo_page']."',
-                        `user_email` = '".$_POST['user']."',
+                        `user_id` = '".$_POST['user_id']."',
                         `status` ='".$aktiv."',
                         `recomend_zag_aktiv` = ".$zagrecomend.",
                         `natpre_zag_aktiv` = '".$zagnatprev."',
                         `natpro_zag_aktiv` = '".$zagnatpro."',
-                        `user_email` = '".$_POST['user']."',
+                        `user_id` = '".$_POST['user_id']."',
                         `demo-annons`='".$_POST['demo-annons']."',
                         `CTR`='".$_POST['CTR']."',
                         `CPM`='".$_POST['CPM']."',
@@ -272,7 +272,7 @@
             {
                 $db=Db::getConnection();
                 if (addslashes($_REQUEST['id'])!='') {
-                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_email`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page`,`favicon` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
+                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page`,`favicon` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
@@ -288,8 +288,8 @@
                 if ($result['slider_aktiv']){$slideraktiv='<div id="slider" class="text-block-118">Настройки</div>';}else{$slideraktiv='<div id="slider" class="text-block-118">Активировать</div>';};
 
 
-                $sql="SELECT `email` FROM `users` WHERE (aktiv='1' AND role='platform') ORDER BY `email` ASC";
-                $user = $db->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+                $sql="SELECT `id`,`email` FROM `users` WHERE (aktiv='1' AND role='platform') ORDER BY `email` ASC";
+                $user = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
                 if (($_GET['id']==0)and($_SERVER['REQUEST_URI']!='/platforms-add')) $disabled='disabled';
                 echo '
         <div class="section-2">
@@ -316,12 +316,12 @@
                     };
                   echo'
                 </select>
-                <select name="user" required="" class="select-field w-select" '.$disabled.'>
+                <select name="user_id" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Владелец площадки</option>';
                 foreach($user as $i){
                     echo "<option ";
-                    if ($result['user_email']==$i ) echo "selected ";
-                    echo "value=\"".$i."\">".$i."</option>";
+                    if ($result['user_id']==$i['id'] ) echo "selected ";
+                    echo "value=\"".$i['email']."\">".$i['email']."</option>";
                 };
                 echo '
                 </select>
