@@ -35,7 +35,7 @@ class FinController
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
             $db = Db::getConnection();
             $dbstat = Db::getstatConnection();
-            $sql = "SELECT p.`id`, p.`domen`, u.`email` FROM `ploshadki` p JOIN `users` u ON p.`user_email`=u.`email` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
+            $sql = "SELECT p.`id`, p.`domen`, u.`email` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $balansall = 0;
             foreach ($result as $i) {
@@ -49,6 +49,7 @@ class FinController
 
             $sql = "SELECT SUM(`balans`) FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "')";
             $balans = $dbstat->query($sql)->fetch(PDO::FETCH_COLUMN);
+
             if (is_null($balans))$balans=0;
 
             if (isset($_GET['platform'])) {

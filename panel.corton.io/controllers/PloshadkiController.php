@@ -17,22 +17,32 @@
 
                 $str="AND";
                 if ((isset($_GET['type'])) AND ($_GET['type']!='all')){
-                    $str.=" `type`='".$_GET['type']."' AND";
+                    $str.=" p.`type`='".$_GET['type']."' AND";
                 }
                 if ((isset($_GET['status'])) AND ($_GET['status']!='all')){
-                    $str.=" `status`='".$_GET['status']."' AND";
+                    $str.=" p.`status`='".$_GET['status']."' AND";
                 }
                 $str=substr($str, 0, -3);
 
-                $sql="SELECT `id`, `domen`, `type`,`otchiclen`, `user_email`, `date_add`, `status`,`otchiclen`, `recomend_aktiv`, `natpre_aktiv`, `natpro_aktiv`, `slider_aktiv`,`favicon` FROM `ploshadki` WHERE `id`!=0 ".$str." ORDER BY `domen`";
+                $sql="SELECT p.`id`, p.`domen`, p.`type`, p.`otchiclen`, u.`email` as `user_email`, p.`date_add`, p.`status`, p.`otchiclen`, p.`recomend_aktiv`, p.`natpre_aktiv`, p.`natpro_aktiv`, p.`slider_aktiv`, p.`favicon` FROM `ploshadki` p RIGHT OUTER JOIN `users` u ON p.`user_id` = u.`id` WHERE p.`id` != 0 ".$str." ORDER BY p.`domen`";
+
                 $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 echo '
+		<div class="form-block w-form">
 		<div class="form-block w-form">
           <div class="w-form-done"></div>
           <div class="w-form-fail"></div>
         </div>
         <script src="https://panel.corton.io/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
         <script src="https://panel.corton.io/js/jquery-ui.min.js" type="text/javascript"></script> 
+        <script>
+                function balans_spisanie(i){
+                    $.get( "https://panel.corton.io/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val());
+                }
+        </script> 
+        
+        
+        
 		<div class="table-box">
         <div class="table w-embed">
           <table>
@@ -122,8 +132,17 @@
                                 <div class=\"div-block-132 modalhide\">
                                     <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
                                 </div>
-                            <input type=\"number\" step=\"0.01\" min=\"0\" max=\"10000\" name=\"coin\" placeholder='Сумма'>руб.
-                            <a onclick=\"alert('test')\" class=\"button-add-site w-button\">Списать с баланса</a>
+                                <div style='text-align: left;'>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Площадка: ".$i['domen']."<br>
+                                    Email: ".$i['user_email']." <br><br>
+                                    <input id='sum_spisanie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>
+                                    <p>Максимальная сумма к выводу ".$balans." руб.</p>
+                                    <a onclick=\"balans_spisanie(".$i['id'].");\" class=\"button-add-site w-button\">Списать с баланса</a>
+                                </div>
+                            
                             </div>
                          </div>
                                                   
@@ -2323,7 +2342,7 @@
                             <div class="corton-left"> <img src="/images/placeholder.jpg" width="180" height="180"></div>
                             <div class="corton-right"> <span class="corton-sign">Рекомендовано для Вас:</span>
                                 <div class="corton-title">Пример рекламного анонса на вашем сайте!</div>
-                            </div> <span class="close-widget"></span> </div>
+                            </div><span class="close-widget"></span></div>
                     </div>
                 </div>
             </div>
@@ -2331,9 +2350,9 @@
     </div>
 </div>
 <div class="black-fon modalhide"></div>';
-                include PANELDIR . '/views/layouts/footer.php';
-                return true;
-            }
+             include PANELDIR . '/views/layouts/footer.php';
+             return true;
+        }
 
         //Меняет коэфициент отчислений для площадки
         public static function actionOtchicleniay()
@@ -2346,6 +2365,30 @@
             return true;
         }
 
+        public static function actionSpisanie()
+        {
+            $db = Db::getConnection();
+            $sql="SELECT `balans`, `spisanie`,`date` FROM `balans_user` WHERE `user_id`='".$_GET['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$_GET['id']."')";
+            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            if (($result) ){
+                if (floatval($result['balans'])>=floatval($_GET['sum'])+floatval($result['spisanie'])){
+                    if ($result['date']==date('Y-m-d')){
+                        $sql = "UPDATE `balans_user` SET `balans` = `balans` - ".$_GET['sum'].",`spisanie` = `spisanie` + ".$_GET['sum']."  WHERE `user_id`='".$_GET['id']."' AND `date`=CURDATE()";
+                    }else{
+                        $balans=floatval($result['balans'])-floatval($_GET['sum']);
+                        $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` = '".$balans."', `spisanie` = '".$_GET['sum']."';";
+                    }
+                    $db->query($sql);
+                    echo "Успешное списание";
+                    return true;
+                }
+                echo "Неправильная сумма";
+                return true;
+            }else{
+                echo "Неудалось списать";
+                return true;
+            }
+        }
 
 
         //Меняет коэфициент отчислений для площадки

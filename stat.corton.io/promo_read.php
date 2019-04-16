@@ -6,7 +6,7 @@ $prosmort_id=(int)$_GET['prosmort_id'];if ($prosmort_id==0)exit;
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 $dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 
-$sql= "SELECT `id`,`otchiclen` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
+$sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
 $ploshadka_id = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
 $sql = "SELECT `pay` FROM `stat_promo_prosmotr` WHERE `prosmotr_id` = '".$_GET['prosmort_id']."'";
@@ -38,6 +38,12 @@ if ($stavka==0){
         $dbstat->query($sql);
     }
 
+    $sql = "UPDATE `balans_user` SET `balans` = `balans` + ".$stavka.", WHERE `date`=CURDATE() AND `user_id`='".$ploshadka_id['user_id']."'";
+    if (!$db->exec($sql)){
+        $sql = "INSERT INTO `balans_user` SET `user_id` = '".$ploshadka_id['user_id']."', `date` = CURDATE(), `balans` = `balans` + ".$stavka;
+        $db->query($sql);
+    }
+
     $sql = "UPDATE `stat_promo_day_count` SET `reading` = `reading` + 1, `st` = `st` + 1, `pay` = `pay` + ".$stavka.", `paycount` = `paycount` + 1  WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."'";
     if (!$dbstat->exec($sql)){
         $dbstat->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `st` = 1, `pay` = ".$stavka);
@@ -51,4 +57,3 @@ if ($stavka==0){
 
 $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka."', `read` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
 $dbstat->query($sql);
-

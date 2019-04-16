@@ -19,6 +19,7 @@ switch ($GLOBALS['user']) {
             'platforms-edit' => 'ploshadki/edit',
             'platforms-update' => 'ploshadki/update',
             'platforms-otchicleniay' => 'ploshadki/otchicleniay',
+            'platforms-spisanie' => 'ploshadki/spisanie',
             'platform-stat' => 'ploshadki/Stat',
             'platforms-del' => 'ploshadki/del',
 

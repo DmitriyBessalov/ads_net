@@ -8,7 +8,7 @@ class ClickController
         include PANELDIR.'/views/layouts/header.php';
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
-        $sql = "SELECT `domen` FROM `ploshadki` WHERE (`status`='1')AND(`id`!='0') ";
+        $sql = "SELECT `domen` FROM `ploshadki` WHERE (`status`='1')AND(`id`!='0') ORDER BY `domen` ASC";
         $domens = $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
 		echo '
 		  <div class="form-block w-form">

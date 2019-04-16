@@ -28,7 +28,7 @@ class UsersController
             }
         };
 
-        $sql="SELECT u.id, u.email, u.fio, u.role, u.phone, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_email = u.email GROUP BY u.email";
+        $sql="SELECT u.id, u.email, u.fio, u.role, u.phone, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id GROUP BY u.email";
 
         $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -199,7 +199,7 @@ class UsersController
     //Авторизация
     public static function actionLogin(){
         $session=substr(sha1(rand()), 0, 26);
-        setcookie ( 'PHPSESSID', $session, time () + 10000000 );
+        setcookie ( 'PHPSESSID', $session, time () + 10000000 , '/');
         $db = Db::getConnection();
         $email=$_POST['login'];
         $password=md5($_POST['password']);
@@ -241,7 +241,7 @@ class UsersController
         $db = Db::getConnection();
         $sql="SELECT `phpsession`,`role` FROM `users` WHERE `users`.`id` = ".$_GET['id'];
         $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        setcookie ( 'PHPSESSID', $user['phpsession'], time () + 10000000 );
+        setcookie ( 'PHPSESSID', $user['phpsession'], time () + 10000000, '/');
         if ($user['role']=='advertiser'){
             header('Location: /articles?active=1');
         }else {
@@ -253,7 +253,7 @@ class UsersController
     //Выход из панели
     public static function actionLogout(){
         setcookie ( 'PHPSESSID', "", time () - 10000000 );
-        header('Location: /');
+        header('Location: https://corton.io/');
         return true;
     }
 
