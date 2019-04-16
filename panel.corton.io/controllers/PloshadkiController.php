@@ -321,7 +321,7 @@
                 foreach($user as $i){
                     echo "<option ";
                     if ($result['user_id']==$i['id'] ) echo "selected ";
-                    echo "value=\"".$i['email']."\">".$i['email']."</option>";
+                    echo "value=\"".$i['id']."\">".$i['email']."</option>";
                 };
                 echo '
                 </select>
