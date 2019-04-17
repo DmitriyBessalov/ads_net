@@ -10,12 +10,12 @@ class UsersController
             if ($_POST['aktiv']=="on"){$_POST['aktiv']=1;}else{$_POST['aktiv']=0;};
             if ($_POST['id']!=""){
                 $id=$_POST['id'];
-                $sql="UPDATE `users` SET `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`phone`='".$_POST['phone']."',  `aktiv`='".$_POST['aktiv']."' WHERE `id`='".$id."';";
+                $sql="UPDATE `users` SET `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`aktiv`='".$_POST['aktiv']."' WHERE `id`='".$id."';";
                 $db->query($sql);
             }else{
                 $data=date('Y-m-d');
                 $phpsession= substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 26);
-                $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`phone`='".$_POST['phone']."',`phpsession`='".$phpsession."',`aktiv`='".$_POST['aktiv']."';";
+                $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`phpsession`='".$phpsession."',`aktiv`='".$_POST['aktiv']."';";
                 $db->query($sql);
                 if ($_POST['role']=='advertiser'){
                     $id=$db->lastInsertId();
@@ -28,11 +28,21 @@ class UsersController
             }
         };
 
-        $sql="SELECT u.id, u.email, u.fio, u.role, u.phone, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id GROUP BY u.email";
+        $sql="SELECT u.id, u.email, u.fio, u.role, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id GROUP BY u.email";
 
         $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 		echo '
+        <script src="https://panel.corton.io/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
+        <script>
+                function balans_spisanie(i){
+                    $.get( "https://panel.corton.io/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function(data) {
+                        $("#sum_spisanie"+i).val("0");
+	                    $("#sum_spisanie"+i).prop(\'disabled\', true);
+	                    $("#status_spisanie"+i).html(data);
+	                })
+                }
+        </script>
         <div class="form-block w-form">
           <div class="w-form-done"></div>
           <div class="w-form-fail"></div>
@@ -45,10 +55,10 @@ class UsersController
                 <th>Email</th>
                 <th>ФИО</th>
                 <th>Группа</th>
-                <th>Телефон</th>
                 <th>IP авторизации</th>
                 <th>Дата создания</th> 
                 <th>Площадки</th>
+                <th>Баланс</th>
                 <th style="width:110px"></th>
               </tr>
             </thead>';
@@ -58,26 +68,50 @@ class UsersController
                      case "advertiser": $i['role'] = "Рекламодатели"; break;
                      case "platform": $i['role'] = "Площадки";
                  };
+
+                 $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$i['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$i['id']."')";
+                 $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                 if (!$balans){$balans='0.00';}
                  echo "
             <tr>
               <td>".$i['email']."</td>
               <td>".$i['fio']."</td>
               <td>".$i['role']."</td>
-              <td>".$i['phone']."</td>
               <td>".$i['last_ip']."</td>
               <td style=\"width: 200px;\">".$i['data_add']."</td>
               <td>".$i['domen']."</td>
+              <td>".$balans." руб.</td>              
               <td style=\"width:90px; text-align: right; padding-right: 20px;\">
 			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                   <ul class=\"sub-menu\"> 
                       <a href=\"user-edit?id=".$i['id']."\">Редактировать</a><br>
                       <a href=\"user-enter?id=".$i['id']."\">Войти</a><br>
+                      <a class='modalclickb' id='balans".$i['id']."'>Вывод баланса</a><br>
                       <a href=\"user-del?id=".$i['id']."\">Удалить</a> 	 
+                   </ul>
               </td>
+                        <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
+                            <div style=\"min-width: 400px !important;\" class=\"div-block-78 w-clearfix\">
+                                <div class=\"div-block-132 modalhide\">
+                                    <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
+                                </div>
+                                <div style='text-align: left;'>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Площадка: ".$i['domen']."<br>
+                                    Email: ".$i['user_email']." <br><br>
+                                    <input id='sum_spisanie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>
+                                    <p id='status_spisanie".$i['id']."'>Максимальная сумма к выводу ".$balans." руб.</p>
+                                    <a id='button_spisanie".$i['id']."' onclick=\"balans_spisanie(".$i['id'].");\" class=\"button-add-site w-button\">Списать с баланса</a>
+                                </div>
+                            </div>
+                         </div>
             </tr>";
         };
         echo '
           </table>
+          <div class="black-fon modalhide" style="display: none;"></div>
 		  </div>
 		  <div class="table-right">
 		    <form id="email-form" name="email-form" class="form-333">
@@ -154,7 +188,7 @@ class UsersController
 	    if (isset($_GET['id'])){
             $title='Редактирование пользователя';
             $db = Db::getConnection();
-            $sql="SELECT `email`,`fio`,`phone`,`role`,`aktiv` FROM `users` WHERE `id`='".$_GET['id']."' LIMIT 1;";
+            $sql="SELECT `email`,`fio`,`role`,`aktiv` FROM `users` WHERE `id`='".$_GET['id']."' LIMIT 1;";
             $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
         }else{
             $title='Добавление пользователя';
@@ -172,7 +206,6 @@ class UsersController
 				<input type="hidden" name="id" value="'.$_GET['id'].'">
 				<input class="text-field-10 w-input" maxlength="256" name="email" value="'.$result['email'].'" placeholder="Email" required="">
 				<input type="password" class="text-field-10 w-input" maxlength="256" name="password" value="" placeholder="Пароль" required="">
-				<input class="text-field-10 w-input" maxlength="256" name="phone" value="'.$result['phone'].'" placeholder="Телефон">
 				<select name="role" required="" class="select-field w-select">
 					<option '; if ($result['role']=="platform") echo 'selected '; echo 'value="platform">Площадки</option>
 					<option '; if ($result['role']=="advertiser") echo 'selected '; echo 'value="advertiser">Рекламодатели</option>

@@ -57,17 +57,14 @@
                 <td>Клики</td>
                 <td><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей и процент от кликов</span></div></td>
                 <td style="width: 111px;"><div class="tooltipinfo1">График<span class="tooltiptext1">График по просмотрам за последние 7 дней</span></div></td>
-                <td>Балансы</td>
+                <td>Доход</td>
                 <td style="width: 110px;"></td>
               </tr> 
             </thead>';
                 foreach ($result as $i) {
-                    $sql="SELECT SUM(`balans`) FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'";
-                    $balans = $dbstat->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-                    $sql="SELECT SUM(`r`)+SUM(`e`)+SUM(`s`) as 'prosmotr',SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`)as 'click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'  AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as 'dohod', SUM(`r`)+SUM(`e`)+SUM(`s`) as 'prosmotr',SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`)as 'click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'  AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                     $platform = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
-                    if (is_null($platform['prosmotr'])){$platform['prosmotr']=$platform['click']=0;}
+                    if (is_null($platform['prosmotr'])){$platform['prosmotr']=$platform['click']=$platform['dohod']=0;}
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
                     echo "<tr>
@@ -102,15 +99,14 @@
 					  <td style=\"width: 160px;\" >
 					     <div class=\"grafclick\"></div>
 					  </td>
-					  <td class=\"bluetext\">" . $balans . "</td>
+					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>
                       <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
 						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                          <ul class=\"sub-menu\">
                               <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
                               <a class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
                               if ($i['type']!='demo'){
-                                  echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>
-                                        <a class='modalclickb' id='balans".$i['id']."'>Вывод балансов</a><br>";
+                                  echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>";
                               }
                               echo "
                               <a href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
@@ -128,26 +124,7 @@
                                 </div>
                             </div>
                          </div>
-                         
-                         <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
-                            <div style=\"min-width: 400px !important;\" class=\"div-block-78 w-clearfix\">
-                                <div class=\"div-block-132 modalhide\">
-                                    <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
-                                </div>
-                                <div style='text-align: left;'>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    Площадка: ".$i['domen']."<br>
-                                    Email: ".$i['user_email']." <br><br>
-                                    <input id='sum_spisanie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>
-                                    <p id='status_spisanie".$i['id']."'>Максимальная сумма к выводу ".$balans." руб.</p>
-                                    <a id='button_spisanie".$i['id']."' onclick=\"balans_spisanie(".$i['id'].");\" class=\"button-add-site w-button\">Списать с баланса</a>
-                                </div>
-                            
-                            </div>
-                         </div>
-                                                  
+                                     
                       </td>
                   </tr>";
                 };
@@ -470,7 +447,7 @@
                 include PANELDIR.'/views/layouts/header.php';
                 PloshadkiController::form();
 
-                $sql="SELECT * FROM `style_promo` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql="SELECT * FROM `style_promo` WHERE `id`='".addslashes($_REQUEST['id'])."';";$result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($result==false){$sql="SELECT * FROM `style_promo` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
 
                 echo '
