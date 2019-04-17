@@ -35,7 +35,7 @@ class FinController
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
             $db = Db::getConnection();
             $dbstat = Db::getstatConnection();
-            $sql = "SELECT p.`id`, p.`domen`, u.`email` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
+            $sql = "SELECT p.`id`, p.`domen`, u.`email`, p.`user_id` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $balansall = 0;
             foreach ($result as $i) {
@@ -47,8 +47,9 @@ class FinController
 
             $strplatform = implode("','", $arrplatform);
 
-            $sql = "SELECT SUM(`balans`) FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "')";
-            $balans = $dbstat->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."')";
+            $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
 
             if (is_null($balans))$balans=0;
 
