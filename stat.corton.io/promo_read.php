@@ -20,7 +20,7 @@ if ($stavka==0){
     $block_ip=$redis->get($ploshadka_id['id'].':'.$_SERVER['REMOTE_ADDR']);
     if ($block_ip) {
         $redis->set($ploshadka_id['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 1296000);
-        exit;
+//        exit;
     }
     $redis->set($ploshadka_id['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 86400);
     $redis->close();
