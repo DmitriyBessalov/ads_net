@@ -37,11 +37,13 @@
         <script src="https://panel.corton.io/js/jquery-ui.min.js" type="text/javascript"></script> 
         <script>
                 function balans_spisanie(i){
-                    $.get( "https://panel.corton.io/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val());
+                    $.get( "https://panel.corton.io/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function( data) {
+                        $("#sum_spisanie"+i).val("0");
+	                    $("#sum_spisanie"+i).prop(\'disabled\', true);
+	                    $("#status_spisanie"+i).html(data);
+	                })
                 }
         </script> 
-        
-        
         
 		<div class="table-box">
         <div class="table w-embed">
@@ -139,8 +141,8 @@
                                     Площадка: ".$i['domen']."<br>
                                     Email: ".$i['user_email']." <br><br>
                                     <input id='sum_spisanie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>
-                                    <p>Максимальная сумма к выводу ".$balans." руб.</p>
-                                    <a onclick=\"balans_spisanie(".$i['id'].");\" class=\"button-add-site w-button\">Списать с баланса</a>
+                                    <p id='status_spisanie".$i['id']."'>Максимальная сумма к выводу ".$balans." руб.</p>
+                                    <a id='button_spisanie".$i['id']."' onclick=\"balans_spisanie(".$i['id'].");\" class=\"button-add-site w-button\">Списать с баланса</a>
                                 </div>
                             
                             </div>
@@ -2376,16 +2378,16 @@
                         $sql = "UPDATE `balans_user` SET `balans` = `balans` - ".$_GET['sum'].",`spisanie` = `spisanie` + ".$_GET['sum']."  WHERE `user_id`='".$_GET['id']."' AND `date`=CURDATE()";
                     }else{
                         $balans=floatval($result['balans'])-floatval($_GET['sum']);
-                        $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` = '".$balans."', `spisanie` = '".$_GET['sum']."';";
+                        $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` - ".$_GET['sum'].", `spisanie` = '".$_GET['sum']."';";
                     }
                     $db->query($sql);
-                    echo "Успешное списание";
+                    echo "Операция выполнена, списано с баланса";
                     return true;
                 }
-                echo "Неправильная сумма";
+                echo "Ошибка, неправильная сумма";
                 return true;
             }else{
-                echo "Неудалось списать";
+                echo "Ошибка, неудалось списать";
                 return true;
             }
         }
