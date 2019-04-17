@@ -45,6 +45,7 @@ class SiteController
   <base href="https://panel.corton.io">
   <title>Corton</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta http-equiv="refresh" content="3;url=https://corton.io" />
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/panel-corton-io.webflow.css" rel="stylesheet" type="text/css">

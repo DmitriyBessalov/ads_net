@@ -100,7 +100,7 @@ class UsersController
                                     <br>
                                     <br>
                                     Площадка: ".$i['domen']."<br>
-                                    Email: ".$i['user_email']." <br><br>
+                                    Email: ".$i['email']." <br><br>
                                     <input id='sum_spisanie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>
                                     <p id='status_spisanie".$i['id']."'>Максимальная сумма к выводу ".$balans." руб.</p>
                                     <a id='button_spisanie".$i['id']."' onclick=\"balans_spisanie(".$i['id'].");\" class=\"button-add-site w-button\">Списать с баланса</a>
