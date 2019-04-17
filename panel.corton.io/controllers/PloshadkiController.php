@@ -2378,7 +2378,7 @@
                         $sql = "UPDATE `balans_user` SET `balans` = `balans` - ".$_GET['sum'].",`spisanie` = `spisanie` + ".$_GET['sum']."  WHERE `user_id`='".$_GET['id']."' AND `date`=CURDATE()";
                     }else{
                         $balans=floatval($result['balans'])-floatval($_GET['sum']);
-                        $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` - ".$_GET['sum'].", `spisanie` = '".$_GET['sum']."';";
+                        $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` = '".$balans."', `spisanie` = '".$_GET['sum']."';";
                     }
                     $db->query($sql);
                     echo "Операция выполнена, списано с баланса";
