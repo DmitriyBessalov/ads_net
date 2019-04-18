@@ -44,6 +44,9 @@ if (!$dbstat->exec($sql)){
 
 $sql = "UPDATE `balans_user` SET `balans` = `balans` + ".$stavka." WHERE `date`=CURDATE() AND `user_id`='".$ploshadka_id['user_id']."'";
 if (!$db->exec($sql)){
-    $sql = "INSERT INTO `balans_user` SET `user_id` = '".$ploshadka_id['user_id']."', `date` = CURDATE(), `balans` = `balans` + ".$stavka;
+    $sql="SELECT `balans` FROM `balans_user` WHERE `user_id` = '".$ploshadka_id['user_id']."' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '".$ploshadka_id['user_id']."')";
+    $oldbalans=$stavka+$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+    $sql = "INSERT INTO `balans_user` SET `user_id` = '".$ploshadka_id['user_id']."', `date` = CURDATE(), `balans` = ".$oldbalans;
     $db->query($sql);
 }
