@@ -99,6 +99,13 @@ class ClickController
             };
             echo
             '</select>
+			<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                <input type="checkbox" checked="" name="mobile" class="form-radiozag">
+                <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                    <a style="color:#333;" class="link">User Agent</a>
+                </label>
+            </div>
+			
              <input name="useragent" type="checkbox" '; if ($_GET['useragent']=='on')echo 'checked'; echo'/> User Agent        
 		  <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
 		  </form>
