@@ -772,7 +772,6 @@ body {
                         <input type="text" class="text-field-4 w-input" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
                         <input name="formtext" type="hidden">
                         <div id="editor-container">'.$result['text'].'</div>
-                        <div class="text-block-139">-- символов</div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
                     <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>

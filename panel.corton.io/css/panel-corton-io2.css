@@ -2108,6 +2108,7 @@ input.w-button2 {
   color: #ff0303;
   font-size: 16px;
   font-family: 'Myriadpro Regular';
+  cursor: pointer;
 }
 
 .utility-page-wrap {
