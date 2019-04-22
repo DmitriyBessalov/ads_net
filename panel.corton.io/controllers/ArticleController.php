@@ -683,6 +683,7 @@ body {
                         </div>
                     </div>
 					
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
 					
 					<div class="div-block-97">
 					<div class="text-block-103">Бренд</div>
@@ -691,11 +692,9 @@ body {
                         <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Namebrand" id="stavka" value="'.$result['namebrand'].'">
                     </div>
 					
-					
                     
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-					
-                   
+					      
                     					
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
                 </form>
