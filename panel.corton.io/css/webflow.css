@@ -318,6 +318,10 @@ input[type="reset"] {
 }
 .w-form {
   margin: 0 0 0px;
+  margin-top: 20px;
+  margin-right: 40px;
+  margin-left: 40px;
+  padding-bottom: 20px;
 }
 .w-form-done {
   display: none;
