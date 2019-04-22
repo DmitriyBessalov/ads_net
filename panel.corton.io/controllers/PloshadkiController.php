@@ -314,7 +314,7 @@
                 <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
                 <select id="podcategoriya" name="podcategoriya" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Подкатегория площадки</option>
-                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon">
+                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 740px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon">
                 </select>';
                   if ($result['type']=='demo')
                  echo'
