@@ -1674,7 +1674,6 @@ input.w-button2 {
 
 .table {
   margin-right: 40px;
-  margin-left: 40px;
   color: #333333;
   font-size: 16px;
   font-family: 'Myriadpro Regular';
@@ -3942,7 +3941,7 @@ input.w-button2 {
     color: #768093;
     position: absolute;
     min-width: 163px;
-    right: 364px;
+    right: 324px;
     background: #fff;
     margin-top: 10px;
     margin-left: -78px;
