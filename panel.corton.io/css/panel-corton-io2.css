@@ -4833,7 +4833,3 @@ input:checked + span {
 .radio input:checked + .radio__text:after {
   opacity: 1;
 }
-
-.ql-editor {
-	padding: 12px 25px !important;
-}
