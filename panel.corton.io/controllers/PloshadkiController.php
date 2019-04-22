@@ -325,6 +325,7 @@
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
                 </div>
                 ';echo'
+				</div>
               <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Скрипт и стили</div>
