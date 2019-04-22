@@ -687,9 +687,6 @@ body {
 					<div class="div-block-97">
 					<div class="text-block-103">Бренд</div>
                         <div class="div-block-85">
-                            <div>
-                                <div class="text-block-96">₽ за CPG</div>
-                            </div>
                         </div>
                         <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Namebrand" id="stavka" value="'.$result['namebrand'].'">
                     </div>
