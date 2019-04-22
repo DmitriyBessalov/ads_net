@@ -683,7 +683,7 @@ body {
                         </div>
                     </div>
 					
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px;"></div>
 					
 					<div class="div-block-97">
 					<div class="text-block-103">Бренд</div>
