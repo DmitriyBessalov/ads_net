@@ -102,7 +102,7 @@ class ClickController
 						
                 <input type="checkbox" name="useragent" class="form-radiozag" '; if ($_GET['useragent']=='on')echo 'checked'; echo'/>
                 <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
-                    <a style="color:#333;" class="link">User Agent2</a>
+                    <a style="color:#333;" class="link">User Agent</a>
                 </label>
   
 		  <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
