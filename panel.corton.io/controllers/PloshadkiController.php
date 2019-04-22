@@ -68,7 +68,7 @@
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
                     echo "<tr>
-                      <td style=\"text-align: left; min-width: 330px;\">
+                      <td style=\"text-align: left; min-width: 336px;\">
 					  <div style=\"margin-top: 7px;\">
 					      <div class=\"logomini\""; if($i['favicon']!="")echo" style=\"background-image: url('".$i['favicon']."');\"";echo "></div>
 					      <div class=\"logominitext\">
