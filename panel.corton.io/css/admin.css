@@ -104,7 +104,7 @@ input[type="checkbox"].ios-switch + div {
 	vertical-align: middle;
 	width: 40px;	height: 20px;
 	border: 1px solid #e1e2e8;;
-	border-radius: 4px;
+	border-radius: 20px;
 	background-color: #f4f6f9;
 	-webkit-transition-duration: .4s;
 	-webkit-transition-property: background-color, box-shadow;
