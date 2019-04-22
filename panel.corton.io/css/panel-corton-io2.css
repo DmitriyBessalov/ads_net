@@ -2518,6 +2518,7 @@ input.w-button2 {
   background-color: none;
   border-top: 1px solid #E0E1E5 !important;
   margin-top: 0px;
+  padding-left: 20px;
 }
 
 .button-add-site {
