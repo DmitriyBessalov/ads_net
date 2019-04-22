@@ -101,9 +101,9 @@ class ClickController
             '</select>
 			
 			
-                <input type="checkbox" checked="" name="mobile" class="form-radiozag">
+                <input type="checkbox" '; if ($_GET['useragent']=='on')echo 'checked'; echo'/>
                 <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
-                    <a style="color:#333;" class="link">User Agent</a>
+                    <a style="color:#333;" class="link">User Agent2</a>
                 </label>
             
 			
