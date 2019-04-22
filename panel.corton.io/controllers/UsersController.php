@@ -198,7 +198,7 @@ class UsersController
         <div class="section-2">
           <div class="w-form">
             <form method="post" action="/users" class="form">
-              <div class="div-block-102">
+              <div style="padding-left:20px;" class="div-block-102">
                 <div class="text-block-103">Настройка</div>
                 <div class="div-block-116">
 					<input type="text" class="text-field-10 w-input" maxlength="256" name="fio" value="'.$result['fio'].'" placeholder="Имя" required="">
