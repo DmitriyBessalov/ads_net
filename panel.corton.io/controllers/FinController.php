@@ -305,7 +305,7 @@ class FinController
                     document.getElementById(result_id).innerHTML = response;
                 },
                 error: function(response) {
-                    document.getElementById(result_id).innerHTML = "<p>Сообщение отправлено, скоро с Вами свяжется менежер</p>";
+                    document.getElementById(result_id).innerHTML = "<p>Сообщение отправлено, скоро с Вами свяжется менежер.</p>";
                 }
             });
             $(\':input\',\'#formMain\') .prop(\'disabled\',true)
