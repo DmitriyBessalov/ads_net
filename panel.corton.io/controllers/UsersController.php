@@ -219,8 +219,9 @@ class UsersController
 				   </div>
                   <div class="text-block-138">Заблокирован / Активен</div>
                 </div>
-				<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-              </div><input type="submit" value="Сохранить" class="submit-button-6 w-button"></form>
+              </div>
+			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+			  <input type="submit" value="Сохранить" class="submit-button-6 w-button"></form>
             <div class="w-form-done"></div>
             <div class="w-form-fail"></div>
           </div>
