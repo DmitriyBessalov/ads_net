@@ -686,7 +686,12 @@ body {
 					
 					<div class="text-block-103">Бренд</div>
                         <div class="div-block-85">
-                            
+                            <div>';
+            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
+            $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            echo'
+                                <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
+                            </div>
                            
                         </div>
                         <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Namebrand" id="stavka" value="'.$result['namebrand'].'">
