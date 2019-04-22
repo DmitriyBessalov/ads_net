@@ -80,7 +80,7 @@ class UsersController
               <td>".$i['last_ip']."</td>
               <td style=\"width: 200px;\">".$i['data_add']."</td>
               <td>".$i['domen']."</td>
-              <td style=\"width: 140px; color: #116DD6;\">".$balans." руб.</td>              
+              <td style=\"width: 154px; color: #116DD6;\">".$balans." руб.</td>              
               <td style=\"width:90px; text-align: right; padding-right: 20px;\">
 			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                   <ul class=\"sub-menu\"> 
