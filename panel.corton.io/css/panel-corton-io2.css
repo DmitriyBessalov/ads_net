@@ -2785,10 +2785,11 @@ input.w-button2 {
 
 .bold-text-2 {
   display: block;
-  color: #333333;
-  font-size: 26px;
-  line-height: 30px;
-  font-weight: 400;
+  color: #116DD6;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  font-family: 'Myriadpro Regular';
 }
 
 .bold-text-3 {
