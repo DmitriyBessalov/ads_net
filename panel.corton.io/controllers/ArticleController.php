@@ -684,6 +684,8 @@ body {
                         <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Namebrand" id="stavka" value="'.$result['namebrand'].'">
                     </div>
 					
+					
+					<div class="div-block-97">
 					<div class="text-block-103">Бренд</div>
                         <div class="div-block-85">
                             <div>';
@@ -692,10 +694,14 @@ body {
             echo'
                                 <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
                             </div>
-                           
+                            <div>
+                                <div class="text-block-96">₽ за CPG</div>
+                            </div>
                         </div>
                         <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Namebrand" id="stavka" value="'.$result['namebrand'].'">
                     </div>
+					
+					
                     
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
 					
