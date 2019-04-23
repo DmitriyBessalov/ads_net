@@ -673,7 +673,7 @@
                                       <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
                                          <a style="color:#333;" class="link">Подчеркнутый</a>
                                       </label>
-                                </div> 
+                                </div>
 
                                 <br>
                                 <br>
@@ -2393,6 +2393,7 @@
                     <td style="min-width: 230px;">Виджет</td>
                     <td><div class="tooltipinfo1">Показы<span class="tooltiptext1">Показы анонсов</span></div></td>
                     <td style="min-width: 210px;">Клики</td>
+                    <td>CTR</td>
                     <td style="min-width: 110px;"><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Оплаченные просмотры (%&nbsp;кликов)</span></div></td>
                     <td><div class="tooltipinfo1">eCPM<span class="tooltiptext1">Доход на 1000 показов анонсов</span></div></td>
                     <td style="min-width: 120px;"><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Переходы со статей по URL (%&nbsp;просмотр&nbsp;оплаченных)</span></div></td>
@@ -2429,6 +2430,13 @@
                     $balansperiod['r_balans'] = $balansperiod['e_balans'] = $balansperiod['s_balans'] = '0.00';
                 };
 
+                $rCTR=round($balansperiod['r_promo_load']/$balansperiod['r_show_anons']*100);
+                $eCTR=round($balansperiod['e_promo_load']/$balansperiod['e_show_anons']*100);
+                $sCTR=round($balansperiod['s_promo_load']/$balansperiod['s_show_anons']*100);
+                if ((is_nan($rCTR)) or (is_infinite($rCTR))) {$rCTR = '0';}
+                if ((is_nan($eCTR)) or (is_infinite($eCTR))) {$eCTR = '0';}
+                if ((is_nan($sCTR)) or (is_infinite($sCTR))) {$sCTR = '0';}
+
                 echo '
         <tbody>
         <tr>
@@ -2451,6 +2459,7 @@
             </td>
             <td>'.$balansperiod['r_show_anons'].'</td>
             <td>'.$balansperiod['r_promo_load'].'</td>
+            <td>'.$rCTR.' %</td>
             <td>'.$balansperiod['r'];$val=round(100/$balansperiod['r_promo_load']*$balansperiod['r'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
             <td>';
             if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
@@ -2482,8 +2491,10 @@
                     </div>
                 </div>
             </td>
+            
             <td>'.$balansperiod['e_show_anons'].'</td>
             <td>'.$balansperiod['e_promo_load'].'</td>
+            <td>'.$eCTR.' %</td>
             <td>'.$balansperiod['e'];$val=round(100/$balansperiod['e_promo_load']*$balansperiod['e'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
             <td>';
                 if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
@@ -2514,9 +2525,10 @@
                         </p>
                     </div>
                 </div>
-            </td>            
+            </td>
             <td>'.$balansperiod['s_show_anons'].'</td>
             <td>'.$balansperiod['s_promo_load'].'</td>
+            <td>'.$sCTR.' %</td>  
             <td>'.$balansperiod['s'];$val=round(100/$balansperiod['s_promo_load']*$balansperiod['s'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
             <td>';
                 if (($aktiv['slider_aktiv'])AND($balansperiod['s']!=0)) {

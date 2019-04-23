@@ -19,7 +19,7 @@ class SiteController
   <link href="css/admin.css" rel="stylesheet" type="text/css">
   <meta name="robots" content="none">
 </head>
-<body class="body"><img src="images/logo-corton.png" alt="" class="image">
+<body class="body"><img src="images/logo-corton.png" class="image">
   <div class="w-form">
     <form method="post" action="https://panel.corton.io/login" class="form-8"><label for="login">Логин</label>
     <input type="text" class="w-input" autofocus="true" maxlength="256" name="login" data-name="login" id="login" required="">
