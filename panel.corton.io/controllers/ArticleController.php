@@ -23,7 +23,6 @@ class ArticleController
                 <th style="width: 140px;"><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших промо-статью</span></div></th>
                 <th><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики с промо статьи и процент от оплаченых просмотров</span></div></th>
                 <th style="width: 127px;"><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от количества показов анонсов</span></div></th>
-                <!--th>Отказы</th-->
                 <th style="width: 110px;"></th>
               </tr>
             </thead>';
@@ -44,7 +43,7 @@ class ArticleController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('185.75.90.54', 6379);
+                $redis->connect('127.0.0.1', 6379);
                 $redis->select(1);
             }
 
@@ -217,7 +216,7 @@ class ArticleController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('185.75.90.54', 6379);
+                $redis->connect('127.0.0.1', 6379);
                 $redis->select(1);
                 $ch=0;
             }
