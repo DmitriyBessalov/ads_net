@@ -68,7 +68,7 @@
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
                     echo "<tr>
-                      <td style=\"text-align: left; min-width: 338px;\">
+                      <td style=\"text-align: left; min-width: 336px;\">
 					  <div style=\"margin-top: 7px;\">
 					      <div class=\"logomini\""; if($i['favicon']!="")echo" style=\"background-image: url('".$i['favicon']."');\"";echo "></div>
 					      <div class=\"logominitext\">
@@ -314,8 +314,11 @@
                 <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
                 <select id="podcategoriya" name="podcategoriya" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Подкатегория площадки</option>
-                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon">
-                </select>';
+                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 740px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon">
+                </select>
+				<div style="width: 1337px; margin-bottom: 60px;"></div>
+				
+				';
                   if ($result['type']=='demo')
                  echo'
                 </div>
@@ -325,6 +328,7 @@
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
                 </div>
                 ';echo'
+				</div>
               <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Скрипт и стили</div>
@@ -354,7 +358,7 @@
               if (addslashes($_REQUEST['id'])!='') {
                     echo '
 				</div>
-                <div class="div-block-102">
+                <div style="padding-left:20px;" class="div-block-102">
                 <div class="text-block-103">Настройка виджетов</div>
                 <div class="text-block-115">Настройти внешний вид каждого виджета и следуйте инструкциям по установки.</div>
                 <div class="div-block-115">

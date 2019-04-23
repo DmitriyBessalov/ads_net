@@ -74,13 +74,13 @@ class UsersController
                  if (!$balans){$balans='0.00';}
                  echo "
             <tr>
-              <td>".$i['email']."</td>
+              <td style=\"color:#116DD6\">".$i['email']."</td>
               <td>".$i['fio']."</td>
               <td>".$i['role']."</td>
               <td>".$i['last_ip']."</td>
               <td style=\"width: 200px;\">".$i['data_add']."</td>
               <td>".$i['domen']."</td>
-              <td>".$balans." руб.</td>              
+              <td style=\"width: 154px; color: #116DD6;\">".$balans."</td>              
               <td style=\"width:90px; text-align: right; padding-right: 20px;\">
 			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                   <ul class=\"sub-menu\"> 
@@ -198,7 +198,7 @@ class UsersController
         <div class="section-2">
           <div class="w-form">
             <form method="post" action="/users" class="form">
-              <div class="div-block-102">
+              <div style="padding-left:20px;" class="div-block-102">
                 <div class="text-block-103">Настройка</div>
                 <div class="div-block-116">
 					<input type="text" class="text-field-10 w-input" maxlength="256" name="fio" value="'.$result['fio'].'" placeholder="Имя" required="">
@@ -219,7 +219,9 @@ class UsersController
 				   </div>
                   <div class="text-block-138">Заблокирован / Активен</div>
                 </div>
-              </div><input type="submit" value="Сохранить" class="submit-button-6 w-button"></form>
+              </div>
+			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+			  <input type="submit" value="Сохранить настройки" class="submit-button-6"></form>
             <div class="w-form-done"></div>
             <div class="w-form-fail"></div>
           </div>

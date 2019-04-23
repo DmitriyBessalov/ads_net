@@ -305,7 +305,7 @@ class FinController
                     document.getElementById(result_id).innerHTML = response;
                 },
                 error: function(response) {
-                    document.getElementById(result_id).innerHTML = "<p>Сообщение отправлено, скоро с Вами свяжется менежер</p>";
+                    document.getElementById(result_id).innerHTML = "<p>Сообщение отправлено, скоро с Вами свяжется менежер.</p>";
                 }
             });
             $(\':input\',\'#formMain\') .prop(\'disabled\',true)
@@ -323,7 +323,7 @@ class FinController
                 <form method="post" id="formMain" action="https://corton.io/contact-form2.php" class="form-3" style="margin-right: 0px !important;">
                     <input type="text" name="host" maxlength="50" placeholder="URL площадки" required="" style="background: #f4f6f9; color: #768093; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 260px; height: 34px; margin-right: 20px;">
                     <input type="hidden" name="email" value="'.$platform['email'].'">
-                    <input style="margin-top: 4px !important; color: #fff; border: 0px;" type="submit" value="Добавить площадку" onclick="AjaxFormRequest(\'messegeResult\', \'formMain\', \'https://corton.io/contact-form2.php\')" class="button-add-site">
+                    <input style="margin-top: 4px !important; cursor: pointer; color: #fff; border: 0px;" type="submit" value="Добавить площадку" onclick="AjaxFormRequest(\'messegeResult\', \'formMain\', \'https://corton.io/contact-form2.php\')" class="button-add-site">
                  </form>
                 <div id="messegeResult"></div>
             </div>
