@@ -24,7 +24,7 @@ $user= UsersController::getUserEmail();
       <? endif; ?>
       <? if ($GLOBALS['user']=='admin'): ?>
 	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" alt="" class="image-6"><div class="text-block-82-copy">Финансы</div></a>
-	        <a href="/platforms" class="link-block w-inline-block"><img src="/images/ic-platform.png" alt="" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
+	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" alt="" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
       <? endif; ?>
       <? if (($GLOBALS['user']=='admin') or ($GLOBALS['user']=='advertiser')): ?>
             <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
