@@ -556,8 +556,8 @@ class ArticleController
         include PANELDIR.'/views/layouts/header.php';
         echo '
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.bubble.css">
+<script type="text/javascript" src="https://panel.corton.io/js/quill.js"></script>
+<link rel="stylesheet" href="https://panel.corton.io/css/quill.bubble.css">
 <style>
 #form-container {
   width: 800px;
