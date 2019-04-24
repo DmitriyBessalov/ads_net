@@ -76,7 +76,7 @@ class FinController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('127.0.0.1', 6379);
+                $redis->connect('185.75.90.54', 6379);
                 $redis->select(3);
 
                 $platforms=explode("','",$strplatform);
@@ -276,13 +276,13 @@ class FinController
 </table>
 
                 </div>
-                
                     <div class="table-right">
 				 <form id="right-form" name="email-form" class="form-333">
 			         <a href="/finance#openaddsite" class="button-add-site w-button">Добавить площадку</a>'.'
-					 <p class="filtermenu"><label for=""><input type="radio" name="platform" value="all" id="" class="form-radio">Показать все</label></p>';
+					 <p class="filtermenu"><label '; if ((!isset($_GET['platform'])) OR ($_GET['platform']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="platform" value="all" id="" class="form-radio">Показать все</label></p>';
+
         foreach ($result as $platform){
-            echo                    '<p class="filtermenu"><label for="" style="width: 200px;"><input type="radio" name="platform" value="'.$platform['id'].'" id="" class="form-radio">Показать '.$platform['domen'].'</label></p>';
+            echo                    '<p class="filtermenu"><label style="width: 200px;'; if ($_GET['platform']==$platform['id']){echo 'text-decoration: underline;';}echo'"><input type="radio" name="platform" value="'.$platform['id'].'" id="" class="form-radio">Показать '.$platform['domen'].'</label></p>';
         };
         echo '              <div class="html-embed-3 w-embed" style="margin-top: 40px;">
                         <input type="text" name="datebegin" class="tcal tcalInput" value="'.$datebegin.'">

@@ -28,7 +28,11 @@ class UsersController
             }
         };
 
-        $sql="SELECT u.id, u.email, u.fio, u.role, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id GROUP BY u.email";
+        if ((isset($_GET['role'])) AND ($_GET['role']!='all')){
+            $str=" WHERE u.`role`='".$_GET['role']."'";
+        }
+
+        $sql="SELECT u.id, u.email, u.fio, u.role, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id".$str." GROUP BY u.email";
 
         $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -114,13 +118,18 @@ class UsersController
           <div class="black-fon modalhide" style="display: none;"></div>
 		  </div>
 		  <div class="table-right">
-		    <form id="email-form" name="email-form" class="form-333">
-			<a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>
-			<p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-one" class="form-radio"><label for="radio-one">Все пользователи</label></p>
-			<p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-two" class="form-radio"><label for="radio-two">Паблишеры</label></p>
-			<p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-three" class="form-radio"><label for="radio-three">Рекламодатели</label></p>
-			<p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-five" class="form-radio"><label for="radio-five">Техподдержка</label></p>
+		    <form id="right-form" class="form-333">
+			<a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>			
+            <p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все пользователи</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>Площадки</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Рекламодатели</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='admin'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="admin"  class="form-radio"'; if ($_GET['role']=='admin'){echo ' checked';} echo'>Техподдержка</label></p>
+           
 			</form>
+			
+			
+            
+			
 		</div>
         </div>
         <div class="div-block-98">

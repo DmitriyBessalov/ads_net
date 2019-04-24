@@ -36,7 +36,7 @@ while (true) {
 }
 
 $redis = new Redis();
-$redis->connect('127.0.0.1', 6379);
+$redis->connect('185.75.90.54', 6379);
 $arr['prosmotr_id'] = $redis->incr("prosmotr_id");
 
 $arr['promo_page']='/promo';

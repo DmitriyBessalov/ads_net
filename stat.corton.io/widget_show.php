@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 $redis = new Redis();
-$redis->connect('127.0.0.1', 6379);
+$redis->connect('185.75.90.54', 6379);
 $redis->select(1);
 $arr=explode(',',addslashes($_GET['anons_ids']));
 foreach ($arr as $value) {

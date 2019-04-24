@@ -1,7 +1,7 @@
 <?php
 $dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 $redis = new Redis();
-$redis->connect('127.0.0.1', 6379);
+$redis->connect('185.75.90.54', 6379);
 
 //Удаляем старые просмотры
 $sql="DELETE FROM `stat_promo_prosmotr` WHERE `date`<='".date('Y-m-d', strtotime('-7 day'))."'";

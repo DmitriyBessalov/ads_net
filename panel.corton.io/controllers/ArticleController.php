@@ -43,7 +43,7 @@ class ArticleController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('127.0.0.1', 6379);
+                $redis->connect('185.75.90.54', 6379);
                 $redis->select(1);
             }
 
@@ -134,9 +134,9 @@ class ArticleController
 		    <form id="right-form" class="form-333">
 			<a href="/article-edit" class="button-add-site w-button">Создать статью</a>
 			
-			<p class="filtermenu"><label><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
-			<p class="filtermenu"><label><input type="radio" name="active" value="1" class="form-radio"'; if ($_GET['active']==1){echo ' checked';} echo'>Активные статьи</label></p>
-			<p class="filtermenu"><label><input type="radio" name="active" value="0" class="form-radio"'; if ($_GET['active']==0){echo ' checked';} echo'>Статьи на паузе</label></p>
+			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
+			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='1')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="active" value="1" class="form-radio"'; if ($_GET['active']==1){echo ' checked';} echo'>Активные статьи</label></p>
+			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='0')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="active" value="0" class="form-radio"'; if ($_GET['active']==0){echo ' checked';} echo'>Статьи на паузе</label></p>
 			
             <div class="html-embed-3 w-embed" style="margin-top: 40px;">
              <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off"  value="'.$datebegin.'">
@@ -216,7 +216,7 @@ class ArticleController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('127.0.0.1', 6379);
+                $redis->connect('185.75.90.54', 6379);
                 $redis->select(1);
                 $ch=0;
             }
@@ -345,7 +345,7 @@ class ArticleController
         
 		';
         include PANELDIR . '/views/layouts/footer.php';
-        return false;
+        return true;
     }
 
     public static function actionUpdate()

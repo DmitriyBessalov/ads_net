@@ -15,7 +15,7 @@ $stavka = $dbstat->query($sql)->fetch(PDO::FETCH_COLUMN);
 if ($stavka==0){
     //Блокировка по IP
     $redis = new Redis();
-    $redis->connect('127.0.0.1', 6379);
+    $redis->connect('185.75.90.54', 6379);
     $redis->select(2);
     $block_ip=$redis->get($ploshadka_id['id'].':'.$_SERVER['REMOTE_ADDR']);
     if ($block_ip) {
