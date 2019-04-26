@@ -840,6 +840,8 @@ var quill = new Quill(\'#editor-container\', {
   modules: {
     toolbar: [
       [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
+	   toolbar: [
+      [{ header: \'2\' }, "bold", "italic"]
     ]
   },
   scrollingContainer: "#scrolling-container",
@@ -847,17 +849,7 @@ var quill = new Quill(\'#editor-container\', {
   theme: \'bubble\'
 });
 
-var quill = new Quill(\'#editor-container\', {
-  modules: {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      [\'bold\', \'italic\', \'underline\'],
-      [\'image\', \'code-block\']
-    ]
-  },
-  placeholder: \'Compose an epic...\',
-  theme: \'snow\'  // or \'bubble\'
-});
+
 
 var form = document.querySelector(\'#formtextsend\');
 form.onsubmit = function() {
