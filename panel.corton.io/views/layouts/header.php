@@ -31,6 +31,7 @@ $user= UsersController::getUserEmail();
       <? endif; ?>
       <? if ($GLOBALS['user']=='admin'): ?>
             <a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" alt="" class="image-6"><div class="text-block-82">Клики</div></a>
+			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" alt="" class="image-6"><div class="text-block-82">Уведомления</div></a>
             <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" alt="" class="image-6"><div class="text-block-82">Пользователи</div></a>
       <? endif; ?>
             <!--a href="/tickets" class="link-block w-inline-block"><img src="/images/ic-ticket.png" alt="" class="image-6"><div class="text-block-82">Тикеты</div></a-->
