@@ -18,7 +18,7 @@ function corton_promo() {
         const promo_selector = style_b.getPropertyValue('--selector');
         if (promo_forcibly==='1'){
             let sel = document.querySelectorAll(promo_selector);
-            sel[0].innerHTML='<div id="corton-promo">4444</div>';
+            sel[0].innerHTML='<div id="corton-promo"><div>33</div></div>';
         }
         console.log(promo_forcibly,promo_selector);
     }
