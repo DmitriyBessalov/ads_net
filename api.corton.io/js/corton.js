@@ -62,9 +62,9 @@ function corton_promo() {
         if (promo_selector_title.length!=0){
             let ele = document.querySelectorAll(promo_selector_title);
             ele[0].innerHTML=result['title'];
-            widget_promo.innerHTML = result['text']+form+'<div>5555</div>';
+            widget_promo.innerHTML = result['text']+form+'<div><a class="btn" data-popup-open="popup-1" href="#"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a> <div class="popup" data-popup="popup-1"> <div class="popup-inner"> <p>Это партнерский материал предоставленный этим сайтом и рекламодателем. Материал был создан с помощью платформы для контент-маркетинга: <a href="https://corton.io/">Corton.io</a>.</p> <a class="popup-close" data-popup-close="popup-1" href="#"> <img style="padding-top:3px; width:12px; height:14px;" src="https://corton.io/images/5c25ef6677f283ad129ce5fe_close.png"></a> </div> </div></div>';
         }else{
-            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form+'<div>5555</div>';
+            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form+'<div><a class="btn" data-popup-open="popup-1" href="#"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a> <div class="popup" data-popup="popup-1"> <div class="popup-inner"> <p>Это партнерский материал предоставленный этим сайтом и рекламодателем. Материал был создан с помощью платформы для контент-маркетинга: <a href="https://corton.io/">Corton.io</a>.</p> <a class="popup-close" data-popup-close="popup-1" href="#"> <img style="padding-top:3px; width:12px; height:14px;" src="https://corton.io/images/5c25ef6677f283ad129ce5fe_close.png"></a> </div> </div></div>';
         }
 
         var promo_form=document.getElementById("corton-form");
