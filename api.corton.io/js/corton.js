@@ -19,11 +19,7 @@ function corton_promo() {
         if (promo_forcibly==='1'){
             let sel = document.querySelectorAll(promo_selector);
             sel[0].innerHTML=
-			'<div id="corton-promo">'+
-			'</div>'+
-			'<div>'+
-			'<p>6656</p>'+
-			'</div>';
+			'<div id="corton-promo"></div>';
         }
         console.log(promo_forcibly,promo_selector);
     }
@@ -66,9 +62,9 @@ function corton_promo() {
         if (promo_selector_title.length!=0){
             let ele = document.querySelectorAll(promo_selector_title);
             ele[0].innerHTML=result['title'];
-            widget_promo.innerHTML = result['text']+form;
+            widget_promo.innerHTML = result['text']+form+'<div>5555</div>';
         }else{
-            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form;
+            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form+'<div>5555</div>';
         }
 
         var promo_form=document.getElementById("corton-form");
