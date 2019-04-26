@@ -62,9 +62,9 @@ function corton_promo() {
         if (promo_selector_title.length!=0){
             let ele = document.querySelectorAll(promo_selector_title);
             ele[0].innerHTML=result['title'];
-            widget_promo.innerHTML = result['text']+form+'<a style="float: right;" href="https://corton.io/" target="_blank" title="Powered by Corton"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a>';
+            widget_promo.innerHTML = result['text']+form+'<a all:unset; style="float: right;" href="https://corton.io/" target="_blank" title="Powered by Corton"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a>';
         }else{
-            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form+'<a style="float: right;" href="https://corton.io/" target="_blank" title="Powered by Corton"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a>';
+            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form+'<a all:unset; style="float: right;" href="https://corton.io/" target="_blank" title="Powered by Corton"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a>';
         }
 
         var promo_form=document.getElementById("corton-form");
