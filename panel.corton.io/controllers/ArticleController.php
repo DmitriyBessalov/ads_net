@@ -841,9 +841,6 @@ var quill = new Quill(\'#editor-container\', {
     toolbar: [
       [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
     ]
-	toolbar: [
-      [{ header: \'2\' }, "bold", "italic"]
-    ]
   },
   scrollingContainer: "#scrolling-container",
   placeholder: "Написать что-то ценное...",
