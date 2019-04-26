@@ -143,7 +143,7 @@ $(document).ready(function(){
         var widgetfontunit=$('.widget-promo [name=widget-font-unit]').val();
 
         var style = "#corton-widget{width: 100%; padding:10px;} " +
-            "#corton-promo .icon-partner{display: none;}";
+            "#corton-promo .icon-partner{display: inline-block;}";
 
         if($('.widget-promo .icon').prop("checked")) style += "#corton-widget .icon-partner{display: block;}";
 
