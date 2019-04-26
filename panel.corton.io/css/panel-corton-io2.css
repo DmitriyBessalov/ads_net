@@ -4848,4 +4848,5 @@ input:checked + span {
 
 .circlnotice:hover {
 	outline: none !important;
+	text-decoration: none !important;
 }
