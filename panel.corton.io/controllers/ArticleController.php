@@ -836,19 +836,17 @@ body {
 
 
 <script>
-
-
 var quill = new Quill(\'#editor-container\', {
   modules: {
     toolbar: [
-      [{ header: [1, 2, false] }],
-      [\'bold\', \'italic\', \'underline\'],
-      [\'image\', \'code-block\']
+      [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
     ]
   },
-  placeholder: \'Compose an epic...\',
-  theme: \'snow\'  // or \'bubble\'
+  scrollingContainer: "#scrolling-container",
+  placeholder: "Написать что-то ценное...",
+  theme: \'bubble\'
 });
+
 
 var form = document.querySelector(\'#formtextsend\');
 form.onsubmit = function() {
