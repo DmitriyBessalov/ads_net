@@ -4845,8 +4845,3 @@ input:checked + span {
     text-align: center;
 	margin-left: 6px;
 }
-
-.circlnotice:hover {
-	outline: none !important;
-	text-decoration: none !important;
-}
