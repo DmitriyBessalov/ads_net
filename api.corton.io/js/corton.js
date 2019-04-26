@@ -62,35 +62,15 @@ function corton_promo() {
         if (promo_selector_title.length!=0){
             let ele = document.querySelectorAll(promo_selector_title);
             ele[0].innerHTML=result['title'];
-            widget_promo.innerHTML = result['text']+form+'<div><a class="btn" data-popup-open="popup-1" href="#"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a> <div class="popup" data-popup="popup-1"> <div class="popup-inner"> <p>Это партнерский материал предоставленный этим сайтом и рекламодателем. Материал был создан с помощью платформы для контент-маркетинга: <a href="https://corton.io/">Corton.io</a>.</p> <a class="popup-close" data-popup-close="popup-1" href="#"> <img style="padding-top:3px; width:12px; height:14px;" src="https://corton.io/images/5c25ef6677f283ad129ce5fe_close.png"></a> </div> </div></div>';
+            widget_promo.innerHTML = result['text']+form+'<a class="corpartner" href="corton.io"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a>';
         }else{
-            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form+'<div><a class="btn" data-popup-open="popup-1" href="#"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a> <div class="popup" data-popup="popup-1"> <div class="popup-inner"> <p>Это партнерский материал предоставленный этим сайтом и рекламодателем. Материал был создан с помощью платформы для контент-маркетинга: <a href="https://corton.io/">Corton.io</a>.</p> <a class="popup-close" data-popup-close="popup-1" href="#"> <img style="padding-top:3px; width:12px; height:14px;" src="https://corton.io/images/5c25ef6677f283ad129ce5fe_close.png"></a> </div> </div></div>';
+            widget_promo.innerHTML = '<h1>'+result['title']+'</h1>'+result['text']+form+'<a class="corpartner" href="corton.io"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a>';
         }
 
         var promo_form=document.getElementById("corton-form");
         if (promo_form) {
             h3=promo_form.scrollHeight;
         };
-		
-		//PopUp партнерской иконки
-		$(function() {
-
-	$('[data-popup-open]').on('click', function(e) {
-		var targeted_popup_class = jQuery(this).attr('data-popup-open');
-		$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-		e.preventDefault();
-	});
-
-	$('[data-popup-close]').on('click', function(e) {
-		var targeted_popup_class = jQuery(this).attr('data-popup-close');
-		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-		e.preventDefault();
-	});
-});
-		
-		
 
         //Клик по ссылке в промо статье
         var a = document.querySelectorAll('div#corton-promo a');
