@@ -18,7 +18,7 @@ function corton_promo() {
         const promo_selector = style_b.getPropertyValue('--selector');
         if (promo_forcibly==='1'){
             let sel = document.querySelectorAll(promo_selector);
-            sel[0].innerHTML='<div id="corton-promo"><a class="btn" data-popup-open="popup-1" href="#"><img style="width:80px; height:20px;" src="https://corton.io/images/cortonlogo.png"></a></div>';
+            sel[0].innerHTML='<div id="corton-promo"></div>';
         }
         console.log(promo_forcibly,promo_selector);
     }
