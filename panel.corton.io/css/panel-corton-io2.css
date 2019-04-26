@@ -4844,4 +4844,5 @@ input:checked + span {
     color: #fff;
     text-align: center;
 	margin-left: 6px;
+	line-height: 1.8;
 }
