@@ -54,7 +54,9 @@ function corton_promo() {
                 '<div id="corton_form_status"></div>'+
                 '</div>'+
                 '</div>'+
-				'<div>Corton</div>'+
+				'<div>'+
+				'<p>Corton</p>'+
+				'</div>'+
                 '</div>';
         }
 
