@@ -1542,7 +1542,6 @@ input.w-button2 {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-right: 25px;
   padding: 13px 20px 20px 40px;
   color: #116DD6;
   text-decoration: none;
@@ -4844,4 +4843,5 @@ input:checked + span {
     height: 21px;
     color: #fff;
     text-align: center;
+	margin-left: 6px;
 }
