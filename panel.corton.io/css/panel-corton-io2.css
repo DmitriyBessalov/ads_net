@@ -4833,3 +4833,15 @@ input:checked + span {
 .radio input:checked + .radio__text:after {
   opacity: 1;
 }
+
+.circlnotice {
+	text-decoration: none !important;
+    background: #c41313;
+    border-radius: 60px;
+    font-size: 12px;
+    font-weight: 600;
+    width: 21px;
+    height: 21px;
+    color: #fff;
+    text-align: center;
+}
