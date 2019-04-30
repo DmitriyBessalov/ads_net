@@ -440,10 +440,10 @@ class FinController
         <div class="text-block-105">249</div><img src="/images/stat-1.png" alt="" class="image-8">
     </div>
 	<div class="div-block-94">
-        <div class="text-block-103">ТОП 5 ключей</div>
+        <div class="text-block-103">ТОП 5 площадок и ключей</div>
         <div class="text-block-104">Популярные ключи на площадках</div>
 		<div style="padding-bottom:14px;"></div>
-        <span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">1.</span> Артроз</span><br>
+        <span class="topwords"><span style="color:#768093;">1.</span> Артроз</span><br>
 		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">2.</span> Давление</span><br>
 		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">3.</span> Кардио</span><br>
 		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">4.</span> Инсулин</span><br>
