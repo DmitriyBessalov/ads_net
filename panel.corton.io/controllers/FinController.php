@@ -404,10 +404,24 @@ class FinController
 
 <div class="table-box">
 <div class="div-block-95 w-clearfix">
-    <div class="div-block-94">
-        <div class="text-block-103">Оборот системы</div>
-        <div class="text-block-104">Оборотные средства платформы за период</div>
-        <div class="text-block-105">20 410</div><img src="/images/stat-1.png" alt="" class="image-8">
+    <div style="width:876px;" class="div-block-94">
+        <div class="text-block-103">Внешние метрики</div>
+		<div style="display: flex;">
+		<div>
+           <div class="text-block-104">Колличество обработанных уников</div>
+           <div class="text-block-105">70 140</div>
+		</div>  
+        <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>		
+		<div>   
+		   <div class="text-block-104">Колличество визитов</div>
+           <div class="text-block-105">70 140</div>
+		</div>
+		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>	
+		<div>   
+		   <div class="text-block-104">Процент показа виджетов</div>
+           <div class="text-block-105">36 %</div>
+		</div>
+		</div>
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Оборот площадок</div>
@@ -423,6 +437,16 @@ class FinController
         <div class="text-block-103">Оплаченные клики</div>
         <div class="text-block-104">Оплаченные клики за период</div>
         <div class="text-block-105">249</div><img src="/images/stat-1.png" alt="" class="image-8">
+    </div>
+	<div class="div-block-94">
+        <div class="text-block-103">ТОП 5 ключей</div>
+        <div class="text-block-104">Популярные ключи на площадках</div>
+		<div style="padding-bottom:14px;"></div>
+        <span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">1.</span> Артроз</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">2.</span> Давление</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">3.</span> Кардио</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">4.</span> Инсулин</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">5.</span> Диабет</span>
     </div>
 </div>
 

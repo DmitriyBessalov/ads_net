@@ -4846,3 +4846,11 @@ input:checked + span {
 	margin-left: 6px;
 	line-height: 1.8;
 }
+
+.topwords {
+	font-size: 22px;
+	color: #116dd6;
+	line-height: 2;
+	font-family: 'Myriadpro Regular';
+    font-weight: 600;
+}
