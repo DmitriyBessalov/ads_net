@@ -441,9 +441,9 @@ class FinController
     </div>
 	<div class="div-block-94">
         <div class="text-block-103">ТОП 5 площадок и ключей</div>
-        <div class="text-block-104">Популярные ключи на площадках</div>
+        <div class="text-block-104">Популярные площадки и ключи</div>
 		<div style="padding-bottom:14px;"></div>
-        <span class="topwords"><span style="color:#768093;">1.</span> Артроз</span><span class="topwords"><span style="color:#768093;">1.</span> Артроз</span><br>
+        <span class="topwords"><span style="color:#768093;">1.</span> Артроз</span><span style="right:40px;" class="topwords"><span style="color:#768093;">1.</span> Артроз</span><br>
 		<span class="topwords"><span style="color:#768093;">2.</span> Давление</span><br>
 		<span class="topwords"><span style="color:#768093;">3.</span> Кардио</span><br>
 		<span class="topwords"><span style="color:#768093;">4.</span> Инсулин</span><br>
