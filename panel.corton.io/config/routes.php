@@ -1,7 +1,7 @@
 <?php
 
 if ($_SERVER['REQUEST_URI']=='/login'){
-    $GLOBALS['user']='none';
+    $GLOBALS['role']='none';
 }else{
     UsersController::getUser();
 };
