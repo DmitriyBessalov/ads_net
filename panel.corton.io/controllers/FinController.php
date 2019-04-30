@@ -425,7 +425,7 @@ class FinController
 		</div>
     </div>
     <div class="div-block-94">
-        <div class="text-block-103">Оборот площадок</div>
+        <div class="text-block-103">Доход площадок</div>
         <div class="text-block-104">Объём заработанных средств площадками</div>
         <div class="text-block-105">16 780</div><img src="/images/stat-1.png" alt="" class="image-8">
     </div>
