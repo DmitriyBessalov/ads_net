@@ -414,8 +414,8 @@ class FinController
 		</div>  
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>		
 		<div>   
-		   <div class="text-block-104">Колличество визитов на площадки</div>
-           <div style="font-size: 46px;" class="text-block-105">70 140</div>
+		   <div class="text-block-104">Колличество визитов</div>
+           <div style="font-size: 46px;" class="text-block-105">128 315</div>
 		</div>
 		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>	
 		<div>   
