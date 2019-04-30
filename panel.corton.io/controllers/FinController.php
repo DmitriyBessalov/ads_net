@@ -411,7 +411,7 @@ class FinController
            <div class="text-block-104">Колличество обработанных уников</div>
            <div class="text-block-105">70 140</div>
 		</div>  
-        <div style="border-width: 0 0 0 1px; border-style: solid #E0E1E5; padding: 10px;"></div>		
+        <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 10px;"></div>		
 		<div>   
 		   <div class="text-block-104">Колличество обработанных уников</div>
            <div class="text-block-105">70 140</div>
