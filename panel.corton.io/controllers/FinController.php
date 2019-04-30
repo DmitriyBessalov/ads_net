@@ -429,11 +429,11 @@ class FinController
 	<div class="div-block-94">
         <div class="text-block-103">ТОП 5 ключей</div>
         <div class="text-block-104">Популярные ключи на площадках</div>
-        <span class="topwords">Артроз</span><br>
-		<span class="topwords">Давление</span><br>
-		<span class="topwords">Давление</span><br>
-		<span class="topwords">Давление</span><br>
-		<span class="topwords">Давление</span>
+        <span class="topwords">1. Артроз</span><br>
+		<span class="topwords">2. Давление</span><br>
+		<span class="topwords">3. Давление</span><br>
+		<span class="topwords">4. Давление</span><br>
+		<span class="topwords">5. Давление</span>
     </div>
 </div>
 
