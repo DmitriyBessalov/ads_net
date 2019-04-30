@@ -445,18 +445,18 @@ class FinController
 		<div style="padding-bottom:14px;"></div>
 		<div style="display: flex;">
 		   <div>
-              <span class="topwords"><span style="color:#768093;">1.</span> Артроз</span><br>
-		      <span class="topwords"><span style="color:#768093;">2.</span> Давление</span><br>
-		      <span class="topwords"><span style="color:#768093;">3.</span> Кардио</span><br>
-		      <span class="topwords"><span style="color:#768093;">4.</span> Инсулин</span><br>
-		      <span class="topwords"><span style="color:#768093;">5.</span> Диабет</span>
+              <span class="topwords"><span style="color:#768093;">1. </span>Cardio.com</span><br>
+		      <span class="topwords"><span style="color:#768093;">2. </span> Diabethelp.org</span><br>
+		      <span class="topwords"><span style="color:#768093;">3. </span> damskf.ru</span><br>
+		      <span class="topwords"><span style="color:#768093;">4. </span> fb.ru</span><br>
+		      <span class="topwords"><span style="color:#768093;">5. </span> like.com</span>
 		   </div>
-		   <div>
-              <span class="topwords"><span style="color:#768093;">1.</span> Артроз</span><br>
-		      <span class="topwords"><span style="color:#768093;">2.</span> Давление</span><br>
-		      <span class="topwords"><span style="color:#768093;">3.</span> Кардио</span><br>
-		      <span class="topwords"><span style="color:#768093;">4.</span> Инсулин</span><br>
-		      <span class="topwords"><span style="color:#768093;">5.</span> Диабет</span>
+		   <div style="padding-left: 20px;">
+              <span class="topwords"><span style="color:#768093;">1. </span> Артроз</span><br>
+		      <span class="topwords"><span style="color:#768093;">2. </span> Давление</span><br>
+		      <span class="topwords"><span style="color:#768093;">3. </span> Кардио</span><br>
+		      <span class="topwords"><span style="color:#768093;">4. </span> Инсулин</span><br>
+		      <span class="topwords"><span style="color:#768093;">5. </span> Диабет</span>
 	    </div>
 		</div>
     </div>
