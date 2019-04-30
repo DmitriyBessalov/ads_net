@@ -435,8 +435,8 @@ class FinController
         <div class="text-block-105">310</div><img src="/images/stat-1.png" alt="" class="image-8">
     </div>
     <div class="div-block-94">
-        <div class="text-block-103">Оплаченные клики</div>
-        <div class="text-block-104">Оплаченные клики за период</div>
+        <div class="text-block-103">Оплаченные просмотры</div>
+        <div class="text-block-104">Оплаченные просмотры за период</div>
         <div class="text-block-105">249</div><img src="/images/stat-1.png" alt="" class="image-8">
     </div>
 	<div class="div-block-94">
