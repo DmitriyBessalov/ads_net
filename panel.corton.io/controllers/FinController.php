@@ -451,6 +451,7 @@ class FinController
 		      <span class="topwords"><span style="color:#768093;">4. </span> fb.ru</span><br>
 		      <span class="topwords"><span style="color:#768093;">5. </span> like.com</span>
 		   </div>
+		   <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>	
 		   <div style="padding-left: 40px;">
               <span class="topwords"><span style="color:#768093;">1. </span> Артроз</span><br>
 		      <span class="topwords"><span style="color:#768093;">2. </span> Давление</span><br>
