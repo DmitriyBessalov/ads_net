@@ -4851,5 +4851,6 @@ input:checked + span {
 	font-size: 22px;
 	color: #116dd6;
 	line-height: 2;
-	font-family: 'Myriadpro SemiExt';
+	font-family: 'Myriadpro Regular';
+    font-weight: 600;
 }

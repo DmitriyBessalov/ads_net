@@ -405,7 +405,7 @@ class FinController
 <div class="table-box">
 <div class="div-block-95 w-clearfix">
     <div style="width:876px;" class="div-block-94">
-        <div class="text-block-103">Общие данные</div>
+        <div class="text-block-103">Внешние метрики</div>
         <div class="text-block-104">Колличество обработанных уников</div>
         <div class="text-block-105">70 140</div>
 		<div class="text-block-104">Колличество обработанных уников</div>
@@ -429,11 +429,11 @@ class FinController
 	<div class="div-block-94">
         <div class="text-block-103">ТОП 5 ключей</div>
         <div class="text-block-104">Популярные ключи на площадках</div>
-		<div style="padding-bottom:10px;"></div>
+		<div style="padding-bottom:14px;"></div>
         <span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">1.</span> Артроз</span><br>
 		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">2.</span> Давление</span><br>
 		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">3.</span> Кардио</span><br>
-		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">4.</span> Боли</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">4.</span> Инсулин</span><br>
 		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">5.</span> Диабет</span>
     </div>
 </div>
