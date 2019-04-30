@@ -422,7 +422,7 @@ class FinController
 		   <div class="text-block-104">Процент показа анонсов</div>
            <div style="font-size: 46px;" class="text-block-105">36 %</div>
 		</div>
-		</div><img src="/images/stat-2.png" alt="" class="image-8">
+		</div><img src="/images/stat-2.png" alt="" class="image-8" style="width: 838px;">
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Доход площадок</div>
