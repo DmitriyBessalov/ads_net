@@ -442,7 +442,7 @@ class FinController
 	<div class="div-block-94">
         <div class="text-block-103">ТОП 5 площадок и ключей</div>
         <div class="text-block-104">Популярные площадки и ключи</div>
-		<div style="padding-bottom:14px;"></div>
+		<div style="padding-bottom:20px;"></div>
 		<div style="display: flex;">
 		   <div>
               <span class="topwords"><span style="color:#768093;">1. </span>Cardio.com</span><br>
