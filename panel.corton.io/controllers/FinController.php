@@ -410,7 +410,8 @@ class FinController
 		<div>
            <div class="text-block-104">Колличество обработанных уников</div>
            <div class="text-block-105">70 140</div>
-		</div>   
+		</div>  
+        <div style="border-width: 0 0 0 1px; border-style: solid; padding-left: 10px;"></div>		
 		<div>   
 		   <div class="text-block-104">Колличество обработанных уников</div>
            <div class="text-block-105">70 140</div>
