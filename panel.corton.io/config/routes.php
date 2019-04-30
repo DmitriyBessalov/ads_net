@@ -3,11 +3,11 @@
 if ($_SERVER['REQUEST_URI']=='/login'){
     $GLOBALS['user']='none';
 }else{
-    $GLOBALS['user']= UsersController::checkRole();
+    UsersController::getUser();
 };
 
 
-switch ($GLOBALS['user']) {
+switch ($GLOBALS['role']) {
     case 'admin':
         return array(
             //Финансы

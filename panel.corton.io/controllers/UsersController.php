@@ -128,8 +128,6 @@ class UsersController
 			</form>
 			
 			
-            
-			
 		</div>
         </div>
         <div class="div-block-98">
@@ -157,6 +155,22 @@ class UsersController
         return true;
     }
 
+    public static function getUser()
+    {
+        $db = Db::getConnection();
+        $sql="SELECT `id`,`role`,`email`,`aktiv` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
+        $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if ($result['aktiv']) {
+            $GLOBALS['user'] = $result['id'];
+            $GLOBALS['role'] = $result['role'];
+            $GLOBALS['email'] = $result['email'];
+        }else{
+            header('Location: https://corton.io/');
+            exit;
+        }
+    }
+
+
     //Возвращает роль пользователя
     public static function checkRole()
     {
@@ -182,6 +196,7 @@ class UsersController
     {
         $db = Db::getConnection();
         $sql="SELECT `role` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
+
         return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
@@ -254,7 +269,7 @@ class UsersController
              $sql = "UPDATE `users` SET `phpsession` = '" . $session . "',`last_ip`='" . $ip . "' WHERE `email`='" . $email . "';";
              $db->query($sql);
              if ($user['role']=='advertiser'){
-                 header('Location: /articles?active=1');
+                 header('Location: /articles');
              }else {
                  header('Location: /finance');
              }

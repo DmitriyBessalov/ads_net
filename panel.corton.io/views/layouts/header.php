@@ -1,6 +1,4 @@
-<?php
-$user= UsersController::getUserEmail();
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
@@ -19,17 +17,18 @@ $user= UsersController::getUserEmail();
 <body class="body">
   <div class="left-menu">
 	  <img src="/images/logo-corton.png" alt="" class="image">
-      <? if ($GLOBALS['user']=='platform'): ?>
+      <? if ($GLOBALS['role']=='platform'): ?>
           <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" alt="" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
       <? endif; ?>
-      <? if ($GLOBALS['user']=='admin'): ?>
+      <? if ($GLOBALS['role']=='admin'): ?>
 	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" alt="" class="image-6"><div class="text-block-82-copy">Финансы</div></a>
 	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" alt="" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
       <? endif; ?>
-      <? if (($GLOBALS['user']=='admin') or ($GLOBALS['user']=='advertiser')): ?>
-            <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
+      <? if ($GLOBALS['role']=='advertiser'): ?>
+            <a href="/articles" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
       <? endif; ?>
-      <? if ($GLOBALS['user']=='admin'): ?>
+      <? if (($GLOBALS['role']=='admin') or ($GLOBALS['user']=='advertiser')): ?>
+            <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
             <a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" alt="" class="image-6"><div class="text-block-82">Клики</div></a>
 			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" alt="" class="image-6"><div class="text-block-82">Уведомления</div><div class="circlnotice">1</div></a>
             <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" alt="" class="image-6"><div class="text-block-82">Пользователи</div></a>
@@ -46,7 +45,7 @@ $user= UsersController::getUserEmail();
 		        <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; text-decoration: none; color: #768093; float: right; padding-top: 28px;">
                     <div class="text-block-116">
                         <?
-                        $string = $user;
+                        $string = $GLOBALS['email'];
                         echo $string[0];
                         ?>
                     </div>
@@ -54,7 +53,7 @@ $user= UsersController::getUserEmail();
                 <ul class="sub-menutwo">
 				    <div>
 					   <span style="line-height: 35px;">
-                           <? echo $user; ?>
+                           <? echo $GLOBALS['email']; ?>
                        </span><br>
                        <a href="https://panel.corton.io/#">Настройки</a><br>
                        <a href="https://panel.corton.io/logout">Выход</a>

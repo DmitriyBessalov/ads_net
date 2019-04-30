@@ -27,10 +27,16 @@ class ArticleController
               </tr>
             </thead>';
 
+        if($GLOBALS['role']=='admin'){
+            $str="1";
+        }else{
+            $str="p.`user_id`='".$GLOBALS['user']."'";
+        }
+
         if (isset($_GET['active'])){
             switch ($_GET['active']){
-                case '1': {$str=" WHERE p.`active`='1'";};break;
-                case '0': {$str=" WHERE p.`active`='0'";}
+                case '1': {$str.=" AND p.`active`='1'";};break;
+                case '0': {$str.=" AND p.`active`='0'";}
             }
         };
 
@@ -47,7 +53,7 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand`, p.`active` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id`".$str." ORDER BY a.`promo_id` DESC ;";
+            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand`, p.`active` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id` WHERE ".$str." ORDER BY a.`promo_id` DESC ;";
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $i) {
                 $anons = str_replace(",", "','", $i['anons_ids']);
@@ -125,15 +131,15 @@ class ArticleController
             if (isset($today)) {
                 $redis->close();
             }
-        }else{echo '<tr><td colspan="12">Некоректные даты фильтра</td></tr>';}
+        }else{ echo '<tr><td colspan="12">Некоректные даты фильтра</td></tr>';}
         echo '
           </table>
         </div>
 		
 		<div class="table-right">
-		    <form id="right-form" class="form-333">
-			<a href="/article-edit" class="button-add-site w-button">Создать статью</a>
-			
+		    <form id="right-form" class="form-333"><br>';
+            if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
+			echo '
 			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
 			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='1')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="active" value="1" class="form-radio"'; if ($_GET['active']==1){echo ' checked';} echo'>Активные статьи</label></p>
 			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='0')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="active" value="0" class="form-radio"'; if ($_GET['active']==0){echo ' checked';} echo'>Статьи на паузе</label></p>
@@ -469,7 +475,11 @@ class ArticleController
 
             $uploaddir = '/var/www/www-root/data/www/api.corton.io'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR;
             //загрузка файлов
-            $count=count ($_POST['anons_ids']);
+
+            mkdir('/var/www/www-root/data/www/api.corton.io'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id, 0755);
+            mkdir('/var/www/www-root/data/www/api.corton.io'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a', 0755);
+
+            $count=count ($_POST['id']);
 
             foreach($anonsold2 as $i) {
                 $sql="SELECT `img_290x180`,`img_180x180` FROM `anons` WHERE `id`='".$_POST['anons_ids'][$i]."'";
@@ -872,11 +882,14 @@ form.onsubmit = function() {
     public static function actionStart(){
         {
             $db = Db::getConnection();
-
+            //Проверка на анонсы
+            $sql ="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id` = '".$_GET['id']."';";
+            $anons = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            if ($anons=="") {echo 'anon'; exit;}
             //Добавление индексов слов
             $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$_GET['id']."';";
             $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            if ($word=="")exit;
+            if ($word=="") {echo 'word'; exit;}
             $words=explode(',',$word);
             $words=ArticleController::miniword($words);
             foreach ($words as $word){
@@ -896,6 +909,7 @@ form.onsubmit = function() {
 
             $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$_GET['id']."';";
             $db->query($sql);
+            echo 'true';
             return true;
         }
     }

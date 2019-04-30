@@ -38,19 +38,24 @@ $(document).ready(function(){
     });
 	
 //Функция для чекбокса
-    var f=function()
-    {
+    $('.flipswitch').click(function() {
         if ($(this).is(':checked')){
-            $(this).next().text('Активна');
             var id=$(this).parents('tr:first').children('td')[0].innerHTML;
-            $.post("https://panel.corton.io/article-start?id="+id)
+            var checkbox=$(this);
+            $.post("https://panel.corton.io/article-start?id="+id,function(data) {
+                switch (data) {
+                    case 'anon':{checkbox.next().text('Неактивна, отсутсвуют анонсы'); checkbox.prop('checked', false); console.log('a'); break;}
+                    case 'word':{checkbox.next().text('Неактивна, отсутсвуют ключевые слова'); checkbox.prop('checked', false); console.log('w'); break;}
+                    case 'true':{checkbox.next().text('Активна');}
+                }
+            });
         } else {
             $(this).next().text('На паузе');
             var id=$(this).parents('tr:first').children('td')[0].innerHTML;
             $.post("https://panel.corton.io/article-stop?id="+id)
         }
-    };
-    $('.flipswitch').change(f).trigger('change');
+    });
+
 
 
 //Отрытие модальных окон на странице площадок
