@@ -429,8 +429,8 @@ class FinController
 	<div class="div-block-94">
         <div class="text-block-103">ТОП 5 ключей</div>
         <div class="text-block-104">Популярные ключи на площадках</div>
-        <div class="text-block-105">Артроз</div>
-		<div class="text-block-105">Давление</div>
+        <span style="font-size: 24px;">Артроз</span>
+		<span style="font-size: 24px;">Давление</span>
     </div>
 </div>
 
