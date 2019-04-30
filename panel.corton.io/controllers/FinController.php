@@ -404,10 +404,10 @@ class FinController
 
 <div class="table-box">
 <div class="div-block-95 w-clearfix">
-    <div style="width:860px;" class="div-block-94">
+    <div style="width:876px;" class="div-block-94">
         <div class="text-block-103">Общие данные</div>
-        <div class="text-block-104">Оборотные средства платформы за период</div>
-        <div class="text-block-105">20 410</div>
+        <div class="text-block-104">Колличество уников</div>
+        <div class="text-block-105">70 140</div>
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Оборот площадок</div>
