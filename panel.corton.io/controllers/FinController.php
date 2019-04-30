@@ -431,10 +431,10 @@ class FinController
         <div class="text-block-104">Популярные ключи на площадках</div>
 		<div style="padding-bottom:10px;"></div>
         <span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">1.</span> Артроз</span><br>
-		<span class="topwords"><span style="color:#768093;">2.</span> Давление</span><br>
-		<span class="topwords"><span style="color:#768093;">3.</span> Кардио</span><br>
-		<span class="topwords"><span style="color:#768093;">4.</span> Боли</span><br>
-		<span class="topwords"><span style="color:#768093;">5.</span> Диабет</span>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">2.</span> Давление</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">3.</span> Кардио</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">4.</span> Боли</span><br>
+		<span class="topwords"><span style="color:#768093; font-family: \'Myriadpro Regular\';">5.</span> Диабет</span>
     </div>
 </div>
 
