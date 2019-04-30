@@ -431,9 +431,9 @@ class FinController
         <div class="text-block-104">Популярные ключи на площадках</div>
         <span class="topwords">1. Артроз</span><br>
 		<span class="topwords">2. Давление</span><br>
-		<span class="topwords">3. Давление</span><br>
-		<span class="topwords">4. Давление</span><br>
-		<span class="topwords">5. Давление</span>
+		<span class="topwords">3. Кардио</span><br>
+		<span class="topwords">4. Боли</span><br>
+		<span class="topwords">5. Диабет</span>
     </div>
 </div>
 
