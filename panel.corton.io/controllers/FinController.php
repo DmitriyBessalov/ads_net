@@ -404,8 +404,9 @@ class FinController
 
 <div class="table-box">
 <div class="div-block-95 w-clearfix">
-    <div style="width:876px; display: flex;" class="div-block-94">
+    <div style="width:876px;" class="div-block-94">
         <div class="text-block-103">Внешние метрики</div>
+		<div style="display: flex;">
 		<div>
            <div class="text-block-104">Колличество обработанных уников</div>
            <div class="text-block-105">70 140</div>
@@ -413,6 +414,7 @@ class FinController
 		<div>   
 		   <div class="text-block-104">Колличество обработанных уников</div>
            <div class="text-block-105">70 140</div>
+		</div>
 		</div>
     </div>
     <div class="div-block-94">
