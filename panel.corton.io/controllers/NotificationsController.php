@@ -75,12 +75,8 @@ class NotificationsController
             </select>
 			
             <select name="domen" style="margin: 20px 0 20px 0; border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">
-            <option value="">Выбор площадки</option>';
-            foreach ($domens as $value) {
-                echo '<option '; if ($_GET['domen']==$value)echo 'selected '; echo'>' . $value . '</option>';
-            };
-            echo
-            '</select>
+            <option value="">Выбор площадки</option>
+            </select>
 						
                 <input type="checkbox" name="useragent" class="form-radiozag" '; if ($_GET['useragent']=='on')echo 'checked'; echo'/>
                 <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
