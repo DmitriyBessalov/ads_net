@@ -54,7 +54,6 @@ class NotificationsController
 			<p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все уведомления</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>В ожидание</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Обработано</label></p>
-		    <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
 		    </form>
 			</div>
 		</div>
