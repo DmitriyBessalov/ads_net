@@ -57,28 +57,7 @@ class NotificationsController
 		    </form>
 			</div>
 		</div>
-		
-		</div>
-        <div class="div-block-98">
-          <div>
-            <div class="text-block-111">&lt;</div>
-          </div>
-          <div>
-            <div class="text-block-111">1</div>
-          </div>
-          <div>
-            <div class="text-block-111">2</div>
-          </div>
-          <div>
-            <div class="text-block-111">3</div>
-          </div>
-          <div>
-            <div class="text-block-111">4</div>
-          </div>
-          <div>
-            <div class="text-block-111">&gt;</div>
-          </div>
-        </div>
+
 		';
 		include PANELDIR . '/views/layouts/footer.php';
 		return true;
