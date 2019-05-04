@@ -41,25 +41,19 @@ class NotificationsController
             </table>
         </div>
 		<div class="table-right">
-					   <form id="email-form" name="email-form" class="form-333">
-			             <a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
-						 <p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-one" class="form-radio"><label for="radio-one">Все площадки</label></p>
-						 <p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-two" class="form-radio"><label for="radio-two">Информационные</label></p>
-						 <p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-three" class="form-radio"><label for="radio-three">Новостные</label></p>
-					   </form>
-                       
-						
-			    <div class="html-embed-3 w-embed" style="margin-top: 40px;">
-                            <input type="text" name="datebegin" class="tcal tcalInput" value="'.$datebegin.'">
-                            <div class="text-block-128">-</div>
-                            <input type="text" name="dateend" class="tcal tcalInput" value="'.$dateend.'">
-                        </div>
-                        <input type="submit" value="Применить" class="submit-button-addkey w-button">
-                    </div>
-		        </form>
-		    </div>
+             <div class="html-embed-3 w-embed">
+            <form id="email-form" name="email-form" data-name="Email Form" class="form-3">
+		   <select name="date" style="border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">    
+            </select>
+			
+            <select name="domen" style="margin: 20px 0 20px 0; border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">
+            <option value="">Выбор площадки</option>
+            </select>
+  
+		  <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
+		  </form>
 			</div>
-			</div>
+		</div>
 		
 		</div>
         <div class="div-block-98">
