@@ -36,7 +36,7 @@ class NotificationsController
                           <td>'.$value['pay'].'</td>
                           <td>'.$value['click'].'</td>
                           <td">'.$stavka.'</td>
-                          <td>
+                          <td style="width: 110px; text-align: right; padding-right: 20px">
 						  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu"> 
                                      <a href="article-edit?id=' . $i['promo_id'] . '">Обработано</a><br>
