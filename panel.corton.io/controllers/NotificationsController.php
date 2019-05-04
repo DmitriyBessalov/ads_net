@@ -11,7 +11,7 @@ class NotificationsController
         $sql = "SELECT `domen` FROM `ploshadki` WHERE (`status`='1')AND(`id`!='0') ORDER BY `domen` ASC";
         $domens = $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
 		echo '
-		  <div style="min-height:680px;" class="form-block w-form">
+		  <div class="form-block w-form">
           <div class="w-form-done"></div>
           <div class="w-form-fail"></div>
         </div>
