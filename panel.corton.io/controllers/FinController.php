@@ -386,7 +386,8 @@ class FinController
         echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
         return true;
     }
-	    
+	    ;
+		include PANELDIR . '/views/layouts/footer.php';
 		echo '<script>$(".sub-menutwo").html("Вывод балансов");</script>';
     }
 
