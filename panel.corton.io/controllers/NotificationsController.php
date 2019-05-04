@@ -30,13 +30,19 @@ class NotificationsController
               </tr>
             </thead>
                       <tr>
-                          <td style="font-size: 15px;">'.$value['anon_id'].'</td>
-                          <td style="font-size: 14px;">'.$value['tizer'].'</td>
-                          <td style="font-size: 11px;">'.$value['url_ref'].'</td>
-                          <td style="font-size: 15px;">'.$value['pay'].'</td>
-                          <td style="font-size: 15px;">'.$value['click'].'</td>
-                          <td style="font-size: 15px;">'.$stavka.'</td>
-                          <td style="font-size: 15px;">'.$value['ip'].'</td>
+                          <td>'.$value['anon_id'].'</td>
+                          <td>'.$value['tizer'].'</td>
+                          <td>'.$value['url_ref'].'</td>
+                          <td>'.$value['pay'].'</td>
+                          <td>'.$value['click'].'</td>
+                          <td">'.$stavka.'</td>
+                          <td>
+						  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
+                                  <ul class="sub-menu"> 
+                                     <a href="article-edit?id=' . $i['promo_id'] . '">Обработано</a><br>
+									 <a href="article-stat?id=' . $i['promo_id'] . '">Удалить</a><br>
+                                  </ul>
+						  </td>
                       </tr>
             </table>
         </div>
