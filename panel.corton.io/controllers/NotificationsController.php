@@ -42,7 +42,7 @@ class NotificationsController
         </div>
 		<div class="table-right">
             <div class="html-embed-3 w-embed">
-            <form id="email-form" name="email-form" data-name="Email Form" class="form-3">
+            <form id="right-form" class="form-333">
 		    <a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
 			<p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все уведомления</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>В ожидание</label></p>
