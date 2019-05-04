@@ -60,13 +60,8 @@ class NotificationsController
                           <td style="font-size: 15px;">'.$value['click'].'</td>
                           <td style="font-size: 15px;">'.$stavka.'</td>
                           <td style="font-size: 15px;">'.$value['ip'].'</td>
-                      </tr>';
-                };
-            }else{
-                echo '<td colspan="10"><h2>Выберите площадку</h2></td>';
-            };
-            echo
-            '</table>
+                      </tr>
+            </table>
         </div>
 		<div class="table-right">
              <div class="html-embed-3 w-embed">
