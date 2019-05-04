@@ -4,7 +4,7 @@ class NotificationsController
 {
     public static function actionIndex()
     {
-        $title='Клики на промо страницу';
+        $title='Системные уведомления';
         include PANELDIR.'/views/layouts/header.php';
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
@@ -20,19 +20,13 @@ class NotificationsController
           <table>
             <thead>
               <tr class="trtop">
-                <th style="min-width: 130px;">Просмотр ID</th>
-                <th style="min-width: 120px;">Анонс ID</th>
-                <th>Виджет</th>
-                <th>Referer</th>
-                <th>Прочитано</th>
-                <th>Оплачено</th>
-                <th>Переход</th>
-                <th>Ставка</th>
-                <th>IP</th>';
-		        if ($_GET['useragent']=='on'){
-		            echo '<th>User agent</th>';
-                };
-                echo'<th>Время</th>
+                <th>ID</th>
+                <th style="width: 140px;">Дата и время</th>
+                <th>Площадка</th>
+                <th>Владелец</th>
+                <th>Описание</th>
+				<th>Статус</th>
+                <th style="width: 110px;"></th>
               </tr>
             </thead>';
             if (!empty($_GET['domen'])) {
@@ -59,20 +53,13 @@ class NotificationsController
 
                     echo '
                       <tr>
-                          <td style="font-size: 15px;">'.$value['prosmotr_id'].'</td>
                           <td style="font-size: 15px;">'.$value['anon_id'].'</td>
                           <td style="font-size: 14px;">'.$value['tizer'].'</td>
                           <td style="font-size: 11px;">'.$value['url_ref'].'</td>
-                          <td style="font-size: 15px;">'.$value['read'].'</td>
                           <td style="font-size: 15px;">'.$value['pay'].'</td>
                           <td style="font-size: 15px;">'.$value['click'].'</td>
                           <td style="font-size: 15px;">'.$stavka.'</td>
-                          <td style="font-size: 15px;">'.$value['ip'].'</td>';
-                            if ($_GET['useragent']=='on'){
-                                echo '<td style="font-size: 10px;">'.$value['user-agent'].'</td>';
-                            };
-                            echo'
-                          <td style="font-size: 15px;">'.$value['timestamp'].'</td>
+                          <td style="font-size: 15px;">'.$value['ip'].'</td>
                       </tr>';
                 };
             }else{
