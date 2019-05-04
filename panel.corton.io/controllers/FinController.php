@@ -386,6 +386,9 @@ class FinController
         echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
         return true;
     }
+	    
+		echo '<script>$(".sub-menutwo").html("Вывод балансов");</script>';
+    }
 
     public static function actionAdmin()
     {
