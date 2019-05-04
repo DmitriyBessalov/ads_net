@@ -15,7 +15,7 @@ class NotificationsController
           <div class="w-form-done"></div>
           <div class="w-form-fail"></div>
         </div>
-		<div class="table-box">
+		<div style="min-height: 650px;" class="table-box">
         <div class="table w-embed">
           <table>
             <thead>
