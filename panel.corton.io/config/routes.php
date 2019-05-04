@@ -38,7 +38,10 @@ switch ($GLOBALS['role']) {
 
             //Клики
             'clicks' => 'click/index',
-
+			
+			//Уведомления
+            'notifications' => 'notifications/index',
+			
             //Тикеты
             'tickets' => 'ticket/index',
             'ticket' => 'ticket/index',
