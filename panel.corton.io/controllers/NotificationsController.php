@@ -59,6 +59,7 @@ class NotificationsController
 		        </form>
 		    </div>
 			</div>
+			</div>
 		
 		</div>
         <div class="div-block-98">
