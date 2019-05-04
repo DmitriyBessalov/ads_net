@@ -28,30 +28,7 @@ class NotificationsController
 				<th>Статус</th>
                 <th style="width: 110px;"></th>
               </tr>
-            </thead>';
-            if (!empty($_GET['domen'])) {
-                $data=date('Y-m-d', strtotime($_GET['date']));
-                $sql="SELECT `id` FROM `ploshadki` WHERE `domen`='".$_GET['domen']."'";
-                $ploshadka_id= $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $sql="SELECT `prosmotr_id`,`tizer`,`anon_id`,`url_ref`,`read`,`pay`,`click`,`user-agent`,`timestamp`,`ip` FROM `stat_promo_prosmotr` WHERE `date`='".$data."' AND `ploshadka_id`='".$ploshadka_id."'";
-                $clicks = $dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                foreach($clicks as $value) {
-                    $sql = "SELECT n.stavka FROM anons a RIGHT OUTER JOIN anons_index n ON a.promo_id = n.promo_id WHERE a.id='".$value['anon_id']."'";
-                    $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-                    switch ($value['tizer']) {
-                        case 'r':
-                            $value['tizer']='Recomendation';
-                            break;
-                        case 'e':
-                            $value['tizer']='NatPreviev';
-                            break;
-                        case 's':
-                            $value['tizer']='Slider';
-                            break;
-                    };
-
-                    echo '
+            </thead>
                       <tr>
                           <td style="font-size: 15px;">'.$value['anon_id'].'</td>
                           <td style="font-size: 14px;">'.$value['tizer'].'</td>
@@ -66,22 +43,12 @@ class NotificationsController
 		<div class="table-right">
              <div class="html-embed-3 w-embed">
             <form id="email-form" name="email-form" data-name="Email Form" class="form-3">
-		   <select name="date" style="border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">';
-                for ($i = 0; $i < 7; $i++){
-                    $date=date('d.m.Y',strtotime('-'.$i.' day'));
-                    echo '<option '; if ($_GET['date']==$date)echo 'selected '; echo'>' . $date . '</option>';
-                };
-            echo'
+		   <select name="date" style="border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">    
             </select>
 			
             <select name="domen" style="margin: 20px 0 20px 0; border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">
             <option value="">Выбор площадки</option>
             </select>
-						
-                <input type="checkbox" name="useragent" class="form-radiozag" '; if ($_GET['useragent']=='on')echo 'checked'; echo'/>
-                <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
-                    <a style="color:#333;" class="link">User Agent</a>
-                </label>
   
 		  <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
 		  </form>
