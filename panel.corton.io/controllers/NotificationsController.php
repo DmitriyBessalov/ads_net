@@ -43,8 +43,7 @@ class NotificationsController
 		<div class="table-right">
              <div class="html-embed-3 w-embed">
             <form id="email-form" name="email-form" data-name="Email Form" class="form-3">
-		   <select name="date" style="border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">    
-            </select>
+		    <a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>
 			
             <select name="domen" style="margin: 20px 0 20px 0; border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">
             <option value="">Выбор площадки</option>
