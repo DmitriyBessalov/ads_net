@@ -26,7 +26,7 @@ class NotificationsController
                 <th>Владелец</th>
                 <th>Описание</th>
 				<th>Статус</th>
-                <th style="width: 110px;"></th>
+                <th></th>
               </tr>
             </thead>
                       <tr>
