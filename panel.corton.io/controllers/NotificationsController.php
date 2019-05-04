@@ -33,6 +33,7 @@ class NotificationsController
                           <td>'.$value['anon_id'].'</td>
                           <td>'.$value['tizer'].'</td>
                           <td>'.$value['url_ref'].'</td>
+						  <td>'.$value['url_ref'].'</td>
                           <td>'.$value['pay'].'</td>
                           <td>'.$value['click'].'</td>
                           <td">'.$stavka.'</td>
