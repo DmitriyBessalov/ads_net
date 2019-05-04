@@ -41,16 +41,14 @@ class NotificationsController
             </table>
         </div>
 		<div class="table-right">
-             <div class="html-embed-3 w-embed">
+            <div class="html-embed-3 w-embed">
             <form id="email-form" name="email-form" data-name="Email Form" class="form-3">
-		    <a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>
-			
-            <select name="domen" style="margin: 20px 0 20px 0; border: 0px; background: #f4f6f9; color: #768093; width: 75px; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 193px; height: 34px; cursor: pointer;  -webkit-appearance: none; -moz-appearance: none; appearance: none;">
-            <option value="">Выбор площадки</option>
-            </select>
-  
-		  <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
-		  </form>
+		    <a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
+			<p class="filtermenu"><label><input type="radio" name="role" value="all" class="form-radio">Все уведомления</label></p>
+            <p class="filtermenu"><label><input type="radio" name="role" value="platform"  class="form-radio">В ожидание</label></p>
+            <p class="filtermenu"><label style="text-decoration: underline;"><input type="radio" name="role" value="advertiser"  class="form-radio" checked>Обработано</label></p>
+		    <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
+		    </form>
 			</div>
 		</div>
 		
