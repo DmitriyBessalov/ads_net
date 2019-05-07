@@ -423,7 +423,10 @@ class FinController
 		   <div class="text-block-104">Процент показа анонсов</div>
            <div style="font-size: 46px;" class="text-block-105">36 %</div>
 		</div>
-		</div><img src="/images/stat-2.png" alt="" class="image-8" style="width: 838px;">
+		</div>
+		<div id="containergr" style="width:818px; height:108px;">
+           <canvas id="d" width="814" height="102"></canvas>
+        </div>
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Доход площадок</div>
@@ -609,6 +612,64 @@ var myLineChart = new Chart(ctx, {
     data: data,
     options: options
 });
+</script>
+
+<script>
+// ChartJS D
+
+var dataset_05 = {
+    label: "Визиты",
+    backgroundColor: "rgba(17,109,214,0.2)",
+    borderColor: "rgba(17,109,214,1)",
+	pointColor: "rgba(17,109,214,1)",
+	borderWidth: "2",
+	pointRadius: 2,
+    data: [30100, 32000, 36300, 29005, 31405, 34604, 17045]
+};
+
+var dataset_06 = {
+    label: "Показы",
+    backgroundColor: "rgba(96,191,82,0.2)",
+    borderColor: "rgba(96,191,82,1)",
+	pointColor: "rgba(96,191,82,1)",
+	borderWidth: "2",
+	pointRadius: 2,
+    data: [9700, 11400, 13800, 10400, 11400, 13900, 5450]
+
+};
+
+var data = {
+    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    datasets: [dataset_05]
+};
+
+var options = {
+  title: { display: false},
+  legend:{ display:false },
+  //maintainAspectRatio : false,
+  //responsive: false,
+  animation: {
+      duration : 1800,  
+      easing : 'easeOutBack'
+  },
+  scales:{
+      xAxes: [{ display: false }],
+      yAxes: [{ display: false }]
+  }
+};
+
+var ctx = document.getElementById("d").getContext("2d");
+
+var myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options : options
+});
+
+setTimeout(function(){   
+    myLineChart.chart.config.data.datasets.unshift(dataset_06);
+    myLineChart.update();
+},300)
 </script>
 
 <div class="table-right">
