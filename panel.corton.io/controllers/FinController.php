@@ -468,26 +468,21 @@ class FinController
 </div>
 
 <script>
-/*
- * Title  : ChartJS 2.0 multi line animation
- */
-// Line data
+// ChartJS
 var dataset_01 = {
     label: "Значение",
-    backgroundColor: "rgba(17,109,214,0.3)",
+    backgroundColor: "rgba(17,109,214,0.2)",
     borderColor: "rgba(17,109,214,1)",
     pointBorderColor: "rgba(1,149,114,1)",
 	borderWidth: "2",
     data: [140, 159, 140, 211, 156, 130, 140, 50]
 };
 
-// Graph data
 var data = {
     labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
     datasets: [dataset_01]
 };
 
-// Graph options
 var options = {
     title: { display: false },
     legend: { display: false },
@@ -509,16 +504,13 @@ var options = {
 }	
 };
 
-// The container
 var ctx = document.getElementById("c").getContext("2d");
 
-// Display the first chart
 var myLineChart = new Chart(ctx, {
     type: "bar",
     data: data,
     options: options
 });
-
 </script>
 
 <div class="table-right">
