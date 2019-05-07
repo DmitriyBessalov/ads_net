@@ -128,7 +128,58 @@
                       </td>
                   </tr>";
                 };
-                echo "</table>\n<script>
+                echo "</table>\n
+				
+				<script>
+// ChartJS
+
+var dataset_01 = {
+    label: \"Визиты\",
+    backgroundColor: \"rgba(17,109,214,0.2)\",
+    borderColor: \"rgba(17,109,214,1)\",
+	pointColor: \"rgba(17,109,214,1)\",
+	pointBorderColor: \"rgba(0,0,0,0)\",
+	borderWidth: \"2\",
+	pointRadius: 0,
+    data: [30100, 32000, 33300, 29005, 31405, 32604, 19045]
+};
+
+var data = {
+    labels: [\"1 день\", \"2 день\", \"3 день\", \"4 день\", \"5 день\", \"6 день\", \"Сегодня\"],
+    datasets: [dataset_01]
+};
+
+var options = {
+  title: { display: false},
+  legend:{ display:false },
+  //maintainAspectRatio : false,
+  //responsive: false,
+  tooltips: {enabled: false},
+  animation: {
+      duration : 1800,  
+      easing : \"easeOutBack\"
+  },
+  scales:{
+      xAxes: [{ display: false }],
+      yAxes: [{ display: false }]
+  }
+};
+
+var ctx = document.getElementById(\"d\").getContext(\"2d\");
+
+var myLineChart = new Chart(ctx, {
+    type: \"line\",
+    data: data,
+    options : options
+});
+
+setTimeout(function(){   
+    myLineChart.chart.config.data.datasets.unshift(dataset_01);
+    myLineChart.update();
+},300)
+</script>
+				
+				<script>
                     $(\".polzunok\").slider({min:0,max:200,range:\"min\",animate:\"slow\",slide:function(event, ui){
                         $('#'+this.id+' span').html(\"<b>&lt;</b>\"+ui.value+\"%<b>&gt;</b>\");
                         $.get(\"https://panel.corton.io/platforms-otchicleniay?id=\"+this.id+\"&otchiclen=\"+ui.value);
@@ -2558,54 +2609,7 @@
                     </div>
 		        </form>
 	</div>
-	<script>
-// ChartJS
-
-var dataset_01 = {
-    label: "Визиты",
-    backgroundColor: "rgba(17,109,214,0.2)",
-    borderColor: "rgba(17,109,214,1)",
-	pointColor: "rgba(17,109,214,1)",
-	pointBorderColor: "rgba(0,0,0,0)",
-	borderWidth: "2",
-	pointRadius: 0,
-    data: [30100, 32000, 33300, 29005, 31405, 32604, 19045]
-};
-
-var data = {
-    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
-    datasets: [dataset_01]
-};
-
-var options = {
-  title: { display: false},
-  legend:{ display:false },
-  //maintainAspectRatio : false,
-  //responsive: false,
-  tooltips: {enabled: false},
-  animation: {
-      duration : 1800,  
-      easing : "easeOutBack"
-  },
-  scales:{
-      xAxes: [{ display: false }],
-      yAxes: [{ display: false }]
-  }
-};
-
-var ctx = document.getElementById("d").getContext("2d");
-
-var myLineChart = new Chart(ctx, {
-    type: "line",
-    data: data,
-    options : options
-});
-
-setTimeout(function(){   
-    myLineChart.chart.config.data.datasets.unshift(dataset_01);
-    myLineChart.update();
-},300)
-</script>
+	
 
     <script>
         document.getElementById("title2").innerHTML="Статистика по площадки:<span class=titlepromo>' . $aktiv['domen'] . '</span>";
