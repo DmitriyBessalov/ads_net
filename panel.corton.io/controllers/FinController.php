@@ -527,7 +527,7 @@ var dataset_02 = {
     borderColor: "rgba(17,109,214,1)",
     pointBorderColor: "rgba(1,149,114,1)",
 	borderWidth: "2",
-    data: [140, 159, 140, 211, 156, 130, 140, 50]
+    data: [140, 159, 140, 211, 156, 130, 310, 0]
 };
 
 var data = {
