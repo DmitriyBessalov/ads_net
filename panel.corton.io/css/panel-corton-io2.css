@@ -4861,6 +4861,11 @@ input:checked + span {
    margin-top: 30px;
 }
 
+#containergr2 {
+   background-image: url(https://panel.corton.io/images/bggraf2.png);
+   margin-top: 30px;
+}
+
 canvas {
 		-moz-user-select: none;
 		-webkit-user-select: none;

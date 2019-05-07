@@ -424,7 +424,7 @@ class FinController
            <div style="font-size: 46px;" class="text-block-105">36 %</div>
 		</div>
 		</div>
-		<div id="containergr" style="width:818px; height:108px;">
+		<div id="containergr2" style="width:818px; height:108px;">
            <canvas id="d" width="814" height="102"></canvas>
         </div>
     </div>
