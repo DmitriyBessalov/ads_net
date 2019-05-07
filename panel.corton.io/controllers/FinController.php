@@ -565,6 +565,52 @@ var myLineChart = new Chart(ctx, {
 });
 </script>
 
+<script>
+// ChartJS A
+var dataset_03 = {
+    label: "Значение",
+    backgroundColor: "rgba(17,109,214,0.2)",
+    borderColor: "rgba(17,109,214,1)",
+    pointBorderColor: "rgba(1,149,114,1)",
+	borderWidth: "2",
+    data: [140, 159, 140, 211, 156, 130, 710, 0]
+};
+
+var data = {
+    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    datasets: [dataset_03]
+};
+
+var options = {
+    title: { display: false },
+    legend: { display: false },
+    //maintainAspectRatio : false,
+    //responsive: false,
+    animation: {
+        duration: 1800,
+        easing: "easeOutBack"
+    },
+    scales: {
+        xAxes: [{ display: false }],
+        yAxes: [{ display: false }]
+    },
+	borderWidth: {
+   top: 1,
+   right: 0,
+   bottom: 0,
+   left: 0
+}	
+};
+
+var ctx = document.getElementById("a").getContext("2d");
+
+var myLineChart = new Chart(ctx, {
+    type: "bar",
+    data: data,
+    options: options
+});
+</script>
+
 <div class="table-right">
 					   <form id="email-form" name="email-form" class="form-333">
 			             <a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
