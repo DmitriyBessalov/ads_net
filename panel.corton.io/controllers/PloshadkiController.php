@@ -162,7 +162,7 @@ var options = {
   layout: {
             padding: {
                 left: 50,
-                right: 0,
+                right: 50,
                 top: 0,
                 bottom: 0
             }
