@@ -97,7 +97,7 @@
                       <td>".$platform['click']."</td>
                       <td class=\"greentext\" style=\"min-width: 140px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
 					  <td style=\"width: 160px;\" >
-                         <canvas id=\"d\" width=\"92\" height=\"40\"></canvas>
+                         <canvas id=\"d\" width=\"92\" height=\"32\"></canvas>
 					  </td>
 					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>
                       <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
