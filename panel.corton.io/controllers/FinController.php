@@ -428,7 +428,10 @@ class FinController
     <div class="div-block-94">
         <div class="text-block-103">Доход площадок</div>
         <div class="text-block-104">Объём заработанных средств площадками</div>
-        <div class="text-block-105">16 780</div><img src="/images/stat-1.png" alt="" class="image-8">
+        <div class="text-block-105">16 780</div>
+		<div id="containergr" style="width:356px; height:102px;">
+           <canvas id="c" width="356" height="102"></canvas>
+        </div>
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Клики</div>
@@ -463,6 +466,60 @@ class FinController
 		</div>
     </div>
 </div>
+
+<script>
+/*
+ * Title  : ChartJS 2.0 multi line animation
+ */
+// Line data
+var dataset_01 = {
+    label: "Значение",
+    backgroundColor: "rgba(17,109,214,0.3)",
+    borderColor: "rgba(17,109,214,1)",
+    pointBorderColor: "rgba(1,149,114,1)",
+	borderWidth: "2",
+    data: [140, 159, 140, 211, 156, 130, 140, 50]
+};
+
+// Graph data
+var data = {
+    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    datasets: [dataset_01]
+};
+
+// Graph options
+var options = {
+    title: { display: false },
+    legend: { display: false },
+    //maintainAspectRatio : false,
+    //responsive: false,
+    animation: {
+        duration: 1800,
+        easing: "easeOutBack"
+    },
+    scales: {
+        xAxes: [{ display: false }],
+        yAxes: [{ display: false }]
+    },
+	borderWidth: {
+   top: 1,
+   right: 0,
+   bottom: 0,
+   left: 0
+}	
+};
+
+// The container
+var ctx = document.getElementById("c").getContext("2d");
+
+// Display the first chart
+var myLineChart = new Chart(ctx, {
+    type: "bar",
+    data: data,
+    options: options
+});
+
+</script>
 
 <div class="table-right">
 					   <form id="email-form" name="email-form" class="form-333">

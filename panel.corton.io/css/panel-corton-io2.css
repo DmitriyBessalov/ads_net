@@ -4855,3 +4855,7 @@ input:checked + span {
 	font-family: 'Myriadpro Regular';
     font-weight: 600;
 }
+
+#containergr {
+   background-image: url(https://panel.corton.io/images/bggraf.png);
+}
