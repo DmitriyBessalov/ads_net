@@ -96,9 +96,9 @@
                       <td>0</td>
                       <td>".$platform['click']."</td>
                       <td class=\"greentext\" style=\"min-width: 140px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
-					  <td style=\"width: 160px;\" >
-					     <div class=\"grafclick\"></div>
-					  </td>
+					  <div id=\"containerpl\" style=\"width:92px; height:40px;\">
+                         <canvas id=\"d\" width=\"92\" height=\"40\"></canvas>
+                      </div>
 					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>
                       <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
 						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
