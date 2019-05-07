@@ -432,10 +432,10 @@ class FinController
             $grafik_pay[]=$i['pay'];
         };
         $graf_data = '"'.implode('","', $grafik_data).'"';
-        $graf_dohod = '"'.implode('","', $grafik_dohod).'"';
-        $graf_show_anons = '"'.implode('","', $grafik_show_anons).'"';
-        $graf_promo_load = '"'.implode('","', $grafik_promo_load).'"';
-        $graf_pay = '"'.implode('","', $grafik_pay).'"';
+        $graf_dohod = '"'.implode('","', $grafik_dohod).'","0"';
+        $graf_show_anons = '"'.implode('","', $grafik_show_anons).'","0"';
+        $graf_promo_load = '"'.implode('","', $grafik_promo_load).'","0"';
+        $graf_pay = '"'.implode('","', $grafik_pay).'","0"';
 
         echo '
 <div class="form-block w-form">
@@ -666,7 +666,7 @@ var dataset_05 = {
 	pointColor: "rgba(17,109,214,1)",
 	borderWidth: "2",
 	pointRadius: 2,
-    data: [8000, 8000, 8000, 8000, 8000, 8000, 8000] //Визиты
+    data: [0, 0, 0, 0, 0, 0, 0] //Визиты
 };
 
 var dataset_06 = {
