@@ -950,3 +950,37 @@
 .ql-container.ql-bubble:not(.ql-disabled) a:hover::after {
   visibility: visible;
 }
+
+
+
+.buttons #_image_button {
+  background-position: -8px -422px;
+}
+
+.buttons #_embed_button {
+  background-position: -8px -454px;
+}
+
+.buttons div:after, .buttons div:before, .tl_blocks .buttons div {
+  background: url(/images/icons.png) -8px 26px no-repeat;
+}
+
+.buttons div {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tl_blocks div {
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: top;
+  padding: 2px;
+  margin: 1px 6px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  float: right;
+}
+

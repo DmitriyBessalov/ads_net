@@ -370,6 +370,8 @@ class ArticleController
                     $user_id = UsersController::getUserId();
                 }
 
+                $_POST['formtext']=stripcslashes ($_POST['formtext']);
+
                 preg_match_all("/src=\"data:image\/(jpeg|jpg|gif|png);base64,(.*?)\">/", $_POST['formtext'],$out);
 
                 mkdir(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id, 0755);
@@ -772,18 +774,27 @@ body {
                 <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
-                    <div class="div-block-97">';
+                    <div class="div-block-97" style="width: 1438px">';
 
         if($title!='Редактирование статьи')
             echo '<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: -60px;"></div>';
         echo '
 					<div class="text-block-103">Контент статьи</div>
-                        <input type="text" class="text-field-4 w-input" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
-                        <input name="formtext" type="hidden">
-                        <div id="editor-container">'.$result['text'].'</div>
-                    </div>
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-                    <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
+					    <div id="_tl_blocks" class="tl_blocks shown" style="float: left;width: 50px;">
+                            <div class="buttons">
+                                <div id="_image_button" class="ql-image"></div>
+                                <div id="_embed_button"></div>
+                            </div>
+                        </div>
+                        <div style="float: right; width: 1337px;">
+                            <input type="text" class="text-field-4 w-input" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
+                            <input name="formtext" type="hidden">
+                            <div id="editor-container">
+                                '.$result['text'].'
+                            </div>
+                            <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+                            <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
+                        </div>
                 </form>
             </div>
         </div>';
@@ -843,35 +854,170 @@ body {
         echo'
     </div>
 </div>
-
-
+    <script src="https://telegra.ph/js/jquery.min.js"></script>
+    <script src="https://telegra.ph/js/jquery.selection.min.js"></script>
+    <script src="https://telegra.ph/js/autosize.min.js"></script>
+    <script src="https://telegra.ph/js/load-image.all.min.js"></script>
+    <script src="https://telegra.ph/js/quill.min.js"></script>
 <script>
-var quill = new Quill(\'#editor-container\', {
-  modules: {
-    toolbar: [
-      [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
-    ]
-  },
-  scrollingContainer: "#scrolling-container",
-  placeholder: "Написать что-то ценное...",
-  theme: \'bubble\'
-});
+    var quill = new Quill(\'#editor-container\', {
+      modules: {
+        toolbar: [
+          [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
+        ]
+      },
+      scrollingContainer: "#scrolling-container",
+      placeholder: "Написать что-то ценное...",
+      theme: \'bubble\'
+    });
+    
+    let $tl_blocks = $(\'#_tl_blocks\');
+    let $image_button     = $(\'#_image_button\');
+    let $embed_button = $(\'#_embed_button\');
+    let ua = navigator.userAgent.toLowerCase();
+    let browser = {
+    opera: (/opera/i.test(ua) || /opr/i.test(ua)),
+    msie: (/msie/i.test(ua) && !/opera/i.test(ua) || /trident\//i.test(ua)) || /edge/i.test(ua),
+    msie_edge: (/edge/i.test(ua) && !/opera/i.test(ua)),
+    mozilla: /firefox/i.test(ua),
+    chrome: /chrome/i.test(ua) && !/edge/i.test(ua),
+    safari: (!(/chrome/i.test(ua)) && /webkit|safari|khtml/i.test(ua)),
+    iphone: /iphone/i.test(ua),
+    ipod: /ipod/i.test(ua),
+    ipad: /ipad/i.test(ua),
+    android: /android/i.test(ua),
+    mobile: /iphone|ipod|ipad|opera mini|opera mobi|iemobile|android/i.test(ua),
+    safari_mobile: /iphone|ipod|ipad/i.test(ua),
+    opera_mobile: /opera mini|opera mobi/i.test(ua),
+    opera_mini: /opera mini/i.test(ua),
+    mac: /mac/i.test(ua),
+    };
+    
+    quill.on(Quill.events.EDITOR_CHANGE, function(eventType, range) {
+        if (eventType !== Quill.events.SELECTION_CHANGE) return;
+        if (!quill.isEnabled()) return;
+        if (range == null) return;
+        //checkFigureBlots(range);
+        //let [block, offset] = quill.scroll.descendant(Block, range.index);
+        if (range.length === 0) {
+            //hideFormatTooltip();
+            //if (block != null &&
+            //    !(block instanceof FieldBlot) &&
+            //    !(block instanceof BlockquoteBlot) &&
+            //    !(block instanceof PullquoteBlot) &&
+            //    !(block instanceof CodeBlock) &&
+            //    !(block instanceof ListItem) &&
+            //    !$(block.domNode).text().length) {
+                showBlocksTooltip(range);
+            //} else {
+            //    hideBlocksTooltip();
+            //}
+        } else {
+           // if (block != null &&
+           //     !(block instanceof TitleBlot)) {
+                showFormatTooltip(range);
+           //     toolbarUpdate(range);
+            //} else {
+           //     hideFormatTooltip();
+            //}
+           // hideBlocksTooltip();
+        }
+//        let formats = quill.getFormat(range);
+//        $tl_article.toggleClass(\'title_focused\', !!(formats[\'blockTitle\'] || formats[\'blockAuthor\']));
+        //checkOncePlaceholder();
+    });
+    
+    function showBlocksTooltip(range) {
+        $tl_blocks.addClass(\'shown\');
+        blocksUpdatePosition(range);
+    }
+    
+    function hideBlocksTooltip() {
+        $tl_blocks.removeClass(\'shown\');
+    }
+    
+    function blocksUpdatePosition(range) {
+        if (typeof range === \'undefined\') {
+            range = quill.getSelection();
+        }
+        if (range == null || !window.quill) return;
+       let lineBounds = quill.getBounds(range);
+       $(\'#_tl_blocks\').css("margin-top",lineBounds.top + lineBounds.height / 2+"px")
+    }
+    
+    $image_button.click(function() {
+        alert(1);
+        
+        
+        
+        let fileInput = quill.container.querySelector(\'input . ql - image[type = file][data - status = ready]\');
+        if (fileInput == null) {
+            fileInput = document.createElement(\'input\');
+            fileInput.setAttribute(\'type\', \'file\');
+            fileInput.setAttribute(\'accept\', browser.safari_mobile ? \'image / gif, image / jpeg, image / jpg, image / png\' : \'image / gif, image / jpeg, image / jpg, image / png, video / mp4\');
+            fileInput.classList.add(\'ql - image\');
+            fileInput.addEventListener(\'change\', () => {
+                if (fileInput.files != null && fileInput.files[0] != null) {
+                    var file = fileInput.files[0];
+                    updatePhoto(file, (file) => {
+                        if (quill.fileSizeLimit && file.size > quill.fileSizeLimit) {
+                            return quill.fileSizeLimitCallback && quill.fileSizeLimitCallback();
+                        }
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            let figure_value = getFigureValueByUrl(e.target.result);
+                            if (figure_value) {
+                                let range = quill.getSelection(true);
+                                quill.updateContents(new Delta()
+                                        .retain(range.index)
+                                        .delete(range.length)
+                                        .insert({blockFigure: figure_value})
+                                    , Quill.sources.USER);
+                            } else {
+                                showError(\'Invalid file format\');
+                            }
+                            fileInput.value = \'\';
+                            fileInput.setAttribute(\'data - status\', \'ready\');
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            });
+            quill.container.appendChild(fileInput);
+        }
+        fileInput.setAttribute(\'data - status\', \'busy\');
+        fileInput.click();
+    });
+    
+    
+    $embed_button.click(function(e) {
+        let range = quill.getSelection(true);
+        let [line, ] = quill.scroll.line(range.index);
+        if (line) {
+            let value = $(line.domNode).text();
+            if (!value) {
+                line.domNode.setAttribute(\'data - placeholder\', \'Paste a YouTube, Vimeo or Twitter link, and press Enter\');
+                $(line.domNode).addClass(\'placeholder_once empty\');
+                hideBlocksTooltip();
+            }
+        }
+    });
+   
+    
+    var form = document.querySelector(\'#formtextsend\');
+    form.onsubmit = function() {
+      // Populate hidden form on submit
+      var about = document.querySelector(\'input[name=formtext]\');
+      //about.value = quill.getContents();
+      var textt = document.querySelector(\'.ql-editor\');
+    
+      about.value = textt.innerHTML;
+      
+      //console.log("Submitted", $(form).serialize(), $(form).serializeArray());
+      
+      return true;
+    }
 
-
-
-var form = document.querySelector(\'#formtextsend\');
-form.onsubmit = function() {
-  // Populate hidden form on submit
-  var about = document.querySelector(\'input[name=formtext]\');
-  //about.value = quill.getContents();
-  var textt = document.querySelector(\'.ql-editor\');
-
-  about.value = textt.innerHTML;
-  
-  //console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-  
-  return true;
-};
 </script>
 ';
         include PANELDIR . '/views/layouts/footer.php';
