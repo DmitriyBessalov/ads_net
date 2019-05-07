@@ -474,7 +474,7 @@ class FinController
 </div>
 
 <script>
-// ChartJS
+// ChartJS C
 var dataset_01 = {
     label: "Значение",
     backgroundColor: "rgba(17,109,214,0.2)",
@@ -487,6 +487,52 @@ var dataset_01 = {
 var data = {
     labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
     datasets: [dataset_01]
+};
+
+var options = {
+    title: { display: false },
+    legend: { display: false },
+    //maintainAspectRatio : false,
+    //responsive: false,
+    animation: {
+        duration: 1800,
+        easing: "easeOutBack"
+    },
+    scales: {
+        xAxes: [{ display: false }],
+        yAxes: [{ display: false }]
+    },
+	borderWidth: {
+   top: 1,
+   right: 0,
+   bottom: 0,
+   left: 0
+}	
+};
+
+var ctx = document.getElementById("c").getContext("2d");
+
+var myLineChart = new Chart(ctx, {
+    type: "bar",
+    data: data,
+    options: options
+});
+</script>
+
+<script>
+// ChartJS B
+var dataset_02 = {
+    label: "Значение",
+    backgroundColor: "rgba(17,109,214,0.2)",
+    borderColor: "rgba(17,109,214,1)",
+    pointBorderColor: "rgba(1,149,114,1)",
+	borderWidth: "2",
+    data: [140, 159, 140, 211, 156, 130, 140, 50]
+};
+
+var data = {
+    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    datasets: [dataset_02]
 };
 
 var options = {
