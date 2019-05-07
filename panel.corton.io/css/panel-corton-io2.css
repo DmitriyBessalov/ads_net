@@ -4858,6 +4858,7 @@ input:checked + span {
 
 #containergr {
    background-image: url(https://panel.corton.io/images/bggraf.png);
+   margin-top: 30px;
 }
 
 canvas {
