@@ -476,8 +476,6 @@ class FinController
     </div>
 </div>
 
-
-/* Графики */
 <script>
 // ChartJS C
 var dataset_01 = {
