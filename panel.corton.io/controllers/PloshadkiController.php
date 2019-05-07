@@ -140,7 +140,7 @@ var dataset_01 = {
 	pointColor: \"rgba(17,109,214,1)\",
 	pointBorderColor: \"rgba(0,0,0,0)\",
 	borderWidth: \"2\",
-	pointRadius: 0,
+	pointRadius: 2,
     data: [30100, 32000, 33300, 29005, 31405, 32604, 19045]
 };
 
