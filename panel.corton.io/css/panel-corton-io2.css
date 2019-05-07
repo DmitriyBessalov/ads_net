@@ -36,6 +36,7 @@
 .miniinfo {
    font-size: 14px;
    margin-top: 14px;
+   display: flex;
 }
 .blockminiinfo {
 	display: inline-block;
