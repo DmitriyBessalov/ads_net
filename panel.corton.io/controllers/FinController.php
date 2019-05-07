@@ -438,7 +438,7 @@ class FinController
         <div class="text-block-104">Клики за период</div>
         <div class="text-block-105">310</div>
 		<div id="containergr" style="width:356px; height:102px;">
-           <canvas id="c" width="356" height="102"></canvas>
+           <canvas id="b" width="356" height="102"></canvas>
         </div>
     </div>
     <div class="div-block-94">
@@ -446,7 +446,7 @@ class FinController
         <div class="text-block-104">Оплаченные просмотры за период</div>
         <div class="text-block-105">249</div>
 		<div id="containergr" style="width:356px; height:102px;">
-           <canvas id="c" width="356" height="102"></canvas>
+           <canvas id="a" width="356" height="102"></canvas>
         </div>
     </div>
 	<div class="div-block-94">
