@@ -650,7 +650,7 @@ var options = {
   //responsive: false,
   animation: {
       duration : 1800,  
-      easing : 'easeOutBack'
+      easing : "easeOutBack"
   },
   scales:{
       xAxes: [{ display: false }],
@@ -661,7 +661,7 @@ var options = {
 var ctx = document.getElementById("d").getContext("2d");
 
 var myLineChart = new Chart(ctx, {
-    type: 'line',
+    type: "line",
     data: data,
     options : options
 });
