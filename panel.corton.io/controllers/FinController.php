@@ -402,24 +402,40 @@ class FinController
         $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod, SUM(`r_show_anons`)+SUM(`e_show_anons`)+SUM(`s_show_anons`) as show_anons, SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`) as promo_load , SUM(`r`)+SUM(`e`)+SUM(`s`) as pay FROM `balans_ploshadki` WHERE  `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
         $result= $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-        if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
-            $today = true;
-            $redis = new Redis();
-            $redis->connect('185.75.90.54', 6379);
-            $redis->select(3);
+        $sql="SELECT `date`, SUM(`r_balans`) + SUM(`e_balans`) + SUM(`s_balans`) AS dohod, SUM(`r_show_anons`) + SUM(`e_show_anons`) + SUM(`s_show_anons`) AS show_anons, SUM(`r_promo_load`) + SUM(`e_promo_load`) + SUM(`s_promo_load`) AS promo_load, SUM(`r`) + SUM(`e`) + SUM(`s`) AS pay FROM `balans_ploshadki` GROUP BY `date` ORDER BY `date` DESC LIMIT 7";
+        $grafiki= $dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql="SELECT `id` FROM `ploshadki` WHERE `status`=1";
-            $platforms= $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        $redis = new Redis();
+        $redis->connect('185.75.90.54', 6379);
+        $redis->select(3);
+        $sql="SELECT `id` FROM `ploshadki` WHERE `status`=1";
+        $platforms= $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        $show_anons_today=0;
+        foreach ($platforms as $i){
+            $ch=$redis->get(date('d').':'.$i.':r');
+            if($ch)$show_anons_today+=$ch;
+            $ch=$redis->get(date('d').':'.$i.':e');
+            if($ch)$show_anons_today+=$ch;
+            $ch=$redis->get(date('d').':'.$i.':s');
+            if($ch)$show_anons_today+=$ch;
+        };
+        if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {$result['show_anons'] += $show_anons_today;}
+        $grafiki[0]['show_anons']=$show_anons_today;
 
-            foreach ($platforms as $i){
-                $ch=$redis->get(date('d').':'.$i.':r');
-                if($ch)$result['show_anons']+=$ch;
-                $ch=$redis->get(date('d').':'.$i.':e');
-                if($ch)$result['show_anons']+=$ch;
-                $ch=$redis->get(date('d').':'.$i.':s');
-                if($ch)$result['show_anons']+=$ch;
-            };
-        }
+        $grafiki = array_reverse($grafiki);
+
+        foreach ($grafiki as $i){
+            $grafik_data[]=date("d.m.Y", strtotime($i['date']));
+            $grafik_dohod[]=$i['dohod'];
+            $grafik_show_anons[]=$i['show_anons'];
+            $grafik_promo_load[]=$i['promo_load'];
+            $grafik_pay[]=$i['pay'];
+        };
+        $graf_data = '"'.implode('","', $grafik_data).'"';
+        $graf_dohod = '"'.implode('","', $grafik_dohod).'"';
+        $graf_show_anons = '"'.implode('","', $grafik_show_anons).'"';
+        $graf_promo_load = '"'.implode('","', $grafik_promo_load).'"';
+        $graf_pay = '"'.implode('","', $grafik_pay).'"';
 
         echo '
 <div class="form-block w-form">
@@ -514,19 +530,17 @@ var dataset_01 = {
     borderColor: "rgba(17,109,214,1)",
     pointBorderColor: "rgba(1,149,114,1)",
 	borderWidth: "2",
-    data: [2820, 1704, 3700, 4001, 3005, 3540, 4040, 50]
+    data: ['.$graf_dohod.'] //Доход
 };
 
 var data = {
-    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    labels: ['.$graf_data.'],
     datasets: [dataset_01]
 };
 
 var options = {
     title: { display: false },
     legend: { display: false },
-    //maintainAspectRatio : false,
-    //responsive: false,
     animation: {
         duration: 1800,
         easing: "easeOutBack"
@@ -560,11 +574,11 @@ var dataset_02 = {
     borderColor: "rgba(17,109,214,1)",
     pointBorderColor: "rgba(1,149,114,1)",
 	borderWidth: "2",
-    data: [140, 159, 140, 211, 156, 130, 310, 0]
+    data: ['.$graf_promo_load.'] //Клики
 };
 
 var data = {
-    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    labels: ['.$graf_data.'],
     datasets: [dataset_02]
 };
 
@@ -596,9 +610,8 @@ var myLineChart = new Chart(ctx, {
     data: data,
     options: options
 });
-</script>
 
-<script>
+
 // ChartJS A
 var dataset_03 = {
     label: "Значение",
@@ -606,11 +619,11 @@ var dataset_03 = {
     borderColor: "rgba(17,109,214,1)",
     pointBorderColor: "rgba(1,149,114,1)",
 	borderWidth: "2",
-    data: [140, 159, 140, 211, 156, 130, 710, 0]
+    data: ['.$graf_pay.'] //Просмотры оплаченные
 };
 
 var data = {
-    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    labels: ['.$graf_data.'],
     datasets: [dataset_03]
 };
 
@@ -642,9 +655,8 @@ var myLineChart = new Chart(ctx, {
     data: data,
     options: options
 });
-</script>
 
-<script>
+
 // ChartJS D
 
 var dataset_05 = {
@@ -654,7 +666,7 @@ var dataset_05 = {
 	pointColor: "rgba(17,109,214,1)",
 	borderWidth: "2",
 	pointRadius: 2,
-    data: [30100, 32000, 36300, 29005, 31405, 34604, 17045]
+    data: [8000, 8000, 8000, 8000, 8000, 8000, 8000] //Визиты
 };
 
 var dataset_06 = {
@@ -664,20 +676,18 @@ var dataset_06 = {
 	pointColor: "rgba(96,191,82,1)",
 	borderWidth: "2",
 	pointRadius: 2,
-    data: [9700, 11400, 13800, 10400, 11400, 13900, 5450]
+    data: ['.$graf_show_anons.'] //Показы
 
 };
 
 var data = {
-    labels: ["1 день", "2 день", "3 день", "4 день", "5 день", "6 день", "Сегодня"],
+    labels: ['.$graf_data.'],
     datasets: [dataset_05]
 };
 
 var options = {
   title: { display: false},
   legend:{ display:false },
-  //maintainAspectRatio : false,
-  //responsive: false,
   animation: {
       duration : 1800,  
       easing : "easeOutBack"
