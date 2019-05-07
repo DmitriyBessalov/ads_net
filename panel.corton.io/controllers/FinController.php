@@ -390,13 +390,36 @@ class FinController
 
     public static function actionAdmin()
     {
-        $title='Статистика кабинета';
+        $title='Статистика общая';
         include PANELDIR.'/views/layouts/header.php';
 
         if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y');}
         if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
-        //$mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
-        //$mySQLdateend = date('Y-m-d', strtotime($dateend));
+        $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
+        $mySQLdateend = date('Y-m-d', strtotime($dateend));
+        $db = Db::getConnection();
+        $dbstat = Db::getstatConnection();
+        $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod, SUM(`r_show_anons`)+SUM(`e_show_anons`)+SUM(`s_show_anons`) as show_anons, SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`) as promo_load , SUM(`r`)+SUM(`e`)+SUM(`s`) as pay FROM `balans_ploshadki` WHERE  `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+        $result= $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
+            $today = true;
+            $redis = new Redis();
+            $redis->connect('185.75.90.54', 6379);
+            $redis->select(3);
+
+            $sql="SELECT `id` FROM `ploshadki` WHERE `status`=1";
+            $platforms= $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+
+            foreach ($platforms as $i){
+                $ch=$redis->get(date('d').':'.$i.':r');
+                if($ch)$result['show_anons']+=$ch;
+                $ch=$redis->get(date('d').':'.$i.':e');
+                if($ch)$result['show_anons']+=$ch;
+                $ch=$redis->get(date('d').':'.$i.':s');
+                if($ch)$result['show_anons']+=$ch;
+            };
+        }
 
         echo '
 <div class="form-block w-form">
@@ -411,77 +434,81 @@ class FinController
 		<div style="display: flex;">
 		<div style="width:33%;">
            <div class="text-block-104">Колличество визитов</div>
-           <div style="font-size: 46px;" class="text-block-105">128 315</div>
-		</div>  
+           <div style="font-size: 46px;" class="text-block-105">(128 315)</div>
+		</div>
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>		
 		<div style="width:33%;">   
 		   <div class="text-block-104">Колличество показов анонсов</div>
-           <div style="font-size: 46px;" class="text-block-105">42 130</div>
+           <div style="font-size: 46px;" class="text-block-105">'.$result['show_anons'].'</div>
 		</div>
 		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>	
 		<div style="width:33%;">   
 		   <div class="text-block-104">Процент показа анонсов</div>
-           <div style="font-size: 46px;" class="text-block-105">36 %</div>
+           <div style="font-size: 46px;" class="text-block-105">(36 %)</div>
 		</div>
 		</div><img src="/images/stat-2.png" alt="" class="image-8" style="width: 838px;">
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Доход площадок</div>
         <div class="text-block-104">Объём заработанных средств площадками</div>
-        <div class="text-block-105">16 780</div><img src="/images/stat-1.png" alt="" class="image-8">
+        <div class="text-block-105">'.$result['dohod'].'</div><img src="/images/stat-1.png" alt="" class="image-8">
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Клики</div>
         <div class="text-block-104">Клики за период</div>
-        <div class="text-block-105">310</div><img src="/images/stat-1.png" alt="" class="image-8">
+        <div class="text-block-105">'.$result['promo_load'].'</div><img src="/images/stat-1.png" alt="" class="image-8">
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Оплаченные просмотры</div>
         <div class="text-block-104">Оплаченные просмотры за период</div>
-        <div class="text-block-105">249</div><img src="/images/stat-1.png" alt="" class="image-8">
+        <div class="text-block-105">'.$result['pay'].'</div><img src="/images/stat-1.png" alt="" class="image-8">
     </div>
 	<div class="div-block-94">
         <div class="text-block-103">ТОП 5 площадок и ключей</div>
         <div class="text-block-104">Популярные площадки и ключи</div>
 		<div style="padding-bottom:22px;"></div>
 		<div style="display: flex;">
-		   <div>
-              <span class="topwords"><span style="color:#768093;">1. </span>Cardio.com</span><br>
-		      <span class="topwords"><span style="color:#768093;">2. </span> Diabethelp.org</span><br>
-		      <span class="topwords"><span style="color:#768093;">3. </span> damskf.ru</span><br>
-		      <span class="topwords"><span style="color:#768093;">4. </span> fb.ru</span><br>
-		      <span class="topwords"><span style="color:#768093;">5. </span> like.com</span>
-		   </div>
+		   <div>';
+
+        $sql="SELECT `ploshadka_id`, SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod FROM `balans_ploshadki` WHERE `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "' GROUP BY `ploshadka_id` ORDER BY dohod DESC LIMIT 5";
+        $platforms= $dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $ch=0;
+        foreach ($platforms as $i){
+            $sql="SELECT `domen` FROM `ploshadki` WHERE `id`='".$i['ploshadka_id']."'";
+            $topplatforms=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $ch++;
+            echo '<span class="topwords"><span style="color:#768093;">'.$ch.'. </span> '.$topplatforms.'</span><br>';
+        };
+
+		   echo '
+           </div>
 		   <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; margin-left: 40px;"></div>	
 		   <div style="padding-left: 40px;">
-              <span class="topwords"><span style="color:#768093;">1. </span> Артроз</span><br>
-		      <span class="topwords"><span style="color:#768093;">2. </span> Давление</span><br>
-		      <span class="topwords"><span style="color:#768093;">3. </span> Кардио</span><br>
-		      <span class="topwords"><span style="color:#768093;">4. </span> Инсулин</span><br>
-		      <span class="topwords"><span style="color:#768093;">5. </span> Диабет</span>
+              <span class="topwords"><span style="color:#768093;">1. </span> (Артроз)</span><br>
+		      <span class="topwords"><span style="color:#768093;">2. </span> (Давление)</span><br>
+		      <span class="topwords"><span style="color:#768093;">3. </span> (Кардио)</span><br>
+		      <span class="topwords"><span style="color:#768093;">4. </span> (Инсулин)</span><br>
+		      <span class="topwords"><span style="color:#768093;">5. </span> (Диабет)</span>
 	    </div>
 		</div>
     </div>
 </div>
-
 <div class="table-right">
-					   <form id="email-form" name="email-form" class="form-333">
-			             <a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
-						 <p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-one" class="form-radio"><label for="radio-one">Все площадки</label></p>
-						 <p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-two" class="form-radio"><label for="radio-two">Информационные</label></p>
-						 <p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-three" class="form-radio"><label for="radio-three">Новостные</label></p>
-					   </form>
-                       
+                <form id="right-form" class="form-333">
+					<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
+					<p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-one" class="form-radio"><label for="radio-one">Все площадки</label></p>
+					<p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-two" class="form-radio"><label for="radio-two">Информационные</label></p>
+					<p class="filtermenu"><input type="radio" name="platform" value="all" id="radio-three" class="form-radio"><label for="radio-three">Новостные</label></p>
 						
-			    <div class="html-embed-3 w-embed" style="margin-top: 40px;">
-                            <input type="text" name="datebegin" class="tcal tcalInput" value="'.$datebegin.'">
-                            <div class="text-block-128">-</div>
-                            <input type="text" name="dateend" class="tcal tcalInput" value="'.$dateend.'">
+			        <div class="html-embed-3 w-embed" style="margin-top: 40px;">
+                        <input type="text" name="datebegin" class="tcal tcalInput" value="'.$datebegin.'">
+                        <div class="text-block-128">-</div>
+                        <input type="text" name="dateend" class="tcal tcalInput" value="'.$dateend.'">
                         </div>
                         <input type="submit" value="Применить" class="submit-button-addkey w-button">
                     </div>
 		        </form>
-		    </div>
+		   </div>
 
 ';
         include PANELDIR . '/views/layouts/footer.php';
