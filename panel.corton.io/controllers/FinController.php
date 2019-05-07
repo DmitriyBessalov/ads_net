@@ -510,7 +510,7 @@ var options = {
 }	
 };
 
-var ctx = document.getElementById("c").getContext("2d");
+var ctx = document.getElementById("b").getContext("2d");
 
 var myLineChart = new Chart(ctx, {
     type: "bar",
