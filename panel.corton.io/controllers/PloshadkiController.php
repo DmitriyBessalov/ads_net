@@ -135,7 +135,7 @@
 
 var dataset_01 = {
     label: \"Визиты\",
-    backgroundColor: \"rgba(17,109,214,0.2)\",
+    backgroundColor: \"rgba(17,109,214,0.1)\",
     borderColor: \"rgba(17,109,214,1)\",
 	pointColor: \"rgba(17,109,214,1)\",
 	pointBorderColor: \"rgba(0,0,0,0)\",
