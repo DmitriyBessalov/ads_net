@@ -141,7 +141,6 @@ var dataset_01 = {
 	pointBorderColor: \"rgba(17,109,214,1)\",
 	borderWidth: \"2\",
 	pointRadius: 2,
-	pointColor: \"rgba(17,109,214,1)\",
     data: [30100, 32000, 33300, 29005, 31405, 32604, 19045]
 };
 
@@ -181,11 +180,6 @@ var myLineChart = new Chart(ctx, {
     data: data,
     options : options
 });
-
-setTimeout(function(){   
-    myLineChart.chart.config.data.datasets.unshift(dataset_01);
-    myLineChart.update();
-},300)
 </script>
 				
 				<script>
