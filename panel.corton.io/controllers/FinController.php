@@ -617,7 +617,7 @@ var dataset_03 = {
     backgroundColor: "rgba(17,109,214,0.2)",
     borderColor: "rgba(17,109,214,1)",
     pointBorderColor: "rgba(1,149,114,1)",
-
+	borderWidth: "2",
     data: ['.$graf_pay.'] //Просмотры оплаченные
 };
 
@@ -640,11 +640,11 @@ var options = {
         yAxes: [{ display: false }]
     },
 	borderWidth: {
-       top: 2,
-       right: 2,
-       bottom: 0,
-       left: 0
-    }	
+   top: 1,
+   right: 0,
+   bottom: 0,
+   left: 0
+}	
 };
 
 var ctx = document.getElementById("a").getContext("2d");
