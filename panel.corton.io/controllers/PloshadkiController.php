@@ -61,6 +61,9 @@
                 <td style="width: 110px;"></td>
               </tr> 
             </thead>';
+
+
+
                 foreach ($result as $i) {
                     $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as 'dohod', SUM(`r`)+SUM(`e`)+SUM(`s`) as 'prosmotr',SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`)as 'click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'  AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                     $platform = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -97,40 +100,8 @@
                       <td>".$platform['click']."</td>
                       <td class=\"greentext\" style=\"min-width: 140px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
 					  <td style=\"width: 160px;\" >
-                         <canvas id=\"d\" width=\"92\" height=\"32\"></canvas>
-					  </td>
-					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>
-                      <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
-						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
-                         <ul class=\"sub-menu\">
-                              <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
-                              <a class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
-                              if ($i['type']!='demo'){
-                                  echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>";
-                              }
-                              echo "
-                              <a href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
-                         </ul>
-                         
-                         <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
-                            <div style=\"min-width: 780px !important;\" class=\"div-block-78 w-clearfix\">
-                                <div class=\"div-block-132 modalhide\">
-                                    <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
-                                </div>
-                                <div class=\"polzunok-container\">
-								    <div class=\"text-block-103\" style=\"text-align: left; margin-bottom: 40px;\">Настройка процента отчислений для площадки</div>
-                                    <div class=\"polzunok\" id=\"polz".$i['id']."\">
-                                    </div>
-                                </div>
-                            </div>
-                         </div>
-                                     
-                      </td>
-                  </tr>";
-                };
-                echo "</table>\n
-				
-<script>
+                         <canvas id=\"d".$i['id']."\" width=\"92\" height=\"32\"></canvas>
+                         <script>
 // ChartJS
 
 var dataset_01 = {
@@ -174,15 +145,46 @@ var options = {
   }
 };
 
-var ctx = document.getElementById(\"d\").getContext(\"2d\");
+var ctx = document.getElementById(\"d".$i['id']."\").getContext(\"2d\");
 
 var myLineChart = new Chart(ctx, {
     type: \"line\",
     data: data,
     options : options
 });
-</script>
-				
+                      </script>
+					  </td>
+					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>
+                      <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
+						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
+                         <ul class=\"sub-menu\">
+                              <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
+                              <a class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
+                              if ($i['type']!='demo'){
+                                  echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>";
+                              }
+                              echo "
+                              <a href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
+                         </ul>
+                         
+                         <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
+                            <div style=\"min-width: 780px !important;\" class=\"div-block-78 w-clearfix\">
+                                <div class=\"div-block-132 modalhide\">
+                                    <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
+                                </div>
+                                <div class=\"polzunok-container\">
+								    <div class=\"text-block-103\" style=\"text-align: left; margin-bottom: 40px;\">Настройка процента отчислений для площадки</div>
+                                    <div class=\"polzunok\" id=\"polz".$i['id']."\">
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                                     
+                      </td>
+                  </tr>";
+                };
+                echo "</table>\n
+							
 				<script>
                     $(\".polzunok\").slider({min:0,max:200,range:\"min\",animate:\"slow\",slide:function(event, ui){
                         $('#'+this.id+' span').html(\"<b>&lt;</b>\"+ui.value+\"%<b>&gt;</b>\");
