@@ -2030,7 +2030,7 @@ input.w-button2 {
 }
 
 .div-block-84 {
-  width: 760px;
+  width: 8400px;
   margin: 15px 0px;
   padding: 10px;
   border: 1px solid #e1e2e8;
@@ -4794,6 +4794,7 @@ input:checked + span {
 .ql-toolbar.ql-snow {
 	border-radius: 4px 4px 0 0;
 	border: 1px solid #e1e2e8;
+	width: 760px;
 }
 
 

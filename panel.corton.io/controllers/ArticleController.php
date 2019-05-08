@@ -726,7 +726,7 @@ class ArticleController
         echo '
 					<div class="text-block-103">Контент статьи</div>
                         <div style=" width: 1337px;">
-                            <input type="text" class="text-field-4 w-input" style=" width: 840px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
+                            <input type="text" class="text-field-4 w-input" style=" width: 760px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
                             <input name="formtext" type="hidden">
                             <div id="toolbar_position"></div>
                             <div id="editor-container">
