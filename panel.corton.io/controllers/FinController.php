@@ -485,7 +485,7 @@ class FinController
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Оплаченные просмотры</div>
-        <div class="text-block-104">Оплаченные просмотры за период</div>
+        <div class="text-block-104">Оплаченные просмотры промо-статей</div>
         <div class="text-block-105">'.$result['pay'].'</div>
 		<div id="containergr" style="width:356px; height:102px;">
            <canvas id="a" width="356" height="102"></canvas>
