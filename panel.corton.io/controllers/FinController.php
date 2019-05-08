@@ -664,7 +664,7 @@ var dataset_05 = {
 	pointColor: "rgba(17,109,214,1)",
 	borderWidth: "2",
 	pointRadius: 2,
-	pointBackgroundColor: "#116dd6",
+	pointBackgroundColor: "rgba(17,109,214,1)",
     data: [0, 0, 0, 0, 0, 0, 0] //Визиты
 };
 
