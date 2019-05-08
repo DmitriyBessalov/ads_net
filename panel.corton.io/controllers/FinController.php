@@ -664,7 +664,6 @@ var dataset_06 = {
 	pointColor: "rgba(96,191,82,1)",
 	borderWidth: "2",
 	pointRadius: 2,
-	pointBackgroundColor: \"#116dd6\",
     data: [9700, 11400, 13800, 10400, 11400, 13900, 5450]
 
 };
@@ -685,8 +684,8 @@ var options = {
   },
   layout: {
             padding: {
-                left: 4,
-                right: 4,
+                left: 5,
+                right: 5,
                 top: 0,
                 bottom: 0
             }
