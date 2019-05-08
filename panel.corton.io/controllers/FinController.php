@@ -675,6 +675,7 @@ var dataset_06 = {
 	pointColor: "rgba(96,191,82,1)",
 	borderWidth: "2",
 	pointRadius: 2,
+	pointBackgroundColor: "rgba(96,191,82,1)",
     data: ['.$graf_show_anons.'] //Показы
 
 };
