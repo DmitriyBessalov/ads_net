@@ -70,6 +70,26 @@
                     if (is_null($platform['prosmotr'])){$platform['prosmotr']=$platform['click']=$platform['dohod']=0;}
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
+
+                    $sql="SELECT `date`, SUM(`r`) + SUM(`e`) + SUM(`s`) AS 'prosmotr' FROM `balans_ploshadki` WHERE `ploshadka_id` = '".$i['id']."' AND `date`>=(CURDATE() - 6) GROUP BY `date`";
+                    $gragik_arr=$dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+                    for ($k = 6; $k >= 0; $k--) {
+                        $date=date('Y-m-d', strtotime('-'.$k.' days'));
+                        $gragika[$date]=0;
+                    }
+
+                    foreach ($gragik_arr as $k){
+                        $gragika[$k['date']]=$k['prosmotr'];
+                    }
+
+                    $grafik="";
+                    foreach ($gragika as $k){
+                        $grafik.='"'.$k.'",';
+                    }
+
+
+                    $grafik.='"0"';
                     echo "<tr>
                       <td style=\"text-align: left; min-width: 336px;\">
 					  <div style=\"margin-top: 7px;\">
@@ -105,7 +125,6 @@
 // ChartJS
 
 var dataset_01 = {
-    label: \"Визиты\",
     backgroundColor: \"rgba(17,109,214,0.1)\",
     borderColor: \"rgba(17,109,214,1)\",
 	pointColor: \"rgba(17,109,214,1)\",
@@ -113,11 +132,11 @@ var dataset_01 = {
 	borderWidth: \"2\",
 	pointRadius: 2,
 	pointBackgroundColor: \"#116dd6\",
-    data: [30100, 32000, 33300, 29005, 31405, 32604, 19045]
+    data: [".$grafik."]
 };
 
 var data = {
-    labels: [\"1 день\", \"2 день\", \"3 день\", \"4 день\", \"5 день\", \"6 день\", \"Сегодня\"],
+    labels: [\"\", \"\", \"\", \"\", \"\", \"\", \"\"],
     datasets: [dataset_01]
 };
 
