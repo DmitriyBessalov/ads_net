@@ -731,6 +731,8 @@ $(document).ready(function(){
         $(".w-tab-link").removeClass("w--current");
         $("#tab3").addClass("w--current");
         $("#tab3block").addClass("w--tab-active");
+        let toolbar=document.querySelector('div.ql-toolbar.ql-snow');
+        if (toolbar)  toolbar.style.position = 'relative';
     });
     $( "#tab4" ).on( "click", function() {
         $(".w-tab-pane").removeClass("w--tab-active");
