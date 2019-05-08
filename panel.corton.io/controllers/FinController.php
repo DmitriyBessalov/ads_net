@@ -682,6 +682,14 @@ var options = {
       duration : 1800,  
       easing : "easeOutBack"
   },
+  layout: {
+            padding: {
+                left: 5,
+                right: 5,
+                top: 0,
+                bottom: 0
+            }
+		},	
   scales:{
       xAxes: [{ display: false }],
       yAxes: [{ display: false }]
