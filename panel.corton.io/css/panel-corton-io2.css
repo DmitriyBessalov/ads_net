@@ -4793,7 +4793,7 @@ input:checked + span {
 
 .ql-toolbar.ql-snow {
 	border-radius: 4px 4px 0 0;
-	border: 1px solid #e1e2e8;
+	border: 1px solid #e1e2e8 !important;
 	width: 760px !important;
 }
 
