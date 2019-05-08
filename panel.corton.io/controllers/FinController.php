@@ -566,9 +566,7 @@ var myLineChart = new Chart(ctx, {
     data: data,
     options: options
 });
-</script>
 
-<script>
 // ChartJS B
 var dataset_02 = {
     label: "Значение",
@@ -612,9 +610,7 @@ var myLineChart = new Chart(ctx, {
     data: data,
     options: options
 });
-</script>
 
-<script>
 // ChartJS A
 var dataset_03 = {
     label: "Значение",
@@ -658,9 +654,7 @@ var myLineChart = new Chart(ctx, {
     data: data,
     options: options
 });
-</script>
 
-<script>
 // ChartJS D
 
 var dataset_05 = {
