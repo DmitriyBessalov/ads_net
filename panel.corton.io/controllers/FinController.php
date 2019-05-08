@@ -449,7 +449,7 @@ class FinController
         <div class="text-block-103">Внешние метрики</div>
 		<div style="display: flex;">
 		<div style="width:33%;">
-           <div class="text-block-104">Колличество визитов</div>
+           <div class="text-block-104">Просмотров страниц</div>
            <div style="font-size: 46px;" class="text-block-105">(128 315)</div>
 		</div>
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>		
@@ -477,7 +477,7 @@ class FinController
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Клики</div>
-        <div class="text-block-104">Клики за период</div>
+        <div class="text-block-104">Клики по анонсам</div>
         <div class="text-block-105">'.$result['promo_load'].'</div>
 		<div id="containergr" style="width:356px; height:102px;">
            <canvas id="b" width="356" height="102"></canvas>
@@ -485,7 +485,7 @@ class FinController
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Оплаченные просмотры</div>
-        <div class="text-block-104">Оплаченные просмотры за период</div>
+        <div class="text-block-104">Оплаченные просмотры промо-статей</div>
         <div class="text-block-105">'.$result['pay'].'</div>
 		<div id="containergr" style="width:356px; height:102px;">
            <canvas id="a" width="356" height="102"></canvas>
