@@ -27,9 +27,9 @@
 	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" alt="" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='advertiser'): ?>
-            <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
+            <a href="/articles?active=all" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
       <? endif; ?>
-      <? if (($GLOBALS['role']=='admin') or ($GLOBALS['user']=='advertiser')): ?>
+      <? if (($GLOBALS['role']=='admin')): ?>
             <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
             <a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" alt="" class="image-6"><div class="text-block-82">Клики</div></a>
 			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" alt="" class="image-6"><div class="text-block-82">Уведомления</div><div class="circlnotice">1</div></a>
