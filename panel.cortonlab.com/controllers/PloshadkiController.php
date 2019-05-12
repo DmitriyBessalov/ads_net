@@ -412,7 +412,7 @@ var myLineChart = new Chart(ctx, {
                 <div class="html-embed w-embed" id="fileadrres">';
                 if (isset($result['domen'])){
                     $domen = str_replace(".", "_", $result['domen']);
-                    echo '&lt;link href="https://api.cortonlab.com/css/'.$domen.'.css.gz" rel="stylesheet"&gt;<br><br> &lt;script async src="https://api.cortonlab.com/js/corton.js.gz" charset="UTF-8"&gt;&lt;/script&gt;';
+                    echo '&lt;link href="https://api.cortonlab.com/css/'.$domen.'.css.gz" rel="stylesheet"&gt;<br><br> &lt;script async src="https://api.cortonlab.com/js/cortonlab.js.gz" charset="UTF-8"&gt;&lt;/script&gt;';
                 } else {echo 'Заполните домен';};
                 echo '
                 </div>
