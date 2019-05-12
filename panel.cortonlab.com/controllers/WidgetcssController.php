@@ -98,9 +98,9 @@ class WidgetcssController
         $domen = str_replace(".", "_", $domen);
 
         if ($domen!='default style') {
-            if (($domen == 'sustavzdorov_ru') OR ($domen == 'spinet_ru') OR ($domen == 'artrozamnet_ru')) {
-                file_put_contents(APIDIR . DIRECTORY_SEPARATOR . "css" . DIRECTORY_SEPARATOR . $domen.".min.css", $css);
-            };
+       //     if (($domen == 'sustavzdorov_ru') OR ($domen == 'spinet_ru') OR ($domen == 'artrozamnet_ru')) {
+       //         file_put_contents(APIDIR . DIRECTORY_SEPARATOR . "css" . DIRECTORY_SEPARATOR . $domen.".min.css", $css);
+       //     };
 
             $gzdata = gzencode($css, 9);
             unlink(      APIDIR . DIRECTORY_SEPARATOR . "css" . DIRECTORY_SEPARATOR . $domen . ".css.gz");
