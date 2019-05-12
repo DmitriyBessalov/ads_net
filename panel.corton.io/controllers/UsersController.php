@@ -37,10 +37,10 @@ class UsersController
         $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 		echo '
-        <script src="https://panel.corton.io/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
+        <script src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
         <script>
                 function balans_spisanie(i){
-                    $.get( "https://panel.corton.io/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function(data) {
+                    $.get( "https://panel.cortonlab.com/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function(data) {
                         $("#sum_spisanie"+i).val("0");
 	                    $("#sum_spisanie"+i).prop(\'disabled\', true);
 	                    $("#status_spisanie"+i).html(data);
@@ -165,7 +165,7 @@ class UsersController
             $GLOBALS['role'] = $result['role'];
             $GLOBALS['email'] = $result['email'];
         }else{
-            header('Location: https://corton.io/');
+            header('Location: https://cortonlab.com/');
             exit;
         }
     }
@@ -179,7 +179,7 @@ class UsersController
         $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
         if ($result['aktiv']) return $result['role'];
         // Иначе выдаём форму авторизации
-        header('Location: https://corton.io/');
+        header('Location: https://cortonlab.com/');
         exit;
     }
 
@@ -312,7 +312,7 @@ class UsersController
     //Выход из панели
     public static function actionLogout(){
         setcookie ( 'PHPSESSID', "", time () - 10000000 );
-        header('Location: https://corton.io/');
+        header('Location: https://cortonlab.com/');
         return true;
     }
 

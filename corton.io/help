@@ -83,7 +83,7 @@
 	<div class="div-block-82">
     <div class="text-block-17">Вход в систему</div>
     <div class="w-form">
-    <form method="post" action="https://panel.corton.io/login"  id="email-form" name="email-form" data-name="Email Form" class="form-3">
+    <form method="post" action="https://panel.cortonlab.com/login"  id="email-form" name="email-form" data-name="Email Form" class="form-3">
     <input type="email" 
     class="text-field w-input" maxlength="256" name="login" data-name="login"
     placeholder="E-mail" id="email-2" required="">

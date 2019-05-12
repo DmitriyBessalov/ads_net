@@ -11,6 +11,6 @@ $promo_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
 $sql="SELECT `id`,`title`,`text`,`form_title`,`active`,`form_text`,`form_button` FROM `promo` WHERE `id`='".$promo_id."'";
 $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-if ($result['active'] or $_SERVER['HTTP_ORIGIN']=='https://demo.corton.io'){
+if ($result['active'] or $_SERVER['HTTP_ORIGIN']=='https://demo.cortonlab.com'){
     echo json_encode($result ,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }

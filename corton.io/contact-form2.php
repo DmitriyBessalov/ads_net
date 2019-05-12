@@ -2,7 +2,7 @@
 $_POST = array_map('addslashes', $_POST);
 if(!empty($_POST['host'] )){
     if(!empty($_POST['email'] )){
-        $to = "orders@corton.io";
+        $to = "orders@cortonlab.com";
         $subject = "Corton contact form";
         $message = '
 
@@ -11,7 +11,7 @@ if(!empty($_POST['host'] )){
          <b>Еmail: </b>'.$_POST['email'].'</br>
          <b>IP: </b>'.$_SERVER['REMOTE_ADDR'].'</br>';
 
-        $headers  = "Content-type: text/html; charset=UTF-8 \r\nFrom: <support@corton.io>\r\n";
+        $headers  = "Content-type: text/html; charset=UTF-8 \r\nFrom: <support@cortonlab.com>\r\n";
         $result = mail($to, $subject, $message, $headers);
     }
 }

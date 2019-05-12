@@ -5,12 +5,12 @@ class SiteController
 
     public static function actionLoginform()
     {
-        header('Location: https://corton.io/#openModal2');
+        header('Location: https://cortonlab.com/#openModal2');
         /*echo'<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <base href="https://panel.corton.io">
+  <base href="https://panel.cortonlab.com">
   <title>Corton - Авторизация</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,7 @@ class SiteController
 </head>
 <body class="body"><img src="images/logo-corton.png" class="image">
   <div class="w-form">
-    <form method="post" action="https://panel.corton.io/login" class="form-8"><label for="login">Логин</label>
+    <form method="post" action="https://panel.cortonlab.com/login" class="form-8"><label for="login">Логин</label>
     <input type="text" class="w-input" autofocus="true" maxlength="256" name="login" data-name="login" id="login" required="">
     <label for="password">Пароль</label>
     <input type="password" class="w-input" maxlength="256" name="password" data-name="password" id="password" required="">
@@ -42,10 +42,10 @@ class SiteController
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <base href="https://panel.corton.io">
+  <base href="https://panel.cortonlab.com">
   <title>Corton</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta http-equiv="refresh" content="3;url=https://corton.io" />
+  <meta http-equiv="refresh" content="3;url=https://cortonlab.com" />
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/panel-corton-io.webflow.css" rel="stylesheet" type="text/css">
@@ -65,7 +65,7 @@ class SiteController
     public static function actionLogout()
     {
         session_destroy();
-        header('Location: https://corton.io/');
+        header('Location: https://cortonlab.com/');
         return true;
     }
 }

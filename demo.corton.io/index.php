@@ -5,22 +5,22 @@ $_GET = array_map('addslashes', $_GET);
 $_COOKIE = array_map('addslashes', $_COOKIE);
 if (isset($_GET['site'])){
     $parsed=parse_url($_GET['site']);
-    setcookie("host", $parsed['host'],time()+72000,'/', ".corton.io");
-    setcookie("scheme", $parsed['scheme'],time()+72000,'/' ,'.corton.io');
+    setcookie("host", $parsed['host'],time()+72000,'/', ".cortonlab.com");
+    setcookie("scheme", $parsed['scheme'],time()+72000,'/' ,'.cortonlab.com');
     $sql="SELECT `CTR`,`CPM`,`CPG`,`recomend_aktiv`,`natpre_aktiv` FROM `ploshadki` WHERE `domen`='".$parsed['host']."'";
     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
     echo '
 <html>
     <head>
        <title>Демонстрация: '.$_GET['site'].'</title>
-		<link href="https://corton.io/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
+		<link href="https://cortonlab.com/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
 		<link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc4dc77d1f61f6d0f03cc_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc55977d1f6922c0f0715_faviconbig.png" rel="apple-touch-icon"/></head>
     </head>
     <body style="overflow:hidden;margin: 0px;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
-            <div style="float: left; margin-right: 14px;"><a href="https://corton.io/">
-			<a href="https://corton.io/platforms" target="_blank"><img style="margin: 15px;" src="https://panel.corton.io/images/logo-corton.png"></a></div>
+            <div style="float: left; margin-right: 14px;"><a href="https://cortonlab.com/">
+			<a href="https://cortonlab.com/platforms" target="_blank"><img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500;">'.$result['CTR'].' %</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;">'.$result['CPM'].' руб.</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>';
@@ -90,7 +90,7 @@ if (isset($_GET['site'])){
 
         //Подключение скрипта
         $host=str_replace('.','_',$_COOKIE['host']);
-        $body = str_replace('</head>', '<link href="https://api.corton.io/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.corton.io/js/corton.js" charset="UTF-8"></script></head>', $body);
+        $body = str_replace('</head>', '<link href="https://api.cortonlab.com/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.cortonlab.com/js/corton.js" charset="UTF-8"></script></head>', $body);
         $enc='UTF8';
         preg_match_all("/<meta.*?>/", $body, $phones);
         foreach ($phones[0] as $phone) {

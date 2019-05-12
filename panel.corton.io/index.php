@@ -19,8 +19,8 @@ array_walk_recursive($_GET,'ecran');
 array_walk_recursive($_COOKIE,'ecran');
 
 // Подключение файлов системы
-define('PANELDIR', '/var/www/www-root/data/www/panel.corton.io');
-define('APIDIR', '/var/www/www-root/data/www/api.corton.io');
+define('PANELDIR', '/var/www/www-root/data/www/panel.cortonlab.com');
+define('APIDIR', '/var/www/www-root/data/www/api.cortonlab.com');
 
 require_once(PANELDIR.'/components/Autoload.php');
 

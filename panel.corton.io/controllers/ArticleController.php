@@ -291,7 +291,7 @@ class ArticleController
                     $sql = "SELECT `user_id`,`img_290x180`,`title` FROM `anons` WHERE `id`='" . $anons . "'";
                     $img = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
                     echo '<td>' . $anons . '</td>
-                          <td><a class="screenshot" style="text-decoration:none;" rel="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.corton.io/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
+                          <td><a class="screenshot" style="text-decoration:none;" rel="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
                     echo '<td>' . $result['promo_id'] . '</td>';
@@ -383,7 +383,7 @@ class ArticleController
                     fwrite($ifp, base64_decode($out[2][$i]));
                     fclose($ifp);
 
-                    $replase='<img src="https://api.corton.io/img/promo/'.$id.'/'.$hash.'.'.$out[1][$i].'">';
+                    $replase='<img src="https://api.cortonlab.com/img/promo/'.$id.'/'.$hash.'.'.$out[1][$i].'">';
 
                     $_POST['formtext']=str_replace($out[0][$i], $replase, $_POST['formtext']);
 
@@ -475,11 +475,11 @@ class ArticleController
                 $user_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
             }
 
-            $uploaddir = '/var/www/www-root/data/www/api.corton.io'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR;
+            $uploaddir = '/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR;
             //загрузка файлов
 
-            mkdir('/var/www/www-root/data/www/api.corton.io'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id, 0755);
-            mkdir('/var/www/www-root/data/www/api.corton.io'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a', 0755);
+            mkdir('/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id, 0755);
+            mkdir('/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a', 0755);
 
             $count=count ($_POST['id']);
 
@@ -549,7 +549,7 @@ class ArticleController
             $db->query($sql);
         }
         };
-        header('Location: https://panel.corton.io/articles?active=1');
+        header('Location: https://panel.cortonlab.com/articles?active=1');
         exit;
     }
 
@@ -568,8 +568,8 @@ class ArticleController
         include PANELDIR.'/views/layouts/header.php';
         echo '
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://panel.corton.io/js/quill.js"></script>
-<link rel="stylesheet" href="https://panel.corton.io/css/quill.snow.css">
+<script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
+<link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
 <div class="w-tabs" id="tab0">';
         if($title=='Редактирование статьи')echo '
     <div class="tabs-menu w-tab-menu">
@@ -673,7 +673,7 @@ class ArticleController
 
                     $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
                     $dir = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    $imgdir = '//api.corton.io/img/' . $dir . '/a/';
+                    $imgdir = '//api.cortonlab.com/img/' . $dir . '/a/';
                     echo '
                                 <div class="div-block-97-copy">
 								<div class="text-block-103">Настройка анонса</div>

@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 $_GET = array_map('addslashes', $_GET);
-$to = "orders@corton.io";
+$to = "orders@cortonlab.com";
 $subject = "Corton promo form";
 
 if ($_GET['host']==""){
@@ -22,6 +22,6 @@ $message = '
 ';
 
 $headers  = "Content-type: text/html; charset=UTF-8 \r\n";
-$headers .= "From: <support@corton.io>\r\n";
+$headers .= "From: <support@cortonlab.com>\r\n";
 mail($to, $subject, $message, $headers);
 echo 'Спасибо! Мы скоро с вами свяжемся.';

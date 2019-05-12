@@ -3,7 +3,7 @@ $_POST = array_map('addslashes', $_POST);
 if(!empty($_POST['role'] )){
     if(!empty($_POST['name'] )){
         if(!empty($_POST['email'] )){
-            $to = "orders@corton.io";
+            $to = "orders@cortonlab.com";
             $subject = "Corton contact form";
             $message = '
  <h3>Получен запрос на добавление пользователя</h3></br>
@@ -14,7 +14,7 @@ if(!empty($_POST['role'] )){
  <b>IP: </b>'.$_SERVER['REMOTE_ADDR'].'</br>';
 
             $headers  = "Content-type: text/html; charset=UTF-8 \r\n";
-            $headers .= "From: <support@corton.io>\r\n";
+            $headers .= "From: <support@cortonlab.com>\r\n";
             $result = mail($to, $subject, $message, $headers);
             if ($result){
                 echo "<p class=\"textgreen\">Спасибо! Мы скоро с вами свяжемся.</p>";

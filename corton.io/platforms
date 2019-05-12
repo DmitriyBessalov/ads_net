@@ -178,7 +178,7 @@
 	<a id="w-node-871d71ed2c02-05b71c9d" href="/advertisers" class="link-block w-inline-block">
 	<div class="text-block-4">Рекламодателям</div></a>
 <a id="w-node-2b68bc3da6f2-05b71c9d" href="#" class="link-block w-inline-block"><div class="text-block-4">Войти</div></a></div><div class="div-block-17 w-clearfix">
-<a href="/terms-of-use" class="link">Пользовательское соглашение</a><a href="/privacy-policy" class="link">Политика конфиденциальности</a><div class="text-block-5">© Corton 2018 | info@corton.io<br/>
+<a href="/terms-of-use" class="link">Пользовательское соглашение</a><a href="/privacy-policy" class="link">Политика конфиденциальности</a><div class="text-block-5">© Corton 2018 | info@cortonlab.com<br/>
 </div></div></div><div class="section-12"><div class="div-block-33"><a href="/" class="w-inline-block">
 <img src="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1224a5201a856725fb5441_logo-corton-white.png" alt="" class="image-5"/></a>
 <div class="div-block-75">
@@ -220,7 +220,7 @@ width="34" height="34" alt="Войти" class="image-18"/></a><a href="#" class=
 	<div class="div-block-82">
     <div class="text-block-17">Вход в систему</div>
     <div class="w-form">
-    <form method="post" action="https://panel.corton.io/login"  id="email-form" name="email-form" data-name="Email Form" class="form-3">
+    <form method="post" action="https://panel.cortonlab.com/login"  id="email-form" name="email-form" data-name="Email Form" class="form-3">
     <input type="email" 
     class="text-field w-input" maxlength="256" name="login" data-name="login"
     placeholder="E-mail" id="email-2" required="">

@@ -10,7 +10,7 @@
     <link href="css/normalize.css" rel="stylesheet" type="text/css">
     <link href="css/webflow.css" rel="stylesheet" type="text/css">
     <link href="css/corton-lp3.webflow.css" rel="stylesheet" type="text/css">
-    <script src="https://panel.corton.io/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
     <script type="text/javascript">
         WebFont.load({
@@ -143,7 +143,7 @@
             </a>
         </div>
         <div class="div-block-17 w-clearfix"><a href="/terms-of-use" class="link">Пользовательское соглашение</a><a href="/privacy-policy" class="link">Политика конфиденциальности</a>
-            <div class="text-block-5">© Corton 2018 | info@corton.io
+            <div class="text-block-5">© Corton 2018 | info@cortonlab.com
                 <br/>
             </div>
         </div>
@@ -181,7 +181,7 @@
                     <input type="text" class="text-field w-input" maxlength="256" name="name" placeholder="Имя" id="name-2" required="" />
                     <input type="email" class="text-field-2 w-input" maxlength="256" name="email" placeholder="E-mail" required="" />
                     <textarea id="field-2" name="soobchenie" required="" maxlength="5000" placeholder="Сообщение" class="textarea w-input"></textarea>
-                    <input type="submit" value="Отправить " class="submit-button w-button" onclick="AjaxFormRequest('messegeResult', 'formMain', 'https://corton.io/contact-form.php')"/>
+                    <input type="submit" value="Отправить " class="submit-button w-button" onclick="AjaxFormRequest('messegeResult', 'formMain', 'https://cortonlab.com/contact-form.php')"/>
                     <div id="messegeResult"></div>
                 </form>
             </div>
@@ -232,7 +232,7 @@
         <div class="div-block-82">
             <div class="text-block-17">Вход в систему</div>
             <div class="w-form">
-                <form method="post" action="https://panel.corton.io/login" id="email-form"  class="form-3">
+                <form method="post" action="https://panel.cortonlab.com/login" id="email-form"  class="form-3">
                     <input type="email" class="text-field w-input" maxlength="256" name="login" data-name="login" placeholder="E-mail" id="email-2" required="">
                     <input type="password" class="text-field-2 w-input" maxlength="256" name="password" data-name="password" placeholder="Пароль" id="password" required="">
                     <input type="submit" value="Авторизация в системе" data-wait="Пожалуйста ожидайте..." class="submit-button w-button">

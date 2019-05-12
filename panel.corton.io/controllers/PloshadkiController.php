@@ -33,11 +33,11 @@
           <div class="w-form-done"></div>
           <div class="w-form-fail"></div>
         </div>
-        <script src="https://panel.corton.io/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
-        <script src="https://panel.corton.io/js/jquery-ui.min.js" type="text/javascript"></script> 
+        <script src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
+        <script src="https://panel.cortonlab.com/js/jquery-ui.min.js" type="text/javascript"></script> 
         <script>
                 function balans_spisanie(i){
-                    $.get( "https://panel.corton.io/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function( data) {
+                    $.get( "https://panel.cortonlab.com/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function( data) {
                         $("#sum_spisanie"+i).val("0");
 	                    $("#sum_spisanie"+i).prop(\'disabled\', true);
 	                    $("#status_spisanie"+i).html(data);
@@ -207,7 +207,7 @@ var myLineChart = new Chart(ctx, {
 				<script>
                     $(\".polzunok\").slider({min:0,max:200,range:\"min\",animate:\"slow\",slide:function(event, ui){
                         $('#'+this.id+' span').html(\"<b>&lt;</b>\"+ui.value+\"%<b>&gt;</b>\");
-                        $.get(\"https://panel.corton.io/platforms-otchicleniay?id=\"+this.id+\"&otchiclen=\"+ui.value);
+                        $.get(\"https://panel.cortonlab.com/platforms-otchicleniay?id=\"+this.id+\"&otchiclen=\"+ui.value);
                         $('#otchic'+this.id.substr(4)).html(ui.value);
                     }});\n";
                 foreach ($result as $i) {
@@ -412,7 +412,7 @@ var myLineChart = new Chart(ctx, {
                 <div class="html-embed w-embed" id="fileadrres">';
                 if (isset($result['domen'])){
                     $domen = str_replace(".", "_", $result['domen']);
-                    echo '&lt;link href="https://api.corton.io/css/'.$domen.'.css.gz" rel="stylesheet"&gt;<br><br> &lt;script async src="https://api.corton.io/js/corton.js.gz" charset="UTF-8"&gt;&lt;/script&gt;';
+                    echo '&lt;link href="https://api.cortonlab.com/css/'.$domen.'.css.gz" rel="stylesheet"&gt;<br><br> &lt;script async src="https://api.cortonlab.com/js/corton.js.gz" charset="UTF-8"&gt;&lt;/script&gt;';
                 } else {echo 'Заполните домен';};
                 echo '
                 </div>

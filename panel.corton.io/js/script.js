@@ -34,7 +34,7 @@ $(document).ready(function(){
     $('input[name="domen"]').change(function() {
         var  domen= $('input[name="domen"]').val();
         domen = domen.replace(/\./gi, '_');
-        document.getElementById('fileadrres').innerHTML='&lt;link href="https://api.corton.io/style/'+domen+'.css.gz" rel="stylesheet"&gt;<br><br>&lt;script async src="https://api.corton.io/js/corton.js.gz"&gt;&lt;/script&gt;';
+        document.getElementById('fileadrres').innerHTML='&lt;link href="https://api.cortonlab.com/style/'+domen+'.css.gz" rel="stylesheet"&gt;<br><br>&lt;script async src="https://api.cortonlab.com/js/corton.js.gz"&gt;&lt;/script&gt;';
     });
 	
 //Функция для чекбокса
@@ -42,7 +42,7 @@ $(document).ready(function(){
         if ($(this).is(':checked')){
             var id=$(this).parents('tr:first').children('td')[0].innerHTML;
             var checkbox=$(this);
-            $.post("https://panel.corton.io/article-start?id="+id,function(data) {
+            $.post("https://panel.cortonlab.com/article-start?id="+id,function(data) {
                 switch (data) {
                     case 'anon':{checkbox.next().text('Неактивна, отсутсвуют анонсы'); checkbox.prop('checked', false); console.log('a'); break;}
                     case 'word':{checkbox.next().text('Неактивна, отсутсвуют ключевые слова'); checkbox.prop('checked', false); console.log('w'); break;}
@@ -52,7 +52,7 @@ $(document).ready(function(){
         } else {
             $(this).next().text('На паузе');
             var id=$(this).parents('tr:first').children('td')[0].innerHTML;
-            $.post("https://panel.corton.io/article-stop?id="+id)
+            $.post("https://panel.cortonlab.com/article-stop?id="+id)
         }
     });
 

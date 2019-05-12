@@ -48,8 +48,8 @@
                 <div class="text-block-7"><span class="text-span-2">Настройка сайта<br/><br/>
                 </span>Перед тем как приступить непосредственно к подключению вашего сайта к системе Corton, необходимо дать гостевые доступы от вашей метрики для этого аккаунта - corton-io@yandex.ru.<br/><br/><strong>Первый шаг</strong><br/>
                 <br/>Первым шагом необходимо добавить CORTON-скрипт на все страницы вашего сайта. Скопируйте и вставьте CORTON-скрипт между тегами head в html документ каждой страницы вашего сайта.<br/></div>
-                <div class="div-block-24"><div class="text-block-8">&lt;link href=&quot;https://corton.io/style/{domen}.css&quot; rel=&quot;stylesheet&quot;&gt;<br/>
-                ‍<br/>&lt;script async src=&quot;https://corton.io/js/corton.js&quot;&gt;&lt;/script&gt;</div></div>
+                <div class="div-block-24"><div class="text-block-8">&lt;link href=&quot;https://cortonlab.com/style/{domen}.css&quot; rel=&quot;stylesheet&quot;&gt;<br/>
+                ‍<br/>&lt;script async src=&quot;https://cortonlab.com/js/corton.js&quot;&gt;&lt;/script&gt;</div></div>
                 <div class="text-block-7"><span class="text-span-2">Шаблон для промо-статье<br/><br/></span>Создайте пустой шаблон страницы на вашем сайте с пустым 
                 заголовком или без тега заголовка. На странице не должно быть рекламных блоков, так же отключите функцию комментариев для этой страницы. <br/>‍
                 <br/>После чего поместите этот код в теле страницы. Отправьте адрес созданной страницы своему личному менеджеру (пример адреса: .../promo).<br/></div><div class="div-block-24">
@@ -90,7 +90,7 @@
 	<div class="div-block-82">
     <div class="text-block-17">Вход в систему</div>
     <div class="w-form">
-    <form method="post" action="https://panel.corton.io/login"  id="email-form" name="email-form" data-name="Email Form" class="form-3">
+    <form method="post" action="https://panel.cortonlab.com/login"  id="email-form" name="email-form" data-name="Email Form" class="form-3">
     <input type="email" 
     class="text-field w-input" maxlength="256" name="login" data-name="login"
     placeholder="E-mail" id="email-2" required="">

@@ -34,11 +34,11 @@ if (isset($_POST['login-form']['login'])){
     $ip=$_SERVER['REMOTE_ADDR'];
     $sql="INSERT INTO `user` SET `email` = `".$email."`, `fio` = `".$fio."`, `role`=`moderator`, `phone` = `".$phone."`, `phpsession` = '".$session."'`,`url` = `".$url."`, `registration_ip` = `".$ip."`, `last_ip` = `".$ip."`;";
     $db->query($sql);
-    $headers = "From: admin@corton.io\r\n";
+    $headers = "From: admin@cortonlab.com\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
     $email = 'dmitriy8bessalov.ru';
-    $subject = 'Новый модератор в сервисе Corton.io';
+    $subject = 'Новый модератор в сервисе Cortonlab.com';
     $message = "<html><body>
                 <b>Имя пользователя:</b> ".$fio."<br>
                 <b>Телефон пользователя:</b> ".$phone."<br>
@@ -46,7 +46,7 @@ if (isset($_POST['login-form']['login'])){
                 <a href=\"http://cotrton.io/panel\">Открыть список пользоваелей на сайте</a>
                 </body></html>";
     mail('dmitriy8bessalov.ru', $subject, $message, $headers);
-    mail('leads@corton.io', $subject, $message, $headers);
+    mail('leads@cortonlab.com', $subject, $message, $headers);
 } elseif (isset($_POST['ContactFormtwo']['name'])) {
     $_SESSION = array();
     $session=session_id();
@@ -57,10 +57,10 @@ if (isset($_POST['login-form']['login'])){
     $ip=$_SERVER['REMOTE_ADDR'];
     $sql="INSERT INTO `user` SET `email` = '".$email."', `fio` = '".$fio."', `role`='reklamodatel', `phone` = '".$phone."', `phpsession` = '".$session."', `registration_ip` = '".$ip."', `last_ip` = '".$ip."';";
     $db->query($sql);
-    $headers = "From: admin@corton.io\r\n";
+    $headers = "From: admin@cortonlab.com\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $subject = 'Новый рекламодатель в сервисе Corton.io';
+    $subject = 'Новый рекламодатель в сервисе Cortonlab.com';
     $message = "<html><body>
                 <b>Имя пользователя:</b> ".$fio."<br>
                 <b>Телефон пользователя:</b> ".$phone."<br>
@@ -68,7 +68,7 @@ if (isset($_POST['login-form']['login'])){
                 <a href=\"http://cotrton.io/panel\">Открыть список пользоваелей на сайте</a>
                 </body></html>";
     mail('dmitriy8bessalov.ru', $subject, $message, $headers);
-    mail('leads@corton.io', $subject, $message, $headers);
+    mail('leads@cortonlab.com', $subject, $message, $headers);
 };
 
 
