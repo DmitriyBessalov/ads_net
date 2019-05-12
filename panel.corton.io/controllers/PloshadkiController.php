@@ -154,8 +154,8 @@ var options = {
             padding: {
                 left: 5,
                 right: 5,
-                top: 0,
-                bottom: 0
+                top: 5,
+                bottom: 5
             }
 		},	
   scales:{
