@@ -7,14 +7,14 @@ var A_TCALCONF = {
 	'cssprefix'  : 'tcal',
 	'months'     : ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
 	'weekdays'   : ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
-	'longwdays'  : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+	'longwdays'  : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 	'yearscroll' : true, // show year scroller
 	'weekstart'  : 0, // first day of week: 0-Su or 1-Mo
 	'prevyear'   : 'Предыдущий год',
 	'nextyear'   : 'Следующий год',
 	'prevmonth'  : 'Предыдущий месяц',
 	'nextmonth'  : 'Следующий месяц',
-	'format'     : 'd.m.Y' // 'd.m.Y', Y-m-d', 'l, F jS Y'
+	'format'     : 'd.m.Y' // 'd.m.Y', Y-m-d', F jS Y'
 };
 
 var A_TCALTOKENS = [
