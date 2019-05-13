@@ -6,7 +6,7 @@
 var A_TCALCONF = {
 	'cssprefix'  : 'tcal',
 	'months'     : ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-	'weekdays'   : ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+	'weekdays'   : ['Вс','Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
 	'longwdays'  : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
 	'yearscroll' : true, // show year scroller
 	'weekstart'  : 1, // first day of week: 0-Su or 1-Mo
