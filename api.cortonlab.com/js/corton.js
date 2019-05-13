@@ -75,14 +75,20 @@ function corton_promo() {
         //Клик по ссылке в промо статье
         var a = document.querySelectorAll('div#corton-promo a');
         for(var i=0; i<a.length; i++) {
-            if ( a[i].getAttribute('href').indexOf("?") > -1 )  {var char='&' }else{var char='?' }
+            if (a[i].getAttribute('href')!=="https://cortonlab.com/") {
+                if (a[i].getAttribute('href').indexOf("?") > -1) {
+                    var char = '&'
+                } else {
+                    var char = '?'
+                }
 
-            a[i].setAttribute('href',a[i].getAttribute('href')+char+'utm_source=corton&utm_medium=CPG&utm_campaign='+result['id']+'&utm_content='+get['anons_id']+'&utm_term='+document.referrer)
-            console.log('promolink',a[i].getAttribute('href'));
-            a[i].onclick = function(e) {
-                console.log     ('https://stat.cortonlab.com/promo_click.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t']);
-                cxhr.open('GET', 'https://stat.cortonlab.com/promo_click.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t']);
-                cxhr.send();
+                a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + document.referrer)
+                console.log('promolink', a[i].getAttribute('href'));
+                a[i].onclick = function (e) {
+                    console.log('https://stat.cortonlab.com/promo_click.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&anons_id=' + get['anons_id'] + '&t=' + get['t']);
+                    cxhr.open('GET', 'https://stat.cortonlab.com/promo_click.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&anons_id=' + get['anons_id'] + '&t=' + get['t']);
+                    cxhr.send();
+                }
             }
         }
     };
