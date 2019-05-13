@@ -546,7 +546,6 @@ class ArticleController
                     $db->query($sql);
                 }
             };
-
             break;
         }case 'форма_заказа' :{
             $sql="UPDATE `promo` SET `form_title`='".$_POST['form-title']."',`form_text`='".$_POST['form-text']."',`form_button`='".$_POST['form-button']."' WHERE `id`='".$_POST['id']."'";
