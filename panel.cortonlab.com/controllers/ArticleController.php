@@ -465,7 +465,11 @@ class ArticleController
             //Список старых анонсов
             $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$_POST['id']."';";
             $anonsold=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            $anonsold2= explode(",", $anonsold);
+            if ($anonsold!=""){
+                $anonsold2= explode(",", $anonsold);
+            }else {
+                $anonsold2 = array();
+            };
             //Список старых файлов картинок
             $role= UsersController::getUserRole();
             if ($role=='advertiser'){
@@ -481,7 +485,7 @@ class ArticleController
             mkdir('/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id, 0755);
             mkdir('/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a', 0755);
 
-            $count=count ($_POST['id']);
+            $count=count ($_POST['anons_ids']);
 
             foreach($anonsold2 as $i) {
                 $sql="SELECT `img_290x180`,`img_180x180` FROM `anons` WHERE `id`='".$_POST['anons_ids'][$i]."'";
@@ -542,7 +546,6 @@ class ArticleController
                     $db->query($sql);
                 }
             };
-
             break;
         }case 'форма_заказа' :{
             $sql="UPDATE `promo` SET `form_title`='".$_POST['form-title']."',`form_text`='".$_POST['form-text']."',`form_button`='".$_POST['form-button']."' WHERE `id`='".$_POST['id']."'";
