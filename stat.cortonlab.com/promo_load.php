@@ -2,8 +2,15 @@
 header('Access-Control-Allow-Origin: *');
 $_GET = array_map('addslashes', $_GET);
 
-$prosmort_id=(int)$_GET['prosmort_id'];if ($prosmort_id==0)exit;
-if (($_GET['ref']=="") OR (!isset($_GET['anons_id'])) OR ($_GET['anons_id']==""))exit;
+$prosmort_id=(int)$_GET['prosmort_id'];
+if (($prosmort_id==0) OR ($_GET['ref']=="") OR (!isset($_GET['anons_id'])) OR ($_GET['anons_id']==""))exit;
+
+$redis = new Redis();
+$redis->connect('185.75.90.54', 6379);
+$redis->select(4);
+$block=$redis->get('l:'.$_GET['prosmort_id']);
+if ($block){$redis->set('l:'.$prosmort_id, 1, 1296000);exit;}else{$redis->set('l:'.$prosmort_id, 1, 1296000);}
+$redis->close();
 
 $domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
@@ -39,6 +46,9 @@ if (!$dbstat->exec($sql)){
 
 /* Структура Redis
  * db0 id_Просмотра
- * db1 Счетчики показа анонсов за день
+ * db1 Счетчики показа анонсов по id анонса за день
  * db2 block_ip
+ * db3 Счетчики показа анонсов по площадкам за день
+ * db4 Блокировка по просморт ID
  */
+

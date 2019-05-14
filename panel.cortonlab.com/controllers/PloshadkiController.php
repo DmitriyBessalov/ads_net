@@ -275,7 +275,7 @@ var myLineChart = new Chart(ctx, {
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
                 if (addslashes($_REQUEST['id'])==""){
-                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."',`CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
+                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."',`widget_page`='".$_POST['widget_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
                     $db->query($sql);
                     $id=$db->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
@@ -303,6 +303,7 @@ var myLineChart = new Chart(ctx, {
                         `categoriya` = '".$_POST['categoriya']."',
                         `podcategoriya` ='".$_POST['podcategoriya']."',
                         `promo_page`='".$_POST['promo_page']."',
+                        `widget_page`='".$_POST['widget_page']."',
                         `user_id` = '".$_POST['user_id']."',
                         `status` ='".$aktiv."',
                         `recomend_zag_aktiv` = ".$zagrecomend.",
@@ -327,7 +328,7 @@ var myLineChart = new Chart(ctx, {
             {
                 $db=Db::getConnection();
                 if (addslashes($_REQUEST['id'])!='') {
-                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page`,`favicon` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
+                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page`,`widget_page`,`favicon` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
@@ -497,6 +498,7 @@ var myLineChart = new Chart(ctx, {
                     </div>
                   </div>
                 </div>
+                <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 740px;margin-top: 25px;" name="widget_page" value="'.$result['widget_page'].'" placeholder="URL widget page">
               </div>
 			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>';}
                 echo'
