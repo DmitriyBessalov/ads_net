@@ -14,7 +14,7 @@ class FinController
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
         echo '
-//info block	
+/* info block */	
 <!-- <div class="message-box">
     <p><span style="font-weight:400; color: #fff;">Обновление от 16.05.2019.</span> Теперь вывод балансов можно запрашивать в личном кабинете. Для этого нажмите на иконку пользователя и выберите пункт "Вывод балансов".</p>
     <span class="close-button">Понял, больше не показывать.</span>
