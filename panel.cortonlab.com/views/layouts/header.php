@@ -94,3 +94,22 @@ $('#delete_cookie').on('click', function() {
 })
 	  </script>
 	  
+	  <style>
+	  #info {
+   display: none;
+}
+
+#info-hide {
+   color: red;
+   font-weight:
+   bold;
+   font-size: 16px;
+   cursor: pointer;
+}
+
+#delete_cookie {
+   text-decoration: underline;
+   cursor: pointer;
+   }
+	  </style>
+	  
