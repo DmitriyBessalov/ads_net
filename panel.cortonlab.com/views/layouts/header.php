@@ -14,7 +14,7 @@
   <script type="text/javascript" src="/js/tcal.js"></script>
   <script src="https://panel.cortonlab.com/js/Chart.min.js"></script>
   <script src="https://panel.cortonlab.com/js/utils.js"></script>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
   
   <meta name="robots" content="none">
