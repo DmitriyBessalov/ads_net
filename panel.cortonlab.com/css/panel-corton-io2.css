@@ -4882,7 +4882,7 @@ canvas {
 		-ms-user-select: none;
 	}
 	
-	.message-box{
+.message-box{
     font: 16px/20px;
     background: #116dd6;
     color: #fff;
@@ -4902,10 +4902,11 @@ canvas {
     right: 10px;
     bottom: 0;
     font-size: 16px;
-    font-weight:600;
+    font-weight:400;
     color: #fff;
     margin-bottom: 10px;
 	margin-right: 20px;
+	text-decoration: underline;
 }
 
 .close-button:hover{
