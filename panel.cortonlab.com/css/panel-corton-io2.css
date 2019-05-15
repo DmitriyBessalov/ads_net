@@ -4903,12 +4903,11 @@ canvas {
 .close-button{
     position: absolute;
     right: 10px;
-    top: 5;
+    top: 0;
     font-size: 16px;
     font-weight:400;
     color: #fff;
-    margin-bottom: 10px;
-	margin-right: 20px;
+    margin: 18px;
 	text-decoration: underline;
 }
 
