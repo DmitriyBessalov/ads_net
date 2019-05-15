@@ -14,7 +14,6 @@
   <script type="text/javascript" src="/js/tcal.js"></script>
   <script src="https://panel.cortonlab.com/js/Chart.min.js"></script>
   <script src="https://panel.cortonlab.com/js/utils.js"></script>
-  <script src="https://panel.cortonlab.com/js/script.js"></script>
   
   <meta name="robots" content="none">
 </head>
@@ -70,4 +69,28 @@
         </div>
 
       <div class="bodys">
+	  
+	  <script>
+	  // Вывод и скрытие блока с информацией о обновлениях в системе
+if ($.cookie('viewed_banner') != $('#info p').text()) {
+    
+    
+    $('#info').show();
+    
+    
+    $('#info-hide').on('click', function() {
+        
+        
+        $('#info').hide();
+        
+       
+        $.cookie('viewed_banner', $('#info p').text(), { expires: 365 });
+    });
+}
+
+
+$('#delete_cookie').on('click', function() {
+    $.removeCookie('viewed_banner');
+})
+	  </script>
 	  
