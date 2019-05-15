@@ -4883,10 +4883,10 @@ canvas {
 	}
 	
 .message-box{
-    font: 16px/20px;
+    font-size: 16px;
     background: #116dd6;
     color: #fff;
-    padding: 10px;
+    padding: 8px;
     width: 100%;
     position: absolute;
     font-family: 'Myriadpro Regular';
