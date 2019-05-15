@@ -17,6 +17,10 @@
   <meta name="robots" content="none">
 </head>
 <body class="body">
+  <div id="info">
+    <p>Обновление от 16.05.2019. Теперь вывод балансов можно запрашивать в личном кабинете. Для этого нажмите на иконку пользователя и выберите пункт "Вывод балансов"<span id="info-hide">Я понял, больше не показывать!</span></p>
+  </div>
+  <span id="delete_cookie">Удалить печеньку</span>
   <div class="left-menu">
 	  <img src="/images/logo-corton.png" alt="" class="image">
       <? if ($GLOBALS['role']=='platform'): ?>

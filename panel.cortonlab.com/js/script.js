@@ -900,3 +900,26 @@ $(document).ready(function(){
         $("#right-form").submit();
     });
 });
+
+
+// Вывод и скрытие блока с информацией о обновлениях в системе
+if ($.cookie('viewed_banner') != $('#info p').text()) {
+    
+    
+    $('#info').show();
+    
+    
+    $('#info-hide').on('click', function() {
+        
+        
+        $('#info').hide();
+        
+       
+        $.cookie('viewed_banner', $('#info p').text(), { expires: 365 });
+    });
+}
+
+
+$('#delete_cookie').on('click', function() {
+    $.removeCookie('viewed_banner');
+})
