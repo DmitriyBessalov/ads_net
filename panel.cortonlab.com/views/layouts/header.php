@@ -14,14 +14,15 @@
   <script type="text/javascript" src="/js/tcal.js"></script>
   <script src="https://panel.cortonlab.com/js/Chart.min.js"></script>
   <script src="https://panel.cortonlab.com/js/utils.js"></script>
-  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
   
   <meta name="robots" content="none">
 </head>
 <body class="body">
-  <div id="info">
-    <p>Обновление от 16.05.2019. Теперь вывод балансов можно запрашивать в личном кабинете. Для 1 этого нажмите на иконку пользователя и выберите пункт "Вывод балансов"<span id="info-hide">Я понял, больше не показывать!</span></p>
+  <div class="message-box">
+    <p>Обновление от 16.05.2019. Теперь вывод балансов можно запрашивать в личном кабинете. Для 1 этого нажмите на иконку пользователя и выберите пункт "Вывод балансов".</p>
+    <span class="close-button">Понял, больше не показывать.</span>
   </div>
   <div class="left-menu">
 	  <img src="/images/logo-corton.png" alt="" class="image">
@@ -73,46 +74,62 @@
       <div class="bodys">
 	  
 	  <script>
-// Проверяем наличие и соответствие куки содержимому параграфа
-if ($.cookie('viewed_banner') != $('#info p').text()) {
-    
-    // если куки нет или её содержимое отличается от текущего текста
-    // то показываем баннер
-    $('#info').show();
-    
-    // и устанавливаем кнопке «скрыть» обработчик клика,
-    $('#info-hide').on('click', function() {
-        
-        // который прячет баннер и
-        $('#info').hide();
-        
-        // устанавливает на 365 дней куку с тектовым содержимым параграфа
-        $.cookie('viewed_banner', $('#info p').text(), { expires: 365 });
-    });
+$(function(){
+    function get_cookie(cookie_name){
+        var results = document.cookie.match ('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
+        if (results)
+            return (unescape (results[2]));
+        else
+            return null;
+    }
+
+function check_cookie(){
+	var textCookie = get_cookie('messagetext'),
+        currentText = $('.message-box p').text();
+	if (textCookie == currentText) {
+        $('.message-box').hide(0);
+    }
 }
 
-
-$('#delete_cookie').on('click', function() {
-    $.removeCookie('viewed_banner');
+check_cookie();
+    
+    $('.close-button').click(function(){
+        var currentText = $('.message-box p').text(),
+        date = new Date();
+        date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+		document.cookie = "messagetext="+currentText+"; expires="+date.toGMTString()+"; path=/";
+        $('.message-box').fadeOut(200);
+    });
 })
 	  </script>
 	  
 	  <style>
-	  #info {
-   display: none;
+.message-box{
+    font: 14px/18px normal Arial, sans-serif;
+    background: #116dd6;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    position: relative;
 }
 
-#info-hide {
-   color: red;
-   font-weight:
-   bold;
-   font-size: 16px;
-   cursor: pointer;
+.message-box p{
+    margin: 20px;
+    padding: 0;
 }
 
-#delete_cookie {
-   text-decoration: underline;
-   cursor: pointer;
-   }
+.close-button{
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.close-button:hover{
+    cursor: pointer;
+}
 	  </style>
 	  
