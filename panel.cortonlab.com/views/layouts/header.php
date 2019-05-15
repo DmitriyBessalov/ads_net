@@ -21,7 +21,7 @@
 </head>
 <body class="body">
   <div class="message-box">
-    <p>Обновление от 16.05.2019. Теперь вывод балансов можно запрашивать в личном кабинете. Для 1 этого нажмите на иконку пользователя и выберите пункт "Вывод балансов".</p>
+    <p><strong>Обновление от 16.05.2019.</strong> Теперь вывод балансов можно запрашивать в личном кабинете. Для этого нажмите на иконку пользователя и выберите пункт "Вывод балансов".</p>
     <span class="close-button">Понял, больше не показывать.</span>
   </div>
   <div class="left-menu">
@@ -105,12 +105,13 @@ check_cookie();
 	  
 	  <style>
 .message-box{
-    font: 14px/18px normal Arial, sans-serif;
+    font: 16px/20px;
     background: #116dd6;
     color: #fff;
     padding: 10px;
     width: 100%;
     position: relative;
+	font-family: 'Myriadpro Regular';
 }
 
 .message-box p{
@@ -122,7 +123,7 @@ check_cookie();
     position: absolute;
     right: 10px;
     bottom: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #fff;
     margin-bottom: 10px;
