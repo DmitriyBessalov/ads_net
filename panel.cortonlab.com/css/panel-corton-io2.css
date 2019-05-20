@@ -4881,3 +4881,36 @@ canvas {
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
+	
+.message-box{
+    font-size: 16px;
+    background: #116dd6;
+    color: #fff;
+    padding: 8px;
+    width: 100%;
+    position: absolute;
+    font-family: 'Myriadpro Regular';
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.message-box p{
+    margin: 8px;
+    padding: 0;
+}
+
+.close-button{
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-size: 16px;
+    font-weight:400;
+    color: #fff;
+    margin: 18px;
+	text-decoration: underline;
+}
+
+.close-button:hover{
+    cursor: pointer;
+}

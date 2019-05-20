@@ -905,3 +905,33 @@ $(document).ready(function(){
         $("#right-form").submit();
     });
 });
+
+
+//Блок с информацией о обновлениях для площадок
+$(function(){
+    function get_cookie(cookie_name){
+        var results = document.cookie.match ('(^|;) ?' + cookie_name + '=([^;]*)(;|$)');
+        if (results)
+            return (unescape (results[2]));
+        else
+            return null;
+    }
+
+function check_cookie(){
+	var textCookie = get_cookie('messagetext'),
+        currentText = $('.message-box p').text();
+	if (textCookie == currentText) {
+        $('.message-box').hide(0);
+    }
+}
+
+check_cookie();
+    
+    $('.close-button').click(function(){
+        var currentText = $('.message-box p').text(),
+        date = new Date();
+        date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
+		document.cookie = "messagetext="+currentText+"; expires="+date.toGMTString()+"; path=/";
+        $('.message-box').fadeOut(200);
+    });
+})
