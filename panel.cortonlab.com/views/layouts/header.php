@@ -20,22 +20,28 @@
   <div class="left-menu">
 	  <img src="/images/logo-corton.png" alt="" class="image">
       <? if ($GLOBALS['role']=='platform'): ?>
-          <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" alt="" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
+          <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='admin'): ?>
-	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" alt="" class="image-6"><div class="text-block-82-copy">Финансы</div></a>
-	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" alt="" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
+	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Финансы</div></a>
+	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='advertiser'): ?>
-            <a href="/articles?active=all" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
+            <a href="/articles?active=all" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
       <? endif; ?>
       <? if (($GLOBALS['role']=='admin')): ?>
-            <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" alt="" class="image-6"><div class="text-block-82">Статьи</div></a>
-            <a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" alt="" class="image-6"><div class="text-block-82">Клики</div></a>
-			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" alt="" class="image-6"><div class="text-block-82">Уведомления</div><div class="circlnotice">1</div></a>
-            <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" alt="" class="image-6"><div class="text-block-82">Пользователи</div></a>
+            <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
+            <a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" class="image-6"><div class="text-block-82">Клики</div></a>
+			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" class="image-6"><div class="text-block-82">Уведомления</div>
+                <?
+                $db = Db::getConnection();
+                $sql = "SELECT COUNT(*) FROM `notifications` WHERE `status`='0'";
+                $notification = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                if ($notification) echo '<div class="circlnotice" >'.$notification.'</div></a>';
+                ?>
+            <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>
       <? endif; ?>
-            <!--a href="/tickets" class="link-block w-inline-block"><img src="/images/ic-ticket.png" alt="" class="image-6"><div class="text-block-82">Тикеты</div></a-->
+            <!--a href="/tickets" class="link-block w-inline-block"><img src="/images/ic-ticket.png" class="image-6"><div class="text-block-82">Тикеты</div></a-->
   </div>
   <div class="header">
     <div class="div-block-88">

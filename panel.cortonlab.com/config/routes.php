@@ -20,7 +20,7 @@ switch ($GLOBALS['role']) {
             'platforms-update' => 'ploshadki/update',
             'platforms-otchicleniay' => 'ploshadki/otchicleniay',
             'platforms-spisanie' => 'ploshadki/spisanie',
-            'platform-stat' => 'ploshadki/Stat',
+            'platform-stat' => 'ploshadki/stat',
             'platforms-del' => 'ploshadki/del',
 
             //Сохранение стилей виджетов
@@ -41,6 +41,8 @@ switch ($GLOBALS['role']) {
 			
 			//Уведомления
             'notifications' => 'notifications/index',
+            'notifikations-obrabotano' => 'notifications/obrabotano',
+            'notifikations-del' => 'notifications/del',
 			
             //Тикеты
             'tickets' => 'ticket/index',

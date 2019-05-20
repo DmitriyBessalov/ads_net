@@ -9,7 +9,6 @@ $redis->select(4);
 $block=$redis->get('r:'.$prosmort_id);
 if ($block){$redis->set('r:'.$prosmort_id, 1, 1296000);$redis->set('s:'.$prosmort_id, 1, 1296000);exit;}else{$redis->set('r:'.$prosmort_id, 1, 1296000);$redis->set('s:'.$prosmort_id, 1, 1296000);}
 
-
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 $dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 

@@ -62,8 +62,6 @@
               </tr> 
             </thead>';
 
-
-
                 foreach ($result as $i) {
                     $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as 'dohod', SUM(`r`)+SUM(`e`)+SUM(`s`) as 'prosmotr',SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`)as 'click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'  AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                     $platform = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);

@@ -37,7 +37,6 @@ if (isset($_POST['login-form']['login'])){
     $headers = "From: admin@cortonlab.com\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $email = 'dmitriy8bessalov.ru';
     $subject = 'Новый модератор в сервисе Cortonlab.com';
     $message = "<html><body>
                 <b>Имя пользователя:</b> ".$fio."<br>
@@ -45,7 +44,6 @@ if (isset($_POST['login-form']['login'])){
                 <b>URL полщадки:</b> ".$url."<br>
                 <a href=\"http://cotrton.io/panel\">Открыть список пользоваелей на сайте</a>
                 </body></html>";
-    mail('dmitriy8bessalov.ru', $subject, $message, $headers);
     mail('leads@cortonlab.com', $subject, $message, $headers);
 } elseif (isset($_POST['ContactFormtwo']['name'])) {
     $_SESSION = array();
@@ -67,7 +65,6 @@ if (isset($_POST['login-form']['login'])){
                 <b>URL полщадки:</b> ".$url."<br>
                 <a href=\"http://cotrton.io/panel\">Открыть список пользоваелей на сайте</a>
                 </body></html>";
-    mail('dmitriy8bessalov.ru', $subject, $message, $headers);
     mail('leads@cortonlab.com', $subject, $message, $headers);
 };
 

@@ -135,6 +135,11 @@ $(document).ready(function(){
         $('.black-fon').css("display", "block");
         $('#spisanie'+this.id.substr(6)).css("display", "block");
     });
+//Открытие модального окона в кабинете площадок при запросе вывода средств
+    $("#vivod").click(function(){
+        $('.modal').css("display", "block");
+        $('.black-fon').css("display", "block");
+    });
 
 // При изменении виджета Promo
     $('.widget-promo input, .widget-promo select').change(function(){
