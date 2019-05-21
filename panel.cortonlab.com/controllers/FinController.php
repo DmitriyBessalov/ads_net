@@ -395,7 +395,7 @@ class FinController
 
     public static function actionAdmin()
     {
-        $title='Статистика общая';
+        $title='Статистика по платформе';
         include PANELDIR.'/views/layouts/header.php';
 
         if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y');}
