@@ -49,7 +49,7 @@ class ArticleController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('185.75.90.54', 6379);
+                $redis->pconnect('185.75.90.54', 6379);
                 $redis->select(1);
             }
 
@@ -222,7 +222,7 @@ class ArticleController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('185.75.90.54', 6379);
+                $redis->pconnect('185.75.90.54', 6379);
                 $redis->select(1);
                 $ch=0;
             }

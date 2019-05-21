@@ -24,7 +24,7 @@
                 }
                 $str=substr($str, 0, -3);
 
-                $sql="SELECT p.`id`, p.`domen`, p.`type`, p.`otchiclen`, u.`email` as `user_email`, p.`date_add`, p.`status`, p.`otchiclen`, p.`recomend_aktiv`, p.`natpre_aktiv`, p.`natpro_aktiv`, p.`slider_aktiv`, p.`favicon` FROM `ploshadki` p RIGHT OUTER JOIN `users` u ON p.`user_id` = u.`id` WHERE p.`id` != 0 ".$str." ORDER BY p.`domen`";
+                $sql="SELECT p.`id`, p.`domen`, p.`type`, p.`otchiclen`, u.`email` as `user_email`, p.`date_add`, p.`status`, p.`otchiclen`, p.`recomend_aktiv`, p.`natpre_aktiv`, p.`natpro_aktiv`, p.`slider_aktiv` FROM `ploshadki` p RIGHT OUTER JOIN `users` u ON p.`user_id` = u.`id` WHERE p.`id` != 0 ".$str." ORDER BY p.`domen`";
 
                 $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 echo '
@@ -59,7 +59,7 @@
                 <td style="width: 111px;"><div class="tooltipinfo1">График<span class="tooltiptext1">График по просмотрам за последние 7 дней</span></div></td>
                 <td>Доход</td>
                 <td style="width: 110px;"></td>
-              </tr> 
+              </tr>
             </thead>';
 
                 foreach ($result as $i) {
@@ -86,12 +86,13 @@
                         $grafik.='"'.$k.'",';
                     }
 
-
                     $grafik.='"0"';
                     echo "<tr>
                       <td style=\"text-align: left; min-width: 336px;\">
 					  <div style=\"margin-top: 7px;\">
-					      <div class=\"logomini\""; if($i['favicon']!="")echo" style=\"background-image: url('".$i['favicon']."');\"";echo "></div>
+					      <div class=\"logomini\"'>
+					        <img style='margin-top: 8px;' src='https://favicon.yandex.net/favicon/".$i['domen']."'>
+                          </div>
 					      <div class=\"logominitext\">
 						     <a href='http://" . $i['domen'] . "' style='text-decoration: none;'>" . $i['domen'] . "</a>
 					         <p style=\"color: #768093; font-size: 12px;\">" . $i['user_email'] . " 
@@ -216,8 +217,11 @@ var myLineChart = new Chart(ctx, {
         echo '
 		<div class="table-right">
 		    <form id="right-form" action="/platforms" name="email-form" class="form-333">
-			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
-			<a href="/platforms-edit?id=0" class="button-css-edit w-button">Стандартные стили</a>
+			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>';
+        if ($GLOBALS['role']=='admin')
+        echo '
+			<a href="/platforms-edit?id=0" class="button-css-edit w-button">Стандартные стили</a>';
+        echo '    
 			<br><br>
 			<p class="filtermenu"><label'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="all"class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';}  echo'>Все статусы площадок</label></p>
             <p class="filtermenu"><label'; if ($_GET['status']=='1'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="1"  class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'>Активные площадки</label></p>
@@ -273,7 +277,7 @@ var myLineChart = new Chart(ctx, {
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
                 if (addslashes($_REQUEST['id'])==""){
-                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."',`widget_page`='".$_POST['widget_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
+                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
                     $db->query($sql);
                     $id=$db->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
@@ -301,7 +305,6 @@ var myLineChart = new Chart(ctx, {
                         `categoriya` = '".$_POST['categoriya']."',
                         `podcategoriya` ='".$_POST['podcategoriya']."',
                         `promo_page`='".$_POST['promo_page']."',
-                        `widget_page`='".$_POST['widget_page']."',
                         `user_id` = '".$_POST['user_id']."',
                         `status` ='".$aktiv."',
                         `recomend_zag_aktiv` = ".$zagrecomend.",
@@ -311,8 +314,7 @@ var myLineChart = new Chart(ctx, {
                         `demo-annons`='".$_POST['demo-annons']."',
                         `CTR`='".$_POST['CTR']."',
                         `CPM`='".$_POST['CPM']."',
-                        `CPG`='".$_POST['CPG']."',
-                        `favicon`='".$_POST['favicon']."'
+                        `CPG`='".$_POST['CPG']."'
                     WHERE `id`='".$_POST['id']."';";
 
                     $db->query($sql);
@@ -326,7 +328,7 @@ var myLineChart = new Chart(ctx, {
             {
                 $db=Db::getConnection();
                 if (addslashes($_REQUEST['id'])!='') {
-                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page`,`widget_page`,`favicon` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
+                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                     $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
@@ -389,7 +391,6 @@ var myLineChart = new Chart(ctx, {
                 <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
                 <select id="podcategoriya" name="podcategoriya" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Подкатегория площадки</option>
-                  <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 740px;" name="favicon" value="'.$result['favicon'].'" placeholder="URL favicon">
                 </select>
 				<div style="width: 1337px; margin-bottom: 60px;"></div>
 				
@@ -496,7 +497,6 @@ var myLineChart = new Chart(ctx, {
                     </div>
                   </div>
                 </div>
-                <input type="url" class="text-field-10 w-input" maxlength="256" style="width: 740px;margin-top: 25px;" name="widget_page" value="'.$result['widget_page'].'" placeholder="URL widget page">
               </div>
 			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>';}
                 echo'
@@ -2489,7 +2489,7 @@ var myLineChart = new Chart(ctx, {
                 if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                     $today = true;
                     $redis = new Redis();
-                    $redis->connect('185.75.90.54', 6379);
+                    $redis->pconnect('185.75.90.54', 6379);
                     $redis->select(3);
 
                     $ch=$redis->get(date('d').':'.$_GET['id'].':r');

@@ -4246,7 +4246,7 @@ input.w-button2 {
     text-align: center;
     background-position: center center;
     background-repeat: no-repeat;
-    background-image: url(/images/favdemo.png);
+/*    background-image: url(/images/favdemo.png);*/
     background-size: cover;
 	background-size: 16px 16px;
 }	

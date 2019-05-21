@@ -7,18 +7,16 @@ class NotificationsController
         $title='Системные уведомления';
         include PANELDIR.'/views/layouts/header.php';
         $db = Db::getConnection();
-
-        if (isset($_GET['status'])) {
-            if ($_GET['status'] != 'all') {
-                if (in_array($_GET['platform'], $arrplatform)) {
-                    $strplatform = $_GET['platform'];
-                    $sql = "SELECT `domen` FROM `ploshadki` WHERE id='" . $_GET['platform'] . "'";
-                    $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                } else exit;
-            }
+        $str='1';
+        if ((!isset($_GET['status'])) xor ($_GET['status'] != 'all')) {
+              if ($_GET['status']) {
+                  $str="`status`='1'";
+              }else{
+                  $str="`status`='0'";
+              }
         }
 
-        $sql="SELECT * FROM `notifications` WHERE 1";
+        $sql="SELECT * FROM `notifications` WHERE ".$str." ORDER BY `status`, `id`";
         $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 		echo '
 		  <div class="form-block w-form">

@@ -22,8 +22,6 @@ class UsersController
                     $dirName=PANELDIR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
                     mkdir($dirName);
                     mkdir($dirName.DIRECTORY_SEPARATOR.'a');
-                    mkdir($dirName.DIRECTORY_SEPARATOR.'s');
-                    mkdir($dirName.DIRECTORY_SEPARATOR.'t');
                 }
             }
         };
@@ -70,7 +68,8 @@ class UsersController
                  switch ($i['role']) {
                      case "admin": $i['role'] = "Администраторы"; break;
                      case "advertiser": $i['role'] = "Рекламодатели"; break;
-                     case "platform": $i['role'] = "Площадки";
+                     case "platform": $i['role'] = "Площадки"; break;
+                     case "manager": $i['role'] = "Менеджер";
                  };
 
                  $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$i['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$i['id']."')";
@@ -207,7 +206,7 @@ class UsersController
         return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
-    //Добавление пользователей
+    //Добавление (создание) пользователей
     public static function actionEdit(){
 	    if (isset($_GET['id'])){
             $title='Редактирование пользователя';
@@ -233,6 +232,7 @@ class UsersController
 				<select name="role" required="" class="select-field w-select">
 					<option '; if ($result['role']=="platform") echo 'selected '; echo 'value="platform">Площадки</option>
 					<option '; if ($result['role']=="advertiser") echo 'selected '; echo 'value="advertiser">Рекламодатели</option>
+                    <option '; if ($result['role']=="manager") echo 'selected '; echo 'value="manager">Менеджер</option>
 					<option '; if ($result['role']=="admin") echo 'selected '; echo 'value="admin">Админы</option>
 				</select>
                 <div class="div-block-127">
@@ -268,11 +268,7 @@ class UsersController
         if ($user['password_md5'] === $password) {
              $sql = "UPDATE `users` SET `phpsession` = '" . $session . "',`last_ip`='" . $ip . "' WHERE `email`='" . $email . "';";
              $db->query($sql);
-             if ($user['role']=='advertiser'){
-                 header('Location: /articles');
-             }else {
-                 header('Location: /finance');
-             }
+             UsersController::panelStartPage($user['role']);
         }else{
              SiteController::actionLoginform();
         };
@@ -281,9 +277,9 @@ class UsersController
 
     //Удаление пользователя
     public static function actionDel(){
-        //$db = Db::getConnection();
-        //$sql="DELETE FROM `users` WHERE `users`.`id` = ".$_GET['id'];
-        //$db->query($sql);
+        $db = Db::getConnection();
+        $sql="DELETE FROM `users` WHERE `users`.`id` = ".$_GET['id'];
+        $db->query($sql);
 
         /* Удаление каталога c содержимым только под linux
            $dirName=PANELDIR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
@@ -301,10 +297,21 @@ class UsersController
         $sql="SELECT `phpsession`,`role` FROM `users` WHERE `users`.`id` = ".$_GET['id'];
         $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
         setcookie ( 'PHPSESSID', $user['phpsession'], time () + 10000000, '/');
-        if ($user['role']=='advertiser'){
-            header('Location: /articles?active=1');
-        }else {
-            header('Location: /finance');
+        UsersController::panelStartPage($user['role']);
+        exit;
+    }
+
+    //Стартовая страница при входе в админку
+    public static function panelstartPage($role){
+        switch ($role) {
+            case 'advertiser':
+                header('Location: /articles?active=1');
+                break;
+            case 'manager':
+                header('Location: /platforms?status=1');
+                break;
+            default:
+                header('Location: /finance');
         }
         exit;
     }

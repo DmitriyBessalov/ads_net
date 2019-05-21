@@ -91,6 +91,22 @@ switch ($GLOBALS['role']) {
             '.+' => 'site/all',
             '' => 'site/loginform',
         );
+    case 'manager':
+        return array(
+            //Вывод и добавление площадок
+            'platforms' => 'ploshadki/index',
+            'platforms-add' => 'ploshadki/add',
+            'platforms-edit' => 'ploshadki/edit',
+            'platforms-update' => 'ploshadki/update',
+            'platform-stat' => 'ploshadki/stat',
+
+            //Авторизация
+            'logout' => 'users/logout',
+
+            //Страницы сайта:
+            '.+' => 'site/all',
+            '' => 'site/loginform',
+        );
     case 'none':
         return array(
             //Авторизация

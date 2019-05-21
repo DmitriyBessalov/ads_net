@@ -4,7 +4,7 @@ $_GET = array_map('addslashes', $_GET);
 $prosmort_id=(int)$_GET['prosmort_id'];if ($prosmort_id==0)exit;
 
 $redis = new Redis();
-$redis->connect('185.75.90.54', 6379);
+$redis->pconnect('185.75.90.54', 6379);
 $redis->select(4);
 $block=$redis->get('c:'.$prosmort_id);
 if ($block){$redis->set('c:'.$prosmort_id, 1, 1296000);exit;}else{$redis->set('c:'.$prosmort_id, 1, 1296000);}

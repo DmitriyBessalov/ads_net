@@ -2,7 +2,6 @@
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 $dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
 
-
 function notifikation($platform_id, $opisanie, $date){
     $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
     $sql= "SELECT `domen` FROM `ploshadki` WHERE `id`='".$platform_id."'";
