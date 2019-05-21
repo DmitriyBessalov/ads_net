@@ -2212,6 +2212,10 @@ input.w-button2 {
   display: inline-flex;
 }
 
+input[name=active] {
+	font-weight: 600;
+}	
+
 .text-block-102 {
   font-size: 18px;
   font-family: 'Myriadpro Regular';
