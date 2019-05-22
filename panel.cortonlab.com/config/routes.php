@@ -100,6 +100,9 @@ switch ($GLOBALS['role']) {
             'platforms-update' => 'ploshadki/update',
             'platform-stat' => 'ploshadki/stat',
 
+            //Пользователи
+            'users' => 'users/index',
+
             //Авторизация
             'logout' => 'users/logout',
 

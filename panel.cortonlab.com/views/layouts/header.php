@@ -29,6 +29,7 @@
       <? endif; ?>
       <? if (($GLOBALS['role']=='manager')): ?>
           <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
+          <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='admin'): ?>
 	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Финансы</div></a>

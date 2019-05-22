@@ -22,9 +22,15 @@
                 if ((isset($_GET['status'])) AND ($_GET['status']!='all')){
                     $str.=" p.`status`='".$_GET['status']."' AND";
                 }
+
+                if ($GLOBALS['role']=='manager'){
+                    $str.=" u.`manager`='".$GLOBALS['user']."' AND";
+                    $manager_a_disable='style="opacity: 0.5; pointer-events: none;"';
+                }
+
                 $str=substr($str, 0, -3);
 
-                $sql="SELECT p.`id`, p.`domen`, p.`type`, p.`otchiclen`, u.`email` as `user_email`, p.`date_add`, p.`status`, p.`otchiclen`, p.`recomend_aktiv`, p.`natpre_aktiv`, p.`natpro_aktiv`, p.`slider_aktiv` FROM `ploshadki` p RIGHT OUTER JOIN `users` u ON p.`user_id` = u.`id` WHERE p.`id` != 0 ".$str." ORDER BY p.`domen`";
+                $sql="SELECT p.`id`, p.`domen`, p.`type`, p.`otchiclen`, u.`email` as `user_email`, p.`date_add`, p.`status`, p.`otchiclen`, p.`recomend_aktiv`, p.`natpre_aktiv`, p.`natpro_aktiv`, p.`slider_aktiv`, u.`manager` FROM `ploshadki` p RIGHT OUTER JOIN `users` u ON p.`user_id` = u.`id` WHERE p.`id` != 0 ".$str." ORDER BY p.`domen`";
 
                 $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 echo '
@@ -69,6 +75,9 @@
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
 
+                    $sql="SELECT `email` FROM `users` WHERE `id` ='".$i['manager']."'";
+                    $i['manager']=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
                     $sql="SELECT `date`, SUM(`r`) + SUM(`e`) + SUM(`s`) AS 'prosmotr' FROM `balans_ploshadki` WHERE `ploshadka_id` = '".$i['id']."' AND `date`>=(CURDATE() - 6) GROUP BY `date`";
                     $gragik_arr=$dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -95,14 +104,15 @@
                           </div>
 					      <div class=\"logominitext\">
 						     <a href='http://" . $i['domen'] . "' style='text-decoration: none;'>" . $i['domen'] . "</a>
-					         <p style=\"color: #768093; font-size: 12px;\">" . $i['user_email'] . " 
-							 <span class=\"nowstatus\">";
+					         <p style=\"color: #768093; font-size: 12px; margin-bottom: 0px;\">" . $i['user_email'] . " 
+							  <span class=\"nowstatus\">";
                     echo $i['status'] ? 'Активна' : 'Неактивен';
-                    echo " </span>
-					<span style=\"margin-left: 5px;\" class=\"nowstatus\" id='otchic".$i['id']."'>
-					%: ".$i['otchiclen']."
-                    </span>
-					</p>
+                    echo "    </span>
+                              <span style=\"margin-left: 5px;\" class=\"nowstatus\" id='otchic".$i['id']."'>
+                              %: ".$i['otchiclen']."
+                              </span>
+                            </p>
+                            <p style=\"color: #768093; font-size: 12px;\">Менеджер: ".$i['manager']."</p>
 						  </div>
 					  </div>
 					  </td>
@@ -177,12 +187,12 @@ var myLineChart = new Chart(ctx, {
 						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                          <ul class=\"sub-menu\">
                               <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
-                              <a class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
+                              <a ".$manager_a_disable." class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
                               if ($i['type']!='demo'){
                                   echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>";
                               }
                               echo "
-                              <a href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
+                              <a ".$manager_a_disable." href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
                          </ul>
                          
                          <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
@@ -277,7 +287,7 @@ var myLineChart = new Chart(ctx, {
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
                 if (addslashes($_REQUEST['id'])==""){
-                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
+                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `manager`='".$GLOBALS['user']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
                     $db->query($sql);
                     $id=$db->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
@@ -525,6 +535,16 @@ var myLineChart = new Chart(ctx, {
                 $db = Db::getConnection();
                 $title='Редактирование площадки';
                 include PANELDIR.'/views/layouts/header.php';
+
+                //Защита от подмены менеджера
+                if ($GLOBALS['role']=='manager') {
+                    $sql = "SELECT `manager` FROM `ploshadki` WHERE `id`='" . addslashes($_REQUEST['id']) . "';";
+                    $manager = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    if ($manager != $GLOBALS['user']) {
+                        die;
+                    };
+                }
+
                 PloshadkiController::form();
 
                 $sql="SELECT * FROM `style_promo` WHERE `id`='".addslashes($_REQUEST['id'])."';";$result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);

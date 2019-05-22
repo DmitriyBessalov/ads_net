@@ -26,8 +26,19 @@ class UsersController
             }
         };
 
+        $str="";
         if ((isset($_GET['role'])) AND ($_GET['role']!='all')){
             $str=" WHERE u.`role`='".$_GET['role']."'";
+        }
+
+        if ($GLOBALS['role']=='manager'){
+            if ($str!=""){
+                $str.=' AND';
+            }else{
+                $str=' WHERE';
+            }
+            $str.=" u.`manager`='".$GLOBALS['user']."'";
+            $manager_a_disable='style="opacity: 0.5; pointer-events: none;"';
         }
 
         $sql="SELECT u.id, u.email, u.fio, u.role, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id".$str." GROUP BY u.email";
@@ -87,10 +98,10 @@ class UsersController
               <td style=\"width:90px; text-align: right; padding-right: 20px;\">
 			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                   <ul class=\"sub-menu\"> 
-                      <a href=\"user-edit?id=".$i['id']."\">Редактировать</a><br>
-                      <a href=\"user-enter?id=".$i['id']."\">Войти</a><br>
-                      <a class='modalclickb' id='balans".$i['id']."'>Вывод баланса</a><br>
-                      <a href=\"user-del?id=".$i['id']."\">Удалить</a> 	 
+                      <a ".$manager_a_disable." href=\"user-edit?id=".$i['id']."\">Редактировать</a><br>
+                      <a ".$manager_a_disable." href=\"user-enter?id=".$i['id']."\">Войти</a><br>
+                      <a ".$manager_a_disable." class='modalclickb' id='balans".$i['id']."'>Вывод баланса</a><br>
+                      <a ".$manager_a_disable." href=\"user-del?id=".$i['id']."\">Удалить</a> 	 
                    </ul>
               </td>
                         <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
@@ -117,16 +128,14 @@ class UsersController
           <div class="black-fon modalhide" style="display: none;"></div>
 		  </div>
 		  <div class="table-right">
-		    <form id="right-form" class="form-333">
+		   <form id="right-form" class="form-333">
 			<a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>			
             <p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все пользователи</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>Площадки</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Рекламодатели</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='manager'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="manager"  class="form-radio"'; if ($_GET['role']=='manager'){echo ' checked';} echo'>Менеджеры</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='admin'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="admin"  class="form-radio"'; if ($_GET['role']=='admin'){echo ' checked';} echo'>Техподдержка</label></p>
-           
-			</form>
-			
-			
+           </form>
 		</div>
         </div>
         <div class="div-block-98">
