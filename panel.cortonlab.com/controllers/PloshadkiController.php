@@ -498,7 +498,7 @@ var myLineChart = new Chart(ctx, {
                   </div>
                 </div>
               </div>
-			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>';}
+			  ';}
                 echo'
 			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
 			  <input type="submit" value="Сохранить настройки" class="submit-button-6 w-button2" '.$disabled.'>
