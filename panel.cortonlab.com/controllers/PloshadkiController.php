@@ -398,10 +398,10 @@ var myLineChart = new Chart(ctx, {
                   if ($result['type']=='demo')
                  echo'
                 </div>
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
                 </div>
                 ';echo'
 				</div>
