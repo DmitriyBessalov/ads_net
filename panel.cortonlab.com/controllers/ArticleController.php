@@ -211,9 +211,7 @@ class ArticleController
                 <th><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики с промо статьи и процент от оплаченых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от кол-ва кликов / CTR от кол-ва целевых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">PCL<span class="tooltiptext1">Цена за переход по URL</span></div></th>
-                <!--th>Отказы</th-->
-               
-                <th></th>
+                <!--th>Отказы</th-->  
               </tr>
             </thead>';
 
@@ -299,7 +297,7 @@ class ArticleController
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
                     echo '<td>' . $result['promo_id'] . '</td>';
-                    echo '<td></td>';
+                    echo '<td></td><td></td>';
                 }
                 echo ' 
                
