@@ -211,7 +211,9 @@ class ArticleController
                 <th><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики с промо статьи и процент от оплаченых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от кол-ва кликов / CTR от кол-ва целевых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">PCL<span class="tooltiptext1">Цена за переход по URL</span></div></th>
-                <!--th>Отказы</th-->  
+                <!--th>Отказы</th-->
+               
+                <th></th>
               </tr>
             </thead>';
 
@@ -309,6 +311,9 @@ class ArticleController
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
+               
+               <td style="width: 111px; text-align: right; padding-right: 20px;">
+               </td>
               </tr>  
              ';
                 $ch2++;
