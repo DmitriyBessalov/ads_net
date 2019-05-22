@@ -2410,7 +2410,7 @@ var myLineChart = new Chart(ctx, {
         </div>
     </div>
 </div>
-<div class="black-fon modalhide"></div>';
+<div class="black-fon modalhide"></div>'
              
 
         //Меняет коэфициент отчислений для площадки
