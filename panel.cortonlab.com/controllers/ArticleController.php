@@ -311,20 +311,6 @@ class ArticleController
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
-               
-               <td style="width: 111px; text-align: right; padding-right: 20px;">
-				 <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
-                 <ul class="sub-menu"> 
-                  <a href="article-edit?id=' . $result['promo_id'] . '">Редактировать</a><br>';
-                if ($result['active'] == 1) {
-                    echo '<a href="article-stop?id=' . $result['promo_id'] . '">Остановить</a><br>';
-                } else {
-                    echo '<a href="article-start?id=' . $result['promo_id'] . '">Запустить</a><br>';
-                };
-                echo '
-                  <a href="article-del?id=' . $result['promo_id'] . '">Удалить</a> 
-                 </ul>
-               </td>
               </tr>  
              ';
                 $ch2++;
