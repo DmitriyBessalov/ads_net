@@ -299,7 +299,7 @@ class ArticleController
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
                     echo '<td>' . $result['promo_id'] . '</td>';
-                    echo '<td></td><td></td>';
+                    echo '<td></td>';
                 }
                 echo ' 
                
