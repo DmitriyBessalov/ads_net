@@ -505,7 +505,8 @@ var myLineChart = new Chart(ctx, {
             </form>
           </div>
         </div>';
-		     
+		     include PANELDIR . '/views/layouts/footer.php';
+             return true;
             }
 
             //Добавления площадки
@@ -516,8 +517,7 @@ var myLineChart = new Chart(ctx, {
 
                 PloshadkiController::form();
 
-                include PANELDIR . '/views/layouts/footer.php';
-                return true;
+               
             }
 
             //Редактирование  площадки
