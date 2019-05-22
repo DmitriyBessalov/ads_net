@@ -539,10 +539,10 @@ var myLineChart = new Chart(ctx, {
 
                 //Защита от подмены менеджера
                 if ($GLOBALS['role']=='manager') {
-                    $sql = "SELECT `manager` FROM `ploshadki` WHERE `id`='" . addslashes($_REQUEST['id']) . "';";
+                    $sql = "SELECT u.`manager` FROM ploshadki p RIGHT OUTER JOIN users u ON p.`user_id` = u.`id`  WHERE p.`id`='" . addslashes($_REQUEST['id']) . "';";
                     $manager = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
                     if ($manager != $GLOBALS['user']) {
-                        die;
+                        die('Доступ запрещён');
                     };
                 }
 
