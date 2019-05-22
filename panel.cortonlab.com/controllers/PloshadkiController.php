@@ -2411,8 +2411,7 @@ var myLineChart = new Chart(ctx, {
     </div>
 </div>
 <div class="black-fon modalhide"></div>';
-             include PANELDIR . '/views/layouts/footer.php';
-             return true;
+             
         }
 
         //Меняет коэфициент отчислений для площадки
