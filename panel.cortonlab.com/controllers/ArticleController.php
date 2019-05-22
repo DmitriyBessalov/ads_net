@@ -120,11 +120,11 @@ class ArticleController
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu"> 
                                      <a href="article-edit?id=' . $i['promo_id'] . '">Редактировать</a><br>
-									 <a href="article-edit?id=' . $i['promo_id'] . '">Настройка анонсов</a><br>
-									 <a href="article-edit?id=' . $i['promo_id'] . '">Таргетинг</a><br>
+									 <a href="article-edit?id=' . $i['promo_id'] . '">Анонсов</a><br>
 									 <a href="article-stat?id=' . $i['promo_id'] . '">Статистика анонсов</a><br>
+									 <a href="article-edit?id=' . $i['promo_id'] . '">Таргетинг</a><br>
 									 <a href="article-stat?id=' . $i['promo_id'] . '">Контактная форма</a><br>
-                                     <a href="article-del?id=' . $i['promo_id'] . '">Удалить</a> 
+                                     <a style="color: #ff0303;" href="article-del?id=' . $i['promo_id'] . '">Удалить</a> 
                                   </ul>
                                   </td>
                                 </tr>  
