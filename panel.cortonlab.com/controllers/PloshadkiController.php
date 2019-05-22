@@ -233,14 +233,14 @@ var myLineChart = new Chart(ctx, {
 			<a href="/platforms-edit?id=0" class="button-css-edit w-button">Стандартные стили</a>';
         echo '    
 			<br><br>
-			<p class="filtermenu"><label'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="all"class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';}  echo'>Все статусы площадок</label></p>
-            <p class="filtermenu"><label'; if ($_GET['status']=='1'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="1"  class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'>Активные площадки</label></p>
-            <p class="filtermenu"><label'; if ($_GET['status']=='0'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="0"  class="form-radio"'; if ($_GET['status']=='0'){echo ' checked';} echo'>Неактивные площадки</label></p>
+			<p class="filtermenu"><label'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="status" value="all"class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';}  echo'>Все статусы площадок</label></p>
+            <p class="filtermenu"><label'; if ($_GET['status']=='1'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="status" value="1"  class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'>Активные площадки</label></p>
+            <p class="filtermenu"><label'; if ($_GET['status']=='0'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="status" value="0"  class="form-radio"'; if ($_GET['status']=='0'){echo ' checked';} echo'>Неактивные площадки</label></p>
             <br>
-            <p class="filtermenu"><label'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="all"  class="form-radio"'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' checked';} echo'>Все типы площадок</label></p>
-			<p class="filtermenu"><label'; if ($_GET['type']=='info'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="info" class="form-radio"'; if ($_GET['type']=='info'){echo ' checked';} echo'>Информационные</label></p>
-			<p class="filtermenu"><label'; if ($_GET['type']=='news'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="news" class="form-radio"'; if ($_GET['type']=='news'){echo ' checked';} echo'>Новостные</label></p>
-			<p class="filtermenu"><label'; if ($_GET['type']=='demo'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="type" value="demo" class="form-radio"'; if ($_GET['type']=='demo'){echo ' checked';} echo'>Демонстрационные</label></p>
+            <p class="filtermenu"><label'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="type" value="all"  class="form-radio"'; if ((!isset($_GET['type'])) OR ($_GET['type']=='all')){echo ' checked';} echo'>Все типы площадок</label></p>
+			<p class="filtermenu"><label'; if ($_GET['type']=='info'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="type" value="info" class="form-radio"'; if ($_GET['type']=='info'){echo ' checked';} echo'>Информационные</label></p>
+			<p class="filtermenu"><label'; if ($_GET['type']=='news'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="type" value="news" class="form-radio"'; if ($_GET['type']=='news'){echo ' checked';} echo'>Новостные</label></p>
+			<p class="filtermenu"><label'; if ($_GET['type']=='demo'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="type" value="demo" class="form-radio"'; if ($_GET['type']=='demo'){echo ' checked';} echo'>Демонстрационные</label></p>
             
 
 			<div class="html-embed-3 w-embed" style="margin-top: 40px;">
@@ -408,10 +408,10 @@ var myLineChart = new Chart(ctx, {
                   if ($result['type']=='demo')
                  echo'
                 </div>
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
                 </div>
                 ';echo'
 				</div>
@@ -439,7 +439,7 @@ var myLineChart = new Chart(ctx, {
                   }
               else
                 {
-                    echo '<div id="checktag" class="text-block-118">Проверка установки тегов</div></div>';
+                    echo '<div id="checktag" class="text-block-118" style="margin-bottom: 60px;">Проверка установки тегов</div></div>';
                 };
               if (addslashes($_REQUEST['id'])!='') {
                     echo '
@@ -507,14 +507,15 @@ var myLineChart = new Chart(ctx, {
                     </div>
                   </div>
                 </div>
-              </div>
-			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>';}
+              </div>';}
                 echo'
+			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
 			  <input type="submit" value="Сохранить настройки" class="submit-button-6 w-button2" '.$disabled.'>
 			  
             </form>
           </div>
         </div>';
+		     
             }
 
             //Добавления площадки

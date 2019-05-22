@@ -74,9 +74,9 @@ class NotificationsController
             <div class="html-embed-3 w-embed">
             <form id="right-form" class="form-333">
 		    <a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
-			<p class="filtermenu"><label'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="all" class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';}  echo'>Все уведомления</label></p>
-            <p class="filtermenu"><label'; if ($_GET['status']=='0'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="0" class="form-radio"'; if ($_GET['status']=='0'){echo ' checked';} echo'>В ожидание</label></p>
-            <p class="filtermenu"><label'; if ($_GET['status']=='1'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="status" value="1"  class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'>Обработано</label></p>
+			<p class="filtermenu"><label'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="status" value="all" class="form-radio"'; if ((!isset($_GET['status'])) OR ($_GET['status']=='all')){echo ' checked';}  echo'>Все уведомления</label></p>
+            <p class="filtermenu"><label'; if ($_GET['status']=='0'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="status" value="0" class="form-radio"'; if ($_GET['status']=='0'){echo ' checked';} echo'>В ожидание</label></p>
+            <p class="filtermenu"><label'; if ($_GET['status']=='1'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="status" value="1"  class="form-radio"'; if ($_GET['status']=='1'){echo ' checked';} echo'>Обработано</label></p>
 		    </form>
 			</div>
 		</div>

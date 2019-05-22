@@ -130,12 +130,15 @@ class UsersController
 		  <div class="table-right">
 		   <form id="right-form" class="form-333">
 			<a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>			
-            <p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все пользователи</label></p>
-            <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>Площадки</label></p>
-            <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Рекламодатели</label></p>
-            <p class="filtermenu"><label'; if ($_GET['role']=='manager'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="manager"  class="form-radio"'; if ($_GET['role']=='manager'){echo ' checked';} echo'>Менеджеры</label></p>
-            <p class="filtermenu"><label'; if ($_GET['role']=='admin'){echo ' style="text-decoration: underline;"';}echo'><input type="radio" name="role" value="admin"  class="form-radio"'; if ($_GET['role']=='admin'){echo ' checked';} echo'>Техподдержка</label></p>
-           </form>
+            <p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все пользователи</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>Площадки</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Рекламодатели</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='manager'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="manager"  class="form-radio"'; if ($_GET['role']=='manager'){echo ' checked';} echo'>Менеджеры</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='admin'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="admin"  class="form-radio"'; if ($_GET['role']=='admin'){echo ' checked';} echo'>Техподдержка</label></p>
+           
+			</form>
+			
+			
 		</div>
         </div>
         <div class="div-block-98">
