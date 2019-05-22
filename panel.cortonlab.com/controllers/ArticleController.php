@@ -123,7 +123,8 @@ class ArticleController
 									 <a href="article-edit?id=' . $i['promo_id'] . '">Анонсы</a><br>
 									 <a href="article-stat?id=' . $i['promo_id'] . '">Статистика анонсов</a><br>
 									 <a href="article-edit?id=' . $i['promo_id'] . '">Таргетинг</a><br>
-									 <a href="article-stat?id=' . $i['promo_id'] . '">Контактная форма</a><br>
+									 <a href="article-stat?id=' . $i['promo_id'] . '">Анализ ссылок</a><br>
+									 <a href="article-stat?id=' . $i['promo_id'] . '">A/B анализ</a><br>
                                      <a style="color: #ff0303;" href="article-del?id=' . $i['promo_id'] . '">Удалить</a> 
                                   </ul>
                                   </td>
