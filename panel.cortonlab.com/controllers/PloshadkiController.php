@@ -429,7 +429,7 @@ var myLineChart = new Chart(ctx, {
                   }
               else
                 {
-                    echo '<div id="checktag" class="text-block-118">Проверка установки тегов</div></div>';
+                    echo '<div id="checktag" class="text-block-118" style="margin-bottom: 60px;">Проверка установки тегов</div></div>';
                 };
               if (addslashes($_REQUEST['id'])!='') {
                     echo '
