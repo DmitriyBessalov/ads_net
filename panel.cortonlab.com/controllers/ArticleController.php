@@ -588,9 +588,6 @@ class ArticleController
         <a class="tab-link-tab-2 w-inline-block w-tab-link" id="tab4">
             <div class="text-block-142">Форма заказа</div>
         </a>
-        <a class="tab-link-tab-5 w-inline-block w-tab-link" id="tab5">
-            <div class="text-block-142">Руководство</div>
-        </a>
     </div>';
         echo'
     <div class="w-tab-content">';
