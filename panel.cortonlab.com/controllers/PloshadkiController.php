@@ -266,8 +266,7 @@ var myLineChart = new Chart(ctx, {
         </div>
         <div class="black-fon modalhide"></div>
 		';
-                include PANELDIR . '/views/layouts/footer.php';
-                return true;
+              
             }
 
             //Обновляет площадку
@@ -2643,7 +2642,8 @@ var myLineChart = new Chart(ctx, {
     </script>     
 </div>';
 
-           
+            include PANELDIR . '/views/layouts/footer.php';
+            return true;
         }
 
 
