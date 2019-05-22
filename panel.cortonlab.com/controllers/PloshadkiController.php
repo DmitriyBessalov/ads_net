@@ -517,6 +517,8 @@ var myLineChart = new Chart(ctx, {
 
                 PloshadkiController::form();
 
+                include PANELDIR . '/views/layouts/footer.php';
+                return true;
             }
 
             //Редактирование  площадки
@@ -2409,8 +2411,7 @@ var myLineChart = new Chart(ctx, {
     </div>
 </div>
 <div class="black-fon modalhide"></div>';
-             include PANELDIR . '/views/layouts/footer.php';
-             return true;
+             
         }
 
         //Меняет коэфициент отчислений для площадки
