@@ -287,7 +287,7 @@ var myLineChart = new Chart(ctx, {
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
                 if (addslashes($_REQUEST['id'])==""){
-                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_email`='".$_POST['user']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `manager`='".$GLOBALS['user']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
+                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_id`='".$_POST['user_id']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
                     $db->query($sql);
                     $id=$db->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
@@ -353,8 +353,11 @@ var myLineChart = new Chart(ctx, {
                 if ($result['natpro_aktiv']){$natproaktiv='<div id="natpro" class="text-block-118">Настройки</div>';}else{$natproaktiv='<div id="natpro" class="text-block-118">Активировать</div>';};
                 if ($result['slider_aktiv']){$slideraktiv='<div id="slider" class="text-block-118">Настройки</div>';}else{$slideraktiv='<div id="slider" class="text-block-118">Активировать</div>';};
 
-
-                $sql="SELECT `id`,`email` FROM `users` WHERE (aktiv='1' AND role='platform') ORDER BY `email` ASC";
+                if ($GLOBALS['role']=='manager') {
+                    $sql="SELECT `id`,`email` FROM `users` WHERE (`aktiv`='1' AND `role`='platform' AND `manager`=".$GLOBALS['user'].") ORDER BY `email` ASC";
+                }else{
+                    $sql="SELECT `id`,`email` FROM `users` WHERE (`aktiv`='1' AND `role`='platform') ORDER BY `email` ASC";
+                }
                 $user = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
                 if (($_GET['id']==0)and($_SERVER['REQUEST_URI']!='/platforms-add')) $disabled='disabled';
                 echo '
@@ -403,16 +406,15 @@ var myLineChart = new Chart(ctx, {
                   <option value="">Подкатегория площадки</option>
                 </select>
 				<div style="width: 1337px; margin-bottom: 60px;"></div>
-				
 				';
-                  if ($result['type']=='demo')
-                 echo'
+                if ($result['type']=='demo')
+                echo'
                 </div>
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
-                </div>
+                <div>
                 ';echo'
 				</div>
               <div class="div-block-102">
@@ -547,7 +549,6 @@ var myLineChart = new Chart(ctx, {
                 }
 
                 PloshadkiController::form();
-
                 $sql="SELECT * FROM `style_promo` WHERE `id`='".addslashes($_REQUEST['id'])."';";$result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($result==false){$sql="SELECT * FROM `style_promo` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
 

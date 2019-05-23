@@ -9,13 +9,14 @@ class UsersController
         if (isset($_POST['email'])){
             if ($_POST['aktiv']=="on"){$_POST['aktiv']=1;}else{$_POST['aktiv']=0;};
             if ($_POST['id']!=""){
+                if ($GLOBALS['role']=='manager'){die('Доступ запрещен');}
                 $id=$_POST['id'];
                 $sql="UPDATE `users` SET `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`aktiv`='".$_POST['aktiv']."' WHERE `id`='".$id."';";
                 $db->query($sql);
             }else{
                 $data=date('Y-m-d');
                 $phpsession= substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 26);
-                $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`phpsession`='".$phpsession."',`aktiv`='".$_POST['aktiv']."';";
+                $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`manager`='".$GLOBALS['user']."',`phpsession`='".$phpsession."',`aktiv`='".$_POST['aktiv']."';";
                 $db->query($sql);
                 if ($_POST['role']=='advertiser'){
                     $id=$db->lastInsertId();
@@ -221,6 +222,7 @@ class UsersController
     //Добавление (создание) пользователей
     public static function actionEdit(){
 	    if (isset($_GET['id'])){
+            if ($GLOBALS['role']=='manager'){die('Доступ запрещен');}
             $title='Редактирование пользователя';
             $db = Db::getConnection();
             $sql="SELECT `email`,`fio`,`role`,`aktiv` FROM `users` WHERE `id`='".$_GET['id']."' LIMIT 1;";
@@ -241,12 +243,19 @@ class UsersController
 				<input type="hidden" name="id" value="'.$_GET['id'].'">
 				<input class="text-field-10 w-input" maxlength="256" name="email" value="'.$result['email'].'" placeholder="Email" required="">
 				<input type="password" class="text-field-10 w-input" maxlength="256" name="password" value="" placeholder="Пароль" required="">
-				<select name="role" required="" class="select-field w-select">
-					<option '; if ($result['role']=="platform") echo 'selected '; echo 'value="platform">Площадки</option>
-					<option '; if ($result['role']=="advertiser") echo 'selected '; echo 'value="advertiser">Рекламодатели</option>
-                    <option '; if ($result['role']=="manager") echo 'selected '; echo 'value="manager">Менеджер</option>
-					<option '; if ($result['role']=="admin") echo 'selected '; echo 'value="admin">Админы</option>
-				</select>
+				<select name="role" required="" class="select-field w-select">';
+                if ($GLOBALS['role']=='admin') {
+                    echo'
+                    <option '; if ($result['role']=="platform") echo 'selected '; echo 'value = "platform" > Площадки</option >
+					<option '; if ($result['role']=="advertiser") echo 'selected '; echo 'value = "advertiser" > Рекламодатели</option >
+                    <option '; if ($result['role']=="manager") echo 'selected '; echo 'value = "manager" > Менеджер</option >
+					<option '; if ($result['role']=="admin") echo 'selected '; echo 'value = "admin" > Админы</option >';
+                }else{
+                    echo'
+                    <option '; if ($result['role']=="platform") echo 'selected '; echo 'value = "platform" > Площадки</option >';
+                }
+                echo '
+                </select>
                 <div class="div-block-127">
                   <div class="html-embed-7 w-embed">
 				    <label>

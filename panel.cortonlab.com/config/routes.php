@@ -102,6 +102,7 @@ switch ($GLOBALS['role']) {
 
             //Пользователи
             'users' => 'users/index',
+            'user-edit' => 'users/edit',
 
             //Авторизация
             'logout' => 'users/logout',
