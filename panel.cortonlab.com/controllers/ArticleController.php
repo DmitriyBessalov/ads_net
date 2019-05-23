@@ -312,7 +312,7 @@ class ArticleController
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
                
-               <td style="width: 60px; padding-right: 0px;">
+               <td style="width: 20px !important;">
                </td>
               </tr>  
              ';
