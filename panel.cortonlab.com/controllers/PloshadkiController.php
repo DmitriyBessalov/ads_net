@@ -2477,6 +2477,19 @@ var myLineChart = new Chart(ctx, {
         {
             $title='Статистика площадки';
             include PANELDIR.'/views/layouts/header.php';
+
+            $db = Db::getConnection();
+            $dbstat = Db::getstatConnection();
+
+            //Защита от подмены менеджера
+            if ($GLOBALS['role']=='manager') {
+                $sql = "SELECT u.`manager` FROM ploshadki p RIGHT OUTER JOIN users u ON p.`user_id` = u.`id`  WHERE p.`id`='" . addslashes($_REQUEST['id']) . "';";
+                $manager = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                if ($manager != $GLOBALS['user']) {
+                    die('Доступ запрещён');
+                };
+            }
+
             if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y', strtotime("-1 month"));}
             if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
             $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
@@ -2499,8 +2512,6 @@ var myLineChart = new Chart(ctx, {
                 </tr>
             </thead>';
             if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
-                $db = Db::getConnection();
-                $dbstat = Db::getstatConnection();
 
                 $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv`, `domen` FROM `ploshadki` WHERE `id`='".$_GET['id']."'";
                 $aktiv = $db->query($sql)->fetch(PDO::FETCH_ASSOC);

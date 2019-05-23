@@ -55,7 +55,6 @@ class FinController
             $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."')";
             $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-
             if (is_null($balans))$balans=0;
 
             if (isset($_GET['platform'])) {
@@ -81,7 +80,7 @@ class FinController
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
                 $redis = new Redis();
-                $redis->connect('185.75.90.54', 6379);
+                $redis->pconnect('185.75.90.54', 6379);
                 $redis->select(3);
 
                 $platforms=explode("','",$strplatform);
@@ -283,9 +282,9 @@ class FinController
                 </div>
                     <div class="table-right">
 				 <form id="right-form" name="email-form" class="form-333">
-			         <a href="/finance#openaddsite" class="button-add-site w-button">Добавить площадку</a>'.'
-					 <p class="filtermenu"><label '; if ((!isset($_GET['platform'])) OR ($_GET['platform']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="platform" value="all" id="" class="form-radio">Показать все</label></p>';
-
+			         <a href="/finance#openaddsite" class="button-add-site w-button">Добавить площадку</a>
+			         <a id="vivod" class="button-add-site w-button" style="font-size: 15px;">Запрос вывода средств</a>
+					 <p class="filtermenu"><label '; if ((!isset($_GET['platform'])) OR ($_GET['platform']=='all')){echo ' style="font-weight: 600;';}echo'><input type="radio" name="platform" value="all" id="" class="form-radio">Показать все</label></p>';
         foreach ($result as $platform){
             echo                    '<p class="filtermenu"><label style="width: 200px;'; if ($_GET['platform']==$platform['id']){echo 'font-weight: 600;';}echo'"><input type="radio" name="platform" value="'.$platform['id'].'" id="" class="form-radio">Показать '.$platform['domen'].'</label></p>';
         };
@@ -298,7 +297,23 @@ class FinController
                     </div>
 		        </form>
 		    </div>
-		
+		<div class="black-fon modalhide" style="display: none;"></div>
+		<div class="modal" style="left: 30%; top: 300px; right: 30%; display: none;">
+                            <div style="min-width: 780px !important;" class="div-block-78 w-clearfix">
+                                <div class="div-block-132 modalhide">
+                                    <img src="/images/close.png" alt="" class="image-5">
+                                </div>
+                                <div class="">
+                                    <br><br>
+                                    <div class="text-block-82-copy" style=""></div>
+                                    <p>Сумма к выводу:</p>
+								    <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="" value="'.$balans.'">
+								    <p>Минимальная сумма к выводу 5000руб. не чаше 1 раза в месяц</p>
+								    <div class="button-add-site w-button" style="">Вывести</div>
+								    <p id="status_vivod">Статус вывода</p>
+                                </div>
+                            </div>
+                         </div>
     <script>
         function AjaxFormRequest(result_id,formMain,url) {
             jQuery.ajax({
@@ -411,7 +426,7 @@ class FinController
         $grafiki= $dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         $redis = new Redis();
-        $redis->connect('185.75.90.54', 6379);
+        $redis->pconnect('185.75.90.54', 6379);
         $redis->select(3);
         $sql="SELECT `id` FROM `ploshadki` WHERE `status`=1";
         $platforms= $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
