@@ -35,7 +35,7 @@
 }
 .miniinfo {
    font-size: 14px;
-   margin-top: 14px;
+   margin-top: 8px;
    display: flex;
 }
 .blockminiinfo {
@@ -3949,8 +3949,8 @@ input[name=active] {
     display: none;
     color: #768093;
     position: absolute;
-    min-width: 163px;
-    right: 284px;
+    min-width: 165px;
+    right: 281px;
     background: #fff;
     margin-top: 10px;
     margin-left: -78px;

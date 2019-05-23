@@ -120,8 +120,12 @@ class ArticleController
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu"> 
                                      <a href="article-edit?id=' . $i['promo_id'] . '">Редактировать</a><br>
-									 <a href="article-stat?id=' . $i['promo_id'] . '">Статистика</a><br>
-                                     <a href="article-del?id=' . $i['promo_id'] . '">Удалить</a> 
+									 <a href="article-edit?id=' . $i['promo_id'] . '">Анонсы</a><br>
+									 <a href="article-stat?id=' . $i['promo_id'] . '">Статистика анонсов</a><br>
+									 <a href="article-edit?id=' . $i['promo_id'] . '">Таргетинг</a><br>
+									 <a href="article-stat?id=' . $i['promo_id'] . '">Анализ ссылок</a><br>
+									 <a href="article-stat?id=' . $i['promo_id'] . '">A/B анализ</a><br>
+                                     <a style="color: #ff0303;" href="article-del?id=' . $i['promo_id'] . '">Удалить</a> 
                                   </ul>
                                   </td>
                                 </tr>  
@@ -308,18 +312,7 @@ class ArticleController
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
                
-               <td style="width: 111px; text-align: right; padding-right: 20px;">
-				 <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
-                 <ul class="sub-menu"> 
-                  <a href="article-edit?id=' . $result['promo_id'] . '">Редактировать</a><br>';
-                if ($result['active'] == 1) {
-                    echo '<a href="article-stop?id=' . $result['promo_id'] . '">Остановить</a><br>';
-                } else {
-                    echo '<a href="article-start?id=' . $result['promo_id'] . '">Запустить</a><br>';
-                };
-                echo '
-                  <a href="article-del?id=' . $result['promo_id'] . '">Удалить</a> 
-                 </ul>
+               <td style="width: 20px !important;">
                </td>
               </tr>  
              ';
@@ -587,9 +580,6 @@ class ArticleController
         </a>
         <a class="tab-link-tab-2 w-inline-block w-tab-link" id="tab4">
             <div class="text-block-142">Форма заказа</div>
-        </a>
-        <a class="tab-link-tab-5 w-inline-block w-tab-link" id="tab5">
-            <div class="text-block-142">Руководство</div>
         </a>
     </div>';
         echo'
