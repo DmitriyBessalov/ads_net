@@ -566,6 +566,11 @@ class ArticleController
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
 <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
+
+<div class="btncontrolarticle">
+   <a href="/platforms-add" class="button-add-site w-button">Статистика анонсов</a>
+</div>
+
 <div class="w-tabs" id="tab0">';
         if($title=='Редактирование статьи')echo '
     <div class="tabs-menu w-tab-menu">
