@@ -4955,7 +4955,6 @@ canvas {
 }
 
  .btnbalans {
-   margin-top: 14px;
     margin-bottom: 10px;
     position: relative;
     left: 0px;
@@ -4974,4 +4973,5 @@ canvas {
     line-height: inherit;
     text-decoration: none;
     cursor: pointer;
+	display: inline-block;
  }
