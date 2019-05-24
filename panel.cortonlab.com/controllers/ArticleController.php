@@ -568,10 +568,10 @@ class ArticleController
 <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
 
 <div class="btncontrolarticle">
-   <a href="/" class="button-add-site w-button">Таргетинги</a>
-   <a href="/" class="button-add-site w-button">A/B анализ</a>
-   <a href="/" class="button-add-site w-button">Анализ URL</a>
-   <a href="/" class="button-add-site w-button">Анонсы</a>
+   <a href="/" class="btnarticle">Таргетинги</a>
+   <a href="/" class="btnarticle">A/B анализ</a>
+   <a href="/" class="btnarticle">Анализ URL</a>
+   <a href="/" class="btnarticle">Анонсы</a>
    <a href="/" class="button-add-site w-button">Расширенная статистика</a>
 </div>
 

@@ -4984,3 +4984,20 @@ canvas {
     right: 284px;
     top: 20px;
  }
+ .btnarticle {
+   margin-top: 14px;
+    margin-bottom: 10px;
+    position: relative;
+    left: 0px;
+    height: 34px;
+    clear: none;
+    background-color: #116dd6;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Myriadpro Regular';
+    font-weight: 400;
+    border-radius: 4px;
+    padding: 9px 20px;
+    min-width: 198px;
+    text-align: center;
+ }
