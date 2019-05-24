@@ -4983,7 +4983,12 @@ canvas {
 	   position: absolute;
        right: 284px;
        top: 38px;
-    }	
+    }		
+@media (max-width: 1920px) and (min-width: 1840px) {
+    .btncontrolarticle {
+       right: 244px;
+    }
+}
 @media (max-width: 1539px) and (min-width: 220px) {
     .btncontrolarticle {
        display: none;
