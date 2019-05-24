@@ -775,8 +775,13 @@ setTimeout(function(){
             return true;
         }
 
-        if(1){
-            echo 'data';
+
+        $date=date('Y-m-d', strtotime("-1 month"));
+        $sql="SELECT SUM(`spisanie`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`>'".$date."'";
+        $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        if($result!='0.00'){
+            echo 'date';
             return true;
         }
 
