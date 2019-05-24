@@ -297,7 +297,7 @@ class FinController
 		    </div>
 		<div class="black-fon modalhide" style="display: none;"></div>
 		<div class="modal" style="left: 30%; top: 300px; right: 30%; display: none;">
-                            <div style="min-width: 780px !important;" class="div-block-78 w-clearfix">
+                            <div style="min-width: 700px !important; max-width: 700px !important;" class="div-block-78 w-clearfix">
                                 <div class="div-block-132 modalhide">
                                     <img src="/images/close.png" alt="" class="image-5">
                                 </div>
