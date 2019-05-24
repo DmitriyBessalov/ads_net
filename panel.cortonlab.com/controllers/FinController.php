@@ -770,8 +770,13 @@ setTimeout(function(){
         $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
         if (is_null($balans))$balans=0;
 
-        if ($balans<$_GET['summa']){
+        if (($balans<$_GET['summa']) OR ($balans<=5000)){
             echo 'summa';
+            return true;
+        }
+
+        if(1){
+            echo 'data';
             return true;
         }
 
@@ -780,7 +785,6 @@ setTimeout(function(){
 
         NotificationsController::addNotification($platform_id, 'Запрошен вывод средств в сумме '.$_GET['summa'].'руб.');
         echo 'true';
-
         return true;
     }
 
