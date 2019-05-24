@@ -4945,3 +4945,11 @@ canvas {
     font-weight: 400;
 	margin-top: 10px;
 }
+.textbal {
+   margin-left: 0px;
+   color: #116DD6;
+   font-weight: 600;
+   font-size: 18px;
+   line-height: 22px;
+   font-family: 'Myriadpro Regular';
+}
