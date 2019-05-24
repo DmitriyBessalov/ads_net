@@ -4938,3 +4938,9 @@ canvas {
    width: 180px;
    height: 34px;
 }
+.textinfobal {
+    color: #768093;
+    font-size: 16px;
+    font-family: 'Myriadpro Regular';
+    font-weight: 400;
+}
