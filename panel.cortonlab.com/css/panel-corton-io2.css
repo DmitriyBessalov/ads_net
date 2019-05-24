@@ -4919,3 +4919,22 @@ canvas {
 .close-button:hover{
     cursor: pointer;
 }
+
+#status_vivod {
+	font-size: 14px;
+	font-family: 'Myriadpro Regular';
+}
+
+.numberout {
+   cursor: pointer;
+   border: 0px;
+   background: #f4f6f9;
+   color: #768093;
+   width: 75px;
+   float: left;
+   border: 1px solid #E0E1E5;
+   padding: 4px 8px;
+   border-radius: 4px;
+   width: 93px;
+   height: 34px;
+}
