@@ -572,7 +572,7 @@ class ArticleController
    <a href="/" class="btnarticlegr">A/B анализ</a>
    <a href="/" class="btnarticlegr">Анализ URL</a>
    <a href="/" class="btnarticlegr">Анонсы</a>
-   <a href="/" class="btnarticle">Расширенная статистика</a>
+   <a href="/article-stat?id=' . $i['promo_id'] . '" class="btnarticle">Расширенная статистика</a>
 </div>
 
 <div class="w-tabs" id="tab0">';
