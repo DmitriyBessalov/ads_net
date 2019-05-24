@@ -337,7 +337,7 @@ class FinController
             <img style="width: 13px; height: 13px;" src="/images/close.png">
         </a>
         <div>
-            <div class="text-block-82-copy" style="">Добавить новую площадку</div>
+            <div class="text-block-82-copy" style="margin-top: 10px;">Добавить новую площадку</div>
 			<p style="margin-top: 10px; color: #768093; font-weight: 400 !important; font-size: 16px; line-height: 20px; font-family: \'Myriadpro Regular\';">Укажите URL площадки которую хотите добавить в систему, после чего личный менеджер свяжется с вами.</p>
             <div class="w-form">
                 <form method="post" id="formMain" action="https://cortonlab.com/contact-form2.php" class="form-3" style="margin-right: 0px !important;">
