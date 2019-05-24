@@ -304,7 +304,7 @@ class FinController
                                 <div class="">
                                     <br><br>
                                     <div class="text-block-82-copy" style=""></div>
-                                    <p>Сумма к выводу:</p>
+                                    <h2>Сумма к выводу:</h2>
 								     <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'"><br><br>
 								    <p class="textinfobal">Минимальная сумма к выводу 5000 рублей. Согласно правилам средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
 								    <div class="button-add-site w-button" id="button_vivod">Вывести</div>
