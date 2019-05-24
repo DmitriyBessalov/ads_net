@@ -4994,7 +4994,7 @@ canvas {
        right: 120px;
     }
 }
-@media (max-width: 1400px) and (min-width: 220px) {
+@media (max-width: 1439px) and (min-width: 220px) {
     .btncontrolarticle {
        display: none;
     }
