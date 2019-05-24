@@ -572,7 +572,7 @@ class ArticleController
    <a href="/" class="btnarticle">A/B анализ</a>
    <a href="/" class="btnarticle">Анализ URL</a>
    <a href="/" class="btnarticle">Анонсы</a>
-   <a href="/" class="button-add-site w-button">Расширенная статистика</a>
+   <a href="/" class="btnarticle">Расширенная статистика</a>
 </div>
 
 <div class="w-tabs" id="tab0">';
