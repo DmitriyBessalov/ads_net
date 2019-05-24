@@ -30,6 +30,7 @@ switch ($GLOBALS['role']) {
             //Статьи
             'articles' => 'article/index',
             'article-edit' => 'article/edit',
+			'article-edit-content' => 'article/edit',
             'article-stat' => 'article/stat',
             'article-update' => 'article/update',
             'article-del' => 'article/del',
@@ -79,6 +80,7 @@ switch ($GLOBALS['role']) {
             //Статьи
             'articles' => 'article/index',
             'article-edit' => 'article/edit',
+			'article-edit-content' => 'article/edit',
             'article-stat' => 'article/stat',
             'article-update' => 'article/update',
             'article-del' => 'article/del',
