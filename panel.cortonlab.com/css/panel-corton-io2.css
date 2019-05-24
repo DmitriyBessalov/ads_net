@@ -4998,6 +4998,6 @@ canvas {
     font-weight: 400;
     border-radius: 4px;
     padding: 9px 20px;
-    min-width: 198px;
     text-align: center;
+	text-decoration: none;
  }
