@@ -4978,13 +4978,12 @@ canvas {
 	display: inline-block;
 	margin-left: 22px;
  }
-@media (max-width: 2260px) and (min-width: 1920px) {
-    .btncontrolarticle {
+
+.btncontrolarticle {
 	   position: absolute;
        right: 284px;
        top: 38px;
-    }
-}
+    }	
 @media (max-width: 1539px) and (min-width: 220px) {
     .btncontrolarticle {
        display: none;
