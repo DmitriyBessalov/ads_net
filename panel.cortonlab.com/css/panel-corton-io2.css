@@ -4989,7 +4989,7 @@ canvas {
        right: 244px;
     }
 }
-@media (max-width: 1739px) and (min-width: 1540px) {
+@media (max-width: 1739px) and (min-width: 1401px) {
     .btncontrolarticle {
        right: 120px;
     }
