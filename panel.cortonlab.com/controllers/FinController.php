@@ -334,7 +334,7 @@ class FinController
 <div id="openaddsite" class="modalDialog2">
     <div>
         <a href="/finance#close" title="Закрыть" class="close">
-            <img src="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c25ef6677f283ad129ce5fe_close.png">
+            <img src="/images/close.png">
         </a>
         <div>
             <div class="text-block-82-copy" style="">Добавить новую площадку</div>
