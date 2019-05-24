@@ -53,9 +53,9 @@ class NotificationsController
                       <tr>
                           <td>'.$i['id'].'</td>
                           <td>'.$i['date'].'</td>
-                          <td>'.$i2['domen'].'</td>
+                          <td class="bluetext">'.$i2['domen'].'</td>
                           <td>'.$i2['email'].'</td>
-                          <td>'.$i['opisanie'].'</td>
+                          <td class="bluetext">'.$i['opisanie'].'</td>
                           <td>'.$i['status'].'</td>
                           <td style="width: 111px; text-align: right; padding-right: 20px;">
 						 <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
