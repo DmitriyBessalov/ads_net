@@ -86,6 +86,23 @@ class NotificationsController
 		return true;
     }
 
+    public static function addNotification($platform_id, $opisanie)
+    {
+
+        $date=date('Y-m-d');
+
+        $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+
+        $sql= "SELECT `domen` FROM `ploshadki` WHERE `id`='".$platform_id."'";
+        $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        $sql= "INSERT INTO `notifications`( `platform_id`, `opisanie`,`date`) VALUES ('".$platform_id."', '".$opisanie."', '".$date."')";
+        $db->query($sql);
+
+        mail('support@cortonlab.com', 'Уведомление по '.$domen, $opisanie, "Content-Type: text/html; charset=UTF-8\r\n");
+        return true;
+    }
+
     public static function actionObrabotano()
     {
         $db = Db::getConnection();

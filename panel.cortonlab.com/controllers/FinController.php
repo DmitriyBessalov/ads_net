@@ -17,8 +17,8 @@ class FinController
 <!-- <div class="message-box">
     <p><span style="font-weight:400; color: #fff;">Обновление от 16.05.2019.</span> Теперь вывод балансов можно запрашивать в личном кабинете. Для этого нажмите на иконку пользователя и выберите пункт "Вывод балансов".</p>
     <span class="close-button">Понял, больше не показывать.</span>
-  </div> -->	
-  
+</div> -->	
+
 <div class="table-box">
     <div class="table w-embed">
         <table>
@@ -274,16 +274,14 @@ class FinController
             <td>0</td>
             <td class="bluetext">0</td>
         </tr-->
-    </tbody>';
+        </tbody>';
         }else{echo '<tr><td colspan="5">Некоректные даты фильтра</td></tr>';}
         echo'
-</table>
-
+        </table>
                 </div>
                     <div class="table-right">
 				 <form id="right-form" name="email-form" class="form-333">
 			         <a href="/finance#openaddsite" class="button-add-site w-button">Добавить площадку</a>
-			         <a id="vivod" class="button-add-site w-button" style="font-size: 15px;">Запрос вывода средств</a>
 					 <p class="filtermenu"><label '; if ((!isset($_GET['platform'])) OR ($_GET['platform']=='all')){echo ' style="font-weight: 600;';}echo'><input type="radio" name="platform" value="all" id="" class="form-radio">Показать все</label></p>';
         foreach ($result as $platform){
             echo                    '<p class="filtermenu"><label style="width: 200px;'; if ($_GET['platform']==$platform['id']){echo 'font-weight: 600;';}echo'"><input type="radio" name="platform" value="'.$platform['id'].'" id="" class="form-radio">Показать '.$platform['domen'].'</label></p>';
@@ -309,12 +307,12 @@ class FinController
                                     <p>Сумма к выводу:</p>
 								    <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="" value="'.$balans.'">
 								    <p>Минимальная сумма к выводу 5000руб. не чаше 1 раза в месяц</p>
-								    <div class="button-add-site w-button" style="">Вывести</div>
+								    <div class="button-add-site w-button" id="button_vivod">Вывести</div>
 								    <p id="status_vivod">Статус вывода</p>
                                 </div>
                             </div>
                          </div>
-    <script>
+        <script>
         function AjaxFormRequest(result_id,formMain,url) {
             jQuery.ajax({
                 url:     url,
@@ -721,7 +719,7 @@ var options = {
                 top: 0,
                 bottom: 0
             }
-		},	
+		},
   scales:{
       xAxes: [{ display: false }],
       yAxes: [{ display: false }]
@@ -763,4 +761,27 @@ setTimeout(function(){
         include PANELDIR . '/views/layouts/footer.php';
         return true;
     }
+
+
+    public static function actionRegectcash()
+    {
+        $db = Db::getConnection();
+        $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
+        $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        if (is_null($balans))$balans=0;
+
+        if ($balans<$_GET['summa']){
+            echo 'summa';
+            return true;
+        }
+
+        $sql="SELECT `id` FROM `ploshadki` WHERE `user_id`='".$GLOBALS['user']."' LIMIT 1";
+        $platform_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        NotificationsController::addNotification($platform_id, 'Запрошен вывод средств в сумме '.$_GET['summa'].'руб.');
+        echo 'true';
+
+        return true;
+    }
+
 }

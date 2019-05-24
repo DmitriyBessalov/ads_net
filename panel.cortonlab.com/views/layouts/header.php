@@ -18,7 +18,6 @@
   <meta name="robots" content="none">
 </head>
 <body class="body">
- 
   <div class="left-menu">
 	  <img src="/images/logo-corton.png" alt="" class="image">
       <? if ($GLOBALS['role']=='platform'): ?>
@@ -68,6 +67,9 @@
                            <? echo $GLOBALS['email']; ?>
                        </span><br>
                        <a href="https://panel.cortonlab.com/#">Настройки</a><br>
+                        <? if (($GLOBALS['role']=='platform')): ?>
+                        <a id="vivod">Запрос вывода средств</a><br>
+                        <? endif; ?>
                        <a href="https://panel.cortonlab.com/logout">Выход</a>
 					</div>
                 </ul>			

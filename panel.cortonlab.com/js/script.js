@@ -904,6 +904,20 @@ $(document).ready(function(){
         $(this).find(':radio').attr('checked','checked');
         $("#right-form").submit();
     });
+
+    //Вывод балансов
+    $('#button_vivod').click(function(){
+        var variable = $('[name=summa]').val();
+
+        //alert(variable);
+        $.post("https://panel.cortonlab.com/finance-vivod?summa="+variable,function(data) {
+            switch (data) {
+                case 'summa':{$('#status_vivod').text('Неправильная сумма к выводу'); break;}
+                case 'date':{$('#status_vivod').text('Ошибка запрашивать вывод можно, не чаше 1 раза в месяц'); break;}
+                case 'true':{$('#status_vivod').text('Запрос принят');}
+            }
+        });
+    });
 });
 
 
@@ -917,15 +931,14 @@ $(function(){
             return null;
     }
 
-function check_cookie(){
-	var textCookie = get_cookie('messagetext'),
-        currentText = $('.message-box p').text();
-	if (textCookie == currentText) {
-        $('.message-box').hide(0);
+    function check_cookie(){
+        var textCookie = get_cookie('messagetext'),
+            currentText = $('.message-box p').text();
+        if (textCookie == currentText) {
+            $('.message-box').hide(0);
+        }
     }
-}
-
-check_cookie();
+    check_cookie();
     
     $('.close-button').click(function(){
         var currentText = $('.message-box p').text(),
@@ -935,3 +948,4 @@ check_cookie();
         $('.message-box').fadeOut(200);
     });
 })
+

@@ -10,7 +10,7 @@ function notifikation($platform_id, $opisanie, $date){
     $sql= "INSERT INTO `notifications`( `platform_id`, `opisanie`,`date`) VALUES ('".$platform_id."', '".$opisanie."', '".$date."')";
     $db->query($sql);
 
-    mail('support@cortonlab.com', 'Уведомление по '.$domen, $opisanie, "Content-Type: text/html; charset=UTF-8\r\n Reply-To: bez1dn6a@ya.ru\r\n");
+    mail('support@cortonlab.com', 'Уведомление по '.$domen, $opisanie, "Content-Type: text/html; charset=UTF-8\r\n");
 }
 
 $sql="SELECT `id` FROM `ploshadki` WHERE `status`='1' AND `type`!='demo' AND `id`!='0'";

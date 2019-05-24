@@ -65,6 +65,7 @@ switch ($GLOBALS['role']) {
         return array(
             //Финансы
             'finance' => 'fin/platform',
+            'finance-vivod' => 'fin/regectcash',
 
             //Авторизация
             'logout' => 'users/logout',
