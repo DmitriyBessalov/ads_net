@@ -1791,7 +1791,7 @@ input.w-button2 {
   min-height: 200px;
   min-width: 1240px;
   padding: 10px 30px 30px;
-  border-radius: 4px;
+  border-radius: 8px;
   background: #F4F6F9;
   box-shadow: 10px 0 60px 0 rgba(29, 29, 31, .09);
 }
