@@ -308,7 +308,7 @@ class FinController
                                        <p class="textbal">Сумма к выводу:</p>
 								       <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
 									 </div>
-								    <div class="button-add-site w-button" id="button_vivod">Запросить вывод средств</div>
+								    <div class="btnbalans" id="button_vivod">Запросить вывод средств</div>
 								    <p id="status_vivod"></p>
 									<p class="textinfobal">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
                                 </div>
