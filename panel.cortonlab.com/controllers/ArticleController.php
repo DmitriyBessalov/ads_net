@@ -831,42 +831,6 @@ class ArticleController
     }
 	
 	
-	
-	 public static function actionUpdate()
-    {
-        $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
-        switch ($_POST['tab']){
-            case 'статья' :{
-                $data_add = date('Y-m-d');
-                if ($_POST['id'] == "new"){$id='-';}else{$id=$_POST['id'];};
-                $role=UsersController::checkRole();
-                if (($role=='admin') AND ($id!="")){
-                    $sql="SELECT `user_id` FROM `promo` WHERE `id`=".$id;
-                    $user_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                }else{
-                    $user_id = UsersController::getUserId();
-                }
-
-                $_POST['formtext']=stripcslashes ($_POST['formtext']);
-
-                preg_match_all("/src=\"data:image\/(jpeg|jpg|gif|png);base64,(.*?)\">/", $_POST['formtext'],$out);
-
-                mkdir(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id, 0755);
-                $i=0;
-                while ($i<count($out[0])){
-
-                    $hash=hash('crc32', $out[2][$i]);
-                    $ifp = fopen(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.$hash.'.'.$out[1][$i], "wb");
-                    fwrite($ifp, base64_decode($out[2][$i]));
-                    fclose($ifp);
-
-                    $replase='<img src="https://api.cortonlab.com/img/promo/'.$id.'/'.$hash.'.'.$out[1][$i].'">';
-
-                    $_POST['formtext']=str_replace($out[0][$i], $replase, $_POST['formtext']);
-
-                    $i++;
-                }
 
                 $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
                 if (!$db->exec($sql)){
