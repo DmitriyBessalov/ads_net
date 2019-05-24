@@ -302,7 +302,7 @@ class FinController
                                     <img src="/images/close.png" alt="" class="image-5">
                                 </div>
                                 <div class="">
-                                    <br><br>
+                                    <br>
                                     <div class="text-block-82-copy" style=""></div>
 									<div>
                                        <p class="textbal">Сумма к выводу:</p>
