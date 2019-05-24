@@ -30,7 +30,9 @@ switch ($GLOBALS['role']) {
             //Статьи
             'articles' => 'article/index',
             'article-edit' => 'article/edit',
-			'article-edit-content' => 'article/target',
+			'article-edit-content' => 'article/content',
+			'article-edit-anons' => 'article/anons',
+			'article-edit-target' => 'article/target',
             'article-stat' => 'article/stat',
             'article-update' => 'article/update',
             'article-del' => 'article/del',
@@ -80,7 +82,9 @@ switch ($GLOBALS['role']) {
             //Статьи
             'articles' => 'article/index',
             'article-edit' => 'article/edit',
-			'article-edit-content' => 'article/target',
+			'article-edit-content' => 'article/content',
+			'article-edit-anons' => 'article/anons',
+			'article-edit-target' => 'article/target',
             'article-stat' => 'article/stat',
             'article-update' => 'article/update',
             'article-del' => 'article/del',
