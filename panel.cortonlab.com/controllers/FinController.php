@@ -763,7 +763,7 @@ setTimeout(function(){
     }
 
 
-    public static function actionRegectcash()
+    public static function actionRequestcash()
     {
         $db = Db::getConnection();
         $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
