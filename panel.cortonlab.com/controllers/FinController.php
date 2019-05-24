@@ -332,7 +332,7 @@ class FinController
         }
     </script>
 <div id="openaddsite" class="modalDialog2">
-    <div style="padding: 20px 30px 20px 30px !important;">
+    <div style="padding: 30px 30px 30px 30px !important; width: 542px !important;">
         <a href="/finance#close" title="Закрыть" class="close">
             <img style="width: 13px; height: 13px;" src="/images/close.png">
         </a>
