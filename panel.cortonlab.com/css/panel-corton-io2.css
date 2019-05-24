@@ -4978,3 +4978,9 @@ canvas {
 	display: inline-block;
 	margin-left: 22px;
  }
+ 
+ .btncontrolarticle {
+	position: absolute;
+    right: 284px;
+    top: 20px;
+ }
