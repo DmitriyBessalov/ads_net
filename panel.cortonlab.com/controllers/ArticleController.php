@@ -568,7 +568,7 @@ class ArticleController
 <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
 
 <div class="btncontrolarticle">
-   <a href="/platforms-add" class="button-add-site w-button">Статистика анонсов</a>
+   <a href="/" class="button-add-site w-button">Статистика анонсов</a>
 </div>
 
 <div class="w-tabs" id="tab0">';
