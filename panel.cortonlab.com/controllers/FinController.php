@@ -334,7 +334,7 @@ class FinController
 <div id="openaddsite" class="modalDialog2">
     <div>
         <a href="/finance#close" title="Закрыть" class="close">
-            <img src="/images/close.png">
+            <img style="width: 13px; height: 13px;" src="/images/close.png">
         </a>
         <div>
             <div class="text-block-82-copy" style="">Добавить новую площадку</div>
