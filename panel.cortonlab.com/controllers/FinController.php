@@ -305,7 +305,7 @@ class FinController
                                     <br><br>
                                     <div class="text-block-82-copy" style=""></div>
                                     <p>Сумма к выводу:</p>
-								    <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
+								     <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
 								    <p>Минимальная сумма к выводу 5000руб. не чаше 1 раза в месяц</p>
 								    <div class="button-add-site w-button" id="button_vivod">Вывести</div>
 								    <p id="status_vivod">Статус вывода</p>
