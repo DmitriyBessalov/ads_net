@@ -304,8 +304,8 @@ class FinController
                                 <div class="">
                                     <br><br>
                                     <div class="text-block-82-copy" style=""></div>
-									<div style="display: inline;">
-                                       <p>Сумма к выводу:</p>
+									<div>
+                                       <p style="display: inline;float: left;">Сумма к выводу:</p>
 								       <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
 									 </div>
 									 <br><br>
