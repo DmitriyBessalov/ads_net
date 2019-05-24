@@ -4952,4 +4952,6 @@ canvas {
    font-size: 18px;
    line-height: 22px;
    font-family: 'Myriadpro Regular';
+   display: inline;
+   float: left;
 }
