@@ -13,6 +13,9 @@
       </div>
     </div>
   </div>
+      <? if (($GLOBALS['role']=='advertiser') OR $GLOBALS['role']=='admin'): ?>
+          <div id="panel_hide" style="position: fixed;bottom: 0; margin-left: 246px; cursor: pointer;border: 1px solid lightgrey;" onmouseover="this.style.color='#00F';" onmouseout="this.style.color='#333';"><</div>
+      <? endif; ?>
   <div class="section-2"></div>
   <script src="/js/jquery-3.3.1.min.js" type="text/javascript"></script>
   <script src="/js/script.js" type="text/javascript"></script>

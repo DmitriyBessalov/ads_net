@@ -113,7 +113,7 @@ class ArticleController
                                   <td>' . $pokaz . '</td>
                                   <td>' . $promosum['clicking'] . '</td>
 								  <td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
-                                  <td>' . $promosum['doread'] . '%</td>
+                                  <td>' . $promosum['doread'] . '(--%)</td>
                                   <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                                   <td style="min-width: 96px;">' . $CRT . '</td>
                                   <td style="width: 111px; text-align: right; padding-right: 20px;">
@@ -307,7 +307,7 @@ class ArticleController
                <td>'.$pokaz.'</td>
                <td>' . $promosum['clicking'] . '</td>
 			   <td class="greentext" style="width:140px;">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
-               <td>' . $promosum['doread'] . '%</td> 
+               <td>' . $promosum['doread'] . '(--%)</td> 
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>

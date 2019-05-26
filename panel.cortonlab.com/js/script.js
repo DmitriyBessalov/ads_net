@@ -918,6 +918,23 @@ $(document).ready(function(){
             }
         });
     });
+
+    //Скрытие панели
+    $('#panel_hide').click(function(){
+        var str = $(this).text();
+        if (str=='<'){
+            $(this).text('>');
+            document.getElementsByClassName('left-menu')[0].style.display = 'none';
+            document.getElementsByClassName('div-block-88')[0].style.marginLeft = '0px';
+            document.getElementById('panel_hide').style.marginLeft = '0px';
+        } else {
+            $(this).text('<');
+            document.getElementsByClassName('left-menu')[0].style.display = 'block';
+            document.getElementsByClassName('div-block-88')[0].style.marginLeft = '246px';
+            document.getElementById('panel_hide').style.marginLeft = '246px';
+        }
+    });
+
 });
 
 
