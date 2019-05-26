@@ -297,18 +297,20 @@ class FinController
 		    </div>
 		<div class="black-fon modalhide" style="display: none;"></div>
 		<div class="modal" style="left: 30%; top: 300px; right: 30%; display: none;">
-                            <div style="min-width: 780px !important;" class="div-block-78 w-clearfix">
+                            <div style="min-width: 700px !important; max-width: 700px !important;" class="div-block-78 w-clearfix">
                                 <div class="div-block-132 modalhide">
                                     <img src="/images/close.png" alt="" class="image-5">
                                 </div>
                                 <div class="">
-                                    <br><br>
-                                    <div class="text-block-82-copy" style=""></div>
-                                    <p>Сумма к выводу:</p>
-								     <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
-								    <p>Минимальная сумма к выводу 5000 рублей. Согласно правилам средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
-								    <div class="button-add-site w-button" id="button_vivod">Вывести</div>
-								    <p id="status_vivod">Статус вывода</p>
+                                    <br>
+                                    <div class="text-block-82-copy" style="background: #fff;"></div>
+									<div>
+                                       <p class="textbal">Сумма к выводу:</p>
+								       <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
+									 </div>
+								    <div class="btnbalans" id="button_vivod">Запросить вывод средств</div>
+								    <p id="status_vivod"></p>
+									<p class="textinfobal">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use" target="_blank">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
                                 </div>
                             </div>
                          </div>
@@ -330,12 +332,12 @@ class FinController
         }
     </script>
 <div id="openaddsite" class="modalDialog2">
-    <div>
+    <div style="padding: 30px 30px 30px 30px !important; width: 542px !important; background: #F4F6F9 !important; border-radius: 8px !important;">
         <a href="/finance#close" title="Закрыть" class="close">
-            <img src="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c25ef6677f283ad129ce5fe_close.png">
+            <img style="width: 13px; height: 13px;" src="/images/close.png">
         </a>
         <div>
-            <div class="text-block-82-copy" style="">Добавить новую площадку</div>
+            <div class="text-block-82-copy" style="margin-top: 10px;">Добавить новую площадку</div>
 			<p style="margin-top: 10px; color: #768093; font-weight: 400 !important; font-size: 16px; line-height: 20px; font-family: \'Myriadpro Regular\';">Укажите URL площадки которую хотите добавить в систему, после чего личный менеджер свяжется с вами.</p>
             <div class="w-form">
                 <form method="post" id="formMain" action="https://cortonlab.com/contact-form2.php" class="form-3" style="margin-right: 0px !important;">

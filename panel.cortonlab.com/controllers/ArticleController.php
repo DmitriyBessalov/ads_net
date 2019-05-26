@@ -566,6 +566,15 @@ class ArticleController
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
 <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
+
+<div class="btncontrolarticle">
+   <a href="/" class="btnarticlegr">Таргетинги</a>
+   <a href="/" class="btnarticlegr">A/B анализ</a>
+   <a href="/" class="btnarticlegr">Анализ URL</a>
+   <a href="/" class="btnarticlegr">Анонсы</a>
+   <a href="/article-stat?id=' . $i['promo_id'] . '" class="btnarticle">Расширенная статистика</a>
+</div>
+
 <div class="w-tabs" id="tab0">';
         if($title=='Редактирование статьи')echo '
     <div class="tabs-menu w-tab-menu">

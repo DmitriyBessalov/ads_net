@@ -77,6 +77,7 @@ template {
  */
 a {
   background-color: transparent;
+  color: #116DD6;
 }
 /**
  * Improve readability of focused elements when they are also in an
