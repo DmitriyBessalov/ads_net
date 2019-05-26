@@ -51,7 +51,7 @@ foreach ($result as $i){
             $med=$i22['r_show_anons']/7;
             if ($med>$i33['r_show_anons']){
                 $ism=round(100 * ($med-$i33['r_show_anons']) / $med);
-                if ($ism>20)
+                if ($ism>30)
                     notifikation($i,'Снижение показа виджета Recommendation на '.$ism.'%', $mySQLdatelast);
             }
         }
@@ -59,7 +59,7 @@ foreach ($result as $i){
             $med=$i22['e_show_anons']/7;
             if ($med>$i33['e_show_anons']){
                 $ism=round(100 * ($med-$i33['e_show_anons']) / $med);
-                if ($ism>20)
+                if ($ism>30)
                     notifikation($i,'Снижение показа виджета Native Preview на '.$ism.'%', $mySQLdatelast);
             }
         }
@@ -67,7 +67,7 @@ foreach ($result as $i){
             $med=$i22['s_show_anons']/7;
             if ($med>$i33['s_show_anons']){
                 $ism=round(100 * ($med-$i33['r_show_anons']) / $med);
-                if ($ism>20)
+                if ($ism>30)
                     notifikation($i,'Снижение показа виджета Slider на '.$ism.'%', $mySQLdatelast);
             }
         }
@@ -75,7 +75,7 @@ foreach ($result as $i){
             $med=$i22['promo_load']/7;
             if ($med>$i33['promo_load']){
                 $ism=round(100 * ($med-$i33['promo_load']) / $med);
-                if ($ism>15)
+                if ($ism>30)
                     notifikation($i,'Снижение показа промо статей на '.$ism.'%', $mySQLdatelast);
             }
         }
