@@ -722,7 +722,7 @@ class ArticleController
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
                     <div style="margin-top: 40px;">
-                        <div class="btnarticle" style="width: 120px;float:left;margin-right: 12px;">Вариант А</div>
+                        <div class="btnarticle aticlevariant" style="width: 120px;float:left;margin-right: 12px;">Вариант А</div>
                         <div class="btnarticle" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</div>
                     </div>
                     <div class="div-block-97" style="width: 1337px">';

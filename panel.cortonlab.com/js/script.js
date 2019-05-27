@@ -937,7 +937,12 @@ $(document).ready(function(){
 
 
     $('#add_variat_promo').click(function(){
-        $(this).before("<div class=\"btnarticle\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</div>");
+        let variant = document.getElementsByClassName('aticlevariant');
+        switch (variant.length) {
+            case 1:{$(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</div>"); break;}
+            case 2:{$(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант C</div>"); break;}
+            case 3:{$(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант D</div>"); $(this).remove();}
+        }
     });
 });
 
