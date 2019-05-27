@@ -745,16 +745,17 @@ $(document).ready(function(){
         $("#tab4").addClass("w--current");
         $("#tab4block").addClass("w--tab-active");
     });
-    $( "#tab5" ).on( "click", function() {
-        $(".w-tab-pane").removeClass("w--tab-active");
-        $(".w-tab-link").removeClass("w--current");
-        $("#tab5").addClass("w--current");
-        $("#tab5block").addClass("w--tab-active");
-    });
+
+    //Начальный таб при редактировании статьи
+    function aticle_tab() {
+
+
+    }
+    aticle_tab();
 
     //Подключение слов в форму
     function words() {
-        variable=$('.div-block-84').text();
+        let variable=$('.div-block-84').text();
         variable=variable.replace(/Удалить/g,',');
         variable=variable.replace(/ /g,'');
         variable=variable.replace(/\n/g,'');
@@ -922,7 +923,7 @@ $(document).ready(function(){
     //Скрытие панели левого меню
     $('#panel_hide').click(function(){
         var str = $(this).text();
-        if (str=='<'){
+        if (str==='<'){
             $(this).text('>');
             document.getElementsByClassName('left-menu')[0].style.display = 'none';
             document.getElementsByClassName('div-block-88')[0].style.marginLeft = '0px';
@@ -939,9 +940,18 @@ $(document).ready(function(){
     $('#add_variat_promo').click(function(){
         let variant = document.getElementsByClassName('aticlevariant');
         switch (variant.length) {
-            case 1:{$(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</div>"); break;}
-            case 2:{$(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант C</div>"); break;}
-            case 3:{$(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант D</div>"); $(this).remove();}
+            case 1:{
+                $(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</div>");
+                break;
+            }
+            case 2:{
+                $(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант C</div>");
+                break;
+            }
+            case 3:{
+                $(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант D</div>");
+                $(this).remove();
+            }
         }
     });
 });
