@@ -191,7 +191,7 @@ class ArticleController
     public static function actionStat()
     {
         $title='Статистика по статье';
-        include PANELDIR.'/views/layouts/header.php';
+        include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
         echo '
@@ -796,7 +796,6 @@ class ArticleController
                     </div>
                     <div class="div-block-97" style="width: 1337px">';
 
-
         if($title!='Редактирование статьи')
             echo '<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: -60px;"></div>';
         echo '
@@ -811,6 +810,7 @@ class ArticleController
                         </div>
 						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
                             <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
+                    </div>
                 </form>
             </div>
         </div>';
