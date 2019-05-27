@@ -919,7 +919,7 @@ $(document).ready(function(){
         });
     });
 
-    //Скрытие панели
+    //Скрытие панели левого меню
     $('#panel_hide').click(function(){
         var str = $(this).text();
         if (str=='<'){
@@ -935,6 +935,10 @@ $(document).ready(function(){
         }
     });
 
+
+    $('#add_variat_promo').click(function(){
+        $(this).before("<div class=\"btnarticle\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</div>");
+    });
 });
 
 
