@@ -29,15 +29,20 @@ switch ($GLOBALS['role']) {
 
             //Статьи
             'articles' => 'article/index',
-            'article-edit' => 'article/edit',
+            'article-edit' => 'article/edit',//Убрать из проекта
+            'article-a/b' => 'article/a_b',
 			'article-edit-content' => 'article/content',
 			'article-edit-anons' => 'article/anons',
-			'article-edit-target' => 'article/target',
+            'article-edit-target' => 'article/target',
+            'article-edit-form' => 'article/promo_form',
+            'article-stat-url' => 'article/stat_url',
             'article-stat' => 'article/stat',
             'article-update' => 'article/update',
             'article-del' => 'article/del',
             'article-start' => 'article/start',
             'article-stop' => 'article/stop',
+            'article-anons-stop' => 'article/anons_stop',
+            'article-anons-start' => 'article/anons_start',
 
             //Клики
             'clicks' => 'click/index',
@@ -79,17 +84,23 @@ switch ($GLOBALS['role']) {
         );break;
     case 'advertiser':
         return array(
+
             //Статьи
             'articles' => 'article/index',
-            'article-edit' => 'article/edit',
-			'article-edit-content' => 'article/content',
-			'article-edit-anons' => 'article/anons',
-			'article-edit-target' => 'article/target',
+            'article-a/b' => 'article/a_b',
+            'article-edit' => 'article/edit',//Убрать из проекта
+            'article-edit-content' => 'article/content',
+            'article-edit-anons' => 'article/anons',
+            'article-edit-target' => 'article/target',
+            'article-edit-form' => 'article/promo_form',
+            'article-stat-url' => 'article/stat_url',
             'article-stat' => 'article/stat',
             'article-update' => 'article/update',
             'article-del' => 'article/del',
             'article-start' => 'article/start',
             'article-stop' => 'article/stop',
+            'article-anons-stop' => 'article/anons_stop',
+            'article-anons-start' => 'article/anons_start',
 
             //Авторизация
             'logout' => 'users/logout',
@@ -97,7 +108,7 @@ switch ($GLOBALS['role']) {
             //Страницы сайта:
             '.+' => 'site/all',
             '' => 'site/loginform',
-        );
+        );break;
     case 'manager':
         return array(
             //Вывод и добавление площадок
@@ -117,7 +128,7 @@ switch ($GLOBALS['role']) {
             //Страницы сайта:
             '.+' => 'site/all',
             '' => 'site/loginform',
-        );
+        );break;
     case 'none':
         return array(
             //Авторизация

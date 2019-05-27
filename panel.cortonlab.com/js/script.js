@@ -746,13 +746,6 @@ $(document).ready(function(){
         $("#tab4block").addClass("w--tab-active");
     });
 
-    //Начальный таб при редактировании статьи
-    function aticle_tab() {
-
-
-    }
-    aticle_tab();
-
     //Подключение слов в форму
     function words() {
         let variable=$('.div-block-84').text();

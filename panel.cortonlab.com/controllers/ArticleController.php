@@ -97,7 +97,7 @@ class ArticleController
 
                 echo '
                                 <tr>
-                                  <td>' . $i['promo_id'] . '</td>
+                                  <td>'.$i['promo_id'].'</td>
                                   <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
 								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-stat?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
 								     <div class="miniinfo"> 
@@ -105,8 +105,8 @@ class ArticleController
 										   <input type="checkbox" ';if ($i['active']) echo 'checked="checked "';echo'class="flipswitch"/>
                                            <span></span>
 										</div>
-										<div class="blockminiinfo"><span style="color: #768093">Бренд: </span>'.$i['namebrand'].'</div>
-										<div class="blockminiinfo"><span style="color: #768093">Ставка:</span> ' . $i['stavka'] . '</div>
+										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>'.$i['namebrand'].'</div>
+										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $i['stavka'] . '</div>
 								     </div>
 								  </td>
                                   <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
@@ -118,14 +118,15 @@ class ArticleController
                                   <td style="min-width: 96px;">' . $CRT . '</td>
                                   <td style="width: 111px; text-align: right; padding-right: 20px;">
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
-                                  <ul class="sub-menu"> 
-                                     <a href="article-edit?id=' . $i['promo_id'] . '">Редактировать</a><br>
-									 <a href="article-edit?id=' . $i['promo_id'] . '">Анонсы</a><br>
-									 <a href="article-stat?id=' . $i['promo_id'] . '">Статистика анонсов</a><br>
-									 <a href="article-edit?id=' . $i['promo_id'] . '">Таргетинг</a><br>
-									 <a href="article-stat?id=' . $i['promo_id'] . '">Анализ ссылок</a><br>
-									 <a href="article-stat?id=' . $i['promo_id'] . '">A/B анализ</a><br>
-                                     <a style="color: #ff0303;" href="article-del?id=' . $i['promo_id'] . '">Удалить</a> 
+                                  <ul class="sub-menu">
+                                     <a href="article-edit?id='.$i['promo_id'].'">Старая версия</a><br>
+								     <a href="article-a/b?id='.$i['promo_id'].'">A/B анализ</a><br>
+									 <a href="article-edit-anons?id='.$i['promo_id'].'">Редактировать анонсы</a><br>
+									 <a href="article-stat?id='.$i['promo_id'].'">Расширенная статистика</a><br>
+									 <a href="article-edit-target?id='.$i['promo_id'].'">Таргетинг</a><br>
+									 <a href="article-edit-form?id='.$i['promo_id'].'">Форма статьи</a><br>
+									 <a href="article-stat-url?id='.$i['promo_id'].'">Анализ ссылок</a><br>
+									 <a style="color: #ff0303;" href="article-del?id='.$i['promo_id'].'">Удалить</a> 
                                   </ul>
                                   </td>
                                 </tr>  
@@ -549,6 +550,82 @@ class ArticleController
         exit;
     }
 
+
+    public static function actionA_b()
+    {
+        $title='А/B тестирование';
+        include PANELDIR.'/views/layouts/article_header.php';
+        $db = Db::getConnection();
+        $dbstat = Db::getstatConnection();
+
+        include PANELDIR.'/views/layouts/footer.php';
+        return true;
+    }
+
+    public static function actionContent()
+    {
+        $title='Контент статьи';
+        include PANELDIR.'/views/layouts/article_header.php';
+        $db = Db::getConnection();
+
+        include PANELDIR.'/views/layouts/footer.php';
+        return true;
+    }
+
+    public static function actionAnons()
+    {
+        $title='А/B тестирование';
+        include PANELDIR.'/views/layouts/article_header.php';
+        $db = Db::getConnection();
+
+        include PANELDIR.'/views/layouts/footer.php';
+        return true;
+    }
+
+    public static function actionAnons_stop()
+    {
+        $db = Db::getConnection();
+        return true;
+    }
+
+    public static function actionAnons_start()
+    {
+        $db = Db::getConnection();
+        return true;
+    }
+
+    public static function actionTarget()
+    {
+        $title='Ключевые слова';
+        include PANELDIR.'/views/layouts/article_header.php';
+        $db = Db::getConnection();
+
+        include PANELDIR.'/views/layouts/footer.php';
+        return true;
+    }
+
+    public static function actionPromo_form()
+    {
+        $title='Форма заказа промо статьи';
+        include PANELDIR.'/views/layouts/article_header.php';
+        $db = Db::getConnection();
+
+        include PANELDIR.'/views/layouts/footer.php';
+        return true;
+    }
+
+    public static function actionStat_url()
+    {
+        $title='Анализ ссылок';
+        include PANELDIR.'/views/layouts/article_header.php';
+        $db = Db::getConnection();
+        $dbstat = Db::getstatConnection();
+
+        include PANELDIR.'/views/layouts/footer.php';
+        return true;
+    }
+
+
     public static function actionEdit()
     {
         if ($_GET['id']==''){
@@ -561,19 +638,11 @@ class ArticleController
             $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
             $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
         };
-        include PANELDIR.'/views/layouts/header.php';
+        include PANELDIR.'/views/layouts/article_header.php';
         echo '
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
 <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
-
-<div class="btncontrolarticle">
-   <a href="/" class="btnarticlegr">Таргетинги</a>
-   <a href="/" class="btnarticlegr">A/B анализ</a>
-   <a href="/" class="btnarticlegr">Анализ URL</a>
-   <a href="/" class="btnarticlegr">Анонсы</a>
-   <a href="/article-stat?id=' . $i['promo_id'] . '" class="btnarticle">Расширенная статистика</a>
-</div>
 
 <div class="w-tabs" id="tab0">';
         if($title=='Редактирование статьи')echo '
@@ -767,28 +836,6 @@ class ArticleController
                         <input type="submit" value="Сохранить" class="submit-button-6">
                     </div>
                 </form>
-            </div>
-        </div>
-        
-        <div class="tab-pane-tab-5 w-tab-pane" id="tab5block">
-            <div class="form-block-2 w-form">
-                <div class="form-2">
-                    <div class="div-block-97">
-					<div class="text-block-103">Руководство</div>
-                        <div class="html-embed-4 w-embed">
-                            <ul style="padding-left: 20px !important;">
-                                <li>Максимальное кол-во символов в статье - 7000</li>
-                                <br>
-                                <li>В статье можно разместить от одной до пяти ссылок</li>
-                                <br>
-                                <li>Поддерживаемые форматы изображений - png, jpg и gif</li>
-                                <br>
-                                <li>Не забывайте про качество контента!</li>
-                            </ul>
-                        </div>
-                    </div>
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-top: 0px;"></div>
-                </div>
             </div>
         </div>';
         }else{
