@@ -9,8 +9,8 @@ $redis->select(4);
 $block=$redis->get('s:'.$prosmort_id);
 if ($block){$redis->set('s:'.$prosmort_id, 1, 1296000);exit;}else{$redis->set('s:'.$prosmort_id, 1, 1296000);}
 
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
-$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
+$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
 
 $sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
 $ploshadka_id = $db->query($sql)->fetch(PDO::FETCH_ASSOC);

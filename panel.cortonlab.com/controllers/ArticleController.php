@@ -557,7 +557,45 @@ class ArticleController
         include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
-
+        echo'
+        <div style="margin-top: 40px;">
+            <div class="btnarticle aticlevariant" style="width: 120px;float:left;margin-right: 12px;">Вариант А</div>
+            <div class="btnarticle" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</div>
+        </div>
+        <div class="table-box">
+            <div class="table w-embed">
+                <table>
+                    <thead>
+                        <tr class="trtop">
+                            <td>Версия</td>
+                            <td>Дата запуска</td>
+                            <td>Заголовок</td>
+                            <td>Расходы</td>
+                            <td>Показы</td>
+                            <td>Клики</td>
+                            <td>Просмотры</td>
+                            <td>Дочитывания</td>
+                            <td>Переходы</td>
+                            <td>Вкл/Выкл</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>А</td>
+                            <td>01.01.1970</td>
+                            <td>Текст</td>
+                            <td>0руб.</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0 (0%)</td>
+                            <td>0</td>
+                            <td>True</td>
+                        </tr>
+                    </tbody>    
+                </table>
+            </div>
+        </div>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
     }
@@ -568,16 +606,89 @@ class ArticleController
         include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
 
+        echo '
+        <script>
+            var quill = new Quill(\'#editor-container\', {
+                modules: {
+                    toolbar: [
+                        [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
+                ]
+              },
+                scrollingContainer: "#scrolling-container",
+              placeholder: "Написать что-то ценное...",
+              theme: "snow"
+            });
+            
+            var form = document.querySelector(\'#formtextsend\');
+            form.onsubmit = function() {
+                var about = document.querySelector(\'input[name=formtext]\');
+                var textt = document.querySelector(\'.ql-editor\');
+                about.value = textt.innerHTML;
+                return true;
+            }
+        </script>';
+
         include PANELDIR.'/views/layouts/footer.php';
         return true;
     }
 
     public static function actionAnons()
     {
-        $title='А/B тестирование';
+        $title='Анонсы статей';
         include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
 
+        echo '<form method="post" action="/article-update" class="form-2" enctype="multipart/form-data">
+                    <input type="hidden" name="tab" value="анонсы">
+                    <input type="hidden" name="id" value="'.$id.'">
+                    <div id="anonses">';
+            $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$id."'";
+            $anons_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            if ($anons_ids!='') {
+                $anons = explode(",", $anons_ids);
+                foreach ($anons as $i) {
+                    $sql = "SELECT * FROM `anons` WHERE `id`='" . $i . "'";
+                    $anon = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                    $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
+                    $dir = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $imgdir = '//api.cortonlab.com/img/' . $dir . '/a/';
+                    echo '
+                                <div class="div-block-97-copy">
+								<div class="text-block-103">Настройка анонса</div>
+                                    <input type="hidden" name="anons_ids[]" value="' . $anon['id'] . '">
+                                    <div class="div-block-142">
+                                        <div class="div-block-145">
+                                            <input type="text" value="' . $anon['title'] . '" class="text-field-6 _1 w-input" maxlength="55" name="title[]" placeholder="Заголовок анонса статьи до 55 символов" id="title-3" required="">
+                                            <textarea name="opisanie[]" placeholder="Описание от 90 до 130 символов" maxlength="130" class="textarea-7 w-input">' . $anon['snippet'] . '</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="div-block-142">
+                                        <div class="div-block-148">
+                                            <div class="image-preview" style="background-image:url(' . $imgdir . $anon['img_290x180'] . ');background-position:center center;background-repeat:no-repeat;background-size:cover;">
+                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 290x180px</label>
+                                                <input type="file" name="image290[]" class="image-upload290" accept=".png,.jpeg,.jpg,.gif" />
+                                            </div>
+                                        </div>
+                                        <div class="div-block-147"></div>
+                                        <div class="div-block-148">
+                                            <div class="image-preview _180" style="background-image:url(' . $imgdir . $anon['img_180x180'] . ');background-position:center center;background-repeat:no-repeat;background-size:cover;">
+                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 180x180px</label>
+                                                <input type="file" name="image180[]" class="image-upload180" accept=".png,.jpeg,.jpg,.gif" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="button-10 w-button delanons">Удалить анонс</a>
+                                </div>';
+                };
+            };
+            echo '
+                    </div>
+                    <input type="hidden" name="del_id" value="">
+					<div style="border-top: 0px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+                    <div class="submit-button-6" id="addanons" style="margin-right: 20px;">Добавить анонс</div>
+                     <input type="submit" value="Сохранить" class="submit-button-6">
+                 </form>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
     }
@@ -599,6 +710,65 @@ class ArticleController
         $title='Ключевые слова';
         include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
+        echo'
+        <form method="post" action="/article-update" class="form-2">
+                    <div class="div-block-97">
+					<div class="text-block-103">Настройка аудитории</div>
+                        <input type="hidden" name="tab" value="настройка">
+                        <input type="hidden" name="id" value="'.$id.'">
+                        <input type="hidden" name="words" value="">
+                        <div class="div-block-81">
+                            <div>
+                                <div class="div-block-82">
+                                    <input type="text" class="text-field-2 w-input" maxlength="256" placeholder="Ключ" id="addkey-2">
+                                    <div class="text-block-141">+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div-block-84">';
+            if ($result['words']!=""){
+                $word=explode(",", $result['words']);
+                foreach($word as $i) {
+                    echo'
+                                        <div class="div-block-86" >
+                                            <div class="text-block-114" >'.$i.'</div >
+                                            <div class="text-block-98" > Удалить</div >
+                                        </div>';
+                };
+            };
+            echo'
+                        </div>
+                        <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
+                    </div>
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 0px;"></div>
+                    <div class="div-block-97">
+					<div class="text-block-103">Ставка</div>
+                        <div class="div-block-85">
+                            <div>';
+            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
+            $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            echo'
+                                <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
+                            </div>
+                            <div>
+                                <div class="text-block-96">₽ за CPG</div>
+                            </div>
+                        </div>
+                    </div>
+					
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px;"></div>
+					
+					<div class="div-block-97">
+					<div class="text-block-103">Бренд</div>
+                        <div class="div-block-85">
+                        </div>
+                        <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
+                    </div>
+					
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+                    					
+					<input type="submit" value="Сохранить изменения" class="submit-button-6">
+                </form>';
 
         include PANELDIR.'/views/layouts/footer.php';
         return true;
@@ -620,7 +790,33 @@ class ArticleController
         include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
-
+        echo'
+        <div style="margin-top: 40px;">
+            <div class="btnarticle aticlevariant" style="width: 120px;float:left;margin-right: 12px;">Вариант А</div>
+            <div class="btnarticle" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</div>
+        </div>
+        <div class="table-box">
+            <div class="table w-embed">
+                <table>
+                    <thead>
+                        <tr class="trtop">
+                            <td>Анкор</td>
+                            <td>URL</td>
+                            <td>Переходы</td>
+                            <td>% Переходов</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>текст</td>
+                            <td>https://example.com</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>    
+                </table>
+            </div>
+        </div>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
     }
@@ -790,10 +986,7 @@ class ArticleController
                 <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
-                    <div style="margin-top: 40px;">
-                        <div class="btnarticle aticlevariant" style="width: 120px;float:left;margin-right: 12px;">Вариант А</div>
-                        <div class="btnarticle" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</div>
-                    </div>
+
                     <div class="div-block-97" style="width: 1337px">';
 
         if($title!='Редактирование статьи')
@@ -860,19 +1053,12 @@ class ArticleController
       placeholder: "Написать что-то ценное...",
       theme: "snow"
     });
-   
     
     var form = document.querySelector(\'#formtextsend\');
     form.onsubmit = function() {
-      // Populate hidden form on submit
       var about = document.querySelector(\'input[name=formtext]\');
-      //about.value = quill.getContents();
       var textt = document.querySelector(\'.ql-editor\');
-    
       about.value = textt.innerHTML;
-      
-      //console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-      
       return true;
     }
 
@@ -951,7 +1137,6 @@ class ArticleController
             return true;
         }
     }
-
 
     //функцию обрезает оконкания слов
     public static function miniword($words)

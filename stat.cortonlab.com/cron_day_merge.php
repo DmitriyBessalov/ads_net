@@ -1,5 +1,5 @@
 <?php
-$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
 

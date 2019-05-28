@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_URI']=='/robots.txt'){echo "User-agent: *\nDisallow: /";exit;}
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
 $_GET = array_map('addslashes', $_GET);
 $_COOKIE = array_map('addslashes', $_COOKIE);
 if (isset($_GET['site'])){

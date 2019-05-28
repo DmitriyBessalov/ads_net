@@ -10,8 +10,8 @@ $block=$redis->get('c:'.$prosmort_id);
 if ($block){$redis->set('c:'.$prosmort_id, 1, 1296000);exit;}else{$redis->set('c:'.$prosmort_id, 1, 1296000);}
 $redis->close();
 
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
-$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
+$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
 
 $sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
 $ploshadka_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);

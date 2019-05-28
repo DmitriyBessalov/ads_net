@@ -14,8 +14,8 @@ $redis->close();
 
 $domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
-$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'www-root', 'Do5aemub0e7893', array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
+$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'corton', 'H4x4B2y5', array(PDO::ATTR_PERSISTENT => true));
 
 $sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $ploshadka_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);

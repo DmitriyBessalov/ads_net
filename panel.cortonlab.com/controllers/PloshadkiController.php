@@ -2531,7 +2531,6 @@ var myLineChart = new Chart(ctx, {
                     if($ch)$balansperiod['e_show_anons']+=$ch;
                     $ch=$redis->get(date('d').':'.$_GET['id'].':s');
                     if($ch)$balansperiod['s_show_anons']+=$ch;
-
                 }
 
                 if (is_null($balansperiod['r'])) {
@@ -2542,6 +2541,7 @@ var myLineChart = new Chart(ctx, {
                 $rCTR=round($balansperiod['r_promo_load']/$balansperiod['r_show_anons']*100);
                 $eCTR=round($balansperiod['e_promo_load']/$balansperiod['e_show_anons']*100);
                 $sCTR=round($balansperiod['s_promo_load']/$balansperiod['s_show_anons']*100);
+
                 if ((is_nan($rCTR)) or (is_infinite($rCTR))) {$rCTR = '0';}
                 if ((is_nan($eCTR)) or (is_infinite($eCTR))) {$eCTR = '0';}
                 if ((is_nan($sCTR)) or (is_infinite($sCTR))) {$sCTR = '0';}
@@ -2638,7 +2638,7 @@ var myLineChart = new Chart(ctx, {
             <td>'.$balansperiod['s_show_anons'].'</td>
             <td>'.$balansperiod['s_promo_load'].'</td>
             <td>'.$sCTR.' %</td>  
-            <td>'.$balansperiod['s'];$val=round(100/$balansperiod['s_promo_load']*$balansperiod['s'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
+            <td>'.$balansperiod['s']; $val=round(100/$balansperiod['s_promo_load']*$balansperiod['s'],2); if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
             <td>';
                 if (($aktiv['slider_aktiv'])AND($balansperiod['s']!=0)) {
                     $val= round($balansperiod['s_balans']/$balansperiod['s_show_anons']*1100,2);
