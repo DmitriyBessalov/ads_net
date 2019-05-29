@@ -30,7 +30,7 @@ class FinController
                     </td>
                     <td style="min-width: 110px;">CTR
                     </td>
-                    <td style="min-width: 120px;">eCPM
+                    <td class="bluetext" style="min-width: 120px;">eCPM
                         <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Доход на 1000 показов анонсов</span></div>
                     </td>
                     <td style="min-width: 130px;">Доход</td>
@@ -145,7 +145,7 @@ class FinController
             </td>
             <td>' . $balansperiod['r'] . '</td>
             <td>' . $r_CTR . ' %</td>
-            <td>';
+            <td class="bluetext">';
             if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
                 $val= round($balansperiod['r_balans']/$balansperiod['r_show_anons']*1100,2);
                 if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
@@ -154,7 +154,7 @@ class FinController
                 echo '0.00';
             }
             echo ' р.</td>
-            <td class="bluetext">' . $balansperiod['r_balans'] . ' р.</td>
+            <td>' . $balansperiod['r_balans'] . ' р.</td>
 			<td>
 		        <a class="main-itemcode" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
                     <div class="codeblock">
