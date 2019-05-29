@@ -30,7 +30,7 @@ class FinController
                     </td>
                     <td style="min-width: 110px;">CTR
                     </td>
-                    <td class="bluetext" style="min-width: 120px;">eCPM1
+                    <td class="bluetext" style="min-width: 120px;">eCPM
                         <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Доход на 1000 показов анонсов</span></div>
                     </td>
                     <td style="min-width: 130px;">Доход</td>
