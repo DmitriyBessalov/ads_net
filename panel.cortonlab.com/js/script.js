@@ -1,4 +1,11 @@
 $(document).ready(function(){
+//Получение get параметров
+    function $_GET(key) {
+        var p = window.location.search;
+        p = p.match(new RegExp(key + '=([^&=]+)'));
+        return p ? p[1] : false;
+    }
+
 //Подгрузка подкатегорий при выборе категорий на странице редактирования площадок
     $("#categoriya").change(function(){
         selec();
@@ -690,17 +697,17 @@ $(document).ready(function(){
         var variable = $('.widget-slider  [name=widget-size-title]').val();
         if (variable != "") {
             if (widgetfontunit=='px') {
-                style += ".widget-slider  .corton-title{font-size: " + variable + "px;}";
+                style += ".widget-slider .corton-title{font-size: " + variable + "px;}";
             } else {
-                style += ".widget-slider  .corton-title{font-size: " + variable/10 + "em;}";
-            };
-        };
+                style += ".widget-slider .corton-title{font-size: " + variable/10 + "em;}";
+            }
+        }
 
         var variable = $('.widget-slider  [name=widget-color-title]').val();
-        if (variable != "") style += ".widget-slider  .corton-title{color: #" + variable + ";}\n";
+        if (variable != "") style += ".widget-slider .corton-title{color: #" + variable + ";}\n";
 
         var variable = $('.widget-slider  [name=widget-type-bold-title]').val();
-        if (variable != "") style += ".widget-slider  .corton-title{font-weight: " + variable + ";}\n";
+        if (variable != "") style += ".widget-slider .corton-title{font-weight: " + variable + ";}\n";
 
         var variable = $('.widget-slider  [name=widget-type-interval-title]').val();
         if (variable != "") style += ".widget-slider  .corton-title{line-height: " + variable + ";}\n";
@@ -929,26 +936,32 @@ $(document).ready(function(){
         }
     });
 
-
+    //Создание статьи на основе текущей
     $('#add_variat_promo').click(function(){
         let variant = document.getElementsByClassName('aticlevariant');
+        id=$_GET('id');
         switch (variant.length) {
             case 1:{
-                $(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</div>");
+                $.post("https://panel.cortonlab.com/article-clone?id="+id, function(data) {
+                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</a>");
+                });
                 break;
             }
             case 2:{
-                $(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант C</div>");
+                $.post("https://panel.cortonlab.com/article-clone?id="+id, function(data) {
+                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант C</a>");
+                });
                 break;
             }
             case 3:{
-                $(this).before("<div class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант D</div>");
-                $(this).remove();
+                $.post("https://panel.cortonlab.com/article-clone?id="+id, function(data) {
+                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант D</a>");
+                    $('#add_variat_promo').remove();
+                });
             }
         }
     });
 });
-
 
 //Блок с информацией о обновлениях для площадок
 $(function(){
@@ -977,4 +990,3 @@ $(function(){
         $('.message-box').fadeOut(200);
     });
 })
-

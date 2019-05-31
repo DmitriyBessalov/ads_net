@@ -174,7 +174,6 @@ function corton_widget() {
     const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
     const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
 
-    //console.log(recomend_algorithm_output,natpre_algorithm_output,slider_algorithm_output);
     if (location.hostname==='demo.cortonlab.com') {
         if (recomend_algorithm_output==='0'||recomend_algorithm_output==='3'||recomend_algorithm_output==='4'||recomend_algorithm_output==='5'){
             let div = document.createElement('div');
@@ -182,7 +181,7 @@ function corton_widget() {
             document.body.appendChild(div);
             console.log('r');
         }
-        if (natpre_algorithm_output!=='1'||natpre_algorithm_output!=='3'||natpre_algorithm_output!=='4'||natpre_algorithm_output!=='5'){
+        if (natpre_algorithm_output==='1'||natpre_algorithm_output==='3'||natpre_algorithm_output==='4'||natpre_algorithm_output==='5'){
             let div = document.createElement('div');
             div.id = 'corton-nativepreview-widget';
             document.body.appendChild(div);
@@ -278,7 +277,7 @@ function corton_widget() {
         const h3 = document.getElementsByTagName("h3");for (const val of h3){splitword(val.innerText);}
         const h4 = document.getElementsByTagName("h4");for (const val of h4){splitword(val.innerText);}
 
-        console.log(top10);
+        //console.log(top10);
 
         top10 = Object.keys(top10).sort(function (a, b){return top10[b] - top10[a]});
             top10 = top10.slice(0, 15);
@@ -597,18 +596,14 @@ function corton_widget() {
             if ((h2>h) && (elements[q].offsetTop>pageYOffset)){
                 {
                     anons_ids_send.push(id);
-                };
+                }
             }
         }
-        //console.log('видимы',anons_ids_send)
         for (q = 0; q < check.length; q++) {
-            //console.log('проверяеся',anons_ids_send[i]);
             if_arr=anons_ids_send.indexOf(anons_ids_send[q])+1;
             if(if_arr){
-                //console.log('пров имеется',anons_ids_send[i]);
                 for (y = 0; y < anons_ids_send.length; y++) {
                     if(anons_ids_send[y]==check[q]){
-                        //console.log('готов к отправке',anons_ids_send[q]);
                         if_arr=anons_ids_read.indexOf(anons_ids_send[q])+1;
                         if(!if_arr){
                             anons_ids_read.push(anons_ids_send[q]);
@@ -648,7 +643,6 @@ function corton_widget() {
             if (widget_recomend.getBoundingClientRect().top != 0) {
                 if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 4 < 0) {
                     show_recomend = 2;
-                    //console.log('recomend');
                     show_widget_aktiv = true;
                 }
             }else{
@@ -661,7 +655,6 @@ function corton_widget() {
             if (widget_natpre.getBoundingClientRect().top != 0) {
                 if ((show_natpre == 1) && (widget_natpre.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 4 < 0)) {
                     show_natpre = 2;
-                    //console.log('natpre');
                     show_widget_aktiv = true;
                 }
             }else{
@@ -672,7 +665,6 @@ function corton_widget() {
 
         if ((show_slider==1)&&(document.body.scrollHeight/2-window.innerHeight/2<pageYOffset)) {
             show_slider = 2;
-            //console.log('slider');
             show_widget_aktiv=true;
         }
         if (show_widget_aktiv){
@@ -702,7 +694,7 @@ function corton_widget() {
             for (f = 0; f < anons_idsnew.length; f++) {
                 if(!anons_idsold.indexOf(anons_idsnew[f]) !== -1){
                     anons_ids_show.push(anons_idsnew[f]);
-                };
+                }
             }
             //console.log('захвачены',anons_ids_show);
             setTimeout(checkread, 3000, anons_ids_show.join().substr(0));
@@ -715,7 +707,6 @@ function corton_widget() {
     onscr();
 
     if (first_widget_check){
-        //console.log('repeat');
         first_widget_check=false;
         setTimeout(onscr, 500);
     }
@@ -778,36 +769,41 @@ function adblock() {
 //Расчёт готовности страницы для подгрузки виджетов и промо статьи
 function corton_delay() {
     if (window.location.hostname === 'demo.cortonlab.com') {
-        let url='';
-        if (window.location.hostname === 'demo.cortonlab.com'){
+        //let url='';
+        //if (window.location.hostname === 'demo.cortonlab.com'){
             url = corton_url;
-        }else{
-            url = location.hostname+location.pathname;
-        }
+        //}else{
+          //  url = location.hostname+location.pathname;
+        //}
         url = url.split('?')[0];
         const url2 = url.split('/')[0];
         if (url===url2+'/promo'){
-            console.log(url);
-            //console.log('Промо');
-            corton_promo();
-            return true;
+            const promo_selector = style_b.getPropertyValue('--selector');
+            let sel = document.querySelectorAll(promo_selector);
+            if (sel[0]){
+                console.log(url);
+                corton_promo();
+                return true;
+            }else{
+                setTimeout(corton_delay, 40);
+            }
         }
         if (document.readyState === "complete") {
             const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
             const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
             const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
-            console.log(url);
+
+
             if (recomend_algorithm_output!=='1' || natpre_algorithm_output!=='0' || slider_algorithm_output!=='1'){
                 corton_widget();
                 return true;
             }
-        } else {
+        }else{
             setTimeout(corton_delay, 40);
         }
     } else {
         let widget_promo = document.getElementById("corton-promo");
         if (widget_promo) {
-            //console.log('промо');
             corton_promo();
             return true;
         } else {
@@ -815,7 +811,6 @@ function corton_delay() {
             widget_natpre = document.getElementById("corton-nativepreview-widget");
             widget_slider = document.getElementById("corton-slider-widget");
             if (widget_recomend || widget_natpre || widget_slider) {
-                //console.log('widget');
                 corton_widget();
                 return true;
             }else{
@@ -827,7 +822,6 @@ function corton_delay() {
                         return true;
                     }
                 }else{
-                    //console.log('wait50');
                     setTimeout(corton_delay, 45);
                 }
             }

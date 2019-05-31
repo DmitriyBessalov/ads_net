@@ -119,8 +119,8 @@ class ArticleController
                                   <td style="width: 111px; text-align: right; padding-right: 20px;">
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu">
-                                     <a href="article-edit?id='.$i['promo_id'].'">Старая версия</a><br>
 								     <a href="article-a/b?id='.$i['promo_id'].'">A/B анализ</a><br>
+								     <a href="article-edit-content?id='.$i['promo_id'].'">Контент статей</a><br>
 									 <a href="article-edit-anons?id='.$i['promo_id'].'">Редактировать анонсы</a><br>
 									 <a href="article-stat?id='.$i['promo_id'].'">Расширенная статистика</a><br>
 									 <a href="article-edit-target?id='.$i['promo_id'].'">Таргетинг</a><br>
@@ -153,9 +153,7 @@ class ArticleController
              <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off"  value="'.$datebegin.'">
              <div class="text-block-128">-</div>
 			 <input type="text" name="dateend" class="tcal tcalInput" autocomplete="off" value="'.$dateend.'">
-             
-            <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
-			
+             <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
             </div>
 			</form>
 		</div>
@@ -203,7 +201,6 @@ class ArticleController
                 <th>ID</th>
                 <td>Превью</td>
                 <th>Заголовок</th>
-            
                 <th><div class="tooltipinfo1">Расход<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
                 <th><div class="tooltipinfo1">Показы<span class="tooltiptext1">Количество показов анонсов</span></div></th>
                 <th><div class="tooltipinfo1">Клики<span class="tooltiptext1">Клики на промо статью</span></div></th>
@@ -307,8 +304,8 @@ class ArticleController
                <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                <td>'.$pokaz.'</td>
                <td>' . $promosum['clicking'] . '</td>
-			   <td class="greentext" style="width:140px;">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
-               <td>' . $promosum['doread'] . '(--%)</td> 
+			   <td class="greentext" style="width:140px;">'.$promosum['st'].' ('.sprintf("%.2f", $protsentst).'%)</td>
+               <td>' . $promosum['doread'] . ' (--%)</td> 
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
@@ -363,24 +360,17 @@ class ArticleController
                 }else{
                     $user_id = UsersController::getUserId();
                 }
-
                 $_POST['formtext']=stripcslashes ($_POST['formtext']);
-
                 preg_match_all("/src=\"data:image\/(jpeg|jpg|gif|png);base64,(.*?)\">/", $_POST['formtext'],$out);
-
                 mkdir(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id, 0755);
                 $i=0;
                 while ($i<count($out[0])){
-
                     $hash=hash('crc32', $out[2][$i]);
                     $ifp = fopen(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.$hash.'.'.$out[1][$i], "wb");
                     fwrite($ifp, base64_decode($out[2][$i]));
                     fclose($ifp);
-
-                    $replase='<img src="https://api.cortonlab.com/img/promo/'.$id.'/'.$hash.'.'.$out[1][$i].'">';
-
+                    $replase=' src="https://api.cortonlab.com/img/promo/'.$id.'/'.$hash.'.'.$out[1][$i].'">';
                     $_POST['formtext']=str_replace($out[0][$i], $replase, $_POST['formtext']);
-
                     $i++;
                 }
 
@@ -393,7 +383,7 @@ class ArticleController
                     $id=$db->lastInsertId();
                     $sql = "INSERT INTO `anons_index` SET `promo_id`='".$id."';";
                     $db->query($sql);
-                    header('Location: /article-edit?id='.$id);
+                    header('Location: /article-edit-anons?id='.$id);
                     exit;
                 }
                 break;
@@ -434,6 +424,7 @@ class ArticleController
                         if (in_array($i, $wordsold)){
                             $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$i."';";
                             $promo_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
                             //Удаляет
                             $ids=explode(",", $promo_ids);
                             unset($ids[array_search($_POST['id'],$ids)]);
@@ -464,6 +455,7 @@ class ArticleController
             }else {
                 $anonsold2 = array();
             };
+
             //Список старых файлов картинок
             $role= UsersController::getUserRole();
             if ($role=='advertiser'){
@@ -472,10 +464,9 @@ class ArticleController
                 $sql ="SELECT `user_id` FROM `promo` WHERE `id` = '".$_POST['id']."';";
                 $user_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
             }
-
             $uploaddir = '/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR;
-            //загрузка файлов
 
+            //загрузка файлов
             mkdir('/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id, 0755);
             mkdir('/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a', 0755);
 
@@ -558,10 +549,6 @@ class ArticleController
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
         echo'
-        <div style="margin-top: 40px;">
-            <div class="btnarticle aticlevariant" style="width: 120px;float:left;margin-right: 12px;">Вариант А</div>
-            <div class="btnarticle" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</div>
-        </div>
         <div class="table-box">
             <div class="table w-embed">
                 <table>
@@ -602,21 +589,72 @@ class ArticleController
 
     public static function actionContent()
     {
-        $title='Контент статьи';
-        include PANELDIR.'/views/layouts/article_header.php';
-        $db = Db::getConnection();
+        $db=Db::getConnection();
+        $title='Редактирование статьи';
+        $id=$_GET['id'];
+        $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
+        $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-        echo '
+        include PANELDIR.'/views/layouts/article_header.php';
+        echo'
+        <script type="text/javascript" src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
+        <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
+        
+        <div style="margin-top: 40px;">';
+
+        $sql="SELECT `id` FROM `promo` WHERE `main_promo_id`='".$result['main_promo_id']."'";
+        $result2 = $db->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+
+        switch (count($result2)){
+            case 1:
+                echo '<a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
+            case 2:
+                echo '<a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
+            case 3:
+                echo '<a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
+                      <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
+            case 4:
+                echo '<a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
+                      <a class="btnarticlegr" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[3].'">Вариант D</a>';
+        };
+
+    echo
+        '</div>
+        
+        <form method="post" id="formtextsend" action="/article-update" class="form-2">
+                    <input type="hidden" name="tab" value="статья">
+                    <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
+                    <div class="div-block-97" style="width: 1337px">
+                        <div style=" width: 1337px;">
+                            <input type="text" class="text-field-4 w-input" style=" width: 760px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
+                            <input name="formtext" type="hidden">
+                            <div id="toolbar_position"></div>
+                            <div id="editor-container">
+                        '.$result['text'].'
+                        </div>
+                        </div>
+						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
+                            <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
+                    </div>
+        </form>
         <script>
             var quill = new Quill(\'#editor-container\', {
                 modules: {
                     toolbar: [
                         [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
-                ]
-              },
+                    ]
+                },
                 scrollingContainer: "#scrolling-container",
-              placeholder: "Написать что-то ценное...",
-              theme: "snow"
+                placeholder: "Написать что-то ценное...",
+                theme: "snow"
             });
             
             var form = document.querySelector(\'#formtextsend\');
@@ -635,9 +673,13 @@ class ArticleController
     public static function actionAnons()
     {
         $title='Анонсы статей';
-        include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
-
+        if ($_GET['id']==''){
+            $id='new';
+        }else{
+            $id=$_GET['id'];
+        };
+        include PANELDIR.'/views/layouts/article_header.php';
         echo '<form method="post" action="/article-update" class="form-2" enctype="multipart/form-data">
                     <input type="hidden" name="tab" value="анонсы">
                     <input type="hidden" name="id" value="'.$id.'">
@@ -709,11 +751,17 @@ class ArticleController
     {
         $title='Ключевые слова';
         include PANELDIR.'/views/layouts/article_header.php';
-        $db = Db::getConnection();
+        if ($_GET['id']==''){
+            $id='new';
+        }else{
+            $db=Db::getConnection();
+            $id=$_GET['id'];
+            $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
+            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        };
         echo'
         <form method="post" action="/article-update" class="form-2">
                     <div class="div-block-97">
-					<div class="text-block-103">Настройка аудитории</div>
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
@@ -755,18 +803,14 @@ class ArticleController
                             </div>
                         </div>
                     </div>
-					
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px;"></div>
-					
 					<div class="div-block-97">
 					<div class="text-block-103">Бренд</div>
                         <div class="div-block-85">
                         </div>
                         <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
                     </div>
-					
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-                    					
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
                 </form>';
 
@@ -776,10 +820,34 @@ class ArticleController
 
     public static function actionPromo_form()
     {
-        $title='Форма заказа промо статьи';
+        $title='Контактная форма в статье';
         include PANELDIR.'/views/layouts/article_header.php';
-        $db = Db::getConnection();
-
+        if ($_GET['id']==''){
+            $id='new';
+        }else{
+            $db=Db::getConnection();
+            $id=$_GET['id'];
+            $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
+            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        };
+        echo '
+                <form method="post" action="/article-update" class="form-2">
+                    <input type="hidden" name="tab" value="форма_заказа">
+                    <input type="hidden" name="id" value="'.$id.'">
+                    <div class="div-block-97">
+                        <input type="text" value="'.$result['form_title'].'" class="text-field-13 w-input" maxlength="46" name="form-title" placeholder="Заголовок формы" id="form-title">
+                        <input type="text" value="'.$result['form_text'].'" class="text-field-14 w-input" maxlength="78" name="form-text" placeholder="Текст формы" id="form-text">
+                        <select required="" class="select-field-2 w-select" name="form-button">
+                            <option value="">Текст кнопки</option>
+                            <option '; if ($result['form_button']=='Отправить'){echo 'selected ';}; echo 'value="Отправить">Отправить</option>
+                            <option '; if ($result['form_button']=='Заказать') {echo 'selected ';}; echo 'value="Заказать">Заказать</option>
+                            <option '; if ($result['form_button']=='Оформить') {echo 'selected ';}; echo 'value="Оформить">Оформить</option>
+                            <option '; if ($result['form_button']=='Получить') {echo 'selected ';}; echo 'value="Получить">Получить</option>
+                        </select>
+						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
+                        <input type="submit" value="Сохранить" class="submit-button-6">
+                    </div>
+                </form>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
     }
@@ -791,10 +859,6 @@ class ArticleController
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
         echo'
-        <div style="margin-top: 40px;">
-            <div class="btnarticle aticlevariant" style="width: 120px;float:left;margin-right: 12px;">Вариант А</div>
-            <div class="btnarticle" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</div>
-        </div>
         <div class="table-box">
             <div class="table w-embed">
                 <table>
@@ -821,179 +885,23 @@ class ArticleController
         return true;
     }
 
-
     public static function actionEdit()
     {
-        if ($_GET['id']==''){
-            $title='Создание новой статьи';
-            $id='new';
-        }else{
-            $db=Db::getConnection();
-            $title='Редактирование статьи';
-            $id=$_GET['id'];
-            $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
-            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-        };
-        include PANELDIR.'/views/layouts/article_header.php';
+        $title='Создание новой статьи';
+        $id='new';
+        include PANELDIR.'/views/layouts/header.php';
         echo '
 <script type="text/javascript" src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
 <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
-
-<div class="w-tabs" id="tab0">';
-        if($title=='Редактирование статьи')echo '
-    <div class="tabs-menu w-tab-menu">
-        <a class="tab-link-tab-4 w-inline-block w-tab-link w--current" id="tab1">
-            <div class="text-block-142">Базовые настройки</div>
-        </a>
-        <a class="tab-link-tab-3 w-inline-block w-tab-link" id="tab2">
-            <div>Редактировать анонсы</div>
-        </a>
-        <a class="tab-link-tab-1 w-inline-block w-tab-link" id="tab3">
-            <div class="text-block-142">Контент статьи</div>
-        </a>
-        <a class="tab-link-tab-2 w-inline-block w-tab-link" id="tab4">
-            <div class="text-block-142">Форма заказа</div>
-        </a>
-    </div>';
-        echo'
-    <div class="w-tab-content">';
-        if($title=='Редактирование статьи'){echo '
-        <div class="tab-pane-tab-4 w-tab-pane w--tab-active" id="tab1block">
-            <div class="form-block-2 w-form">
-                <form method="post" action="/article-update" class="form-2">
-                    <div class="div-block-97">
-					<div class="text-block-103">Настройка аудитории</div>
-                        <input type="hidden" name="tab" value="настройка">
-                        <input type="hidden" name="id" value="'.$id.'">
-                        <input type="hidden" name="words" value="">
-                        <div class="div-block-81">
-                            <div>
-                                <div class="div-block-82">
-                                    <input type="text" class="text-field-2 w-input" maxlength="256" placeholder="Ключ" id="addkey-2">
-                                    <div class="text-block-141">+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="div-block-84">';
-            if ($result['words']!=""){
-                $word=explode(",", $result['words']);
-                foreach($word as $i) {
-                    echo'
-                                        <div class="div-block-86" >
-                                            <div class="text-block-114" >'.$i.'</div >
-                                            <div class="text-block-98" > Удалить</div >
-                                        </div>';
-                };
-            };
-            echo'
-                        </div>
-                        <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
-                    </div>
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 0px;"></div>
-                    <div class="div-block-97">
-					<div class="text-block-103">Ставка</div>
-                        <div class="div-block-85">
-                            <div>';
-            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
-            $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            echo'
-                                <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
-                            </div>
-                            <div>
-                                <div class="text-block-96">₽ за CPG</div>
-                            </div>
-                        </div>
-                    </div>
-					
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px;"></div>
-					
-					<div class="div-block-97">
-					<div class="text-block-103">Бренд</div>
-                        <div class="div-block-85">
-                        </div>
-                        <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
-                    </div>
-					
-                    
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-					      
-                    					
-					<input type="submit" value="Сохранить изменения" class="submit-button-6">
-                </form>
-            </div>
-        </div>
-        
-        <div class="w-tab-pane" id="tab2block">
-            <div class="form-block-2 w-form"> 
-                <form method="post" action="/article-update" class="form-2" enctype="multipart/form-data">
-                    <input type="hidden" name="tab" value="анонсы">
-                    <input type="hidden" name="id" value="'.$id.'">
-                    <div id="anonses">';
-            $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$id."'";
-            $anons_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            if ($anons_ids!='') {
-                $anons = explode(",", $anons_ids);
-                foreach ($anons as $i) {
-                    $sql = "SELECT * FROM `anons` WHERE `id`='" . $i . "'";
-                    $anon = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-                    $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
-                    $dir = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    $imgdir = '//api.cortonlab.com/img/' . $dir . '/a/';
-                    echo '
-                                <div class="div-block-97-copy">
-								<div class="text-block-103">Настройка анонса</div>
-                                    <input type="hidden" name="anons_ids[]" value="' . $anon['id'] . '">
-                                    <div class="div-block-142">
-                                        <div class="div-block-145">
-                                            <input type="text" value="' . $anon['title'] . '" class="text-field-6 _1 w-input" maxlength="55" name="title[]" placeholder="Заголовок анонса статьи до 55 символов" id="title-3" required="">
-                                            <textarea name="opisanie[]" placeholder="Описание от 90 до 130 символов" maxlength="130" class="textarea-7 w-input">' . $anon['snippet'] . '</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="div-block-142">
-                                        <div class="div-block-148">
-                                            <div class="image-preview" style="background-image:url(' . $imgdir . $anon['img_290x180'] . ');background-position:center center;background-repeat:no-repeat;background-size:cover;">
-                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 290x180px</label>
-                                                <input type="file" name="image290[]" class="image-upload290" accept=".png,.jpeg,.jpg,.gif" />
-                                            </div>
-                                        </div>
-                                        <div class="div-block-147"></div>
-                                        <div class="div-block-148">
-                                            <div class="image-preview _180" style="background-image:url(' . $imgdir . $anon['img_180x180'] . ');background-position:center center;background-repeat:no-repeat;background-size:cover;">
-                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 180x180px</label>
-                                                <input type="file" name="image180[]" class="image-upload180" accept=".png,.jpeg,.jpg,.gif" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a class="button-10 w-button delanons">Удалить анонс</a>
-                                </div>';
-                };
-            };
-            echo '
-                    </div>
-                    <input type="hidden" name="del_id" value="">
-					<div style="border-top: 0px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-                    <div class="submit-button-6" id="addanons" style="margin-right: 20px;">Добавить анонс</div>
-                     <input type="submit" value="Сохранить" class="submit-button-6">
-                 </form>
-            </div>
-        </div>';};
-
-        echo'
-        <div class="tab-pane-tab-1 w-tab-pane" id="tab3block">
+    <div class="w-tab-content">
             <div class="form-block-2 w-form">
                 <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
-
-                    <div class="div-block-97" style="width: 1337px">';
-
-        if($title!='Редактирование статьи')
-            echo '<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: -60px;"></div>';
-        echo '
+                    <div class="div-block-97" style="width: 1337px">
 					<div class="text-block-103">Контент статьи</div>
-                        <div style=" width: 1337px;">
+                        <div style="width: 1337px;">
                             <input type="text" class="text-field-4 w-input" style=" width: 760px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
                             <input name="formtext" type="hidden">
                             <div id="toolbar_position"></div>
@@ -1002,46 +910,11 @@ class ArticleController
                             </div>
                         </div>
 						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
-                            <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
+                            <button class="submit-button-6 w-button" type="submit">Далее</button>
                     </div>
                 </form>
             </div>
-        </div>';
-
-        if($title=='Редактирование статьи'){echo '
-        <div class="tab-pane-tab-2 w-tab-pane" id="tab4block">
-            <div class="form-block-2 w-form">
-                <form method="post" action="/article-update" class="form-2">
-                    <input type="hidden" name="tab" value="форма_заказа">
-                    <input type="hidden" name="id" value="'.$id.'">
-                    <div class="div-block-97">
-					<div class="text-block-103">Контактная форма в статье</div>
-                        <input type="text" value="'.$result['form_title'].'" class="text-field-13 w-input" maxlength="46" name="form-title" placeholder="Заголовок формы" id="form-title">
-                        <input type="text" value="'.$result['form_text'].'" class="text-field-14 w-input" maxlength="78" name="form-text" placeholder="Текст формы" id="form-text">
-                        <select required="" class="select-field-2 w-select" name="form-button">
-                            <option value="">Текст кнопки</option>
-                            <option '; if ($result['form_button']=='Отправить'){echo 'selected ';}; echo 'value="Отправить">Отправить</option>
-                            <option '; if ($result['form_button']=='Заказать') {echo 'selected ';}; echo 'value="Заказать">Заказать</option>
-                            <option '; if ($result['form_button']=='Оформить') {echo 'selected ';}; echo 'value="Оформить">Оформить</option>
-                            <option '; if ($result['form_button']=='Получить') {echo 'selected ';}; echo 'value="Получить">Получить</option>
-                        </select>
-						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
-                        <input type="submit" value="Сохранить" class="submit-button-6">
-                    </div>
-                </form>
-            </div>
-        </div>';
-        }else{
-            echo '
-            <script>
-                var tab3block = document.querySelector(\'#tab3block\');
-                tab3block.style.display="block";
-            </script>';
-        };
-        echo'
     </div>
-</div>
-
 <script>
     var quill = new Quill(\'#editor-container\', {
       modules: {
@@ -1061,7 +934,6 @@ class ArticleController
       about.value = textt.innerHTML;
       return true;
     }
-
 </script>
 ';
         include PANELDIR . '/views/layouts/footer.php';
@@ -1105,7 +977,7 @@ class ArticleController
     }
 
     //Остановка показа статей
-    public static function actionStop($del){
+    public static function actionStop(){
         {
             $db = Db::getConnection();
             $id=$_GET['id'];
@@ -1133,12 +1005,11 @@ class ArticleController
 
             $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$_GET['id']."';";
             $db->query($sql);
-            if ($del) return true;
             return true;
         }
     }
 
-    //функцию обрезает оконкания слов
+    //Функция обрезает окончания слов
     public static function miniword($words)
     {
         $count = count($words);
@@ -1160,12 +1031,11 @@ class ArticleController
         return array_unique($words);
     }
 
-    //функцию очистки от лишних анонсов
+    //Удаление промо статьи
     public static function actionDel(){
         {
             $db = Db::getConnection();
-
-            ArticleController::actionStop(1);
+            ArticleController::actionStop();
 
             //Написать функцию очистки от лишних анонсов
             $sql ="DELETE FROM `promo` WHERE `id` = '".$_GET['id']."';";
@@ -1177,4 +1047,19 @@ class ArticleController
         }
     }
 
+    //Копирование промо статьи на основе текущей
+    public static function actionClone(){
+        {
+          $db = Db::getConnection();
+            $sql ="SELECT * FROM `promo` WHERE `id` = '".$_GET['id']."';";
+            $promo=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+            $sql ="INSERT INTO `promo` SET `title`='".$promo['title']."', `text`='".$promo['text']."', `main_promo_id`=".$promo['main_promo_id'].", `data_add`=CURDATE();";
+            $db->query($sql);
+            $id=$db->lastInsertId();
+
+            echo $id;
+            return true;
+        }
+    }
 }

@@ -5000,36 +5000,41 @@ canvas {
     }
 }
 
- .btnarticle {
-    position: relative;
-    left: 0px;
-    height: 34px;
-    clear: none;
-    background-color: #116dd6;
-    color: #fff;
-    font-size: 16px;
-    font-family: 'Myriadpro Regular';
-    font-weight: 400;
-    border-radius: 4px;
-    padding: 8px 20px;
-    text-align: center;
-	text-decoration: none;
- }
- 
-  .btnarticlegr {
-    position: relative;
-    left: 0px;
-    height: 34px;
-    clear: none;
-    background-color: #F4F6F9;
-    color: #768093;
-    font-size: 16px;
-    font-family: 'Myriadpro Regular';
-    font-weight: 400;
-    border-radius: 4px;
-    padding: 8px 20px;
-    text-align: center;
-	text-decoration: none;
-	border: 1px solid #E0E1E5;
-	margin-right: 10px;
- }
+.btnarticle {
+  position: relative;
+  left: 0px;
+  height: 34px;
+  clear: none;
+  background-color: #116dd6;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Myriadpro Regular';
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btnarticlegr {
+  position: relative;
+  left: 0px;
+  height: 34px;
+  clear: none;
+  background-color: #F4F6F9;
+  color: #768093;
+  font-size: 16px;
+  font-family: 'Myriadpro Regular';
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #E0E1E5;
+  margin-right: 10px;
+}
+
+a.btnarticlegr:active{
+  background-color: #116dd6;
+  color: #fff;
+}

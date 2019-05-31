@@ -88,6 +88,21 @@ if (isset($_GET['site'])){
         $body= preg_replace('/<base.*?>/', '<base href="'.$outsite.'">', $body);
         $body = str_replace($_COOKIE['scheme'].'://'.$_COOKIE['host'], $outsite, $body);
 
+        //Блокировка стороний скриптов на сайтах
+        $domen=parse_url ( $URI, PHP_URL_HOST );
+
+        switch ($domen){
+            case 'www.kp.ru':
+                $body = str_replace('/bundle.all.with.frames.min.js', '', $body);
+                break;
+            case 'medaboutme.ru':
+                $body = str_replace('//cdn.viewst.com/showinparent_concat.js', '', $body);
+                break;
+        }
+
+
+
+
         //Подключение скрипта
         $host=str_replace('.','_',$_COOKIE['host']);
         $body = str_replace('</head>', '<link href="https://api.cortonlab.com/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.cortonlab.com/js/corton.js" charset="UTF-8"></script></head>', $body);
