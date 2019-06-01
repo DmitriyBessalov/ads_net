@@ -23,7 +23,7 @@ if (isset($_GET['site'])){
 			   <a href="https://cortonlab.com/platforms" target="_blank">
 			      <img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a>
 			</div>
-			<div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="font-weight: 500;">Демо для '.$platform['domen'].'</span></div>
+			<div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="font-weight: 500;">Демо для yousite.com '.$platform['domen'].'</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500;">'.$result['CTR'].' %</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;">'.$result['CPM'].' руб.</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>';
