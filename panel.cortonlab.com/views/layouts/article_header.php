@@ -14,9 +14,8 @@ echo '
    <div class="dropdown">
       <button onclick="myFunction()" class="dropbtn"><i class="fa fa-caret-down"></i></button>
    <div id="myDropdown" class="dropdown-content">
-     <a href="#home">Home</a>
-     <a href="#about">About</a>
-     <a href="#contact">Contact</a>
+     <a href="#home">A/B анализ</a>
+     <a href="#about">Анализ ссылок</a>
    </div>
 </div>
 </div>
