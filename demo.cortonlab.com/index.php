@@ -41,21 +41,11 @@ if (isset($_GET['site'])){
     padding: 5px 5px;
     position: absolute;
     z-index: 1;
-    top: 150%;
+    top: -50%;
     left: 50%;
     margin-left: -110px;
     font-size: 14px;
 }
-
-.tooltipinfo2 .tooltiptext1::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 48%;
-  border: 5px solid transparent;
-  border-bottom: 5px solid #333;
-}
-
 .tooltipinfo2:hover .tooltiptext1 {
   visibility: visible;
 }
