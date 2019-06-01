@@ -10,7 +10,7 @@ echo '
    <a href="/article-edit-target?id='.$_GET['id'].'" class="btnarticlegr">Таргетинги</a>
    <a href="/article-stat-url?id='.$_GET['id'].'" class="btnarticlegr">Анализ ссылок</a>
    <a href="/article-edit-form?id='.$_GET['id'].'" class="btnarticlegr">Форма заказа</a>
-   <a href="/article-stat?id='.$_GET['id'].'" class="btnarticle" style="border-radius: 4px 0 0 4px;">Расширенная статистика</a>
+   <a href="/article-stat?id='.$_GET['id'].'" class="btnarticle" style="border-radius: 4px 0 0 4px;">Cтатистика</a>
    <div class="dropdown">
       <button onclick="myFunction()" class="dropbtn"><i class="fa fa-caret-down"></i></button>
    <div id="myDropdown" class="dropdown-content">
