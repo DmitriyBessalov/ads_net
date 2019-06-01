@@ -5065,7 +5065,7 @@ a.btnarticlegr:active{
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #fff;
     min-width: 160px;
     overflow: auto;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 6px 0px, rgba(0, 0, 0, 0.03) 0px 2px 4px 0px;
