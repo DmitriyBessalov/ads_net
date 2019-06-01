@@ -5048,8 +5048,6 @@ a.btnarticlegr:active{
     cursor: pointer;
 	border-radius: 0px 4px 4px 0px;
 	outline: none;
-	left: -5px;
-    top: 1px;
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -5059,6 +5057,8 @@ a.btnarticlegr:active{
 .dropdown {
     position: relative;
     display: inline-block;
+	left: -5px;
+    top: 1px;
 }
 
 .dropdown-content {
