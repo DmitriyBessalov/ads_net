@@ -189,7 +189,7 @@ class FinController
             </td>
             <td>' . $balansperiod['e'] . '</td>
             <td>' . $e_CTR . ' %</td>
-            <td>';
+            <td class="bluetext">';
             if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
                 $val= round($balansperiod['e_balans']/$balansperiod['e_show_anons']*1100,2);
                 if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
@@ -233,7 +233,7 @@ class FinController
             </td>
             <td>' . $balansperiod['s'] . '</td>
             <td>' . $s_CTR . ' %</td>
-            <td>';
+            <td class="bluetext">';
             if (($aktiv['slider_aktiv'])AND($balansperiod['s']!=0)) {
                 $val= round($balansperiod['s_balans']/$balansperiod['s_show_anons']*1100,2);
                 if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
