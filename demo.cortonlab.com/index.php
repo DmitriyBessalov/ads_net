@@ -33,7 +33,7 @@ if (isset($_GET['site'])){
 }
 .tooltipinfo2 .tooltiptext1 {
     visibility: hidden;
-    width: 220px;
+    width: 200px;
     background-color: #333333;
     color: #fff;
     text-align: center;
@@ -41,9 +41,9 @@ if (isset($_GET['site'])){
     padding: 5px 5px;
     position: absolute;
     z-index: 1;
-    top: -50%;
+    top: -80%;
     left: 50%;
-    margin-left: -110px;
+    margin-left: 15px;
     font-size: 14px;
 }
 .tooltipinfo2:hover .tooltiptext1 {
