@@ -5066,7 +5066,7 @@ a.btnarticlegr:active{
     display: none;
     position: absolute;
     background-color: #fff;
-    min-width: 160px;
+    min-width: 180px;
     overflow: auto;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 6px 0px, rgba(0, 0, 0, 0.03) 0px 2px 4px 0px;
 	border: 1px solid #EAEBEF;
