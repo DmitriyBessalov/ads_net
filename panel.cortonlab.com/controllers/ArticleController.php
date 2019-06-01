@@ -122,7 +122,7 @@ class ArticleController
 								     <a href="article-a/b?id='.$i['promo_id'].'">A/B анализ</a><br>
 								     <a href="article-edit-content?id='.$i['promo_id'].'">Контент статей</a><br>
 									 <a href="article-edit-anons?id='.$i['promo_id'].'">Редактировать анонсы</a><br>
-									 <a href="article-stat?id='.$i['promo_id'].'">Расширенная статистика</a><br>
+									 <a href="article-stat?id='.$i['promo_id'].'">Расширенная статистика</a><button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"> <i class="icon-caret-down" style="font-size: 0.65em;"></i> </button><br>
 									 <a href="article-edit-target?id='.$i['promo_id'].'">Таргетинг</a><br>
 									 <a href="article-edit-form?id='.$i['promo_id'].'">Форма статьи</a><br>
 									 <a href="article-stat-url?id='.$i['promo_id'].'">Анализ ссылок</a><br>
