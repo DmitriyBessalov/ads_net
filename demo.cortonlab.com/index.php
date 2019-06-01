@@ -29,6 +29,7 @@ if (isset($_GET['site'])){
     position: relative;
     display: inline-block;
     margin-left: 5px;
+	top: -2;
 }
 .tooltipinfo2 .tooltiptext1 {
     visibility: hidden;
