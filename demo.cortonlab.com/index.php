@@ -20,7 +20,10 @@ if (isset($_GET['site'])){
     <body style="overflow:hidden;margin: 0px;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
             <div style="float: left; margin-right: 14px;"><a href="https://cortonlab.com/">
-			<a href="https://cortonlab.com/platforms" target="_blank"><img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a></div>
+			   <a href="https://cortonlab.com/platforms" target="_blank">
+			      <img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a>
+			</div>
+			<div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="font-weight: 500;">Демо для yousite.com</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500;">'.$result['CTR'].' %</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;">'.$result['CPM'].' руб.</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>';
