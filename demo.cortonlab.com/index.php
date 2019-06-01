@@ -24,8 +24,8 @@ if (isset($_GET['site'])){
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500;">'.$result['CTR'].' %</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;">'.$result['CPM'].' руб.</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>';
-            if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет NativePreview</a>';}
-            if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет Recomendation</a>';}
+            if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
+            if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
             echo '
     </div>
         <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
