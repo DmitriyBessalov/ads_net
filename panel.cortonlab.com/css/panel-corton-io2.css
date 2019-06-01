@@ -5058,7 +5058,7 @@ a.btnarticlegr:active{
     position: relative;
     display: inline-block;
 	left: -4px;
-    top: 3px;
+    top: -1px;
 }
 
 .dropdown-content {
