@@ -5048,7 +5048,8 @@ a.btnarticlegr:active{
     cursor: pointer;
 	border-radius: 0px 4px 4px 0px;
 	outline: none;
-	border-left: 1px solid #F4F6F9;
+	left: -5px;
+    top: 1px;
 }
 
 .dropbtn:hover, .dropbtn:focus {
