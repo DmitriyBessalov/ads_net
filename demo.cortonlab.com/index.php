@@ -46,7 +46,7 @@ if (isset($_GET['site'])){
     margin-left: 15px;
     font-size: 14px;
 }
-.tooltipinfo2::after {
+.tooltipinfo2 .tooltiptext1::after {
     content: "";
     position: absolute;
     top: 50%;
