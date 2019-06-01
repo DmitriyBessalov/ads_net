@@ -16,8 +16,49 @@ if (isset($_GET['site'])){
 		<link href="https://cortonlab.com/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
 		<link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc4dc77d1f61f6d0f03cc_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc55977d1f6922c0f0715_faviconbig.png" rel="apple-touch-icon"/></head>
-		 <link href="https://panel.cortonlab.com/css/panel-corton-io2.css" rel="stylesheet" type="text/css">
     </head>
+	<style>
+	.tooltipinfo2 {
+    width: 16px;
+    height: 16px;
+    border-radius: 20px;
+    padding: 0px 2px 0px 2px;
+    text-align: center;
+    color: #fff;
+    background: #768093;
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+}
+.tooltipinfo2 .tooltiptext1 {
+    visibility: hidden;
+    width: 220px;
+    background-color: #333333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -110px;
+    font-size: 16px;
+}
+
+.tooltipinfo2 .tooltiptext1::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 48%;
+  border: 5px solid transparent;
+  border-bottom: 5px solid #333;
+}
+
+.tooltipinfo2:hover .tooltiptext1 {
+  visibility: visible;
+}
+	</style>
     <body style="overflow:hidden;margin: 0px;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
             <div style="float: left; margin-right: 14px;"><a href="https://cortonlab.com/">
