@@ -19,8 +19,8 @@ if (isset($_GET['site'])){
     </head>
 	<style>
 	.tooltipinfo2 {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 20px;
     padding: 0px 2px 0px 2px;
     text-align: center;
