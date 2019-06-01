@@ -46,6 +46,16 @@ if (isset($_GET['site'])){
     margin-left: 15px;
     font-size: 14px;
 }
+.tooltip-right::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #555 transparent transparent;
+}
 .tooltipinfo2:hover .tooltiptext1 {
   visibility: visible;
 }
