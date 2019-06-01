@@ -30,7 +30,7 @@ class FinController
                     </td>
                     <td style="min-width: 110px;">CTR
                     </td>
-                    <td class="bluetext" style="min-width: 120px;">eCPM
+                    <td class="bluetext" style="min-width: 120px; font-weight: 600;">eCPM
                         <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Доход на 1000 показов анонсов</span></div>
                     </td>
                     <td style="min-width: 130px;">Доход</td>
@@ -198,7 +198,7 @@ class FinController
                 echo '0.00';
             }
             echo ' р.</td>
-            <td class="bluetext">' . $balansperiod['e_balans'] . ' р.</td>
+            <td>' . $balansperiod['e_balans'] . ' р.</td>
 			<td>
 			   <a class="main-itemcode2" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
                     <div class="codeblock">
@@ -242,7 +242,7 @@ class FinController
                 echo '0.00';
             }
             echo ' р.</td>
-            <td class="bluetext">' . $balansperiod['s_balans'] . ' р.</td>
+            <td>' . $balansperiod['s_balans'] . ' р.</td>
 			<td>
 			   <a class="main-itemcode3" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
                     <div class="codeblock">
