@@ -51,7 +51,7 @@ if (isset($_GET['site'])){
     position: absolute;
     top: 50%;
     right: 100%;
-    margin-top: -5px;
+    margin-top: -7px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent #333333 transparent transparent;
