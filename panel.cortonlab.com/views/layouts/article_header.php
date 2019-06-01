@@ -14,8 +14,8 @@ echo '
    <div class="dropdown">
       <button onclick="myFunction()" class="dropbtn"><i class="fa fa-caret-down"></i></button>
    <div id="myDropdown" class="dropdown-content">
-     <a href="#home">A/B анализ</a>
-     <a href="#about">Анализ ссылок</a>
+     <a href="/article-a/b?id='.$_GET['id'].'">A/B анализ</a>
+     <a href="/article-stat-url?id='.$_GET['id'].'">Анализ ссылок</a>
    </div>
 </div>
 </div>
