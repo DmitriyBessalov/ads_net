@@ -5076,14 +5076,16 @@ a.btnarticlegr:active{
 	font-size: 16px;
     font-family: 'Myriadpro Regular';
 	border-radius: 4px;
+	padding: 6px 0;
 }
 
 .dropdown-content a {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+	color: #333;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown a:hover {color: #116dd6;}
 
 .show {display: block;}
