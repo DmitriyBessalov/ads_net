@@ -2,6 +2,7 @@
 include PANELDIR.'/views/layouts/header.php';
 
 echo '
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="btncontrolarticle">
    <a href="/article-a/b?id='.$_GET['id'].'" class="btnarticlegr">A/B анализ</a>
    <a href="/article-edit-content?id='.$_GET['id'].'" class="btnarticlegr">Контент статей</a>
