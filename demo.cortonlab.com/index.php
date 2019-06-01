@@ -16,6 +16,7 @@ if (isset($_GET['site'])){
 		<link href="https://cortonlab.com/css/corton-lp3.webflow.css" rel="stylesheet" type="text/css"/>
 		<link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc4dc77d1f61f6d0f03cc_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc55977d1f6922c0f0715_faviconbig.png" rel="apple-touch-icon"/></head>
+		 <link href="https://panel.cortonlab.com/css/panel-corton-io2.css" rel="stylesheet" type="text/css">
     </head>
     <body style="overflow:hidden;margin: 0px;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
