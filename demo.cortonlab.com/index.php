@@ -66,7 +66,7 @@ if (isset($_GET['site'])){
 			   <a href="https://cortonlab.com/platforms" target="_blank">
 			      <img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a>
 			</div>
-			<div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="font-weight: 500; color: #116dd6;">Демо для yousite.com '.$platform['domen'].'</span></div>
+			<div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="font-weight: 500; color: #116dd6;">Демо для '.$parsed['host'].'</span></div>
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CTR'].' %</span>
 			    <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средний процент кликабельности</span></div>
 			</div> 
@@ -151,9 +151,6 @@ if (isset($_GET['site'])){
                 $body = str_replace('//cdn.viewst.com/showinparent_concat.js', '', $body);
                 break;
         }
-
-
-
 
         //Подключение скрипта
         $host=str_replace('.','_',$_COOKIE['host']);
