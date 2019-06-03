@@ -943,19 +943,19 @@ $(document).ready(function(){
         switch (variant.length) {
             case 1:{
                 $.post("https://panel.cortonlab.com/article-clone?id="+id, function(data) {
-                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</a>");
+                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticlegr aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант B</a>");
                 });
                 break;
             }
             case 2:{
                 $.post("https://panel.cortonlab.com/article-clone?id="+id, function(data) {
-                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант C</a>");
+                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticlegr aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант C</a>");
                 });
                 break;
             }
             case 3:{
                 $.post("https://panel.cortonlab.com/article-clone?id="+id, function(data) {
-                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticle aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант D</a>");
+                    $('#add_variat_promo').before("<a href='https://panel.cortonlab.com/article-edit-content?id="+ data +"' class=\"btnarticlegr aticlevariant\" style=\"width: 120px;float:left;margin-right: 12px;\">Вариант D</a>");
                     $('#add_variat_promo').remove();
                 });
             }
