@@ -233,7 +233,7 @@ class ArticleController
             $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
             echo '
             <script>
-                document.getElementById("title2").innerHTML="Статистика по статье:<br><span class=titlepromo>' . $result['title'] . '</span>";
+                document.getElementById("title2").innerHTML="Статистика по статье<br><span class=titlepromo>Заголовок:"' . $result['title'] . '</span>";
             </script>';
             $anon[] = str_replace(",", "','", $result['anons_ids']);
             $anons2 = explode(',', $result['anons_ids']);
