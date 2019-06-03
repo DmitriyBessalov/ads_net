@@ -601,7 +601,7 @@ class ArticleController
         <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
         <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
         
-        <div style="margin-top: 40px;">';
+        <div style="margin-top: 40px; padding-left: 20px;">';
 
         $sql="SELECT `id` FROM `promo` WHERE `main_promo_id`='".$result['main_promo_id']."'";
         $result2 = $db->query($sql)->fetchALL(PDO::FETCH_COLUMN);
