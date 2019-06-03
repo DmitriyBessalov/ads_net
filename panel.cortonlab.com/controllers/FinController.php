@@ -30,8 +30,8 @@ class FinController
                     </td>
                     <td style="min-width: 110px;">CTR
                     </td>
-                    <td class="bluetext" style="min-width: 120px;">eCPM
-                        <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Доход на 1000 показов анонсов</span></div>
+                    <td class="bluetext" style="min-width: 120px; font-weight: 600;">eCPM
+                        <div class="tooltipinfo2" style="font-size: 14px; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Доход на 1000 показов анонсов</span></div>
                     </td>
                     <td style="min-width: 130px;">Доход</td>
 					<td style="min-width: 140px;">Код виджета</td>
@@ -189,7 +189,7 @@ class FinController
             </td>
             <td>' . $balansperiod['e'] . '</td>
             <td>' . $e_CTR . ' %</td>
-            <td>';
+            <td class="bluetext">';
             if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
                 $val= round($balansperiod['e_balans']/$balansperiod['e_show_anons']*1100,2);
                 if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
@@ -198,7 +198,7 @@ class FinController
                 echo '0.00';
             }
             echo ' р.</td>
-            <td class="bluetext">' . $balansperiod['e_balans'] . ' р.</td>
+            <td>' . $balansperiod['e_balans'] . ' р.</td>
 			<td>
 			   <a class="main-itemcode2" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
                     <div class="codeblock">
@@ -233,7 +233,7 @@ class FinController
             </td>
             <td>' . $balansperiod['s'] . '</td>
             <td>' . $s_CTR . ' %</td>
-            <td>';
+            <td class="bluetext">';
             if (($aktiv['slider_aktiv'])AND($balansperiod['s']!=0)) {
                 $val= round($balansperiod['s_balans']/$balansperiod['s_show_anons']*1100,2);
                 if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
@@ -242,7 +242,7 @@ class FinController
                 echo '0.00';
             }
             echo ' р.</td>
-            <td class="bluetext">' . $balansperiod['s_balans'] . ' р.</td>
+            <td>' . $balansperiod['s_balans'] . ' р.</td>
 			<td>
 			   <a class="main-itemcode3" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
                     <div class="codeblock">

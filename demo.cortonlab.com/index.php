@@ -17,15 +17,67 @@ if (isset($_GET['site'])){
 		<link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc4dc77d1f61f6d0f03cc_favicon.png" rel="shortcut icon" type="image/x-icon"/>
         <link href="https://uploads-ssl.webflow.com/5bd6e3ad10ba2a79417b499a/5c1cc55977d1f6922c0f0715_faviconbig.png" rel="apple-touch-icon"/></head>
     </head>
+	<style>
+	.tooltipinfo2 {
+    width: 18px;
+    height: 18px;
+    border-radius: 20px;
+    padding: 0px 2px 0px 2px;
+    text-align: center;
+    color: #fff;
+    background: #768093;
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+	top: -2;
+}
+.tooltipinfo2 .tooltiptext1 {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    top: -80%;
+    left: 50%;
+    margin-left: 20px;
+    font-size: 14px;
+}
+.tooltipinfo2 .tooltiptext1::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -7px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #333333 transparent transparent;
+}
+.tooltipinfo2:hover .tooltiptext1 {
+  visibility: visible;
+}
+	</style>
     <body style="overflow:hidden;margin: 0px;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9;">
             <div style="float: left; margin-right: 14px;"><a href="https://cortonlab.com/">
-			<a href="https://cortonlab.com/platforms" target="_blank"><img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a></div>
-            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500;">'.$result['CTR'].' %</span></div>
-            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;">'.$result['CPM'].' руб.</span></div>
-            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500;">'.$result['CPG'].' руб.</span></div>';
-            if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет NativePreview</a>';}
-            if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Виджет Recomendation</a>';}
+			   <a href="https://cortonlab.com/platforms" target="_blank">
+			      <img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a>
+			</div>
+			<div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="font-weight: 500; color: #116dd6;">Демо для yousite.com '.$platform['domen'].'</span></div>
+            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CTR'].' %</span>
+			    <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средний процент кликабельности</span></div>
+			</div> 
+            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;color: #116dd6;">'.$result['CPM'].' руб.</span>
+			   <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средний доход на 1000 показов анонсов</span></div>
+			</div>
+            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CPG'].' руб.</span>
+			   <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средняя цена за просмотр промо-материала</span></div>
+			</div>';
+            if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
+            if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
             echo '
     </div>
         <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
