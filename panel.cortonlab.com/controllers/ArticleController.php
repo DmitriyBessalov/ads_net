@@ -99,7 +99,7 @@ class ArticleController
                                 <tr>
                                   <td>'.$i['promo_id'].'</td>
                                   <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
-								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-stat?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
+								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
 								     <div class="miniinfo"> 
 								        <div class="blockminiinfo">
 										   <input type="checkbox" ';if ($i['active']) echo 'checked="checked "';echo'class="flipswitch"/>
