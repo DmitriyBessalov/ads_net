@@ -93,7 +93,10 @@ class ArticleController
                 };
 
                 $protsentst=100/$promosum['clicking']*$promosum['st'];
-                if (is_nan($protsentst) or is_infinite($protsentst))$protsentst=0;
+
+
+                $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
+                if (is_nan($doread) or is_infinite($doread))$doread=0;
 
                 echo '
                                 <tr>
@@ -113,7 +116,7 @@ class ArticleController
                                   <td>' . $pokaz . '</td>
                                   <td>' . $promosum['clicking'] . '</td>
 								  <td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
-                                  <td>' . $promosum['doread'] . '(--%)</td>
+                                  <td>' . $promosum['doread'] . ' ('.$doread.'%)</td>
                                   <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                                   <td style="min-width: 96px;">' . $CRT . '</td>
                                   <td style="width: 111px; text-align: right; padding-right: 20px;">
@@ -188,7 +191,7 @@ class ArticleController
 
     public static function actionStat()
     {
-        $title='Статистика по статье';
+        $title='Статистика по анонсам';
         include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
@@ -299,13 +302,17 @@ class ArticleController
                     echo '<td>' . $result['promo_id'] . '</td>';
                     echo '<td></td><td></td>';
                 }
+
+                $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
+                if (is_nan($doread) or is_infinite($doread))$doread=0;
+
                 echo ' 
                
                <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                <td>'.$pokaz.'</td>
                <td>' . $promosum['clicking'] . '</td>
 			   <td class="greentext" style="width:140px;">'.$promosum['st'].' ('.sprintf("%.2f", $protsentst).'%)</td>
-               <td>' . $promosum['doread'] . ' (--%)</td> 
+               <td>' . $promosum['doread'] . ' ( '.$doread.'%)</td> 
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
@@ -548,6 +555,10 @@ class ArticleController
         include PANELDIR.'/views/layouts/article_header.php';
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
+
+        $sql="SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
+        $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
         echo'
         <div class="table-box">
             <div class="table w-embed">
@@ -566,20 +577,22 @@ class ArticleController
                             <td>Вкл/Выкл</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>А</td>
-                            <td>01.01.1970</td>
-                            <td>Текст</td>
-                            <td>0руб.</td>
+                    <tbody>';
+        foreach ($result as $i) {
+            echo '      <tr>
+                            <td>'.$i['id'].'</td>
+                            <td>'.date('d.m.Y', strtotime($i['data_add'])).'</td>
+                            <td>'.$i['title'].'</td>
+                            <td>0 руб.</td>
                             <td>0</td>
                             <td>0</td>
                             <td>0</td>
                             <td>0 (0%)</td>
                             <td>0</td>
-                            <td>True</td>
-                        </tr>
-                    </tbody>    
+                            <td>'.$i['active'].'</td>
+                        </tr>';
+        }
+        echo '      </tbody>    
                 </table>
             </div>
         </div>';
