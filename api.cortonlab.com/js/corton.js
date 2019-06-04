@@ -769,37 +769,30 @@ function adblock() {
 //Расчёт готовности страницы для подгрузки виджетов и промо статьи
 function corton_delay() {
     if (window.location.hostname === 'demo.cortonlab.com') {
-        //let url='';
-        //if (window.location.hostname === 'demo.cortonlab.com'){
-            url = corton_url;
-        //}else{
-          //  url = location.hostname+location.pathname;
-        //}
+        let url = corton_url;
         url = url.split('?')[0];
         const url2 = url.split('/')[0];
-        if (url===url2+'/promo'){
+        if (url===url2+'/promo') {
             const promo_selector = style_b.getPropertyValue('--selector');
             let sel = document.querySelectorAll(promo_selector);
-            if (sel[0]){
+            if (sel[0]) {
                 console.log(url);
                 corton_promo();
                 return true;
-            }else{
+            }
+        } else {
+            if (document.readyState === "complete") {
+                const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
+                const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
+                const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
+
+                if (recomend_algorithm_output !== '1' || natpre_algorithm_output !== '0' || slider_algorithm_output !== '1') {
+                    corton_widget();
+                    return true;
+                }
+            } else {
                 setTimeout(corton_delay, 40);
             }
-        }
-        if (document.readyState === "complete") {
-            const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
-            const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
-            const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
-
-
-            if (recomend_algorithm_output!=='1' || natpre_algorithm_output!=='0' || slider_algorithm_output!=='1'){
-                corton_widget();
-                return true;
-            }
-        }else{
-            setTimeout(corton_delay, 40);
         }
     } else {
         let widget_promo = document.getElementById("corton-promo");

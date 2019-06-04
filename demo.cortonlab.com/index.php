@@ -3,6 +3,8 @@ if ($_SERVER['REQUEST_URI']=='/robots.txt'){echo "User-agent: *\nDisallow: /";ex
 $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
 $_GET = array_map('addslashes', $_GET);
 $_COOKIE = array_map('addslashes', $_COOKIE);
+
+
 if (isset($_GET['site'])){
     $parsed=parse_url($_GET['site']);
     setcookie("host", $parsed['host'],time()+72000,'/', ".cortonlab.com");
@@ -76,9 +78,9 @@ if (isset($_GET['site'])){
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CPG'].' руб.</span>
 			   <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средняя цена за просмотр промо-материала</span></div>
 			</div>';
-            if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
-            if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
-            echo '
+    if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
+    if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
+    echo '
     </div>
         <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
         </iframe>
@@ -111,6 +113,7 @@ if (isset($_GET['site'])){
 
     if ($_SERVER['REDIRECT_URL']=='/promo'){
         $URI=$_COOKIE['scheme'].'://'.$result;
+
     }
 
     $outsite=$_COOKIE['scheme'].'://'.$_SERVER['HTTP_HOST'];
