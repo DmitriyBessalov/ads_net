@@ -99,7 +99,7 @@ class ArticleController
                                 <tr>
                                   <td>'.$i['promo_id'].'</td>
                                   <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
-								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-stat?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
+								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
 								     <div class="miniinfo"> 
 								        <div class="blockminiinfo">
 										   <input type="checkbox" ';if ($i['active']) echo 'checked="checked "';echo'class="flipswitch"/>
@@ -233,7 +233,7 @@ class ArticleController
             $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
             echo '
             <script>
-                document.getElementById("title2").innerHTML="Статистика по статье:<span class=titlepromo>' . $result['title'] . '</span>";
+                document.getElementById("title2").innerHTML="Статистика по статье<br><span class=titlepromo>Статья: ' . $result['title'] . '</span>";
             </script>';
             $anon[] = str_replace(",", "','", $result['anons_ids']);
             $anons2 = explode(',', $result['anons_ids']);
@@ -601,7 +601,7 @@ class ArticleController
         <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
         <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
         
-        <div style="margin-top: 40px;">';
+        <div style="margin-top: 40px; padding-left: 20px;">';
 
         $sql="SELECT `id` FROM `promo` WHERE `main_promo_id`='".$result['main_promo_id']."'";
         $result2 = $db->query($sql)->fetchALL(PDO::FETCH_COLUMN);
