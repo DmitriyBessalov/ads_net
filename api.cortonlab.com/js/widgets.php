@@ -13,11 +13,13 @@ foreach ($result as $i) {
     $promo_ids=array_merge($promo_ids, explode(',',$i));
 };
 $promo_ids=array_unique($promo_ids);
+
 //Берем ID Анонсов
 $promo=implode("','" ,$promo_ids);
 $sql="SELECT * FROM `anons_index` WHERE `promo_id` IN ('".$promo."')";
 $result2 = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 $anons_ids = array();
+
 //Премешивание анонсов внутри статьи
 foreach ($result2 as $i) {
     if ($i['anons_ids']==''){

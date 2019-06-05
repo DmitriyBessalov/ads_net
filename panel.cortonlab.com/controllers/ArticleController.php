@@ -93,7 +93,7 @@ class ArticleController
                 };
 
                 $protsentst=100/$promosum['clicking']*$promosum['st'];
-
+                if (is_nan($protsentst)){$protsentst=0;}
 
                 $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
                 if (is_nan($doread) or is_infinite($doread))$doread=0;
@@ -319,7 +319,7 @@ class ArticleController
                
                <td style="width: 20px !important;">
                </td>
-              </tr>  
+              </tr>
              ';
                 $ch2++;
             }
@@ -556,16 +556,13 @@ class ArticleController
         $db = Db::getConnection();
         $dbstat = Db::getstatConnection();
 
-        $sql="SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
-        $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
         echo'
         <div class="table-box">
             <div class="table w-embed">
                 <table>
                     <thead>
                         <tr class="trtop">
-                            <td>Версия</td>
+                            <td>Версия (ID)</td>
                             <td>Дата запуска</td>
                             <td>Заголовок</td>
                             <td>Расходы</td>
@@ -574,27 +571,75 @@ class ArticleController
                             <td>Просмотры</td>
                             <td>Дочитывания</td>
                             <td>Переходы</td>
-                            <td>Вкл/Выкл</td>
+                            <td>CTR</td>
                         </tr>
                     </thead>
                     <tbody>';
-        foreach ($result as $i) {
-            echo '      <tr>
-                            <td>'.$i['id'].'</td>
-                            <td>'.date('d.m.Y', strtotime($i['data_add'])).'</td>
-                            <td>'.$i['title'].'</td>
-                            <td>0 руб.</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0 (0%)</td>
-                            <td>0</td>
-                            <td>'.$i['active'].'</td>
-                        </tr>';
-        }
+        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y');}
+        if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
+        if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
+            $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
+            $mySQLdateend = date('Y-m-d', strtotime($dateend));
+
+            if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
+                $today = true;
+                $redis = new Redis();
+                $redis->pconnect('185.75.90.54', 6379);
+                $redis->select(1);
+            }
+
+            $sql = "SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='" . $_GET['id'] . "';";
+            $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+            $ch = 65;
+            foreach ($result as $i) {
+                if ($i['active']) {
+                    $i['active'] = 'Вкл.';
+                } else {
+                    $i['active'] = 'Выкл.';
+                }
+                echo '      <tr>
+                                <td>' . chr($ch++) . ' (' . $i['id'] . ')</td>
+                                <td>' . date('d.m.Y', strtotime($i['data_add'])) . '</td>
+                                
+                                <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
+                                         <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
+                                         <div class="miniinfo"> 
+                                            <div class="blockminiinfo">
+                                               <input type="checkbox" ';
+                if ($i['active']) echo 'checked="checked "';
+                echo 'class="flipswitch"/>
+                                               <span></span>
+                                            </div>
+                                         </div>
+                                </td>
+                                
+                                <td>0 руб.</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0 (0%)</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>';
+            }
+        }else{ echo '<tr><td colspan="10">Некоректные даты фильтра</td></tr>';}
         echo '      </tbody>    
                 </table>
             </div>
+            
+            <div class="table-right">
+		    <form id="right-form" class="form-333"><br>
+                <div class="html-embed-3 w-embed" style="margin-top: 40px;">
+                 <input type="hidden" name="id" value="'.$_GET['id'].'">
+                 <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off"  value="'.$datebegin.'">
+                 <div class="text-block-128">-</div>
+                 <input type="text" name="dateend" class="tcal tcalInput" autocomplete="off" value="'.$dateend.'">
+                 <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
+                </div>
+			</form>
+		</div>
+            
         </div>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;

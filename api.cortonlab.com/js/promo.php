@@ -8,10 +8,13 @@ $sql="SELECT `promo_id` FROM `anons` WHERE `id`='".addslashes($_GET['anons_id'])
 $promo_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 $items=Array($promo_id);
+$ver=array_rand($items);
 
 //Выдача промо статьи
-$sql="SELECT `id`,`title`,`text`,`form_title`,`active`,`form_text`,`form_button` FROM `promo` WHERE `id`='".$items[array_rand($items)]."'";
+$sql="SELECT `id`,`title`,`text`,`form_title`,`active`,`form_text`,`form_button` FROM `promo` WHERE `id`='".$items[$ver]."'";
 $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+$result['v']=chr(65+$ver);
 
 if ($result['active'] or $_SERVER['HTTP_ORIGIN']=='https://demo.cortonlab.com'){
     echo json_encode($result ,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
