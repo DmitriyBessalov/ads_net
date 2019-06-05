@@ -2675,7 +2675,7 @@ var myLineChart = new Chart(ctx, {
 	
 
     <script>
-        document.getElementById("title2").innerHTML="Статистика по площадки:<br><span class=titlepromo>' . $aktiv['domen'] . '</span>";
+        document.getElementById("title2").innerHTML="Статистика по площадки<br><span class=titlepromo>' . $aktiv['domen'] . '</span>";
     </script>     
 </div>';
 
