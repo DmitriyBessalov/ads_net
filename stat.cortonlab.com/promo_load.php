@@ -38,9 +38,9 @@ $sql = "UPDATE `stat_promo_day_count` SET `perehod` = `perehod` + 1 WHERE `data`
 if (!$dbstat->exec($sql)){$dbstat->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `perehod` = 1");
 }
 
-$sql = "UPDATE `balans_ploshadki` SET ".$_GET['t']."_promo_load=".$_GET['t']."_promo_load+1  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
+$sql = "UPDATE `balans_ploshadki` SET `".$_GET['t']."_promo_load`=`".$_GET['t']."_promo_load`+1  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
 if (!$dbstat->exec($sql)){
-    $sql = "INSERT INTO `balans_ploshadki` SET ".$_GET['t']."_promo_load=".$_GET['t']."_promo_load+1, `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
+    $sql = "INSERT INTO `balans_ploshadki` SET `".$_GET['t']."_promo_load`=1, `date`=CURDATE(), `ploshadka_id`='".$ploshadka_id."'";
     $dbstat->query($sql);
 }
 
