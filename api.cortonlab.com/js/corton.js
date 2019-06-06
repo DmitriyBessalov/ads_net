@@ -84,7 +84,7 @@ function corton_promo() {
                 }
 
                 if (window.location.hostname === 'demo.cortonlab.com') {
-                    a[i].setAttribute('href', '#')
+                    a[i].setAttribute('href', 'javascript: void(0)')
                 }else{
                     a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + document.referrer)
                     console.log('promolink', a[i].getAttribute('href'));
