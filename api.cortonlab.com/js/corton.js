@@ -176,27 +176,6 @@ function corton_widget() {
     const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
     const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
 
-    if (location.hostname==='demo.cortonlab.com') {
-        if (recomend_algorithm_output==='0'||recomend_algorithm_output==='3'||recomend_algorithm_output==='4'||recomend_algorithm_output==='5'){
-            let div = document.createElement('div');
-            div.id = 'corton-recomendation-widget';
-            document.body.appendChild(div);
-            console.log('r');
-        }
-        if (natpre_algorithm_output==='1'||natpre_algorithm_output==='3'||natpre_algorithm_output==='4'||natpre_algorithm_output==='5'){
-            let div = document.createElement('div');
-            div.id = 'corton-nativepreview-widget';
-            document.body.appendChild(div);
-            console.log('e');
-        }
-        if (slider_algorithm_output === '0') {
-            let div = document.createElement('div');
-            div.id = 'corton-slider-widget';
-            document.body.appendChild(div);
-            console.log('s');
-        }
-    }
-
     //Определение устройства пользователя
     function Device() {
         const device = {};
@@ -295,6 +274,24 @@ function corton_widget() {
         console.log(top10);
 
         return top10;
+    }
+
+    if (location.hostname==='demo.cortonlab.com') {
+        if (recomend_algorithm_output==='0'||recomend_algorithm_output==='3'||recomend_algorithm_output==='4'||recomend_algorithm_output==='5'){
+            let div = document.createElement('div');
+            div.id = 'corton-recomendation-widget';
+            document.body.appendChild(div);
+        }
+        if (natpre_algorithm_output==='1'||natpre_algorithm_output==='3'||natpre_algorithm_output==='4'||natpre_algorithm_output==='5'){
+            let div = document.createElement('div');
+            div.id = 'corton-nativepreview-widget';
+            document.body.appendChild(div);
+        }
+        if (slider_algorithm_output === '0') {
+            let div = document.createElement('div');
+            div.id = 'corton-slider-widget';
+            document.body.appendChild(div);
+        }
     }
 
     function widget_check() {
@@ -699,7 +696,8 @@ function corton_widget() {
                 }
             }
             //console.log('захвачены',anons_ids_show);
-            setTimeout(checkread, 3000, anons_ids_show.join().substr(0));
+
+            setTimeout(checkread, 3000, anons_ids_show.join().substr(0))
             anons_idsnew.splice(0,anons_idsnew.length);
         }
         anons_ids_old=anons_ids.join();

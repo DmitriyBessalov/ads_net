@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_URI']=='/login'){
     UsersController::getUser();
 };
 
-
 switch ($GLOBALS['role']) {
     case 'admin':
         return array(
@@ -42,6 +41,8 @@ switch ($GLOBALS['role']) {
             'article-clone' => 'article/clone',
             'article-start' => 'article/start',
             'article-stop' => 'article/stop',
+            'article-start-all' => 'article/start_all',
+            'article-stop-all' => 'article/stop_all',
             'article-anons-stop' => 'article/anons_stop',
             'article-anons-start' => 'article/anons_start',
 
@@ -101,6 +102,8 @@ switch ($GLOBALS['role']) {
             'article-del' => 'article/del',
             'article-start' => 'article/start',
             'article-stop' => 'article/stop',
+            'article-start-all' => 'article/start_all',
+            'article-stop-all' => 'article/stop_all',
             'article-anons-stop' => 'article/anons_stop',
             'article-anons-start' => 'article/anons_start',
 

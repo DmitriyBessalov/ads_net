@@ -78,8 +78,8 @@ if (isset($_GET['site'])){
             <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CPG'].' руб.</span>
 			   <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средняя цена за просмотр промо-материала</span></div>
 			</div>';
-    if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
-    if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета</a>';}
+    if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №2</a>';}
+    if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №1</a>';}
     echo '
     </div>
         <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
@@ -134,16 +134,34 @@ if (isset($_GET['site'])){
 
     $result = strpos ($ContentType[1], 'html');
 
-    if ($result){  //содержимое html код
+    if ($result){  //содержимое html кода
 
         $body = substr($response, $header_size);
         curl_close($ch);
 
-        //Замена ссылок
-        $body= preg_replace('/<base.*?>/', '<base href="'.$outsite.'">', $body);
-        $body = str_replace($_COOKIE['scheme'].'://'.$_COOKIE['host'], $outsite, $body);
 
-        //Блокировка стороний скриптов на сайтах
+        $body= preg_replace('/<base.*?>/', '<base href="'.$outsite.'">', $body);
+
+
+        //Замена ссылок
+        function str_link($matches)
+        {
+            $matches[5] = str_replace($_COOKIE['scheme'].'://'.$_COOKIE['host'], 'https://demo.cortonlab.com' , $matches[0]);
+            return $matches[5];
+        }
+        $body= preg_replace_callback("/<a.*?href=(\"|')(.*?)(\"|')/","str_link",$body);
+
+        // Отключение обработки iframe
+        function str_iframe($matches)
+        {
+            if (mb_substr($matches[2], 0, 1)=='/'){
+                $matches[0]=str_replace('src='.$matches[1], 'src='.$matches[1].$_COOKIE['scheme'].'://'.$_COOKIE['host'], $matches[0]);
+            }
+            return $matches[0];
+        }
+        $body= preg_replace_callback("/<iframe.*?src=(\"|')(.*?)\"/","str_iframe",$body);
+
+        //Блокировка стороних скриптов на сайтах
         $domen=parse_url ( $URI, PHP_URL_HOST );
 
         switch ($domen){
@@ -156,7 +174,7 @@ if (isset($_GET['site'])){
         }
 
         //Подключение скрипта
-        $host=str_replace('.','_',$_COOKIE['host']);
+        $host = str_replace('.','_',$_COOKIE['host']);
         $body = str_replace('</head>', '<link href="https://api.cortonlab.com/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.cortonlab.com/js/corton.js" charset="UTF-8"></script></head>', $body);
         $enc='UTF8';
         preg_match_all("/<meta.*?>/", $body, $phones);
@@ -170,7 +188,7 @@ if (isset($_GET['site'])){
 
         $url=str_replace('http://','',$url);
         $url=str_replace('https://','',$url);
-        $script="<script>
+        $GLOBALS['script']="<script>
 var corton_url='".$url."';
 function bindEvent(eventHandler){if(window.addEventListener){window.addEventListener('message',eventHandler,false);}}
 bindEvent(function (e) {
@@ -212,9 +230,12 @@ bindEvent(function (e) {
     }
 });
         </script>";
-        if ($enc=='WIN1251')  $script=iconv("UTF-8", "WINDOWS-1251", $script);
+        if ($enc=='WIN1251')  $GLOBALS['script']=iconv("UTF-8", "WINDOWS-1251", $GLOBALS['script']);
 
-        $body = str_replace('<head>', '<head>'.$script, $body);
+        function str_jshead($matches){
+            return $matches[0].$GLOBALS['script'];
+        }
+        $body= preg_replace_callback("/<head(.*?)>/","str_jshead",$body);
         echo $body;
     }else{//содержимое не html код
         header('Location: '.$url);
