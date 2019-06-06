@@ -83,8 +83,14 @@ function corton_promo() {
                     var char = '?'
                 }
 
-                a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + document.referrer)
-                console.log('promolink', a[i].getAttribute('href'));
+                if (window.location.hostname === 'demo.cortonlab.com') {
+                    a[i].setAttribute('href', '#')
+                }else{
+                    a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + document.referrer)
+                    console.log('promolink', a[i].getAttribute('href'));
+                }
+
+
                 a[i].onclick = function (e) {
                     console.log('https://stat.cortonlab.com/promo_click.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']);
                     cxhr.open('GET', 'https://stat.cortonlab.com/promo_click.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']);

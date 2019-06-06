@@ -212,8 +212,6 @@ class ArticleController
                 <th><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики с промо статьи и процент от оплаченых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от кол-ва кликов / CTR от кол-ва целевых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">PCL<span class="tooltiptext1">Цена за переход по URL</span></div></th>
-                <!--th>Отказы</th-->
-               
                 <th></th>
               </tr>
             </thead>';
@@ -355,7 +353,6 @@ class ArticleController
     public static function actionUpdate()
     {
         $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
         switch ($_POST['tab']){
             case 'статья' :{
                 $data_add = date('Y-m-d');
