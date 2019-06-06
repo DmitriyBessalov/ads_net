@@ -765,7 +765,6 @@ function adblock() {
     if (corton_adsblock<20) {corton_adsblock++;setTimeout(adblock, 250);}else{setTimeout(adblock, 5000);}
 }
 
-
 //Расчёт готовности страницы для подгрузки виджетов и промо статьи
 function corton_delay() {
     if (window.location.hostname === 'demo.cortonlab.com') {
@@ -779,6 +778,8 @@ function corton_delay() {
                 console.log(url);
                 corton_promo();
                 return true;
+            } else {
+                setTimeout(corton_delay, 40);
             }
         } else {
             if (document.readyState === "complete") {
