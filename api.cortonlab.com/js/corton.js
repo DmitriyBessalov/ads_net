@@ -725,7 +725,6 @@ function cortonform()
             return false;
         }
         params.push(children[i].name + '=' + children[i].value);
-
     }
     params = params.join('&');
     cortonrequest.open('GET', 'https://stat.cortonlab.com/mail.php?'+params+'&host='+document.referrer);

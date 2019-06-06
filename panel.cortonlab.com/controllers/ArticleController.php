@@ -385,10 +385,9 @@ class ArticleController
                 if (!$db->exec($sql)){
                     $sql = "INSERT INTO `promo` SET `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."';";
                     $db->query($sql);
-                }
-                if ($_POST['id'] == "new") {
                     $id=$db->lastInsertId();
-                    $sql = "INSERT INTO `anons_index` SET `promo_id`='".$id."';";
+                    $sql = "UPDATE `promo` SET  `main_promo_id`='".$id."' WHERE  `id`='".$id."';";
+                    $sql .= "INSERT INTO `anons_index` SET `promo_id`='".$id."';";
                     $db->query($sql);
                     header('Location: /article-edit-anons?id='.$id);
                     exit;
@@ -998,23 +997,7 @@ class ArticleController
     }
 
 
-
-
-
     //public static function actionStart(){}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //Активация показа статей
