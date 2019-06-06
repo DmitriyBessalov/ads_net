@@ -14,7 +14,7 @@
     </div>
   </div>
       <? if (($GLOBALS['role']=='advertiser') OR $GLOBALS['role']=='admin'): ?>
-          <div id="panel_hide" style="position: fixed;bottom: 0; margin-left: 246px; cursor: pointer;border: 1px solid lightgrey;" onmouseover="this.style.color='#00F';" onmouseout="this.style.color='#333';"><</div>
+          <div id="panel_hide" style="position: fixed; bottom: 0px; margin-left: 226px; cursor: pointer; border: 1px solid lightgrey; color: rgb(51, 51, 51); z-index: 2; font-size: 24px; font-family: 'Myriadpro Regular'; font-weight: 600; padding: 2px;" onmouseout="this.style.color='#333';"><</div>
       <? endif; ?>
   <div class="section-2"></div>
   <script src="/js/jquery-3.3.1.min.js" type="text/javascript"></script>
