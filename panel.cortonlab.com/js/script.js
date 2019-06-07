@@ -24,7 +24,7 @@ $(document).ready(function(){
         var categoriyaval = $("#categoriya option:selected").val();
         switch (categoriyaval){
 			case 'Авто':
-                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Обзоры авто">Обзоры авто</option>';
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option> <option value="Общее">Общее</option><option value="Обзоры авто">Обзоры авто</option>';
                 break;
 			case 'Беременность и роды':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
