@@ -24,16 +24,94 @@ $(document).ready(function(){
         var categoriyaval = $("#categoriya option:selected").val();
         switch (categoriyaval){
 			case 'Авто':
-                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее1</option><option value="Суставы">Суставы</option><option value="Диабет">Диабет</option><option value="Похудание">Похудание</option><option value="Кардио">Кардио</option>';
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Обзоры авто">Обзоры авто</option>';
                 break;
+			case 'Беременность и роды':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;	
+			case 'Дом и сад':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Домашние животные':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Женская общая':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Заработок и Финансы':
+               document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Общее">Бизнес</option><option value="Общее">IT</option>'';
+               break;					
             case 'Здоровье и медицина':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Суставы">Суставы</option><option value="Диабет">Диабет</option><option value="Похудание">Похудание</option><option value="Кардио">Кардио</option>';
                 break;
-            case 'Еда':
-                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Здоровое питание">Здоровое питание</option><option value="Рецепты">Рецепты</option><option value="Диеты">Диеты</option>';
+			case 'Фитнес и диеты':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;	
+			case 'Знаменитости':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
                 break;
-            case 'Авто':
-                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Покупка авто">Покупка авто</option>';
+            case 'Игры':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;  
+            case 'Искусство':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+			case 'Книги и журналы':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Комиксы и анимация':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Красота':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+             case 'Мобильные технологии':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Мужская':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+             case 'Музыка':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Общее':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+             case 'Покупки':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Психология/Отношения':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break; 
+            case 'Развлекательный':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break; 
+            case 'Рецепты':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Рецепты':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break; 
+            case 'Семья и воспитание':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break; 
+            case 'Спорт':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Общее">Футбол</option><option value="Общее">Хокей</option>';
+                break;
+            case 'Стиль и мода':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Строительство и ремонт':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;
+            case 'Учеба':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;	
+            case 'Фильмы/Сериалы/Телешоу':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
+                break;				
+            case 'Хобби и интересы':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Здоровое питание">Здоровое питание</option><option value="Рецепты">Рецепты</option><option value="Диеты">Диеты</option>';
                 break;
             case 'Недвижимость':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Покупка квартир">Покупка квартир</option>';

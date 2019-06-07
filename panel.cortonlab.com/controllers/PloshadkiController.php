@@ -402,14 +402,14 @@ var myLineChart = new Chart(ctx, {
 				  <option '; if ($result['categoriya']=='Домашние животные' ) echo "selected"; echo ' value="Домашние животные">Домашние животные</option>
 				  <option '; if ($result['categoriya']=='Женская общая' ) echo "selected"; echo ' value="Женская общая">Женская общая</option>
 				  <option '; if ($result['categoriya']=='Заработок и Финансы' ) echo "selected"; echo ' value="Заработок и Финансы">Заработок и Финансы</option> 
-                  <option '; if ($result['categoriya']=='Здоровье и фитнес/диеты' ) echo "selected"; echo ' value="Здоровье и медицина">Здоровье и медицина</option>
+                  <option '; if ($result['categoriya']=='Здоровье и медицина' ) echo "selected"; echo ' value="Здоровье и медицина">Здоровье и медицина</option>
+				  <option '; if ($result['categoriya']=='Фитнес и диеты' ) echo "selected"; echo ' value="Фитнес и диеты">Фитнес и диеты</option>
 				  <option '; if ($result['categoriya']=='Знаменитости' ) echo "selected"; echo ' value="Знаменитости">Знаменитости</option>
 				  <option '; if ($result['categoriya']=='Игры' ) echo "selected"; echo ' value="Игры">Игры</option>
 				  <option '; if ($result['categoriya']=='Искусство' ) echo "selected"; echo ' value="Искусство">Искусство</option>
 				  <option '; if ($result['categoriya']=='Книги и журналы' ) echo "selected"; echo ' value="Книги и журналы">Книги и журналы</option>
 				  <option '; if ($result['categoriya']=='Комиксы и анимация' ) echo "selected"; echo ' value="Комиксы и анимация">Комиксы и анимация</option>
 				  <option '; if ($result['categoriya']=='Красота' ) echo "selected"; echo ' value="Красота">Красота</option>
-				  <option '; if ($result['categoriya']=='Медицина' ) echo "selected"; echo ' value="Медицина">Медицина</option>
 				  <option '; if ($result['categoriya']=='Мобильные технологии' ) echo "selected"; echo ' value="Мобильные технологии">Мобильные технологии</option>
 				  <option '; if ($result['categoriya']=='Мужская' ) echo "selected"; echo ' value="Мужская">Мужская</option>
 				  <option '; if ($result['categoriya']=='Музыка' ) echo "selected"; echo ' value="Музыка">Музыка</option>
