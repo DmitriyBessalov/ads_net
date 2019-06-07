@@ -23,6 +23,9 @@ $(document).ready(function(){
     function selec() {
         var categoriyaval = $("#categoriya option:selected").val();
         switch (categoriyaval){
+			case 'Авто':
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее1</option><option value="Суставы">Суставы</option><option value="Диабет">Диабет</option><option value="Похудание">Похудание</option><option value="Кардио">Кардио</option>';
+                break;
             case 'Здоровье и медицина':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Суставы">Суставы</option><option value="Диабет">Диабет</option><option value="Похудание">Похудание</option><option value="Кардио">Кардио</option>';
                 break;
