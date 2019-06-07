@@ -105,7 +105,7 @@ class ArticleController
 								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
 								     <div class="miniinfo"> 
 								        <div class="blockminiinfo">
-										   <input type="checkbox" ';if ($i['active']) echo 'checked="checked "';echo'class="flipswitch"/>
+										   <input type="checkbox" ';if ($i['active']) echo 'checked="checked "';echo' class="flipswitch all"/>
                                            <span></span>
 										</div>
 										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>'.$i['namebrand'].'</div>
@@ -604,7 +604,7 @@ class ArticleController
                                             <div class="blockminiinfo">
                                                <input type="checkbox" ';
                 if ($i['active']) echo 'checked="checked "';
-                echo 'class="flipswitch"/>
+                echo 'class="flipswitch one"/>
                                                <span></span>
                                             </div>
                                          </div>
@@ -993,41 +993,69 @@ class ArticleController
         return true;
     }
 
-    //Активация показа статей
-    public static function actionStart(){
+    //Добавление индексов слов
+    public static function startword($id){
+        $db = Db::getConnection();
+        $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
+        $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        if ($word=="") {echo 'word'; exit;}
+        $words=explode(',',$word);
+        $words=ArticleController::miniword($words);
+        foreach ($words as $word){
+            $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
+            $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $promo_ids=explode(',', $promo_id);
+            $promo_ids[]=$id;
+            $promo_ids=array_unique($promo_ids);
+            asort($promo_ids);
+            $promo_id=implode(',',$promo_ids);
+            $sql="UPDATE `words_index` SET `promo_ids`='".$promo_id."' WHERE `word`='".$word."'";
+            if (!$db->exec($sql)){
+                $sql="INSERT INTO `words_index` SET `promo_ids`='".$id."', `word`='".$word."'";
+                $db->query($sql);
+            }
+        }
+        return true;
+    }
+
+    //Очистка индексов слов
+    public static function stopword($id){
+        $db = Db::getConnection();
+        $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
+        $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $words=explode(',',$word);
+        $words=ArticleController::miniword($words);
+        foreach ($words as $word){
+            $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
+            $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $promo_ids=explode(',', $promo_id);
+            $key=array_search($id, $promo_ids);
+            if (false !== $key)
+                unset( $promo_ids[$key]);
+            $promo_id=implode(',',$promo_ids);
+            if ($promo_id==''){
+                $sql = "DELETE FROM `words_index` WHERE `word`='" . $word . "'";
+            }else{
+                $sql = "UPDATE `words_index` SET `promo_ids`='" . $promo_id . "' WHERE `word`='" . $word . "'";
+            }
+            $db->query($sql);
+        }
+        return true;
+    }
+
+    //Остановка показа статей
+    public static function actionStop_all(){
         {
             $db = Db::getConnection();
-            //Проверка на анонсы
-            $sql ="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id` = '".$_GET['id']."';";
-            $anons = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            if ($anons=="") {echo 'anon'; exit;}
-            //Добавление индексов слов
-            $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$_GET['id']."';";
-            $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            if ($word=="") {echo 'word'; exit;}
-            $words=explode(',',$word);
-            $words=ArticleController::miniword($words);
-            foreach ($words as $word){
-                $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
-                $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $promo_ids=explode(',', $promo_id);
-                $promo_ids[]=$_GET['id'];
-                $promo_ids=array_unique($promo_ids);
-                asort($promo_ids);
-                $promo_id=implode(',',$promo_ids);
-                $sql="UPDATE `words_index` SET `promo_ids`='".$promo_id."' WHERE `word`='".$word."'";
-                if (!$db->exec($sql)){
-                    $sql="INSERT INTO `words_index` SET `promo_ids`='".$_GET['id']."', `word`='".$word."'";
-                    $db->query($sql);
-                }
-            }
 
-            $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$_GET['id']."';";
+            ArticleController::stopword($_GET['id']);
+
+            $sql ="UPDATE `promo` SET `active`='0' WHERE `main_promo_id`= '".$_GET['id']."';";
             $db->query($sql);
-            echo 'true';
             return true;
         }
     }
+
 
     //Активация показа статей
     public static function actionStart_all(){
@@ -1037,28 +1065,48 @@ class ArticleController
             $sql ="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id` = '".$_GET['id']."';";
             $anons = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
             if ($anons=="") {echo 'anon'; exit;}
-            //Добавление индексов слов
-            $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$_GET['id']."';";
-            $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            if ($word=="") {echo 'word'; exit;}
-            $words=explode(',',$word);
-            $words=ArticleController::miniword($words);
-            foreach ($words as $word){
-                $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
-                $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $promo_ids=explode(',', $promo_id);
-                $promo_ids[]=$_GET['id'];
-                $promo_ids=array_unique($promo_ids);
-                asort($promo_ids);
-                $promo_id=implode(',',$promo_ids);
-                $sql="UPDATE `words_index` SET `promo_ids`='".$promo_id."' WHERE `word`='".$word."'";
-                if (!$db->exec($sql)){
-                    $sql="INSERT INTO `words_index` SET `promo_ids`='".$_GET['id']."', `word`='".$word."'";
-                    $db->query($sql);
-                }
+
+            ArticleController::startword($_GET['id']);
+
+            $sql ="UPDATE `promo` SET `active`='1' WHERE `main_promo_id`= '".$_GET['id']."';";
+            $db->query($sql);
+
+            $sql ="SELECT COUNT(*) FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
+            $count=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+            if ($count!=1){
+                echo $count;
+            }else{
+                echo 'true';
             }
 
-            $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$_GET['id']."';";
+            return true;
+        }
+    }
+
+    //Активация показа статей
+    public static function actionStart(){
+        {
+            $db = Db::getConnection();
+
+            $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
+
+            $sql ="SELECT `main_promo_id` FROM `promo` WHERE `id`= '".$id."';";
+            $main_promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+            //Проверка на анонсы
+            $sql ="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id` = '".$main_promo_id."';";
+            $anons = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            if ($anons=="") {echo 'anon'; exit;}
+
+            $sql ="SELECT COUNT(*)  FROM `promo` WHERE `main_promo_id`= '".$main_promo_id."' AND `active`='1';";
+            $count=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+            if (!$count) {
+                ArticleController::startword($main_promo_id);
+            }
+
+            $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$id."';";
             $db->query($sql);
             echo 'true';
             return true;
@@ -1069,65 +1117,22 @@ class ArticleController
     public static function actionStop(){
         {
             $db = Db::getConnection();
-            $id=$_GET['id'];
 
-            //Очиста индексов слов
-            $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
-            $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            $words=explode(',',$word);
-            $words=ArticleController::miniword($words);
-            foreach ($words as $word){
-                $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
-                $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $promo_ids=explode(',', $promo_id);
-                $key=array_search($id, $promo_ids);
-                if (false !== $key)
-                    unset( $promo_ids[$key]);
-                $promo_id=implode(',',$promo_ids);
-                if ($promo_id==''){
-                    $sql = "DELETE FROM `words_index` WHERE `word`='" . $word . "'";
-                }else {
-                    $sql = "UPDATE `words_index` SET `promo_ids`='" . $promo_id . "' WHERE `word`='" . $word . "'";
-                }
-                $db->query($sql);
-            }
+            $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
 
-            $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$_GET['id']."';";
+            $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$id."';";
             $db->query($sql);
-            return true;
-        }
-    }
 
+            $sql ="SELECT `main_promo_id` FROM `promo` WHERE `id`= '".$id."';";
+            $main_promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-    //Остановка показа статей
-    public static function actionStop_all(){
-        {
-            $db = Db::getConnection();
-            $id=$_GET['id'];
+            $sql ="SELECT COUNT(*)  FROM `promo` WHERE `main_promo_id`= '".$main_promo_id."' AND `active`='1';";
+            $count=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-            //Очиста индексов слов
-            $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
-            $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
-            $words=explode(',',$word);
-            $words=ArticleController::miniword($words);
-            foreach ($words as $word){
-                $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
-                $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $promo_ids=explode(',', $promo_id);
-                $key=array_search($id, $promo_ids);
-                if (false !== $key)
-                    unset( $promo_ids[$key]);
-                $promo_id=implode(',',$promo_ids);
-                if ($promo_id==''){
-                    $sql = "DELETE FROM `words_index` WHERE `word`='" . $word . "'";
-                }else {
-                    $sql = "UPDATE `words_index` SET `promo_ids`='" . $promo_id . "' WHERE `word`='" . $word . "'";
-                }
-                $db->query($sql);
+            if (!$count){
+                ArticleController::stopword($main_promo_id);
             }
-
-            $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$_GET['id']."';";
-            $db->query($sql);
+            echo 'true';
             return true;
         }
     }

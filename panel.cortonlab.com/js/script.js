@@ -17,19 +17,19 @@ $(document).ready(function(){
             if (podcategor!=""){
                 selec();
                 $('#podcategoriya option[value="'+podcategor+'"]').attr("selected", "selected");
-            };
+            }
         }
     }
     function selec() {
         var categoriyaval = $("#categoriya option:selected").val();
         switch (categoriyaval){
-			case 'Авто':
+            case 'Авто':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option> <option value="Общее">Общее</option><option value="Обзоры авто">Обзоры авто</option>';
                 break;
-			case 'Беременность и роды':
+            case 'Беременность и роды':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break;	
-			case 'Дом и сад':
+                break;
+            case 'Дом и сад':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
                 break;
             case 'Домашние животные':
@@ -39,24 +39,24 @@ $(document).ready(function(){
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
                 break;
             case 'Заработок и Финансы':
-               document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Общее">Бизнес</option><option value="Общее">IT</option>';
-               break;					
+                document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Общее">Бизнес</option><option value="Общее">IT</option>';
+                break;
             case 'Здоровье и медицина':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Суставы">Суставы</option><option value="Диабет">Диабет</option><option value="Похудание">Похудание</option><option value="Кардио">Кардио</option>';
                 break;
-			case 'Фитнес и диеты':
+            case 'Фитнес и диеты':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break;	
-			case 'Знаменитости':
+                break;
+            case 'Знаменитости':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
                 break;
             case 'Игры':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break;  
+                break;
             case 'Искусство':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
                 break;
-			case 'Книги и журналы':
+            case 'Книги и журналы':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
                 break;
             case 'Комиксы и анимация':
@@ -82,16 +82,16 @@ $(document).ready(function(){
                 break;
             case 'Психология/Отношения':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break; 
+                break;
             case 'Развлекательный':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break; 
+                break;
             case 'Рецепты':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
                 break;
             case 'Семья и воспитание':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break; 
+                break;
             case 'Спорт':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Общее">Футбол</option><option value="Общее">Хокей</option>';
                 break;
@@ -103,10 +103,10 @@ $(document).ready(function(){
                 break;
             case 'Учеба':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break;	
+                break;
             case 'Фильмы/Сериалы/Телешоу':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option>';
-                break;				
+                break;
             case 'Хобби и интересы':
                 document.getElementById('podcategoriya').innerHTML='<option value="">Подкатегория площадки</option><option value="Общее">Общее</option><option value="Здоровое питание">Здоровое питание</option><option value="Рецепты">Рецепты</option><option value="Диеты">Диеты</option>';
                 break;
@@ -123,7 +123,27 @@ $(document).ready(function(){
     });
 	
 //Функция для чекбокса для всех вариантов статей
-    $('.flipswitch').click(function() {
+    $('.flipswitch.all').click(function() {
+        if ($(this).is(':checked')){
+            var id=$(this).parents('tr:first').children('td')[0].innerHTML;
+            var checkbox=$(this);
+            $.post("https://panel.cortonlab.com/article-start-all?id="+id,function(data) {
+                switch (data) {
+                    case 'anon':{checkbox.next().text('Неактивна, отсутсвуют анонсы'); checkbox.prop('checked', false); console.log('a'); break;}
+                    case 'word':{checkbox.next().text('Неактивна, отсутсвуют ключевые слова'); checkbox.prop('checked', false); console.log('w'); break;}
+                    case 'true':{checkbox.next().text('Активна'); break;}
+                    default:    {checkbox.next().text('Активна'); alert('Внимание активированно '+data+' статей');}
+                }
+            });
+        } else {
+            $(this).next().text('На паузе');
+            var id=$(this).parents('tr:first').children('td')[0].innerHTML;
+            $.post("https://panel.cortonlab.com/article-stop-all?id="+id)
+        }
+    });
+
+    //Функция для чекбокса для одного вариантов статей
+    $('.flipswitch.one').click(function() {
         if ($(this).is(':checked')){
             var id=$(this).parents('tr:first').children('td')[0].innerHTML;
             var checkbox=$(this);
