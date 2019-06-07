@@ -993,10 +993,6 @@ class ArticleController
         return true;
     }
 
-
-    //public static function actionStart(){}
-
-
     //Активация показа статей
     public static function actionStart(){
         {

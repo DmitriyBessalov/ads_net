@@ -193,7 +193,7 @@ var corton_url='".$url."';
 function bindEvent(eventHandler){if(window.addEventListener){window.addEventListener('message',eventHandler,false);}}
 bindEvent(function (e) {
     if(e.data.indexOf('corton') !== -1) {
-        if (document.readyState === \"complete\") {        
+        if (document.readyState === \"complete\") {
             let element=document.getElementById(e.data);
             if (element){
                 let scrolo=element.getBoundingClientRect().top;
