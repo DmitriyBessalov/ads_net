@@ -34,8 +34,8 @@ $stavka=round($stavka*$ploshadka_id['otchiclen']/100,2);
 $sql= "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka."' WHERE  `prosmotr_id` = '".$_GET['prosmort_id']."'";
 $GLOBALS['dbstat']->query($sql);
 
-$sql = "UPDATE `stat_promo_day_count` SET `st` = `st` + 1, `pay` = `pay` + ".$stavka."  WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."'";
-if (!$GLOBALS['dbstat']->exec($sql)){$GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `st` = 1, `pay` = ".$stavka);
+$sql = "UPDATE `stat_promo_day_count` SET `st` = `st` + 1, `pay` = `pay` + ".$stavka."  WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."' AND `promo_variant`='".$_GET['p_id']."'";
+if (!$GLOBALS['dbstat']->exec($sql)){$GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `promo_variant`='".$_GET['p_id']."', `st` = 1, `pay` = ".$stavka);
 }
 
 $sql = "UPDATE `balans_ploshadki` SET `".$_GET['t']."`=".$_GET['t']."+1, `".$_GET['t']."_balans`=".$_GET['t']."_balans+".$stavka."  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id['id']."'";

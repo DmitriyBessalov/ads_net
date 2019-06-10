@@ -7,7 +7,6 @@ class ArticleController
         $title='Управление статьями';
         include PANELDIR.'/views/layouts/header.php';
 
-
         echo '
 		<div class="table-box">
         <div class="table w-embed">
@@ -53,7 +52,7 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand`, p.`active` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id` WHERE p.`id`=p.`main_promo_id` ".$str." ORDER BY a.`promo_id` DESC ;";
+            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id` WHERE p.`id`=p.`main_promo_id` ".$str." ORDER BY a.`promo_id` DESC ;";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $i) {
                 $anons = str_replace(",", "','", $i['anons_ids']);
@@ -70,7 +69,7 @@ class ArticleController
                 if (isset($today)) {
                     $anon = explode(',', $i['anons_ids']);
                     foreach ($anon as $y) {
-                        $ch = $redis->get(date('d') . ':' . $y);
+                        $ch = $redis->get(date('d').':'.$y);
                         if ($ch) {
                             $pokaz += $ch;
                         }
@@ -88,7 +87,7 @@ class ArticleController
                     if (is_infinite($CRT)) {
                         $CRT = '--';
                     } else {
-                        $CRT = round($CRT * 100, 2) . ' %';
+                        $CRT = round($CRT * 100, 2).' %';
                     }
                 };
 
@@ -549,8 +548,6 @@ class ArticleController
         $title='А/B тестирование';
         include PANELDIR.'/views/layouts/article_header.php';
 
-
-
         echo'
         <div class="table-box">
             <div class="table w-embed">
@@ -583,14 +580,59 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='" . $_GET['id'] . "';";
+            $sql = "SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-            $ch = 65;
+            //$sql = "SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`=".$result[0]['id'];
+            //$anons= $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
             foreach ($result as $i) {
+                $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "') AND `promo_variant`='".$i['id']."' AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
+                $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                if (is_null($promosum['doread'])){$promosum['doread']=$promosum['pay']=$promosum['perehod']=$promosum['st']=$promosum['clicking']=0;}
+
+                //$sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                //$pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+                //if (is_null($pokaz)) {$pokaz = 0;}
+
+                //if (isset($today)) {
+                //    $anon = explode(',', $i['anons_ids']);
+                //    foreach ($anon as $y) {
+                //        $ch = $redis->get(date('d').':'.$y);
+                //        if ($ch) {
+                //            $pokaz += $ch;
+                //        }
+                //    }
+                //}
+
+                //$CRT = $promosum['clicking'] / $pokaz;
+
+                $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
+                if (is_nan($protsentperehodov)){$protsentperehodov=0;}
+
+                //if (is_nan($CRT)) {
+                //    $CRT = '--';
+                //} else {
+                //    if (is_infinite($CRT)) {
+                //        $CRT = '--';
+                //    } else {
+                //        $CRT = round($CRT * 100, 2).' %';
+                //    }
+                //};
+
+                $protsentst=100/$promosum['clicking']*$promosum['st'];
+                if (is_nan($protsentst)){$protsentst=0;}
+
+                $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
+                if (is_nan($doread) or is_infinite($doread))$doread=0;
+
+                //$ch = 65;
+                //foreach ($result as $i) {
                 echo '      <tr>
-                                <td>' . chr($ch++) . ' (' . $i['id'] . ')</td>
-                                <td>' . date('d.m.Y', strtotime($i['data_add'])) . '</td>
+                                
+                                <td>'.date('d.m.Y', strtotime($i['data_add'])).'</td>
                                 
                                 <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
                                          <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
@@ -603,13 +645,13 @@ class ArticleController
                                             </div>
                                          </div>
                                 </td>
-                                <td>0 руб.</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0 (0%)</td>
-                                <td>0</td>
-                                <td>0</td>
+                                <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
+                                <td>' . $pokaz . '</td>
+                                <td>' . $promosum['clicking'] . '</td>
+								<td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
+                                <td>' . $promosum['doread'] . ' ('.$doread.'%)</td>
+                                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
+                                <td style="min-width: 96px;">' . $CRT . '</td>
                             </tr>';
             }
         }else{ echo '<tr><td colspan="10">Некоректные даты фильтра</td></tr>';}
@@ -739,14 +781,14 @@ class ArticleController
 
                     $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
                     $dir = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    $imgdir = '//api.cortonlab.com/img/' . $dir . '/a/';
+                    $imgdir = '//api.cortonlab.com/img/'.$dir.'/a/';
                     echo '
                                 <div class="div-block-97-copy">
 								<div class="text-block-103">Настройка анонса</div>
-                                    <input type="hidden" name="anons_ids[]" value="' . $anon['id'] . '">
+                                    <input type="hidden" name="anons_ids[]" value="'.$anon['id'].'">
                                     <div class="div-block-142">
                                         <div class="div-block-145">
-                                            <input type="text" value="' . $anon['title'] . '" class="text-field-6 _1 w-input" maxlength="55" name="title[]" placeholder="Заголовок анонса статьи до 55 символов" id="title-3" required="">
+                                            <input type="text" value="'.$anon['title'].'" class="text-field-6 _1 w-input" maxlength="55" name="title[]" placeholder="Заголовок анонса статьи до 55 символов" id="title-3" required="">
                                             <textarea name="opisanie[]" placeholder="Описание от 90 до 130 символов" maxlength="130" class="textarea-7 w-input">' . $anon['snippet'] . '</textarea>
                                         </div>
                                     </div>
@@ -772,7 +814,7 @@ class ArticleController
             echo '
                     </div>
                     <input type="hidden" name="del_id" value="">
-					<div style="border-top: 0px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+					<div style="border-top: 0 solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
                     <div class="submit-button-6" id="addanons" style="margin-right: 20px;">Добавить анонс</div>
                      <input type="submit" value="Сохранить" class="submit-button-6">
                  </form>';
@@ -803,7 +845,7 @@ class ArticleController
             $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
             $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         };
-        echo'
+        echo '
         <form method="post" action="/article-update" class="form-2">
                     <div class="div-block-97">
                         <input type="hidden" name="tab" value="настройка">

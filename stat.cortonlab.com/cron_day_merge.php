@@ -15,7 +15,7 @@ fwrite($fp, $gzdata);
 fclose($fp);
 unset($gzdata);
 
-// Перенос статистики из Redis в stat_promo_day_count
+// Перенос статистики из Redis в stat_anons_day_show
 $redis->select(1);
 for ($i = 1; $i <= 4; $i++) {
     $y=date('d', strtotime( '-'.$i.' day'));

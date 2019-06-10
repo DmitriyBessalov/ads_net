@@ -17,8 +17,8 @@ $ploshadka_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 $sql = "UPDATE `stat_promo_prosmotr` SET `click` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
 $GLOBALS['db']->query($sql);
 
-$sql = "UPDATE `stat_promo_day_count` SET `clicking` = `clicking` + 1 WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."'";
-if (!$GLOBALS['dbstat']->exec($sql)){$GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `clicking` = 1");
+$sql = "UPDATE `stat_promo_day_count` SET `clicking` = `clicking` + 1 WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."' AND `promo_variant`='".$_GET['p_id']."'";
+if (!$GLOBALS['dbstat']->exec($sql)){$GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `promo_variant`='".$_GET['p_id']."', `data` = CURDATE(), `clicking` = 1");
 }
 
 $sql ="UPDATE `balans_ploshadki` SET `".$_GET['t']."_promo_click` = `".$_GET['t']."_promo_click` + 1 WHERE `ploshadka_id`='".$ploshadka_id."' AND `date`=CURDATE();";
