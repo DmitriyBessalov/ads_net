@@ -554,7 +554,7 @@ class ArticleController
                 <table>
                     <thead>
                         <tr class="trtop">
-                            <td>Версия (ID)</td>
+                            <td style="min-width: 118px;">Версия (ID)</td>
                             <td>Дата запуска</td>
                             <td>Заголовок</td>
                             <td>Расходы</td>
