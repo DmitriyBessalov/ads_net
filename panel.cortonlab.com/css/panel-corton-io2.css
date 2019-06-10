@@ -5034,6 +5034,10 @@ canvas {
   border: 1px solid #E0E1E5;
   margin-right: 10px;
 }
+.btnarticlegr:hover {
+  color: #116dd6;
+  border: 1px solid #116dd6;
+}
 
 a.btnarticlegr:active{
   background-color: #116dd6;
