@@ -5037,7 +5037,7 @@ canvas {
 .btnarticlegr:hover {
   color: #116dd6;
   border: 1px solid #116dd6;
-  cursor: pointer:
+  cursor: pointer;
 }
 
 a.btnarticlegr:active{
