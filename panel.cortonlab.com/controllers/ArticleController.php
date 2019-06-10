@@ -6,8 +6,8 @@ class ArticleController
     {
         $title='Управление статьями';
         include PANELDIR.'/views/layouts/header.php';
-        $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
+
+
         echo '
 		<div class="table-box">
         <div class="table w-embed">
@@ -54,16 +54,16 @@ class ArticleController
             }
 
             $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand`, p.`active` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id` WHERE p.`id`=p.`main_promo_id` ".$str." ORDER BY a.`promo_id` DESC ;";
-            $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $i) {
                 $anons = str_replace(",", "','", $i['anons_ids']);
                 $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('".$anons."')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
-                $promosum = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 if (is_null($promosum['doread'])){$promosum['doread']=$promosum['pay']=$promosum['perehod']=$promosum['st']=$promosum['clicking']=0;}
 
                 $sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-                $pokaz = $dbstat->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
                 if (is_null($pokaz)) {$pokaz = 0;}
 
@@ -184,7 +184,7 @@ class ArticleController
           </div>
         </div>
 		';
-        include PANELDIR . '/views/layouts/footer.php';
+        include PANELDIR.'/views/layouts/footer.php';
         return true;
     }
 
@@ -193,8 +193,8 @@ class ArticleController
     {
         $title='Статистика по анонсам';
         include PANELDIR.'/views/layouts/article_header.php';
-        $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
+
+
         echo '
 		<div class="table-box">
         <div class="table w-embed">
@@ -231,7 +231,7 @@ class ArticleController
             }
 
             $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active` FROM `anons_index` a JOIN `promo` p ON p.`id`=a.`promo_id` WHERE a.`promo_id`='" . $_GET['id'] . "'";
-            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             echo '
             <script>
                 document.getElementById("title2").innerHTML="Статистика по статье<br><span class=titlepromo>Статья: ' . $result['title'] . '</span>";
@@ -249,14 +249,14 @@ class ArticleController
             $ch2 = -1;
             foreach ($anon as $anons) {
                 $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "') AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
-                $promosum = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 if (is_null($promosum['doread'])) {
                     $promosum['doread'] = $promosum['pay'] = $promosum['perehod'] = $promosum['st'] = $promosum['clicking'] = 0;
                 }
 
                 $sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "')AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-                $pokaz = $dbstat->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 if (is_null($pokaz)) {$pokaz = 0;}
 
                 $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
@@ -292,7 +292,7 @@ class ArticleController
              <tr>';
                 if ($ch2 != -1) {
                     $sql = "SELECT `user_id`,`img_290x180`,`title` FROM `anons` WHERE `id`='" . $anons . "'";
-                    $img = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $img = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                     echo '<td>' . $anons . '</td>
                           <td><a class="screenshot" style="text-decoration:none;" rel="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
@@ -352,7 +352,7 @@ class ArticleController
 
     public static function actionUpdate()
     {
-        $db = Db::getConnection();
+
         switch ($_POST['tab']){
             case 'статья' :{
                 $data_add = date('Y-m-d');
@@ -360,7 +360,7 @@ class ArticleController
                 $role=UsersController::checkRole();
                 if (($role=='admin') AND ($id!="")){
                     $sql="SELECT `user_id` FROM `promo` WHERE `id`=".$id;
-                    $user_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $user_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 }else{
                     $user_id = UsersController::getUserId();
                 }
@@ -379,13 +379,13 @@ class ArticleController
                 }
 
                 $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
-                if (!$db->exec($sql)){
+                if (!$GLOBALS['db']->exec($sql)){
                     $sql = "INSERT INTO `promo` SET `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."';";
-                    $db->query($sql);
-                    $id=$db->lastInsertId();
+                    $GLOBALS['db']->query($sql);
+                    $id=$GLOBALS['db']->lastInsertId();
                     $sql = "UPDATE `promo` SET  `main_promo_id`='".$id."' WHERE  `id`='".$id."';";
                     $sql .= "INSERT INTO `anons_index` SET `promo_id`='".$id."';";
-                    $db->query($sql);
+                    $GLOBALS['db']->query($sql);
                     header('Location: /article-edit-anons?id='.$id);
                     exit;
                 }
@@ -396,7 +396,7 @@ class ArticleController
             asort($words);
             $strtolow=implode(',', $words);
             $sql="SELECT `active`,`words` FROM `promo` WHERE `id`='".$_POST['id']."';";
-            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             $wordsold=explode(",", $result['words']);
 
             if (!$result['active']){array_splice($words, 0);}
@@ -410,7 +410,7 @@ class ArticleController
                     if (in_array($i, $words)){
                         if (!in_array($i, $wordsold)){
                             $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$i."';";
-                            $promo_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                            $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                             if ($promo_ids){
                                 $promo_id=explode(',', $promo_ids);
                                 $promo_id[]=$_POST['id'];
@@ -421,12 +421,12 @@ class ArticleController
                                 $promo_ids=$_POST['id'];
                             }
                             $sql="REPLACE INTO `words_index` SET `word`='".$i."' , `promo_ids`='".$promo_ids."';";
-                            $db->query($sql);
+                            $GLOBALS['db']->query($sql);
                         }
                     }else{
                         if (in_array($i, $wordsold)){
                             $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$i."';";
-                            $promo_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                            $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
                             //Удаляет
                             $ids=explode(",", $promo_ids);
@@ -434,25 +434,25 @@ class ArticleController
                             $promo_ids = implode(",", $ids);
                             if ($promo_ids==''){
                                 $sql="DELETE FROM `words_index` WHERE `word` ='".$i."'";
-                                $db->query($sql);
+                                $GLOBALS['db']->query($sql);
                             }else{
                                 $sql="REPLACE INTO `words_index` SET `word`='".$i."' , `promo_ids`='".$promo_ids."';";
-                                $db->query($sql);
+                                $GLOBALS['db']->query($sql);
                             }
                         }
                     }
             }
 
             $sql="UPDATE `promo` SET `words`='".$strtolow."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
 
             break;
         }case 'анонсы':{
             //Список старых анонсов
             $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$_POST['id']."';";
-            $anonsold=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $anonsold=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             if ($anonsold!=""){
                 $anonsold2= explode(",", $anonsold);
             }else {
@@ -465,7 +465,7 @@ class ArticleController
                 $user_id= UsersController::getUserId();
             }else {
                 $sql ="SELECT `user_id` FROM `promo` WHERE `id` = '".$_POST['id']."';";
-                $user_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $user_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             }
             $uploaddir = '/var/www/www-root/data/www/api.cortonlab.com'.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.$user_id.DIRECTORY_SEPARATOR.'a'.DIRECTORY_SEPARATOR;
 
@@ -477,7 +477,7 @@ class ArticleController
 
             foreach($anonsold2 as $i) {
                 $sql="SELECT `img_290x180`,`img_180x180` FROM `anons` WHERE `id`='".$_POST['anons_ids'][$i]."'";
-                $imgdb = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $imgdb = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 $imageold[]=$imgdb['img_290x180'];
                 $imageold[]=$imgdb['img_180x180'];
             };
@@ -499,19 +499,19 @@ class ArticleController
                 }
                 if($_POST['anons_ids'][$i]=="new"){
                     $sql = "SELECT MAX(`id`) FROM `anons`";
-                    $maxid = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $maxid = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                     $maxid+=random_int ( 1 , 105 );
                     $sql = "INSERT INTO `anons` SET `id`=".$maxid.", `promo_id`=".$_POST['id'].", `user_id`='".$user_id."' ,`title`='" . $_POST['title'][$i] . "',`snippet`='" . $_POST['opisanie'][$i] . "'".$filename290[$i].$filename180[$i];
-                    $db->query($sql);
-                    $anon[]=$db->lastInsertId();
+                    $GLOBALS['db']->query($sql);
+                    $anon[]=$GLOBALS['db']->lastInsertId();
                     $img[]=$hash290.'.'.$extension290;
                     $img[]=$hash180.'.'.$extension180;
                 }else if (in_array($_POST['anons_ids'][$i], $anonsold2)) {
                     $sql = "UPDATE `anons` SET `promo_id`=".$_POST['id'].", `title`='" . $_POST['title'][$i] . "',`snippet`='" . $_POST['opisanie'][$i] . "'".$filename290[$i].$filename180[$i]." WHERE `id`='" . $_POST['anons_ids'][$i] . "'";
-                    $db->query($sql);
+                    $GLOBALS['db']->query($sql);
                     $anon[]=$_POST['anons_ids'][$i];
                     $sql="SELECT `img_290x180`,`img_180x180` FROM `anons` WHERE `id`='".$_POST['anons_ids'][$i]."'";
-                    $imgdb = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $imgdb = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                     $img[]=$imgdb['img_290x180'];
                     $img[]=$imgdb['img_180x180'];
                 }
@@ -527,30 +527,29 @@ class ArticleController
             //Обновляет индексы анонсов к статье
             $anons=implode(",", $anon);
             $sql="UPDATE `anons_index` SET `anons_ids`='".$anons."' WHERE `promo_id`='".$_POST['id']."'";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
             foreach($anonsold2 as $i) {
                 if (!in_array($i, $anon)){
                     $sql = "DELETE FROM `anons` WHERE `id`='" . $i . "';";
-                    $db->query($sql);
+                    $GLOBALS['db']->query($sql);
                 }
             };
             break;
         }case 'форма_заказа' :{
             $sql="UPDATE `promo` SET `form_title`='".$_POST['form-title']."',`form_text`='".$_POST['form-text']."',`form_button`='".$_POST['form-button']."' WHERE `id`='".$_POST['id']."'";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
         }
         };
         header('Location: https://panel.cortonlab.com/articles?active=1');
         exit;
     }
 
-
     public static function actionA_b()
     {
         $title='А/B тестирование';
         include PANELDIR.'/views/layouts/article_header.php';
-        $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
+
+
 
         echo'
         <div class="table-box">
@@ -585,15 +584,10 @@ class ArticleController
             }
 
             $sql = "SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='" . $_GET['id'] . "';";
-            $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
             $ch = 65;
             foreach ($result as $i) {
-                if ($i['active']) {
-                    $i['active'] = 'Вкл.';
-                } else {
-                    $i['active'] = 'Выкл.';
-                }
                 echo '      <tr>
                                 <td>' . chr($ch++) . ' (' . $i['id'] . ')</td>
                                 <td>' . date('d.m.Y', strtotime($i['data_add'])) . '</td>
@@ -609,7 +603,6 @@ class ArticleController
                                             </div>
                                          </div>
                                 </td>
-                                
                                 <td>0 руб.</td>
                                 <td>0</td>
                                 <td>0</td>
@@ -620,7 +613,7 @@ class ArticleController
                             </tr>';
             }
         }else{ echo '<tr><td colspan="10">Некоректные даты фильтра</td></tr>';}
-        echo '      </tbody>    
+        echo '        </tbody>
                 </table>
             </div>
             
@@ -643,11 +636,10 @@ class ArticleController
 
     public static function actionContent()
     {
-        $db=Db::getConnection();
         $title='Редактирование статьи';
         $id=$_GET['id'];
         $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
-        $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
         include PANELDIR.'/views/layouts/article_header.php';
         echo'
@@ -658,7 +650,7 @@ class ArticleController
         <div style="margin-top: 40px; padding-left: 20px;">';
 
         $sql="SELECT `id` FROM `promo` WHERE `main_promo_id`='".$result['main_promo_id']."'";
-        $result2 = $db->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+        $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
 
         switch (count($result2)){
             case 1:
@@ -726,7 +718,7 @@ class ArticleController
     public static function actionAnons()
     {
         $title='Анонсы статей';
-        $db = Db::getConnection();
+
         if ($_GET['id']==''){
             $id='new';
         }else{
@@ -738,15 +730,15 @@ class ArticleController
                     <input type="hidden" name="id" value="'.$id.'">
                     <div id="anonses">';
             $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$id."'";
-            $anons_ids = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             if ($anons_ids!='') {
                 $anons = explode(",", $anons_ids);
                 foreach ($anons as $i) {
                     $sql = "SELECT * FROM `anons` WHERE `id`='" . $i . "'";
-                    $anon = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $anon = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                     $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
-                    $dir = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $dir = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                     $imgdir = '//api.cortonlab.com/img/' . $dir . '/a/';
                     echo '
                                 <div class="div-block-97-copy">
@@ -790,13 +782,13 @@ class ArticleController
 
     public static function actionAnons_stop()
     {
-        $db = Db::getConnection();
+
         return true;
     }
 
     public static function actionAnons_start()
     {
-        $db = Db::getConnection();
+
         return true;
     }
 
@@ -807,10 +799,9 @@ class ArticleController
         if ($_GET['id']==''){
             $id='new';
         }else{
-            $db=Db::getConnection();
             $id=$_GET['id'];
             $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
-            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         };
         echo'
         <form method="post" action="/article-update" class="form-2">
@@ -847,7 +838,7 @@ class ArticleController
                         <div class="div-block-85">
                             <div>';
             $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
-            $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             echo'
                                 <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
                             </div>
@@ -878,10 +869,9 @@ class ArticleController
         if ($_GET['id']==''){
             $id='new';
         }else{
-            $db=Db::getConnection();
             $id=$_GET['id'];
             $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
-            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         };
         echo '
                 <form method="post" action="/article-update" class="form-2">
@@ -909,8 +899,8 @@ class ArticleController
     {
         $title='Анализ ссылок';
         include PANELDIR.'/views/layouts/article_header.php';
-        $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
+
+
         echo'
         <div class="table-box">
             <div class="table w-embed">
@@ -995,24 +985,24 @@ class ArticleController
 
     //Добавление индексов слов
     public static function startword($id){
-        $db = Db::getConnection();
+
         $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
-        $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $word = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
         if ($word=="") {echo 'word'; exit;}
         $words=explode(',',$word);
         $words=ArticleController::miniword($words);
         foreach ($words as $word){
             $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
-            $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $promo_id=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             $promo_ids=explode(',', $promo_id);
             $promo_ids[]=$id;
             $promo_ids=array_unique($promo_ids);
             asort($promo_ids);
             $promo_id=implode(',',$promo_ids);
             $sql="UPDATE `words_index` SET `promo_ids`='".$promo_id."' WHERE `word`='".$word."'";
-            if (!$db->exec($sql)){
+            if (!$GLOBALS['db']->exec($sql)){
                 $sql="INSERT INTO `words_index` SET `promo_ids`='".$id."', `word`='".$word."'";
-                $db->query($sql);
+                $GLOBALS['db']->query($sql);
             }
         }
         return true;
@@ -1020,14 +1010,14 @@ class ArticleController
 
     //Очистка индексов слов
     public static function stopword($id){
-        $db = Db::getConnection();
+
         $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
-        $word = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $word = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
         $words=explode(',',$word);
         $words=ArticleController::miniword($words);
         foreach ($words as $word){
             $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$word."'";
-            $promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $promo_id=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             $promo_ids=explode(',', $promo_id);
             $key=array_search($id, $promo_ids);
             if (false !== $key)
@@ -1038,7 +1028,7 @@ class ArticleController
             }else{
                 $sql = "UPDATE `words_index` SET `promo_ids`='" . $promo_id . "' WHERE `word`='" . $word . "'";
             }
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
         }
         return true;
     }
@@ -1046,12 +1036,12 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop_all(){
         {
-            $db = Db::getConnection();
+
 
             ArticleController::stopword($_GET['id']);
 
             $sql ="UPDATE `promo` SET `active`='0' WHERE `main_promo_id`= '".$_GET['id']."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
             return true;
         }
     }
@@ -1060,19 +1050,19 @@ class ArticleController
     //Активация показа статей
     public static function actionStart_all(){
         {
-            $db = Db::getConnection();
+
             //Проверка на анонсы
             $sql ="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id` = '".$_GET['id']."';";
-            $anons = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $anons = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             if ($anons=="") {echo 'anon'; exit;}
 
             ArticleController::startword($_GET['id']);
 
             $sql ="UPDATE `promo` SET `active`='1' WHERE `main_promo_id`= '".$_GET['id']."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
 
             $sql ="SELECT COUNT(*) FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
-            $count=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $count=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             if ($count!=1){
                 echo $count;
@@ -1087,27 +1077,27 @@ class ArticleController
     //Активация показа статей
     public static function actionStart(){
         {
-            $db = Db::getConnection();
+
 
             $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
 
             $sql ="SELECT `main_promo_id` FROM `promo` WHERE `id`= '".$id."';";
-            $main_promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $main_promo_id=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             //Проверка на анонсы
             $sql ="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id` = '".$main_promo_id."';";
-            $anons = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $anons = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             if ($anons=="") {echo 'anon'; exit;}
 
             $sql ="SELECT COUNT(*)  FROM `promo` WHERE `main_promo_id`= '".$main_promo_id."' AND `active`='1';";
-            $count=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $count=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             if (!$count) {
                 ArticleController::startword($main_promo_id);
             }
 
             $sql ="UPDATE `promo` SET `active`='1' WHERE `id`= '".$id."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
             echo 'true';
             return true;
         }
@@ -1116,18 +1106,18 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop(){
         {
-            $db = Db::getConnection();
+
 
             $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
 
             $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$id."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
 
             $sql ="SELECT `main_promo_id` FROM `promo` WHERE `id`= '".$id."';";
-            $main_promo_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $main_promo_id=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             $sql ="SELECT COUNT(*)  FROM `promo` WHERE `main_promo_id`= '".$main_promo_id."' AND `active`='1';";
-            $count=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $count=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             if (!$count){
                 ArticleController::stopword($main_promo_id);
@@ -1162,14 +1152,14 @@ class ArticleController
     //Удаление промо статьи
     public static function actionDel(){
         {
-            $db = Db::getConnection();
+
             ArticleController::actionStop();
 
             //Написать функцию очистки от лишних анонсов
             $sql ="DELETE FROM `promo` WHERE `id` = '".$_GET['id']."';";
             $sql.="DELETE FROM `anons_index` WHERE `anons_index`.`promo_id` = '".$_GET['id']."'";
 
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
             ArticleController::actionIndex();
             return true;
         }
@@ -1178,13 +1168,13 @@ class ArticleController
     //Копирование промо статьи на основе текущей
     public static function actionClone(){
         {
-          $db = Db::getConnection();
+
             $sql ="SELECT * FROM `promo` WHERE `id` = '".$_GET['id']."';";
-            $promo=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $promo=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
             $sql ="INSERT INTO `promo` SET `title`='".$promo['title']."', `text`='".$promo['text']."', `main_promo_id`=".$promo['main_promo_id'].", `data_add`=CURDATE();";
-            $db->query($sql);
-            $id=$db->lastInsertId();
+            $GLOBALS['db']->query($sql);
+            $id=$GLOBALS['db']->lastInsertId();
 
             echo $id;
             return true;

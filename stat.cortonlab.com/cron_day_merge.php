@@ -1,11 +1,11 @@
 <?php
-$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
+require_once('/var/www/www-root/data/db.php');
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
 
 //Удаляем старые просмотры
 $sql="DELETE FROM `stat_promo_prosmotr` WHERE `date`<='".date('Y-m-d', strtotime('-7 day'))."'";
-$dbstat->query($sql);
+$GLOBALS['dbstat']->query($sql);
 
 // Сжимать файл corton.js
 $data = implode("", file("/var/www/www-root/data/www/api.cortonlab.com/js/corton.js"));
@@ -25,7 +25,7 @@ for ($i = 1; $i <= 4; $i++) {
         $ch=$redis->get($key);
         preg_match('/(\d{1,2}):(\d{1,5})/', $key, $matches);
         $sql="REPLACE INTO `stat_anons_day_show` SET `date`='".$y2."',`anons_id`='".$matches[2]."', `ch`='".$ch."'";
-        $dbstat->query($sql);
+        $GLOBALS['dbstat']->query($sql);
         $redis->delete($key);
     };
 };
@@ -40,9 +40,9 @@ for ($i = 1; $i <= 4; $i++) {
         preg_match('/^\d{1,2}:(\d{1,5}):([rse])$/', $key, $matches);
 
         $sql = "UPDATE `balans_ploshadki` SET ".$matches[2]."_show_anons='".$ch."'  WHERE `date`='".$y2."' AND `ploshadka_id`='".$matches[1]."'";
-        if (!$dbstat->exec($sql)){
+        if (!$GLOBALS['dbstat']->exec($sql)){
             $sql = "INSERT INTO `balans_ploshadki` SET ".$matches[2]."_show_anons='".$ch."'  WHERE `date`='".$y2."' AND `ploshadka_id`='".$matches[1]."'";
-            $dbstat->query($sql);
+            $GLOBALS['dbstat']->query($sql);
         }
         $redis->delete($key);
     };

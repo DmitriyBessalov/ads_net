@@ -6,7 +6,7 @@ class NotificationsController
     {
         $title='Системные уведомления';
         include PANELDIR.'/views/layouts/header.php';
-        $db = Db::getConnection();
+
         $str='1';
         if ((!isset($_GET['status'])) xor ($_GET['status'] != 'all')) {
               if ($_GET['status']) {
@@ -17,7 +17,7 @@ class NotificationsController
         }
 
         $sql="SELECT * FROM `notifications` WHERE ".$str." ORDER BY `status`, `id`";
-        $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 		echo '
 		  <div class="form-block w-form">
           <div class="w-form-done"></div>
@@ -42,7 +42,7 @@ class NotificationsController
             foreach ($result as $i) {
                 $i['date']=date('d.m.Y',strtotime($i['date']));
                 $sql="SELECT p.`domen`,u.`email` FROM `ploshadki`p RIGHT OUTER JOIN `users` u ON p.`user_id`=u.`id` WHERE  p.`id`='".$i['platform_id']."'";
-                $i2 = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $i2 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($i['status']){
                     $i['status']='Обработано';
                 }else{
@@ -91,13 +91,11 @@ class NotificationsController
 
         $date=date('Y-m-d');
 
-        $db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
-
         $sql= "SELECT `domen` FROM `ploshadki` WHERE `id`='".$platform_id."'";
-        $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
         $sql= "INSERT INTO `notifications`( `platform_id`, `opisanie`,`date`) VALUES ('".$platform_id."', '".$opisanie."', '".$date."')";
-        $db->query($sql);
+        $GLOBALS['db']->query($sql);
 
         mail('support@cortonlab.com', 'Уведомление по '.$domen, $opisanie, "Content-Type: text/html; charset=UTF-8\r\n");
         return true;
@@ -105,18 +103,18 @@ class NotificationsController
 
     public static function actionObrabotano()
     {
-        $db = Db::getConnection();
+
         $sql="UPDATE `notifications` SET `status`='1' WHERE `id` = '".$_GET['id']."';";
-        $db->query($sql);
+        $GLOBALS['db']->query($sql);
         NotificationsController::actionIndex();
         return true;
     }
 
     public static function actionDel()
     {
-        $db = Db::getConnection();
+
         $sql="DELETE FROM `notifications` WHERE `id` = '".$_GET['id']."';";
-        $db->query($sql);
+        $GLOBALS['db']->query($sql);
         NotificationsController::actionIndex();
         return true;
     }

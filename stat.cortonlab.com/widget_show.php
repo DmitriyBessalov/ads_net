@@ -11,9 +11,9 @@ foreach ($arr as $value) {
 
 $domen=parse_url ( $_SERVER['HTTP_ORIGIN'], PHP_URL_HOST );
 
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
+require_once('/var/www/www-root/data/db.php');
 $sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
-$ploshadka_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+$ploshadka_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 $redis->select(3);
 foreach ($arr as $value) {

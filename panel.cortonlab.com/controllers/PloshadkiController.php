@@ -12,9 +12,6 @@
                 $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
                 $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
-                $db = Db::getConnection();
-                $dbstat = Db::getstatConnection();
-
                 $str="AND";
                 if ((isset($_GET['type'])) AND ($_GET['type']!='all')){
                     $str.=" p.`type`='".$_GET['type']."' AND";
@@ -32,7 +29,7 @@
 
                 $sql="SELECT p.`id`, p.`domen`, p.`type`, p.`otchiclen`, u.`email` as `user_email`, p.`date_add`, p.`status`, p.`otchiclen`, p.`recomend_aktiv`, p.`natpre_aktiv`, p.`natpro_aktiv`, p.`slider_aktiv`, u.`manager` FROM `ploshadki` p RIGHT OUTER JOIN `users` u ON p.`user_id` = u.`id` WHERE p.`id` != 0 ".$str." ORDER BY p.`domen`";
 
-                $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 echo '
 		<div class="form-block w-form">
 		<div class="form-block w-form">
@@ -70,16 +67,16 @@
 
                 foreach ($result as $i) {
                     $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as 'dohod', SUM(`r`)+SUM(`e`)+SUM(`s`) as 'prosmotr',SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`)as 'click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'  AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-                    $platform = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $platform = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
                     if (is_null($platform['prosmotr'])){$platform['prosmotr']=$platform['click']=$platform['dohod']=0;}
                     $protsent_prochteniy = round(100 / $platform['click'] * $platform['prosmotr'], 2);
                     if ((is_infinite($protsent_prochteniy)) OR (is_nan($protsent_prochteniy))){$protsent_prochteniy='0.00';}
 
                     $sql="SELECT `email` FROM `users` WHERE `id` ='".$i['manager']."'";
-                    $i['manager']=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $i['manager']=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
                     $sql="SELECT `date`, SUM(`r`) + SUM(`e`) + SUM(`s`) AS 'prosmotr' FROM `balans_ploshadki` WHERE `ploshadka_id` = '".$i['id']."' AND `date`>=(CURDATE() - 6) GROUP BY `date`";
-                    $gragik_arr=$dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                    $gragik_arr=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
                     for ($k = 6; $k >= 0; $k--) {
                         $date=date('Y-m-d', strtotime('-'.$k.' days'));
@@ -283,19 +280,18 @@ var myLineChart = new Chart(ctx, {
             //Обновляет площадку
             public static function actionUpdate()
             {
-                $db = Db::getConnection();
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
                 if (addslashes($_REQUEST['id'])==""){
                     $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_id`='".$_POST['user_id']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
-                    $db->query($sql);
-                    $id=$db->lastInsertId();
+                    $GLOBALS['db']->query($sql);
+                    $id=$GLOBALS['db']->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
                     header('Location: /platforms-edit?id='.$id);exit;
                 } else {
                     //Обновление домена площадки
                     $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".$_POST['id'];
-                    $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                     if ($domen!=$_POST['domen']) {
                         $domen = str_replace(".", "_", $domen);
                         $domen2 = str_replace(".", "_", $_POST['domen']);
@@ -327,7 +323,7 @@ var myLineChart = new Chart(ctx, {
                         `CPG`='".$_POST['CPG']."'
                     WHERE `id`='".$_POST['id']."';";
 
-                    $db->query($sql);
+                    $GLOBALS['db']->query($sql);
                     WidgetcssController::UpdateCSSfile($_POST['id']);
                     header('Location: /platforms');
                 }
@@ -336,10 +332,9 @@ var myLineChart = new Chart(ctx, {
 
             public static function form()
             {
-                $db=Db::getConnection();
                 if (addslashes($_REQUEST['id'])!='') {
                     $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
-                    $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
                 };
@@ -358,7 +353,7 @@ var myLineChart = new Chart(ctx, {
                 }else{
                     $sql="SELECT `id`,`email` FROM `users` WHERE (`aktiv`='1' AND `role`='platform') ORDER BY `email` ASC";
                 }
-                $user = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+                $user = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
                 if (($_GET['id']==0)and($_SERVER['REQUEST_URI']!='/platforms-add')) $disabled='disabled';
                 echo '
         <div class="section-2">
@@ -562,22 +557,22 @@ var myLineChart = new Chart(ctx, {
             //Редактирование  площадки
             public static function actionEdit()
             {
-                $db = Db::getConnection();
+
                 $title='Редактирование площадки';
                 include PANELDIR.'/views/layouts/header.php';
 
                 //Защита от подмены менеджера
                 if ($GLOBALS['role']=='manager') {
                     $sql = "SELECT u.`manager` FROM ploshadki p RIGHT OUTER JOIN users u ON p.`user_id` = u.`id`  WHERE p.`id`='" . addslashes($_REQUEST['id']) . "';";
-                    $manager = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $manager = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                     if ($manager != $GLOBALS['user']) {
                         die('Доступ запрещён');
                     };
                 }
 
                 PloshadkiController::form();
-                $sql="SELECT * FROM `style_promo` WHERE `id`='".addslashes($_REQUEST['id'])."';";$result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                if ($result==false){$sql="SELECT * FROM `style_promo` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
+                $sql="SELECT * FROM `style_promo` WHERE `id`='".addslashes($_REQUEST['id'])."';";$result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                if ($result==false){$sql="SELECT * FROM `style_promo` WHERE `id`='0';"; $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);};
 
                 echo '
 <div class="modal promo">
@@ -1318,8 +1313,8 @@ var myLineChart = new Chart(ctx, {
         </div>
     </div>
 </div>';
-                $sql="SELECT * FROM `style_recomend` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                if ($result==false){$sql="SELECT * FROM `style_recomend` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
+                $sql="SELECT * FROM `style_recomend` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                if ($result==false){$sql="SELECT * FROM `style_recomend` WHERE `id`='0';"; $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
 <div class="modal recomendation">
     <div class="div-block-78 w-clearfix">
@@ -1689,7 +1684,7 @@ var myLineChart = new Chart(ctx, {
     </div>
 </div>';
                 $sql="SELECT `code` FROM `zag_recomend` WHERE `id`='".addslashes($_REQUEST['id'])."';";
-                $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $result = str_replace(array("<", ">"), $output = array("&lt;", "&gt;"), $result);
                 echo '
 <div class="modal zagrecom">
@@ -1706,8 +1701,8 @@ var myLineChart = new Chart(ctx, {
         </div>
     </div>
 </div>';
-                $sql="SELECT * FROM `style_natpre` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                if ($result==false){$sql="SELECT * FROM `style_natpre` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
+                $sql="SELECT * FROM `style_natpre` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                if ($result==false){$sql="SELECT * FROM `style_natpre` WHERE `id`='0';"; $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
 <div class="modal nativepreview">
     <div class="div-block-78 w-clearfix">
@@ -2128,7 +2123,7 @@ var myLineChart = new Chart(ctx, {
     </div>
 </div>';
                 $sql="SELECT `code` FROM `zag_natpre` WHERE `id`='".addslashes($_REQUEST['id'])."';";
-                $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $result = str_replace(array("<", ">"), $output = array("&lt;", "&gt;"), $result);
                 echo '
 <div class="modal zagnativepreview">
@@ -2145,8 +2140,8 @@ var myLineChart = new Chart(ctx, {
         </div>
     </div>
 </div>';
-                $sql="SELECT * FROM `style_natpro` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                if ($result==false){$sql="SELECT * FROM `style_natpro` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
+                $sql="SELECT * FROM `style_natpro` WHERE `id`='".addslashes($_REQUEST['id'])."';";   $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                if ($result==false){$sql="SELECT * FROM `style_natpro` WHERE `id`='0';"; $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
 <div class="modal nativepro">
     <div class="div-block-78 w-clearfix">
@@ -2221,7 +2216,7 @@ var myLineChart = new Chart(ctx, {
     </div>
 </div>';
                 $sql="SELECT `code` FROM `zag_natpro` WHERE `id`='".addslashes($_REQUEST['id'])."';";
-                $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $result = str_replace(array("<", ">"), $output = array("&lt;", "&gt;"), $result);
                 echo '
 <div class="modal zag-nativepro">
@@ -2238,8 +2233,8 @@ var myLineChart = new Chart(ctx, {
     </div>
 </div>';
                 $sql="SELECT * FROM `style_slider` WHERE `id`='".addslashes($_REQUEST['id'])."';";
-                $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
-                if ($result==false){$sql="SELECT * FROM `style_slider` WHERE `id`='0';"; $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);};
+                $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                if ($result==false){$sql="SELECT * FROM `style_slider` WHERE `id`='0';"; $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);};
                 echo '
 <div class="modal slider">
     <div class="div-block-78 w-clearfix">
@@ -2465,19 +2460,19 @@ var myLineChart = new Chart(ctx, {
         //Меняет коэфициент отчислений для площадки
         public static function actionOtchicleniay()
         {
-            $db = Db::getConnection();
-            $dbstat = Db::getstatConnection();
+
+
             $_GET['id']= substr($_GET['id'], 4);
             $sql="UPDATE `ploshadki` SET `otchiclen`='".$_GET['otchiclen']."' WHERE `id` = '".$_GET['id']."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
             return true;
         }
 
         public static function actionSpisanie()
         {
-            $db = Db::getConnection();
+
             $sql="SELECT `balans`, `spisanie`,`date` FROM `balans_user` WHERE `user_id`='".$_GET['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$_GET['id']."')";
-            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             if (($result) ){
                 if (floatval($result['balans'])>=floatval($_GET['sum'])+floatval($result['spisanie'])){
                     if ($result['date']==date('Y-m-d')){
@@ -2486,7 +2481,7 @@ var myLineChart = new Chart(ctx, {
                         $balans=floatval($result['balans'])-floatval($_GET['sum']);
                         $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` = '".$balans."', `spisanie` = '".$_GET['sum']."';";
                     }
-                    $db->query($sql);
+                    $GLOBALS['db']->query($sql);
                     echo "Операция выполнена, списано с баланса";
                     return true;
                 }
@@ -2505,13 +2500,13 @@ var myLineChart = new Chart(ctx, {
             $title='Статистика площадки';
             include PANELDIR.'/views/layouts/header.php';
 
-            $db = Db::getConnection();
-            $dbstat = Db::getstatConnection();
+
+
 
             //Защита от подмены менеджера
             if ($GLOBALS['role']=='manager') {
                 $sql = "SELECT u.`manager` FROM ploshadki p RIGHT OUTER JOIN users u ON p.`user_id` = u.`id`  WHERE p.`id`='" . addslashes($_REQUEST['id']) . "';";
-                $manager = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $manager = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 if ($manager != $GLOBALS['user']) {
                     die('Доступ запрещён');
                 };
@@ -2541,10 +2536,10 @@ var myLineChart = new Chart(ctx, {
             if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
 
                 $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv`, `domen` FROM `ploshadki` WHERE `id`='".$_GET['id']."'";
-                $aktiv = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $aktiv = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load', SUM(`r_promo_click`) as 'r_promo_click', SUM(`e_promo_click`) as 'e_promo_click', SUM(`s_promo_click`) as 's_promo_click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-                $balansperiod = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $balansperiod = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if (is_null($balansperiod['r_balans'])){
                     foreach ($balansperiod as $key => $value) {
                         $balansperiod[$key]=0;
@@ -2714,9 +2709,9 @@ var myLineChart = new Chart(ctx, {
         //Удаляет площадку
         public static function actionDel()
         {
-            $db = Db::getConnection();
+
             $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".$_GET['id'];
-            $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             $domen = str_replace(".", "_", $domen);
             unlink(PANELDIR.'/style/'.$domen.'.css.gz');
             $sql="DELETE FROM `ploshadki` WHERE `ploshadki`.`id` = '".$_GET['id']."';";
@@ -2725,7 +2720,7 @@ var myLineChart = new Chart(ctx, {
             $sql.="DELETE FROM `style_promo` WHERE `id` = '".$_GET['id']."';";
             $sql.="DELETE FROM `style_recomend` WHERE `id` = '".$_GET['id']."';";
             $sql.="DELETE FROM `style_slider` WHERE `id` = '".$_GET['id']."';";
-            $db->query($sql);
+            $GLOBALS['db']->query($sql);
             PloshadkiController::actionIndex();
             return true;
         }

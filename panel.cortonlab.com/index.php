@@ -22,6 +22,7 @@ array_walk_recursive($_COOKIE,'ecran');
 define('PANELDIR', '/var/www/www-root/data/www/panel.cortonlab.com');
 define('APIDIR', '/var/www/www-root/data/www/api.cortonlab.com');
 
+require_once('/var/www/www-root/data/db.php');
 require_once(PANELDIR.'/components/Autoload.php');
 
 // Вызов Router

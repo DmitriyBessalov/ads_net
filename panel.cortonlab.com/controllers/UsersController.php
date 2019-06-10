@@ -5,21 +5,21 @@ class UsersController
 	public static function actionIndex(){
         $title='Управление пользователями';
         include PANELDIR.'/views/layouts/header.php';
-        $db = Db::getConnection();
+
         if (isset($_POST['email'])){
             if ($_POST['aktiv']=="on"){$_POST['aktiv']=1;}else{$_POST['aktiv']=0;};
             if ($_POST['id']!=""){
                 if ($GLOBALS['role']=='manager'){die('Доступ запрещен');}
                 $id=$_POST['id'];
                 $sql="UPDATE `users` SET `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`aktiv`='".$_POST['aktiv']."' WHERE `id`='".$id."';";
-                $db->query($sql);
+                $GLOBALS['db']->query($sql);
             }else{
                 $data=date('Y-m-d');
                 $phpsession= substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 26);
                 $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`manager`='".$GLOBALS['user']."',`phpsession`='".$phpsession."',`aktiv`='".$_POST['aktiv']."';";
-                $db->query($sql);
+                $GLOBALS['db']->query($sql);
                 if ($_POST['role']=='advertiser'){
-                    $id=$db->lastInsertId();
+                    $id=$GLOBALS['db']->lastInsertId();
                     $dirName=PANELDIR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
                     mkdir($dirName);
                     mkdir($dirName.DIRECTORY_SEPARATOR.'a');
@@ -44,7 +44,7 @@ class UsersController
 
         $sql="SELECT u.id, u.email, u.fio, u.role, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id".$str." GROUP BY u.email";
 
-        $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 		echo '
         <script src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
@@ -85,7 +85,7 @@ class UsersController
                  };
 
                  $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$i['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$i['id']."')";
-                 $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                 $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                  if (!$balans){$balans='0.00';}
                  echo "
             <tr>
@@ -169,9 +169,9 @@ class UsersController
 
     public static function getUser()
     {
-        $db = Db::getConnection();
+
         $sql="SELECT `id`,`role`,`email`,`aktiv` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
-        $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         if ($result['aktiv']) {
             $GLOBALS['user'] = $result['id'];
             $GLOBALS['role'] = $result['role'];
@@ -186,9 +186,9 @@ class UsersController
     //Возвращает роль пользователя
     public static function checkRole()
     {
-        $db = Db::getConnection();
+
         $sql="SELECT `role`,`aktiv` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
-        $result=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         if ($result['aktiv']) return $result['role'];
         // Иначе выдаём форму авторизации
         header('Location: https://cortonlab.com/');
@@ -198,25 +198,25 @@ class UsersController
     //Возвращает id пользователя
     public static function getUserId()
     {
-        $db = Db::getConnection();
+
         $sql="SELECT `id` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
-        return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        return $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
     //Возвращает role пользователя
     public static function getUserRole()
     {
-        $db = Db::getConnection();
+
         $sql="SELECT `role` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
 
-        return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        return $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
     public static function getUserEmail()
     {
-        $db = Db::getConnection();
+
         $sql="SELECT `email` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
-        return $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        return $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
     //Добавление (создание) пользователей
@@ -224,9 +224,9 @@ class UsersController
 	    if (isset($_GET['id'])){
             if ($GLOBALS['role']=='manager'){die('Доступ запрещен');}
             $title='Редактирование пользователя';
-            $db = Db::getConnection();
+
             $sql="SELECT `email`,`fio`,`role`,`aktiv` FROM `users` WHERE `id`='".$_GET['id']."' LIMIT 1;";
-            $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         }else{
             $title='Добавление пользователя';
         };
@@ -280,15 +280,15 @@ class UsersController
     public static function actionLogin(){
         $session=substr(sha1(rand()), 0, 26);
         setcookie ( 'PHPSESSID', $session, time () + 10000000 , '/');
-        $db = Db::getConnection();
+
         $email=$_POST['login'];
         $password=md5($_POST['password']);
         $ip=$_SERVER['REMOTE_ADDR'];
         $sql="SELECT `password_md5`, `role` FROM `users` WHERE (`email`='".$email."') AND (`aktiv`='1') LIMIT 1;";
-        $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $user = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         if ($user['password_md5'] === $password) {
              $sql = "UPDATE `users` SET `phpsession` = '" . $session . "',`last_ip`='" . $ip . "' WHERE `email`='" . $email . "';";
-             $db->query($sql);
+             $GLOBALS['db']->query($sql);
              UsersController::panelStartPage($user['role']);
         }else{
              SiteController::actionLoginform();
@@ -298,9 +298,9 @@ class UsersController
 
     //Удаление пользователя
     public static function actionDel(){
-        $db = Db::getConnection();
+
         $sql="DELETE FROM `users` WHERE `users`.`id` = ".$_GET['id'];
-        $db->query($sql);
+        $GLOBALS['db']->query($sql);
 
         /* Удаление каталога c содержимым только под linux
            $dirName=PANELDIR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
@@ -314,9 +314,9 @@ class UsersController
 
     //Вход в пользователя из под админа
     public static function actionEnter(){
-        $db = Db::getConnection();
+
         $sql="SELECT `phpsession`,`role` FROM `users` WHERE `users`.`id` = ".$_GET['id'];
-        $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $user = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         setcookie ( 'PHPSESSID', $user['phpsession'], time () + 10000000, '/');
         UsersController::panelStartPage($user['role']);
         exit;

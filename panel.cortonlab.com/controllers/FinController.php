@@ -38,10 +38,10 @@ class FinController
                 </tr>
             </thead>';
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
-            $db = Db::getConnection();
-            $dbstat = Db::getstatConnection();
+
+
             $sql = "SELECT p.`id`, p.`domen`, u.`email`, p.`user_id` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
-            $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $balansall = 0;
             foreach ($result as $i) {
                 $arrplatform[] = $i['id'];
@@ -53,7 +53,7 @@ class FinController
             $strplatform = implode("','", $arrplatform);
 
             $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."')";
-            $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             if (is_null($balans))$balans=0;
 
@@ -62,20 +62,20 @@ class FinController
                     if (in_array($_GET['platform'], $arrplatform)) {
                         $strplatform = $_GET['platform'];
                         $sql = "SELECT `domen` FROM `ploshadki` WHERE id='" . $_GET['platform'] . "'";
-                        $domen = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                        $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                     } else exit;
                 }
             }
 
             $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv` FROM `ploshadki` WHERE `id` in ('" . $strplatform . "')";
-            $aktiv = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $aktiv = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
             if (is_null($strplatform)){
                 $aktiv['recomend_aktiv']=$aktiv['natpre_aktiv']=$aktiv['slider_aktiv']=false;
             }
 
             $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load' FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-            $balansperiod = $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $balansperiod = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
             if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                 $today = true;
@@ -417,19 +417,19 @@ class FinController
         if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
         $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
-        $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
+
+
         $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod, SUM(`r_show_anons`)+SUM(`e_show_anons`)+SUM(`s_show_anons`) as show_anons, SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`) as promo_load , SUM(`r`)+SUM(`e`)+SUM(`s`) as pay FROM `balans_ploshadki` WHERE  `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-        $result= $dbstat->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $result= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
         $sql="SELECT `date`, SUM(`r_balans`) + SUM(`e_balans`) + SUM(`s_balans`) AS dohod, SUM(`r_show_anons`) + SUM(`e_show_anons`) + SUM(`s_show_anons`) AS show_anons, SUM(`r_promo_load`) + SUM(`e_promo_load`) + SUM(`s_promo_load`) AS promo_load, SUM(`r`) + SUM(`e`) + SUM(`s`) AS pay FROM `balans_ploshadki` GROUP BY `date` ORDER BY `date` DESC LIMIT 7";
-        $grafiki= $dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $grafiki= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         $redis = new Redis();
         $redis->pconnect('185.75.90.54', 6379);
         $redis->select(3);
         $sql="SELECT `id` FROM `ploshadki` WHERE `status`=1";
-        $platforms= $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        $platforms= $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_COLUMN);
         $show_anons_today=0;
         foreach ($platforms as $i){
             $ch=$redis->get(date('d').':'.$i.':r');
@@ -519,11 +519,11 @@ class FinController
 		   <div>';
 
         $sql="SELECT `ploshadka_id`, SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod FROM `balans_ploshadki` WHERE `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "' GROUP BY `ploshadka_id` ORDER BY dohod DESC LIMIT 5";
-        $platforms= $dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $platforms= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         $ch=0;
         foreach ($platforms as $i){
             $sql="SELECT `domen` FROM `ploshadki` WHERE `id`='".$i['ploshadka_id']."'";
-            $topplatforms=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $topplatforms=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             $ch++;
             echo '<span class="topwords"><span style="color:#768093;">'.$ch.'. </span> '.$topplatforms.'</span><br>';
         };
@@ -767,9 +767,9 @@ setTimeout(function(){
 
     public static function actionRequestcash()
     {
-        $db = Db::getConnection();
+
         $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
-        $balans=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
         if (is_null($balans))$balans=0;
 
         if (($balans<$_GET['summa']) OR ($balans<=5000)){
@@ -780,7 +780,7 @@ setTimeout(function(){
 
         $date=date('Y-m-d', strtotime("-1 month"));
         $sql="SELECT SUM(`spisanie`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`>'".$date."'";
-        $result=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
         if($result!='0.00'){
             echo 'date';
@@ -788,7 +788,7 @@ setTimeout(function(){
         }
 
         $sql="SELECT `id` FROM `ploshadki` WHERE `user_id`='".$GLOBALS['user']."' LIMIT 1";
-        $platform_id=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $platform_id=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
         NotificationsController::addNotification($platform_id, 'Запрошен вывод средств в сумме '.$_GET['summa'].'руб.');
         echo 'true';

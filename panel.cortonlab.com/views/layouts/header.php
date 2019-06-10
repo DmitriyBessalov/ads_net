@@ -37,9 +37,9 @@
             <a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" class="image-6"><div class="text-block-82">Клики</div></a>
 			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" class="image-6"><div class="text-block-82">Уведомления</div>
                 <?
-                $db = Db::getConnection();
+
                 $sql = "SELECT COUNT(*) FROM `notifications` WHERE `status`='0'";
-                $notification = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $notification = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 if ($notification) echo '<div class="circlnotice" >'.$notification.'</div></a>';
                 ?>
             <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>

@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_URI']=='/robots.txt'){echo "User-agent: *\nDisallow: /";exit;}
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
+require_once('/var/www/www-root/data/db.php');
 $_GET = array_map('addslashes', $_GET);
 $_COOKIE = array_map('addslashes', $_COOKIE);
 
@@ -10,7 +10,7 @@ if (isset($_GET['site'])){
     setcookie("host", $parsed['host'],time()+72000,'/', ".cortonlab.com");
     setcookie("scheme", $parsed['scheme'],time()+72000,'/' ,'.cortonlab.com');
     $sql="SELECT `CTR`,`CPM`,`CPG`,`recomend_aktiv`,`natpre_aktiv` FROM `ploshadki` WHERE `domen`='".$parsed['host']."'";
-    $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+    $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
     echo '
 <html>
     <head>
@@ -109,7 +109,7 @@ if (isset($_GET['site'])){
     }
 
     $sql="SELECT `promo_page` FROM `ploshadki` WHERE `domen`='".$_COOKIE['host']."'";
-    $result = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+    $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
     if ($_SERVER['REDIRECT_URL']=='/promo'){
         $URI=$_COOKIE['scheme'].'://'.$result;

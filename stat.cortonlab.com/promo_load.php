@@ -14,11 +14,10 @@ $redis->close();
 
 $domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
-$dbstat = new PDO("mysql:host=185.75.90.54;dbname=corton-stat", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
+require_once('/var/www/www-root/data/db.php');
 
 $sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
-$ploshadka_id = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+$ploshadka_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 $sql= "INSERT INTO 
     `stat_promo_prosmotr`
@@ -32,16 +31,16 @@ SET
     `tizer` = '".$_GET['t']."',
     `user-agent`= '".$_SERVER['HTTP_USER_AGENT']."',
     `timestamp` = '".date('H:i:s')."'";
-$dbstat->query($sql);
+$GLOBALS['dbstat']->query($sql);
 
 $sql = "UPDATE `stat_promo_day_count` SET `perehod` = `perehod` + 1 WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."'";
-if (!$dbstat->exec($sql)){$dbstat->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `perehod` = 1");
+if (!$GLOBALS['dbstat']->exec($sql)){$GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `perehod` = 1");
 }
 
 $sql = "UPDATE `balans_ploshadki` SET `".$_GET['t']."_promo_load`=`".$_GET['t']."_promo_load`+1  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
-if (!$dbstat->exec($sql)){
+if (!$GLOBALS['dbstat']->exec($sql)){
     $sql = "INSERT INTO `balans_ploshadki` SET `".$_GET['t']."_promo_load`=1, `date`=CURDATE(), `ploshadka_id`='".$ploshadka_id."'";
-    $dbstat->query($sql);
+    $GLOBALS['dbstat']->query($sql);
 }
 
 /* Структура Redis

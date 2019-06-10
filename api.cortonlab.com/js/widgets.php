@@ -2,12 +2,12 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
 $_GET = array_map('addslashes', $_GET);
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
+require_once('/var/www/www-root/data/db.php');
 $y=0;
 $words=str_replace(',', '\',\'', $_GET['words']);
 //Найдем ID статей
 $sql="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."')";
-$result = $db->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+$result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
 $promo_ids = array();
 foreach ($result as $i) {
     $promo_ids=array_merge($promo_ids, explode(',',$i));
@@ -17,7 +17,7 @@ $promo_ids=array_unique($promo_ids);
 //Берем ID Анонсов
 $promo=implode("','" ,$promo_ids);
 $sql="SELECT * FROM `anons_index` WHERE `promo_id` IN ('".$promo."')";
-$result2 = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+$result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 $anons_ids = array();
 
 //Премешивание анонсов внутри статьи
@@ -38,7 +38,7 @@ $count=count($anons_ids);
 preg_match('/\/\/(.*?)\//', $_SERVER['HTTP_REFERER'], $referer);
 
 $sql="SELECT `id`,`promo_page`,`recomend_zag_aktiv`,`natpre_zag_aktiv` FROM `ploshadki` WHERE `domen`='".$referer[1]."'";
-$result1 = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+$result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $arr['platform_id'] = $result1['id'];
 
 //Алгорим расчета вероятности выдачи анонса
@@ -115,7 +115,7 @@ if ($arr['anons_count']!=0) {
 
     $ann = implode("','", $an);
     $sql = "SELECT * FROM `anons` WHERE `id` IN ('" . $ann . "')";
-    $result = $db->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+    $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
     $ch = 0;
 
     shuffle($result);

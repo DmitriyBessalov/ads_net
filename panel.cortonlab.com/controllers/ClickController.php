@@ -1,15 +1,13 @@
 <?php
-
 class ClickController
 {
     public static function actionIndex()
     {
         $title='Клики на промо страницу';
         include PANELDIR.'/views/layouts/header.php';
-        $db = Db::getConnection();
-        $dbstat = Db::getstatConnection();
+
         $sql = "SELECT `domen` FROM `ploshadki` WHERE (`status`='1')AND(`id`!='0') ORDER BY `domen` ASC";
-        $domens = $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        $domens = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_COLUMN);
 		echo '
 		  <div class="form-block w-form">
           <div class="w-form-done"></div>
@@ -38,12 +36,12 @@ class ClickController
             if (!empty($_GET['domen'])) {
                 $data=date('Y-m-d', strtotime($_GET['date']));
                 $sql="SELECT `id` FROM `ploshadki` WHERE `domen`='".$_GET['domen']."'";
-                $ploshadka_id= $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $ploshadka_id= $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 $sql="SELECT `prosmotr_id`,`tizer`,`anon_id`,`url_ref`,`read`,`pay`,`click`,`user-agent`,`timestamp`,`ip` FROM `stat_promo_prosmotr` WHERE `date`='".$data."' AND `ploshadka_id`='".$ploshadka_id."'";
-                $clicks = $dbstat->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                $clicks = $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 foreach($clicks as $value) {
                     $sql = "SELECT n.stavka FROM anons a RIGHT OUTER JOIN anons_index n ON a.promo_id = n.promo_id WHERE a.id='".$value['anon_id']."'";
-                    $stavka = $db->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
                     switch ($value['tizer']) {
                         case 'r':

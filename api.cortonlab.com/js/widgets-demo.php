@@ -2,12 +2,12 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
 $_GET = array_map('addslashes', $_GET);
-$db = new PDO("mysql:host=185.75.90.54;dbname=corton", 'corton', 'W1w5J7e6', array(PDO::ATTR_PERSISTENT => true));
+require_once('/var/www/www-root/data/db.php');
 
 preg_match('/host=(.*?);/', $_GET['host'], $referer);
 preg_match('/scheme=(.*?);/', $_GET['sheme'], $referer2);
 $sql="SELECT `id`,`demo-annons` FROM `ploshadki` WHERE `domen`='".$referer[1]."';";
-$anons = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+$anons = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
 preg_match_all('/\d{1,6}/',$anons['demo-annons'],$matches);
 $annons=implode("','",$matches[0]);
@@ -15,7 +15,7 @@ $annons=implode("','",$matches[0]);
 $arr['anons_count']=(int)$_GET['r']+(int)$_GET['e']+(int)$_GET['s'];
 
 $sql="SELECT * FROM `anons` WHERE `id` IN ('".$annons."') LIMIT ".$arr['anons_count'];
-$result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $i=$ch=0;
 while (true) {

@@ -4,7 +4,7 @@ class WidgetcssController
 {
     //Обновляет файл стилей площадки
     public static function actionUpdate(){
-        $db = Db::getConnection();
+
 
         if (($_POST['type']=="zag_recomend")or($_POST['type']=="zag_natpre")or($_POST['type']=="zag_natpro")){
         }else{;
@@ -15,7 +15,7 @@ class WidgetcssController
                     case 'style_natpre':$sql="UPDATE `ploshadki` SET `natpre_aktiv`='0' WHERE `id`='".$_POST['id']."'";break;
                     case 'style_slider':$sql="UPDATE `ploshadki` SET `slider_aktiv`='0' WHERE `id`='".$_POST['id']."'";
                 }
-                $db->query($sql);
+                $GLOBALS['db']->query($sql);
             }
         }
 
@@ -29,7 +29,7 @@ class WidgetcssController
         };
 
         $sql = substr($sql,0,-1).";";
-        $db->query($sql);
+        $GLOBALS['db']->query($sql);
 
         WidgetcssController::UpdateCSSfile($_POST['id']);
         header('Location: /platforms-edit?id='.$_POST['id']);
@@ -38,16 +38,16 @@ class WidgetcssController
 
     //Собирает файл стилей для площадки
     public static function UpdateCSSfile($id){
-        $db = Db::getConnection();
+
         $sql="SELECT `status`,`type`,`promo_page`,`recomend_aktiv`,`natpre_aktiv`,`natpro_aktiv`,`slider_aktiv` FROM `ploshadki` WHERE `id`='".$id."'";
-        $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
         if ($result['status']){
             $sql="SELECT `forcibly`,`selector`,`selector-title`,`css`,`adblock-css` FROM `style_promo` WHERE `id`='".$id."'";
-            $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             if ($css2==false){
                 $sql="SELECT `forcibly`,`selector`,`selector-title`,`css`,`adblock-css` FROM `style_promo` WHERE `id`='0';";
-                $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             }
             $css='@charset "utf-8"; '.$css2['css'];
             $block = preg_replace("/[\r\n][\r\n]/",",",$css2['adblock-css']);
@@ -57,10 +57,10 @@ class WidgetcssController
 
             if ($result['recomend_aktiv']) {
                 $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`,`widget-text-title`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_recomend` WHERE `id`='".$id."'";
-                $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($css2==false){
                     $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`,`widget-text-title`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_recomend` WHERE `id`='0';";
-                    $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }
                 $css.=$css2['css'];
                 $css.="#corton-recomendation-widget{--mobile:".$css2['mobile'].";--tablet:".$css2['tablet'].";--desktop:".$css2['desktop'].";--titletext:".$css2['widget-text-title'].";--widgetpositionp:".$css2['widget-position-p'].";--widgetparentid:".$css2['widget-parent-id'].";--image_shape:".$css2['image-shape'].";}";
@@ -69,10 +69,10 @@ class WidgetcssController
 
             if ($result['natpre_aktiv']) {
                 $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='".$id."'";
-                $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($css2==false){
                     $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`, `button-text`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_natpre` WHERE `id`='0'";
-                    $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }
                 $css.=$css2['css'];
                 $css.="#corton-nativepreview-widget{--mobile:".$css2['mobile'].";--tablet:".$css2['tablet'].";--desktop:".$css2['desktop'].";--widgetpositionp:".$css2['widget-position-p'].";--widgetparentid:".$css2['widget-parent-id'].";--buttontext:".$css2['button-text'].";--image_shape:".$css2['image-shape'].";}";
@@ -81,10 +81,10 @@ class WidgetcssController
 
             if ($result['slider_aktiv']) {
                 $sql="SELECT `css`, `mobile`, `tablet`, `desktop` FROM `style_slider` WHERE `id`='".$id."'";
-                $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($css2==false){
                     $sql="SELECT `css`, `mobile`, `tablet`, `desktop` FROM `style_slider` WHERE `id`='0'";
-                    $css2=$db->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }
                 $css.=$css2['css'];
                 $css.="#corton-slider-widget{--mobile:".$css2['mobile'].";--tablet:".$css2['tablet'].";--desktop:".$css2['desktop'].";}";
@@ -94,7 +94,7 @@ class WidgetcssController
         }else{$css="";}
 
         $sql="SELECT `domen` FROM `ploshadki` WHERE `id`='".$id."'";
-        $domen=$db->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $domen=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
         $domen = str_replace(".", "_", $domen);
 
         if ($domen!='default style') {
@@ -112,9 +112,9 @@ class WidgetcssController
     }
 
     public static function actionAktiv(){
-        $db = Db::getConnection();
+
         $sql="UPDATE `ploshadki` SET `".$_GET['widget']."_aktiv`='1' WHERE `id`='".$_GET['id']."';";
-        $db->query($sql);
+        $GLOBALS['db']->query($sql);
         WidgetcssController::UpdateCSSfile($_GET['id']);
         return true;
     }
