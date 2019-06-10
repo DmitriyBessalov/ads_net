@@ -5016,7 +5016,9 @@ canvas {
   text-align: center;
   text-decoration: none;
 }
-
+.btnarticle:hover {
+   background-color: #3285e3;
+}
 .btnarticlegr {
   position: relative;
   left: 0px;
