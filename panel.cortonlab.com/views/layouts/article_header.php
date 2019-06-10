@@ -8,8 +8,8 @@ if (!isset($result['main_promo_id'])){
 echo '
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="btncontrolarticle">
-   <a href="/article-edit-content?id='.$result['main_promo_id'].'" class="btnarticlegr">Контент статей</a>
-   <a href="/article-edit-anons?id='.$result['main_promo_id'].'" class="btnarticlegr">Редактировать анонсы</a>
+   <a href="/article-edit-content?id='.$result['main_promo_id'].'" class="btnarticlegr">Статья</a>
+   <a href="/article-edit-anons?id='.$result['main_promo_id'].'" class="btnarticlegr">Анонсы</a>
    <a href="/article-edit-target?id='.$result['main_promo_id'].'" class="btnarticlegr">Таргетинги</a>
    <a href="/article-edit-form?id='.$result['main_promo_id'].'" class="btnarticlegr">Форма заказа</a>
    <a href="/article-stat?id='.$result['main_promo_id'].'" class="btnarticle" style="border-radius: 4px 0 0 4px;">Cтатистика</a>
