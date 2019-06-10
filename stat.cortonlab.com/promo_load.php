@@ -33,8 +33,8 @@ SET
     `timestamp` = '".date('H:i:s')."'";
 $GLOBALS['dbstat']->query($sql);
 
-$sql = "UPDATE `stat_promo_day_count` SET `perehod` = `perehod` + 1 WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."'";
-if (!$GLOBALS['dbstat']->exec($sql)){$GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `perehod` = 1");
+$sql = "UPDATE `stat_promo_day_count` SET `perehod` = `perehod` + 1 WHERE `data`=CURDATE() AND `anons_id`='".$_GET['anons_id']."' AND `promo_variant`='".$_GET['p_id']."'";
+if (!$GLOBALS['dbstat']->exec($sql)){$GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `promo_variant`='".$_GET['p_id']."', `perehod` = 1");
 }
 
 $sql = "UPDATE `balans_ploshadki` SET `".$_GET['t']."_promo_load`=`".$_GET['t']."_promo_load`+1  WHERE `date`=CURDATE() AND `ploshadka_id`='".$ploshadka_id."'";
