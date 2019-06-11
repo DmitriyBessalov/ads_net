@@ -68,18 +68,18 @@ if (isset($_GET['site'])){
 			   <a href="https://cortonlab.com/platforms" target="_blank">
 			      <img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a>
 			</div>
-			<div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="font-weight: 500; color: #116dd6;">Демо для '.$parsed['host'].'</span></div>
-            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CTR'].' %</span>
+			<div style="float: left;margin: 29px; color: #116dd6; font-size: 18px;"><span style="font-weight: 500; color: #116dd6;">Демо для '.$parsed['host'].'</span></div>
+            <div style="float: left;margin: 29px; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CTR: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CTR'].' %</span>
 			    <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средний процент кликабельности</span></div>
 			</div> 
-            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;color: #116dd6;">'.$result['CPM'].' руб.</span>
+            <div style="float: left;margin: 29px; color: #116dd6; font-size: 18px;"><span style="color: 768093;">eCPM: </span><span style="font-weight: 500;color: #116dd6;">'.$result['CPM'].' руб.</span>
 			   <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средний доход на 1000 показов анонсов</span></div>
 			</div>
-            <div style="float: left;margin: 29px; font-family: Roboto; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CPG'].' руб.</span>
+            <div style="float: left;margin: 29px; color: #116dd6; font-size: 18px;"><span style="color: 768093;">CPG: </span><span style="font-weight: 500; color: #116dd6;">'.$result['CPG'].' руб.</span>
 			   <div class="tooltipinfo2" style="font-size: 14px; cursor: default; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Средняя цена за просмотр промо-материала</span></div>
 			</div>';
-    if ($result['natpre_aktiv']){echo '<a id="message_e" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №2</a>';}
-    if ($result['recomend_aktiv']){echo '<a id="message_r" style="font-family: Roboto; cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №1</a>';}
+    if ($result['natpre_aktiv']){echo '<a id="message_e" style="cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №2</a>';}
+    if ($result['recomend_aktiv']){echo '<a id="message_r" style="cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №1</a>';}
     echo '
     </div>
         <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
