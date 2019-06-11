@@ -63,7 +63,7 @@ if (isset($_GET['site'])){
 }
 	</style>
     <body style="overflow:hidden;margin: 0px;">
-        <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9; font-family: Roboto,sans-serif;">
+        <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9; font-family: Roboto sans-serif;">
             <div style="float: left; margin-right: 14px;"><a href="https://cortonlab.com/">
 			   <a href="https://cortonlab.com/platforms" target="_blank">
 			      <img style="margin: 15px;" src="https://panel.cortonlab.com/images/logo-corton.png"></a>
