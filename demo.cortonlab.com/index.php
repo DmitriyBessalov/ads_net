@@ -82,7 +82,7 @@ if (isset($_GET['site'])){
     if ($result['recomend_aktiv']){echo '<a id="message_r" style="cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №1</a>';}
     echo '
     </div>
-        <iframe id="frame" style="width: 100%; min-height: 1000px important; border: none;" src="iframe.php?url='.$_GET['site'].'">
+        <iframe id="frame" style="width: 100%; min-height: 1000px !important; border: none;" src="iframe.php?url='.$_GET['site'].'">
         </iframe>
     </body>
     <script>
