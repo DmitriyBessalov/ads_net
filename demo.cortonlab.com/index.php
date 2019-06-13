@@ -62,7 +62,7 @@ if (isset($_GET['site'])){
   visibility: visible;
 }
 	</style>
-    <body style="overflow:hidden;margin: 0px;">
+    <body style="overflow:hidden;margin: 0px; min-height: 1000px !important;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9; font-family: Roboto, sans-serif;">
             <div style="float: left; margin-right: 14px;"><a href="https://cortonlab.com/">
 			   <a href="https://cortonlab.com/platforms" target="_blank">
@@ -82,7 +82,7 @@ if (isset($_GET['site'])){
     if ($result['recomend_aktiv']){echo '<a id="message_r" style="cursor: pointer; background-color: #116dd6;color: #fff;float: right; margin:20px;padding: 8px 20px; font-size: 14px; border-radius: 4px; text-decoration: none;">Показать пример виджета №1</a>';}
     echo '
     </div>
-        <iframe id="frame" style="width: 100%; min-height: 1000px !important; border: none;" src="iframe.php?url='.$_GET['site'].'">
+        <iframe id="frame" style="width: 100%; border: none;" src="iframe.php?url='.$_GET['site'].'">
         </iframe>
     </body>
     <script>
