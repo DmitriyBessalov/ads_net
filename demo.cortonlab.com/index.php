@@ -61,6 +61,9 @@ if (isset($_GET['site'])){
 .tooltipinfo2:hover .tooltiptext1 {
   visibility: visible;
 }
+iframe {
+	min-height: 1000px !important;
+}
 	</style>
     <body style="overflow:hidden;margin: 0px; min-height: 1000px !important;">
         <div style="height: 80px; overflow: hidden; min-width: 1020px; padding: 0px 30px; border-bottom: 1px solid #E0E1E5; background: #F4F6F9; font-family: Roboto, sans-serif;">
