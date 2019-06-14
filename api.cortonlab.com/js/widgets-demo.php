@@ -2,9 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
 $_GET = array_map('addslashes', $_GET);
-require_once('/var/www/www-root/data/db.php');
-
-preg_match('/host=(.*?);/', $_GET['host'], $referer);
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');preg_match('/host=(.*?);/', $_GET['host'], $referer);
 preg_match('/scheme=(.*?);/', $_GET['sheme'], $referer2);
 $sql="SELECT `id`,`demo-annons` FROM `ploshadki` WHERE `domen`='".$referer[1]."';";
 $anons = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);

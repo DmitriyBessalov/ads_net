@@ -2,8 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
 $_GET = array_map('addslashes', $_GET);
-require_once('/var/www/www-root/data/db.php');
-$y=0;
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$y=0;
 $words=str_replace(',', '\',\'', $_GET['words']);
 //Найдем ID статей
 $sql="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."')";

@@ -1,6 +1,5 @@
 <?php
-require_once('/var/www/www-root/data/db.php');
-$redis = new Redis();
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
 
 //Удаляем старые просмотры

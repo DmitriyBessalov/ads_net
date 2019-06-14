@@ -1,7 +1,6 @@
 <?php
 $_GET = array_map('addslashes', $_GET);
-require_once('/var/www/www-root/data/db.php');
-$data= $GLOBALS['db']->query("SELECT `code` FROM `zag_".$_GET['tizer']."` WHERE `id`='".$_GET['id']."'")->fetch(PDO::FETCH_COLUMN);
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$data= $GLOBALS['db']->query("SELECT `code` FROM `zag_".$_GET['tizer']."` WHERE `id`='".$_GET['id']."'")->fetch(PDO::FETCH_COLUMN);
 echo
 '<!DOCTYPE html>
 <html>

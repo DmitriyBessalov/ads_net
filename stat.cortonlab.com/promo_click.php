@@ -9,9 +9,7 @@ $redis->select(4);
 $block=$redis->get('c:'.$prosmort_id);
 if ($block){$redis->set('c:'.$prosmort_id, 1, 1296000);exit;}else{$redis->set('c:'.$prosmort_id, 1, 1296000);}
 $redis->close();
-require_once('/var/www/www-root/data/db.php');
-
-$sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
 $ploshadka_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 $sql = "UPDATE `stat_promo_prosmotr` SET `click` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";

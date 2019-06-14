@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_URI']=='/robots.txt'){echo "User-agent: *\nDisallow: /";exit;}
-require_once('/var/www/www-root/data/db.php');
-$_GET = array_map('addslashes', $_GET);
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$_GET = array_map('addslashes', $_GET);
 $_COOKIE = array_map('addslashes', $_COOKIE);
 
 

@@ -14,9 +14,7 @@ $redis->close();
 
 $domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
-require_once('/var/www/www-root/data/db.php');
-
-$sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $ploshadka_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 $sql= "INSERT INTO 

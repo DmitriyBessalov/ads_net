@@ -1,7 +1,5 @@
 <?php
-require_once('/var/www/www-root/data/db.php');
-
-function notifikation($platform_id, $opisanie, $date){
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');function notifikation($platform_id, $opisanie, $date){
     $sql= "SELECT `domen` FROM `ploshadki` WHERE `id`='".$platform_id."'";
     $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
