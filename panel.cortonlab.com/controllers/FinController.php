@@ -398,7 +398,6 @@ class FinController
 	}
 	.close:hover { background: #116dd6; }
 </style>
-			
 			';
         include PANELDIR . '/views/layouts/footer.php';
         if (isset($today)) {$redis->close();}
@@ -426,7 +425,7 @@ class FinController
         $grafiki= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         $redis = new Redis();
-        $redis->pconnect('185.75.90.54', 6379);
+        $redis->connect('185.75.90.54', 6379);
         $redis->select(3);
         $sql="SELECT `id` FROM `ploshadki` WHERE `status`=1";
         $platforms= $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_COLUMN);

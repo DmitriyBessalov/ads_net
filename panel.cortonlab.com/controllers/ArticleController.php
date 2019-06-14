@@ -583,44 +583,48 @@ class ArticleController
             $sql = "SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-            //$sql = "SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`=".$result[0]['id'];
-            //$anons= $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $sql = "SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`=".$result[0]['id'];
+            $anons= $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
+            $anons = str_replace(",", "','", $anons);
+
+            $ch = 65;
             foreach ($result as $i) {
+
                 $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "') AND `promo_variant`='".$i['id']."' AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
                 $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 if (is_null($promosum['doread'])){$promosum['doread']=$promosum['pay']=$promosum['perehod']=$promosum['st']=$promosum['clicking']=0;}
 
-                //$sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-                //$pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                $pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-                //if (is_null($pokaz)) {$pokaz = 0;}
+                if (is_null($pokaz)) {$pokaz = 0;}
 
-                //if (isset($today)) {
-                //    $anon = explode(',', $i['anons_ids']);
-                //    foreach ($anon as $y) {
-                //        $ch = $redis->get(date('d').':'.$y);
-                //        if ($ch) {
-                //            $pokaz += $ch;
-                //        }
-                //    }
-                //}
+                if (isset($today)) {
+                    $anon = explode(',', $i['anons_ids']);
+                    foreach ($anon as $y) {
+                        $ch = $redis->get(date('d').':'.$y);
+                        if ($ch) {
+                            $pokaz += $ch;
+                        }
+                    }
+                }
 
-                //$CRT = $promosum['clicking'] / $pokaz;
+                $CRT = $promosum['clicking'] / $pokaz;
 
                 $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
                 if (is_nan($protsentperehodov)){$protsentperehodov=0;}
 
-                //if (is_nan($CRT)) {
-                //    $CRT = '--';
-                //} else {
-                //    if (is_infinite($CRT)) {
-                //        $CRT = '--';
-                //    } else {
-                //        $CRT = round($CRT * 100, 2).' %';
-                //    }
-                //};
+                if (is_nan($CRT)) {
+                    $CRT = '--';
+                } else {
+                    if (is_infinite($CRT)) {
+                        $CRT = '--';
+                    } else {
+                        $CRT = round($CRT * 100, 2).' %';
+                    }
+                };
 
                 $protsentst=100/$promosum['clicking']*$promosum['st'];
                 if (is_nan($protsentst)){$protsentst=0;}
@@ -631,7 +635,7 @@ class ArticleController
                 //$ch = 65;
                 //foreach ($result as $i) {
                 echo '      <tr>
-                                
+                                <td>' . chr($ch++) . ' (' . $i['id'] . ')</td>
                                 <td>'.date('d.m.Y', strtotime($i['data_add'])).'</td>
                                 
                                 <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">

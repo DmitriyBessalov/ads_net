@@ -621,7 +621,7 @@ function corton_widget() {
 
         if(0<anons_ids_read2.length){
             var cxhr = new XMLHttpRequest();
-            console.log(     'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read2.join());
+            console.log('https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read2.join());
             cxhr.open('GET', 'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read2.join());
             cxhr.send();
             anons_ids_read2.splice(0,anons_ids_read2.length);
@@ -632,7 +632,7 @@ function corton_widget() {
     //проверка прочтения слайдера
     function checkreadslider(slider_anons_id) {
         var cxhr = new XMLHttpRequest();
-        console.log(     'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+slider_anons_id);
+        console.log('https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+slider_anons_id);
         cxhr.open('GET', 'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+slider_anons_id);
         cxhr.send();
     }

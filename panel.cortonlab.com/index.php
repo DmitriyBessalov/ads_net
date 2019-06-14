@@ -1,4 +1,5 @@
 <?php
+
 if ($_SERVER["SERVER_PORT"]==80){
     header("HTTPS/1.1 301 Moved Permanently");
     header( "Location: https://".$_SERVER["HTTP_HOST"]);
@@ -22,11 +23,9 @@ array_walk_recursive($_COOKIE,'ecran');
 define('PANELDIR', '/var/www/www-root/data/www/panel.cortonlab.com');
 define('APIDIR', '/var/www/www-root/data/www/api.cortonlab.com');
 
-require_once('/var/www/www-root/data/db.php');
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 require_once(PANELDIR.'/components/Autoload.php');
 
 // Вызов Router
 $router = new Router();
 $router->run();
-
-?>
