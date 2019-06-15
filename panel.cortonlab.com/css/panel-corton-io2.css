@@ -5016,7 +5016,9 @@ canvas {
   text-align: center;
   text-decoration: none;
 }
-
+.btnarticle:hover {
+   background-color: #3285e3;
+}
 .btnarticlegr {
   position: relative;
   left: 0px;
@@ -5033,6 +5035,11 @@ canvas {
   text-decoration: none;
   border: 1px solid #E0E1E5;
   margin-right: 10px;
+}
+.btnarticlegr:hover {
+  color: #116dd6;
+  border: 1px solid #116dd6;
+  cursor: pointer;
 }
 
 a.btnarticlegr:active{
