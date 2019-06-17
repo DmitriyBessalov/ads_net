@@ -2,7 +2,7 @@
 $_POST = array_map('addslashes', $_POST);
 if(!empty($_POST['host'] )){
     if(!empty($_POST['email'] )){
-        $to = "orders@cortonlab.com";
+        $to = "support@cortonlab.com";
         $subject = "Corton contact form";
         $message = '
 

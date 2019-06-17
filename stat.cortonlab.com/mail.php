@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 $_GET = array_map('addslashes', $_GET);
-$to = "orders@cortonlab.com";
+$to = "support@cortonlab.com";
 $subject = "Corton promo form";
 
 if ($_GET['host']==""){

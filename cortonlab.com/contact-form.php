@@ -3,7 +3,7 @@ $_POST = array_map('addslashes', $_POST);
 if(!empty($_POST['role'] )){
     if(!empty($_POST['name'] )){
         if(!empty($_POST['email'] )){
-            $to = "orders@cortonlab.com";
+            $to = "support@cortonlab.com";
             $subject = "Corton contact form";
             $message = '
  <h3>Получен запрос на добавление пользователя</h3></br>
