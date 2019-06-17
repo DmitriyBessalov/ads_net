@@ -131,7 +131,7 @@ class ArticleController
 									 <a style="color: #ff0303;" href="article-del?id='.$i['promo_id'].'">Удалить</a> 
                                   </ul>
                                   </td>
-                                </tr>  
+                                </tr>
                                ';
             }
 
@@ -558,12 +558,10 @@ class ArticleController
                             <td>Дата запуска</td>
                             <td>Заголовок</td>
                             <td>Расходы</td>
-                            <td>Показы</td>
                             <td>Клики</td>
                             <td>Просмотры</td>
                             <td>Дочитывания</td>
                             <td>Переходы</td>
-                            <td>CTR</td>
                         </tr>
                     </thead>
                     <tbody>';
@@ -596,35 +594,8 @@ class ArticleController
 
                 if (is_null($promosum['doread'])){$promosum['doread']=$promosum['pay']=$promosum['perehod']=$promosum['st']=$promosum['clicking']=0;}
 
-                $sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-                $pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-                if (is_null($pokaz)) {$pokaz = 0;}
-
-                if (isset($today)) {
-                    $anon = explode(',', $i['anons_ids']);
-                    foreach ($anon as $y) {
-                        $ch = $redis->get(date('d').':'.$y);
-                        if ($ch) {
-                            $pokaz += $ch;
-                        }
-                    }
-                }
-
-                $CRT = $promosum['clicking'] / $pokaz;
-
                 $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
                 if (is_nan($protsentperehodov)){$protsentperehodov=0;}
-
-                if (is_nan($CRT)) {
-                    $CRT = '--';
-                } else {
-                    if (is_infinite($CRT)) {
-                        $CRT = '--';
-                    } else {
-                        $CRT = round($CRT * 100, 2).' %';
-                    }
-                };
 
                 $protsentst=100/$promosum['clicking']*$promosum['st'];
                 if (is_nan($protsentst)){$protsentst=0;}
@@ -650,12 +621,10 @@ class ArticleController
                                          </div>
                                 </td>
                                 <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
-                                <td>' . $pokaz . '</td>
                                 <td>' . $promosum['clicking'] . '</td>
 								<td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
                                 <td>' . $promosum['doread'] . ' ('.$doread.'%)</td>
                                 <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
-                                <td style="min-width: 96px;">' . $CRT . '</td>
                             </tr>';
             }
         }else{ echo '<tr><td colspan="10">Некоректные даты фильтра</td></tr>';}

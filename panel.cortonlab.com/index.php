@@ -10,7 +10,7 @@ header('X-XSS-Protection: 1');
 
 // Общие настройки
 ini_set('display_errors',1);
-error_reporting(E_ALL & ~E_WARNING & ~E_DEPRECATED & ~E_NOTICE); 
+error_reporting(E_ALL & ~E_WARNING & ~E_DEPRECATED & ~E_NOTICE);
 
 session_start();
 
