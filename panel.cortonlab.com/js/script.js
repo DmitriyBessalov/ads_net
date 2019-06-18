@@ -119,7 +119,7 @@ $(document).ready(function(){
     $('input[name="domen"]').change(function() {
         var  domen= $('input[name="domen"]').val();
         domen = domen.replace(/\./gi, '_');
-        document.getElementById('fileadrres').innerHTML='&lt;link href="https://api.cortonlab.com/style/'+domen+'.css.gz" rel="stylesheet"&gt;<br><br>&lt;script async src="https://api.cortonlab.com/js/cortonlab.js.gz"&gt;&lt;/script&gt;';
+        document.getElementById('fileadrres').innerHTML='&lt;link href="https://api.cortonlab.com/css/'+domen+'.css.gz" rel="stylesheet"&gt;<br><br>&lt;script async src="https://api.cortonlab.com/js/cortonlab.js.gz"&gt;&lt;/script&gt;';
     });
 	
 //Функция для чекбокса для всех вариантов статей
