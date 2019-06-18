@@ -229,14 +229,18 @@ class ArticleController
                 $ch=0;
             }
 
-            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active` FROM `anons_index` a JOIN `promo` p ON p.`id`=a.`promo_id` WHERE a.`promo_id`='" . $_GET['id'] . "'";
-            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+            $sql = "SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $_GET['id'] . "'";
+            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+            $sql = "SELECT `title` FROM  `promo` WHERE `id`='" . $_GET['id'] . "'";
+            $title = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
             echo '
             <script>
-                document.getElementById("title2").innerHTML="Статистика по статье<br><span class=titlepromo>Статья: ' . $result['title'] . '</span>";
+                document.getElementById("title2").innerHTML="Статистика по статье<br><span class=titlepromo>Статья: '.$title.'</span>";
             </script>';
-            $anon[] = str_replace(",", "','", $result['anons_ids']);
-            $anons2 = explode(',', $result['anons_ids']);
+            $anon[] = str_replace(",", "','", $result);
+            $anons2 = explode(',', $result);
 
             foreach ($anons2 as $i) {
                 $anon[] = $i;
@@ -290,21 +294,20 @@ class ArticleController
                 echo '
              <tr>';
                 if ($ch2 != -1) {
-                    $sql = "SELECT `user_id`,`img_290x180`,`title` FROM `anons` WHERE `id`='" . $anons . "'";
+                    $sql = "SELECT `user_id`,`img_290x180`,`title`,`active` FROM `anons` WHERE `id`='" . $anons . "'";
                     $img = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                     echo '<td>' . $anons . '</td>
                           <td><a class="screenshot" style="text-decoration:none;" rel="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
-                    echo '<td>' . $result['promo_id'] . '</td>';
+                    echo '<td>' . $_GET['id'] . '</td>';
                     echo '<td></td><td></td>';
                 }
 
                 $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
                 if (is_nan($doread) or is_infinite($doread))$doread=0;
 
-                echo ' 
-               
+                echo '
                <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                <td>'.$pokaz.'</td>
                <td>' . $promosum['clicking'] . '</td>
@@ -314,7 +317,9 @@ class ArticleController
                <td style="min-width:90px;">' . $CRT . '</td>
                <td>' . sprintf("%.2f", $PCL) . '</td>
                
-               <td style="width: 20px !important;">
+               <td style="width: 20px !important;">';
+               if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}
+               echo '    
                </td>
               </tr>
              ';
@@ -795,17 +800,55 @@ class ArticleController
         return true;
     }
 
-    public static function actionAnons_stop()
-    {
-
-        return true;
-    }
-
     public static function actionAnons_start()
     {
+        $sql="UPDATE `anons` SET `active`='1' WHERE `id`='".$_GET['id']."'";
+        $GLOBALS['db']->query($sql);
+
+        $sql="SELECT `promo_id` FROM `anons` WHERE `id`='".$_GET['id']."'";
+        $promo_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$promo_id."'";
+        $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        if ($anons_ids!='')
+        $anons_arr=explode(',',$anons_ids);
+
+        $anons_arr[]=$_GET['id'];
+
+        $anons_ids=implode(',',$anons_arr);
+
+        $sql="UPDATE `anons_index` SET `anons_ids`='".$anons_ids."' WHERE `promo_id`='".$promo_id."'";
+        $GLOBALS['db']->query($sql);
 
         return true;
     }
+
+    public static function actionAnons_stop()
+    {
+        $sql="UPDATE `anons` SET `active`='0' WHERE `id`='".$_GET['id']."'";
+        $GLOBALS['db']->query($sql);
+
+        $sql="SELECT `promo_id` FROM `anons` WHERE `id`='".$_GET['id']."'";
+        $promo_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$promo_id."'";
+        $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        $anons_arr=explode(',',$anons_ids);
+
+        $anons_arr = array_flip($anons_arr);
+        unset ($anons_arr[$_GET['id']]);
+        $anons_arr = array_flip($anons_arr);
+
+        $anons_ids=implode(',',$anons_arr);
+
+        $sql="UPDATE `anons_index` SET `anons_ids`='".$anons_ids."' WHERE `promo_id`='".$promo_id."'";
+        $GLOBALS['db']->query($sql);
+
+        return true;
+    }
+
 
     public static function actionTarget()
     {

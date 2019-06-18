@@ -161,6 +161,15 @@ $(document).ready(function(){
         }
     });
 
+    //Функция для чекбокса для остановки показа анонсов
+    $('.flipswitch.anons').click(function() {
+        var id=$(this).parents('tr:first').children('td')[0].innerHTML;
+        if ($(this).is(':checked')){
+            $.post("https://panel.cortonlab.com/article-anons-start?id="+id);
+        } else {
+            $.post("https://panel.cortonlab.com/article-anons-stop?id="+id)
+        }
+    });
 
 
 //Отрытие модальных окон на странице площадок
@@ -178,12 +187,14 @@ $(document).ready(function(){
         }else{
             $('.recomendation').css("display", "block");
             $('.black-fon').css("display", "block");
-        };
+        }
     });
+
     $("#zagrecomend").click(function(){
         $('.modal.zagrecom').css("display", "block");
         $('.black-fon').css("display", "block");
     });
+
     $("#natprev").click(function(){
         var variable = $('#natprev').html();
         if (variable=='Активировать'){
@@ -193,12 +204,13 @@ $(document).ready(function(){
         }else{
             $('.modal.nativepreview').css("display", "block");
             $('.black-fon').css("display", "block");
-        };
+        }
     });
     $("#zagnatprev").click(function(){
         $('.modal.zagnativepreview').css("display", "block");
         $('.black-fon').css("display", "block");
     });
+
     $("#natpro").click(function(){
         var variable = $('#natpro').html();
         if (variable=='Активировать'){
@@ -208,12 +220,14 @@ $(document).ready(function(){
         }else{
             $('.modal.nativepro').css("display", "block");
             $('.black-fon').css("display", "block");
-        };
+        }
     });
+
     $("#zagnatpro").click(function(){
         $('.modal.zag-nativepro').css("display", "block");
         $('.black-fon').css("display", "block");
     });
+
     $("#slider").click(function(){
         var variable = $('#slider').html();
         if (variable=='Активировать'){
@@ -223,7 +237,7 @@ $(document).ready(function(){
         }else{
             $('.modal.slider').css("display", "block");
             $('.black-fon').css("display", "block");
-        };
+        }
     });
 //Скрытие модальных окон
     $(".modalhide").click(function(){
