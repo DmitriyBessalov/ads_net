@@ -607,8 +607,6 @@ class ArticleController
                 $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
                 if (is_nan($doread) or is_infinite($doread))$doread=0;
 
-                //$ch = 65;
-                //foreach ($result as $i) {
                 echo '      <tr>
                                 <td>' . chr($ch++) . ' (' . $i['id'] . ')</td>
                                 <td>'.date('d.m.Y', strtotime($i['data_add'])).'</td>

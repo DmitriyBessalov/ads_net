@@ -44,9 +44,9 @@ class NotificationsController
                 $sql="SELECT p.`domen`,u.`email` FROM `ploshadki`p RIGHT OUTER JOIN `users` u ON p.`user_id`=u.`id` WHERE  p.`id`='".$i['platform_id']."'";
                 $i2 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if ($i['status']){
-                    $i['status']='Обработано';
+                    $i['status']='>Обработано';
                 }else{
-                    $i['status']='Ожидание';
+                    $i['status']=' style="color:#60bf52;">Ожидание';
                 }
 
                 echo '
@@ -56,7 +56,7 @@ class NotificationsController
                           <td class="bluetext">'.$i2['domen'].'</td>
                           <td>'.$i2['email'].'</td>
                           <td class="bluetext">'.$i['opisanie'].'</td>
-                          <td style="color:#60bf52;">'.$i['status'].'</td>
+                          <td'.$i['status'].'</td>
                           <td style="width: 111px; text-align: right; padding-right: 20px;">
 						 <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                          <ul class="sub-menu">
