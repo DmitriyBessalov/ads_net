@@ -193,7 +193,6 @@ class ArticleController
         $title='Статистика по анонсам';
         include PANELDIR.'/views/layouts/article_header.php';
 
-
         echo '
 		<div class="table-box">
         <div class="table w-embed">
@@ -808,17 +807,7 @@ class ArticleController
         $sql="SELECT `promo_id` FROM `anons` WHERE `id`='".$_GET['id']."'";
         $promo_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-        $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$promo_id."'";
-        $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-        if ($anons_ids!='')
-        $anons_arr=explode(',',$anons_ids);
-
-        $anons_arr[]=$_GET['id'];
-
-        $anons_ids=implode(',',$anons_arr);
-
-        $sql="UPDATE `anons_index` SET `anons_ids`='".$anons_ids."' WHERE `promo_id`='".$promo_id."'";
+        $sql="UPDATE `anons_index` SET `anons_ids`=(SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $promo_id . "' AND `active`='1') WHERE `promo_id`='".$promo_id."'";
         $GLOBALS['db']->query($sql);
 
         return true;
@@ -832,18 +821,7 @@ class ArticleController
         $sql="SELECT `promo_id` FROM `anons` WHERE `id`='".$_GET['id']."'";
         $promo_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-        $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$promo_id."'";
-        $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-        $anons_arr=explode(',',$anons_ids);
-
-        $anons_arr = array_flip($anons_arr);
-        unset ($anons_arr[$_GET['id']]);
-        $anons_arr = array_flip($anons_arr);
-
-        $anons_ids=implode(',',$anons_arr);
-
-        $sql="UPDATE `anons_index` SET `anons_ids`='".$anons_ids."' WHERE `promo_id`='".$promo_id."'";
+        $sql="UPDATE `anons_index` SET `anons_ids`=(SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $promo_id . "' AND `active`='1') WHERE `promo_id`='".$promo_id."'";
         $GLOBALS['db']->query($sql);
 
         return true;
