@@ -112,7 +112,6 @@ class NotificationsController
 
     public static function actionDel()
     {
-
         $sql="DELETE FROM `notifications` WHERE `id` = '".$_GET['id']."';";
         $GLOBALS['db']->query($sql);
         NotificationsController::actionIndex();

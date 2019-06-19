@@ -287,6 +287,8 @@ var myLineChart = new Chart(ctx, {
                     $GLOBALS['db']->query($sql);
                     $id=$GLOBALS['db']->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
+                    $sql="INSERT INTO `platforms_domen_memory`(`domen`, `id`) VALUES ('".$_POST['domen']."','".$id."')";
+                    $GLOBALS['db']->query($sql);
                     header('Location: /platforms-edit?id='.$id);exit;
                 } else {
                     //Обновление домена площадки
@@ -322,8 +324,11 @@ var myLineChart = new Chart(ctx, {
                         `CPM`='".$_POST['CPM']."',
                         `CPG`='".$_POST['CPG']."'
                     WHERE `id`='".$_POST['id']."';";
-
                     $GLOBALS['db']->query($sql);
+
+                    $sql="UPDATE `platforms_domen_memory` SET `domen` = '".$_POST['domen']."' VALUES `id`='".$_POST['id']."')";
+                    $GLOBALS['db']->query($sql);
+
                     WidgetcssController::UpdateCSSfile($_POST['id']);
                     header('Location: /platforms');
                 }

@@ -48,8 +48,11 @@ switch ($GLOBALS['role']) {
 
             //Клики
             'clicks' => 'click/index',
-			
-			//Уведомления
+
+			//Слова
+            'words' => 'words/index',
+
+            //Уведомления
             'notifications' => 'notifications/index',
             'notifikations-obrabotano' => 'notifications/obrabotano',
             'notifikations-del' => 'notifications/del',
@@ -106,6 +109,9 @@ switch ($GLOBALS['role']) {
             'article-stop-all' => 'article/stop_all',
             'article-anons-stop' => 'article/anons_stop',
             'article-anons-start' => 'article/anons_start',
+
+            //Слова
+            'words' => 'words/index',
 
             //Авторизация
             'logout' => 'users/logout',

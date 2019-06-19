@@ -134,3 +134,20 @@ if ($arr['anons_count']!=0) {
 }
 $str= json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 echo $str;
+
+//Cбор статистики слов
+
+$word_arr=explode("','",$words);
+
+$domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
+
+$sql = "SELECT `id` FROM `platforms_domen_memory` WHERE `domen`='".$domen."'";
+$platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+foreach ($word_arr as $i){
+    $sql = "UPDATE `words` SET `count`=`count`+1   WHERE `platform_id`='".$platform_id."' AND `word`='".$i."'";
+    if (!$GLOBALS['dbstat']->exec($sql)){
+        $sql = "INSERT INTO `words` SET `platform_id`='".$platform_id."', `word`='".$i."', `count`='1'";
+        $GLOBALS['dbstat']->query($sql);
+    }
+}
