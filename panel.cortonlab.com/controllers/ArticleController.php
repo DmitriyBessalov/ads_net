@@ -845,6 +845,7 @@ class ArticleController
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
+						<div class="text-block-103">Ключевые слова</div>
                         <div class="div-block-81">
                             <div>
                                 <div class="div-block-82">
