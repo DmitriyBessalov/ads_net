@@ -33,7 +33,7 @@ class ArticleController
         }
 
         switch ($_GET['active']){
-            case '0': {$str.=" AND `active`='0'";};break;
+            case '0': break;
             default: {$str.=" AND `active`='1'";$_GET['active']='1';}
         }
 
@@ -50,96 +50,114 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT `main_promo_id` FROM `promo` WHERE ".$str." GROUP BY `main_promo_id` ORDER BY `promo`.`main_promo_id` DESC";
-            $main_promo_id = $GLOBALS['db']->query($sql)->fetchall(PDO::FETCH_COLUMN);
+            $sql = "SELECT `main_promo_id`,SUM(`active`) as `active` FROM `promo` WHERE ".$str." GROUP BY `main_promo_id` ORDER BY `main_promo_id` DESC";
+            $main_promo_id = $GLOBALS['db']->query($sql)->fetchall(PDO::FETCH_ASSOC);
 
             foreach ($main_promo_id as $i) {
-                $sql = "SELECT `title`,`namebrand`  FROM `promo` WHERE `id`='".$i."'";
-                $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-                $sql = "SELECT `anons_ids`, `stavka` FROM `anons_index` WHERE `promo_id`='".$i."';";
-                $anons_index = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-                $anons = str_replace(",", "','", $anons_index['anons_ids']);
-                $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('".$anons."')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
-                $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-                if (is_null($promosum['doread'])){$promosum['doread']=$promosum['pay']=$promosum['perehod']=$promosum['st']=$promosum['clicking']=0;}
-
-                $sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-                $pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-                if (is_null($pokaz)) {$pokaz = 0;}
-
-                if (isset($today)) {
-                    $anon = explode(',', $anons_index['anons_ids']);
-                    foreach ($anon as $y) {
-                        $ch = $redis->get(date('d').':'.$y);
-                        if ($ch) {
-                            $pokaz += $ch;
-                        }
-                    }
+                $begin = true;
+                if ($_GET['active'] == '0') {
+                    if ($i['active'])
+                        $begin = false;
                 }
 
-                $CRT = $promosum['clicking'] / $pokaz;
+                if ($begin) {
+                    $sql = "SELECT `title`,`namebrand`  FROM `promo` WHERE `id`='" . $i['main_promo_id'] . "'";
+                    $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-                $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
-                if (is_nan($protsentperehodov)){$protsentperehodov=0;}
+                    $sql = "SELECT `anons_ids`, `stavka` FROM `anons_index` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
+                    $anons_index = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-                if (is_nan($CRT)) {
-                    $CRT = '--';
-                } else {
-                    if (is_infinite($CRT)) {
+                    $anons = str_replace(",", "','", $anons_index['anons_ids']);
+                    $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
+                    $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                    if (is_null($promosum['doread'])) {
+                        $promosum['doread'] = $promosum['pay'] = $promosum['perehod'] = $promosum['st'] = $promosum['clicking'] = 0;
+                    }
+
+                    $sql = "SELECT SUM(`ch`) FROM `stat_anons_day_show` WHERE `anons_id` IN ('" . $anons . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+                    if (is_null($pokaz)) {
+                        $pokaz = 0;
+                    }
+
+                    if (isset($today)) {
+                        $anon = explode(',', $anons_index['anons_ids']);
+                        foreach ($anon as $y) {
+                            $ch = $redis->get(date('d') . ':' . $y);
+                            if ($ch) {
+                                $pokaz += $ch;
+                            }
+                        }
+                    }
+
+                    $CRT = $promosum['clicking'] / $pokaz;
+
+                    $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
+                    if (is_nan($protsentperehodov)) {
+                        $protsentperehodov = 0;
+                    }
+
+                    if (is_nan($CRT)) {
                         $CRT = '--';
                     } else {
-                        $CRT = round($CRT * 100, 2).' %';
+                        if (is_infinite($CRT)) {
+                            $CRT = '--';
+                        } else {
+                            $CRT = round($CRT * 100, 2) . ' %';
+                        }
+                    };
+
+                    $protsentst = 100 / $promosum['clicking'] * $promosum['st'];
+                    if (is_nan($protsentst)) {
+                        $protsentst = 0;
                     }
-                };
 
-                $protsentst=100/$promosum['clicking']*$promosum['st'];
-                if (is_nan($protsentst)){$protsentst=0;}
+                    $doread = round(100 / $promosum['clicking'] * $promosum['doread'], 2);
+                    if (is_nan($doread) or is_infinite($doread)) $doread = 0;
 
-                $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
-                if (is_nan($doread) or is_infinite($doread))$doread=0;
-
-                echo '
+                    echo '
                                 <tr>
-                                  <td>'.$i.'</td>
+                                  <td>' . $i['main_promo_id'] . '</td>
                                   <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
-								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i . '">' . $promo['title'] . '</a></div>
+								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">' . $promo['title'] . '</a></div>
 								     <div class="miniinfo"> 
 								        <div class="blockminiinfo">
-										   <input type="checkbox" ';if ($_GET['active']) echo 'checked="checked "';echo' class="flipswitch all"/>
+										   <input type="checkbox" ';
+                    if ($_GET['active']) echo 'checked="checked "';
+                    echo ' class="flipswitch all"/>
                                            <span></span>
 										</div>
-										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>'.$promo['namebrand'].'</div>
+										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>' . $promo['namebrand'] . '</div>
 										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $anons_index['stavka'] . '</div>
 								     </div>
 								  </td>
                                   <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                                   <td>' . $pokaz . '</td>
                                   <td>' . $promosum['clicking'] . '</td>
-								  <td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
-                                  <td>' . $promosum['doread'] . ' ('.$doread.'%)</td>
+								  <td  style="width:140px;" class="greentext">' . $promosum['st'] . ' (' . sprintf("%.2f", $protsentst) . '%)</td>
+                                  <td>' . $promosum['doread'] . ' (' . $doread . '%)</td>
                                   <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                                   <td style="min-width: 96px;">' . $CRT . '</td>
                                   <td style="width: 111px; text-align: right; padding-right: 20px;">
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu">
-								     <a href="article-edit-content?id='.$i.'">Отредактировать</a><br>
-									 <a href="article-edit-anons?id='.$i.'">Управление анонсами</a><br>
-									 <a style="color: #ff0303;" href="article-del?id='.$i.'">Удалить</a> 
+								     <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Отредактировать</a><br>
+									 <a href="article-edit-anons?id=' . $i['main_promo_id'] . '">Управление анонсами</a><br>
+									 <a style="color: #ff0303;" href="article-del?id=' . $i['main_promo_id'] . '">Удалить</a> 
 									 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
-									 <a href="article-stat?id='.$i.'">Расширенная статистика</a><br>
-								     <a href="article-a/b?id='.$i.'">A/B анализ</a><br>
-									 <a href="article-stat-url?id='.$i.'">Анализ ссылок</a><br>
+									 <a href="article-stat?id=' . $i['main_promo_id'] . '">Расширенная статистика</a><br>
+								     <a href="article-a/b?id=' . $i['main_promo_id'] . '">A/B анализ</a><br>
+									 <a href="article-stat-url?id=' . $i['main_promo_id'] . '">Анализ ссылок</a><br>
 									 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
-									 <a href="article-edit-target?id='.$i.'">Таргетинги</a><br>
-									 <a href="article-edit-form?id='.$i.'">Лид форма</a><br>
+									 <a href="article-edit-target?id=' . $i['main_promo_id'] . '">Таргетинги</a><br>
+									 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
                                   </ul>
                                   </td>
                                 </tr>
                                ';
+                }
             }
 
             if (isset($today)) {
