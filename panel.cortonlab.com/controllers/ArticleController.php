@@ -128,7 +128,7 @@ class ArticleController
 									 <a href="article-stat?id='.$i['promo_id'].'">Расширенная статистика</a><br>
 								     <a href="article-a/b?id='.$i['promo_id'].'">A/B анализ</a><br>
 									 <a href="article-stat-url?id='.$i['promo_id'].'">Анализ ссылок</a><br>
-									 <div style="height:1px; width:100%; background:#E0E1E5; argin: 6px 0;"></div>
+									 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
 									 <a href="article-edit-target?id='.$i['promo_id'].'">Таргетинги</a><br>
 									 <a href="article-edit-form?id='.$i['promo_id'].'">Лид форма</a><br>
                                   </ul>
