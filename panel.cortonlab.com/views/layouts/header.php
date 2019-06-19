@@ -25,7 +25,7 @@
       <? endif; ?>
       <? if ($GLOBALS['role']=='advertiser'): ?>
           <a href="/articles?active=all" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
-          <a href="/words" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82">Ключи</div></a>
+          <a href="/words" class="link-block w-inline-block"><img src="/images/keywords.png" class="image-6"><div class="text-block-82">Ключи</div></a>
       <? endif; ?>
       <? if (($GLOBALS['role']=='manager')): ?>
           <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
