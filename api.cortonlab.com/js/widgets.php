@@ -141,8 +141,11 @@ $word_arr=explode("','",$words);
 
 $domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
-$sql = "SELECT `id` FROM `platforms_domen_memory` WHERE `domen`='".$domen."'";
+$sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+//$sql = "SELECT `id` FROM `platforms_domen_memory` WHERE `domen`='".$domen."'";
+//$platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 foreach ($word_arr as $i){
     $sql = "UPDATE `words` SET `count`=`count`+1   WHERE `platform_id`='".$platform_id."' AND `word`='".$i."'";

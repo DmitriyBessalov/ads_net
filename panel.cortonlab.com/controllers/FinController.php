@@ -511,8 +511,8 @@ class FinController
         </div>
     </div>
 	<div class="div-block-94">
-        <div class="text-block-103">ТОП 5 площадок и ключей</div>
-        <div class="text-block-104">Популярные площадки и ключи</div>
+        <div class="text-block-103">ТОП 5 площадок</div>
+        <div class="text-block-104">Популярные площадки</div>
 		<div style="padding-bottom:22px;"></div>
 		<div style="display: flex;">
 		   <div>';
@@ -529,14 +529,7 @@ class FinController
 
 		   echo '
            </div>
-		   <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; margin-left: 40px;"></div>	
-		   <div style="padding-left: 40px;">
-              <span class="topwords"><span style="color:#768093;">1. </span> (Артроз)</span><br>
-		      <span class="topwords"><span style="color:#768093;">2. </span> (Давление)</span><br>
-		      <span class="topwords"><span style="color:#768093;">3. </span> (Кардио)</span><br>
-		      <span class="topwords"><span style="color:#768093;">4. </span> (Инсулин)</span><br>
-		      <span class="topwords"><span style="color:#768093;">5. </span> (Диабет)</span>
-	    </div>
+
 		</div>
     </div>
 </div>
