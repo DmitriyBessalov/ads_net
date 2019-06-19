@@ -6,7 +6,7 @@
   <base href="https://panel.cortonlab.com">
   <link href="/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="/css/panel-corton-io2.css" rel="stylesheet" type="text/css">
+  <link href="/css/panel-corton-io2.1.css" rel="stylesheet" type="text/css">
   <link href="/css/admin.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({google: {families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Inconsolata:400,700","Roboto:300,300italic,regular,italic,500,500italic,700,700italic:cyrillic,latin"]  }});</script>
@@ -19,7 +19,7 @@
 </head>
 <body class="body">
   <div class="left-menu">
-	  <img src="/images/logo-corton.png" alt="" class="image">
+	  <img src="/images/cortonlab.png" alt="" class="image">
       <? if ($GLOBALS['role']=='platform'): ?>
           <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
       <? endif; ?>
