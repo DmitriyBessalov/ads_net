@@ -27,17 +27,15 @@ class ArticleController
             </thead>';
 
         if($GLOBALS['role']=='admin'){
-            $str=" AND 1";
+            $str="1";
         }else{
-            $str=" AND p.`user_id`='".$GLOBALS['user']."'";
+            $str="`user_id`='".$GLOBALS['user']."'";
         }
 
-        if (isset($_GET['active'])){
-            switch ($_GET['active']){
-                case '1': {$str.=" AND p.`active`='1'";};break;
-                case '0': {$str.=" AND p.`active`='0'";}
-            }
-        };
+        switch ($_GET['active']){
+            case '0': {$str.=" AND `active`='0'";};break;
+            default: {$str.=" AND `active`='1'";$_GET['active']='1';}
+        }
 
         if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y');}
         if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
@@ -52,10 +50,17 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT a.`promo_id`, p.`title`, a.`anons_ids`, a.`stavka`, p.`active`, p.`namebrand` FROM `anons_index` a RIGHT OUTER JOIN `promo` p ON p.`id`=a.`promo_id` WHERE p.`id`=p.`main_promo_id` ".$str." ORDER BY a.`promo_id` DESC ;";
-            $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($result as $i) {
-                $anons = str_replace(",", "','", $i['anons_ids']);
+            $sql = "SELECT `main_promo_id` FROM `promo` WHERE ".$str." GROUP BY `main_promo_id` ORDER BY `promo`.`main_promo_id` DESC";
+            $main_promo_id = $GLOBALS['db']->query($sql)->fetchall(PDO::FETCH_COLUMN);
+
+            foreach ($main_promo_id as $i) {
+                $sql = "SELECT `title`,`namebrand`  FROM `promo` WHERE `id`='".$i."'";
+                $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                $sql = "SELECT `anons_ids`, `stavka` FROM `anons_index` WHERE `promo_id`='".$i."';";
+                $anons_index = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                $anons = str_replace(",", "','", $anons_index['anons_ids']);
                 $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('".$anons."')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
                 $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
@@ -67,7 +72,7 @@ class ArticleController
                 if (is_null($pokaz)) {$pokaz = 0;}
 
                 if (isset($today)) {
-                    $anon = explode(',', $i['anons_ids']);
+                    $anon = explode(',', $anons_index['anons_ids']);
                     foreach ($anon as $y) {
                         $ch = $redis->get(date('d').':'.$y);
                         if ($ch) {
@@ -99,16 +104,16 @@ class ArticleController
 
                 echo '
                                 <tr>
-                                  <td>'.$i['promo_id'].'</td>
+                                  <td>'.$i.'</td>
                                   <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
-								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['promo_id'] . '">' . $i['title'] . '</a></div>
+								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i . '">' . $promo['title'] . '</a></div>
 								     <div class="miniinfo"> 
 								        <div class="blockminiinfo">
-										   <input type="checkbox" ';if ($i['active']) echo 'checked="checked "';echo' class="flipswitch all"/>
+										   <input type="checkbox" ';if ($_GET['active']) echo 'checked="checked "';echo' class="flipswitch all"/>
                                            <span></span>
 										</div>
-										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>'.$i['namebrand'].'</div>
-										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $i['stavka'] . '</div>
+										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>'.$promo['namebrand'].'</div>
+										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $anons_index['stavka'] . '</div>
 								     </div>
 								  </td>
                                   <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
@@ -121,14 +126,14 @@ class ArticleController
                                   <td style="width: 111px; text-align: right; padding-right: 20px;">
 								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
                                   <ul class="sub-menu">
-								     <a href="article-a/b?id='.$i['promo_id'].'">A/B анализ</a><br>
-								     <a href="article-edit-content?id='.$i['promo_id'].'">Контент статей</a><br>
-									 <a href="article-edit-anons?id='.$i['promo_id'].'">Редактировать анонсы</a><br>
-									 <a href="article-stat?id='.$i['promo_id'].'">Расширенная статистика</a><br>
-									 <a href="article-edit-target?id='.$i['promo_id'].'">Таргетинг</a><br>
-									 <a href="article-edit-form?id='.$i['promo_id'].'">Форма статьи</a><br>
-									 <a href="article-stat-url?id='.$i['promo_id'].'">Анализ ссылок</a><br>
-									 <a style="color: #ff0303;" href="article-del?id='.$i['promo_id'].'">Удалить</a> 
+								     <a href="article-a/b?id='.$i.'">A/B анализ</a><br>
+								     <a href="article-edit-content?id='.$i.'">Контент статей</a><br>
+									 <a href="article-edit-anons?id='.$i.'">Редактировать анонсы</a><br>
+									 <a href="article-stat?id='.$i.'">Расширенная статистика</a><br>
+									 <a href="article-edit-target?id='.$i.'">Таргетинг</a><br>
+									 <a href="article-edit-form?id='.$i.'">Форма статьи</a><br>
+									 <a href="article-stat-url?id='.$i.'">Анализ ссылок</a><br>
+									 <a style="color: #ff0303;" href="article-del?id='.$i.'">Удалить</a> 
                                   </ul>
                                   </td>
                                 </tr>
