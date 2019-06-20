@@ -5077,6 +5077,7 @@ a.btnarticlegr:active{
 	border-radius: 0px 4px 4px 0px;
 	outline: none;
 	padding: 0px 12px;
+	max-height: 34px;
 }
 
 .dropbtn:hover, .dropbtn:focus {
