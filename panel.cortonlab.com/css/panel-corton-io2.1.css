@@ -2449,6 +2449,18 @@ input[name=active] {
   width: 160px;
 }
 
+.text-field-geo {
+  height: 34px;
+  border: 1px solid #e1e2e8;
+  border-radius: 4px;
+  color: #333333;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: 'Myriadpro Regular';
+  background: none;
+  width: 160px;
+}
+
 .text-field-9::-webkit-input-placeholder {
   color: #768093;
 }
