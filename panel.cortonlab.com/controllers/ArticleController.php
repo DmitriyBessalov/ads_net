@@ -931,9 +931,8 @@ class ArticleController
                         </div>
                         <div style="inline-table">
                             <div class="submit-button-6">>></div><br>
-                            <div class="submit-button-6">>></div><br>
                         </div>
-                        <div>
+                        <div >
                             Выбранные регионы:
                         </div>
                     </div>

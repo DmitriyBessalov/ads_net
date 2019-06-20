@@ -2462,6 +2462,7 @@ input[name=active] {
   padding: 6px;
   margin-bottom: 20px;
   min-width: 200px;
+  margin-right: 20px;
 }
 
 .text-field-9::-webkit-input-placeholder {
