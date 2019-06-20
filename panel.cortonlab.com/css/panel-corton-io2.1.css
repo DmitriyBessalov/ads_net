@@ -2449,6 +2449,26 @@ input[name=active] {
   width: 160px;
 }
 
+.text-field-geo {
+  height: 34px;
+  border: 1px solid #e1e2e8;
+  border-radius: 4px;
+  color: #333333;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: 'Myriadpro Regular';
+  background: none;
+  width: 160px;
+  padding: 6px;
+  margin-bottom: 20px;
+  min-width: 200px;
+  margin-right: 20px;
+}
+
+.geoselect {
+   margin-left: 60px;
+}
+
 .text-field-9::-webkit-input-placeholder {
   color: #768093;
 }
@@ -5057,6 +5077,7 @@ a.btnarticlegr:active{
 	border-radius: 0px 4px 4px 0px;
 	outline: none;
 	padding: 0px 12px;
+	max-height: 34px;
 }
 
 .dropbtn:hover, .dropbtn:focus {
