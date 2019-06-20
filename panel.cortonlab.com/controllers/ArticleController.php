@@ -853,7 +853,7 @@ class ArticleController
 
     public static function actionTarget()
     {
-        $title='Ключевые слова';
+        $title='Таргетинг';
         include PANELDIR.'/views/layouts/article_header.php';
         if ($_GET['id']==''){
             $id='new';
@@ -892,7 +892,53 @@ class ArticleController
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 0px;"></div>
-                    <div class="div-block-97">
+					<div class="div-block-97">
+					
+					<div class="text-block-103">Регион</div>
+					
+					<div style="display: flex;">
+                        <div>					
+                            <div>
+                                <select name="select2" style="width: 200px;">
+                                    <option selected="selected">Выберите страну</option>
+                                    <option>Россия</option>
+                                    <option>Армения</option>
+                                    <option>Азербайджан</option>
+                                    <option>Белоруссия</option>
+                                    <option>Грузия</option>
+                                    <option>Латвия</option>
+                                    <option>Литва</option>
+                                    <option>Монголия</option>
+                                    <option>Казахстан</option>
+                                    <option>Норвегия</option>
+                                    <option>Польша</option>
+                                    <option>Украина</option>
+                                    <option>Финляндия</option>
+                                    <option>Эстония</option>
+                                    <option>Швеция</option>
+                                </select>
+                            </div>
+                            <div>
+                                <select name="select2">
+                                    <option selected="selected">Выберите регион</option>
+                                    <option>Чебурашка</option>
+                                    <option>Крокодил Гена</option>
+                                    <option>Шапокляк</option>
+                                    <option>Крыса Лариса</option> 
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <div style="inline-table">
+                            <div class="submit-button-6">>></div><br>
+                            <div class="submit-button-6">>></div><br>
+                        </div>
+                        <div>
+                            Выбранные регионы:
+                        </div>
+                    </div>
+                    
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
 					<div class="text-block-103">Ставка</div>
                         <div class="div-block-85">
                             <div>';
@@ -908,6 +954,9 @@ class ArticleController
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px;"></div>
 					<div class="div-block-97">
+					
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+					
 					<div class="text-block-103">Бренд</div>
                         <div class="div-block-85">
                         </div>
@@ -958,7 +1007,6 @@ class ArticleController
     {
         $title='Анализ ссылок';
         include PANELDIR.'/views/layouts/article_header.php';
-
 
         echo'
         <div class="table-box">
