@@ -933,7 +933,7 @@ class ArticleController
                             <div class="submit-button-6">>></div><br>
                         </div>
                         <div class="geoselect">
-                            Выбранные регионы:
+                            <div class="text-block-103">Выбранные регионы:</div>
                         </div>
                     </div>
                     
