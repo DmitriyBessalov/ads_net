@@ -2465,6 +2465,10 @@ input[name=active] {
   margin-right: 20px;
 }
 
+.geoselect {
+   margin-left: 60px;
+}
+
 .text-field-9::-webkit-input-placeholder {
   color: #768093;
 }
