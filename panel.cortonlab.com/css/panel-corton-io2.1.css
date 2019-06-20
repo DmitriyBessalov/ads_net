@@ -2459,6 +2459,9 @@ input[name=active] {
   font-family: 'Myriadpro Regular';
   background: none;
   width: 160px;
+  padding: 6px;
+  margin-bottom: 20px;
+  min-width: 200px;
 }
 
 .text-field-9::-webkit-input-placeholder {
