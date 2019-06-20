@@ -899,7 +899,7 @@ class ArticleController
 					<div style="display: flex;">
                         <div>					
                             <div>
-                                <select name="select2" style="width: 200px;">
+                                <select name="select2" class="text-field-geo" style="width: 200px;">
                                     <option selected="selected">Выберите страну</option>
                                     <option>Россия</option>
                                     <option>Армения</option>
@@ -919,7 +919,7 @@ class ArticleController
                                 </select>
                             </div>
                             <div>
-                                <select name="select2">
+                                <select name="select2" class="text-field-geo">
                                     <option selected="selected">Выберите регион</option>
                                     <option>Чебурашка</option>
                                     <option>Крокодил Гена</option>
