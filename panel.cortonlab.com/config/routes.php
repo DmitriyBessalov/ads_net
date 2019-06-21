@@ -79,7 +79,7 @@ switch ($GLOBALS['role']) {
             //Финансы
             'finance' => 'fin/platform',
             'finance-vivod' => 'fin/requestcash',
-			'balans' => 'fin/platformbalans',
+			'balance' => 'fin/platformbalans',
 			
 
             //Авторизация
