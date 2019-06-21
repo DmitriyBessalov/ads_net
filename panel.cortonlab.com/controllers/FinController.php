@@ -295,25 +295,6 @@ class FinController
                     </div>
 		        </form>
 		    </div>
-		<div class="black-fon modalhide" style="display: none;"></div>
-		<div class="modal" style="left: 30%; top: 300px; right: 30%; display: none;">
-                            <div style="min-width: 700px !important; max-width: 700px !important;" class="div-block-78 w-clearfix">
-                                <div class="div-block-132 modalhide">
-                                    <img src="/images/close.png" alt="" class="image-5">
-                                </div>
-                                <div class="">
-                                    <br>
-                                    <div class="text-block-82-copy" style="background: #fff;"></div>
-									<div>
-                                       <p class="textbal">Сумма к выводу:</p>
-								       <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
-									 </div>
-								    <div class="btnbalans" id="button_vivod">Запросить вывод средств</div>
-								    <p id="status_vivod"></p>
-									<p class="textinfobal">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use" target="_blank">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
-                                </div>
-                            </div>
-                         </div>
         <script>
         function AjaxFormRequest(result_id,formMain,url) {
             jQuery.ajax({
@@ -406,7 +387,122 @@ class FinController
         return true;
     }
 	    	
+    public static function actionPlatformBalans()
+    {
+        $title='Вывод средств с балансов';
+        include PANELDIR.'/views/layouts/header.php';
 
+        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y', strtotime("-1 month"));}
+        if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
+        $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
+        $mySQLdateend = date('Y-m-d', strtotime($dateend));
+
+        echo '
+		<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 20px;"></div>
+                                <div style="margin-left: 20px; width: 1337px;">
+                                    <br>
+                                    <div class="text-block-82-copy" style="background: #fff;"></div>
+									<div>
+                                       <p class="textbal">Сумма к выводу:</p>
+								       <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
+									 </div>
+								    <div class="btnbalans" id="button_vivod">Запросить вывод средств</div>
+								    <p id="status_vivod"></p>
+									<p class="textinfobal" style="max-width: 540px;">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use.html" target="_blank">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
+                                </div>
+		<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-top: 60px;"></div>						
+        <script>
+        function AjaxFormRequest(result_id,formMain,url) {
+            jQuery.ajax({
+                url:     url,
+                type:     "POST",
+                dataType: "html",
+                data: jQuery("#"+formMain).serialize(),
+                success: function(response) {
+                    document.getElementById(result_id).innerHTML = response;
+                },
+                error: function(response) {
+                    document.getElementById(result_id).innerHTML = "<p>Сообщение отправлено, скоро с Вами свяжется менежер.</p>";
+                }
+            });
+            $(\':input\',\'#formMain\') .prop(\'disabled\',true)
+        }
+    </script>
+<div id="openaddsite" class="modalDialog2">
+    <div style="padding: 30px 30px 30px 30px !important; width: 542px !important; background: #F4F6F9 !important; border-radius: 8px !important;">
+        <a href="/finance#close" title="Закрыть" class="close">
+            <img style="width: 13px; height: 13px;" src="/images/close.png">
+        </a>
+        <div>
+            <div class="text-block-82-copy" style="margin-top: 10px;">Добавить новую площадку</div>
+			<p style="margin-top: 10px; color: #768093; font-weight: 400 !important; font-size: 16px; line-height: 20px; font-family: \'Myriadpro Regular\';">Укажите URL площадки которую хотите добавить в систему, после чего личный менеджер свяжется с вами.</p>
+            <div class="w-form">
+                <form method="post" id="formMain" action="https://cortonlab.com/contact-form2.php" class="form-3" style="margin-right: 0px !important;">
+                    <input type="text" name="host" maxlength="50" placeholder="URL площадки" required="" style="background: #f4f6f9; color: #768093; border: 1px solid #E0E1E5; padding: 4px 8px; border-radius: 4px; width: 260px; height: 34px; margin-right: 20px;">
+                    <input type="hidden" name="email" value="'.$platform['email'].'">
+                    <input style="margin-top: 4px !important; cursor: pointer; color: #fff; border: 0px;" type="submit" value="Добавить площадку" onclick="AjaxFormRequest(\'messegeResult\', \'formMain\', \'https://cortonlab.com/contact-form2.php\')" class="button-add-site">
+                 </form>
+                <div id="messegeResult"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+	.modalDialog,
+    .modalDialog2  {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(0,0,0,0.8);
+		z-index: 99999;
+		-webkit-transition: opacity 400ms ease-in;
+		-moz-transition: opacity 400ms ease-in;
+		transition: opacity 400ms ease-in;
+		display: none;
+		pointer-events: none;
+	}
+	.modalDialog:target,
+    .modalDialog2:target {
+		display: block;
+		pointer-events: auto;
+	}
+	.modalDialog > div,
+    .modalDialog2 > div {
+		width: 524px;
+		position: relative;
+		margin: 15% auto;
+		padding: 20px 20px 20px 20px;
+		background: #fff;
+        border-radius: 4px;
+	}
+	.close {
+		color: #FFFFFF;
+		line-height: 34px;
+		position: absolute;
+		right: -33px;
+		text-align: center;
+		top: -33px;
+		width: 34px;
+		text-decoration: none;
+		font-weight: bold;
+		-webkit-border-radius: 34px;
+		-moz-border-radius: 34px;
+		border-radius: 34px;
+		background: none !important;
+	}
+	.close:hover { background: #116dd6; }
+</style>
+			';
+        include PANELDIR . '/views/layouts/footer.php';
+        if (isset($today)) {$redis->close();}
+        if ($balans==false)$balans='0.00';
+        echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
+        return true;
+    }
+			
     public static function actionAdmin()
     {
         $title='Статистика по платформе';

@@ -4955,7 +4955,7 @@ canvas {
    border: 1px solid #E0E1E5;
    padding: 4px 8px;
    border-radius: 4px;
-   width: 400px;
+   width: 300px;
    height: 34px;
    font-size: 16px;
    font-family: 'Myriadpro Regular';
@@ -4974,7 +4974,7 @@ canvas {
    font-size: 18px;
    line-height: 22px;
    font-family: 'Myriadpro Regular';
-   margin-top: 12px;
+   margin-bottom: 20px;
 }
 
  .btnbalans {
