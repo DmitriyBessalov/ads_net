@@ -870,6 +870,7 @@ class ArticleController
                         <input type="hidden" name="words" value="">
                         <div class="div-block-81">
                             <div>
+							<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-bottom: 60px;"></div>
                                 <div class="div-block-82">
                                     <input type="text" class="text-field-2 w-input" maxlength="256" placeholder="Ключ" id="addkey-2">
                                     <div class="text-block-141">+</div>
