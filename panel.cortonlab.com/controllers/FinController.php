@@ -406,7 +406,7 @@ class FinController
         return true;
     }
 	    	
-    public static function actionPlatform()
+    public static function actionPlatformBalans()
     {
         $title='Вывод балансов';
         include PANELDIR.'/views/layouts/header.php';
