@@ -169,7 +169,9 @@ class ArticleController
         </div>
 		
 		<div class="table-right">
-		    <form id="right-form" class="form-333"><br>';
+		    <form id="right-form" class="form-333">
+			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
+			';
             if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
 			echo '
 			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
