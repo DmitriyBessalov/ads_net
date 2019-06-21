@@ -864,7 +864,7 @@ class ArticleController
         };
         echo '
         <form method="post" action="/article-update" class="form-2">
-                    <div class="div-block-97">
+                    <div class="div-block-97" style="padding: 30px 0;">
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
@@ -891,77 +891,73 @@ class ArticleController
                         </div>
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 0px;"></div>
-					<div class="div-block-97">
-					
-					<div class="text-block-103">Регион</div>
-					
-					<div style="display: flex;">
-                        <div>					
+					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">					
+                        <div style="flex-direction: column;">
                             <div>
-                                <select name="select2" class="text-field-geo" style="width: 200px;">
-                                    <option selected="selected">Выберите страну</option>
-                                    <option>Россия</option>
-                                    <option>Армения</option>
-                                    <option>Азербайджан</option>
-                                    <option>Белоруссия</option>
-                                    <option>Грузия</option>
-                                    <option>Латвия</option>
-                                    <option>Литва</option>
-                                    <option>Монголия</option>
-                                    <option>Казахстан</option>
-                                    <option>Норвегия</option>
-                                    <option>Польша</option>
-                                    <option>Украина</option>
-                                    <option>Финляндия</option>
-                                    <option>Эстония</option>
-                                    <option>Швеция</option>
-                                </select>
+                            <div class="text-block-103">Выберите регион:</div>
+                                <div class="div-block-84" style="width: 500px">
+                                    <div>
+                                        <select name="select2" class="text-field-geo" style="width: 400px;">
+                                            <option selected="selected">Все страны</option>
+                                            <option>Россия</option>
+                                            <option>Армения</option>
+                                            <option>Азербайджан</option>
+                                            <option>Белоруссия</option>
+                                            <option>Грузия</option>
+                                            <option>Латвия</option>
+                                            <option>Литва</option>
+                                            <option>Монголия</option>
+                                            <option>Казахстан</option>
+                                            <option>Норвегия</option>
+                                            <option>Польша</option>
+                                            <option>Украина</option>
+                                            <option>Финляндия</option>
+                                            <option>Эстония</option>
+                                            <option>Швеция</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <select name="select2" class="text-field-geo" style="width: 400px;">
+                                            <option selected="selected">Все регионы</option>
+                                            <option>Чебурашка</option>
+                                        </select>                                        
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <select name="select2" class="text-field-geo">
-                                    <option selected="selected">Выберите регион</option>
-                                    <option>Чебурашка</option>
-                                    <option>Крокодил Гена</option>
-                                    <option>Шапокляк</option>
-                                    <option>Крыса Лариса</option> 
-                                </select>
-                                
-                            </div>
+                        </div>    
+                        <div>
+                            <div class="submit-button-6" style="margin:60px 50px 0px 50px">>></div>
                         </div>
-                        <div style="inline-table">
-                            <div class="submit-button-6">>></div><br>
-                        </div>
-                        <div class="geoselect">
+                        <div>
                             <div class="text-block-103">Выбранные регионы:</div>
-                        </div>
-                    </div>
-                    
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-					<div class="text-block-103">Ставка</div>
-                        <div class="div-block-85">
-                            <div>';
-            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
-            $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-            echo'
-                                <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
+                            <div class="div-block-84" style="width: 700px">
+                            <div class="div-block-86">
+                                <div class="text-block-114">Москва </div>
+                                <div class="text-block-98"> Удалить</div>
                             </div>
-                            <div>
-                                <div class="text-block-96">₽ за CPG</div>
+                            <div class="div-block-86">
+                                <div class="text-block-114">Московская обл.</div>
+                                <div class="text-block-98"> Удалить</div>
+                            </div>
                             </div>
                         </div>
                     </div>
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px;"></div>
-					<div class="div-block-97">
-					
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
-					
-					<div class="text-block-103">Бренд</div>
-                        <div class="div-block-85">
+					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
+                    <div class="div-block-85">
+                        <div>';
+                            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
+                            $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                            echo'
+                            <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
                         </div>
-                        <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
+                        <div>
+                            <div class="text-block-96">₽ за CPG</div>
+                        </div>
                     </div>
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+                    										
+					<div class="text-block-103" style="padding: 35px 0 0 0;">Бренд</div>
+                    <div class="div-block-85"></div>
+                    <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
                 </form>';
 

@@ -1,4 +1,5 @@
 <?php
+//$start = microtime(true);
 class SxGeo {
 	protected $fh;
 	protected $ip1c;
@@ -160,3 +161,4 @@ class SxGeo {
 $SxGeo = new SxGeo();
 
 echo $SxGeo->getCityFull($_GET['ip']);
+//echo  microtime(true) - $start;
