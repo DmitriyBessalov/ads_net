@@ -958,7 +958,9 @@ class ArticleController
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Бренд</div>
                     <div class="div-block-85"></div>
                     <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 40px;"></div>
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
+					
                 </form>';
 
         include PANELDIR.'/views/layouts/footer.php';
