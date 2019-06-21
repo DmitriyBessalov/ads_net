@@ -68,8 +68,7 @@
 				    <div>
 					   <span style="line-height: 35px;">
                            <? echo $GLOBALS['email']; ?>
-                       </span><br>
-                       <a href="https://panel.cortonlab.com/#">Настройки</a><br>
+                       </span><br>                     
                         <? if (($GLOBALS['role']=='platform')): ?>
                         <? endif; ?>
                        <a href="https://panel.cortonlab.com/logout">Выход</a>
