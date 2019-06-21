@@ -417,11 +417,26 @@ class FinController
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
         echo '
-<!-- <div class="message-box">
-    <p><span style="font-weight:400; color: #fff;">Обновление от 16.05.2019.</span> Теперь вывод балансов можно запрашивать в личном кабинете. Для этого нажмите на иконку пользователя и выберите пункт "Вывод балансов".</p>
-    <span class="close-button">Понял, больше не показывать.</span>
-</div> -->	
 
+		
+<div class="modal" style="left: 30%; top: 300px; right: 30%; display: none;">
+                            <div style="min-width: 700px !important; max-width: 700px !important;" class="div-block-78 w-clearfix">
+                                <div class="div-block-132 modalhide">
+                                    <img src="/images/close.png" alt="" class="image-5">
+                                </div>
+                                <div class="">
+                                    <br>
+                                    <div class="text-block-82-copy" style="background: #fff;"></div>
+									<div>
+                                       <p class="textbal">Сумма к выводу:</p>
+								       <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
+									 </div>
+								    <div class="btnbalans" id="button_vivod">Запросить вывод средств</div>
+								    <p id="status_vivod"></p>
+									<p class="textinfobal">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use" target="_blank">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
+                                </div>
+                            </div>
+                         </div>		
 <div class="table-box">
     <div class="table w-embed">
         <table>
