@@ -868,7 +868,7 @@ class ArticleController
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
-						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-bottom: 60px;"></div>
+						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-left: -20px; margin-top: -20px;"></div>
                         <div class="div-block-81">
                             <div>
                                 <div class="div-block-82">
