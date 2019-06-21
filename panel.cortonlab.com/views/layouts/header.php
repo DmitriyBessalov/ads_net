@@ -22,6 +22,7 @@
 	  <img src="/images/cortonlab.png" alt="" class="image">
       <? if ($GLOBALS['role']=='platform'): ?>
           <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
+		  <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Вывод средств</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='advertiser'): ?>
           <a href="/articles?active=all" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
