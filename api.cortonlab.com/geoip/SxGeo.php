@@ -159,4 +159,4 @@ class SxGeo {
 }
 $SxGeo = new SxGeo();
 
-echo $SxGeo->getCityFull('176.59.37.231');
+echo $SxGeo->getCityFull($_GET['ip']);
