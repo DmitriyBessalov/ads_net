@@ -35,6 +35,7 @@
           <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='admin'): ?>
+	        <div>МЕТРИКИ СИСТЕМЫ</div>
 	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Финансы</div></a>
 	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
             <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
