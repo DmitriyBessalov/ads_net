@@ -417,7 +417,8 @@ class FinController
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
         echo '
-                                <div style="margin-left: 20px;">
+		<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
+                                <div style="margin-left: 20px; width: 1337px;">
                                     <br>
                                     <div class="text-block-82-copy" style="background: #fff;"></div>
 									<div>
