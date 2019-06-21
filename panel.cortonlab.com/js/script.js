@@ -132,7 +132,7 @@ $(document).ready(function(){
                     case 'anon':{checkbox.next().text('Неактивна, отсутсвуют анонсы'); checkbox.prop('checked', false); console.log('a'); break;}
                     case 'word':{checkbox.next().text('Неактивна, отсутсвуют ключевые слова'); checkbox.prop('checked', false); console.log('w'); break;}
                     case 'true':{checkbox.next().text('Активна'); break;}
-                    default:    {checkbox.next().text('Активна'); alert('Внимание активированно '+data+' статей');}
+                    default:    {checkbox.next().text('Активна'); alert('Внимание активированно '+data+' варианта статьи');}
                 }
             });
         } else {
