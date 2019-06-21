@@ -893,7 +893,7 @@ class ArticleController
                         </div>
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
-					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px; margin-left: -20px; margin-top: -20px;"></div>
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px; margin-left: -20px;"></div>
 					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">					
                         <div style="flex-direction: column;">
                             <div>
