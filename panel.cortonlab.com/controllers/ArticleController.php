@@ -1139,7 +1139,6 @@ class ArticleController
     public static function actionStop_all(){
         {
 
-
             ArticleController::stopword($_GET['id']);
 
             $sql ="UPDATE `promo` SET `active`='0' WHERE `main_promo_id`= '".$_GET['id']."';";
