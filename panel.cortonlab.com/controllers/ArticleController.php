@@ -945,6 +945,7 @@ class ArticleController
                             </div>
                         </div>
                     </div>
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
                     <div class="div-block-85">
                         <div>';
@@ -957,7 +958,7 @@ class ArticleController
                             <div class="text-block-96">₽ за CPG</div>
                         </div>
                     </div>
-                    										
+                    <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Бренд</div>
                     <div class="div-block-85"></div>
                     <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
