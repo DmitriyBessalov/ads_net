@@ -43,7 +43,7 @@
 	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
             <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
 			<a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>
-			<div class="titlehr" style="margin-top:10px;">Системные оповещения</div>
+			<div class="titlehr" style="margin-top:10px;">Системные</div>
 			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" class="image-6"><div class="text-block-82">Уведомления</div>
                 <?
                 $sql = "SELECT COUNT(*) FROM `notifications` WHERE `status`='0'";
