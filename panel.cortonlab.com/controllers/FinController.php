@@ -429,6 +429,7 @@ class FinController
 								    <p id="status_vivod"></p>
 									<p class="textinfobal" style="max-width: 540px;">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use" target="_blank">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
                                 </div>
+		<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-top: 40px;"></div>						
         <script>
         function AjaxFormRequest(result_id,formMain,url) {
             jQuery.ajax({
