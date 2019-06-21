@@ -417,10 +417,7 @@ class FinController
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
         echo '
-
-		
-                            <div style="min-width: 700px !important; max-width: 700px !important;" class="div-block-78 w-clearfix">
-                                <div class="">
+                                <div>
                                     <br>
                                     <div class="text-block-82-copy" style="background: #fff;"></div>
 									<div>
@@ -431,8 +428,6 @@ class FinController
 								    <p id="status_vivod"></p>
 									<p class="textinfobal">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use" target="_blank">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
                                 </div>
-                            </div>	
-
         <script>
         function AjaxFormRequest(result_id,formMain,url) {
             jQuery.ajax({
