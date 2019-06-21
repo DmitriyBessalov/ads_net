@@ -70,7 +70,6 @@
                        </span><br>
                        <a href="https://panel.cortonlab.com/#">Настройки</a><br>
                         <? if (($GLOBALS['role']=='platform')): ?>
-                        <a id="vivod">Запрос вывода средств</a><br>
                         <? endif; ?>
                        <a href="https://panel.cortonlab.com/logout">Выход</a>
 					</div>
