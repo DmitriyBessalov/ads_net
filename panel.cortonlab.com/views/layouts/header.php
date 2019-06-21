@@ -37,17 +37,20 @@
       <? if ($GLOBALS['role']=='admin'): ?>
 	        <div>МЕТРИКИ СИСТЕМЫ</div>
 	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Финансы</div></a>
+			<a href="/words" class="link-block w-inline-block"><img src="/images/keywords.png" class="image-6"><div class="text-block-82">Ключи</div></a>
+			<a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" class="image-6"><div class="text-block-82">Клики</div></a>
+			<div>УПРАВЛЕНИЕ</div>
 	        <a href="/platforms?status=1" class="link-block w-inline-block"><img src="/images/ic-platform.png" class="image-6"><div class="text-block-82-copy">Площадки</div></a>
             <a href="/articles?active=1" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
-            <a href="/words" class="link-block w-inline-block"><img src="/images/keywords.png" class="image-6"><div class="text-block-82">Ключи</div></a>
-            <a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" class="image-6"><div class="text-block-82">Клики</div></a>
+			<a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>
+			<div>УПРАВЛЕНИЕ</div>
 			<a href="/notifications" class="link-block w-inline-block"><img src="/images/ic-notice.png" class="image-6"><div class="text-block-82">Уведомления</div>
                 <?
                 $sql = "SELECT COUNT(*) FROM `notifications` WHERE `status`='0'";
                 $notification = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 if ($notification) echo '<div class="circlnotice" >'.$notification.'</div></a>';
                 ?>
-            <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>
+            
       <? endif; ?>
             <!--a href="/tickets" class="link-block w-inline-block"><img src="/images/ic-ticket.png" class="image-6"><div class="text-block-82">Тикеты</div></a-->
   </div>
