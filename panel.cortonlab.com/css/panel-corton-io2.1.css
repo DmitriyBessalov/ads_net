@@ -2260,6 +2260,7 @@ input[name=active] {
 .div-block-95 {
   min-width: 420px;
   margin-top: 0px;
+  padding: 0px 6%;
 }
 
 .text-block-103 {
@@ -2558,7 +2559,7 @@ input[name=active] {
 }
 
 .div-block-102-one {
-  padding: 20px 7%;
+  padding: 20px 6%;
   margin-top: 0px;
   background: none;
 }
