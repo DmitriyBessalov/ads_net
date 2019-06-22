@@ -2547,7 +2547,7 @@ input[name=active] {
 }
 
 .div-block-102 {
-  width: 800px;
+  width: 820px;
   padding: 60px 20px;
   border-top: 1px solid #fff !important;
   margin-top: 0px;
@@ -2558,9 +2558,12 @@ input[name=active] {
 }
 
 .div-block-102-one {
-  padding: 60px 0px;
+  padding: 60px 20px;
   margin-top: 0px;
-  background: none;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 19px 38px rgba(0,0,0,.06), 0 10px 12px rgba(0,0,0,.04);
+  margin-bottom: 40px;
 }
 
 .button-add-site {
