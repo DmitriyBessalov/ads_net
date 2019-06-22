@@ -2567,6 +2567,7 @@ input[name=active] {
   padding: 0px 6%;
   margin-top: 0px;
   background: none;
+  width: 100%;
 }
 
 .button-add-site {
