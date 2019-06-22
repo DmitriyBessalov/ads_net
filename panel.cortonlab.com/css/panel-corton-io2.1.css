@@ -2168,7 +2168,7 @@ input.w-button2 {
 .div-block-88 {
   width: 100%;
   min-width: 1180px;
-  margin-left: 260px;
+  margin-left: 250px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f6f9), to(#f4f6f9));
   background-image: linear-gradient(180deg, #f4f6f9, #f4f6f9);
 }
@@ -2903,7 +2903,7 @@ input[name=active] {
 .left-menu {
   position: fixed;
   display: block;
-  width: 260px;
+  width: 250px;
   height: 100%;
   border-style: none solid none none;
   border-right-width: 1px;
