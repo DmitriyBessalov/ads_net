@@ -24,6 +24,7 @@ class NotificationsController
           <div class="w-form-fail"></div>
         </div>
 		<div style="min-height: 620px;" class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
@@ -70,6 +71,7 @@ class NotificationsController
             echo '
             </table>
         </div>
+		</div>
 		<div class="table-right">
             <div class="html-embed-3 w-embed">
             <form id="right-form" class="form-333">
