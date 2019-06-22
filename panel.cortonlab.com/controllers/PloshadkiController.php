@@ -2526,6 +2526,7 @@ var myLineChart = new Chart(ctx, {
 
             echo '
 <div class="table-box">
+    <div class="div-block-102">
     <div class="table w-embed">
         <table>
             <thead>
@@ -2690,6 +2691,7 @@ var myLineChart = new Chart(ctx, {
             echo'
         </table>
     </div>
+	</div>
     <div class="table-right">
 				 <form id="right-form" name="email-form" class="form-333">
                     <div class="html-embed-3 w-embed" style="margin-top: 40px;">
