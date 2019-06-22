@@ -5075,6 +5075,9 @@ canvas {
   text-decoration: none;
   margin-right: 10px;
 }
+.btnabgr:hover {
+	cursor: pointer;
+}
 .btnarticlegr {
   position: relative;
   left: 0px;
