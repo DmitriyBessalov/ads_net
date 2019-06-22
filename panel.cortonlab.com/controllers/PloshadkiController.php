@@ -49,7 +49,7 @@
         </script> 
         
 		<div class="table-box">
-		<div class="div-block-102">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
