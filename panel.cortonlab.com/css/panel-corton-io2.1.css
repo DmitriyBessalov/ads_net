@@ -2549,9 +2549,11 @@ input[name=active] {
 .div-block-102 {
   width: 1337px;
   padding: 60px 0px;
-  background-color: none;
-  border-top: 1px solid #E0E1E5 !important;
+  border-top: 1px solid #fff !important;
   margin-top: 0px;
+  background: #fff;
+  box-shadow: 0 19px 38px rgba(0,0,0,.08), 0 10px 12px rgba(0,0,0,.06);
+  border-radius: 8px;
 }
 
 .button-add-site {
