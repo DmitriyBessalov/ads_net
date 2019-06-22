@@ -49,6 +49,7 @@
         </script> 
         
 		<div class="table-box">
+		<div class="div-block-102">
         <div class="table w-embed">
           <table>
             <thead>
@@ -220,7 +221,9 @@ var myLineChart = new Chart(ctx, {
                     echo "$(\"#polz".$i['id']."\").slider(\"value\",".$i['otchiclen'].");$(\"#polz".$i['id']." span\").html(\"<b>&lt;</b>\"+$(\"#polz".$i['id']."\").slider(\"value\")+\"%<b>&gt;</b>\");\n";
                 }
                 echo '</script>
-        </div>';
+        </div>
+		</div>
+		';
         echo '
 		<div class="table-right">
 		    <form id="right-form" action="/platforms" name="email-form" class="form-333">
