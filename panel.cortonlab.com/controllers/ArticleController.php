@@ -692,7 +692,7 @@ class ArticleController
         <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
         
 		
-		<div class="div-block-102-one">
+		<div class="div-block-102-one" style="margin-top: 78px;">
         <div class="div-block-102">
         <div class="a-b-btn"style="padding-left: 20px;">';
 
