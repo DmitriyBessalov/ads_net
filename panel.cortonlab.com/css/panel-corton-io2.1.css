@@ -1687,6 +1687,7 @@ input.w-button2 {
   text-align: left;
   min-width: 480px;
   overflow: auto;
+  padding: 0px 6%;
   flex: 1;
     flex-grow: 1;
     flex-shrink: 1;
@@ -1697,7 +1698,6 @@ input.w-button2 {
     width: 100%;
     margin-top: 0px;
     display: flex;
-	padding: 0px 6%;
 }
 
 .table-right {
