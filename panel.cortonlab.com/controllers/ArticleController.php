@@ -725,7 +725,7 @@ class ArticleController
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
                     <div class="div-block-97">
-                        <div>
+                        <div style="margin-top: 20px;">
                             <input type="text" class="text-field-4 w-input" style=" width: 760px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
                             <input name="formtext" type="hidden">
                             <div id="toolbar_position"></div>
