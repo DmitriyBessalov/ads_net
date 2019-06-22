@@ -691,6 +691,9 @@ class ArticleController
         <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
         <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
         
+		
+		<div class="div-block-102-one">
+        <div class="div-block-102">
         <div style="margin-top: 40px; padding-left: 20px;">';
 
         $sql="SELECT `id` FROM `promo` WHERE `main_promo_id`='".$result['main_promo_id']."'";
@@ -734,6 +737,8 @@ class ArticleController
                             <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
                     </div>
         </form>
+		</div>
+        </div>
         <script>
             var quill = new Quill(\'#editor-container\', {
                 modules: {
