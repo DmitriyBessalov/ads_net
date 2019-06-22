@@ -9,6 +9,7 @@ class ArticleController
 
         echo '
 		<div class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
@@ -167,6 +168,7 @@ class ArticleController
         echo '
           </table>
         </div>
+		</div>
 		
 		<div class="table-right">
 		    <form id="right-form" class="form-333">
