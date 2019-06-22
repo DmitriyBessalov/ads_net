@@ -2248,7 +2248,7 @@ input[name=active] {
   border-radius: 8px;
   border: 1px solid #fff !important;
   background: #fff;
-  box-shadow: 0 19px 38px rgba(0,0,0,.08), 0 10px 12px rgba(0,0,0,.06);
+  box-shadow: 0 19px 38px rgba(0,0,0,.06), 0 10px 12px rgba(0,0,0,.04);
 }
 
 @media (max-width: 1240px) and (min-width: 320px) {
@@ -2552,7 +2552,7 @@ input[name=active] {
   border-top: 1px solid #fff !important;
   margin-top: 0px;
   background: #fff;
-  box-shadow: 0 19px 38px rgba(0,0,0,.08), 0 10px 12px rgba(0,0,0,.06);
+  box-shadow: 0 19px 38px rgba(0,0,0,.06), 0 10px 12px rgba(0,0,0,.04);
   border-radius: 8px;
   margin-bottom: 40px;
 }
