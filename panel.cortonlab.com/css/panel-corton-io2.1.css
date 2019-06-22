@@ -1544,7 +1544,7 @@ input.w-button2 {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 13px 20px 20px 40px;
+  padding: 10px 20px 10px 40px;
   color: #116DD6;
   text-decoration: none;
 }
