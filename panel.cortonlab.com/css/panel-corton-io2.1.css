@@ -2560,10 +2560,7 @@ input[name=active] {
 .div-block-102-one {
   padding: 60px 20px;
   margin-top: 0px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 19px 38px rgba(0,0,0,.06), 0 10px 12px rgba(0,0,0,.04);
-  margin-bottom: 40px;
+  background: none;
 }
 
 .button-add-site {
