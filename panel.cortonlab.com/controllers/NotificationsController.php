@@ -29,7 +29,7 @@ class NotificationsController
             <thead>
               <tr class="trtop">
                 <th>ID</th>
-                <th>Дата и время</th>
+                <th>Дата</th>
                 <th>Площадка</th>
                 <th>Владелец площадки</th>
                 <th>Описание</th>
