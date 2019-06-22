@@ -89,7 +89,9 @@ class UsersController
                  if (!$balans){$balans='0.00';}
                  echo "
             <tr>
-              <td style=\"color:#116DD6\">".$i['email']."</td>
+              <td style=\"color:#116DD6\">".$i['email']."
+			  <p style=\"color: #768093; font-size: 12px; margin-bottom: 0px;\">656565</p>
+			  </td>
               <td>".$i['fio']."</td>
               <td>".$i['role']."</td>
               <td>".$i['last_ip']."</td>
