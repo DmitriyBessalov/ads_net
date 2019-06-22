@@ -437,7 +437,7 @@ var myLineChart = new Chart(ctx, {
 				';
                 if ($result['type']=='demo')
                 echo'
-			    <div class="text-block-103">Общие настройки</div>
+			    <div class="text-block-103">Данные для демо</div>
                 </div>
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
