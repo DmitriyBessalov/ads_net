@@ -375,8 +375,7 @@ var myLineChart = new Chart(ctx, {
                     <div class="html-embed-21 w-embed"><label>
                      <input type="checkbox" class="ios-switch tinyswitch" '.$status.' name="aktiv" '.$disabled.'><div><div></div></div></label></div>
                     <div class="text-block-138">Отключен / Активен</div>
-                  </div> 
-				</div>  
+                  </div>  
                 </div>
                 <select name="type" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Тип ресурса</option>
@@ -446,6 +445,7 @@ var myLineChart = new Chart(ctx, {
                 <div>
                 ';echo'
 				</div>
+			  </div> 	
               <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Скрипт и стили</div>
