@@ -694,7 +694,7 @@ class ArticleController
 		
 		<div class="div-block-102-one">
         <div class="div-block-102">
-        <div style="margin-top: 40px; padding-left: 20px;">';
+        <div class="a-b-btn"style="padding-left: 20px;">';
 
         $sql="SELECT `id` FROM `promo` WHERE `main_promo_id`='".$result['main_promo_id']."'";
         $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
@@ -733,7 +733,6 @@ class ArticleController
                         '.$result['text'].'
                         </div>
                         </div>
-						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
                             <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
                     </div>
         </form>

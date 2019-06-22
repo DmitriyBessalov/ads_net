@@ -2889,7 +2889,6 @@ input[name=active] {
   height: 28px;
   margin-left: 10px;
 }
-
 .div-block-116 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2901,7 +2900,6 @@ input[name=active] {
   -ms-flex-align: center;
   align-items: center;
 }
-
 .left-menu {
   position: fixed;
   display: block;
@@ -2913,7 +2911,9 @@ input[name=active] {
   background-color: #efefef;
   z-index: 2;
 }
-
+.a-b-btn {
+	
+}
 .div-block-117 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2921,27 +2921,22 @@ input[name=active] {
   display: flex;
   height: 700px;
 }
-
 .form-6 {
   width: 300px;
   height: 700px;
 }
-
 .div-block-118 {
   width: 100%;
   margin-left: 30px;
   padding-right: 30px;
 }
-
 .div-block-119 {
   height: 600px;
 }
-
 .widget-promo {
   overflow: auto;
   height: 650px;
 }
-
 .html-embed-9 {
   display: block;
   width: 927px;
@@ -2958,27 +2953,22 @@ input[name=active] {
   background-color: #fff;
   font-size: 16px;
 }
-
 .widget-native100 {
   overflow: auto;
   height: 650px;
 }
-
 .widget-popup {
   overflow: auto;
   height: 650px;
 }
-
 .text-block-125 {
   margin: 6px;
   font-size: 12px;
   text-align: right;
 }
-
 .text-block-127 {
   margin: 11px;
 }
-
 .black-fon {
   position: fixed;
   left: 0px;
@@ -2989,7 +2979,6 @@ input[name=active] {
   display: none;
   background: rgba(0,0,0,0.8);
 }
-
 #messegeResult {
 	font-family: 'Myriadpro Regular';
     color: #60bf52;
@@ -2997,7 +2986,6 @@ input[name=active] {
     line-height: 20px;
 	font-weight: 400 !important;
 }
-
 .modal {
   position: fixed;
   left: 2%;
@@ -3013,11 +3001,9 @@ input[name=active] {
   -ms-grid-rows: auto auto;
   grid-template-rows: auto auto;
 }
-
 .modal.zag-nativepro {
   display: none;
 }
-
 .modal.promo {
   display: none;
 }
