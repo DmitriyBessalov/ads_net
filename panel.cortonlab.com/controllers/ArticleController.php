@@ -701,22 +701,22 @@ class ArticleController
 
         switch (count($result2)){
             case 1:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
                       <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
             case 2:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
                       <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
             case 3:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
                       <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
             case 4:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[3]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[3].'">Вариант D</a>';
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[3]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[3].'">Вариант D</a>';
         };
 
     echo
