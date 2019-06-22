@@ -69,7 +69,6 @@ class UsersController
                 <th>Email</th>
                 <th>ФИО</th>
                 <th>Группа</th>
-                <th>IP авторизации</th>
                 <th>Дата создания</th> 
                 <th>Площадки</th>
                 <th>Баланс</th>
