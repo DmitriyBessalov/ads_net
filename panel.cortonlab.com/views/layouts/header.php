@@ -51,6 +51,7 @@
                 if ($notification) echo '<div class="circlnotice" >'.$notification.'</div></a>';
                 ?>
             
+      <? endif; ?>
             <!--a href="/tickets" class="link-block w-inline-block"><img src="/images/ic-ticket.png" class="image-6"><div class="text-block-82">Тикеты</div></a-->
   </div>
   <div class="header">
