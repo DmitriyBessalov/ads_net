@@ -62,6 +62,7 @@ class UsersController
           <div class="w-form-fail"></div>
         </div>
 		 <div class="table-box">
+		 <div class="div-block-102-table">
 		 <div class="table w-embed">
           <table>
             <thead>
@@ -127,6 +128,7 @@ class UsersController
         echo '
           </table>
           <div class="black-fon modalhide" style="display: none;"></div>
+		  </div>
 		  </div>
 		  <div class="table-right">
 		   <form id="right-form" class="form-333">
