@@ -20,7 +20,7 @@
 <body class="body">
   <div class="left-menu">
 	  <img src="/images/cortonlab.png" alt="" class="image">
-	  <div style="height:1px; width:210px; background:#E0E1E5; margin-left: 20px; margin-bottom: 20px;"></div>
+	  <div style="height:1px; width:210px; background:#E0E1E5; margin-left: 20px; margin-bottom: 24px;"></div>
       <? if ($GLOBALS['role']=='platform'): ?>
           <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
 		  <a href="/balance" class="link-block w-inline-block"><img src="/images/ic-balance.png" class="image-6"><div class="text-block-82-copy">Вывод средств</div></a>
@@ -35,7 +35,7 @@
           <a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='admin'): ?>
-	        <div class="titlehr"style="margin-top:4px;">Метрики системы</div>
+	        <div class="titlehr">Метрики системы</div>
 	        <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Финансы</div></a>
 			<a href="/words" class="link-block w-inline-block"><img src="/images/keywords.png" class="image-6"><div class="text-block-82">Ключи</div></a>
 			<a href="/clicks" class="link-block w-inline-block"><img src="/images/ic-click.png" class="image-6"><div class="text-block-82">Клики</div></a>
