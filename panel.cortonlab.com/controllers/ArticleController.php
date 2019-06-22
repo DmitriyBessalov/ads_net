@@ -724,8 +724,8 @@ class ArticleController
         <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
-                    <div class="div-block-97" style="width: 1337px">
-                        <div style=" width: 1337px;">
+                    <div class="div-block-97">
+                        <div>
                             <input type="text" class="text-field-4 w-input" style=" width: 760px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
                             <input name="formtext" type="hidden">
                             <div id="toolbar_position"></div>
