@@ -20,7 +20,7 @@
 <body class="body">
   <div class="left-menu">
 	  <img src="/images/cortonlab.png" alt="" class="image">
-	  <div style="height:1px; width:210px; background:#E0E1E5; margin-left: 20px; margin-bottom: 20px;"></div>
+	  <div style="height:1px; width:220px; background:#E0E1E5; margin-left: 20px; margin-bottom: 20px;"></div>
       <? if ($GLOBALS['role']=='platform'): ?>
           <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
 		  <a href="/balance" class="link-block w-inline-block"><img src="/images/ic-balance.png" class="image-6"><div class="text-block-82-copy">Вывод средств</div></a>
