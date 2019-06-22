@@ -13,6 +13,7 @@ class WordsController
             </script>
 
 		<div class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
@@ -44,6 +45,7 @@ class WordsController
         echo '
           </table>
         </div>
+		</div>
 		
 		<div class="table-right">
            <div class="html-embed-3 w-embed">
