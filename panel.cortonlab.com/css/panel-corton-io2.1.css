@@ -2208,7 +2208,7 @@ input.w-button2 {
   margin-top: 10px;
   background-color: #f4f6f9;
   line-height: 18px;
-  margin-left: 40px;
+  margin-left: 0px;
 }
 
 .div-block-92 {
@@ -2547,7 +2547,7 @@ input[name=active] {
 }
 
 .div-block-102 {
-  width: 820px;
+  width: 100%;
   padding: 40px 20px;
   border-top: 1px solid #fff !important;
   margin-top: 0px;
@@ -2558,7 +2558,7 @@ input[name=active] {
 }
 
 .div-block-102-one {
-  padding: 20px 20px;
+  padding: 20px 7%;
   margin-top: 0px;
   background: none;
 }
