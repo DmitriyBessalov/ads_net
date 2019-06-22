@@ -2246,7 +2246,9 @@ input[name=active] {
   padding: 30px;
   float: left;
   border-radius: 8px;
-  border: 1px solid #E0E1E5 !important;
+  border: 1px solid #fff !important;
+  background: #fff;
+  box-shadow: 0 19px 38px rgba(0,0,0,.08), 0 10px 12px rgba(0,0,0,.06);
 }
 
 @media (max-width: 1240px) and (min-width: 320px) {
