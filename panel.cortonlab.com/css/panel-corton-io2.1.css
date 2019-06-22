@@ -5059,7 +5059,22 @@ canvas {
   text-align: center;
   text-decoration: none;
 }
-
+.btnabgr {
+  position: relative;
+  left: 0px;
+  height: 34px;
+  clear: none;
+  background-color: #F4F6F9;
+  color: #768093;
+  font-size: 18px;
+  font-family: 'Myriadpro Regular';
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
 .btnarticlegr {
   position: relative;
   left: 0px;
