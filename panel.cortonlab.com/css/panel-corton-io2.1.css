@@ -2556,6 +2556,12 @@ input[name=active] {
   border-radius: 8px;
 }
 
+.div-block-102-one {
+  padding: 60px 0px;
+  margin-top: 0px;
+  background: none;
+}
+
 .button-add-site {
 	margin-top: 14px;
     margin-bottom: 10px;

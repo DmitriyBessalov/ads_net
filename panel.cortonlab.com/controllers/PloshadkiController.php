@@ -365,7 +365,7 @@ var myLineChart = new Chart(ctx, {
           <div class="w-form">
             <form method="post" action="/platforms-update" class="form">
               <input type="hidden" name="id" value="'.addslashes($_REQUEST['id']).'">
-              <div class="div-block-102">
+              <div class="div-block-102-one">
 			  <div class="boxsetting">
                 <div class="text-block-103">Общие настройки</div>
                 <div class="div-block-130">
