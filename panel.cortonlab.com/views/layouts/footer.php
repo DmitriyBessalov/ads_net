@@ -1,6 +1,6 @@
 ﻿	  </div>
       <div class="div-block-92 w-clearfix">
-	  <div class="text-block-108">© Corton 2019</div>
+	  <div class="text-block-108">© Cortonlab 2019</div>
         <a href="https://cortonlab.com/privacy-policy" class="link-block-3 w-inline-block">
           <div class="text-block-102">Политика конфиденциальности</div>
         </a>
