@@ -476,7 +476,7 @@ var myLineChart = new Chart(ctx, {
               if (addslashes($_REQUEST['id'])!='') {
                     echo '
 				</div>
-                <div style="padding-left:20px;" class="div-block-102">
+                <div style="padding-left:40px;" class="div-block-102">
                 <div class="text-block-103">Настройка виджетов</div>
                 <div class="text-block-115">Настройти внешний вид каждого виджета и следуйте инструкциям по установки.</div>
                 <div class="div-block-115">
