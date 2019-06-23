@@ -62,6 +62,7 @@ class UsersController
           <div class="w-form-fail"></div>
         </div>
 		 <div class="table-box">
+		 <div class="div-block-102-table">
 		 <div class="table w-embed">
           <table>
             <thead>
@@ -69,7 +70,6 @@ class UsersController
                 <th>Email</th>
                 <th>ФИО</th>
                 <th>Группа</th>
-                <th>IP авторизации</th>
                 <th>Дата создания</th> 
                 <th>Площадки</th>
                 <th>Баланс</th>
@@ -89,10 +89,11 @@ class UsersController
                  if (!$balans){$balans='0.00';}
                  echo "
             <tr>
-              <td style=\"color:#116DD6\">".$i['email']."</td>
+              <td style=\"color:#116DD6\">".$i['email']."
+			  <p style=\"color: #768093; font-size: 12px; margin-bottom: 0px;\">IP: ".$i['last_ip']."</p>
+			  </td>
               <td>".$i['fio']."</td>
               <td>".$i['role']."</td>
-              <td>".$i['last_ip']."</td>
               <td style=\"width: 200px;\">".$i['data_add']."</td>
               <td>".$i['domen']."</td>
               <td style=\"width: 154px; color: #116DD6;\">".$balans."</td>              
@@ -127,6 +128,7 @@ class UsersController
         echo '
           </table>
           <div class="black-fon modalhide" style="display: none;"></div>
+		  </div>
 		  </div>
 		  <div class="table-right">
 		   <form id="right-form" class="form-333">

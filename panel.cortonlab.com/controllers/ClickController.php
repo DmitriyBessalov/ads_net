@@ -14,6 +14,7 @@ class ClickController
           <div class="w-form-fail"></div>
         </div>
 		<div class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
@@ -79,6 +80,7 @@ class ClickController
             echo
             '</table>
         </div>
+		</div>
 		<div class="table-right">
              <div class="html-embed-3 w-embed">
             <form id="email-form" name="email-form" data-name="Email Form" class="form-3">

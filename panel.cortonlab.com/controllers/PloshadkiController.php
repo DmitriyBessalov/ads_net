@@ -49,6 +49,7 @@
         </script> 
         
 		<div class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
@@ -56,7 +57,6 @@
                 <td>Площадка</td>
                 <td>Виджеты</td>
                 <td>Визиты</td>
-                <td>Уники</td>
                 <td>Клики</td>
                 <td><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей и процент от кликов</span></div></td>
                 <td style="width: 111px;"><div class="tooltipinfo1">График<span class="tooltiptext1">График по просмотрам за последние 7 дней</span></div></td>
@@ -121,7 +121,6 @@
                         <div class=\"slider-mini\""; if (!$i['slider_aktiv']) {echo " style='opacity: 0.3;'";}; echo"><span class=\"tooltiptext4\">Slider</span></div>
                        </div>
                       </td>
-                      <td>0</td>
                       <td>0</td>
                       <td>".$platform['click']."</td>
                       <td class=\"greentext\" style=\"min-width: 140px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
@@ -220,7 +219,9 @@ var myLineChart = new Chart(ctx, {
                     echo "$(\"#polz".$i['id']."\").slider(\"value\",".$i['otchiclen'].");$(\"#polz".$i['id']." span\").html(\"<b>&lt;</b>\"+$(\"#polz".$i['id']."\").slider(\"value\")+\"%<b>&gt;</b>\");\n";
                 }
                 echo '</script>
-        </div>';
+        </div>
+		</div>
+		';
         echo '
 		<div class="table-right">
 		    <form id="right-form" action="/platforms" name="email-form" class="form-333">
@@ -365,7 +366,8 @@ var myLineChart = new Chart(ctx, {
           <div class="w-form">
             <form method="post" action="/platforms-update" class="form">
               <input type="hidden" name="id" value="'.addslashes($_REQUEST['id']).'">
-              <div class="div-block-102">
+              <div class="div-block-102-one">
+			  <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Общие настройки</div>
                 <div class="div-block-130">
@@ -374,7 +376,7 @@ var myLineChart = new Chart(ctx, {
                     <div class="html-embed-21 w-embed"><label>
                      <input type="checkbox" class="ios-switch tinyswitch" '.$status.' name="aktiv" '.$disabled.'><div><div></div></div></label></div>
                     <div class="text-block-138">Отключен / Активен</div>
-                  </div> 
+                  </div>  
                 </div>
                 <select name="type" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Тип ресурса</option>
@@ -436,14 +438,16 @@ var myLineChart = new Chart(ctx, {
 				';
                 if ($result['type']=='demo')
                 echo'
+			    <div class="text-block-103">Данные для демо</div>
                 </div>
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
-                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 760px; margin-left: 20px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
+                  <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
                 <div>
                 ';echo'
 				</div>
+			  </div> 	
               <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Скрипт и стили</div>
@@ -473,7 +477,7 @@ var myLineChart = new Chart(ctx, {
               if (addslashes($_REQUEST['id'])!='') {
                     echo '
 				</div>
-                <div style="padding-left:20px;" class="div-block-102">
+                <div style="padding-left:40px;" class="div-block-102">
                 <div class="text-block-103">Настройка виджетов</div>
                 <div class="text-block-115">Настройти внешний вид каждого виджета и следуйте инструкциям по установки.</div>
                 <div class="div-block-115">
@@ -538,7 +542,6 @@ var myLineChart = new Chart(ctx, {
                 </div>
               </div>';}
                 echo'
-			  <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
 			  <input type="submit" value="Сохранить настройки" class="submit-button-6 w-button2" '.$disabled.'>
 			  
             </form>
@@ -2524,6 +2527,7 @@ var myLineChart = new Chart(ctx, {
 
             echo '
 <div class="table-box">
+    <div class="div-block-102">
     <div class="table w-embed">
         <table>
             <thead>
@@ -2688,6 +2692,7 @@ var myLineChart = new Chart(ctx, {
             echo'
         </table>
     </div>
+	</div>
     <div class="table-right">
 				 <form id="right-form" name="email-form" class="form-333">
                     <div class="html-embed-3 w-embed" style="margin-top: 40px;">

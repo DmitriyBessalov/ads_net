@@ -1544,7 +1544,7 @@ input.w-button2 {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 13px 20px 20px 40px;
+  padding: 10px 20px 10px 40px;
   color: #116DD6;
   text-decoration: none;
 }
@@ -1623,8 +1623,8 @@ input.w-button2 {
 
 .image {
   width: 165px;
-  margin-top: 36px;
-  margin-bottom: 36px;
+  margin-top: 34px;
+  margin-bottom: 28px;
   margin-left: 40px;
   clear: left;
 }
@@ -1673,9 +1673,13 @@ input.w-button2 {
   font-size: 18px;
 }
 
-
+.titlehr {
+	padding: 13px 20px 6px 40px;
+	font-size: 18px;
+    font-family: 'Myriadpro Regular';
+    color: #768093;	
+}
 .table {
-  margin-right: 40px;
   color: #333333;
   font-size: 16px;
   font-family: 'Myriadpro Regular';
@@ -2163,7 +2167,7 @@ input.w-button2 {
 .div-block-88 {
   width: 100%;
   min-width: 1180px;
-  margin-left: 246px;
+  margin-left: 250px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f6f9), to(#f4f6f9));
   background-image: linear-gradient(180deg, #f4f6f9, #f4f6f9);
 }
@@ -2176,8 +2180,8 @@ input.w-button2 {
 }
 
 .div-block-90 {
-  height: 104px;
-  max-height: 104px;
+  height: 96px;
+  max-height: 96px;
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -2187,6 +2191,8 @@ input.w-button2 {
   margin-bottom: 0px;
   text-align: justify;
   line-height: 0em;
+  box-shadow: 0 0 18px 0 rgba(69,57,57,.18);
+  margin-bottom: 36px;
 }
 
 .div-block-90:after {
@@ -2201,7 +2207,7 @@ input.w-button2 {
   margin-top: 10px;
   background-color: #f4f6f9;
   line-height: 18px;
-  margin-left: 40px;
+  margin-left: 0px;
 }
 
 .div-block-92 {
@@ -2239,7 +2245,9 @@ input[name=active] {
   padding: 30px;
   float: left;
   border-radius: 8px;
-  border: 1px solid #E0E1E5 !important;
+  border: 1px solid #fff !important;
+  background: #fff;
+  box-shadow: 0 19px 38px rgba(0,0,0,.06), 0 10px 12px rgba(0,0,0,.04);
 }
 
 @media (max-width: 1240px) and (min-width: 320px) {
@@ -2251,6 +2259,7 @@ input[name=active] {
 .div-block-95 {
   min-width: 420px;
   margin-top: 0px;
+  padding: 0px 6%;
 }
 
 .text-block-103 {
@@ -2538,11 +2547,27 @@ input[name=active] {
 }
 
 .div-block-102 {
-  width: 1337px;
-  padding: 60px 0px;
-  background-color: none;
-  border-top: 1px solid #E0E1E5 !important;
+  width: 100%;
+  padding: 40px 20px;
+  border-top: 1px solid #fff !important;
   margin-top: 0px;
+  background: #fff;
+  box-shadow: 0 19px 38px rgba(0,0,0,.06), 0 10px 12px rgba(0,0,0,.04);
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.div-block-102-one {
+  padding: 20px 6%;
+  margin-top: 0px;
+  background: none;
+}
+
+.div-block-102-table {
+  padding: 0px 6%;
+  margin-top: 0px;
+  background: none;
+  width: 100%;
 }
 
 .button-add-site {
@@ -2709,7 +2734,7 @@ input[name=active] {
   display: -ms-flexbox;
   display: flex;
   width: 180px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .div-block-114 {
@@ -2764,7 +2789,7 @@ input[name=active] {
     display: inline-block;
     height: 34px;
     margin-top: 10px;
-    margin-right: 30px;
+    margin-right: 20px;
     padding: 9px 20px;
     -webkit-box-align: center;
     -webkit-align-items: center;
@@ -2871,7 +2896,6 @@ input[name=active] {
   height: 28px;
   margin-left: 10px;
 }
-
 .div-block-116 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2883,19 +2907,20 @@ input[name=active] {
   -ms-flex-align: center;
   align-items: center;
 }
-
 .left-menu {
   position: fixed;
   display: block;
-  width: 246px;
+  width: 250px;
   height: 100%;
   border-style: none solid none none;
   border-right-width: 1px;
-  border-right-color: #E0E1E5;
-  background-color: #f4f6f9;
+  border-right-color: #efefef;
+  background-color: #efefef;
   z-index: 2;
 }
-
+.a-b-btn {
+	margin-top: -85px;
+}
 .div-block-117 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2903,27 +2928,22 @@ input[name=active] {
   display: flex;
   height: 700px;
 }
-
 .form-6 {
   width: 300px;
   height: 700px;
 }
-
 .div-block-118 {
   width: 100%;
   margin-left: 30px;
   padding-right: 30px;
 }
-
 .div-block-119 {
   height: 600px;
 }
-
 .widget-promo {
   overflow: auto;
   height: 650px;
 }
-
 .html-embed-9 {
   display: block;
   width: 927px;
@@ -2940,27 +2960,22 @@ input[name=active] {
   background-color: #fff;
   font-size: 16px;
 }
-
 .widget-native100 {
   overflow: auto;
   height: 650px;
 }
-
 .widget-popup {
   overflow: auto;
   height: 650px;
 }
-
 .text-block-125 {
   margin: 6px;
   font-size: 12px;
   text-align: right;
 }
-
 .text-block-127 {
   margin: 11px;
 }
-
 .black-fon {
   position: fixed;
   left: 0px;
@@ -2971,7 +2986,6 @@ input[name=active] {
   display: none;
   background: rgba(0,0,0,0.8);
 }
-
 #messegeResult {
 	font-family: 'Myriadpro Regular';
     color: #60bf52;
@@ -2979,7 +2993,6 @@ input[name=active] {
     line-height: 20px;
 	font-weight: 400 !important;
 }
-
 .modal {
   position: fixed;
   left: 2%;
@@ -2995,11 +3008,9 @@ input[name=active] {
   -ms-grid-rows: auto auto;
   grid-template-rows: auto auto;
 }
-
 .modal.zag-nativepro {
   display: none;
 }
-
 .modal.promo {
   display: none;
 }
@@ -3970,7 +3981,7 @@ input[name=active] {
     color: #768093;
     position: absolute;
     min-width: 165px;
-    right: 276px;
+    right: 305px;
     background: #fff;
     margin-top: 10px;
     margin-left: -78px;
@@ -5038,6 +5049,41 @@ canvas {
 }
 .btnarticle:hover {
    background-color: #3285e3;
+}
+
+.btnab {
+  position: relative;
+  left: 0px;
+  height: 44px;
+  clear: none;
+  background-color: #fff;
+  color: #116dd6;
+  font-size: 18px;
+  font-family: 'Myriadpro Regular';
+  font-weight: 600;
+  border-radius: 8px 8px 0px 0px;
+  padding: 13px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+.btnabgr {
+  position: relative;
+  left: 0px;
+  height: 34px;
+  clear: none;
+  background-color: #F4F6F9;
+  color: #768093;
+  font-size: 18px;
+  font-family: 'Myriadpro Regular';
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 13px 20px;
+  text-align: center;
+  text-decoration: none;
+  margin-right: 10px;
+}
+.btnabgr:hover {
+	cursor: pointer;
 }
 .btnarticlegr {
   position: relative;

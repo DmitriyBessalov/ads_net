@@ -9,6 +9,7 @@ class ArticleController
 
         echo '
 		<div class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
@@ -167,9 +168,12 @@ class ArticleController
         echo '
           </table>
         </div>
+		</div>
 		
 		<div class="table-right">
-		    <form id="right-form" class="form-333"><br>';
+		    <form id="right-form" class="form-333">
+			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
+			';
             if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
 			echo '
 			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
@@ -689,29 +693,32 @@ class ArticleController
         <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
         <link rel="stylesheet" href="https://panel.cortonlab.com/css/quill.snow.css">
         
-        <div style="margin-top: 40px; padding-left: 20px;">';
+		
+		<div class="div-block-102-one" style="margin-top: 78px;">
+        <div class="div-block-102">
+        <div class="a-b-btn"style="padding-left: 20px;">';
 
         $sql="SELECT `id` FROM `promo` WHERE `main_promo_id`='".$result['main_promo_id']."'";
         $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
 
         switch (count($result2)){
             case 1:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
-                      <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="btnabgr" style="width: 150px;float:left;margin-right: 12px;" id="add_variat_promo">Новая версия</a>'; break;
             case 2:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
-                      <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="btnabgr" style="width: 150px;float:left;margin-right: 12px;" id="add_variat_promo">Новая версия</a>'; break;
             case 3:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
-                      <a class="btnarticlegr" style="width: 50px;float:left;margin-right: 12px;" id="add_variat_promo">+</a>'; break;
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
+                      <a class="btnabgr" style="width: 150px;float:left;margin-right: 12px;" id="add_variat_promo">Новая версия</a>'; break;
             case 4:
-                echo '<a class="aticlevariant btnarticle'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
-                      <a class="aticlevariant btnarticle'; if ($id!=$result2[3]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[3].'">Вариант D</a>';
+                echo '<a class="aticlevariant btnab'; if ($id!=$result2[0]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[0].'">Вариант А</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[1]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[1].'">Вариант B</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[2]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[2].'">Вариант C</a>            
+                      <a class="aticlevariant btnab'; if ($id!=$result2[3]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[3].'">Вариант D</a>';
         };
 
     echo
@@ -719,8 +726,8 @@ class ArticleController
         <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
-                    <div class="div-block-97" style="width: 1337px">
-                        <div style=" width: 1337px;">
+                    <div class="div-block-97">
+                        <div style="margin-top: 20px;">
                             <input type="text" class="text-field-4 w-input" style=" width: 760px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
                             <input name="formtext" type="hidden">
                             <div id="toolbar_position"></div>
@@ -728,10 +735,11 @@ class ArticleController
                         '.$result['text'].'
                         </div>
                         </div>
-						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
                             <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
                     </div>
         </form>
+		</div>
+        </div>
         <script>
             var quill = new Quill(\'#editor-container\', {
                 modules: {
@@ -868,6 +876,8 @@ class ArticleController
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
+						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-left: -20px; margin-top: -20px;"></div>
+						<div class="text-block-103">Ключевые слова</div>
                         <div class="div-block-81">
                             <div>
                                 <div class="div-block-82">
@@ -891,6 +901,7 @@ class ArticleController
                         </div>
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">					
                         <div style="flex-direction: column;">
                             <div>
@@ -942,6 +953,7 @@ class ArticleController
                             </div>
                         </div>
                     </div>
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
                     <div class="div-block-85">
                         <div>';
@@ -954,11 +966,13 @@ class ArticleController
                             <div class="text-block-96">₽ за CPG</div>
                         </div>
                     </div>
-                    										
+                    <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Бренд</div>
                     <div class="div-block-85"></div>
                     <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
+					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
+					
                 </form>';
 
         include PANELDIR.'/views/layouts/footer.php';
@@ -1138,6 +1152,7 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop_all(){
         {
+
 
             ArticleController::stopword($_GET['id']);
 
