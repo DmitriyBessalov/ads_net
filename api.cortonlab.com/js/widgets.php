@@ -131,6 +131,9 @@ if ($arr['anons_count']!=0) {
     $redis = new Redis();
     $redis->pconnect('185.75.90.54', 6379);
     $arr['prosmotr_id'] = $redis->incr("prosmotr_id");
+    $show=1;
+}else{
+    $show=0;
 }
 $str= json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 echo $str;
@@ -148,9 +151,17 @@ $platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 //$platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 foreach ($word_arr as $i){
-    $sql = "UPDATE `words` SET `count`=`count`+1   WHERE `platform_id`='".$platform_id."' AND `word`='".$i."'";
+    $sql = "UPDATE `words` SET `count`=`count`+1   WHERE `platform_id`='".$platform_id."' AND `uri`='".$i."'";
     if (!$GLOBALS['dbstat']->exec($sql)){
-        $sql = "INSERT INTO `words` SET `platform_id`='".$platform_id."', `word`='".$i."', `count`='1'";
+        $sql = "INSERT INTO `words` SET `platform_id`='".$platform_id."', `uri`='".$i."', `count`='1'";
         $GLOBALS['dbstat']->query($sql);
     }
+}
+
+$i=parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
+
+$sql = "UPDATE `words_top10` SET `count`=`count`+1   WHERE `platform_id`='".$platform_id."' AND `uri`='".$i."'";
+if (!$GLOBALS['dbstat']->exec($sql)) {
+    $sql = "INSERT INTO `words_top10` SET `platform_id`='" . $platform_id . "', `uri`='".$i."',  `top10`='" . $_GET['words'] . "', `wdget_show`='".$show."',`count`='1'";
+    $GLOBALS['dbstat']->query($sql);
 }

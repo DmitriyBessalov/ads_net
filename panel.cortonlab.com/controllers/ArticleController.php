@@ -1207,8 +1207,6 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop(){
         {
-
-
             $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
 
             $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$id."';";
