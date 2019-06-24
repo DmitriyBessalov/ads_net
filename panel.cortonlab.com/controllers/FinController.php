@@ -569,19 +569,19 @@ class FinController
            <div class="text-block-104">Просмотров страниц</div>
            <div style="font-size: 46px;" class="text-block-105">128 315</div>
 		</div>
-        <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>		
+        <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>		
 		<div style="width:33%;">   
-		   <div class="text-block-104">Колличество показов анонсов</div>
+		   <div class="text-block-104">Показы анонсов</div>
            <div style="font-size: 46px;" class="text-block-105">'.$result['show_anons'].'</div>
 		</div>
-		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 40px;"></div>	
+		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>	
 		<div style="width:33%;">   
 		   <div class="text-block-104">Процент показа анонсов</div>
            <div style="font-size: 46px;" class="text-block-105">36 %</div>
 		</div>
 		</div>
-		<div id="containergr2" style="width:818px; height:108px;">
-           <canvas id="d" width="814" height="102"></canvas>
+		<div id="containergr2" style="width:780px; height:108px;">
+           <canvas id="d" width="720" height="102"></canvas>
         </div>
     </div>
     <div class="div-block-94">
