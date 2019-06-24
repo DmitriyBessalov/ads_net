@@ -189,7 +189,8 @@ var myLineChart = new Chart(ctx, {
                                   echo "";
                               }
                               echo "
-                              <a ".$manager_a_disable." href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
+							  <div style=\"height:1px; width:100%; background:#E0E1E5; margin: 6px 0;\"></div>
+                              <a style=\"color: #ff0303;\" ".$manager_a_disable." href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
                          </ul>
                          
                          <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
