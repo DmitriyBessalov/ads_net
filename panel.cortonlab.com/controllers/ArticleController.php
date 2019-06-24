@@ -328,7 +328,7 @@ class ArticleController
                           <td><a class="screenshot" style="text-decoration:none;" rel="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
-                    echo '<td>' . $_GET['id'] . '</td>';
+                    echo '<td></td>';
                     echo '<td></td><td></td>';
                 }
 
