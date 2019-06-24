@@ -584,7 +584,7 @@ class FinController
            <canvas id="d" width="710" height="102"></canvas>
         </div>
     </div>
-    <div class="div-block-94">
+    <div class="div-block-94" style="margin-right: 0px !important;">
         <div class="text-block-103">Доход площадок</div>
         <div class="text-block-104">Объём заработанных средств площадками</div>
         <div class="text-block-105">'.$result['dohod'].'</div>
@@ -608,7 +608,7 @@ class FinController
            <canvas id="a" width="356" height="102"></canvas>
         </div>
     </div>
-	<div class="div-block-94">
+	<div class="div-block-94" style="margin-right: 0px !important;">
         <div class="text-block-103">ТОП 5 площадок</div>
         <div class="text-block-104">Популярные площадки</div>
 		<div style="padding-bottom:22px;"></div>
