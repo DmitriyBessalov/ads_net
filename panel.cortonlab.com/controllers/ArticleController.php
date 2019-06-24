@@ -229,7 +229,8 @@ class ArticleController
           <table>
             <thead>
               <tr class="trtop">
-                <td>Превью</td>
+			    <td>ID</td>	
+                <td>Превью</td>				
                 <th>Заголовок</th>
                 <th><div class="tooltipinfo1">Расход<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
                 <th><div class="tooltipinfo1">Показы<span class="tooltiptext1">Количество показов анонсов</span></div></th>
@@ -238,7 +239,6 @@ class ArticleController
                 <th><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших промо-статью</span></div></th>
                 <th><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики с промо статьи и процент от оплаченых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от кол-ва кликов / CTR от кол-ва целевых просмотров</span></div></th>
-                <th><div class="tooltipinfo1">PCL<span class="tooltiptext1">Цена за переход по URL</span></div></th>
                 <th></th>
               </tr>
             </thead>';
@@ -324,11 +324,11 @@ class ArticleController
                 if ($ch2 != -1) {
                     $sql = "SELECT `user_id`,`img_290x180`,`title`,`active` FROM `anons` WHERE `id`='" . $anons . "'";
                     $img = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-                    echo '
+                    echo '<td>' . $anons . '</td>
                           <td><a class="screenshot" style="text-decoration:none;" rel="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
                     echo '<td style="width: 180px !important;"><div class=titleform>' . $img['title'] . '</div></td>';
                 } else {
-                    echo '<td></td>';
+                    echo '<td>' . $_GET['id'] . '</td>';
                     echo '<td></td><td></td>';
                 }
 
@@ -343,7 +343,7 @@ class ArticleController
                <td>' . $promosum['doread'] . ' ( '.$doread.'%)</td> 
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
-               <td>' . sprintf("%.2f", $PCL) . '</td>
+               
                
                <td style="width: 20px !important;">';
                if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}
