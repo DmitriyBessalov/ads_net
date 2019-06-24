@@ -580,8 +580,8 @@ class FinController
            <div style="font-size: 46px;" class="text-block-105">36 %</div>
 		</div>
 		</div>
-		<div id="containergr2" style="width:760px; height:108px;">
-           <canvas id="d" width="700" height="102"></canvas>
+		<div id="containergr2" style="width:740px; height:108px;">
+           <canvas id="d" width="740" height="102"></canvas>
         </div>
     </div>
     <div class="div-block-94">
