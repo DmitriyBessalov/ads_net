@@ -186,7 +186,7 @@ var myLineChart = new Chart(ctx, {
 							  <a href='platform-stat?id=".$i['id']. "'>Статистика</a><br>
                               <a ".$manager_a_disable." class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
                               if ($i['type']!='demo'){
-                                  echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>";
+                                  echo "";
                               }
                               echo "
                               <a ".$manager_a_disable." href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
