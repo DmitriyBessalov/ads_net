@@ -183,6 +183,7 @@ var myLineChart = new Chart(ctx, {
 						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                          <ul class=\"sub-menu\">
                               <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
+							  <a href='platform-stat?id=".$i['id']. "'>Статистика</a><br>
                               <a ".$manager_a_disable." class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
                               if ($i['type']!='demo'){
                                   echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>";
