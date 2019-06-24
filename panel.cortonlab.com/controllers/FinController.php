@@ -280,7 +280,7 @@ class FinController
         echo'
         </table>
                 </div>
-			
+			</div>
                     <div class="table-right">
 				 <form id="right-form" name="email-form" class="form-333">
 			         <a href="/finance#openaddsite" class="button-add-site w-button">Добавить площадку</a>
