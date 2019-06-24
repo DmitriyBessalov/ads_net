@@ -322,7 +322,7 @@ class ArticleController
                 echo '
              <tr>';
                 if ($ch2 != -1) {
-                    $sql = "SELECT `user_id`,`img_290x180`,`title`,`active` FROM `anons` WHERE `id`='" . $anons . "'";
+                    $sql = "SELECT `user_id`,`img_290x180`,`title`,`active` FROM `anons` WHERE `id`='""'";
                     $img = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                     echo '
                           <td><a class="screenshot" style="text-decoration:none;" rel="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '" ><img style="max-width: 70px !important; border-radius: 2px;" src="https://api.cortonlab.com/img/' . $img['user_id'] . '/a/' . $img['img_290x180'] . '"></a></td>';
