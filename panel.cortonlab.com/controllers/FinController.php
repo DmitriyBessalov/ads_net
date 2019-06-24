@@ -589,7 +589,7 @@ class FinController
         <div class="text-block-104">Объём заработанных средств площадками</div>
         <div class="text-block-105">'.$result['dohod'].'</div>
 	<div id="containergr" style="width:356px; height:102px;">
-	<canvas id="c" width="356" height="102"></canvas>
+	<canvas id="c" width="336" height="102"></canvas>
 	</div>
     </div>
     <div class="div-block-94">
