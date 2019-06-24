@@ -562,7 +562,7 @@ class FinController
 
 <div class="table-box">
 <div class="div-block-95 w-clearfix">
-    <div style="width:760px;" class="div-block-94">
+    <div style="width:770px;" class="div-block-94">
         <div class="text-block-103">Внешние метрики</div>
 		<div style="display: flex;">
 		<div style="width:33%;">
@@ -580,8 +580,8 @@ class FinController
            <div style="font-size: 46px;" class="text-block-105">36 %</div>
 		</div>
 		</div>
-		<div id="containergr2" style="width:700px; height:108px;">
-           <canvas id="d" width="700" height="102"></canvas>
+		<div id="containergr2" style="width:710px; height:108px;">
+           <canvas id="d" width="710" height="102"></canvas>
         </div>
     </div>
     <div class="div-block-94">
