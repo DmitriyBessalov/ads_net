@@ -224,6 +224,7 @@ class ArticleController
 
         echo '
 		<div class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
@@ -359,7 +360,7 @@ class ArticleController
         echo '
           </table>
         </div>
-		
+		</div>
 		<div class="table-right">
 		    <form id="right-form" class="form-333">
 			
@@ -583,6 +584,7 @@ class ArticleController
 
         echo'
         <div class="table-box">
+		<div class="div-block-102-table">
             <div class="table w-embed">
                 <table>
                     <thead>
@@ -662,7 +664,7 @@ class ArticleController
         echo '        </tbody>
                 </table>
             </div>
-            
+        </div>   
             <div class="table-right">
 		    <form id="right-form" class="form-333"><br>
                 <div class="html-embed-3 w-embed" style="margin-top: 40px;">
@@ -1019,6 +1021,7 @@ class ArticleController
 
         echo'
         <div class="table-box">
+		<div class="div-block-102-table">
             <div class="table w-embed">
                 <table>
                     <thead>
@@ -1039,6 +1042,7 @@ class ArticleController
                     </tbody>    
                 </table>
             </div>
+		</div>	
         </div>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
