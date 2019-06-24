@@ -6,7 +6,7 @@
   <base href="https://panel.cortonlab.com">
   <link href="/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="/css/panel-corton-io2.1.css" rel="stylesheet" type="text/css">
+  <link href="/css/panel-corton-io2.2.css" rel="stylesheet" type="text/css">
   <link href="/css/admin.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({google: {families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Inconsolata:400,700","Roboto:300,300italic,regular,italic,500,500italic,700,700italic:cyrillic,latin"]  }});</script>
