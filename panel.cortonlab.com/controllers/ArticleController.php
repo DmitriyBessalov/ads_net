@@ -224,12 +224,13 @@ class ArticleController
 
         echo '
 		<div class="table-box">
+		<div class="div-block-102-table">
         <div class="table w-embed">
           <table>
             <thead>
               <tr class="trtop">
-                <th>ID</th>
-                <td>Превью</td>
+			    <td>ID</td>	
+                <td>Превью</td>				
                 <th>Заголовок</th>
                 <th><div class="tooltipinfo1">Расход<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
                 <th><div class="tooltipinfo1">Показы<span class="tooltiptext1">Количество показов анонсов</span></div></th>
@@ -238,7 +239,6 @@ class ArticleController
                 <th><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших промо-статью</span></div></th>
                 <th><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики с промо статьи и процент от оплаченых просмотров</span></div></th>
                 <th><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от кол-ва кликов / CTR от кол-ва целевых просмотров</span></div></th>
-                <th><div class="tooltipinfo1">PCL<span class="tooltiptext1">Цена за переход по URL</span></div></th>
                 <th></th>
               </tr>
             </thead>';
@@ -343,7 +343,7 @@ class ArticleController
                <td>' . $promosum['doread'] . ' ( '.$doread.'%)</td> 
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
-               <td>' . sprintf("%.2f", $PCL) . '</td>
+               
                
                <td style="width: 20px !important;">';
                if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}
@@ -359,7 +359,7 @@ class ArticleController
         echo '
           </table>
         </div>
-		
+		</div>
 		<div class="table-right">
 		    <form id="right-form" class="form-333">
 			
@@ -583,6 +583,7 @@ class ArticleController
 
         echo'
         <div class="table-box">
+		<div class="div-block-102-table">
             <div class="table w-embed">
                 <table>
                     <thead>
@@ -662,7 +663,7 @@ class ArticleController
         echo '        </tbody>
                 </table>
             </div>
-            
+        </div>   
             <div class="table-right">
 		    <form id="right-form" class="form-333"><br>
                 <div class="html-embed-3 w-embed" style="margin-top: 40px;">
@@ -1019,6 +1020,7 @@ class ArticleController
 
         echo'
         <div class="table-box">
+		<div class="div-block-102-table">
             <div class="table w-embed">
                 <table>
                     <thead>
@@ -1039,6 +1041,7 @@ class ArticleController
                     </tbody>    
                 </table>
             </div>
+		</div>	
         </div>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;

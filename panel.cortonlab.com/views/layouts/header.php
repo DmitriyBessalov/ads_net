@@ -6,7 +6,7 @@
   <base href="https://panel.cortonlab.com">
   <link href="/css/normalize.css" rel="stylesheet" type="text/css">
   <link href="/css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="/css/panel-corton-io2.1.css" rel="stylesheet" type="text/css">
+  <link href="/css/panel-corton-io2.2.css" rel="stylesheet" type="text/css">
   <link href="/css/admin.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({google: {families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Inconsolata:400,700","Roboto:300,300italic,regular,italic,500,500italic,700,700italic:cyrillic,latin"]  }});</script>
@@ -22,12 +22,16 @@
 	  <img src="/images/cortonlab.png" alt="" class="image">
 	  <div style="height:1px; width:210px; background:#E0E1E5; margin-left: 20px; margin-bottom: 24px;"></div>
       <? if ($GLOBALS['role']=='platform'): ?>
+	      <div class="titlehr">Кабинет</div>
           <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
 		  <a href="/balance" class="link-block w-inline-block"><img src="/images/ic-balance.png" class="image-6"><div class="text-block-82-copy">Вывод средств</div></a>
+		  <div class="titlehr" style="margin-top:14px;">Система</div>
 		  <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-setting.png" class="image-6"><div class="text-block-82-copy">Настройки</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='advertiser'): ?>
+	      <div class="titlehr">Управление</div>
           <a href="/articles?active=all" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
+		  <div class="titlehr" style="margin-top:14px;">Статистика</div>
           <a href="/words" class="link-block w-inline-block"><img src="/images/keywords.png" class="image-6"><div class="text-block-82">Ключи</div></a>
       <? endif; ?>
       <? if (($GLOBALS['role']=='manager')): ?>

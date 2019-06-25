@@ -183,12 +183,14 @@ var myLineChart = new Chart(ctx, {
 						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                          <ul class=\"sub-menu\">
                               <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
+							  <a href='platform-stat?id=".$i['id']. "'>Статистика площадки</a><br>
                               <a ".$manager_a_disable." class='modalclick' id='otchiclen".$i['id']."'>Отчисления</a><br>";
                               if ($i['type']!='demo'){
-                                  echo "<a href='platform-stat?id=".$i['id']."'>Статистика</a></br>";
+                                  echo "";
                               }
                               echo "
-                              <a ".$manager_a_disable." href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
+							  <div style=\"height:1px; width:100%; background:#E0E1E5; margin: 6px 0;\"></div>
+                              <a style=\"color: #ff0303;\" ".$manager_a_disable." href='platforms-del?id=" . $i['id'] . "'>Удалить</a> 
                          </ul>
                          
                          <div class=\"modal otchislen\" id='modalotch".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
@@ -2527,7 +2529,7 @@ var myLineChart = new Chart(ctx, {
 
             echo '
 <div class="table-box">
-    <div class="div-block-102">
+    <div class="div-block-102-table">
     <div class="table w-embed">
         <table>
             <thead>
