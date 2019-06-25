@@ -865,11 +865,11 @@ $(document).ready(function(){
         $("#tab4block").addClass("w--tab-active");
     });
 
-    //Подключение слов в форму
+    //Подключение слов в форму ключи
     function words() {
-        let variable=$('.div-block-84').text();
-        variable=variable.replace(/Удалить/g,',');
-        variable=variable.replace(/ /g,'');
+        let variable=$('.div-block-84.word').text();
+        variable=variable.replace(/Удалить/g,';');
+        variable=variable.replace(/ /g,'_');
         variable=variable.replace(/\n/g,'');
         variable=variable.slice(0, -1);
         $('[name=words]').val(variable);
@@ -879,7 +879,7 @@ $(document).ready(function(){
     $( ".text-block-141" ).on( "click", function() {
         var variable = $('#addkey-2').val();
         if (variable.length > 3) {
-            $('.div-block-84').append('<div class="div-block-86"><div class="text-block-114">' + variable + '</div><div class="text-block-98">Удалить</div></div>');
+            $('.div-block-84.word').append('<div class="div-block-86"><div class="text-block-114">' + variable + '</div><div class="text-block-98">Удалить</div></div>');
             $('#addkey-2').val("");
             words();
         }else{
@@ -895,6 +895,24 @@ $(document).ready(function(){
             words();
         }, 300);
     });
+
+    //Добавление в список регионов
+    $(document).on('click','.typeahead__item',function(){
+        $('.js-typeahead').val('');
+    });
+    //Подключение слов в форму регионы
+    function geo() {
+        let variable=$('.div-block-84.geo').text();
+        variable=variable.replace(/Удалить/g,',');
+        variable=variable.replace(/ /g,'');
+        variable=variable.replace(/\n/g,'');
+        variable=variable.slice(0, -1);
+        $('[name=geo]').val(variable);
+    }
+    geo();
+
+
+
 
     //Добавление формы анонса
     $('#addanons').click(function() {
