@@ -1698,10 +1698,10 @@ a {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-box-align: left;
+  -webkit-align-items: left;
+  -ms-flex-align: left;
+  align-items: left;
   border-style: none;
   border-radius: 8px;
   background-color: none;
@@ -1753,7 +1753,7 @@ a {
   font-size: 22px;
   line-height: 28px;
   font-weight: 400;
-  text-align: center;
+  text-align: left;
 }
 
 .div-block-54 {
