@@ -257,6 +257,137 @@
 </div>
 
 <style>
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+.container .carousel-nav {
+  text-align: center;
+  padding: 50px;
+}
+.container .carousel-nav a {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  margin: 30px;
+  text-decoration: none;
+  color: gray;
+  transition: color 0.15s ease;
+}
+.container .carousel-nav a:hover {
+  color: orange;
+}
+.container .carousel-nav .active-tab {
+  color: black;
+}
+.container .carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+}
+.container .carousel-wrapper .slide-belt {
+  position: absolute;
+  left: 0%;
+  width: 300%;
+}
+.container .carousel-wrapper .slide-belt .slide-pair {
+  width: 33.33%;
+  float: left;
+  display: flex;
+}
+.container .carousel-wrapper .slide-belt .slide-pair .slide {
+  width: 50%;
+  height: 500px;
+  float: left;
+  padding: 100px 80px 30px 80px;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 900px) {
+  .container .carousel-wrapper .slide-belt .slide-pair {
+    width: 100%;
+  }
+  .container .carousel-wrapper .slide-belt .slide-pair h2 {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  .container .carousel-wrapper .slide-belt .slide-pair hr {
+    border: 2px solid;
+    width: 50px;
+    float: left;
+    margin-top: 20px;
+  }
+  .container .carousel-wrapper .slide-belt .slide-pair p {
+    float: left;
+    font-family: "Lato", sans-serif;
+    line-height: 1.6em;
+  }
+  .container .carousel-wrapper .slide-belt .slide-pair a {
+    float: left;
+    border: 2px solid;
+    padding: 10px 40px;
+    margin-top: 30px;
+    font-family: "Lato", sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    transition: all 0.2s ease;
+  }
+}
+.container .carousel-wrapper .slide-belt .slide-pair [class*="content-"] {
+  background: #212b38;
+}
+.container .carousel-wrapper .slide-belt .slide-pair [class*="img-"] {
+  background-size: cover;
+  background-position: center center;
+}
+@media screen and (max-width: 900px) {
+  .container .carousel-wrapper .slide-belt .slide-pair {
+    order: 1;
+  }
+}
+.container .carousel-wrapper .slide-belt .slide-pair .img-1 {
+  background-image: url("https://i.imgur.com/sSKFb9r.jpg");
+}
+.container .carousel-wrapper .slide-belt .slide-pair .img-2 {
+  background-image: url("http://www.toptenpack.com/wp-content/uploads/2014/08/beautiful-high-resolution-wallpapers.jpg");
+}
+.container .carousel-wrapper .slide-belt .slide-pair .img-3 {
+  background-image: url("http://buddycruise.org/assets/images/boxed_background/white-sand-palm-beach.jpg");
+}
+.container .carousel-wrapper .slide-belt .slide-pair .content-1 {
+  background-color: #212b38;
+  color: #fff;
+}
+.container .carousel-wrapper .slide-belt .slide-pair .content-1 a:hover {
+  background: #fff;
+  color: #212b38;
+  border: 2px solid #fff;
+}
+.container .carousel-wrapper .slide-belt .slide-pair .content-2 {
+  background-color: #9ea184;
+  color: #000;
+}
+.container .carousel-wrapper .slide-belt .slide-pair .content-2 a {
+  color: #000;
+}
+.container .carousel-wrapper .slide-belt .slide-pair .content-2 a:hover {
+  background: #000;
+  color: #9ea184;
+  border: 2px solid #000;
+}
+.container .carousel-wrapper .slide-belt .slide-pair .content-3 {
+  background-color: #28294f;
+  color: #fff;
+}
+.container .carousel-wrapper .slide-belt .slide-pair .content-3 a:hover {
+  background: #fff;
+  color: #28294f;
+  border: 2px solid #fff;
+}
+
+
+
 	.modalDialog {
 		position: fixed;
 		top: 0;
