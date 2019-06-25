@@ -898,10 +898,10 @@ class ArticleController
                 $word=explode(",", $result['words']);
                 foreach($word as $i) {
                     echo'
-                                        <div class="div-block-86" >
-                                            <div class="text-block-114" >'.$i.'</div >
-                                            <div class="text-block-98" > Удалить</div >
-                                        </div>';
+                        <div class="div-block-86" >
+                            <div class="text-block-114" >'.$i.'</div >
+                            <div class="text-block-98" > Удалить</div >
+                        </div>';
                 };
             };
             echo'
@@ -996,7 +996,6 @@ class ArticleController
                     <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
-					
                 </form>';
 
         include PANELDIR.'/views/layouts/footer.php';

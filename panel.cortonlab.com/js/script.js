@@ -868,8 +868,8 @@ $(document).ready(function(){
     //Подключение слов в форму ключи
     function words() {
         let variable=$('.div-block-84.word').text();
-        variable=variable.replace(/Удалить/g,';');
-        variable=variable.replace(/ /g,'_');
+        variable=variable.replace(/Удалить/g,',');
+        variable=variable.replace(/ /g,'');
         variable=variable.replace(/\n/g,'');
         variable=variable.slice(0, -1);
         $('[name=words]').val(variable);
@@ -910,9 +910,6 @@ $(document).ready(function(){
         $('[name=geo]').val(variable);
     }
     geo();
-
-
-
 
     //Добавление формы анонса
     $('#addanons').click(function() {

@@ -3258,7 +3258,7 @@
         hideLayout: function () {
             $('.div-block-84.geo').append('<div class="div-block-86"><div class="text-block-114">' + this.rawQuery + '</div><div class="text-block-98">Удалить</div></div>');
 
-            //Подключение слов в форму
+            //Подключение слов в форму регионы
             function geo() {
                 let variable=$('.div-block-84.geo').text();
                 variable=variable.replace(/Удалить/g,';');
