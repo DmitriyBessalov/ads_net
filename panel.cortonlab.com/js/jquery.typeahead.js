@@ -635,7 +635,7 @@
                     }
 
                     if (!scope.options.backdropOnFocus) {
-                        scope.hideLayout();
+                     //   scope.hideLayout();
                     }
 
                     if (scope.options.callback.onSubmit) {
@@ -2399,7 +2399,7 @@
                     })
                 });
 
-                (function (i, item, liHtml) {
+               /* (function (i, item, liHtml) {
                     liHtml.on("click", function (e, originalEvent) {
                         if (item.disabled) {
                             e.preventDefault();
@@ -2482,7 +2482,7 @@
                         );
                     });
                 })(i, _item, _liHtml);
-
+*/
                 (this.groupTemplate
                     ? groupTemplate.find('[data-group-template="' + _group + '"] ul')
                     : groupTemplate).append(_liHtml);
@@ -3250,24 +3250,12 @@
                             scope.hasDragged
                         ) return;
 
-                        scope.hideLayout();
+//                        scope.hideLayout();
                     });
             }
         },
 
         hideLayout: function () {
-            $('.div-block-84.geo').append('<div class="div-block-86"><div class="text-block-114">' + this.rawQuery + '</div><div class="text-block-98">Удалить</div></div>');
-
-            //Подключение слов в форму регионы
-            function geo() {
-                let variable=$('.div-block-84.geo').text();
-                variable=variable.replace(/Удалить/g,';');
-                variable=variable.replace(/ /g,'_');
-                variable=variable.replace(/\n/g,'');
-                variable=variable.slice(0, -1);
-                $('[name=geo]').val(variable);
-            }
-            geo();
 
             // Means the container is already hidden
             if (!this.container.hasClass("result") && !this.container.hasClass("backdrop")) return;

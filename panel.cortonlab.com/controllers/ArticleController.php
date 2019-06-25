@@ -878,7 +878,7 @@ class ArticleController
         <script src="/js/jquery.typeahead.js"></script>
         
         <link rel="stylesheet" href="/css/jquery.typeahead.css">
-        <form method="post" action="/article-update" class="form-2">
+        <form method="post" action="/article-update" class="form-2" onsubmit="return false;">
                     <div class="div-block-97" style="padding: 30px 0;">
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
@@ -963,7 +963,7 @@ class ArticleController
                             hint: true,
                             dropdownFilter: "Все",
                             onclick:"alert(1)",
-                            template: "<div style=\"display: flex;flex-direction: row;justify-content: space-between;\"><div>{{display}} </div> <div class=\"addgeoname\" style=\"color: #60bf52;\">Добавить</div></div>",
+                            template: "<div style=\"display: flex;flex-direction: row;justify-content: space-between;\"><div>{{display}}</div> <div class=\"addgeoname\" style=\"color: #60bf52;\">Добавить</div></div>",
                             emptyTemplate: "Регион \"{{query}}\" не найден",
                             source: {
                                 Страна: {
