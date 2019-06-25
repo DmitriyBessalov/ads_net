@@ -921,7 +921,9 @@ class ArticleController
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="geo" value="">
                         <div class="div-block-84 geo"></div>
+                        
                     </div>
                     <script>
                         var data = {

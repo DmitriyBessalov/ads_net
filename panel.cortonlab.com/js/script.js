@@ -865,11 +865,11 @@ $(document).ready(function(){
         $("#tab4block").addClass("w--tab-active");
     });
 
-    //Подключение слов в форму
+    //Подключение слов в форму ключи
     function words() {
         let variable=$('.div-block-84.word').text();
-        variable=variable.replace(/Удалить/g,',');
-        variable=variable.replace(/ /g,'');
+        variable=variable.replace(/Удалить/g,';');
+        variable=variable.replace(/ /g,'_');
         variable=variable.replace(/\n/g,'');
         variable=variable.slice(0, -1);
         $('[name=words]').val(variable);
@@ -900,6 +900,16 @@ $(document).ready(function(){
     $(document).on('click','.typeahead__item',function(){
         $('.js-typeahead').val('');
     });
+    //Подключение слов в форму регионы
+    function geo() {
+        let variable=$('.div-block-84.geo').text();
+        variable=variable.replace(/Удалить/g,',');
+        variable=variable.replace(/ /g,'');
+        variable=variable.replace(/\n/g,'');
+        variable=variable.slice(0, -1);
+        $('[name=geo]').val(variable);
+    }
+    geo();
 
 
 
