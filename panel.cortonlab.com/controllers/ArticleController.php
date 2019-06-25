@@ -902,7 +902,7 @@ class ArticleController
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
-					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">					
+					<!--div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">					
                         <div style="flex-direction: column;">
                             <div>
                             <div class="text-block-103">Выберите регион:</div>
@@ -952,7 +952,7 @@ class ArticleController
                             </div>
                             </div>
                         </div>
-                    </div>
+                    </div-->
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
                     <div class="div-block-85">
@@ -1185,7 +1185,6 @@ class ArticleController
             }else{
                 echo 'true';
             }
-
             return true;
         }
     }
