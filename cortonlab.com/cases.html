@@ -27,6 +27,36 @@
         webvisor:true,
         trackHash:true
    });
+   
+   $('document').ready(function(){
+  tabslider();
+  
+});
+
+function tabslider(){
+  //add class 'active-tab' to the first link
+  $('.carousel-nav a').first().addClass("active-tab");
+
+  $('.carousel-nav a').click(function(){
+    var $this = $(this),
+        $siblings = $this.parent().children(),
+        position = $siblings.index($this);
+    
+    $('.carousel-nav a').removeClass('active-tab').eq(position).addClass('active-tab');
+    
+    if(position == 1){
+      $('.slide-belt').animate({"left": "-100%"}, 200);
+    } else if(position == 2){
+      $('.slide-belt').animate({'left': '-200%'}, 200);
+    } else {
+      $('.slide-belt').animate({'left': '0%'}, 200);
+    }
+    
+    
+  });
+  
+  
+}
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/53194270" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
@@ -429,5 +459,6 @@
 	}
 	.close:hover { background: #116dd6; }
 </style>
+
 </body>
 </html>
