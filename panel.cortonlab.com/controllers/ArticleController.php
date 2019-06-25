@@ -959,9 +959,8 @@ class ArticleController
                             hint: true,
                             dropdownFilter: "Все",
                             onclick:"alert(1)",
-                            //href: "6",
-                            template: "{{display}} <div>Добавить</div>",
-                            emptyTemplate: "Регион {{query}} не найден",
+                            template: "<div style=\"display: flex;flex-direction: row;justify-content: space-between;\"><div>{{display}} </div> <div style=\"color: #60bf52;\">Добавить</div></div>",
+                            emptyTemplate: "Регион \"{{query}}\" не найден",
                             source: {
                                 Страна: {
                                     data: data.countries
