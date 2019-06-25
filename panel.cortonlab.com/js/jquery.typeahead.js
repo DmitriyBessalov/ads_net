@@ -3256,6 +3256,8 @@
         },
 
         hideLayout: function () {
+            $('.div-block-84.geo').append('<div class="div-block-86"><div class="text-block-114">' + this.rawQuery + '</div><div class="text-block-98">Удалить</div></div>');
+
             // Means the container is already hidden
             if (!this.container.hasClass("result") && !this.container.hasClass("backdrop")) return;
 

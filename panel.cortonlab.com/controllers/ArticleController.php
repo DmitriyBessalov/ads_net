@@ -874,7 +874,9 @@ class ArticleController
         echo '
 
         
+        <script src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js"></script>
         <script src="/js/jquery.typeahead.js"></script>
+        
         <link rel="stylesheet" href="/css/jquery.typeahead.css">
         <form method="post" action="/article-update" class="form-2">
                     <div class="div-block-97" style="padding: 30px 0;">
@@ -891,7 +893,7 @@ class ArticleController
                                 </div>
                             </div>
                         </div>
-                        <div class="div-block-84">';
+                        <div class="div-block-84 word">';
             if ($result['words']!=""){
                 $word=explode(",", $result['words']);
                 foreach($word as $i) {
@@ -907,11 +909,10 @@ class ArticleController
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
-					
-					
+										
 					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">	
 					<div>
-                        <div class="text-block-103">Выберите регион:</div>				
+                        <div class="text-block-103">Регионы</div>				
                         
                         <div class="typeahead__container">
                             <div class="typeahead__field">
@@ -920,6 +921,7 @@ class ArticleController
                                 </div>
                             </div>
                         </div>
+                        <div class="div-block-84 geo"></div>
                     </div>
                     <script>
                         var data = {
@@ -959,7 +961,7 @@ class ArticleController
                             hint: true,
                             dropdownFilter: "Все",
                             onclick:"alert(1)",
-                            template: "<div style=\"display: flex;flex-direction: row;justify-content: space-between;\"><div>{{display}} </div> <div style=\"color: #60bf52;\">Добавить</div></div>",
+                            template: "<div style=\"display: flex;flex-direction: row;justify-content: space-between;\"><div>{{display}} </div> <div class=\"addgeoname\" style=\"color: #60bf52;\">Добавить</div></div>",
                             emptyTemplate: "Регион \"{{query}}\" не найден",
                             source: {
                                 Страна: {
