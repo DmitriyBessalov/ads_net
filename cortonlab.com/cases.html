@@ -28,35 +28,6 @@
         trackHash:true
    });
    
-   $('document').ready(function(){
-  tabslider();
-  
-});
-
-function tabslider(){
-  //add class 'active-tab' to the first link
-  $('.carousel-nav a').first().addClass("active-tab");
-
-  $('.carousel-nav a').click(function(){
-    var $this = $(this),
-        $siblings = $this.parent().children(),
-        position = $siblings.index($this);
-    
-    $('.carousel-nav a').removeClass('active-tab').eq(position).addClass('active-tab');
-    
-    if(position == 1){
-      $('.slide-belt').animate({"left": "-100%"}, 200);
-    } else if(position == 2){
-      $('.slide-belt').animate({'left': '-200%'}, 200);
-    } else {
-      $('.slide-belt').animate({'left': '0%'}, 200);
-    }
-    
-    
-  });
-  
-  
-}
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/53194270" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
@@ -79,66 +50,61 @@ function tabslider(){
          <div class="div-block-34">
             <h1 class="heading-3"><span class="text-span-30">Кейсы рекламодателей</h1></div>
 	     <div class="div-block-60">
-	        <div class="div-block-61">
-			
-			
-			<head>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat|Lato' rel='stylesheet' type='text/css'>
-</head>
-<body>
-  <section class="carousel">
-    <div class="container">
-      <div class="carousel-nav">
-        <a href="#">Slide One</a>
-        <a href="#">Slide Two</a>
-        <a href="#">Slide Three</a>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="slide-belt">
-          <div class="slide-pair">
-            <div class="slide content-1">
-              <h2>Slide One Title</h2>
-              <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a class="btn" href="#" role="button">Button</a>
-      </div>
-            <div class="slide img-1">
-            </div>
-          </div>
-          <div class="slide-pair">
-            <div class="slide content-2">
-              <h2>Slide Two Title</h2>
-              <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a class="btn" href="#" role="button">Button</a>
+		 
+		 
+		 <div class="container">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
       
-            </div>
-            <div class="slide img-2">
-            </div>
+        <div class="item active">
+          <img src="http://placehold.it/1200x440/cccccc/ffffff">
+           <div class="carousel-caption">
+            <h3>Headline</h3>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
           </div>
-          <div class="slide-pair">
-            <div class="slide content-3">
-              <h2>Slide Two Title</h2>
-              <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a class="btn" href="#" role="button">Button</a>
-            </div>
-            <div class="slide img-3">
-            </div>
+        </div><!-- End Item -->
+ 
+         <div class="item">
+          <img src="http://placehold.it/1200x440/999999/cccccc">
+           <div class="carousel-caption">
+            <h3>Headline</h3>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</body>
-			
-			
-			
-			
-			
-			
-			
-			
+        </div><!-- End Item -->
+        
+        <div class="item">
+          <img src="http://placehold.it/1200x440/dddddd/333333">
+           <div class="carousel-caption">
+            <h3>Headline</h3>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+          </div>
+        </div><!-- End Item -->
+        
+        <div class="item">
+          <img src="http://placehold.it/1200x440/999999/cccccc">
+           <div class="carousel-caption">
+            <h3>Headline</h3>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+          </div>
+        </div><!-- End Item -->
+                
+      </div><!-- End Carousel Inner -->
+
+
+		<ul class="nav nav-pills nav-justified">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">About<small>Lorem ipsum dolor sit</small></a></li>
+          <li data-target="#myCarousel" data-slide-to="1"><a href="#">Projects<small>Lorem ipsum dolor sit</small></a></li>
+          <li data-target="#myCarousel" data-slide-to="2"><a href="#">Portfolio<small>Lorem ipsum dolor sit</small></a></li>
+          <li data-target="#myCarousel" data-slide-to="3"><a href="#">Services<small>Lorem ipsum dolor sit</small></a></li>
+        </ul>
+
+
+    </div><!-- End Carousel -->
+</div>
+		 
+	        <div class="div-block-61">
 	          <div class="div-block-62">
 	             <div class="text-block-17">
 				    <strong>Бренд: Здоровая семья</strong><br><br>
@@ -287,133 +253,15 @@ function tabslider(){
 </div>
 
 <style>
-.container {
-  max-width: 1170px;
-  margin: 0 auto;
+body { padding-top: 50px; }
+#myCarousel .nav a small {
+	display:block;
 }
-.container .carousel-nav {
-  text-align: center;
-  padding: 50px;
+#myCarousel .nav li a {
+  border-radius: 0;
 }
-.container .carousel-nav a {
-  font-family: "Montserrat", sans-serif;
-  text-transform: uppercase;
-  margin: 30px;
-  text-decoration: none;
-  color: gray;
-  transition: color 0.15s ease;
-}
-.container .carousel-nav a:hover {
-  color: orange;
-}
-.container .carousel-nav .active-tab {
-  color: black;
-}
-.container .carousel-wrapper {
-  position: relative;
-  overflow: hidden;
-  height: 600px;
-}
-.container .carousel-wrapper .slide-belt {
-  position: absolute;
-  left: 0%;
-  width: 300%;
-}
-.container .carousel-wrapper .slide-belt .slide-pair {
-  width: 33.33%;
-  float: left;
-  display: flex;
-}
-.container .carousel-wrapper .slide-belt .slide-pair .slide {
-  width: 50%;
-  height: 500px;
-  float: left;
-  padding: 100px 80px 30px 80px;
-  box-sizing: border-box;
-}
-@media screen and (max-width: 900px) {
-  .container .carousel-wrapper .slide-belt .slide-pair {
-    width: 100%;
-  }
-  .container .carousel-wrapper .slide-belt .slide-pair h2 {
-    font-family: "Montserrat", sans-serif;
-    margin: 0;
-    text-transform: uppercase;
-    font-size: 20px;
-  }
-  .container .carousel-wrapper .slide-belt .slide-pair hr {
-    border: 2px solid;
-    width: 50px;
-    float: left;
-    margin-top: 20px;
-  }
-  .container .carousel-wrapper .slide-belt .slide-pair p {
-    float: left;
-    font-family: "Lato", sans-serif;
-    line-height: 1.6em;
-  }
-  .container .carousel-wrapper .slide-belt .slide-pair a {
-    float: left;
-    border: 2px solid;
-    padding: 10px 40px;
-    margin-top: 30px;
-    font-family: "Lato", sans-serif;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: white;
-    transition: all 0.2s ease;
-  }
-}
-.container .carousel-wrapper .slide-belt .slide-pair [class*="content-"] {
-  background: #212b38;
-}
-.container .carousel-wrapper .slide-belt .slide-pair [class*="img-"] {
-  background-size: cover;
-  background-position: center center;
-}
-@media screen and (max-width: 900px) {
-  .container .carousel-wrapper .slide-belt .slide-pair {
-    order: 1;
-  }
-}
-.container .carousel-wrapper .slide-belt .slide-pair .img-1 {
-  background-image: url("https://i.imgur.com/sSKFb9r.jpg");
-}
-.container .carousel-wrapper .slide-belt .slide-pair .img-2 {
-  background-image: url("http://www.toptenpack.com/wp-content/uploads/2014/08/beautiful-high-resolution-wallpapers.jpg");
-}
-.container .carousel-wrapper .slide-belt .slide-pair .img-3 {
-  background-image: url("http://buddycruise.org/assets/images/boxed_background/white-sand-palm-beach.jpg");
-}
-.container .carousel-wrapper .slide-belt .slide-pair .content-1 {
-  background-color: #212b38;
-  color: #fff;
-}
-.container .carousel-wrapper .slide-belt .slide-pair .content-1 a:hover {
-  background: #fff;
-  color: #212b38;
-  border: 2px solid #fff;
-}
-.container .carousel-wrapper .slide-belt .slide-pair .content-2 {
-  background-color: #9ea184;
-  color: #000;
-}
-.container .carousel-wrapper .slide-belt .slide-pair .content-2 a {
-  color: #000;
-}
-.container .carousel-wrapper .slide-belt .slide-pair .content-2 a:hover {
-  background: #000;
-  color: #9ea184;
-  border: 2px solid #000;
-}
-.container .carousel-wrapper .slide-belt .slide-pair .content-3 {
-  background-color: #28294f;
-  color: #fff;
-}
-.container .carousel-wrapper .slide-belt .slide-pair .content-3 a:hover {
-  background: #fff;
-  color: #28294f;
-  border: 2px solid #fff;
+#myCarousel .nav {
+	background:#eee;
 }
 
 
