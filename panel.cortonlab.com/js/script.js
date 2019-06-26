@@ -1069,6 +1069,13 @@ $(document).ready(function(){
         $('.js-typeahead').val('');
     });
 
+    $('form').bind("keypress", function(e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     //Создание статьи на основе текущей
     $('#add_variat_promo').click(function(){
         let variant = document.getElementsByClassName('aticlevariant');
