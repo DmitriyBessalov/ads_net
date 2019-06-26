@@ -1055,7 +1055,6 @@ $(document).ready(function(){
         let str='';
         let count=0;
         if (value.length){
-
             countries.forEach(function(item, index) {
                 if (count<15){
                     let itm=item.toLowerCase();
@@ -1065,7 +1064,6 @@ $(document).ready(function(){
                     };
                 }
             });
-
             $('#geolist').html('<ul id="geo_list">'+str+'</ul>');
             $('#geolist').show();
         }else {
@@ -1074,17 +1072,7 @@ $(document).ready(function(){
         }
     });
 
-    //Подключение слов в форму регионы
-    /*function geo() {
-        let variable=$('.div-block-84.geo').text();
-        variable=variable.replace(/Удалить/g,',');
-        variable=variable.replace(/ /g,'_');
-        variable=variable.replace(/\n/g,'');
-        variable=variable.slice(0, -1);
-        $('[name=geo]').val(variable);
-    }
-    geo();
-
+    /*
     //Добавление в список регионов
     $(document).on('click','li',function(){
         let region=$(this).children('a')[0].text;
@@ -1094,6 +1082,18 @@ $(document).ready(function(){
         $('.typeahead__list').remove();
         $('.js-typeahead').val('');
     });*/
+
+
+    //Подключение слов в форму регионы
+    function geo() {
+        let variable=$('.div-block-84.geo').text();
+        variable=variable.replace(/Удалить/g,',');
+        variable=variable.replace(/ /g,'_');
+        variable=variable.replace(/\n/g,'');
+        variable=variable.slice(0, -1);
+        $('[name=geo]').val(variable);
+    }
+    geo();
 
     //Создание статьи на основе текущей
     $('#add_variat_promo').click(function(){
