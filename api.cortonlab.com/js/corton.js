@@ -574,12 +574,12 @@ function corton_widget() {
                 widget_slider.style.zIndex = '99999';
                 w++;
                 show_slider=3;
-                setTimeout(checkreadslider, 3000, slider_anons_id);
+                setTimeout(checkreadslider, 5000, slider_anons_id);
             }
         }
     }
 
-    //Проверка тизеров на длительность прочтения в 3 секунды
+    //Проверка тизеров на длительность прочтения в 5 секунды
     var anons_ids_old='';
     var anons_ids_new;
     var anons_ids_show=[];
@@ -703,7 +703,7 @@ function corton_widget() {
             }
             //console.log('захвачены',anons_ids_show);
 
-            setTimeout(checkread, 3000, anons_ids_show.join().substr(0))
+            setTimeout(checkread, 5000, anons_ids_show.join().substr(0))
             anons_idsnew.splice(0,anons_idsnew.length);
         }
         anons_ids_old=anons_ids.join();
