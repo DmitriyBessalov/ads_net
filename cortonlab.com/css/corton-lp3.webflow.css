@@ -2741,6 +2741,13 @@ a {
     -ms-flex-align: left;
     align-items: left;
   }
+    .div-block-83-2 {
+    justify-content: left;
+    -webkit-box-align: left;
+    -webkit-align-items: left;
+    -ms-flex-align: center;
+    align-items: left;
+  }
   .text-block-15 {
     direction: ltr;
     font-size: 68px;
