@@ -534,6 +534,14 @@ a {
   color: #000;
 }
 
+  .hrline {
+	height:1px; 
+	width:100%; 
+	background:#E0E1E5; 
+	margin-bottom: -10px; 
+	margin-top: 20px;
+  }
+
 .hero-subhead {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -2753,6 +2761,13 @@ a {
   }
   .tabs {
 	  padding: 0px!important;
+  }
+  .hrline {
+	height:1px; 
+	width:100%; 
+	background:#E0E1E5; 
+	margin-bottom: -10px; 
+	margin-top: 20px;
   }
   .text-block-15 {
     direction: ltr;
