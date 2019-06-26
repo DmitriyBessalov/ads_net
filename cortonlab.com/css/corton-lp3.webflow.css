@@ -2752,7 +2752,7 @@ a {
 	margin-bottom: 40px;
   }
   .tabs {
-	  padding: 0px;
+	  padding: 0px!important;
   }
   .text-block-15 {
     direction: ltr;
