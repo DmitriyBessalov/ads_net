@@ -534,6 +534,14 @@ a {
   color: #000;
 }
 
+  .hrline {
+	height:1px; 
+	width:100%; 
+	background:#E0E1E5; 
+	margin-bottom: -10px; 
+	margin-top: 60px;
+  }
+
 .hero-subhead {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -1698,10 +1706,10 @@ a {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-box-align: left;
+  -webkit-align-items: left;
+  -ms-flex-align: left;
+  align-items: left;
   border-style: none;
   border-radius: 8px;
   background-color: none;
@@ -1753,7 +1761,7 @@ a {
   font-size: 22px;
   line-height: 28px;
   font-weight: 400;
-  text-align: center;
+  text-align: left;
 }
 
 .div-block-54 {
@@ -2736,10 +2744,30 @@ a {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
+    -webkit-box-align: left;
+    -webkit-align-items: left;
+    -ms-flex-align: left;
+    align-items: left;
+  }
+    .div-block-83-2 {
+    justify-content: left;
+    -webkit-box-align: left;
+    -webkit-align-items: left;
     -ms-flex-align: center;
-    align-items: center;
+    align-items: left;
+  }
+  .div-block-52-2 {
+	margin-bottom: 40px;
+  }
+  .tabs {
+	  padding: 0px!important;
+  }
+  .hrline {
+	height:1px; 
+	width:100%; 
+	background:#E0E1E5; 
+	margin-bottom: 0px; 
+	margin-top: 20px;
   }
   .text-block-15 {
     direction: ltr;
