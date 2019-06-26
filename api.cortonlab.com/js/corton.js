@@ -28,7 +28,7 @@ function corton_promo() {
 
     adblock();
     var h3=0;
-    var request ='https://api2.cortonlab.com/promo.php'+location.search;
+    var request ='https://api.cortonlab.com/js/promo.php'+location.search;
     let result=[];
     console.log(request);
     var xhr = new XMLHttpRequest();
@@ -446,8 +446,8 @@ function corton_widget() {
             widget_load_status=1;
             //console.log('widget_load');
             var top10 = words();
-            var request = 'https://api2.cortonlab.com/widgets.php?words=' + encodeURI(top10.join()) + widget;
-            if (location.hostname=='demo.cortonlab.com'){request='https://api2.cortonlab.com/widgets-demo.php?words=' + encodeURI(top10.join())+'&sheme='+document.cookie.match(/scheme=(.+?);/)+'&host='+document.cookie.match(/host=(.+?);/) + widget;}
+            var request = 'https://api.cortonlab.com/js/widgets.php?words=' + encodeURI(top10.join()) + widget;
+            if (location.hostname=='demo.cortonlab.com'){request='https://api.cortonlab.com/js/widgets-demo.php?words=' + encodeURI(top10.join())+'&sheme='+document.cookie.match(/scheme=(.+?);/)+'&host='+document.cookie.match(/host=(.+?);/) + widget;}
             console.log(decodeURI(request));
             //console.log(location.hostname);
             var xhr = new XMLHttpRequest();
