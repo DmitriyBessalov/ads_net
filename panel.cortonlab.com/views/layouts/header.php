@@ -22,10 +22,10 @@
 	  <img src="/images/cortonlab.png" alt="" class="image">
 	  <div style="height:1px; width:210px; background:#E0E1E5; margin-left: 20px; margin-bottom: 24px;"></div>
       <? if ($GLOBALS['role']=='platform'): ?>
-	      <div class="titlehr">Кабинет</div>
+	      <div class="titlehr">Платформа</div>
           <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-fin.png" class="image-6"><div class="text-block-82-copy">Статистика</div></a>
 		  <a href="/balance" class="link-block w-inline-block"><img src="/images/ic-balance.png" class="image-6"><div class="text-block-82-copy">Вывод средств</div></a>
-		  <div class="titlehr" style="margin-top:14px;">Система</div>
+		  <div class="titlehr" style="margin-top:14px;">Кабинет</div>
 		  <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-setting.png" class="image-6"><div class="text-block-82-copy">Настройки</div></a>
       <? endif; ?>
       <? if ($GLOBALS['role']=='advertiser'): ?>

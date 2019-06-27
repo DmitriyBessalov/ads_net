@@ -2213,10 +2213,11 @@ input.w-button2 {
 .div-block-92 {
   height: 60px;
   min-width: 740px;
-  margin: 100px 20px 30px;
+  margin: 100px 0px 30px;
   padding-top: 25px;
   border-top: 1px solid #f4f6f9;
   display: inline-flex;
+  padding: 0 6%;
 }
 
 input[name=active] {
@@ -2914,8 +2915,8 @@ input[name=active] {
   height: 100%;
   border-style: none solid none none;
   border-right-width: 1px;
-  border-right-color: #efefef;
-  background-color: #efefef;
+  border-right-color: #F2F2F2;
+  background-color: #F2F2F2;
   z-index: 2;
 }
 .a-b-btn {
