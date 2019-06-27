@@ -974,15 +974,16 @@ $(document).ready(function(){
         let str='';
         let count=0;
         if (value.length){
-            countries.forEach(function(item, index) {
+            Object.keys(countries).forEach(function(el, id) {
                 if (count<15){
-                    let itm=item.toLowerCase();
+                    let itm=countries[el].toLowerCase();
                     if(itm.indexOf(value) + 1) {
-                        str=str+'<li style=""><div>'+item+'</div><div style="color: #008a00">Добавить</div></li>';
+                        str=str+'<li data-name="'+el+'"><div>'+countries[el]+'</div><div style="color: #008a00">Добавить</div></li>';
                         count++;
                     };
                 }
             });
+
             if (count) {
                 $('#geolist').html('<ul id="geo_list"><p>' + str + '</p></ul>');
             }else{
@@ -999,7 +1000,8 @@ $(document).ready(function(){
     $(document).on('click','ul#geo_list > li',function(){
         let region=$(this).text();
         region=region.substr(0,region.length - 8);
-        $('.div-block-84.geo').append('<div class="div-block-86"><div class="text-block-114">' + region + '</div><div class="text-block-98">Удалить</div></div>');
+        let name=$(this).data('name');
+        $('.div-block-84.geo').append('<div class="div-block-86"><div class="text-block-114 isogeolist" data-label="'+name+'">' + region + '</div><div class="text-block-98">Удалить</div></div>');
         $('#geolist').hide();
         geo();
     });
@@ -1016,12 +1018,13 @@ $(document).ready(function(){
 
     //Подключение слов в форму регионы
     function geo() {
-        let variable=$('.div-block-84.geo').text();
-        variable=variable.replace(/Удалить/g,',');
-        variable=variable.replace(/ /g,'_');
-        variable=variable.replace(/\n/g,'');
-        variable=variable.slice(0, -1);
-        $('[name=geo]').val(variable);
+        var arr = [];
+        var variable=document.querySelectorAll('.isogeolist');
+        for (i = 0; i < variable.length; i++) {
+            console.log( variable[i].dataset.label) ;
+            arr[i]=variable[i].dataset.label;
+        }
+        $('[name=geo]').val(arr.join(','));
     }
     geo();
 
