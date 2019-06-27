@@ -313,7 +313,7 @@ var myLineChart = new Chart(ctx, {
                     SET
                         `domen` = '".$_POST['domen']."',
                         `type` = '".$_POST['type']."',
-                        `podcategoriya_id` ='".$_POST['podcategoriya']."',
+                        `podcategoriya_id` ='".$_POST['podcategoriya_id']."',
                         `promo_page`='".$_POST['promo_page']."',
                         `user_id` = '".$_POST['user_id']."',
                         `status` ='".$aktiv."',
@@ -396,6 +396,9 @@ var myLineChart = new Chart(ctx, {
                     echo "value=\"".$i['id']."\">".$i['email']."</option>";
                 };
 
+                $sql = "SELECT `id_categoriya` FROM `podcategoriya` WHERE `id`='".$result['podcategoriya_id']."'";
+                $current_categoriya = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
                 $sql = "SELECT * FROM `categoriya` WHERE 1";
                 $categoriy = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
@@ -404,13 +407,19 @@ var myLineChart = new Chart(ctx, {
                 <select id="categoriya" name="categoriya" required="" class="select-field w-select" '.$disabled.'>
                   <option value="">Категория площадки</option>';
                   foreach ($categoriy as $i) {
-                      echo  '<option '; if ($result['categoriya']==$i['categoriya'] ) echo "selected"; echo ' value="'.$i['categoriya'].'">'.$i['categoriya'].'</option>';
+                      echo  '<option '; if ($current_categoriya==$i['id'] ) echo "selected"; echo ' value="'.$i['id'].'">'.$i['categoriya'].'</option>';
                   };
                     echo'  
                 </select>
                 <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
-                <select id="podcategoriya" name="podcategoriya" required="" class="select-field w-select" '.$disabled.'>
-                  <option value="">Подкатегория площадки</option>
+                <select id="podcategoriya" name="podcategoriya_id" required="" class="select-field w-select" '.$disabled.'>
+                  <option value="">Подкатегория площадки</option>';
+                    $sql = "SELECT `id`, `podcategoriya` FROM `podcategoriya` WHERE `id_categoriya`='".$current_categoriya."'";
+                    $current_podcategoriya = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+                    foreach ($current_podcategoriya as $i) {
+                        echo  '<option '; if ($result['podcategoriya_id']==$i['id'] ) echo "selected"; echo ' value="'.$i['id'].'">'.$i['podcategoriya'].'</option>';
+                    };
+                    echo '  
                 </select>
 				<div style="width: 1337px; margin-bottom: 60px;"></div>
 				';
