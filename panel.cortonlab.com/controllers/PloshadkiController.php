@@ -286,7 +286,7 @@ var myLineChart = new Chart(ctx, {
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
                 if (addslashes($_REQUEST['id'])==""){
-                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_id`='".$_POST['user_id']."',`type`='".$_POST['type']."', `categoriya`='".$_POST['categoriya']."', `podcategoriya`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
+                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_id`='".$_POST['user_id']."',`type`='".$_POST['type']."', `podcategoriya_id`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
                     $GLOBALS['db']->query($sql);
                     $id=$GLOBALS['db']->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
@@ -313,8 +313,7 @@ var myLineChart = new Chart(ctx, {
                     SET
                         `domen` = '".$_POST['domen']."',
                         `type` = '".$_POST['type']."',
-                        `categoriya` = '".$_POST['categoriya']."',
-                        `podcategoriya` ='".$_POST['podcategoriya']."',
+                        `podcategoriya_id` ='".$_POST['podcategoriya']."',
                         `promo_page`='".$_POST['promo_page']."',
                         `user_id` = '".$_POST['user_id']."',
                         `status` ='".$aktiv."',
@@ -341,7 +340,7 @@ var myLineChart = new Chart(ctx, {
             public static function form()
             {
                 if (addslashes($_REQUEST['id'])!='') {
-                    $sql = "SELECT  `domen`, `type`, `categoriya`, `podcategoriya`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
+                    $sql = "SELECT  `domen`, `type`, `podcategoriya_id`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                     $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
@@ -396,41 +395,18 @@ var myLineChart = new Chart(ctx, {
                     if ($result['user_id']==$i['id'] ) echo "selected ";
                     echo "value=\"".$i['id']."\">".$i['email']."</option>";
                 };
+
+                $sql = "SELECT * FROM `categoriya` WHERE 1";
+                $categoriy = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
                 echo '
                 </select>
                 <select id="categoriya" name="categoriya" required="" class="select-field w-select" '.$disabled.'>
-                  <option value="">Категория площадки</option>
-				  <option '; if ($result['categoriya']=='Авто' ) echo "selected"; echo ' value="Авто">Авто</option>
-				  <option '; if ($result['categoriya']=='Беременность и роды﻿' ) echo "selected"; echo ' value="Беременность и роды﻿">Беременность и роды﻿</option>
-				  <option '; if ($result['categoriya']=='Дом и сад' ) echo "selected"; echo ' value="Дом и сад">Дом и сад</option>
-				  <option '; if ($result['categoriya']=='Домашние животные' ) echo "selected"; echo ' value="Домашние животные">Домашние животные</option>
-				  <option '; if ($result['categoriya']=='Женская общая' ) echo "selected"; echo ' value="Женская общая">Женская общая</option>
-				  <option '; if ($result['categoriya']=='Заработок и Финансы' ) echo "selected"; echo ' value="Заработок и Финансы">Заработок и Финансы</option> 
-                  <option '; if ($result['categoriya']=='Здоровье и медицина' ) echo "selected"; echo ' value="Здоровье и медицина">Здоровье и медицина</option>
-				  <option '; if ($result['categoriya']=='Фитнес и диеты' ) echo "selected"; echo ' value="Фитнес и диеты">Фитнес и диеты</option>
-				  <option '; if ($result['categoriya']=='Знаменитости' ) echo "selected"; echo ' value="Знаменитости">Знаменитости</option>
-				  <option '; if ($result['categoriya']=='Игры' ) echo "selected"; echo ' value="Игры">Игры</option>
-				  <option '; if ($result['categoriya']=='Искусство' ) echo "selected"; echo ' value="Искусство">Искусство</option>
-				  <option '; if ($result['categoriya']=='Книги и журналы' ) echo "selected"; echo ' value="Книги и журналы">Книги и журналы</option>
-				  <option '; if ($result['categoriya']=='Комиксы и анимация' ) echo "selected"; echo ' value="Комиксы и анимация">Комиксы и анимация</option>
-				  <option '; if ($result['categoriya']=='Красота' ) echo "selected"; echo ' value="Красота">Красота</option>
-				  <option '; if ($result['categoriya']=='Мобильные технологии' ) echo "selected"; echo ' value="Мобильные технологии">Мобильные технологии</option>
-				  <option '; if ($result['categoriya']=='Мужская' ) echo "selected"; echo ' value="Мужская">Мужская</option>
-				  <option '; if ($result['categoriya']=='Музыка' ) echo "selected"; echo ' value="Музыка">Музыка</option>
-				  <option '; if ($result['categoriya']=='Общая' ) echo "selected"; echo ' value="Общая">Общая</option>
-				  <option '; if ($result['categoriya']=='Покупки' ) echo "selected"; echo ' value="Покупки">Покупки</option>
-				  <option '; if ($result['categoriya']=='Психология/Отношения' ) echo "selected"; echo ' value="Психология/Отношения">Психология/Отношения</option>
-				  <option '; if ($result['categoriya']=='Путешествия и туризм' ) echo "selected"; echo ' value="Путешествия и туризм">Путешествия и туризм</option>
-				  <option '; if ($result['categoriya']=='Развлекательный' ) echo "selected"; echo ' value="Развлекательный">Развлекательный</option>
-				  <option '; if ($result['categoriya']=='Рецепты' ) echo "selected"; echo ' value="Рецепты">Рецепты</option>
-				  <option '; if ($result['categoriya']=='Семья и воспитание' ) echo "selected"; echo ' value="Семья и воспитание">Семья и воспитание</option>
-				  <option '; if ($result['categoriya']=='Спорт' ) echo "selected"; echo ' value="Спорт">Спорт</option>
-				  <option '; if ($result['categoriya']=='Стиль и мода' ) echo "selected"; echo ' value="Стиль и мода">Стиль и мода</option>
-				  <option '; if ($result['categoriya']=='Строительство и ремонт' ) echo "selected"; echo ' value="Строительство и ремонт">Строительство и ремонт</option>
-				  <option '; if ($result['categoriya']=='Учеба' ) echo "selected"; echo ' value="Учеба">Учеба</option>
-				  <option '; if ($result['categoriya']=='Фильмы/Сериалы/Телешоу' ) echo "selected"; echo ' value="Фильмы/Сериалы/Телешоу">Фильмы/Сериалы/Телешоу</option>	
-                  <option '; if ($result['categoriya']=='Хобби и интересы' ) echo "selected"; echo ' value="Хобби и интересы">Хобби и интересы</option>
-                  <option '; if ($result['categoriya']=='Недвижимость' ) echo "selected"; echo ' value="Недвижимость">Недвижимость</option>
+                  <option value="">Категория площадки</option>';
+                  foreach ($categoriy as $i) {
+                      echo  '<option '; if ($result['categoriya']==$i['categoriya'] ) echo "selected"; echo ' value="'.$i['categoriya'].'">'.$i['categoriya'].'</option>';
+                  };
+                    echo'  
                 </select>
                 <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
                 <select id="podcategoriya" name="podcategoriya" required="" class="select-field w-select" '.$disabled.'>

@@ -871,6 +871,16 @@ class ArticleController
             $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
             $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         };
+
+        $sql="SELECT `region` FROM `iso3166-2`";
+        $region = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        $regionall=implode('","', $region);
+        echo'
+        <script>
+            var countries=["'.$regionall.'"];
+        </script>
+        ';
+
         echo '
 
         <form method="post" action="/article-update" class="form-2">
