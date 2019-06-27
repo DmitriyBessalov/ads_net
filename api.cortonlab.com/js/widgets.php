@@ -151,9 +151,9 @@ $platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 //$platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
 foreach ($word_arr as $i){
-    $sql = "UPDATE `words` SET `count`=`count`+1   WHERE `platform_id`='".$platform_id."' AND `uri`='".$i."'";
+    $sql = "UPDATE `words` SET `count`=`count`+1 WHERE `platform_id`='".$platform_id."' AND `words`='".$i."'";
     if (!$GLOBALS['dbstat']->exec($sql)){
-        $sql = "INSERT INTO `words` SET `platform_id`='".$platform_id."', `uri`='".$i."', `count`='1'";
+        $sql = "INSERT INTO `words` SET `platform_id`='".$platform_id."', `words`='".$i."', `count`='1'";
         $GLOBALS['dbstat']->query($sql);
     }
 }
