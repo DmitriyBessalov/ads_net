@@ -423,6 +423,9 @@ class ArticleController
                 }
                 break;
             }case 'настройка' :{
+            $geo=array_unique(explode(',', $_POST['geo']));
+            $_POST['geo']=implode(',', $geo);
+
             $strtolow=mb_strtolower($_POST['words'], 'UTF-8');
             $words = array_unique(explode(",", $strtolow));
             asort($words);
@@ -475,7 +478,7 @@ class ArticleController
                     }
             }
 
-            $sql="UPDATE `promo` SET `words`='".$strtolow."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
+            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."',  `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
@@ -872,17 +875,17 @@ class ArticleController
             $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         };
 
-        $sql="SELECT `region` FROM `iso3166-2`";
-        $region = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_COLUMN);
-        $regionall=implode('","', $region);
-        echo'
-        <script>
-            var countries=["'.$regionall.'"];
-        </script>
-        ';
-
+        $sql="SELECT `kod`,`region` FROM `iso3166-2`";
+        $region = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        echo'<script>';
+        $str='';
+        foreach ($region as $i){
+            $str.='"'.$i['kod'].'":"'.$i['region'].'",';
+        };
+        $str = substr($str, 0, -1);
         echo '
-
+        var countries={'.$str.'};
+        </script>
         <form method="post" action="/article-update" class="form-2">
                     <div class="div-block-97" style="padding: 30px 0;">
                         <input type="hidden" name="tab" value="настройка">
@@ -921,7 +924,8 @@ class ArticleController
                         <input name="searchgeo" type="text" class="text-field-2 w-input" maxlength="128" placeholder="Поиск" style="width: 760px;">
                         <div id="geolist" style="display: none;position: relative;top: -11px;z-index: 100;border: 1px solid #E0E1E5 ;"></div>
                         <input type="hidden" name="geo" value="">
-                        <div class="div-block-84 geo"></div>
+                        <div class="div-block-84 geo">
+                        </div>
                     </div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
@@ -946,6 +950,15 @@ class ArticleController
                 </form>';
 
         include PANELDIR.'/views/layouts/footer.php';
+        $result['region'] = str_replace(',', '","', $result['region']);
+        echo '<script>                            
+            var isoreg=["'.$result['region'].'"];
+            let str=\'\';
+            isoreg.forEach(function(value, index) {
+                str=str+\'<div class="div-block-86"><div class="text-block-114 isogeolist" data-label="\'+value+\'">\'+countries[value]+\'</div><div class="text-block-98">Удалить</div></div>\';
+            });
+            $(\'.div-block-84.geo\').html(str);
+        </script>';
         return true;
     }
 
