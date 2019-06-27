@@ -21,7 +21,7 @@ switch ($GLOBALS['role']) {
             'platforms-spisanie' => 'ploshadki/spisanie',
             'platform-stat' => 'ploshadki/stat',
             'platforms-del' => 'ploshadki/del',
-
+            'platforms-get-podcategoriya' => 'ploshadki/get_podcategoriya',
             //Сохранение стилей виджетов
             'widget-update' => 'widgetcss/update',
             'widget-aktiv' => 'widgetcss/aktiv',
@@ -80,7 +80,6 @@ switch ($GLOBALS['role']) {
             'finance' => 'fin/platform',
             'finance-vivod' => 'fin/requestcash',
 			'balance' => 'fin/platformbalans',
-			
 
             //Авторизация
             'logout' => 'users/logout',

@@ -2702,7 +2702,6 @@ var myLineChart = new Chart(ctx, {
             return true;
         }
 
-
         //Удаляет площадку
         public static function actionDel()
         {
@@ -2719,6 +2718,16 @@ var myLineChart = new Chart(ctx, {
             $sql.="DELETE FROM `style_slider` WHERE `id` = '".$_GET['id']."';";
             $GLOBALS['db']->query($sql);
             PloshadkiController::actionIndex();
+            return true;
+        }
+
+        //ajax подгрузка подкатегорий
+        public static function actionGet_podcategoriya()
+        {
+
+            $sql="SELECT `id`, `podcategoriya` FROM `podcategoriya` WHERE `id_categoriya`='".$_GET['id']."'";
+            $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($result, JSON_UNESCAPED_UNICODE);
             return true;
         }
     };
