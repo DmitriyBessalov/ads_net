@@ -2914,8 +2914,8 @@ input[name=active] {
   height: 100%;
   border-style: none solid none none;
   border-right-width: 1px;
-  border-right-color: #efefef;
-  background-color: #efefef;
+  border-right-color: #F2F2F2;
+  background-color: #F2F2F2;
   z-index: 2;
 }
 .a-b-btn {
