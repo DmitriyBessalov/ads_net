@@ -423,6 +423,9 @@ class ArticleController
                 }
                 break;
             }case 'настройка' :{
+            $geo=array_unique(explode(',', $_POST['geo']));
+            $_POST['geo']=implode(',', $geo);
+
             $strtolow=mb_strtolower($_POST['words'], 'UTF-8');
             $words = array_unique(explode(",", $strtolow));
             asort($words);
