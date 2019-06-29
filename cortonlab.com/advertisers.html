@@ -122,7 +122,10 @@
 		    <div class="div-block-61" style="justify-content: center;">
 		       <div class="div-block-62" style="margin-bottom: 0px;">
 		          <div class="text-block-17" style="background:#E0E1E5; padding: 40px; border-radius: 8px;">
-		              <img src="/images/pltost.png">
+		              <div id="img_container">
+                         <img class="bottom" src="/images/pltost.png" />
+                         <img class="top" src="/images/pltosttwo.png" />
+                      </div>
 				  </div>
 				  </div>
             </div>
@@ -714,6 +717,108 @@
 		border-radius: 34px;
 	}
 	.close:hover { background: #116dd6; }
+	
+	
+	#img_container {
+position:relative;
+height:281px;
+width:450px;
+margin:0 auto;
+}
+
+#img_container img {
+position:absolute;
+left:0;
+-webkit-transition: opacity 1s ease-in-out;
+-moz-transition: opacity 1s ease-in-out;
+-o-transition: opacity 1s ease-in-out;
+transition: opacity 1s ease-in-out;
+}
+
+@-webkit-keyframes cf3FadeInOut {
+0% {
+opacity:1;
+}
+45% {
+opacity:1;
+}
+55% {
+opacity:0;
+}
+100% {
+opacity:0;
+}
+}
+
+@-moz-keyframes cf3FadeInOut {
+0% {
+opacity:1;
+}
+45% {
+opacity:1;
+}
+55% {
+opacity:0;
+}
+100% {
+opacity:0;
+}
+}
+
+@-o-keyframes cf3FadeInOut {
+0% {
+opacity:1;
+}
+45% {
+opacity:1;
+}
+55% {
+opacity:0;
+}
+100% {
+opacity:0;
+}
+}
+
+@keyframes cf3FadeInOut {
+0% {
+opacity:1;
+}
+45% {
+opacity:1;
+}
+55% {
+opacity:0;
+}
+100% {
+opacity:0;
+}
+}
+
+#img_container img.top {
+-webkit-animation-name: cf3FadeInOut;
+-webkit-animation-timing-function: ease-in-out;
+-webkit-animation-iteration-count: infinite;
+-webkit-animation-duration: 5s;
+-webkit-animation-direction: alternate;
+
+-moz-animation-name: cf3FadeInOut;
+-moz-animation-timing-function: ease-in-out;
+-moz-animation-iteration-count: infinite;
+-moz-animation-duration: 5s;
+-moz-animation-direction: alternate;
+
+-o-animation-name: cf3FadeInOut;
+-o-animation-timing-function: ease-in-out;
+-o-animation-iteration-count: infinite;
+-o-animation-duration: 5s;
+-o-animation-direction: alternate;
+<p style="text-align: center;">animation-name: cf3FadeInOut;
+animation-timing-function: ease-in-out;
+animation-iteration-count: infinite;
+animation-duration: 5s;
+animation-direction: alternate;
+}
 </style>
 </body>
 </html>
