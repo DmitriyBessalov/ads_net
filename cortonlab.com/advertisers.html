@@ -122,11 +122,12 @@
 		    <div class="div-block-61" style="justify-content: center;">
 		       <div class="div-block-62" style="margin-bottom: 0px;">
 		          <div class="text-block-17" style="background:#E0E1E5; padding: 40px; border-radius: 8px;">
-		              <div id="img_container">
-                         <img class="bottom" src="/images/pltost.png" />
-                         <img class="top" src="/images/pltosttwo.png" />
-						 <img class="top" src="/images/pltostthree.png" />
-                      </div>
+		               <div class="div-style">
+                          <img src="/images/pltost.png" title="Image 1" class="img-style im-1">
+                          <img src="/images/pltosttwo.png" title="Image 2" class="img-style next im-2">
+                          <img src="/images/pltostthree.png" title="Image 3" class="img-style next im-3">
+                          <img src="/images/pltost.png" title="Image 4" class="img-style next im-4">
+                        </div>
 				  </div>
 				  </div>
             </div>
@@ -720,106 +721,88 @@
 	.close:hover { background: #116dd6; }
 	
 	
-	#img_container {
-position:relative;
-height:281px;
-width:450px;
-margin:0 auto;
+	@keyframes fadeIm-1
+{
+    from    { opacity: 1; }
+    16%     { opacity: 1; }
+    25%     { opacity: 0; }
+    91%     { opacity: 0; }
+    to      { opacity: 1; }
 }
-
-#img_container img {
-position:absolute;
-left:0;
--webkit-transition: opacity 1.5s ease-in-out;
--moz-transition: opacity 1.5s ease-in-out;
--o-transition: opacity 1.5s ease-in-out;
-transition: opacity 1.5s ease-in-out;
+ 
+@keyframes fadeIm-2
+{
+    from    { opacity: 0; }
+    16%     { opacity: 0; }
+    25%     { opacity: 1; }
+    41%     { opacity: 1; }
+    50%     { opacity: 0; }
+    to      { opacity: 0; }
 }
-
-@-webkit-keyframes cf3FadeInOut {
-0% {
-opacity:1;
+ 
+@keyframes fadeIm-3
+{
+    from    { opacity: 0; }
+    41%     { opacity: 0; }
+    50%     { opacity: 1; }
+    66%     { opacity: 1; }
+    75%     { opacity: 0; }
+    to      { opacity: 0; }
 }
-45% {
-opacity:1;
+ 
+@keyframes fadeIm-4
+{
+    from    { opacity: 0; }
+    66%     { opacity: 0; }
+    75%     { opacity: 1; }
+    91%     { opacity: 1; }
+    to      { opacity: 0; }
 }
-55% {
-opacity:0;
+ 
+.div-style
+{
+    position: relative; 
+    text-align: center; 
+    width: 99%; 
 }
-100% {
-opacity:0;
+ 
+.img-style
+{
+    width: 33.3%;
+    margin-top: 8px;
+    border: 1px solid #0000ff;
+     
+    animation-duration: 24s;
+    animation-iteration-count: infinite;
 }
+ 
+.img-style.next
+{
+    position: absolute;
+    left: 33.3%;
+    opacity: 0;
 }
-
-@-moz-keyframes cf3FadeInOut {
-0% {
-opacity:1;
+ 
+.img-style.im-1
+{ 
+    animation-name: fadeIm-1;
 }
-45% {
-opacity:1;
+ 
+.img-style.next.im-2
+{ 
+    animation-name: fadeIm-2;
 }
-55% {
-opacity:0;
+ 
+.img-style.next.im-3
+{
+    animation-name: fadeIm-3;
 }
-100% {
-opacity:0;
+ 
+.img-style.next.im-4
+{
+    animation-name: fadeIm-4;
 }
-}
-
-@-o-keyframes cf3FadeInOut {
-0% {
-opacity:1;
-}
-45% {
-opacity:1;
-}
-55% {
-opacity:0;
-}
-100% {
-opacity:0;
-}
-}
-
-@keyframes cf3FadeInOut {
-0% {
-opacity:1;
-}
-45% {
-opacity:1;
-}
-55% {
-opacity:0;
-}
-100% {
-opacity:0;
-}
-}
-
-#img_container img.top {
--webkit-animation-name: cf3FadeInOut;
--webkit-animation-timing-function: ease-in-out;
--webkit-animation-iteration-count: infinite;
--webkit-animation-duration: 1.5s;
--webkit-animation-direction: alternate;
-
--moz-animation-name: cf3FadeInOut;
--moz-animation-timing-function: ease-in-out;
--moz-animation-iteration-count: infinite;
--moz-animation-duration: 1.5s;
--moz-animation-direction: alternate;
-
--o-animation-name: cf3FadeInOut;
--o-animation-timing-function: ease-in-out;
--o-animation-iteration-count: infinite;
--o-animation-duration: 1.5s;
--o-animation-direction: alternate;
-<p style="text-align: center;">animation-name: cf3FadeInOut;
-animation-timing-function: ease-in-out;
-animation-iteration-count: infinite;
-animation-duration: 1.5s;
-animation-direction: alternate;
-}
+	
 </style>
 </body>
 </html>
