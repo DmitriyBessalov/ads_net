@@ -961,7 +961,7 @@ class ArticleController
             var isoreg=["'.$result['region'].'"];
             let str=\'\';
             isoreg.forEach(function(value, index) {
-                if ((value!="") or (value!="ALL"))
+                if (countries[value] !== undefined)
                 str=str+\'<div class="div-block-86"><div class="text-block-114 isogeolist" data-label="\'+value+\'">\'+countries[value]+\'</div><div class="text-block-98">Удалить</div></div>\';
             });
             $(\'.div-block-84.geo\').html(str);
