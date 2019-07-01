@@ -506,7 +506,7 @@ class ArticleController
 
             //Список старых файлов картинок
             $role= UsersController::getUserRole();
-            if ($role=='advertiser'){
+            if ($role=='copywriter'){
                 $user_id= UsersController::getUserId();
             }else {
                 $sql ="SELECT `user_id` FROM `promo` WHERE `id` = '".$_POST['id']."';";

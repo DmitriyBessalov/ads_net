@@ -28,7 +28,7 @@
 		  <div class="titlehr" style="margin-top:14px;">Кабинет</div>
 		  <a href="/finance" class="link-block w-inline-block"><img src="/images/ic-setting.png" class="image-6"><div class="text-block-82-copy">Настройки</div></a>
       <? endif; ?>
-      <? if ($GLOBALS['role']=='advertiser'): ?>
+      <? if ($GLOBALS['role']=='copywriter'): ?>
 	      <div class="titlehr">Управление</div>
           <a href="/articles?active=all" class="link-block w-inline-block"><img src="/images/ic-content.png" class="image-6"><div class="text-block-82">Статьи</div></a>
 		  <div class="titlehr" style="margin-top:14px;">Статистика</div>

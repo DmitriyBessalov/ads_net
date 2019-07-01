@@ -88,7 +88,7 @@ switch ($GLOBALS['role']) {
             '.+' => 'site/all',
             '' => 'site/loginform',
         );break;
-    case 'advertiser':
+    case 'copywriter':
         return array(
 
             //Статьи
