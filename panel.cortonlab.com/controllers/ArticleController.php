@@ -433,10 +433,10 @@ class ArticleController
             $words = array_unique(explode(",", $strtolow));
             asort($words);
             $strtolow=implode(',', $words);
-            $sql="SELECT `active`,`words` FROM `promo` WHERE `id`='".$_POST['id']."';";
+            $sql="SELECT `active`,`words`,`region` FROM `promo` WHERE `id`='".$_POST['id']."';";
             $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             $wordsold=explode(",", $result['words']);
-
+            $regionold=explode(",", $result['region']);
             if (!$result['active']){array_splice($words, 0);}
 
             $words=ArticleController::miniword($words);
@@ -444,12 +444,14 @@ class ArticleController
 
             $wordsall = array_unique(array_merge($words, $wordsold));
 
-            foreach($geo as $iso) {
+            $regionall=array_unique(array_merge($geo, $regionold));
+
+            foreach($regionall as $iso) {
                 foreach ($wordsall as $i) {
                     if ($i != "")
-                        if (in_array($i, $words)) {
-                            if (!in_array($i, $wordsold)) {
-                                $sql = "SELECT `promo_ids` FROM `words_index` WHERE `region`=" . $iso. " AND `word`='" . $i . "';";
+                        if (in_array($i, $words) and in_array($iso, $geo)) {
+                            if (!in_array($i, $wordsold) or !in_array($iso, $regionold)) {
+                                $sql = "SELECT `promo_ids` FROM `words_index` WHERE `region`='" . $iso. "' AND `word`='" . $i . "';";
                                 $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                                 if ($promo_ids) {
                                     $promo_id = explode(',', $promo_ids);
@@ -460,12 +462,12 @@ class ArticleController
                                 } else {
                                     $promo_ids = $_POST['id'];
                                 }
-                                $sql = "REPLACE INTO `words_index` SET `region`=" . $iso. ", `word`='" . $i . "' , `promo_ids`='" . $promo_ids . "';";
+                                $sql = "REPLACE INTO `words_index` SET `region`='" . $iso. "', `word`='" . $i . "' , `promo_ids`='" . $promo_ids . "';";
                                 $GLOBALS['db']->query($sql);
                             }
                         } else {
                             if (in_array($i, $wordsold)) {
-                                $sql = "SELECT `promo_ids` FROM `words_index` WHERE `region`=" . $iso. " AND `word`='" . $i . "';";
+                                $sql = "SELECT `promo_ids` FROM `words_index` WHERE `region`='" . $iso. "' AND `word`='" . $i . "';";
                                 $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
                                 //Удаляет
@@ -473,10 +475,10 @@ class ArticleController
                                 unset($ids[array_search($_POST['id'], $ids)]);
                                 $promo_ids = implode(",", $ids);
                                 if ($promo_ids == '') {
-                                    $sql = "DELETE FROM `words_index` WHERE `region`=" . $iso. " AND `word` ='" . $i . "'";
+                                    $sql = "DELETE FROM `words_index` WHERE `region`='" . $iso. "' AND `word` ='" . $i . "'";
                                     $GLOBALS['db']->query($sql);
                                 } else {
-                                    $sql = "REPLACE INTO `words_index` SET `region`=" . $iso. ", `word`='" . $i . "' , `promo_ids`='" . $promo_ids . "';";
+                                    $sql = "REPLACE INTO `words_index` SET `region`='" . $iso. "', `word`='" . $i . "' , `promo_ids`='" . $promo_ids . "';";
                                     $GLOBALS['db']->query($sql);
                                 }
                             }
@@ -866,7 +868,6 @@ class ArticleController
 
         return true;
     }
-
 
     public static function actionTarget()
     {
