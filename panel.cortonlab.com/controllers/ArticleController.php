@@ -424,7 +424,7 @@ class ArticleController
                 break;
             }case 'настройка' :{
             if ($_POST['geo']=='') {
-                $geo[] = 'ALL';
+                $geo[] = $_POST['geo']='ALL';
             }else{
                 $geo = array_unique(explode(',', $_POST['geo']));
                 $_POST['geo'] = implode(',', $geo);
@@ -961,7 +961,7 @@ class ArticleController
             var isoreg=["'.$result['region'].'"];
             let str=\'\';
             isoreg.forEach(function(value, index) {
-                if (value!="")
+                if ((value!="") or (value!="ALL"))
                 str=str+\'<div class="div-block-86"><div class="text-block-114 isogeolist" data-label="\'+value+\'">\'+countries[value]+\'</div><div class="text-block-98">Удалить</div></div>\';
             });
             $(\'.div-block-84.geo\').html(str);

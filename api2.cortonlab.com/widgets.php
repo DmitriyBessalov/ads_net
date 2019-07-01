@@ -6,6 +6,7 @@ require_once('/var/www/www-root/data/www/api2.cortonlab.com/geoip/SxGeo.php');
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$y=0;
 $words=str_replace(',', '\',\'', $_GET['words']);
 
+$iso='RU-MOW';
 switch (strlen ($iso)){
     case 3: $arr['region']="ALL"; break;
     case 2: $arr['region']="ALL','".$iso; break;
