@@ -7,13 +7,13 @@ require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$y=
 $words=str_replace(',', '\',\'', $_GET['words']);
 
 switch (strlen ($iso)){
-    case 3: $region='ALL'; break;
-    case 2: $region="ALL','".$iso; break;
-    default:$region="ALL','".substr($iso, 0, 2)."','".$iso;
+    case 3: $arr['region']="ALL"; break;
+    case 2: $arr['region']="ALL','".$iso; break;
+    default:$arr['region']="ALL','".substr($iso, 0, 2)."','".$iso;
 }
 
 //Найдем ID статей
-$sql="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$region."')";
+$sql="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
 $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
 $promo_ids = array();
 foreach ($result as $i) {
