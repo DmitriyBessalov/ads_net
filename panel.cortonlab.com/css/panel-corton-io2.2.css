@@ -2261,6 +2261,7 @@ input[name=active] {
   min-width: 420px;
   margin-top: 0px;
   padding: 0px 6%;
+  max-width: 1470px;
 }
 
 .text-block-103 {
