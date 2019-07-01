@@ -65,10 +65,13 @@ class ArticleController
                     $sql = "SELECT `title`,`namebrand`  FROM `promo` WHERE `id`='" . $i['main_promo_id'] . "'";
                     $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-                    $sql = "SELECT `anons_ids`, `stavka` FROM `anons_index` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
-                    $anons_index = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT `stavka` FROM `anons_index` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
+                    $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-                    $anons = str_replace(",", "','", $anons_index['anons_ids']);
+                    $sql = "SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
+                    $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+                    $anons = str_replace(",", "','", $anons_ids);
                     $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
                     $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
@@ -84,7 +87,7 @@ class ArticleController
                     }
 
                     if (isset($today)) {
-                        $anon = explode(',', $anons_index['anons_ids']);
+                        $anon = explode(',', $anons_ids);
                         foreach ($anon as $y) {
                             $ch = $redis->get(date('d') . ':' . $y);
                             if ($ch) {
@@ -131,7 +134,7 @@ class ArticleController
                                            <span></span>
 										</div>
 										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>' . $promo['namebrand'] . '</div>
-										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $anons_index['stavka'] . '</div>
+										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $stavka . '</div>
 								     </div>
 								  </td>
                                   <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
@@ -625,7 +628,7 @@ class ArticleController
             $sql = "SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`=".$result[0]['id'];
+            $sql = "SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`=".$result[0]['id'];
             $anons= $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             $anons = str_replace(",", "','", $anons);
