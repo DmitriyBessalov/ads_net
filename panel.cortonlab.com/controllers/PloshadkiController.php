@@ -404,23 +404,6 @@ var myLineChart = new Chart(ctx, {
 
                 echo '
                 </select>
-                <select id="categoriya" name="categoriya" required="" class="select-field w-select" '.$disabled.'>
-                  <option value="">Категория площадки</option>';
-                  foreach ($categoriy as $i) {
-                      echo  '<option '; if ($current_categoriya==$i['id'] ) echo "selected"; echo ' value="'.$i['id'].'">'.$i['categoriya'].'</option>';
-                  };
-                    echo'  
-                </select>
-                <div id="podcategoriyaval" hidden>'.$result['podcategoriya'].'</div>
-                <select id="podcategoriya" name="podcategoriya_id" required="" class="select-field w-select" '.$disabled.'>
-                  <option value="">Подкатегория площадки</option>';
-                    $sql = "SELECT `id`, `podcategoriya` FROM `podcategoriya` WHERE `id_categoriya`='".$current_categoriya."'";
-                    $current_podcategoriya = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-                    foreach ($current_podcategoriya as $i) {
-                        echo  '<option '; if ($result['podcategoriya_id']==$i['id'] ) echo "selected"; echo ' value="'.$i['id'].'">'.$i['podcategoriya'].'</option>';
-                    };
-                    echo '  
-                </select>
 				<div style="width: 1337px; margin-bottom: 60px;"></div>
 				';
                 if ($result['type']=='demo')
@@ -432,9 +415,40 @@ var myLineChart = new Chart(ctx, {
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
                 <div>
-                ';echo'
+                '; echo'
 				</div>
-			  </div> 	
+			  </div>
+			  <div class="div-block-102">
+			  <div class="boxsetting">
+                <div class="text-block-103">Категории разделов площадки</div>
+                
+                <div style="display:flex;flex-direction:row;">
+                    <div style="width: 33.4%">
+                        <div class="text-block-115">Выбор категории:</div>
+                        <select name="categoriay" required="" class="select-field w-select"  style="width: 220px">
+                          <option selected="" value="">Категория</option>';
+                            $sql = "SELECT * FROM `categoriya`";
+                            $categorii = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+                            foreach ($categorii as $i) {
+                                echo  '<option '; echo ' value="'.$i['id'].'">'.$i['categoriya'].'</option>';
+                            };
+                            echo '
+                        </select>
+                    </div>
+                    <div style="width: 33.3%">
+                        <div class="text-block-115">Тип поиска раздела:</div>
+                        <input type="radio" id="contactChoice1" name="type_razdel" value="url"> <label for="contactChoice1" checked="checked">По части URL</label>
+                        <input type="radio" id="contactChoice2" name="type_razdel" value="selector"> <label for="contactChoice2">По части текста в селекторе</label>
+                    </div>
+                    <div style="width: 33.3%">
+                        <div class="text-block-115">Регулярное выражени:</div>
+                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="">
+                    </div>
+                </div>
+                
+                <div id="addcat" class="text-block-118">Добавить категорию</div>
+              </div>
+              </div>
               <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Скрипт и стили</div>
@@ -447,7 +461,7 @@ var myLineChart = new Chart(ctx, {
                 echo '
                 </div>
 			  </div>
-              </div>
+              </div>   
               <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Настройка промо-страницы</div>
@@ -761,7 +775,7 @@ var myLineChart = new Chart(ctx, {
                                 <input value="'.$result['widget-h2-color'].'" name="widget-h2-color" class="jscolor">
                                 <br>
                                 <label>Насыщенность</label>
-                                <select name="widget-h2-bold">
+                                <select name="widget-h2-bold">F
 									<option value=""></option>
                                     <option '; if ($result['widget-h2-bold']=="100"){echo 'selected ';} echo 'value="100">thin-100</option>
                                     <option '; if ($result['widget-h2-bold']=="200"){echo 'selected ';} echo 'value="200">200</option>

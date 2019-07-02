@@ -136,13 +136,11 @@ class UsersController
 			<a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>			
             <p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все пользователи</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>Площадки</label></p>
-            <p class="filtermenu"><label'; if ($_GET['role']=='copywriter'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='copywriter'){echo ' checked';} echo'>Копирайтер</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='copywriter'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="copywriter"  class="form-radio"'; if ($_GET['role']=='copywriter'){echo ' checked';} echo'>Копирайтер</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Рекламодатели</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='manager'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="manager"  class="form-radio"'; if ($_GET['role']=='manager'){echo ' checked';} echo'>Менеджеры</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='admin'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="admin"  class="form-radio"'; if ($_GET['role']=='admin'){echo ' checked';} echo'>Техподдержка</label></p>
-           
 			</form>
-			
 			
 		</div>
         </div>
@@ -251,6 +249,7 @@ class UsersController
                 if ($GLOBALS['role']=='admin') {
                     echo'
                     <option '; if ($result['role']=="platform") echo 'selected '; echo 'value = "platform" > Площадки</option >
+					<option '; if ($result['role']=="copywriter") echo 'selected '; echo 'value = "copywriter" > Копирайтер</option >
 					<option '; if ($result['role']=="advertiser") echo 'selected '; echo 'value = "advertiser" > Рекламодатели</option >
                     <option '; if ($result['role']=="manager") echo 'selected '; echo 'value = "manager" > Менеджер</option >
 					<option '; if ($result['role']=="admin") echo 'selected '; echo 'value = "admin" > Админы</option >';
