@@ -18,7 +18,7 @@ class UsersController
                 $phpsession= substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 26);
                 $sql="INSERT INTO `users` SET `data_add`='".$data."', `email`='".$_POST['email']."', `password_md5`='".md5($_POST['password'])."',`fio`='".$_POST['fio']."',`role`='".$_POST['role']."',`manager`='".$GLOBALS['user']."',`phpsession`='".$phpsession."',`aktiv`='".$_POST['aktiv']."';";
                 $GLOBALS['db']->query($sql);
-                if ($_POST['role']=='advertiser'){
+                if ($_POST['role']=='copywriter'){
                     $id=$GLOBALS['db']->lastInsertId();
                     $dirName=PANELDIR.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$id;
                     mkdir($dirName);
@@ -79,6 +79,7 @@ class UsersController
              foreach($result as $i){
                  switch ($i['role']) {
                      case "admin": $i['role'] = "Администраторы"; break;
+                     case "copywriter": $i['role'] = "Копирайтер"; break;
                      case "advertiser": $i['role'] = "Рекламодатели"; break;
                      case "platform": $i['role'] = "Площадки"; break;
                      case "manager": $i['role'] = "Менеджер";
@@ -135,6 +136,7 @@ class UsersController
 			<a href="/user-edit" class="button-add-site w-button">Новый пользователь</a>			
             <p class="filtermenu"><label'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="all" class="form-radio"'; if ((!isset($_GET['role'])) OR ($_GET['role']=='all')){echo ' checked';}  echo'>Все пользователи</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='platform'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="platform"  class="form-radio"'; if ($_GET['role']=='platform'){echo ' checked';} echo'>Площадки</label></p>
+            <p class="filtermenu"><label'; if ($_GET['role']=='copywriter'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='copywriter'){echo ' checked';} echo'>Копирайтер</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Рекламодатели</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='manager'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="manager"  class="form-radio"'; if ($_GET['role']=='manager'){echo ' checked';} echo'>Менеджеры</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='admin'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="admin"  class="form-radio"'; if ($_GET['role']=='admin'){echo ' checked';} echo'>Техподдержка</label></p>
@@ -327,7 +329,7 @@ class UsersController
     //Стартовая страница при входе в админку
     public static function panelstartPage($role){
         switch ($role) {
-            case 'advertiser':
+            case 'copywriter':
                 header('Location: /articles?active=1');
                 break;
             case 'manager':

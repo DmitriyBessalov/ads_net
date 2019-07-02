@@ -65,10 +65,13 @@ class ArticleController
                     $sql = "SELECT `title`,`namebrand`  FROM `promo` WHERE `id`='" . $i['main_promo_id'] . "'";
                     $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-                    $sql = "SELECT `anons_ids`, `stavka` FROM `anons_index` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
-                    $anons_index = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $sql = "SELECT `stavka` FROM `anons_index` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
+                    $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-                    $anons = str_replace(",", "','", $anons_index['anons_ids']);
+                    $sql = "SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
+                    $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+                    $anons = str_replace(",", "','", $anons_ids);
                     $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "')  AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
                     $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
@@ -84,7 +87,7 @@ class ArticleController
                     }
 
                     if (isset($today)) {
-                        $anon = explode(',', $anons_index['anons_ids']);
+                        $anon = explode(',', $anons_ids);
                         foreach ($anon as $y) {
                             $ch = $redis->get(date('d') . ':' . $y);
                             if ($ch) {
@@ -131,7 +134,7 @@ class ArticleController
                                            <span></span>
 										</div>
 										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>' . $promo['namebrand'] . '</div>
-										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $anons_index['stavka'] . '</div>
+										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $stavka . '</div>
 								     </div>
 								  </td>
                                   <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
@@ -412,7 +415,7 @@ class ArticleController
 
                 $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
                 if (!$GLOBALS['db']->exec($sql)){
-                    $sql = "INSERT INTO `promo` SET `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."';";
+                    $sql = "INSERT INTO `promo` SET `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."',`region`='ALL';";
                     $GLOBALS['db']->query($sql);
                     $id=$GLOBALS['db']->lastInsertId();
                     $sql = "UPDATE `promo` SET  `main_promo_id`='".$id."' WHERE  `id`='".$id."';";
@@ -423,61 +426,68 @@ class ArticleController
                 }
                 break;
             }case 'настройка' :{
-            $geo=array_unique(explode(',', $_POST['geo']));
-            $_POST['geo']=implode(',', $geo);
-
+            if ($_POST['geo']=='') {
+                $geo[] = $_POST['geo']='ALL';
+            }else{
+                $geo = array_unique(explode(',', $_POST['geo']));
+                $_POST['geo'] = implode(',', $geo);
+            }
             $strtolow=mb_strtolower($_POST['words'], 'UTF-8');
             $words = array_unique(explode(",", $strtolow));
             asort($words);
             $strtolow=implode(',', $words);
-            $sql="SELECT `active`,`words` FROM `promo` WHERE `id`='".$_POST['id']."';";
+            $sql="SELECT `active`,`words`,`region` FROM `promo` WHERE `id`='".$_POST['id']."';";
             $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             $wordsold=explode(",", $result['words']);
-
+            $regionold=explode(",", $result['region']);
             if (!$result['active']){array_splice($words, 0);}
 
             $words=ArticleController::miniword($words);
             $wordsold=ArticleController::miniword($wordsold);
 
             $wordsall = array_unique(array_merge($words, $wordsold));
-            foreach($wordsall as $i){
-                if ($i!="")
-                    if (in_array($i, $words)){
-                        if (!in_array($i, $wordsold)){
-                            $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$i."';";
-                            $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                            if ($promo_ids){
-                                $promo_id=explode(',', $promo_ids);
-                                $promo_id[]=$_POST['id'];
-                                asort($promo_id);
-                                $promo_id=array_unique($promo_id);
-                                $promo_ids=implode(',', $promo_id);
-                            }else{
-                                $promo_ids=$_POST['id'];
-                            }
-                            $sql="REPLACE INTO `words_index` SET `word`='".$i."' , `promo_ids`='".$promo_ids."';";
-                            $GLOBALS['db']->query($sql);
-                        }
-                    }else{
-                        if (in_array($i, $wordsold)){
-                            $sql="SELECT `promo_ids` FROM `words_index` WHERE `word`='".$i."';";
-                            $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-                            //Удаляет
-                            $ids=explode(",", $promo_ids);
-                            unset($ids[array_search($_POST['id'],$ids)]);
-                            $promo_ids = implode(",", $ids);
-                            if ($promo_ids==''){
-                                $sql="DELETE FROM `words_index` WHERE `word` ='".$i."'";
-                                $GLOBALS['db']->query($sql);
-                            }else{
-                                $sql="REPLACE INTO `words_index` SET `word`='".$i."' , `promo_ids`='".$promo_ids."';";
+            $regionall=array_unique(array_merge($geo, $regionold));
+
+            foreach($regionall as $iso) {
+                foreach ($wordsall as $i) {
+                    if ($i != "")
+                        if (in_array($i, $words) and in_array($iso, $geo)) {
+                            if (!in_array($i, $wordsold) or !in_array($iso, $regionold)) {
+                                $sql = "SELECT `promo_ids` FROM `words_index` WHERE `region`='" . $iso. "' AND `word`='" . $i . "';";
+                                $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                                if ($promo_ids) {
+                                    $promo_id = explode(',', $promo_ids);
+                                    $promo_id[] = $_POST['id'];
+                                    asort($promo_id);
+                                    $promo_id = array_unique($promo_id);
+                                    $promo_ids = implode(',', $promo_id);
+                                } else {
+                                    $promo_ids = $_POST['id'];
+                                }
+                                $sql = "REPLACE INTO `words_index` SET `region`='" . $iso. "', `word`='" . $i . "' , `promo_ids`='" . $promo_ids . "';";
                                 $GLOBALS['db']->query($sql);
                             }
+                        } else {
+                            if (in_array($i, $wordsold)) {
+                                $sql = "SELECT `promo_ids` FROM `words_index` WHERE `region`='" . $iso. "' AND `word`='" . $i . "';";
+                                $promo_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+                                //Удаляет
+                                $ids = explode(",", $promo_ids);
+                                unset($ids[array_search($_POST['id'], $ids)]);
+                                $promo_ids = implode(",", $ids);
+                                if ($promo_ids == '') {
+                                    $sql = "DELETE FROM `words_index` WHERE `region`='" . $iso. "' AND `word` ='" . $i . "'";
+                                    $GLOBALS['db']->query($sql);
+                                } else {
+                                    $sql = "REPLACE INTO `words_index` SET `region`='" . $iso. "', `word`='" . $i . "' , `promo_ids`='" . $promo_ids . "';";
+                                    $GLOBALS['db']->query($sql);
+                                }
+                            }
                         }
-                    }
+                }
             }
-
             $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."',  `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
@@ -496,7 +506,7 @@ class ArticleController
 
             //Список старых файлов картинок
             $role= UsersController::getUserRole();
-            if ($role=='advertiser'){
+            if ($role=='copywriter'){
                 $user_id= UsersController::getUserId();
             }else {
                 $sql ="SELECT `user_id` FROM `promo` WHERE `id` = '".$_POST['id']."';";
@@ -618,7 +628,7 @@ class ArticleController
             $sql = "SELECT `id`,`data_add`,`title`,`active` FROM `promo` WHERE `main_promo_id`='".$_GET['id']."';";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`=".$result[0]['id'];
+            $sql = "SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`=".$result[0]['id'];
             $anons= $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
             $anons = str_replace(",", "','", $anons);
@@ -862,7 +872,6 @@ class ArticleController
         return true;
     }
 
-
     public static function actionTarget()
     {
         $title='Таргетинг';
@@ -955,6 +964,7 @@ class ArticleController
             var isoreg=["'.$result['region'].'"];
             let str=\'\';
             isoreg.forEach(function(value, index) {
+                if (countries[value] !== undefined)
                 str=str+\'<div class="div-block-86"><div class="text-block-114 isogeolist" data-label="\'+value+\'">\'+countries[value]+\'</div><div class="text-block-98">Удалить</div></div>\';
             });
             $(\'.div-block-84.geo\').html(str);

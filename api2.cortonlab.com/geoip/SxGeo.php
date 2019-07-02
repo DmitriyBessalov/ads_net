@@ -1,5 +1,4 @@
 <?php
-//$start = microtime(true);
 class SxGeo {
 	protected $fh;
 	protected $ip1c;
@@ -17,7 +16,7 @@ class SxGeo {
 	protected $regions_db;
 	protected $cities_db;
 
-	public function __construct($db_file = 'SxGeoCity.dat', $type = 0){
+	public function __construct($db_file = '/var/www/www-root/data/www/api2.cortonlab.com/geoip/SxGeoCity.dat', $type = 0){
 		$this->fh = fopen($db_file, 'rb');
 		// Сначала убеждаемся, что есть файл базы данных
 		$header = fread($this->fh, 40); // В версии 2.2 заголовок увеличился на 8 байт
@@ -160,5 +159,7 @@ class SxGeo {
 }
 $SxGeo = new SxGeo();
 
-echo $SxGeo->getCityFull($_GET['ip']);
-//echo  microtime(true) - $start;
+$iso=$SxGeo->getCityFull($_SERVER['REMOTE_ADDR']);
+if ($iso==''){
+    $iso='ALL';
+}

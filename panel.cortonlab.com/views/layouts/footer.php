@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-      <? if (($GLOBALS['role']=='advertiser') OR $GLOBALS['role']=='admin'): ?>
+      <? if (($GLOBALS['role']=='copywriter') OR $GLOBALS['role']=='admin'): ?>
           <div id="panel_hide" style="position: fixed; bottom: 0px; margin-left: 226px; cursor: pointer; border: 1px solid lightgrey; color: rgb(51, 51, 51); z-index: 2; font-size: 24px; font-family: 'Myriadpro Regular'; font-weight: 600; padding: 2px;" onmouseout="this.style.color='#333';"><</div>
       <? endif; ?>
   <div class="section-2"></div>
