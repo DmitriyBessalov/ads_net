@@ -5187,3 +5187,26 @@ ul#geo_list {
   list-style-type: none;
   margin-left: -40px;
 }
+
+/* стиль для печати статьи */
+@media print {
+  @page {
+    margin: 0;
+  }
+  body{
+    visibility: hidden;
+  }
+  input[name=title] {
+    position: relative;
+    top: -200px;
+    left: -280px;
+    font-weight:bold;
+    visibility: visible;
+  }
+  .ql-editor {
+    position: relative;
+    top: -240px;
+    left: -280px;
+    visibility: visible;
+  }
+}

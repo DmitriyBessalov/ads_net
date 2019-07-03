@@ -104,7 +104,11 @@ class WidgetcssController
             fwrite($fp, $gzdata);
             fclose($fp);
         }
-        exec('curl -H "X-Token: db56vbB4H6B2zScdV3GXn7m44_93166" -H "Content-Type: application/json" "https://my.selectel.ru/api/cdn/v1/projects/ee-b36a-93c4c2b9051a/records/71dc89aa-e85b-4907-9277-9797e266b414/purge" -X PUT --data-binary "{\"paths\":[\"/css/'.$domen.'.css.gz \"]}" --compressed');
+
+
+
+       // $cmd='curl -H "X-Token: db56vbB4H6B2zScdV3GXn7m44_93166" -H "Content-Type: application/json" "https://my.selectel.ru/api/cdn/v1/projects/ee-b36a-93c4c2b9051a/records/71dc89aa-e85b-4907-9277-9797e266b414/purge" -X PUT --data-binary "{\"paths\":[\"/css/'.$domen.'.css.gz \"]}" --compressed';
+       // exec($cmd);
         return true;
     }
 
