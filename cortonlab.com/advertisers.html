@@ -104,8 +104,8 @@
       <div class="div-block-59">
          <div class="div-block-34">
             <h1 class="heading-3"><span class="text-span-30">Платформа для<br/>‍</span>рекламодателей*</h1>
-	     <div class="div-block-60">
-	        <div class="div-block-61" style="justify-content: center;">
+	     <div class="div-block-60 rowall">
+	        <div class="div-block-61 col1" style="justify-content: center;">
 	          <div class="div-block-62" style="margin-bottom: 20px;">
 	             <div class="text-block-17">
 	                <strong>Мгновенное распространение на сотнях сайтов с вашей целевой аудиторией</strong>
@@ -119,7 +119,7 @@
 		            </div>
 		        </div>
 		    </div>
-		    <div class="div-block-61" style="justify-content: center;">
+		    <div class="div-block-61 col2" style="justify-content: center;">
 		       <div class="div-block-62" style="margin-bottom: 0px;">
 		          <div class="text-block-17" style="background:#E0E1E5; padding: 40px; border-radius: 8px;">
 		               <div class="div-style">
@@ -133,7 +133,7 @@
             </div>
          </div>
 		<div class="div-block-60">
-		    <div class="div-block-61" style="justify-content: center;">
+		    <div class="div-block-61 сщ" style="justify-content: center;">
 		       <div class="div-block-62" style="margin-bottom: 0px;">
 		          <div class="text-block-17" style="background:#E0E1E5; padding: 40px; border-radius: 8px;">
 		              <div class="div-style">
@@ -442,18 +442,24 @@
 </div>
 
 <style>
-.div-block-60 {
+.rowall {
    display: flex;
    flex-flow: wrap;
 }
-.col1, .col2 { 
+.col1, .col2, .col3, .col4 { 
    width: 100%;
 }
 .col1 {
-   order: 2;
+   order: 3;
 }
 .col2 {
+   order: 2;
+}
+.col3 {
    order: 1;
+}
+.col4 {
+   order: 0;
 }
 
 	.modalDialog {
