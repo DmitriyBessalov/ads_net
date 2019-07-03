@@ -1696,6 +1696,7 @@ a {
   display: -ms-flexbox;
   display: flex;
   height: 320px;
+  max-width: 300px;
   margin-bottom: 1px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -2462,6 +2463,7 @@ a {
   display: -ms-flexbox;
   display: flex;
   height: 320px;
+  max-width: 300px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
