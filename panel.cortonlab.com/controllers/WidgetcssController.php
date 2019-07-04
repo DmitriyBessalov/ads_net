@@ -5,7 +5,6 @@ class WidgetcssController
     //Обновляет файл стилей площадки
     public static function actionUpdate(){
 
-
         if (($_POST['type']=="zag_recomend")or($_POST['type']=="zag_natpre")or($_POST['type']=="zag_natpro")){
         }else{;
             //Деактивация виджета
@@ -105,10 +104,19 @@ class WidgetcssController
             fclose($fp);
         }
 
+        $redis = new Redis();
+        $redis->pconnect('185.75.90.54', 6379);
+        $redis->select(0);
+        $cache=$redis->get('cdn_cache_update');
+        if ($cache) $cache_arr=json_decode($cache, true);
+        $cache_arr['paths'][]='/css/'.$domen.'.css.gz';
+        $cache_arr['paths'][]='/data.php';
+        $cache_arr['paths']=array_unique($cache_arr['paths']);
+        $cache=json_encode($cache_arr);
+        $redis->set('cdn_cache_update',$cache, 1296000);
+        $redis->close();
 
-
-       // $cmd='curl -H "X-Token: db56vbB4H6B2zScdV3GXn7m44_93166" -H "Content-Type: application/json" "https://my.selectel.ru/api/cdn/v1/projects/ee-b36a-93c4c2b9051a/records/71dc89aa-e85b-4907-9277-9797e266b414/purge" -X PUT --data-binary "{\"paths\":[\"/css/'.$domen.'.css.gz \"]}" --compressed';
-       // exec($cmd);
+        exec('wget -q https://api2.cortonlab.com/update_cache_cdn.php -O - >/dev/null 2>&1');
         return true;
     }
 
