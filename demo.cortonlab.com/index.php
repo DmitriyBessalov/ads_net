@@ -177,7 +177,7 @@ iframe {
 
         //Подключение скрипта
         $host = str_replace('.','_',$_COOKIE['host']);
-        $body = str_replace('</head>', '<link href="https://api.cortonlab.com/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.cortonlab.com/js/corton.js" charset="UTF-8"></script></head>', $body);
+        $body = str_replace('</head>', '<link href="https://api.cortonlab.com/css/'.$host.'.css.gz" rel="stylesheet"><script async src="https://api.cortonlab.com/js/cortonlab.js.gz" charset="UTF-8"></script></head>', $body);
         $enc='UTF8';
         preg_match_all("/<meta.*?>/", $body, $phones);
         foreach ($phones[0] as $phone) {

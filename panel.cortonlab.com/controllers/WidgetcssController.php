@@ -110,7 +110,6 @@ class WidgetcssController
         $cache=$redis->get('cdn_cache_update');
         if ($cache) $cache_arr=json_decode($cache, true);
         $cache_arr['paths'][]='/css/'.$domen.'.css.gz';
-        $cache_arr['paths'][]='/data.php';
         $cache_arr['paths']=array_unique($cache_arr['paths']);
         $cache=json_encode($cache_arr);
         $redis->set('cdn_cache_update',$cache, 1296000);
