@@ -805,12 +805,48 @@ $(document).ready(function(){
     });
     //Удаление ключевых слов при редактировании статьи
     $(document).on('click','.text-block-98',function(){
+        $(this).parent('tr').toggle('slow');
         $(this).parent('div').toggle('slow');
         var $this=this;
         setTimeout(function (){
+            $($this).parent('tr').remove();
             $($this).parent('div').remove();
             words();geo();
         }, 300);
+    });
+
+    //Добавление условий поиска категорий на пложадках
+
+    $(document).on('click','#addcategory',function(){
+        let str="<option selected=\"\" value=\"\">Выберите</option>";
+        Object.keys(category).forEach(function(el, id) {
+            str=str+'<option value="'+el+'">'+category[el]+'</option>';
+        });
+
+        $("#tablecategory").append("" +
+            "<tr>"+
+            "<td>"+
+            "<select name=\"categoriay\" required=\"\" class=\"select-field w-select\">"+
+            str +
+            "</select>"+
+            "</td>"+
+            "<td>"+
+            "<select class=\"select-field w-select\">"+
+            "<option selected=\"\" value=\"\">Выберите</option>"+
+            "<option value=\"0\">По url</option>"+
+            "<option value=\"1\">По тексту в селекторе</option>"+
+            "</select>"+
+            "</td>"+
+            "<td>"+
+            "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"regex\" value=\"\" placeholder=\"Регуляторка url\">"+
+            "</td>"+
+            "<td>"+
+            "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"regex\" value=\"\" placeholder=\"\">"+
+            "</td>"+
+            "<td style=\"color:red\" class=\"text-block-98\">Удалить</td>"+
+            "</tr>"
+        );
+
     });
 
     //Добавление формы анонса

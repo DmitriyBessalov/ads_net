@@ -413,22 +413,32 @@ var myLineChart = new Chart(ctx, {
 				</div>
 			  </div>
 			  <div class="div-block-102">
-			  <div class="boxsetting">';
+			  <div class="boxsetting" style="width: 98%">';
                 $sql = "SELECT * FROM `categoriya`";
                 $categorii = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+                echo'<script>';
+                $str='';
+                foreach ($categorii as $i){
+                    $str.='"'.$i['id'].'":"'.$i['categoriya'].'",';
+                };
+                $str = substr($str, 0, -1);
+                echo 'var category={'.$str.'};
+                </script>';
+
+
                 echo '
                 <div class="text-block-103">Категории разделов площадки</div>
                 
-                <table>
-                  <tr>
+                <table id="tablecategory">
+                  <tr class="text-block-115">
                     <td>Категория</td>
-                    <td>Поиск раздела</td>
-                    <td></td>
-                    <td>Значение</td>
+                    <td>Тип поиска</td>
+                    <td>Параметр поиска</td>
+                    <td>Значение поиска</td>
                     <td></td>
                   </tr>
-                  
-                  
+                                    
                   <tr>
                     <td>
                     <select name="categoriay" required="" class="select-field w-select">
@@ -450,39 +460,15 @@ var myLineChart = new Chart(ctx, {
                         <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Регуляторка url">
                     </td>
                     <td>
-                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Селектор">
+                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="">
                     </td>
-                    <td style="color:red">Удалить</td>
+                    <td style="color:red" class="text-block-98">Удалить</td>
                   </tr>
                   
-                  <tr>
-                    <td>
-                    <select name="categoriay" required="" class="select-field w-select">
-                      <option selected="" value="">Выберите</option>';
-                        foreach ($categorii as $i) {
-                            echo  '<option '; echo ' value="'.$i['id'].'">'.$i['categoriya'].'</option>';
-                        };
-                        echo '
-                    </select>
-                    </td>
-                    <td>
-                    <select class="select-field w-select">
-                        <option selected="" value="">Выберите</option>
-                        <option value="0">По url</option>
-                        <option value="1">По тексту в селекторе</option>
-                    </select>
-                    </td>
-                    <td>
-                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Селектор">
-                    </td>
-                    <td>
-                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Селектор">
-                    </td>
-                    <td style="color:red">Удалить</td>
-                  </tr>
+                  
                   
                 </table>
-                <div class="text-block-118">Добавить категорию</div>
+                <div class="text-block-118" id="addcategory">Добавить категорию</div>
               </div>
               </div>
               <div class="div-block-102">
