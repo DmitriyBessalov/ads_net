@@ -826,22 +826,22 @@ $(document).ready(function(){
         $("#tablecategory").append("" +
             "<tr>"+
             "<td>"+
-            "<select name=\"categoriay\" required=\"\" class=\"select-field w-select\">"+
+            "<select name=\"categoriay[]\" required=\"\" class=\"select-field w-select\">"+
             str +
             "</select>"+
             "</td>"+
             "<td>"+
-            "<select class=\"select-field w-select\">"+
+            "<select name=\"type_search[]\" required=\"\" class=\"select-field w-select\">"+
             "<option selected=\"\" value=\"\">Выберите</option>"+
             "<option value=\"0\">По url</option>"+
             "<option value=\"1\">По тексту в селекторе</option>"+
             "</select>"+
             "</td>"+
             "<td>"+
-            "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"regex\" value=\"\" placeholder=\"Регуляторка url\">"+
+            "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"regex[]\" value=\"\" placeholder=\"Регуляторка url\" required=\"\">"+
             "</td>"+
             "<td>"+
-            "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"regex\" value=\"\" placeholder=\"\">"+
+            "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"znach[]\" value=\"\" placeholder=\"\" required=\"\">"+
             "</td>"+
             "<td style=\"color:red\" class=\"text-block-98\">Удалить</td>"+
             "</tr>"

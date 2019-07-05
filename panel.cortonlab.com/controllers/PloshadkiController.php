@@ -286,7 +286,7 @@ var myLineChart = new Chart(ctx, {
                 if ($_POST['aktiv']=='on'){$aktiv=1;}else{$aktiv=0;};
                 //Создание домена площадки
                 if (addslashes($_REQUEST['id'])==""){
-                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_id`='".$_POST['user_id']."',`type`='".$_POST['type']."', `podcategoriya_id`='".$_POST['podcategoriya']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
+                    $sql="INSERT INTO `ploshadki` SET `domen`='".$_POST['domen']."',`status`='".$aktiv."',`user_id`='".$_POST['user_id']."',`type`='".$_POST['type']."', `promo_page`='".$_POST['promo_page']."', `CTR`='".$_POST['CTR']."',`CPM`='".$_POST['CPM']."',`CPG`='".$_POST['CPG']."',`demo-annons`='".$_POST['demo-annons']."', `date_add` = '".date('Y-m-d')."';";
                     $GLOBALS['db']->query($sql);
                     $id=$GLOBALS['db']->lastInsertId();
                     WidgetcssController::UpdateCSSfile($id);
@@ -313,7 +313,6 @@ var myLineChart = new Chart(ctx, {
                     SET
                         `domen` = '".$_POST['domen']."',
                         `type` = '".$_POST['type']."',
-                        `podcategoriya_id` ='".$_POST['podcategoriya_id']."',
                         `promo_page`='".$_POST['promo_page']."',
                         `user_id` = '".$_POST['user_id']."',
                         `status` ='".$aktiv."',
@@ -331,6 +330,16 @@ var myLineChart = new Chart(ctx, {
                     $sql="UPDATE `platforms_domen_memory` SET `domen` = '".$_POST['domen']."' VALUES `id`='".$_POST['id']."')";
                     $GLOBALS['db']->query($sql);
 
+                    $sql="DELETE FROM `plarforms_regex_categorii` WHERE `id_platform`='".$_POST['id']."';";
+
+                    $count=count($_POST['categoriay']);
+
+                    for($i = 0; $i < $count; $i++){
+                        $sql.="INSERT INTO `plarforms_regex_categorii` SET `id_platform`='".$_POST['id']."',`id_categoriya`='".$_POST['categoriay'][$i]."',`type_search`='".$_POST['type_search'][$i]."',`regex`='".$_POST['regex'][$i]."',`value`='".$_POST['znach'][$i]."';";
+                    };
+
+                    $GLOBALS['db']->query($sql);
+
                     WidgetcssController::UpdateCSSfile($_POST['id']);
                     header('Location: /platforms');
                 }
@@ -340,7 +349,7 @@ var myLineChart = new Chart(ctx, {
             public static function form()
             {
                 if (addslashes($_REQUEST['id'])!='') {
-                    $sql = "SELECT  `domen`, `type`, `podcategoriya_id`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
+                    $sql = "SELECT  `domen`, `type`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                     $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
@@ -437,36 +446,39 @@ var myLineChart = new Chart(ctx, {
                     <td>Параметр поиска</td>
                     <td>Значение поиска</td>
                     <td></td>
-                  </tr>
-                                    
+                  </tr>';
+
+                $sql = "SELECT `id_categoriya`,`type_search`,`regex`,`value` FROM `plarforms_regex_categorii` WHERE `id_platform`='".addslashes($_REQUEST['id'])."';";
+                $regex = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+                foreach ($regex as $y) {
+                    echo '                  
                   <tr>
                     <td>
-                    <select name="categoriay" required="" class="select-field w-select">
-                      <option selected="" value="">Выберите</option>';
-                        foreach ($categorii as $i) {
-                            echo  '<option '; echo ' value="'.$i['id'].'">'.$i['categoriya'].'</option>';
-                        };
-                        echo '
+                    <select name="categoriay[]" required="" class="select-field w-select">
+                      <option value="">Выберите</option>';
+                    foreach ($categorii as $i) {
+                        echo '<option '; if($y['id_categoriya']==$i['id']) echo 'selected="" '; echo ' value="' . $i['id'] . '">' . $i['categoriya'] . '</option>';
+                    };
+                    echo '
                     </select>
                     </td>
                     <td>
-                    <select class="select-field w-select">
-                        <option selected="" value="">Выберите</option>
-                        <option value="0">По url</option>
-                        <option value="1">По тексту в селекторе</option>
+                    <select name="type_search[]" required="" class="select-field w-select">
+                        <option value="">Выберите</option>
+                        <option '; if(!$y['type_search']) echo 'selected="" '; echo 'value="0">По url</option>
+                        <option '; if( $y['type_search']) echo 'selected="" '; echo 'value="1">По тексту в селекторе</option>
                     </select>
                     </td>
                     <td>
-                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Регуляторка url">
+                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex[]" value="'.$y['regex'].'" placeholder="Регуляторка url" required="">
                     </td>
                     <td>
-                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="">
+                        <input type="text" class="text-field-10 w-input" maxlength="256" name="znach[]" value="'.$y['value'].'" placeholder="" required="">
                     </td>
                     <td style="color:red" class="text-block-98">Удалить</td>
-                  </tr>
-                  
-                  
-                  
+                  </tr>';
+                };
+                echo'               
                 </table>
                 <div class="text-block-118" id="addcategory">Добавить категорию</div>
               </div>
