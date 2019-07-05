@@ -396,12 +396,6 @@ var myLineChart = new Chart(ctx, {
                     echo "value=\"".$i['id']."\">".$i['email']."</option>";
                 };
 
-                $sql = "SELECT `id_categoriya` FROM `podcategoriya` WHERE `id`='".$result['podcategoriya_id']."'";
-                $current_categoriya = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-                $sql = "SELECT * FROM `categoriya` WHERE 1";
-                $categoriy = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-
                 echo '
                 </select>
 				<div style="width: 1337px; margin-bottom: 60px;"></div>
@@ -430,6 +424,7 @@ var myLineChart = new Chart(ctx, {
                     <td>Категория</td>
                     <td>Поиск раздела</td>
                     <td></td>
+                    <td>Значение</td>
                     <td></td>
                   </tr>
                   
@@ -454,6 +449,9 @@ var myLineChart = new Chart(ctx, {
                     <td>
                         <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Регуляторка url">
                     </td>
+                    <td>
+                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Селектор">
+                    </td>
                     <td style="color:red">Удалить</td>
                   </tr>
                   
@@ -473,6 +471,9 @@ var myLineChart = new Chart(ctx, {
                         <option value="0">По url</option>
                         <option value="1">По тексту в селекторе</option>
                     </select>
+                    </td>
+                    <td>
+                        <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Селектор">
                     </td>
                     <td>
                         <input type="text" class="text-field-10 w-input" maxlength="256" name="regex" value="" placeholder="Селектор">
