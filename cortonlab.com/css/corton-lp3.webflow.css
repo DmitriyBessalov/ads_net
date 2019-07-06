@@ -1835,7 +1835,13 @@ a {
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: none;
-  box-shadow: rgba(41, 41, 43, 0.05) 0px 2px 4px 0px;
+}
+
+.blockbiginfo {
+	box-shadow: rgba(41, 41, 43, 0.05) 0px 2px 4px 0px;
+	background:#e8e8eb; 
+	padding: 40px; 
+	border-radius: 8px;
 }
 
 .text-block-18 {
