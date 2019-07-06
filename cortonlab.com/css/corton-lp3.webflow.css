@@ -1838,10 +1838,14 @@ a {
 }
 
 .blockbiginfo {
-	box-shadow: rgba(41, 41, 43, 0.05) 0px 2px 4px 0px;
-	background:#e8e8eb; 
 	padding: 40px; 
 	border-radius: 8px;
+	background: #F6F6F8;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(224, 229, 233);
+    box-shadow: 0 12px 34px 0 rgba(41,41,43,.06);
+}
 }
 
 .text-block-18 {
