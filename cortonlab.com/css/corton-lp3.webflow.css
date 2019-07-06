@@ -1835,6 +1835,7 @@ a {
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: none;
+  box-shadow: rgba(41, 41, 43, 0.05) 0px 2px 4px 0px;
 }
 
 .text-block-18 {
@@ -2455,6 +2456,7 @@ a {
   border-radius: 8px;
   background: #e8e8eb;
   margin-right: 20px;
+  box-shadow: rgba(41, 41, 43, 0.05) 0px 2px 4px 0px;
 }
 
 .div-block-83-2 {
