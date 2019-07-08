@@ -1226,7 +1226,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: 3px solid hsla(0, 0%, 100%, .1);
-  background-color: #f4f6f9;
+  background-color: #F6F6F8;
 }
 
 .div-block-33 {
@@ -1637,7 +1637,7 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #f4f6f9;
+  background-color: #F6F6F8;
 }
 
 .section-9 {
@@ -1660,7 +1660,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: 3px solid hsla(0, 0%, 100%, .1);
-  background-color: #f4f6f9;
+  background-color: #f6f6f8;
 }
 
 .div-block-52 {
@@ -1771,7 +1771,7 @@ a {
 
 .section-10 {
   width: 100%;
-  background-color: #202029;
+  background-color: #f4f6f9;
 }
 
 .image-12 {
@@ -1797,7 +1797,7 @@ a {
 .div-block-58 {
   width: 100%;
   padding: 140px 20% 40px;
-  background-color: #f4f6f9;
+  background-color: #f6f6f8;
 }
 
 .text-span-15 {
@@ -1835,6 +1835,16 @@ a {
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: none;
+}
+
+.blockbiginfo {
+	padding: 40px; 
+	border-radius: 8px;
+	background: #F6F6F8;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(224, 229, 233);
+    box-shadow: 0 12px 34px 0 rgba(41,41,43,.06);
 }
 
 .text-block-18 {
@@ -2453,8 +2463,12 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 8px;
-  background: #E0E1E5;
+  background: #F6F6F8;
   margin-right: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(224, 229, 233);
+  box-shadow: 0 12px 34px 0 rgba(41,41,43,.06);
 }
 
 .div-block-83-2 {
