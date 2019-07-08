@@ -54,7 +54,7 @@
                 $notification = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 if ($notification) echo '<div class="circlnotice" >'.$notification.'</div></a>';
                 ?>
-            <a href="/load" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Нагрузка</div></a>
+            <a href="/load" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Анализ трафика</div></a>
 			<a href="/users" class="link-block w-inline-block"><img src="/images/ic-user.png" class="image-6"><div class="text-block-82">Пользователи</div></a>	
       <? endif; ?>
             <!--a href="/tickets" class="link-block w-inline-block"><img src="/images/ic-ticket.png" class="image-6"><div class="text-block-82">Тикеты</div></a-->
