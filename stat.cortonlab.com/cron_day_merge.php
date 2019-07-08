@@ -48,17 +48,39 @@ for ($i = 1; $i <= 4; $i++) {
     };
 };
 
-// Сжимать статистику stat_promo_day_count до месяцев с задержкой в месяц
+$redis->close();
 
+if (date('w')==7) {
+    $sql = "INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) SELECT SUBDATE(CURRENT_DATE, 1), `platform_id`, SUM(`count`)/10 FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
+    $GLOBALS['dbstat']->query($sql);
+}else{
+    $sql = "SELECT `platform_id`, SUM(`count`)/10  as `request` FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
+    $current=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql = "SELECT `platform_id`, MAX(`request`) as `request` FROM `nagruzka` GROUP BY `platform_id`";
+    $old=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_KEY_PAIR);
+
+    $mySQLdatelast = date('Y-m-d', strtotime("-1 days"));
+    $sql='INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) VALUES ';
+    foreach ($current as $i){
+       $request=round($i['request'])-$old[$i['request']];
+       $sql.='('.$mySQLdatelast.','.$i['platform_id'].','.$request.'),';
+    }
+    $sql=substr($sql, 0, -1);
+    $GLOBALS['dbstat']->query($sql);
+}
+if (date('w')==6){
+    //каждую неделю с пятницы на субботу сбрасывать статистку по словам
+    $sql = "TRUNCATE `words`; TRUNCATE `words_top10`;";
+
+    $GLOBALS['dbstat']->query($sql);
+}
+
+
+// Сжимать статистику stat_promo_day_count до месяцев с задержкой в месяц
 // Сжимать статистику balans_ploshadki до месяцев с задержкой в 3 месяца
 //...
 
-// Скидывать статистику по показам анонсов из Redis в базу MySQL
-// Сжатие статистики по показам анонсов с задержкой в 3 месяца
-// ...
-
-
-echo 1;
 
 /*
  *  Дополнительные задания по cron
@@ -69,7 +91,6 @@ echo 1;
  *
  */
 
-$redis->close();
 /*
  * Структура Redis
  * db0 счеткик активного id_Просмотра (должен сбрасывается раз в месяц)

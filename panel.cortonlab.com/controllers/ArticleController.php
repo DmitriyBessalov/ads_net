@@ -900,13 +900,20 @@ class ArticleController
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
-						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-left: -20px; margin-top: -20px;"></div>
+                        
+                        <div class="text-block-103">Категории</div>
+                        <div class="div-block-82">
+                            <input type="cattext" class="text-field-2 w-input" maxlength="256" placeholder="Категория" id="addkey-3">
+                            <div class="text-block-141 cat">+</div>
+                        </div>      
+                        
+						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 30px; margin-left: -20px; margin-top: 30px;"></div>
 						<div class="text-block-103">Ключевые слова</div>
                         <div class="div-block-81">
                             <div>
                                 <div class="div-block-82">
                                     <input type="text" class="text-field-2 w-input" maxlength="256" placeholder="Ключ" id="addkey-2">
-                                    <div class="text-block-141">+</div>
+                                    <div class="text-block-141 key">+</div>
                                 </div>
                             </div>
                         </div>
