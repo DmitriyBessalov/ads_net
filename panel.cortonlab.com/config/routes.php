@@ -56,10 +56,13 @@ switch ($GLOBALS['role']) {
             'notifications' => 'notifications/index',
             'notifikations-obrabotano' => 'notifications/obrabotano',
             'notifikations-del' => 'notifications/del',
-			
+
+            //Нагрузка
+            'load' => 'load/index',
+
             //Тикеты
-            'tickets' => 'ticket/index',
-            'ticket' => 'ticket/index',
+            //'tickets' => 'ticket/index',
+            //'ticket' => 'ticket/index',
 
             //Пользователи
             'users' => 'users/index',

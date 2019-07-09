@@ -793,7 +793,7 @@ $(document).ready(function(){
     }
     words();
     //Добавление ключевых слов при редактировании статьи
-    $( ".text-block-141" ).on( "click", function() {
+    $( ".text-block-141.key" ).on( "click", function() {
         var variable = $('#addkey-2').val();
         if (variable.length > 3) {
             $('.div-block-84.word').append('<div class="div-block-86"><div class="text-block-114">' + variable + '</div><div class="text-block-98">Удалить</div></div>');

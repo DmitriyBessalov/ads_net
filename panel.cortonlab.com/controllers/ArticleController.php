@@ -488,7 +488,7 @@ class ArticleController
                         }
                 }
             }
-            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."',  `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
+            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `category`='".$_POST['categoriay']."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
@@ -894,19 +894,37 @@ class ArticleController
         $str = substr($str, 0, -1);
         echo '
         var countries={'.$str.'};
-        </script>
+        </script>';
+        echo '
         <form method="post" action="/article-update" class="form-2">
                     <div class="div-block-97" style="padding: 30px 0;">
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
-						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-left: -20px; margin-top: -20px;"></div>
+                        
+                        <div class="text-block-103">Категории</div>
+                        <div class="div-block-82">
+                            
+                            <select name="categoriay" style="width:695px" required="" class="select-field w-select">
+                                <option value="">Выберите</option>';
+                                $sql="SELECT * FROM `categoriya`";
+                                $category = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($category as $y){
+                                    echo '<option '; if ($y['id']==$result['category'])echo 'selected="" '; echo 'value="'.$y['id'].'">'.$y['categoriya'].'</option>';
+                                };
+
+                            echo '
+                            </select>
+                            <div class="text-block-141 cat">+</div>
+                        </div> 
+                        
+						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 30px; margin-left: -20px; margin-top: 30px;"></div>
 						<div class="text-block-103">Ключевые слова</div>
                         <div class="div-block-81">
                             <div>
                                 <div class="div-block-82">
                                     <input type="text" class="text-field-2 w-input" maxlength="256" placeholder="Ключ" id="addkey-2">
-                                    <div class="text-block-141">+</div>
+                                    <div class="text-block-141 key">+</div>
                                 </div>
                             </div>
                         </div>
