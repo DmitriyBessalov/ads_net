@@ -2566,8 +2566,8 @@ a {
   }
 }
 .hblockinfo {
-  font-size: 28px;
-  line-height: 38px;
+  font-size: 34px;
+  line-height: 44px;
 }
 
 @media (max-width: 1440px) and (min-width: 1024px) {
