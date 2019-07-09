@@ -58,6 +58,7 @@
 			</div>
 		 </div>
 		 <div style="margin-top:40px; display: flex; justify-content: center">
+		    <a href="#about" class="submit-button w-button">Получить доступы</a>
 		    <input type="submit" href="#agentinfo" value="Получить доступ" class="submit-button w-button"><div style="width:20px;"></div><input type="submit" value="Подробнее" class="submit-buttongrey w-button">
 		 </div>
 	  </div>
@@ -430,7 +431,14 @@
     
 	</div>
 </div>
-
+<script>
+$(document).on("click", "nav a", function(e) {
+    e.preventDefault();
+    var id  = $(this).attr('href');
+    var top = $(id).offset().top; // получаем координаты блока
+    $('body, html').animate({scrollTop: top}, 800); // плавно переходим к блоку
+});
+</script>
 <style>
 @media (max-width: 992px) {
    .rowall {
