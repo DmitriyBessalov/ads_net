@@ -2608,7 +2608,7 @@ a {
     flex-direction: column;
   }
   .blocagent {
-	background: #fff; 
+	background: #fff !important; 
 	padding: 140px 10% 140px;
 }
   .formblock {
