@@ -791,7 +791,7 @@ a {
 }
 
 .blocagent {
-	background: #fff; 
+	background: #fff !important;  
 	padding: 140px 20% 140px;
 }
 
@@ -2608,8 +2608,7 @@ a {
     flex-direction: column;
   }
   .blocagent {
-	background: #fff !important; 
-	margin-top: 100px;
+	padding: 140px 10% 140px;
 }
   .formblock {
 	padding: 40px;
@@ -3002,8 +3001,7 @@ a {
   font-size: 22px;
   line-height: 32px;
 }
-.blocagent {
-	background: #fff; 
+.blocagent { 
 	padding: 140px 20% 140px;
 }
   .section.center {
@@ -3470,7 +3468,6 @@ a {
   line-height: 32px;
 }
 .blocagent {
-	background: #fff; 
 	padding: 140px 4% 140px;
 }
   h3 {
