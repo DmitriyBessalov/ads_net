@@ -2253,10 +2253,10 @@ a {
     color: #fff;
     background-color: #116dd6;
     font-family: 'Myriadpro Regular';
-    font-size: 16px;
-    line-height: 14px;
+    font-size: 18px;
     font-weight: 400;
-    border-radius: 4px;
+    border-radius: 8px;
+	padding: 20px 20px 40px 20px;
 }
 
 .modalDialog > div {
