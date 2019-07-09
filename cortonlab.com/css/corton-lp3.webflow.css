@@ -2258,6 +2258,18 @@ a {
     border-radius: 8px;
 	padding: 16px 10px 33px 10px;
 }
+.submit-buttongrey {
+    width: 100%;
+    height: 34px;
+    color: #116dd6;
+    background-color: #F6F6F8;
+    font-family: 'Myriadpro Regular';
+    font-size: 18px;
+	border-color: #116dd6;
+    font-weight: 400;
+    border-radius: 8px;
+	padding: 16px 10px 33px 10px;
+}
 
 .modalDialog > div {
 	border-radius: 8px;
