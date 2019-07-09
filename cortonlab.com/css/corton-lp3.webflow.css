@@ -2299,10 +2299,12 @@ a {
     background-color: #fff;
     font-family: 'Myriadpro Regular';
     font-size: 18px;
-	border: 1px solid #fff;
     font-weight: 400;
     border-radius: 8px;
 	padding: 16px 20px 33px 20px;
+}
+.submit-buttonwhite:hover {
+    background-color: #f5f2f2;
 }
 
 .modalDialog > div {
