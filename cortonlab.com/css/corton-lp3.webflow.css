@@ -781,6 +781,15 @@ a {
   text-align: center;
 }
 
+.hblockinfo {
+  font-family: 'Myriadpro SemiExt';
+  color: #fff;
+  font-size: 34px;
+  line-height: 44px;
+  font-weight: 700;
+  text-align: left;
+}
+
 .text-span {
   -webkit-filter: none;
   filter: none;
@@ -2556,6 +2565,10 @@ a {
     padding-left: 6%;
   }
 }
+.hblockinfo {
+  font-size: 28px;
+  line-height: 38px;
+}
 
 @media (max-width: 1440px) and (min-width: 1024px) {
 .div-block-33, .div-block-43, .div-block-84, .div-block-58 {
@@ -2976,6 +2989,10 @@ a {
     font-size: 28px;
     line-height: 38px;
   }
+  .hblockinfo {
+  font-size: 22px;
+  line-height: 32px;
+}
   .section.center {
     min-height: 460px;
   }
@@ -3435,6 +3452,10 @@ a {
     font-size: 60px;
     line-height: 70px;
   }
+  .hblockinfo {
+  font-size: 22px;
+  line-height: 32px;
+}
   h3 {
     font-size: 16px;
   }
@@ -3559,6 +3580,7 @@ a {
     font-size: 32px;
     line-height: 34px;
   }
+
   .image-5 {
     width: 155px;
   }
