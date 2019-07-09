@@ -1527,6 +1527,13 @@ a {
   text-decoration: none;
 }
 
+.formblock {
+	background-image: url(images/backgeometry.png);
+	background-repeat: no-repeat;
+	background-position: 100% 100%; 
+	padding: 80px;
+}
+
 .div-block-47 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2582,6 +2589,9 @@ a {
     -ms-flex-direction: column;
     flex-direction: column;
   }
+  .formblock {
+	padding: 40px;
+}
   .hero {
     padding-right: 1vw;
     padding-left: 1vw;
@@ -2975,7 +2985,9 @@ a {
   .body {
     height: 100%;
   }
-  
+  .formblock {
+	padding: 20px;
+}  
   .text-block-16-2 {
      font-size: 18px;
      line-height: 24px;
@@ -3435,6 +3447,9 @@ a {
   .linehome {
 	padding-top: 80px;
 	background: #f4f6f9;
+}
+  .formblock {
+	padding: 20px;
 }
   .hero {
     padding-right: 3vw;
