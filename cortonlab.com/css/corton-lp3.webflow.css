@@ -2231,8 +2231,8 @@ a {
     background-color: #f4f6f9;
     font-family: 'Myriadpro Regular';
     color: #7a7a83;
-    font-size: 16px;
-    border-radius: 4px;
+    font-size: 18px;
+    border-radius: 8px;
 }
 
 .textarea {
@@ -3893,7 +3893,7 @@ a {
     font-size: 16px;
   }
   .text-field-2 {
-    font-size: 16px;
+    font-size: 18px;
   }
   .textarea {
     font-size: 16px;
