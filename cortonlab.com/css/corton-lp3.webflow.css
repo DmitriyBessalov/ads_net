@@ -1542,7 +1542,7 @@ a {
 }
 
 .formblock {
-	background-image: url(images/backgeometry.png);
+	background-image: url(/images/backgeometry.png);
 	background-repeat: no-repeat;
 	background-position: 100% 100%; 
 	padding: 80px;
