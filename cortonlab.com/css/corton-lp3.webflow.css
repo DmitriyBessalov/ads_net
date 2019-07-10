@@ -1236,7 +1236,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: 3px solid hsla(0, 0%, 100%, .1);
-  background-color: #F6F6F8;
+  background-color: #fff;
 }
 
 .div-block-33 {
@@ -1653,7 +1653,7 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #F6F6F8;
+  background-color: #fff;
 }
 
 .section-9 {
@@ -1676,7 +1676,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: 3px solid hsla(0, 0%, 100%, .1);
-  background-color: #f6f6f8;
+  background-color: #fff;
 }
 
 .div-block-52 {
@@ -1813,7 +1813,7 @@ a {
 .div-block-58 {
   width: 100%;
   padding: 30px 20% 90px;
-  background-color: #f6f6f8;
+  background-color: #fff;
 }
 
 .text-span-15 {
@@ -1856,7 +1856,7 @@ a {
 .blockbiginfo {
 	padding: 40px; 
 	border-radius: 8px;
-	background: #F6F6F8;
+	background: #fff;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(224, 229, 233);
@@ -2280,7 +2280,7 @@ a {
     width: auto;
     height: 34px;
     color: #116dd6;
-    background-color: #F6F6F8;
+    background-color: #fff;
     font-family: 'Myriadpro Regular';
     font-size: 18px;
 	border: 1px solid #116dd6;
@@ -2507,7 +2507,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 8px;
-  background: #F6F6F8;
+  background: #fff;
   margin-right: 20px;
   border-width: 1px;
   border-style: solid;
