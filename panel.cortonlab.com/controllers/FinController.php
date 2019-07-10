@@ -517,11 +517,14 @@ class FinController
         $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
-        $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod, SUM(`r_show_anons`)+SUM(`e_show_anons`)+SUM(`s_show_anons`) as show_anons, SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`) as promo_load , SUM(`r`)+SUM(`e`)+SUM(`s`) as pay FROM `balans_ploshadki` WHERE  `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+        $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod, SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`) as promo_load , SUM(`r`)+SUM(`e`)+SUM(`s`) as pay FROM `balans_ploshadki` WHERE  `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
         $result= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-        $sql="SELECT `date`, SUM(`r_balans`) + SUM(`e_balans`) + SUM(`s_balans`) AS dohod, SUM(`r_show_anons`) + SUM(`e_show_anons`) + SUM(`s_show_anons`) AS show_anons, SUM(`r_promo_load`) + SUM(`e_promo_load`) + SUM(`s_promo_load`) AS promo_load, SUM(`r`) + SUM(`e`) + SUM(`s`) AS pay FROM `balans_ploshadki` GROUP BY `date` ORDER BY `date` DESC LIMIT 1,8";
+        $sql="SELECT `date`, SUM(`r_balans`) + SUM(`e_balans`) + SUM(`s_balans`) AS dohod, SUM(`r_show_anons`) + SUM(`e_show_anons`) + SUM(`s_show_anons`) AS show_anons, SUM(`r_promo_load`) + SUM(`e_promo_load`) + SUM(`s_promo_load`) AS promo_load, SUM(`r`) + SUM(`e`) + SUM(`s`) AS pay FROM `balans_ploshadki` GROUP BY `date` ORDER BY `date` DESC LIMIT 7";
         $grafiki= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+        $sql="SELECT `date`, SUM(`r_show_anons`) + SUM(`e_show_anons`) + SUM(`s_show_anons`) AS show_anons FROM `balans_ploshadki` GROUP BY `date` ORDER BY `date` DESC LIMIT 1,8";
+        $show_anons= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         $redis = new Redis();
         $redis->connect('185.75.90.54', 6379);
@@ -538,19 +541,23 @@ class FinController
             if($ch)$show_anons_today+=$ch;
         };
 
-      // if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {$result['show_anons'] += $show_anons_today;}
-     //  $grafiki[0]['show_anons']=$show_anons_today;
-
         $grafiki = array_reverse($grafiki);
+        $show_anons = array_reverse($show_anons);
 
         foreach ($grafiki as $i){
             $grafik_data[]=date("d.m.Y", strtotime($i['date']));
             $grafik_dohod[]=$i['dohod'];
-            $grafik_show_anons[]=$i['show_anons'];
             $grafik_promo_load[]=$i['promo_load'];
             $grafik_pay[]=$i['pay'];
         };
+
+        foreach ($show_anons as $i){
+            $grafik_data_anons[]=date("d.m.Y", strtotime($i['date']));
+            $grafik_show_anons[]=$i['show_anons'];
+        };
+
         $graf_data = '"'.implode('","', $grafik_data).'"';
+        $graf_data_anons = '"'.implode('","', $grafik_data_anons).'"';
         $graf_dohod = '"'.implode('","', $grafik_dohod).'","0"';
         $graf_show_anons = '"'.implode('","', $grafik_show_anons).'","0"';
         $graf_promo_load = '"'.implode('","', $grafik_promo_load).'","0"';
@@ -560,7 +567,7 @@ class FinController
         $load= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_KEY_PAIR);
 
         $loadall=0;
-        foreach ($grafik_data as $i){
+        foreach ($grafik_data_anons as $i){
             $grafik_vizit[]=$load[$i];
             $loadall+=$load[$i];
         }
@@ -586,12 +593,12 @@ class FinController
         <div class="text-block-103">Внешние метрики среднесуточные за неделю</div>
 		<div style="display: flex;">
 		<div style="width:33%;">
-           <div class="text-block-104">Визиты</div>
+           <div class="text-block-104 tooltipinfo1">Визиты<span class="tooltiptext1">Считаются запросы по поиску виджетов</span></div>
            <div style="font-size: 46px;" class="text-block-105">'.$loadall.'</div>
 		</div>
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>		
 		<div style="width:33%;">   
-		   <div class="text-block-104">Показы анонсов<br>среднесуточное (за сегодня)</div>
+		   <div class="text-block-104 tooltipinfo1">Показы анонсов<br>среднесуточное (за сегодня)<span class="tooltiptext1">Считается каждый анонс на странице</span></div>
            <div style="font-size: 46px;margin-top: 0" class="text-block-105">'.$srednee_show_anons.'('.$show_anons_today.')</div>
 		</div>
 		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>	
@@ -681,10 +688,10 @@ var options = {
         yAxes: [{ display: false }]
     },
 	borderWidth: {
-   top: 1,
-   right: 0,
-   bottom: 0,
-   left: 0
+    top: 1,
+    right: 0,
+    bottom: 0,
+    left: 0
 }	
 };
 
@@ -810,7 +817,7 @@ var dataset_06 = {
 };
 
 var data = {
-    labels: ['.$graf_data.'],
+    labels: ['.$graf_data_anons.'],
     datasets: [dataset_05]
 };
 
