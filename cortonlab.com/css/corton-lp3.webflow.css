@@ -1860,6 +1860,10 @@ a {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(224, 229, 233);
+	width: 60rem;
+    max-width: 60rem;
+    height: 45rem;
+    max-height: 45rem;
     box-shadow: 0 12px 34px 0 rgba(41,41,43,.06);
 }
 
