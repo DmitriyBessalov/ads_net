@@ -1,5 +1,6 @@
 <?php
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
+
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
 
@@ -64,7 +65,7 @@ if (date('w')==7) {
     $sql='INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) VALUES ';
     foreach ($current as $i){
        $request=round($i['request'])-$old[$i['request']];
-       $sql.='('.$mySQLdatelast.','.$i['platform_id'].','.$request.'),';
+       $sql.='("'.$mySQLdatelast.'","'.$i['platform_id'].'","'.$request.'"),';
     }
     $sql=substr($sql, 0, -1);
     $GLOBALS['dbstat']->query($sql);

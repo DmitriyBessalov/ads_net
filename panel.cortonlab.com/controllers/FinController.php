@@ -506,7 +506,7 @@ class FinController
         echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
         return true;
     }
-			
+
     public static function actionAdmin()
     {
         $title='Статистика по платформе';
@@ -516,7 +516,6 @@ class FinController
         if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
         $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
-
 
         $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod, SUM(`r_show_anons`)+SUM(`e_show_anons`)+SUM(`s_show_anons`) as show_anons, SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`) as promo_load , SUM(`r`)+SUM(`e`)+SUM(`s`) as pay FROM `balans_ploshadki` WHERE  `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
         $result= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -556,6 +555,12 @@ class FinController
         $graf_promo_load = '"'.implode('","', $grafik_promo_load).'","0"';
         $graf_pay = '"'.implode('","', $grafik_pay).'","0"';
 
+
+        $sql="SELECT SUM(`request`) FROM `nagruzka` WHERE `data`>=SUBDATE(CURRENT_DATE, 8);";
+        $load= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        $persent=round($load/$result['show_anons']);
+
         echo '
 <div class="form-block w-form">
     <div class="w-form-done"></div>
@@ -565,21 +570,21 @@ class FinController
 <div class="table-box">
 <div class="div-block-95 w-clearfix">
     <div style="width:790px;" class="div-block-94">
-        <div class="text-block-103">Внешние метрики</div>
+        <div class="text-block-103">Внешние метрики (среднесуточная за неделю)</div>
 		<div style="display: flex;">
 		<div style="width:33%;">
-           <div class="text-block-104">Просмотров страниц</div>
-           <div style="font-size: 46px;" class="text-block-105">128 315</div>
+           <div class="text-block-104">Запросы страниц</div>
+           <div style="font-size: 46px;" class="text-block-105">'.$load.'</div>
 		</div>
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>		
 		<div style="width:33%;">   
-		   <div class="text-block-104">Показы анонсов</div>
+		   <div class="text-block-104">Показы анонсов<br>Среднее (сегодня)</div>
            <div style="font-size: 46px;" class="text-block-105">'.$result['show_anons'].'</div>
 		</div>
 		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>	
 		<div style="width:33%;">   
 		   <div class="text-block-104">Процент показа анонсов</div>
-           <div style="font-size: 46px;" class="text-block-105">36 %</div>
+           <div style="font-size: 46px;" class="text-block-105">'.$persent.'</div>
 		</div>
 		</div>
 		<div id="containergr2" style="width:725px; height:108px;">
@@ -626,7 +631,6 @@ class FinController
             $ch++;
             echo '<span class="topwords"><span style="color:#768093;">'.$ch.'. </span> '.$topplatforms.'</span><br>';
         };
-
 		   echo '
            </div>
 
