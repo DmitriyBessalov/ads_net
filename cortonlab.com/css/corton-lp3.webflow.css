@@ -244,11 +244,6 @@ a {
   border-bottom: 1px none hsla(0, 0%, 100%, .1);
 }
 
-.body {
-  background-color: #f4f6f9;
-  font-family: 'Open Sans', sans-serif;
-}
-
 .feature-content {
   width: 50vw;
   max-width: 450px;
