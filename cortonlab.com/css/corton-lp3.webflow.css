@@ -1812,7 +1812,7 @@ a {
 
 .div-block-58 {
   width: 100%;
-  padding: 30px 20% 90px;
+  padding: 30px 14% 90px;
   background-color: #fff;
 }
 
@@ -1825,7 +1825,7 @@ a {
 }
 
 .div-block-60 {
-  display: -webkit-box;
+   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -1840,6 +1840,10 @@ a {
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .text-block-17 {
@@ -1875,7 +1879,23 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 45%;
+  width: 40%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+.div-block-61two {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 60%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2912,6 +2932,12 @@ a {
     margin-bottom: 60px;
     margin-left: 0px;
   }
+  .div-block-61two {
+    width: 100%;
+    margin-top: -40px;
+    margin-bottom: 60px;
+    margin-left: 0px;
+  }
   .div-block-62 {
     margin-bottom: 0px;
     font-size: 22px;
@@ -3326,6 +3352,10 @@ a {
   .div-block-60 {
     height: auto;
     margin-top: 30px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
@@ -3349,6 +3379,16 @@ a {
     -ms-flex-pack: start;
     justify-content: flex-start;
   }
+  .div-block-61two {
+    width: 100%;
+    margin-top: -40px;
+    margin-bottom: 60px;
+    margin-left: 0px;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
   .div-block-62 {
     margin-bottom: 0px;
   }
