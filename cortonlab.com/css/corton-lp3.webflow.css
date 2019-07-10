@@ -2546,6 +2546,7 @@ a {
    .div-block-52-2 {
 	   max-width: 260px;
    }
+
 }
 .div-block-84 {
   width: 100%;
@@ -2572,6 +2573,9 @@ a {
     padding-right: 6%;
     padding-left: 6%;
   }
+  .blocagent { 
+	padding: 140px 6% 140px !important;
+}
 }
 .hblockinfo {
   font-size: 34px;
@@ -3006,7 +3010,7 @@ a {
   line-height: 32px;
 }
 .blocagent { 
-	padding: 140px 20% 140px !important;
+	padding: 140px 4% 140px !important;
 }
   .section.center {
     min-height: 460px;
