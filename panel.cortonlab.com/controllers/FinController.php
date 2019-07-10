@@ -520,7 +520,7 @@ class FinController
         $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as dohod, SUM(`r_show_anons`)+SUM(`e_show_anons`)+SUM(`s_show_anons`) as show_anons, SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`) as promo_load , SUM(`r`)+SUM(`e`)+SUM(`s`) as pay FROM `balans_ploshadki` WHERE  `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
         $result= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-        $sql="SELECT `date`, SUM(`r_balans`) + SUM(`e_balans`) + SUM(`s_balans`) AS dohod, SUM(`r_show_anons`) + SUM(`e_show_anons`) + SUM(`s_show_anons`) AS show_anons, SUM(`r_promo_load`) + SUM(`e_promo_load`) + SUM(`s_promo_load`) AS promo_load, SUM(`r`) + SUM(`e`) + SUM(`s`) AS pay FROM `balans_ploshadki` GROUP BY `date` ORDER BY `date` DESC LIMIT 7";
+        $sql="SELECT `date`, SUM(`r_balans`) + SUM(`e_balans`) + SUM(`s_balans`) AS dohod, SUM(`r_show_anons`) + SUM(`e_show_anons`) + SUM(`s_show_anons`) AS show_anons, SUM(`r_promo_load`) + SUM(`e_promo_load`) + SUM(`s_promo_load`) AS promo_load, SUM(`r`) + SUM(`e`) + SUM(`s`) AS pay FROM `balans_ploshadki` GROUP BY `date` ORDER BY `date` DESC LIMIT 1,8";
         $grafiki= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         $redis = new Redis();
@@ -537,8 +537,9 @@ class FinController
             $ch=$redis->get(date('d').':'.$i.':s');
             if($ch)$show_anons_today+=$ch;
         };
-        if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {$result['show_anons'] += $show_anons_today;}
-        $grafiki[0]['show_anons']=$show_anons_today;
+
+      // if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {$result['show_anons'] += $show_anons_today;}
+     //  $grafiki[0]['show_anons']=$show_anons_today;
 
         $grafiki = array_reverse($grafiki);
 
@@ -555,11 +556,23 @@ class FinController
         $graf_promo_load = '"'.implode('","', $grafik_promo_load).'","0"';
         $graf_pay = '"'.implode('","', $grafik_pay).'","0"';
 
+        $sql="SELECT DATE_FORMAT(`data`, \"%d.%m.%Y\"), SUM(`request`) as request FROM `nagruzka` WHERE `data`>=SUBDATE(CURRENT_DATE, 8) GROUP BY `data`;";
+        $load= $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_KEY_PAIR);
 
-        $sql="SELECT SUM(`request`) FROM `nagruzka` WHERE `data`>=SUBDATE(CURRENT_DATE, 8);";
-        $load= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        $loadall=0;
+        foreach ($grafik_data as $i){
+            $grafik_vizit[]=$load[$i];
+            $loadall+=$load[$i];
+        }
 
-        $persent=round($load/$result['show_anons']);
+        $graf_vizit = '"'.implode('","', $grafik_vizit).'"';
+
+
+        $loadall=round($loadall/7);
+
+        $srednee_show_anons=round(array_sum($grafik_show_anons)/7);
+
+        $persent=round($srednee_show_anons/$loadall*100);
 
         echo '
 <div class="form-block w-form">
@@ -570,21 +583,21 @@ class FinController
 <div class="table-box">
 <div class="div-block-95 w-clearfix">
     <div style="width:790px;" class="div-block-94">
-        <div class="text-block-103">Внешние метрики (среднесуточная за неделю)</div>
+        <div class="text-block-103">Внешние метрики среднесуточные за неделю</div>
 		<div style="display: flex;">
 		<div style="width:33%;">
-           <div class="text-block-104">Запросы страниц</div>
-           <div style="font-size: 46px;" class="text-block-105">'.$load.'</div>
+           <div class="text-block-104">Визиты</div>
+           <div style="font-size: 46px;" class="text-block-105">'.$loadall.'</div>
 		</div>
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>		
 		<div style="width:33%;">   
-		   <div class="text-block-104">Показы анонсов<br>Среднее (сегодня)</div>
-           <div style="font-size: 46px;" class="text-block-105">'.$result['show_anons'].'</div>
+		   <div class="text-block-104">Показы анонсов<br>среднесуточное (за сегодня)</div>
+           <div style="font-size: 46px;margin-top: 0" class="text-block-105">'.$srednee_show_anons.'('.$show_anons_today.')</div>
 		</div>
 		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>	
 		<div style="width:33%;">   
 		   <div class="text-block-104">Процент показа анонсов</div>
-           <div style="font-size: 46px;" class="text-block-105">'.$persent.'</div>
+           <div style="font-size: 46px;" class="text-block-105">'.$persent.'%</div>
 		</div>
 		</div>
 		<div id="containergr2" style="width:725px; height:108px;">
@@ -781,7 +794,7 @@ var dataset_05 = {
 	borderWidth: "2",
 	pointRadius: 2,
 	pointBackgroundColor: "rgba(17,109,214,1)",
-    data: [0, 0, 0, 0, 0, 0, 0] //Визиты
+    data: ['.$graf_vizit.'] //Визиты
 };
 
 var dataset_06 = {
