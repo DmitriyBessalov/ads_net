@@ -775,9 +775,24 @@ a {
   margin-bottom: 0px;
   font-family: 'Myriadpro SemiExt';
   color: #116dd6;
-  font-size: 68px;
-  line-height: 70px;
+  font-size: 54px;
+  line-height: 68px;
   font-weight: 700;
+  text-align: center;
+}
+
+.hblockinfo {
+  font-family: 'Myriadpro SemiExt';
+  color: #fff;
+  font-size: 34px;
+  line-height: 44px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.blocagent {
+	background: #fff !important;  
+	padding: 140px 20% 140px !important;
 }
 
 .text-span {
@@ -1352,7 +1367,6 @@ a {
 }
 
 .text-block-14 {
-  max-width: 540px;
   margin-right: 40px;
   font-family: 'Myriadpro Regular';
   color: #116dd6;
@@ -1527,13 +1541,20 @@ a {
   text-decoration: none;
 }
 
+.formblock {
+	background-image: url(/images/backgeometry.png);
+	background-repeat: no-repeat;
+	background-position: 100% 100%; 
+	padding: 80px;
+}
+
 .div-block-47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  margin-top: 70px;
+  margin-top: 30px;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
@@ -1796,7 +1817,7 @@ a {
 
 .div-block-58 {
   width: 100%;
-  padding: 140px 20% 40px;
+  padding: 30px 20% 90px;
   background-color: #f6f6f8;
 }
 
@@ -2221,8 +2242,9 @@ a {
     background-color: #f4f6f9;
     font-family: 'Myriadpro Regular';
     color: #7a7a83;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 4px;
+	padding: 25px 20px 25px 20px;
 }
 
 .text-field-2 {
@@ -2231,8 +2253,9 @@ a {
     background-color: #f4f6f9;
     font-family: 'Myriadpro Regular';
     color: #7a7a83;
-    font-size: 16px;
-    border-radius: 4px;
+    font-size: 18px;
+    border-radius: 8px;
+	padding: 25px 20px 25px 20px;
 }
 
 .textarea {
@@ -2248,15 +2271,41 @@ a {
 }
 
 .submit-button {
-    width: 100%;
+    width: auto;
     height: 34px;
     color: #fff;
     background-color: #116dd6;
     font-family: 'Myriadpro Regular';
-    font-size: 16px;
-    line-height: 14px;
+    font-size: 18px;
     font-weight: 400;
-    border-radius: 4px;
+    border-radius: 8px;
+	padding: 16px 20px 33px 20px;
+}
+.submit-buttongrey {
+    width: auto;
+    height: 34px;
+    color: #116dd6;
+    background-color: #F6F6F8;
+    font-family: 'Myriadpro Regular';
+    font-size: 18px;
+	border: 1px solid #116dd6;
+    font-weight: 400;
+    border-radius: 8px;
+	padding: 16px 20px 33px 20px;
+}
+.submit-buttonwhite {
+    width: auto;
+    height: 34px;
+    color: #116dd6;
+    background-color: #fff;
+    font-family: 'Myriadpro Regular';
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 8px;
+	padding: 16px 20px 33px 20px;
+}
+.submit-buttonwhite:hover {
+    background-color: #e4e4e4;
 }
 
 .modalDialog > div {
@@ -2500,7 +2549,7 @@ a {
 }
 .div-block-84 {
   width: 100%;
-  padding: 80px 20% 20px;
+  padding: 140px 20% 140px;
 }
 
 .div-block-85 {
@@ -2510,7 +2559,7 @@ a {
   display: flex;
   width: 100%;
   height: 200px;
-  margin-top: 70px;
+  margin-top: 40px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -2523,6 +2572,10 @@ a {
     padding-right: 6%;
     padding-left: 6%;
   }
+}
+.hblockinfo {
+  font-size: 34px;
+  line-height: 44px;
 }
 
 @media (max-width: 1440px) and (min-width: 1024px) {
@@ -2557,6 +2610,13 @@ a {
     -ms-flex-direction: column;
     flex-direction: column;
   }
+  .blocagent {
+	padding: 140px 10% 140px !important;
+}
+  .formblock {
+	padding: 40px;
+	background-position: 150% 120%;
+}
   .hero {
     padding-right: 1vw;
     padding-left: 1vw;
@@ -2653,8 +2713,8 @@ a {
     padding-left: 18px;
   }
   .heading-3 {
-    font-size: 68px;
-    line-height: 70px;
+    font-size: 54px;
+    line-height: 68px;
   }
   .div-block-15 {
     display: none;
@@ -2714,7 +2774,7 @@ a {
   }
   .text-block-14 {
     width: 560px;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     font-size: 22px;
     line-height: 28px;
   }
@@ -2941,6 +3001,13 @@ a {
     font-size: 28px;
     line-height: 38px;
   }
+  .hblockinfo {
+  font-size: 22px;
+  line-height: 32px;
+}
+.blocagent { 
+	padding: 140px 20% 140px !important;
+}
   .section.center {
     min-height: 460px;
   }
@@ -2950,7 +3017,9 @@ a {
   .body {
     height: 100%;
   }
-  
+  .formblock {
+	padding: 20px;
+}  
   .text-block-16-2 {
      font-size: 18px;
      line-height: 24px;
@@ -3158,7 +3227,6 @@ a {
   }
   .text-block-14 {
     width: 100%;
-    max-width: 490px;
     margin-top: 20px;
     margin-bottom: 0px;
     font-size: 18px;
@@ -3172,7 +3240,6 @@ a {
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
-    background-color: #f4f6f9;
   }
   .div-block-47 {
     width: 80%;
@@ -3400,6 +3467,13 @@ a {
     font-size: 60px;
     line-height: 70px;
   }
+  .hblockinfo {
+  font-size: 22px;
+  line-height: 32px;
+}
+.blocagent {
+	padding: 140px 4% 140px !important;
+}
   h3 {
     font-size: 16px;
   }
@@ -3412,6 +3486,9 @@ a {
   .linehome {
 	padding-top: 80px;
 	background: #f4f6f9;
+}
+  .formblock {
+	padding: 20px;
 }
   .hero {
     padding-right: 3vw;
@@ -3521,6 +3598,7 @@ a {
     font-size: 32px;
     line-height: 34px;
   }
+
   .image-5 {
     width: 155px;
   }
@@ -3626,10 +3704,9 @@ a {
   }
   .text-block-14 {
     width: 320px;
-    max-width: 320px;
     margin-top: 10px;
     margin-right: 0px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     font-size: 18px;
     line-height: 24px;
   }
@@ -3651,7 +3728,6 @@ a {
   }
   .div-block-47 {
     width: 100%;
-    margin-top: 4vw;
     margin-bottom: 0vw;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -3870,7 +3946,7 @@ a {
     font-size: 16px;
   }
   .text-field-2 {
-    font-size: 16px;
+    font-size: 18px;
   }
   .textarea {
     font-size: 16px;
