@@ -244,11 +244,6 @@ a {
   border-bottom: 1px none hsla(0, 0%, 100%, .1);
 }
 
-.body {
-  background-color: #f4f6f9;
-  font-family: 'Open Sans', sans-serif;
-}
-
 .feature-content {
   width: 50vw;
   max-width: 450px;
@@ -1241,7 +1236,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: 3px solid hsla(0, 0%, 100%, .1);
-  background-color: #F6F6F8;
+  background-color: #fff;
 }
 
 .div-block-33 {
@@ -1255,7 +1250,7 @@ a {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  margin-top: 4vw;
+  margin-top: 2vw;
   padding-right: 20%;
   padding-left: 20%;
   clear: none;
@@ -1658,7 +1653,7 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #F6F6F8;
+  background-color: #fff;
 }
 
 .section-9 {
@@ -1681,7 +1676,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: 3px solid hsla(0, 0%, 100%, .1);
-  background-color: #f6f6f8;
+  background-color: #fff;
 }
 
 .div-block-52 {
@@ -1792,7 +1787,7 @@ a {
 
 .section-10 {
   width: 100%;
-  background-color: #f4f6f9;
+  background-color: #fff;
 }
 
 .image-12 {
@@ -1818,7 +1813,7 @@ a {
 .div-block-58 {
   width: 100%;
   padding: 30px 20% 90px;
-  background-color: #f6f6f8;
+  background-color: #fff;
 }
 
 .text-span-15 {
@@ -1861,7 +1856,7 @@ a {
 .blockbiginfo {
 	padding: 40px; 
 	border-radius: 8px;
-	background: #F6F6F8;
+	background: #fff;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(224, 229, 233);
@@ -2285,7 +2280,7 @@ a {
     width: auto;
     height: 34px;
     color: #116dd6;
-    background-color: #F6F6F8;
+    background-color: #fff;
     font-family: 'Myriadpro Regular';
     font-size: 18px;
 	border: 1px solid #116dd6;
@@ -2512,7 +2507,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 8px;
-  background: #F6F6F8;
+  background: #fff;
   margin-right: 20px;
   border-width: 1px;
   border-style: solid;
@@ -2546,6 +2541,7 @@ a {
    .div-block-52-2 {
 	   max-width: 260px;
    }
+
 }
 .div-block-84 {
   width: 100%;
@@ -2572,6 +2568,9 @@ a {
     padding-right: 6%;
     padding-left: 6%;
   }
+  .blocagent { 
+	padding: 140px 6% 140px !important;
+}
 }
 .hblockinfo {
   font-size: 34px;
@@ -2768,7 +2767,7 @@ a {
     padding-left: 10px;
   }
   .div-block-33 {
-    margin-top: 5vw;
+    margin-top: 3vw;
     padding-right: 4%;
     padding-left: 4%;
   }
@@ -3006,7 +3005,7 @@ a {
   line-height: 32px;
 }
 .blocagent { 
-	padding: 140px 20% 140px !important;
+	padding: 140px 4% 140px !important;
 }
   .section.center {
     min-height: 460px;
@@ -3216,7 +3215,7 @@ a {
     position: relative;
     top: 2vw;
     z-index: 1;
-    margin-top: 5vw;
+    margin-top: 3vw;
     margin-bottom: 2vw;
     padding-right: 4%;
     padding-left: 4%;
@@ -3683,10 +3682,10 @@ a {
   .div-block-33 {
     position: static;
     left: 0px;
-    top: 2vw;
+    top: 1vw;
     right: 0px;
     z-index: 1;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
     padding-right: 4%;
     padding-left: 4%;
