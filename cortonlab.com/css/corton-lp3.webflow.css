@@ -1250,7 +1250,7 @@ a {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  margin-top: 4vw;
+  margin-top: 2vw;
   padding-right: 20%;
   padding-left: 20%;
   clear: none;
@@ -2767,7 +2767,7 @@ a {
     padding-left: 10px;
   }
   .div-block-33 {
-    margin-top: 5vw;
+    margin-top: 3vw;
     padding-right: 4%;
     padding-left: 4%;
   }
@@ -3215,7 +3215,7 @@ a {
     position: relative;
     top: 2vw;
     z-index: 1;
-    margin-top: 5vw;
+    margin-top: 3vw;
     margin-bottom: 2vw;
     padding-right: 4%;
     padding-left: 4%;
@@ -3682,10 +3682,10 @@ a {
   .div-block-33 {
     position: static;
     left: 0px;
-    top: 2vw;
+    top: 1vw;
     right: 0px;
     z-index: 1;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 20px;
     padding-right: 4%;
     padding-left: 4%;
