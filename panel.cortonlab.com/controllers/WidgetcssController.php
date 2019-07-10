@@ -52,6 +52,15 @@ class WidgetcssController
             $block = preg_replace("/[\r\n][\r\n]/",",",$css2['adblock-css']);
             $css.="#corton-promo{--adblock:".$block.";}";
 
+          /*  $sql='SELECT * FROM `plarforms_regex_categorii` WHERE `id_platform`='.$id.';';
+            $category=$GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+            $ch=0;$str='';
+            foreach ($category as $i){
+                $str.="--i".$ch.":".$i['id_categoriya'].";--t".$ch.":".$i['type_search'].";--r".$ch.":".$i['regex'].";--v".$ch.":".$i['value'].";";
+                $ch++;
+            };*/
+
             $css.="body{--forcibly:".$css2['forcibly'].";--selector:".$css2['selector'].";--selectortitle:".$css2['selector-title'].";--promo:".$result['promo_page'].";--promo_template:".$result['promo_template'].";}";
 
             if ($result['recomend_aktiv']) {
@@ -120,7 +129,6 @@ class WidgetcssController
     }
 
     public static function actionAktiv(){
-
         $sql="UPDATE `ploshadki` SET `".$_GET['widget']."_aktiv`='1' WHERE `id`='".$_GET['id']."';";
         $GLOBALS['db']->query($sql);
         WidgetcssController::UpdateCSSfile($_GET['id']);
