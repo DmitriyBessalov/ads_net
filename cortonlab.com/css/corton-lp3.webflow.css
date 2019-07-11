@@ -393,7 +393,13 @@ a {
 .nav-menu-wrap {
   clear: none;
 }
-
+.text-block-29 {
+  margin-bottom: 20px;
+  font-family: 'Myriadpro SemiExt', sans-serif;
+  color: #116dd6;
+  font-size: 22px;
+  line-height: 24px;
+}
 .nav-link {
   position: static;
   display: block;
