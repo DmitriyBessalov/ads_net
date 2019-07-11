@@ -7,6 +7,15 @@ class ArticleController
         $title='Управление статьями';
         include PANELDIR.'/views/layouts/header.php';
 
+        if ($GLOBALS['role']=='advertiser'){
+            echo '
+                <style>
+                .flipswitch{
+                    pointer-events: none;
+                }
+                </style>';
+        }
+
         echo '
 		<div class="table-box">
 		<div class="div-block-102-table">
@@ -178,7 +187,6 @@ class ArticleController
 		
 		<div class="table-right">
 		    <form id="right-form" class="form-333">
-			<!--a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a-->
 			';
             if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
 			echo '

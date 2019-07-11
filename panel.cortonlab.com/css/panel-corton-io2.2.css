@@ -3851,7 +3851,7 @@ input[name=active] {
 
 .ql-container.ql-snow {
   border: 1px solid #e1e2e8 !important;
-  border-top: 0px solid !important;
+/*  border-top: 0px solid !important;*/
 }
 
 /* calendar */
