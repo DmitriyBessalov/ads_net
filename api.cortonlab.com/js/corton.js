@@ -73,6 +73,12 @@ function corton_promo() {
             h3=promo_form.scrollHeight;
         };
 
+        //Скрытие referrer при переходе со статьи
+        var meta = document.createElement('meta');
+        meta.name = "referrer";
+        meta.content = "no-referrer";
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
         //Клик по ссылке в промо статье
         var a = document.querySelectorAll('div#corton-promo a');
         for(var i=0; i<a.length; i++) {
@@ -86,10 +92,10 @@ function corton_promo() {
                 if (window.location.hostname === 'demo.cortonlab.com') {
                     a[i].setAttribute('href', 'javascript: void(0)')
                 }else{
-                    a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + document.referrer)
+                    a[i].rel="noreferrer";
+                    a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + result['p_id'])
                     console.log('promolink', a[i].getAttribute('href'));
                 }
-
 
                 a[i].onclick = function (e) {
                     console.log('https://stat.cortonlab.com/promo_click.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']);

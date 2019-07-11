@@ -46,7 +46,7 @@ preg_match('/\/\/(.*?)\//', $_SERVER['HTTP_REFERER'], $referer);
 
 $sql="SELECT `id`,`promo_page`,`recomend_zag_aktiv`,`natpre_zag_aktiv` FROM `ploshadki` WHERE `domen`='".$referer[1]."'";
 $result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-$arr['platform_id'] = $result1['id'];
+$arr['p_id'] = $result1['id'];
 
 //Алгорим расчета вероятности выдачи анонса
 $anons=0;
@@ -150,26 +150,18 @@ echo $str;
 
 $word_arr=explode("','",$words);
 
-$domen=parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
-
-$sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
-$platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-//$sql = "SELECT `id` FROM `platforms_domen_memory` WHERE `domen`='".$domen."'";
-//$platform_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
 foreach ($word_arr as $i){
-    $sql = "UPDATE `words` SET `count`=`count`+1 WHERE `platform_id`='".$platform_id."' AND `word`='".$i."'";
+    $sql = "UPDATE `words` SET `count`=`count`+1 WHERE `platform_id`='".$arr['p_id']."' AND `word`='".$i."'";
     if (!$GLOBALS['dbstat']->exec($sql)){
-        $sql = "INSERT INTO `words` SET `platform_id`='".$platform_id."', `word`='".$i."', `count`='1'";
+        $sql = "INSERT INTO `words` SET `platform_id`='".$arr['p_id']."', `word`='".$i."', `count`='1'";
         $GLOBALS['dbstat']->query($sql);
     }
 }
 
 $i=parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
 
-$sql = "UPDATE `words_top10` SET `count`=`count`+1   WHERE `platform_id`='".$platform_id."' AND `uri`='".$i."'";
+$sql = "UPDATE `words_top10` SET `count`=`count`+1   WHERE `platform_id`='".$arr['p_id']."' AND `uri`='".$i."'";
 if (!$GLOBALS['dbstat']->exec($sql)) {
-    $sql = "INSERT INTO `words_top10` SET `platform_id`='" . $platform_id . "', `uri`='".$i."',  `top10`='" . $_GET['words'] . "', `wdget_show`='".$show."',`count`='1'";
+    $sql = "INSERT INTO `words_top10` SET `platform_id`='" . $arr['p_id'] . "', `uri`='".$i."',  `top10`='" . $_GET['words'] . "', `wdget_show`='".$show."',`count`='1'";
     $GLOBALS['dbstat']->query($sql);
 }
