@@ -10,7 +10,7 @@ class ArticleController
         echo '
 		<div class="table-box">
 		<div class="div-block-102-table">
-        <div class="table w-embed">
+        <div class="table w-embed" style="overflow: visible;">
           <table>
             <thead>
               <tr class="trtop">
@@ -27,10 +27,13 @@ class ArticleController
               </tr>
             </thead>';
 
-        if($GLOBALS['role']=='admin'){
-            $str="1";
-        }else{
-            $str="`user_id`='".$GLOBALS['user']."'";
+        switch ($GLOBALS['role']){
+            case 'admin':
+                {$str="1"; break;}
+            case 'advertiser':
+                {$str="`id_user_advertiser`='".$GLOBALS['user']."'"; break;}
+            default:
+                {$str="`user_id`='".$GLOBALS['user']."'";}
         }
 
         switch ($_GET['active']){
@@ -175,7 +178,7 @@ class ArticleController
 		
 		<div class="table-right">
 		    <form id="right-form" class="form-333">
-			<a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a>
+			<!--a href="/platforms-add" class="button-add-site w-button">Добавить площадку</a-->
 			';
             if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
 			echo '
@@ -391,7 +394,7 @@ class ArticleController
         switch ($_POST['tab']){
             case 'статья' :{
                 $data_add = date('Y-m-d');
-                if ($_POST['id'] == "new"){$id='-';}else{$id=$_POST['id'];};
+                if ($_POST['id'] == "new"){$id='-';}else{UsersController::blockArticle();$id=$_POST['id'];};
                 $role=UsersController::checkRole();
                 if (($role=='admin') AND ($id!="")){
                     $sql="SELECT `user_id` FROM `promo` WHERE `id`=".$id;
@@ -426,6 +429,7 @@ class ArticleController
                 }
                 break;
             }case 'настройка' :{
+            UsersController::blockArticle();
             if ($_POST['geo']=='') {
                 $geo[] = $_POST['geo']='ALL';
             }else{
@@ -488,13 +492,14 @@ class ArticleController
                         }
                 }
             }
-            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `category`='".$_POST['categoriay']."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
+            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `category`='".$_POST['categoriay']."', `id_user_advertiser`='".$_POST['advertiser']."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
 
             break;
         }case 'анонсы':{
+            UsersController::blockArticle();
             //Список старых анонсов
             $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$_POST['id']."';";
             $anonsold=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
@@ -581,6 +586,7 @@ class ArticleController
             };
             break;
         }case 'форма_заказа' :{
+            UsersController::blockArticle();
             $sql="UPDATE `promo` SET `form_title`='".$_POST['form-title']."',`form_text`='".$_POST['form-text']."',`form_button`='".$_POST['form-button']."' WHERE `id`='".$_POST['id']."'";
             $GLOBALS['db']->query($sql);
         }
@@ -593,7 +599,6 @@ class ArticleController
     {
         $title='А/B тестирование';
         include PANELDIR.'/views/layouts/article_header.php';
-
         echo'
         <div class="table-box">
 		<div class="div-block-102-table">
@@ -697,11 +702,11 @@ class ArticleController
     public static function actionContent()
     {
         $title='Редактирование статьи';
+        include PANELDIR.'/views/layouts/article_header.php';
         $id=$_GET['id'];
         $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
         $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-        include PANELDIR.'/views/layouts/article_header.php';
         echo'
         <script type="text/javascript" src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="https://panel.cortonlab.com/js/quill.js"></script>
@@ -846,6 +851,7 @@ class ArticleController
 
     public static function actionAnons_start()
     {
+        UsersController::blockArticle();
         $sql="UPDATE `anons` SET `active`='1' WHERE `id`='".$_GET['id']."'";
         $GLOBALS['db']->query($sql);
 
@@ -860,6 +866,7 @@ class ArticleController
 
     public static function actionAnons_stop()
     {
+        UsersController::blockArticle();
         $sql="UPDATE `anons` SET `active`='0' WHERE `id`='".$_GET['id']."'";
         $GLOBALS['db']->query($sql);
 
@@ -969,9 +976,31 @@ class ArticleController
                         </div>
                     </div>
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
+					<div class="text-block-103" style="padding: 35px 0 0 0;">Доступ рекламодателю</div>
+                    <div class="div-block-85"></div>
+                                        
+                    <select name="advertiser" style="width:695px" class="select-field w-select">
+                    <option value="">Выберите</option>';
+                    if ($GLOBALS['role']=='copywriter'){
+                        $sql="SELECT `id` FROM `users` WHERE `role`='advertiser';";
+                    }else{
+                        $sql="SELECT `id`,`email` FROM `users` WHERE `role`='advertiser';";
+                    }
+                    $advertiser = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($advertiser as $i){
+                        echo '<option '; if ($i['id']==$result['id_user_advertiser'])echo 'selected="" '; echo 'value="'.$i['id'].'">'.$i['id'].'. '.$i['email'].'</option>';
+                    };
+
+                    echo '
+                    </select>
+                                        
+                    <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Бренд</div>
                     <div class="div-block-85"></div>
-                    <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" id="stavka" value="'.$result['namebrand'].'">
+                    
+                    <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" value="'.$result['namebrand'].'">
+                    
+                    
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
                 </form>';
@@ -1059,6 +1088,7 @@ class ArticleController
 
     public static function actionEdit()
     {
+        UsersController::blockArticle();
         $title='Создание новой статьи';
         $id='new';
         include PANELDIR.'/views/layouts/header.php';
@@ -1165,7 +1195,7 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop_all(){
         {
-
+            UsersController::blockArticle();
 
             ArticleController::stopword($_GET['id']);
 
@@ -1179,6 +1209,7 @@ class ArticleController
     //Активация показа статей
     public static function actionStart_all(){
         {
+            UsersController::blockArticle();
             //Проверка на анонсы
             $sql ="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id` = '".$_GET['id']."';";
             $anons = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
@@ -1204,7 +1235,7 @@ class ArticleController
     //Активация показа статей
     public static function actionStart(){
         {
-
+            UsersController::blockArticle();
 
             $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
 
@@ -1233,6 +1264,7 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop(){
         {
+            UsersController::blockArticle();
             $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
 
             $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$id."';";
@@ -1277,7 +1309,7 @@ class ArticleController
     //Удаление промо статьи
     public static function actionDel(){
         {
-
+            UsersController::blockArticle();
             ArticleController::actionStop();
 
             //Написать функцию очистки от лишних анонсов
@@ -1293,6 +1325,7 @@ class ArticleController
     //Копирование промо статьи на основе текущей
     public static function actionClone(){
         {
+            UsersController::blockArticle();
             $sql ="SELECT * FROM `promo` WHERE `id` = '".$_GET['id']."';";
             $promo=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 

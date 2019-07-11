@@ -153,7 +153,6 @@ function corton_promo() {
         }
         if (i!=-1) {i++;};
     }
-
     letsGo();
 }
 
@@ -496,12 +495,12 @@ function corton_widget() {
                 for (; w < count; w++) {
                     if (result['anons_count'] > 0) {
                         htmll = htmll +
-                            '<div class="corton-recomendation-section anons" id="anons' + result['anons'][0][w] + 'r">' +
+                            '<noindex><div class="corton-recomendation-section anons" id="anons' + result['anons'][0][w] + 'r">' +
                             '<a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=r">' +
                             '<img src="https://api.cortonlab.com/img/' + result['anons'][5][w] + '/a/' + result['anons'][recomend_image_shape][w] + '">' +
                             '<p>' + result['anons'][1][w] + '</p>' +
                             '</a>' +
-                            '</div>';
+                            '</div></noindex>';
                         result['anons_count']--;
                     }
                 }
@@ -524,14 +523,14 @@ function corton_widget() {
                 console.log('natpre_anons');
                 if (buttontext == "") buttontext = 'Подробнее';
                 var htmll =
-                    '<div class="anons" id="anons' + result['anons'][0][w] + 'e">' +
+                    '<noindex><div class="anons" id="anons' + result['anons'][0][w] + 'e">' +
                     '<div class="corton-left"> <a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e"><img src="https://api.cortonlab.com/img/' + result['anons'][5][w] + '/a/' + result['anons'][natpre_image_shape][w] + '" width="290" height="180"></a> </div>' +
                     '<div class="corton-right">' +
                     '<a style="text-decoration: none" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e"><div class="corton-title">' + result['anons'][1][w] + '</div></a>' +
                     '<a style="text-decoration: none" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e"><p class="corton-content">' + result['anons'][2][w] + '</p></a>' +
                     '<a class="corton-link" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=e">' + buttontext + '</a>' +
                     '</div>' +
-                    '</div>';
+                    '</div></noindex>';
                 //Расчет позиции NatPrev
                 widget_natpre.innerHTML=htmll;
                 result['anons_count']--;
@@ -550,7 +549,7 @@ function corton_widget() {
             if (result['anons_count'] > 0) {
                 console.log('slider_anons');
                 widget_slider.innerHTML =
-                    '<div class="widget-slider" id="widget-slider">' +
+                    '<noindex><div class="widget-slider" id="widget-slider">' +
                     '<div class="corton-left">' +
                     '<a href="' + promo_page + '?prosmort_id='+ result['prosmotr_id']+'&anons_id=' + result['anons'][0][w] + '&t=s">' +
                     '<img src="https://api.cortonlab.com/img/'+result['anons'][5][w]+'/a/' + result['anons'][4][w] + '" alt="" width="180" height="180">' +
@@ -566,7 +565,7 @@ function corton_widget() {
                     '</div>' +
                     '<span class="close-widget" onclick="document.getElementById(\'corton-slider-widget\').style.display = \'none\';"></span>' +
                     '<div class="widget-slider-id" id="'+result['anons'][0][w]+'"></div>'+
-                    '</div>';
+                    '</div></noindex>';
                 slider_anons_id=result['anons'][0][w]+'s';
                 widget_slider.style.position = 'fixed';
                 widget_slider.style.bottom = '0px';
