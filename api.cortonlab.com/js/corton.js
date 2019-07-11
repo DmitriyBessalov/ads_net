@@ -98,7 +98,7 @@ function corton_promo() {
                     a[i].setAttribute('href', 'javascript: void(0)')
                 }else{
                     a[i].rel="noreferrer";
-                    a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + result['p_id'])
+                    a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'])
                     console.log('promolink', a[i].getAttribute('href'));
                 }
 
@@ -560,7 +560,7 @@ function corton_widget() {
             if (result['anons_count'] > 0) {
                 console.log('slider_anons');
                 widget_slider.innerHTML =
-                    '<noindex><div class="widget-slider" id="widget-slider">' +
+                    '<div class="widget-slider" id="widget-slider">' +
                     '<div class="corton-left">' +
                     '<a href="' + promo_page + '?prosmort_id='+ result['prosmotr_id']+'&anons_id=' + result['anons'][0][w] + '&t=s">' +
                     '<img src="https://api.cortonlab.com/img/'+result['anons'][5][w]+'/a/' + result['anons'][4][w] + '" alt="" width="180" height="180">' +
@@ -576,7 +576,7 @@ function corton_widget() {
                     '</div>' +
                     '<span class="close-widget" onclick="document.getElementById(\'corton-slider-widget\').style.display = \'none\';"></span>' +
                     '<div class="widget-slider-id" id="'+result['anons'][0][w]+'"></div>'+
-                    '</div></noindex>';
+                    '</div>';
                 slider_anons_id=result['anons'][0][w]+'s';
                 widget_slider.style.position = 'fixed';
                 widget_slider.style.bottom = '0px';
