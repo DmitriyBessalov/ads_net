@@ -93,7 +93,6 @@ switch ($GLOBALS['role']) {
         );break;
     case 'copywriter':
         return array(
-
             //Статьи
             'articles' => 'article/index',
             'article-a/b' => 'article/a_b',
@@ -116,6 +115,21 @@ switch ($GLOBALS['role']) {
 
             //Слова
             'words' => 'words/index',
+
+            //Авторизация
+            'logout' => 'users/logout',
+
+            //Страницы сайта:
+            '.+' => 'site/all',
+            '' => 'site/loginform',
+        );break;
+    case 'advertiser':
+        return array(
+            //Статьи
+            'articles' => 'article/index',
+            'article-edit-content' => 'article/content',
+            'article-edit-anons' => 'article/anons',
+            'article-stat' => 'article/stat',
 
             //Авторизация
             'logout' => 'users/logout',

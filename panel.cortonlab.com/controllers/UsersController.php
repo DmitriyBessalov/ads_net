@@ -249,7 +249,7 @@ class UsersController
                 if ($GLOBALS['role']=='admin') {
                     echo'
                     <option '; if ($result['role']=="platform") echo 'selected '; echo 'value = "platform" > Площадки</option >
-					<option '; if ($result['role']=="copywriter") echo 'selected '; echo 'value = "copywriter" > Копирайтер</option >
+					<option '; if ($result['role']=="copywriter") echo 'selected '; echo 'value = "copywriter" > Копирайтеры</option >
 					<option '; if ($result['role']=="advertiser") echo 'selected '; echo 'value = "advertiser" > Рекламодатели</option >
                     <option '; if ($result['role']=="manager") echo 'selected '; echo 'value = "manager" > Менеджер</option >
 					<option '; if ($result['role']=="admin") echo 'selected '; echo 'value = "admin" > Админы</option >';
@@ -311,13 +311,13 @@ class UsersController
            exec("rm -rf $dirName");
            rmdir($dirName);
         */
+
         UsersController::actionIndex();
         return true;
     }
 
     //Вход в пользователя из под админа
     public static function actionEnter(){
-
         $sql="SELECT `phpsession`,`role` FROM `users` WHERE `users`.`id` = ".$_GET['id'];
         $user = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         setcookie ( 'PHPSESSID', $user['phpsession'], time () + 10000000, '/');
@@ -329,6 +329,7 @@ class UsersController
     public static function panelstartPage($role){
         switch ($role) {
             case 'copywriter':
+            case 'advertiser':
                 header('Location: /articles?active=1');
                 break;
             case 'manager':
@@ -347,5 +348,21 @@ class UsersController
         return true;
     }
 
+    //Блокировка доступа к редактированию (просмотру) чужих статей для копирайтеров и рекламодаделей
+    public static function blockArticle(){
 
+	    if ($GLOBALS['role']=='copywriter') {
+            $sql = "SELECT `id_user` FROM `promo` WHERE `id`='" . $_GET['id'] . "';";
+        } else {
+            if ($GLOBALS['role'] == 'advertiser')
+                $sql = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`='" . $_GET['id'] . "';";
+        }
+        if ($sql) {
+            $id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+            if ($id!=$GLOBALS['user']){
+                UsersController::panelstartPage($GLOBALS['role']);
+            }
+        }
+        return true;
+    }
 }
