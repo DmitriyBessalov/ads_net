@@ -1955,11 +1955,11 @@ a {
 
 .text-block-19 {
   margin-bottom: 10px;
-  font-family: 'Myriadpro Regular';
+  font-family: 'Myriadpro Regular', sans-serif;
   color: #116dd6;
-  font-size: 22px;
-  text-align: center;
-  text-decoration: underline;
+  font-size: 20px;
+  text-align: left;
+  text-decoration: none;
 }
 
 .div-block-66 {
@@ -2961,8 +2961,8 @@ a {
     padding-top: 40px;
   }
   .text-block-19 {
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 20px;
+    line-height: 20px;
   }
   .text-block-20 {
     font-size: 22px;
@@ -3408,7 +3408,7 @@ a {
   }
   .text-block-19 {
     font-size: 18px;
-    line-height: 24px;
+    line-height: 18px;
   }
   .text-block-20 {
     direction: ltr;
