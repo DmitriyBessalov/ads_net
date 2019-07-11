@@ -499,26 +499,26 @@ function corton_widget() {
                 console.log('recomend_anons');
                 if (titletext != "") titletext = '<div class="corton-title">' + titletext + '</div>';
                 var htmll = '<div>' +
-                    '<div class="corton-recomendation-wrapper 4x1">' +
+                    '<noindex><div class="corton-recomendation-wrapper 4x1">' +
                     titletext +
                     '<div class="corton-recomendation-row">';
                 count+=w;
                 for (; w < count; w++) {
                     if (result['anons_count'] > 0) {
                         htmll = htmll +
-                            '<noindex><div class="corton-recomendation-section anons" id="anons' + result['anons'][0][w] + 'r">' +
+                            '<div class="corton-recomendation-section anons" id="anons' + result['anons'][0][w] + 'r">' +
                             '<a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&t=r">' +
                             '<img src="https://api.cortonlab.com/img/' + result['anons'][5][w] + '/a/' + result['anons'][recomend_image_shape][w] + '">' +
                             '<p>' + result['anons'][1][w] + '</p>' +
                             '</a>' +
-                            '</div></noindex>';
+                            '</div>';
                         result['anons_count']--;
                     }
                 }
                 htmll = htmll +
                     '</div>' +
                     '</div>' +
-                    '</div>';
+                    '</div></noindex>';
                 widget_recomend.innerHTML = htmll;
             } else {
                 if (typeof(result['recomend_zag']) != "undefined" && result['recomend_zag'] !== null && result['recomend_zag'] != false) {
@@ -560,7 +560,7 @@ function corton_widget() {
             if (result['anons_count'] > 0) {
                 console.log('slider_anons');
                 widget_slider.innerHTML =
-                    '<div class="widget-slider" id="widget-slider">' +
+                    '<noindex><div class="widget-slider" id="widget-slider">' +
                     '<div class="corton-left">' +
                     '<a href="' + promo_page + '?prosmort_id='+ result['prosmotr_id']+'&anons_id=' + result['anons'][0][w] + '&t=s">' +
                     '<img src="https://api.cortonlab.com/img/'+result['anons'][5][w]+'/a/' + result['anons'][4][w] + '" alt="" width="180" height="180">' +
@@ -576,7 +576,7 @@ function corton_widget() {
                     '</div>' +
                     '<span class="close-widget" onclick="document.getElementById(\'corton-slider-widget\').style.display = \'none\';"></span>' +
                     '<div class="widget-slider-id" id="'+result['anons'][0][w]+'"></div>'+
-                    '</div>';
+                    '</div></noindex>';
                 slider_anons_id=result['anons'][0][w]+'s';
                 widget_slider.style.position = 'fixed';
                 widget_slider.style.bottom = '0px';
