@@ -74,13 +74,15 @@ function corton_promo() {
         };
 
         //Скрытие referrer при переходе со статьи
-        var met = document.querySelectorAll('meta[name=referrer]');
-        if (met){ met[0].remove();}
-
-        var meta = document.createElement('meta');
-        meta.name = "referrer";
-        meta.content = "no-referrer";
-        document.getElementsByTagName('head')[0].appendChild(meta);
+        var meta = document.querySelectorAll('meta[name=referrer]');
+        if (meta.length!=0){
+            meta[0].remove();
+        }else{
+            var meta = document.createElement('meta');
+            meta.name = "referrer";
+            meta.content = "no-referrer";
+            document.getElementsByTagName('head')[0].appendChild(meta);
+        }
 
         //Клик по ссылке в промо статье
         var a = document.querySelectorAll('div#corton-promo a');
