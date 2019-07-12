@@ -13,6 +13,16 @@ $data = implode("", file("/var/www/www-root/data/www/api.cortonlab.com/js/corton
 $data = preg_replace("/((^| )\/\/.*$)/m", "", $data); //Удаление коментариев
 $data = preg_replace("/\n/", "", $data); //Удаление переносов строк
 $data = preg_replace("/\s\s+/", " ", $data); //Удаление двойных пробелов
+$data = preg_replace("/; /", ";", $data);
+$data = preg_replace("/ ?{ ?/", "{", $data);
+$data = preg_replace("/ ?} ?/", "}", $data);
+$data = preg_replace("/ ?= ?/", "=", $data);
+$data = preg_replace("/ ?\+ ?/", "+", $data);
+$data = preg_replace("/ ?\( ?/", "(", $data);
+$data = preg_replace("/ ?\) ?/", ")", $data);
+$data = preg_replace("/ ?\|\| ?/", "||", $data);
+$data = preg_replace("/ ?&& ?/", "&&", $data);
+$data = preg_replace("/, ?/", ",", $data);
 $gzdata = gzencode($data, 9);
 $fp = fopen("/var/www/www-root/data/www/api.cortonlab.com/js/cortonlab.js.gz", "w");
 fwrite($fp, $gzdata);
