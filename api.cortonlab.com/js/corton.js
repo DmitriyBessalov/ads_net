@@ -98,7 +98,7 @@ function corton_promo() {
                     a[i].setAttribute('href', 'javascript: void(0)')
                 }else{
                     a[i].rel="noreferrer";
-                    a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'])
+                    a[i].setAttribute('href', a[i].getAttribute('href') + char + 'utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id']);
                     console.log('promolink', a[i].getAttribute('href'));
                 }
 
@@ -243,7 +243,7 @@ function corton_widget() {
         let top10=[];
         let val;
         function splitword(wordsss){
-            let arr = wordsss.toLowerCase().match(/[а-яё]{4,}/g)
+            let arr = wordsss.toLowerCase().match(/[а-яё]{4,}/g);
             if (arr !== null)
             for (val of arr){
                 const lastchar= val.slice(-1);
@@ -713,7 +713,7 @@ function corton_widget() {
             }
             //console.log('захвачены',anons_ids_show);
 
-            setTimeout(checkread, 5000, anons_ids_show.join().substr(0))
+            setTimeout(checkread, 5000, anons_ids_show.join().substr(0));
             anons_idsnew.splice(0,anons_idsnew.length);
         }
         anons_ids_old=anons_ids.join();
