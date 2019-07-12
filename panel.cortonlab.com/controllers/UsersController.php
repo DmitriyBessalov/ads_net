@@ -352,7 +352,7 @@ class UsersController
     public static function blockArticle(){
 
 	    if ($GLOBALS['role']=='copywriter') {
-            $sql = "SELECT `id_user` FROM `promo` WHERE `id`='" . $_GET['id'] . "';";
+            $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $_GET['id'] . "';";
         } else {
             if ($GLOBALS['role'] == 'advertiser')
                 $sql = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`='" . $_GET['id'] . "';";

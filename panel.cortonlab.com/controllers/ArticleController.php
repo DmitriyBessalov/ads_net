@@ -1096,7 +1096,6 @@ class ArticleController
 
     public static function actionEdit()
     {
-        UsersController::blockArticle();
         $title='Создание новой статьи';
         $id='new';
         include PANELDIR.'/views/layouts/header.php';
