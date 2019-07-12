@@ -393,10 +393,14 @@ class FinController
         $title='Вывод средств с балансов';
         include PANELDIR.'/views/layouts/header.php';
 
-        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y', strtotime("-1 month"));}
-        if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
-        $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
-        $mySQLdateend = date('Y-m-d', strtotime($dateend));
+        $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
+        $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        if (is_null($balans))$balans=0;
+
+        if ($balans<5000){
+            $disable=' disabled="disabled" ';
+            $cursor='style="cursor: not-allowed;"';
+        }
 
         echo '
 		<div class="div-block-102-one"> 
@@ -406,9 +410,9 @@ class FinController
                                     <div class="text-block-82-copy" style="background: #fff;"></div>
 									<div>
                                        <p class="textbal">Сумма к выводу:</p>
-								       <input type="number" required  min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
+								       <input type="number" required '.$disable.' min="5000" max="'.$balans.'" name="summa" class="numberout" value="'.$balans.'">
 									 </div>
-								    <div class="btnbalans" id="button_vivod">Запросить вывод средств</div>
+								    <div class="btnbalans" id="button_vivod" '.$cursor.'>Запросить вывод средств</div>
 								    <p id="status_vivod"></p>
 									<p class="textinfobal" style="max-width: 540px;">Минимальная сумма к выводу 5000 рублей. Согласно <a href="https://cortonlab.com/terms-of-use.html" target="_blank">правилам</a> средства могут быть перечислены в течение 9 рабочих дней после запроса на вывод.</p>
                                 </div>
@@ -500,7 +504,6 @@ class FinController
 </style>
 			';
         include PANELDIR . '/views/layouts/footer.php';
-        if (isset($today)) {$redis->close();}
         if ($balans==false)$balans='0.00';
         echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
         return true;
@@ -881,7 +884,6 @@ setTimeout(function(){
 
     public static function actionRequestcash()
     {
-
         $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
         $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
         if (is_null($balans))$balans=0;
