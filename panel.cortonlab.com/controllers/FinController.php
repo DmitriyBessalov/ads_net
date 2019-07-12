@@ -53,9 +53,8 @@ class FinController
 
             $strplatform = implode("','", $arrplatform);
 
-            $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$result[0]['user_id']."')";
+            $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
             $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
             if (is_null($balans))$balans=0;
 
             if (isset($_GET['platform'])) {
