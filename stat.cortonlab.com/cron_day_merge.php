@@ -68,7 +68,7 @@ if (date('w')==7) {
     $sql = "INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) SELECT SUBDATE(CURRENT_DATE, 1), `platform_id`, SUM(`count`)/10 FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
     $GLOBALS['dbstat']->query($sql);
 }else{
-    $sql = "SELECT `platform_id`, SUM(`count`)/10  as `request` FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
+    $sql = "SELECT `platform_id`, SUM(`count`)  as `request` FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
     $current=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
     $sql = "SELECT `platform_id`, MAX(`request`) as `request` FROM `nagruzka` GROUP BY `platform_id`";
