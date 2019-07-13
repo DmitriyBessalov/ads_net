@@ -102,9 +102,15 @@ class UsersController
 			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                   <ul class=\"sub-menu\"> 
                       <a ".$manager_a_disable." href=\"user-edit?id=".$i['id']."\">Редактировать</a><br>
-                      <a ".$manager_a_disable." href=\"user-enter?id=".$i['id']."\">Войти</a><br>
-                      <a ".$manager_a_disable." class='modalclickb' id='balans".$i['id']."'>Вывод баланса</a><br>
-                      <a ".$manager_a_disable." href=\"user-del?id=".$i['id']."\">Удалить</a> 	 
+                      <a ".$manager_a_disable." href=\"user-enter?id=".$i['id']."\">Войти</a><br>";
+
+                      switch ($i['role']) {
+                          case "Площадки": echo " <a ".$manager_a_disable." class='modalclickb' id='balans".$i['id']."'>Вывод баланса</a><br>"; break;
+                          case "Рекламодатели": echo " <a class='modalclickb' id='in_balans".$i['id']."'>Пополнение баланса</a><br>";
+                      };
+
+                    echo
+                     "<a ".$manager_a_disable." href=\"user-del?id=".$i['id']."\">Удалить</a> 	 
                    </ul>
               </td>
                         <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
@@ -140,8 +146,7 @@ class UsersController
             <p class="filtermenu"><label'; if ($_GET['role']=='advertiser'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="advertiser"  class="form-radio"'; if ($_GET['role']=='advertiser'){echo ' checked';} echo'>Рекламодатели</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='manager'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="manager"  class="form-radio"'; if ($_GET['role']=='manager'){echo ' checked';} echo'>Менеджеры</label></p>
             <p class="filtermenu"><label'; if ($_GET['role']=='admin'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="role" value="admin"  class="form-radio"'; if ($_GET['role']=='admin'){echo ' checked';} echo'>Техподдержка</label></p>
-			</form>
-			
+		   </form>
 		</div>
         </div>
         <div class="div-block-98">

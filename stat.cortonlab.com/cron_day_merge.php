@@ -1,6 +1,6 @@
 <?php
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
-/*
+
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
 
@@ -62,7 +62,7 @@ for ($i = 1; $i <= 4; $i++) {
     };
 };
 
-$redis->close();*/
+$redis->close();
 
 if (date('w')==7) {
     $sql = "INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) SELECT SUBDATE(CURRENT_DATE, 1), `platform_id`, SUM(`count`)/10 FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";

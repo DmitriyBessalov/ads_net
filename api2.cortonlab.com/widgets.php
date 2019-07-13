@@ -147,7 +147,6 @@ $str= json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 echo $str;
 
 //Cбор статистики слов
-
 $word_arr=explode("','",$words);
 
 foreach ($word_arr as $i){
