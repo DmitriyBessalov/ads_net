@@ -49,80 +49,82 @@ class FinController
                 $domen = $i['domen'];
             };
 
+            $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id`='" . $GLOBALS['user'] . "' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='" . $GLOBALS['user'] . "')";
+            $balans = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+            if (is_null($balans)) $balans = 0;
+
             if (count($result) != 1) $domen = "";
+            if (count($result) != 0){
+                $strplatform = implode("','", $arrplatform);
 
-            $strplatform = implode("','", $arrplatform);
-
-            $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
-            $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-            if (is_null($balans))$balans=0;
-
-            if (isset($_GET['platform'])) {
-                if ($_GET['platform'] != 'all') {
-                    if (in_array($_GET['platform'], $arrplatform)) {
-                        $strplatform = $_GET['platform'];
-                        $sql = "SELECT `domen` FROM `ploshadki` WHERE id='" . $_GET['platform'] . "'";
-                        $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    } else exit;
+                if (isset($_GET['platform'])) {
+                    if ($_GET['platform'] != 'all') {
+                        if (in_array($_GET['platform'], $arrplatform)) {
+                            $strplatform = $_GET['platform'];
+                            $sql = "SELECT `domen` FROM `ploshadki` WHERE id='" . $_GET['platform'] . "'";
+                            $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                        } else exit;
+                    }
                 }
-            }
 
-            $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv` FROM `ploshadki` WHERE `id` in ('" . $strplatform . "')";
-            $aktiv = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv` FROM `ploshadki` WHERE `id` in ('" . $strplatform . "')";
+                $aktiv = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-            if (is_null($strplatform)){
-                $aktiv['recomend_aktiv']=$aktiv['natpre_aktiv']=$aktiv['slider_aktiv']=false;
-            }
+                if (is_null($strplatform)) {
+                    $aktiv['recomend_aktiv'] = $aktiv['natpre_aktiv'] = $aktiv['slider_aktiv'] = false;
+                }
 
-            $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load' FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
-            $balansperiod = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load' FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                $balansperiod = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-            if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
-                $today = true;
-                $redis = new Redis();
-                $redis->pconnect('185.75.90.54', 6379);
-                $redis->select(3);
+                if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
+                    $today = true;
+                    $redis = new Redis();
+                    $redis->pconnect('185.75.90.54', 6379);
+                    $redis->select(3);
 
-                $platforms=explode("','",$strplatform);
+                    $platforms = explode("','", $strplatform);
 
-                foreach ($platforms as $i){
-                    $ch=$redis->get(date('d').':'.$i.':r');
-                    if($ch)$balansperiod['r_show_anons']+=$ch;
-                    $ch=$redis->get(date('d').':'.$i.':e');
-                    if($ch)$balansperiod['e_show_anons']+=$ch;
-                    $ch=$redis->get(date('d').':'.$i.':s');
-                    if($ch)$balansperiod['s_show_anons']+=$ch;
+                    foreach ($platforms as $i) {
+                        $ch = $redis->get(date('d') . ':' . $i . ':r');
+                        if ($ch) $balansperiod['r_show_anons'] += $ch;
+                        $ch = $redis->get(date('d') . ':' . $i . ':e');
+                        if ($ch) $balansperiod['e_show_anons'] += $ch;
+                        $ch = $redis->get(date('d') . ':' . $i . ':s');
+                        if ($ch) $balansperiod['s_show_anons'] += $ch;
+                    };
+                }
+
+                $r_CTR = $balansperiod['r_promo_load'] / $balansperiod['r_show_anons'];
+                $e_CTR = $balansperiod['e_promo_load'] / $balansperiod['e_show_anons'];
+                $s_CTR = $balansperiod['s_promo_load'] / $balansperiod['s_show_anons'];
+
+                if (is_nan($r_CTR)) {
+                    $r_CTR = '0.00';
+                } else {
+                    $r_CTR = round($r_CTR * 100);
+                    if (is_infinite($r_CTR)) $r_CTR = '0.00';
                 };
-            }
+                if (is_nan($e_CTR)) {
+                    $e_CTR = '0.00';
+                } else {
+                    $e_CTR = round($e_CTR * 100);
+                    if (is_infinite($e_CTR)) $e_CTR = '0.00';
+                };
+                if (is_nan($s_CTR)) {
+                    $s_CTR = '0.00';
+                } else {
+                    $s_CTR = round($s_CTR * 100);
+                    if (is_infinite($s_CTR)) $s_CTR = '0.00';
+                };
 
-            $r_CTR = $balansperiod['r_promo_load'] / $balansperiod['r_show_anons'];
-            $e_CTR = $balansperiod['e_promo_load'] / $balansperiod['e_show_anons'];
-            $s_CTR = $balansperiod['s_promo_load'] / $balansperiod['s_show_anons'];
-
-            if (is_nan($r_CTR)) {
-                $r_CTR = '0.00';
-            } else {
-                $r_CTR = round($r_CTR * 100);
-                if (is_infinite($r_CTR)) $r_CTR = '0.00';
+                if (is_null($balansperiod['r'])) {
+                    $balansperiod['r'] = $balansperiod['e'] = $balansperiod['s'] = 0;
+                    $balansperiod['r_balans'] = $balansperiod['e_balans'] = $balansperiod['s_balans'] = '0.00';
+                };
+            }else{
+                echo '<tr><h2 style="color: #c40028;">Отсутствуют подключённые площадки</h2></tr>';
             };
-            if (is_nan($e_CTR)) {
-                $e_CTR = '0.00';
-            } else {
-                $e_CTR = round($e_CTR * 100);
-                if (is_infinite($e_CTR)) $e_CTR = '0.00';
-            };
-            if (is_nan($s_CTR)) {
-                $s_CTR = '0.00';
-            } else {
-                $s_CTR = round($s_CTR * 100);
-                if (is_infinite($s_CTR)) $s_CTR = '0.00';
-            };
-
-            if (is_null($balansperiod['r'])) {
-                $balansperiod['r'] = $balansperiod['e'] = $balansperiod['s'] = 0;
-                $balansperiod['r_balans'] = $balansperiod['e_balans'] = $balansperiod['s_balans'] = '0.00';
-            };
-			
             echo '
     <tbody>
         <tr>
