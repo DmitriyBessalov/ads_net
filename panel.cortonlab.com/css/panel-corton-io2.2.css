@@ -84,7 +84,7 @@
 }
 
 .div-block-infocontent:hover {
-	box-shadow: rgba(41, 41, 43, 0.07) 0px 4px 6px 0px;
+	box-shadow: rgba(41, 41, 43, 0.08) 0px 8px 12px 0px;
 }
 * {
     -webkit-box-sizing: border-box;
