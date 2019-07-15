@@ -282,8 +282,8 @@ input[type="radio"] {
   /* 1 */
   padding: 0;
   float: left;
-  margin-left: -240px;
-  margin-top: 2px;
+  margin-right: 5px;
+  margin-top: 0px;
   /* 2 */
 }
 /**
