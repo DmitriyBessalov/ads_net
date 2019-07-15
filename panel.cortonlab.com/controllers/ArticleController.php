@@ -171,7 +171,7 @@ class ArticleController
                      <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="15.076573" width="6.5" height="0.300339" stroke="#116dd6" id="svg_5"/>
                      </g>
                      </svg>
-		             <div style="margin-left: 6px; line-height: 1.2;">' . $promosum['st'] . ' (' . sprintf("%.2f", $protsentst) . '%)</div>
+		             <div style="margin-left: 6px; line-height: 1.2;">' . $promosum['st'] . '</div>
 		         </div>
 		   
 		         <div style="margin-right:20px; display: flex;">
