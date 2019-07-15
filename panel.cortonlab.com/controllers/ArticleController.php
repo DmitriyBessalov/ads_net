@@ -143,7 +143,7 @@ class ArticleController
                          if ($_GET['active']) echo 'checked="checked "';
                          echo ' class="flipswitch all"/> 
 					</div>
-	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 12px; vertical-align: super; text-decoration: none; color: #768093;">...</a>
+	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 0.25; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
                                  <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Отредактировать</a><br>
 								 <a href="article-edit-anons?id=' . $i['main_promo_id'] . '">Управление анонсами</a><br>
