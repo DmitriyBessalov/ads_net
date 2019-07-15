@@ -134,7 +134,6 @@ class ArticleController
                     if (is_nan($doread) or is_infinite($doread)) $doread = 0;
 
                     echo '
-					<a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">
 					<div class="div-block-infocontent">
 	                <div style="background-image: url(https://api.cortonlab.com/img/promo/121/76c7fa6f.jpeg); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
 	                <div style="height:30px; margin-top: -8px;">
@@ -159,7 +158,9 @@ class ArticleController
 					 </div>
 	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 298px; height: 136px; margin-left: -20px; margin-top: 10px; position: relative;"></div>
 	         <div style="padding-left: 20px; min-height: 143px; border-bottom: 1px solid rgb(224, 229, 233); padding-right: 20px; padding-top: 10px; background: #fff; margin-left: -20px; margin-right: -20px; padding-bottom: 15px; border-radius: 0 0 8px 8px;">
-             <div class="text-block-103" style="margin-bottom: 15px; min-height: 44px;">' . $promo['title'] . '</div>
+             <a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">
+			     <div class="text-block-103" style="margin-bottom: 15px; min-height: 44px;">' . $promo['title'] . '</div>
+			 </a>
              <div class="text-block-104"><span style="margin-right:20px;">' . $promo['namebrand'] . '</span><span>Расход: ' . sprintf("%.2f", $promosum['pay']) . '<span></div>
 		     <div class="text-block-103" style="color:#116DD6 !importante; margin-top: 20px; margin-bottom: 0px; padding-bottom: 5px; display: flex;">
 		         <div style="margin-right:20px; display: flex; min-width: 55px;">
@@ -202,7 +203,6 @@ class ArticleController
 		       </div>
 	        </div>
 	     </div>
-		 </a>	
     </div>
 					
 					
