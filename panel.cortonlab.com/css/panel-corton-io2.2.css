@@ -135,11 +135,11 @@
 .menuarticle {
 	background: rgba(255, 255, 255, 0.8); 
 	border-radius: 44px; 
-	height: 34px; 
+	height: 30px; 
 	line-height: 1.7; 
-	width: 34px; 
+	width: 30px; 
 	text-align: center; 
-	margin-left: 226px;
+	margin-left: 238px;
 	box-shadow: rgba(41, 41, 43, 0.05) 0px 2px 4px 0px;
 }
 /* article block end */
