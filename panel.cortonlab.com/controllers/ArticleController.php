@@ -345,7 +345,7 @@ class ArticleController
 
             echo '
             <script>
-                document.getElementById("title2").innerHTML="Статистика по статье<br><span class=titlepromo>Статья: '.$title.'</span>";
+                document.getElementById("title2").innerHTML="Статистика по статье";
             </script>';
             $anon[] = str_replace(",", "','", $result);
             $anons2 = explode(',', $result);
