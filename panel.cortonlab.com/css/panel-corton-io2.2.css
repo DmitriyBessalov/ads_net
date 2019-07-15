@@ -135,9 +135,10 @@
     border-style: solid;
     border-color: rgb(224, 229, 233);
 	margin-top: -8px;
+	display:none;
 }
 .div-block-infocontent:hover .menuarticle {
-	border: 2px solid #333;
+	display: block;
 }
 /* article block end */
 
