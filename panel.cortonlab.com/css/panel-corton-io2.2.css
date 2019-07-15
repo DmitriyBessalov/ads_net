@@ -122,7 +122,9 @@
 .sub-menu-content:hover { 
    display: block; 
 } 
-.menuarticle {
+.menuarticle:hover .menuarticle {
+	display: block;
+}
 	background: rgba(255, 255, 255, 0.8); 
 	border-radius: 44px; 
 	height: 30px; 
@@ -135,9 +137,10 @@
     border-style: solid;
     border-color: rgb(224, 229, 233);
 	margin-top: -8px;
+	display: none;
 }
 /* article block end */
-
+.div-block-infocontent {
 input.w-button2 {
   -webkit-appearance: button;
   position: relative;
