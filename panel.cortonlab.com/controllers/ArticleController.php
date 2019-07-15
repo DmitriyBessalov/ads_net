@@ -144,11 +144,11 @@ class ArticleController
                                  <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Отредактировать</a><br>
 								 <a href="article-edit-anons?id=' . $i['main_promo_id'] . '">Управление анонсами</a><br>
 								 <a style="color: #ff0303;" href="article-del?id=' . $i['main_promo_id'] . '">Удалить</a> 
-								 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
+								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
 								 <a href="article-stat?id=' . $i['main_promo_id'] . '">Расширенная статистика</a><br>
 								 <a href="article-a/b?id=' . $i['main_promo_id'] . '">A/B анализ</a><br>
 								 <a href="article-stat-url?id=' . $i['main_promo_id'] . '">Анализ ссылок</a><br>
-								 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
+								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
 								 <a href="article-edit-target?id=' . $i['main_promo_id'] . '">Таргетинги</a><br>
 								 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
                              </ul>
