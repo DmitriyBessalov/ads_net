@@ -137,7 +137,7 @@ class ArticleController
 					
 					<div class="div-block-infocontent">
 	                <div style="background-image: url(https://api.cortonlab.com/img/promo/121/76c7fa6f.jpeg); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
-	                <div style="background: rgba(255, 255, 255, 0.8); border-radius: 4px; height: 20px; line-height: 1.7; width: 34px; text-align: center; margin-left: 226px;">
+	                <div class="menuarticle">
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
                                  <a href="platforms-edit?id=42">Настройка</a><br>
