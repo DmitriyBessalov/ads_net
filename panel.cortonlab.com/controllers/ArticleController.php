@@ -202,8 +202,8 @@ class ArticleController
 		       </div>
 	        </div>
 	     </div>
+		 </a>	
     </div>
-</a>	
 					
 					
                                 <tr>
