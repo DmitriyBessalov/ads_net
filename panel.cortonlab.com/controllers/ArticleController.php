@@ -140,9 +140,16 @@ class ArticleController
 	                <div class="menuarticle">
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 12px; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
-                                 <a href="platforms-edit?id=42">Настройка</a><br>
-                                 <a class="modalclick" id="otchiclen42">Отчисления</a><br>
-                                 <a href="platforms-del?id=42">Удалить</a> 
+                                 <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Отредактировать</a><br>
+								 <a href="article-edit-anons?id=' . $i['main_promo_id'] . '">Управление анонсами</a><br>
+								 <a style="color: #ff0303;" href="article-del?id=' . $i['main_promo_id'] . '">Удалить</a> 
+								 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
+								 <a href="article-stat?id=' . $i['main_promo_id'] . '">Расширенная статистика</a><br>
+								 <a href="article-a/b?id=' . $i['main_promo_id'] . '">A/B анализ</a><br>
+								 <a href="article-stat-url?id=' . $i['main_promo_id'] . '">Анализ ссылок</a><br>
+								 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
+								 <a href="article-edit-target?id=' . $i['main_promo_id'] . '">Таргетинги</a><br>
+								 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
                              </ul>
 	                 </div>
 	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 300px; height: 136px; margin-left: -20px; margin-top: 10px; position: relative;"></div>
