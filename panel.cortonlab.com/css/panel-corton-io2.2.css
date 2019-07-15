@@ -122,7 +122,7 @@
 .sub-menu-content:hover { 
    display: block; 
 } 
-.menuarticle:hover .menuarticle {
+.div-block-infocontent:hover .menuarticle {
 	display: block;
 }
 	background: rgba(255, 255, 255, 0.8); 
