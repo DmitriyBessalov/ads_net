@@ -103,10 +103,10 @@
     margin-left: -192px;
     padding: 10px;
     text-align: left;
-    border-radius: 4px;
-    border: 1px solid #EAEBEF;
+    border-radius: 8px;
+    border: 1px solid rgb(224, 229, 233);
     padding: 15px 25px 15px 25px;
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 6px 0px, rgba(0, 0, 0, 0.08) 0px 2px 4px 0px;
+    box-shadow: rgba(41, 41, 43, 0.1) 0px 5px 10px 0px;
     z-index: 10;
 }
 .sub-menu-content a { 
