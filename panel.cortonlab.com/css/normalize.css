@@ -283,7 +283,7 @@ input[type="radio"] {
   padding: 0;
   float: left;
   margin-left: -240px;
-  margin-top: 0px;
+  margin-top: 2px;
   /* 2 */
 }
 /**
