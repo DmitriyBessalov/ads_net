@@ -157,7 +157,7 @@ class ArticleController
              <div class="text-block-103" style="margin-bottom: 15px; min-height: 44px;">' . $promo['title'] . '</div>
              <div class="text-block-104"><span style="margin-right:20px;">' . $promo['namebrand'] . '</span><span>Расход: ' . sprintf("%.2f", $promosum['pay']) . '<span></div>
 		     <div class="text-block-103" style="color:#116DD6 !importante; margin-top: 20px; margin-bottom: 0px; padding-bottom: 5px; display: flex;">
-		         <div style="margin-right:20px; display: flex;">
+		         <div style="margin-right:20px; display: flex; min-width: 60px;">
                      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">           
                      <g>
                      <title>Layer 1</title>
@@ -167,7 +167,7 @@ class ArticleController
                      </svg>
 		             <div style="margin-left: 4px; line-height: 1.2;">' . $pokaz . '</div>
 		         </div>
-		         <div style="margin-right:20px; display: flex;">
+		         <div style="margin-right:20px; display: flex; min-width: 60px;">
 		             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                      <g>
                      <title>Layer 1</title>
