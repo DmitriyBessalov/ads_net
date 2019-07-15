@@ -2615,7 +2615,12 @@ a {
     padding-left: 15%;
   }
 }
-  
+@media (max-width: 1120px) {
+	.formblock {
+	padding: 40px;
+	background-position: 150% 120%;
+	}
+ }
 @media (max-width: 991px) {
   h2 {
     font-size: 34px;
