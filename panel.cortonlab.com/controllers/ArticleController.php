@@ -148,7 +148,7 @@ class ArticleController
 	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 300px; height: 136px; margin-left: -20px; margin-top: 10px; position: relative;"></div>
 	         <div style="padding-left: 20px; padding-right: 20px; padding-top: 10px; background: #fff; margin-left: -20px; margin-right: -20px; padding-bottom: 15px; border-radius: 0 0 8px 8px;">
              <div class="text-block-103" style="margin-bottom: 15px;">Как убрать жир на животе: неожиданные способы</div>
-             <div class="text-block-104"><span style="margin-right:20px;">Бренд: 7Слим</span><span>Расход:' . sprintf("%.2f", $promosum['pay']) . '<span></div>
+             <div class="text-block-104"><span style="margin-right:20px;">Бренд: 7Слим</span><span>Расход: ' . sprintf("%.2f", $promosum['pay']) . '<span></div>
 		     <div class="text-block-103" style="color:#116DD6 !importante; margin-top: 20px; margin-bottom: 0px; padding-bottom: 5px; display: flex;">
 		         <div style="margin-right:20px; display: flex;">
                      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">           
@@ -171,7 +171,7 @@ class ArticleController
                      <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="15.076573" width="6.5" height="0.300339" stroke="#116dd6" id="svg_5"/>
                      </g>
                      </svg>
-		             <div style="margin-left: 6px; line-height: 1.2;">1302</div>
+		             <div style="margin-left: 6px; line-height: 1.2;">' . $promosum['st'] . ' (' . sprintf("%.2f", $protsentst) . '%)</div>
 		         </div>
 		   
 		         <div style="margin-right:20px; display: flex;">
