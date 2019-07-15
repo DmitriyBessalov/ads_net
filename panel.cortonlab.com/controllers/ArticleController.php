@@ -139,16 +139,6 @@ class ArticleController
 	                <div style="background-image: url(https://api.cortonlab.com/img/promo/121/76c7fa6f.jpeg); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
 	                <div style="height:30px; margin-top: -8px;">
 					<div class="menuarticle">
-					<section>
-    <label class="select-label">Выберите своего динозавра:</label>
-    <select class="cs-select cs-skin-rotate">
-        <option value="1">Стегозавр</option>
-        <option value="2">Велоцираптор</option>
-        <option value="3">Спинозавр</option>
-        <option value="4">Археоптерикс</option>
-        <option value="5">Апатозавр</option>
-    </select>
-</section>
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 12px; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
                                  <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Отредактировать</a><br>
