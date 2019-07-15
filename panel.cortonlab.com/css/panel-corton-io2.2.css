@@ -102,23 +102,6 @@
     box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 6px 0px, rgba(0, 0, 0, 0.08) 0px 2px 4px 0px;
     z-index: 10;
 }
-.sub-menu-content::after, .sub-menu:before {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 85%;
-    margin-left: -10px;
-	border: 1px solid #EAEBEF;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent #fff transparent;
-}
-.sub-menu-content:before {
-	border-color: rgba(224, 225, 229, 0);
-	border-bottom-color: #EAEBEF;
-	border-width: 11px;
-	margin-left: -11px;
-}
 .sub-menu-content a { 
     line-height: 35px;
 	text-decoration: none;
