@@ -134,7 +134,7 @@ class ArticleController
                     if (is_nan($doread) or is_infinite($doread)) $doread = 0;
 
                     echo '
-					
+					<a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">
 					<div class="div-block-infocontent">
 	                <div style="background-image: url(https://api.cortonlab.com/img/promo/121/76c7fa6f.jpeg); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
 	                <div style="height:30px; margin-top: -8px;">
@@ -203,6 +203,7 @@ class ArticleController
 	        </div>
 	     </div>
     </div>	
+	</a>
 					
 					
                                 <tr>
