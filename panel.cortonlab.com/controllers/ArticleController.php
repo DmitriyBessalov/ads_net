@@ -137,7 +137,8 @@ class ArticleController
 					
 					<div class="div-block-infocontent">
 	                <div style="background-image: url(https://api.cortonlab.com/img/promo/121/76c7fa6f.jpeg); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
-	                <div class="menuarticle">
+	                <div style="height:30px;">
+					<div class="menuarticle">
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 12px; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
                                  <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Отредактировать</a><br>
@@ -152,6 +153,7 @@ class ArticleController
 								 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
                              </ul>
 	                 </div>
+					 </div>
 	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 298px; height: 136px; margin-left: -20px; margin-top: 10px; position: relative;"></div>
 	         <div style="padding-left: 20px; min-height: 143px; border-bottom: 1px solid rgb(224, 229, 233); padding-right: 20px; padding-top: 10px; background: #fff; margin-left: -20px; margin-right: -20px; padding-bottom: 15px; border-radius: 0 0 8px 8px;">
              <div class="text-block-103" style="margin-bottom: 15px; min-height: 44px;">' . $promo['title'] . '</div>
