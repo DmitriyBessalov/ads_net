@@ -69,6 +69,11 @@
   cursor: pointer;
 }
 
+.h1audit {
+	font-size: 34px;
+	line-height: 44px;
+}
+
 /* article block */
 .div-block-infocontent {
     width: 300px;
