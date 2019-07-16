@@ -1630,10 +1630,6 @@ a {
   background-repeat: no-repeat, repeat;
 }
 
-.div-block-51 {
-  min-width: 820px;
-}
-
 .section-6 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2855,9 +2851,6 @@ a {
     width: 420px;
     height: 420px;
   }
-  .div-block-51 {
-    min-width: 750px;
-  }
   .section-7 {
     height: 90px;
   }
@@ -3335,7 +3328,6 @@ a {
     background-color: #202029;
   }
   .div-block-51 {
-    min-width: 440px;
     margin-top: 40px;
   }
   .section-7 {
