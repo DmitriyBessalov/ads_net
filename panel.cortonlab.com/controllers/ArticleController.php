@@ -115,7 +115,7 @@ class ArticleController
 
                     echo '
 					<div class="div-block-infocontent">
-	                <div style="background-image: url('.$matches['1'].'); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
+	                <div style="background-image: url('.$matches['1'].'); background-position-x: center; background-size: cover; height:60%; border-radius: 8px; padding:20px;">
 	                <div style="height:30px; margin-top: -8px;">
 					<div class="menuarticle">
 					<div class="checkactiv">
