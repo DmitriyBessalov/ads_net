@@ -64,14 +64,23 @@ for ($i = 1; $i <= 4; $i++) {
 
 $redis->close();
 
-if (date('w')==7) {
+if (date('w')==6) {
     $sql = "INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) SELECT SUBDATE(CURRENT_DATE, 1), `platform_id`, SUM(`count`)/10 FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
     $GLOBALS['dbstat']->query($sql);
 }else{
     $sql = "SELECT `platform_id`, SUM(`count`)  as `request` FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
     $current=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT `platform_id`, MAX(`request`) as `request` FROM `nagruzka` GROUP BY `platform_id`";
+    switch (date('w')){
+        case 7: $lastSaturday = date('Y-m-d', strtotime("-1 days"));break;
+        case 1: $lastSaturday = date('Y-m-d', strtotime("-2 days"));break;
+        case 2: $lastSaturday = date('Y-m-d', strtotime("-3 days"));break;
+        case 3: $lastSaturday = date('Y-m-d', strtotime("-4 days"));break;
+        case 4: $lastSaturday = date('Y-m-d', strtotime("-5 days"));break;
+        case 5: $lastSaturday = date('Y-m-d', strtotime("-6 days"));
+    }
+
+    $sql = "SELECT `platform_id`, SUM(`request`) as `request` FROM `nagruzka` WHERE `data`>='".$lastSaturday."' GROUP BY `platform_id`";
     $old=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_KEY_PAIR);
 
     $mySQLdatelast = date('Y-m-d', strtotime("-1 days"));
