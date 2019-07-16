@@ -115,7 +115,7 @@ class ArticleController
 
                     echo '
 					<div class="div-block-infocontent">
-	                <div style="background-image: url('.$matches['1'].'); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
+	                <div style="background-image: url('.$matches['1'].'); background-position-x: center; background-size: cover; height:60%; border-radius: 8px; padding:20px;">
 	                <div style="height:30px; margin-top: -8px;">
 					<div class="menuarticle">
 					<div class="checkactiv">
@@ -138,7 +138,7 @@ class ArticleController
                              </ul>
 	                 </div>
 					 </div>
-	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 298px; height: 136px; margin-left: -20px; margin-top: 10px; position: relative;"></div>
+	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 298px; height: 70px; margin-left: -20px; margin-top: 76px; position: relative;"></div>
 	         <div style="padding-left: 20px; min-height: 143px; border-bottom: 1px solid rgb(224, 229, 233); padding-right: 20px; padding-top: 10px; background: #fff; margin-left: -20px; margin-right: -20px; padding-bottom: 15px; border-radius: 0 0 8px 8px;">
              <a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">
 			     <div class="text-block-103" style="margin-bottom: 15px; min-height: 44px;">' . $promo['title'] . '</div>

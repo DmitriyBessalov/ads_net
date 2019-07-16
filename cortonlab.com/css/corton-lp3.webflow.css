@@ -1052,7 +1052,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border: 1px solid #e1e2e8;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: #f4f6f9;
 }
 
@@ -1374,6 +1374,15 @@ a {
   font-size: 20px;
   line-height: 26px;
   font-weight: 400;
+  padding: 0 18%;
+}
+.text-block-14contact {
+  margin-right: 40px;
+  font-family: 'Myriadpro Regular';
+  color: #116dd6;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 400;
 }
 
 .div-block-37 {
@@ -1627,10 +1636,6 @@ a {
   background-position: 0px 0px, 0px 0px;
   background-size: 100%, auto;
   background-repeat: no-repeat, repeat;
-}
-
-.div-block-51 {
-  min-width: 820px;
 }
 
 .section-6 {
@@ -2269,7 +2274,7 @@ a {
     font-family: 'Myriadpro Regular';
     color: #7a7a83;
     font-size: 18px;
-    border-radius: 4px;
+    border-radius: 8px;
 	padding: 25px 20px 25px 20px;
 }
 
@@ -2297,9 +2302,9 @@ a {
     background-color: #f4f6f9;
     font-family: 'Myriadpro Regular';
     color: #7a7a83;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 18px;
-    border-radius: 4px;
+    border-radius: 8px;
     max-height: 90px;
 }
 
@@ -2818,6 +2823,7 @@ a {
     margin-bottom: 0px;
     font-size: 22px;
     line-height: 28px;
+	padding: 0 14%;
   }
   .div-block-43 {
     margin-top: 2vw;
@@ -2852,9 +2858,6 @@ a {
   .div-block-49 {
     width: 420px;
     height: 420px;
-  }
-  .div-block-51 {
-    min-width: 750px;
   }
   .section-7 {
     height: 90px;
@@ -3050,11 +3053,11 @@ a {
   }
   .hblockinfo {
   font-size: 22px;
-  line-height: 32px;
+  line-height: 28px;
 }
 .haudit {
     font-size: 22px;
-    line-height: 32px;
+    line-height: 28px;
 	margin-bottom: 10px;
 }
 .blocagent { 
@@ -3283,6 +3286,7 @@ a {
     margin-bottom: 0px;
     font-size: 18px;
     line-height: 24px;
+	padding: 0 10%;
   }
   .div-block-43 {
     margin-top: 0px;
@@ -3294,7 +3298,7 @@ a {
     align-items: flex-start;
   }
   .div-block-47 {
-    width: 80%;
+    width: 100%;
     margin-top: 0vw;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -3332,7 +3336,6 @@ a {
     background-color: #202029;
   }
   .div-block-51 {
-    min-width: 540px;
     margin-top: 40px;
   }
   .section-7 {
@@ -3538,11 +3541,11 @@ a {
   }
   .hblockinfo {
   font-size: 22px;
-  line-height: 32px;
+  line-height: 28px;
 }
 .haudit {
     font-size: 22px;
-    line-height: 32px;
+    line-height: 28px;
 	margin-bottom: 10px;
 }
 .blocagent {
@@ -3783,6 +3786,7 @@ a {
     margin-bottom: 0px;
     font-size: 18px;
     line-height: 24px;
+	padding: 0 10%;
   }
   .div-block-43 {
     margin-top: 0vw;
@@ -3923,6 +3927,7 @@ a {
   .text-block-18 {
     font-size: 18px;
     line-height: 24px;
+	margin-bottom: 20px;
   }
   .div-block-61 {
     margin-bottom: 40px;
