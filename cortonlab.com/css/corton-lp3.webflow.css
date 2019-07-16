@@ -1470,7 +1470,7 @@ a {
 }
 
 .auditdor {
-	padding: 140px 20% 140px;
+	padding: 140px 20% 140px !important;
 }
 
 .div-block-43 {
@@ -3512,7 +3512,7 @@ a {
     padding: 0px 4% 40px;
   }
   .auditdor {
-	padding: 40px 4% 40px;
+	padding: 40px 4% 40px !important;
 }
   .div-block-85 {
     height: 320px;
@@ -4089,7 +4089,7 @@ a {
     padding: 60px 4%;
   }
   .auditdor {
-	padding: 60px 4%;
+	padding: 60px 4% !important;
 }
   .div-block-85 {
     height: 320px;
