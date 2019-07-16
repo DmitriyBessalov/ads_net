@@ -1469,13 +1469,17 @@ a {
   background-repeat: repeat;
 }
 
+.auditdor {
+	padding: 110px 20% 110px !important;
+}
+
 .div-block-43 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  padding: 150px 20% 60px;
+  padding: 140px 20% 60px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -2279,7 +2283,14 @@ a {
     border-radius: 8px;
 	padding: 25px 20px 25px 20px;
 }
-
+.haudit {
+	font-size: 34px;
+	line-height: 44px;
+	font-family: 'Myriadpro SemiExt';
+    color: #116dd6;
+	text-align: center;
+	margin-bottom: 30px;
+}
 .textarea {
     min-height: 90px;
     border: 1px solid #E0E1E5;
@@ -2601,6 +2612,7 @@ a {
   font-size: 34px;
   line-height: 44px;
 }
+
 
 @media (max-width: 1440px) and (min-width: 1024px) {
 .div-block-33, .div-block-43, .div-block-84, .div-block-58 {
@@ -3039,6 +3051,11 @@ a {
   .hblockinfo {
   font-size: 22px;
   line-height: 32px;
+}
+.haudit {
+    font-size: 22px;
+    line-height: 32px;
+	margin-bottom: 10px;
 }
 .blocagent { 
 	padding: 140px 4% 140px !important;
@@ -3500,6 +3517,9 @@ a {
   .div-block-84 {
     padding: 0px 4% 40px;
   }
+  .auditdor {
+	padding: 40px 4% 40px !important;
+}
   .div-block-85 {
     height: 320px;
     margin-top: 30px;
@@ -3519,6 +3539,11 @@ a {
   .hblockinfo {
   font-size: 22px;
   line-height: 32px;
+}
+.haudit {
+    font-size: 22px;
+    line-height: 32px;
+	margin-bottom: 10px;
 }
 .blocagent {
 	padding: 60px 4% 60px !important;
@@ -4068,12 +4093,15 @@ a {
     line-height: 22px;
   }
   .div-block-83 {
-    width: 95%;
+    width: 100%;
 	margin-bottom: 20px;
   }
   .div-block-84 {
     padding: 60px 4%;
   }
+  .auditdor {
+	padding: 60px 4% !important;
+}
   .div-block-85 {
     height: 320px;
     margin-top: 30px;
