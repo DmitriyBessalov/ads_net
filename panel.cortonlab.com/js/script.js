@@ -161,21 +161,28 @@ $(document).ready(function(){
         $('.modal').css("display", "none");
         $('.black-fon').css("display", "none");
     });
+
 //Открытие модальных окон на странице со статистикой площадок
     $(".modalclick").click(function(){
         $('.black-fon').css("display", "block");
         $('#modalotch'+this.id.substr(9)).css("display", "block");
     });
-
+//Открытие модальных окон на списание баланса площадок
     $(".modalclickb").click(function(){
         $('.black-fon').css("display", "block");
         $('#spisanie'+this.id.substr(6)).css("display", "block");
     });
-//Открытие модального окона в кабинете площадок при запросе вывода средств
-    $("#vivod").click(function(){
-        $('.modal').css("display", "block");
+//Открытие модальных окон на пополнение баланса рекламодателя
+    $(".modalclickc").click(function(){
         $('.black-fon').css("display", "block");
+        $('#popolnenie'+this.id.substr(9)).css("display", "block");
     });
+
+//Открытие модального окона в кабинете площадок при запросе вывода средств
+//    $("#vivod").click(function(){
+//        $('.modal').css("display", "block");
+//        $('.black-fon').css("display", "block");
+//    });
 
 // При изменении виджета Promo
     $('.widget-promo input, .widget-promo select').change(function(){
@@ -1046,9 +1053,9 @@ $(document).ready(function(){
     //Отключение отправки форм по нажатию Enter
     $(document).ready(function() {
         $(window).keydown(function(event){
-            if(event.keyCode == 13) {
-                event.preventDefault();
-                return false;
+            if((event.keyCode == 13) && (event.originalEvent.target.localName=='input')) {
+               event.preventDefault();
+               return false;
             }
         });
     });
