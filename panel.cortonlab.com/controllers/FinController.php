@@ -656,7 +656,6 @@ class FinController
         };
 		   echo '
            </div>
-
 		</div>
     </div>
 </div>
