@@ -1469,6 +1469,10 @@ a {
   background-repeat: repeat;
 }
 
+.auditdor {
+	padding: 140px 20% 140px;
+}
+
 .div-block-43 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3507,6 +3511,9 @@ a {
   .div-block-84 {
     padding: 0px 4% 40px;
   }
+  .auditdor {
+	padding: 40px 4% 40px;
+}
   .div-block-85 {
     height: 320px;
     margin-top: 30px;
@@ -4081,6 +4088,9 @@ a {
   .div-block-84 {
     padding: 60px 4%;
   }
+  .auditdor {
+	padding: 60px 4%;
+}
   .div-block-85 {
     height: 320px;
     margin-top: 30px;
