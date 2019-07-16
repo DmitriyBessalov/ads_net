@@ -2285,6 +2285,7 @@ a {
 	font-family: 'Myriadpro SemiExt';
     color: #116dd6;
 	text-align: center;
+	margin-bottom: 30px;
 }
 .textarea {
     min-height: 90px;
