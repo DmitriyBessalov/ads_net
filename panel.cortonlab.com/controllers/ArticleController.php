@@ -19,22 +19,7 @@ class ArticleController
         echo '	
 		<div class="table-box">
 		<div class="div-block-102-table">
-        <div class="table w-embed" style="overflow: visible;">
-          <table>
-            <thead>
-              <tr class="trtop">
-                <th>ID</th>
-                <th>Заголовок</th>
-                <th><div class="tooltipinfo1">Расход<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
-                <th><div class="tooltipinfo1">Показы<span class="tooltiptext1">Количество показов анонсов</span></div></th>
-                <th><div class="tooltipinfo1">Клики<span class="tooltiptext1">Клики на промо статью</span></div></th>
-				<th style="width: 120px;"><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей</span></div></th>
-                <th style="width: 140px;"><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших промо-статью</span></div></th>
-                <th style="width: 132px;"><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики с промо статьи и процент от оплаченых просмотров</span></div></th>
-                <th style="width: 127px;"><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от количества показов анонсов</span></div></th>
-                <th style="width: 110px;"></th>
-              </tr>
-            </thead>';
+        <div class="table w-embed" style="overflow: visible;">';
 
         switch ($GLOBALS['role']){
             case 'admin':
@@ -63,7 +48,7 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT `main_promo_id`,SUM(`active`) as `active` FROM `promo` WHERE ".$str." GROUP BY `main_promo_id` ORDER BY `main_promo_id` DESC";
+            $sql = "SELECT `main_promo_id`, SUM(`active`) as `active` FROM `promo` WHERE ".$str." GROUP BY `main_promo_id` ORDER BY `main_promo_id` DESC";
             $main_promo_id = $GLOBALS['db']->query($sql)->fetchall(PDO::FETCH_ASSOC);
 
             foreach ($main_promo_id as $i) {
@@ -74,11 +59,8 @@ class ArticleController
                 }
 
                 if ($begin) {
-                    $sql = "SELECT `title`,`namebrand`  FROM `promo` WHERE `id`='" . $i['main_promo_id'] . "'";
+                    $sql = "SELECT `title`,`namebrand`,`text`  FROM `promo` WHERE `id`='" . $i['main_promo_id'] . "'";
                     $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-                    $sql = "SELECT `stavka` FROM `anons_index` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
-                    $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
                     $sql = "SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $i['main_promo_id'] . "';";
                     $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
@@ -98,6 +80,14 @@ class ArticleController
                         $pokaz = 0;
                     }
 
+                    //обрезка строки title до 50 смволов
+                    while (iconv_strlen($promo['title'])>=55){
+                        $promo['title'] = substr($promo['title'], 0, strrpos($promo['title'], ' '));
+                        $i['title']=true;
+                    }if($i['title']) $promo['title'].=' ...';
+
+                    preg_match('/src="(https:\/\/api\.cortonlab\.com\/img\/promo\/.*?)"/',$promo['text'],$matches);
+
                     if (isset($today)) {
                         $anon = explode(',', $anons_ids);
                         foreach ($anon as $y) {
@@ -110,11 +100,6 @@ class ArticleController
 
                     $CRT = $promosum['clicking'] / $pokaz;
 
-                    $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
-                    if (is_nan($protsentperehodov)) {
-                        $protsentperehodov = 0;
-                    }
-
                     if (is_nan($CRT)) {
                         $CRT = '--';
                     } else {
@@ -125,17 +110,12 @@ class ArticleController
                         }
                     };
 
-                    $protsentst = 100 / $promosum['clicking'] * $promosum['st'];
-                    if (is_nan($protsentst)) {
-                        $protsentst = 0;
-                    }
-
                     $doread = round(100 / $promosum['clicking'] * $promosum['doread'], 2);
                     if (is_nan($doread) or is_infinite($doread)) $doread = 0;
 
                     echo '
 					<div class="div-block-infocontent">
-	                <div style="background-image: url(https://api.cortonlab.com/img/promo/121/76c7fa6f.jpeg); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
+	                <div style="background-image: url('.$matches['1'].'); background-position-x: center; background-size: cover; height:100%; border-radius: 8px; padding:20px;">
 	                <div style="height:30px; margin-top: -8px;">
 					<div class="menuarticle">
 					<div class="checkactiv">
@@ -168,7 +148,7 @@ class ArticleController
 		         <div style="margin-right:20px; display: flex; min-width: 55px;">
                      <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">           
                      <g>
-                     <title>Layer 1</title>
+                     <title>Показы</title>
                      <ellipse fill="#000000" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="10.031256" cy="9.984176" rx="8.8" ry="8.8" fill-opacity="0.01" id="svg_3" stroke="#116dd6"/>
                      <ellipse fill="#000000" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="10.071417" cy="9.958791" rx="4.933139" ry="4.933139" fill-opacity="0.01" id="svg_4" stroke="#116dd6"/>
                      </g>
@@ -178,7 +158,7 @@ class ArticleController
 		         <div style="margin-right:20px; display: flex; min-width: 55px;">
 		             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                      <g>
-                     <title>Layer 1</title>
+                     <title>Дочитывания</title>
                      <path stroke="#116dd6" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" d="m14.658014,2.974384c-1.185988,-1.151986 -2.465142,-2.074799 -3.514442,-2.200606c-0.057123,-0.00816 -0.116286,-0.01292 -0.17885,-0.014281l-6.905796,0c-0.110167,0 -0.218973,0.042843 -0.296497,0.122407c-0.076844,0.077524 -0.122407,0.186331 -0.122407,0.297178l0,17.511006c0,0.110167 0.042843,0.215572 0.122407,0.295817c0.079565,0.078885 0.18429,0.121727 0.296497,0.121727l12.488238,0c0.110167,0 0.215572,-0.042163 0.295137,-0.121727c0.079565,-0.079565 0.123767,-0.18497 0.123767,-0.295817l0,-11.65247c-0.024481,-1.352598 -1.083982,-2.827603 -2.308052,-4.063234l-0.000001,0l-0.000001,0zm1.468885,15.294759l-11.650429,0l0,-16.673198l6.488933,0l0,0.00136c0.282896,-0.017001 0.52703,0.262495 0.714041,0.901731c0.17001,0.608635 0.212852,1.402241 0.212172,1.952392c0.00136,0.403263 -0.018361,0.673919 -0.018361,0.673919l-0.033322,0.443385l0.446106,0.00476c0.002041,0 1.030939,0.012241 2.040117,0.241414c0.969735,0.209452 1.72798,0.626996 1.798703,1.099623c0.00272,0.042163 0.0034,0.084325 0.00272,0.123767l0,11.230845l-0.00068,0l0,0.000001l0,0.000001z" id="svg_19"/>
                      <rect stroke="#116dd6" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="4.439774" width="2.867333" height="0.300339" id="svg_1"/>
                      <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="8.202145" width="6.5" height="0.300339" stroke="#116dd6" id="svg_3"/>
@@ -192,7 +172,7 @@ class ArticleController
 		         <div style="margin-right:20px; display: flex;">
 		         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                  <g>
-                 <title>Layer 1</title>
+                 <title>CTR</title>
                  <polyline id="svg_1" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
                  <polyline id="svg_16" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
                  <polyline id="svg_17" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
@@ -205,57 +185,15 @@ class ArticleController
 		       </div>
 	        </div>
 	     </div>
-    </div>
-					
-					
-                                <tr>
-                                  <td>' . $i['main_promo_id'] . '</td>
-                                  <td style="min-width: 280px; padding-top: 14px; padding-bottom: 12px;">
-								     <div class="titleform2"><a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">' . $promo['title'] . '</a></div>
-								     <div class="miniinfo"> 
-								        <div class="blockminiinfo">
-										   <input type="checkbox" ';
-                    if ($_GET['active']) echo 'checked="checked "';
-                    echo ' class="flipswitch all"/>
-                                           <span></span>
-										</div>
-										<div class="blockminiinfo"><span style="color: #768093;">Бренд: </span>' . $promo['namebrand'] . '</div>
-										<div class="blockminiinfo"><span style="color: #768093;">Ставка:</span> ' . $stavka . '</div>
-								     </div>
-								  </td>
-                                  <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
-                                  <td>' . $pokaz . '</td>
-                                  <td>' . $promosum['clicking'] . '</td>
-								  <td  style="width:140px;" class="greentext">' . $promosum['st'] . ' (' . sprintf("%.2f", $protsentst) . '%)</td>
-                                  <td>' . $promosum['doread'] . ' (' . $doread . '%)</td>
-                                  <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
-                                  <td style="min-width: 96px;">' . $CRT . '</td>
-                                  <td style="width: 111px; text-align: right; padding-right: 20px;">
-								  <a class="main-item" href="javascript:void(0);" tabindex="1"  style="font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;">...</a> 
-                                  <ul class="sub-menu">
-								     <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Отредактировать</a><br>
-									 <a href="article-edit-anons?id=' . $i['main_promo_id'] . '">Управление анонсами</a><br>
-									 <a style="color: #ff0303;" href="article-del?id=' . $i['main_promo_id'] . '">Удалить</a> 
-									 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
-									 <a href="article-stat?id=' . $i['main_promo_id'] . '">Расширенная статистика</a><br>
-								     <a href="article-a/b?id=' . $i['main_promo_id'] . '">A/B анализ</a><br>
-									 <a href="article-stat-url?id=' . $i['main_promo_id'] . '">Анализ ссылок</a><br>
-									 <div style="height:1px; width:100%; background:#E0E1E5; margin: 6px 0;"></div>
-									 <a href="article-edit-target?id=' . $i['main_promo_id'] . '">Таргетинги</a><br>
-									 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
-                                  </ul>
-                                  </td>
-                                </tr>							
-                               ';
+    </div>';
                 }
             }
-
             if (isset($today)) {
                 $redis->close();
             }
-        }else{ echo '<tr><td colspan="12">Некоректные даты фильтра</td></tr>';}
+        }else{
+            echo 'Некоректные даты фильтра';}
         echo '
-          </table>
         </div>
 		</div>
 		
@@ -431,8 +369,6 @@ class ArticleController
                <td>' . $promosum['doread'] . ' ( '.$doread.'%)</td> 
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
-               
-               
                <td style="width: 20px !important;">';
                if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}
                echo '    
