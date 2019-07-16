@@ -2613,6 +2613,7 @@ a {
   line-height: 44px;
 }
 
+
 @media (max-width: 1440px) and (min-width: 1024px) {
 .div-block-33, .div-block-43, .div-block-84, .div-block-58 {
     padding-right: 12%;
@@ -3050,6 +3051,10 @@ a {
   .hblockinfo {
   font-size: 22px;
   line-height: 32px;
+}
+.haudit {
+    font-size: 22px;
+    line-height: 32px;
 }
 .blocagent { 
 	padding: 140px 4% 140px !important;
@@ -3533,6 +3538,10 @@ a {
   .hblockinfo {
   font-size: 22px;
   line-height: 32px;
+}
+.haudit {
+    font-size: 22px;
+    line-height: 32px;
 }
 .blocagent {
 	padding: 60px 4% 60px !important;
