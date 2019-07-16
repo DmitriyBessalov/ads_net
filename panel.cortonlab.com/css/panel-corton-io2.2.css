@@ -69,13 +69,6 @@
   cursor: pointer;
 }
 
-.haudit {
-	font-size: 34px;
-	line-height: 44px;
-	font-family: 'Myriadpro SemiExt';
-    color: #116dd6;
-}
-
 /* article block */
 .div-block-infocontent {
     width: 300px;
@@ -102,6 +95,12 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+.haudit {
+	font-size: 34px;
+	line-height: 44px;
+	font-family: 'Myriadpro SemiExt';
+    color: #116dd6;
 }
 .sub-menu-content {
     display: none;
