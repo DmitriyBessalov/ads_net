@@ -2219,7 +2219,7 @@ border: 1px solid #116dd6;
 padding: 10px 14px;
 border-radius: 8px;
 color: #116dd6;
-margin-left: 10px;
+margin-left: 15px;
 }
 .singinstyle:hover {
    color: #fff;
@@ -2227,7 +2227,7 @@ margin-left: 10px;
 }
 .menustyle {
    color: #116dd6;
-   padding: 0 20px;
+   padding: 0 15px;
 }
 .section-14 {
   display: -webkit-box;
