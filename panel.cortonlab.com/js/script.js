@@ -88,7 +88,6 @@ $(document).ready(function(){
         }
     });
 
-
 //Отрытие модальных окон на странице площадок
     $("#promo").click(function(){
         $('.modal.promo').css("display", "block");
@@ -178,12 +177,6 @@ $(document).ready(function(){
         $('#popolnenie'+this.id.substr(9)).css("display", "block");
     });
 
-//Открытие модального окона в кабинете площадок при запросе вывода средств
-//    $("#vivod").click(function(){
-//        $('.modal').css("display", "block");
-//        $('.black-fon').css("display", "block");
-//    });
-
 // При изменении виджета Promo
     $('.widget-promo input, .widget-promo select').change(function(){
         widget_promo();
@@ -208,7 +201,7 @@ $(document).ready(function(){
 
         style += "#corton-promo h1{font-weight: 400;}";
         
-         style += "#corton-promo p{text-indent: 0px !important; margin-bottom: 20px !important;}";
+        style += "#corton-promo p{text-indent: 0px !important; margin-bottom: 20px !important;}";
 
         var h1_font = $('.widget-promo [name=widget-h1-font]').val();
         if (h1_font != "") style += "#corton-promo h1{font-family: " + h1_font + ";}";
@@ -219,8 +212,8 @@ $(document).ready(function(){
                 style += "#corton-promo h1{font-size: " + h1_size + "px;}";
             } else {
                 style += "#corton-promo h1{font-size: " + h1_size/10 + "em;}";
-            };
-        };
+            }
+        }
 
         var h1_color = $('.widget-promo [name=widget-h1-color]').val();
         if (h1_color != "") style += "#corton-promo h1{color: #" + h1_color + ";}";
@@ -247,8 +240,8 @@ $(document).ready(function(){
                 style += "#corton-promo h2{font-size: " + h2_size + "px;}";
             } else {
                 style += "#corton-promo h2{font-size: " + h2_size/10 + "em;}";
-            };
-        };
+            }
+        }
 
         var variable = $('.widget-promo [name=widget-h2-bold]').val();
         if (variable != "") style += "#corton-promo h2{font-weight: " + variable + ";}";
@@ -272,8 +265,8 @@ $(document).ready(function(){
                 style += "#corton-promo p{font-size: " + text_size + "px;}";
             } else {
                 style += "#corton-promo p{font-size: " + text_size/10 + "em;}";
-            };
-        };
+            }
+        }
 
         var variable = $('.widget-promo [name=widget-text-bold]').val();
         if (variable != "") style += "#corton-promo p{font-weight: " + variable + ";}";
@@ -1023,7 +1016,7 @@ $(document).ready(function(){
                     if(itm.indexOf(value) + 1) {
                         str=str+'<li data-name="'+el+'"><div>'+countries[el]+'</div><div style="color: #008a00">Добавить</div></li>';
                         count++;
-                    };
+                    }
                 }
             });
 
@@ -1065,7 +1058,7 @@ $(document).ready(function(){
         var arr = [];
         var variable=document.querySelectorAll('.isogeolist');
         for (i = 0; i < variable.length; i++) {
-            console.log( variable[i].dataset.label) ;
+            console.log( variable[i].dataset.label);
             arr[i]=variable[i].dataset.label;
         }
         $('[name=geo]').val(arr.join(','));

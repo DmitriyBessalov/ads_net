@@ -43,17 +43,24 @@ class UsersController
         }
 
         $sql="SELECT u.id, u.email, u.fio, u.role, u.last_ip , u.data_add, GROUP_CONCAT(`p`.`domen` SEPARATOR '<br>') AS `domen` FROM ploshadki p RIGHT OUTER JOIN users u ON p.user_id = u.id".$str." GROUP BY u.email";
-
         $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 		echo '
-        <script src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js" type="text/javascript"></script> 
+        <script src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script>
                 function balans_spisanie(i){
-                    $.get( "https://panel.cortonlab.com/platforms-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function(data) {
+                    $.get( "https://panel.cortonlab.com/finance-spisanie?id="+i+"&sum="+$("#sum_spisanie"+i).val(),  function(data) {
                         $("#sum_spisanie"+i).val("0");
 	                    $("#sum_spisanie"+i).prop(\'disabled\', true);
 	                    $("#status_spisanie"+i).html(data);
+	                })  
+                }
+                
+                function balans_popolnenie(i){
+                    $.get( "https://panel.cortonlab.com/finance-popolnenie?id="+i+"&sum="+$("#sum_popolnenie"+i).val(),  function(data) {
+                        $("#sum_popolnenie"+i).val("0");
+	                    $("#sum_popolnenie"+i).prop(\'disabled\', true);
+	                    $("#status_popolnenie"+i).html(data);
 	                })
                 }
         </script>
@@ -97,23 +104,26 @@ class UsersController
               <td>".$i['role']."</td>
               <td style=\"width: 200px;\">".$i['data_add']."</td>
               <td>".$i['domen']."</td>
-              <td style=\"width: 154px; color: #116DD6;\">".$balans."</td>              
+              <td style=\"width: 154px; color: #116DD6;\" id=\"balans_val".$i['id']."\">".$balans."</td>
               <td style=\"width:90px; text-align: right; padding-right: 20px;\">
-			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
-                  <ul class=\"sub-menu\"> 
+			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\" style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
+                  <ul class=\"sub-menu\">
                       <a ".$manager_a_disable." href=\"user-edit?id=".$i['id']."\">Редактировать</a><br>
                       <a ".$manager_a_disable." href=\"user-enter?id=".$i['id']."\">Войти</a><br>";
 
                       switch ($i['role']) {
                           case "Площадки": echo " <a ".$manager_a_disable." class='modalclickb' id='balans".$i['id']."'>Вывод баланса</a><br>"; break;
-                          case "Рекламодатели": echo " <a class='modalclickb' id='in_balans".$i['id']."'>Пополнение баланса</a><br>";
+                          case "Рекламодатели": echo " <a class='modalclickc' id='in_balans".$i['id']."'>Пополнение баланса</a><br>";
                       };
 
                     echo
                      "<a ".$manager_a_disable." href=\"user-del?id=".$i['id']."\">Удалить</a> 	 
                    </ul>
-              </td>
-                        <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
+              </td>";
+               switch ($i['role']) {
+                   case "Площадки":
+                       echo "
+                         <div class=\"modal otchislen\" id='spisanie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
                             <div style=\"min-width: 400px !important;\" class=\"div-block-78 w-clearfix\">
                                 <div class=\"div-block-132 modalhide\">
                                     <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
@@ -130,7 +140,28 @@ class UsersController
                                 </div>
                             </div>
                          </div>
-            </tr>";
+                   "; break;
+                   case "Рекламодатели":
+                       echo "
+                         <div class=\"modal otchislen\" id='popolnenie".$i['id']."' style=\"left:30%;top:300px;right:30%;display: none;\">
+                            <div style=\"min-width: 400px !important;\" class=\"div-block-78 w-clearfix\">
+                                <div class=\"div-block-132 modalhide\">
+                                    <img src=\"/images/close.png\" alt=\"\" class=\"image-5\">
+                                </div>
+                                <div style='text-align: left;'>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    Рекламодатель: ".$i['domen']."<br>
+                                    Email: ".$i['email']." <br><br>
+                                    <input id='sum_popolnenie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>                                    
+                                    <p id='status_popolnenie".$i['id']."'></p>
+                                    <a id='button_popolnenie".$i['id']."' onclick=\"balans_popolnenie(".$i['id'].");\" class=\"button-add-site w-button\">Пополнить баланс</a>
+                                </div>
+                            </div>
+                         </div>";
+               };
+             echo "</tr>";
         };
         echo '
           </table>
@@ -348,7 +379,7 @@ class UsersController
 
     //Выход из панели
     public static function actionLogout(){
-        setcookie ( 'PHPSESSID', "", time () - 10000000 );
+        setcookie ( 'PHPSESSID', "", time () - 10000000);
         header('Location: https://cortonlab.com/');
         return true;
     }

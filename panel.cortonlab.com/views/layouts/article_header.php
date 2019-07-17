@@ -24,6 +24,10 @@ if ($GLOBALS['role']=='advertiser'){
        <a href="/article-stat?id=' . $result['main_promo_id'] . '" class="btnarticle" style="border-radius: 4px 0 0 4px;">Расширенная статистика</a>
     </div>
     ';
+    $sql="SELECT `balans` FROM `balans_rekl` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_rekl` WHERE `user_id`='".$GLOBALS['user']."')";
+    $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    if ($balans==false)$balans='0.00';
+    echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
 }else {
     echo '
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

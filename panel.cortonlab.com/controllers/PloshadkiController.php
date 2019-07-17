@@ -2436,14 +2436,14 @@ var myLineChart = new Chart(ctx, {
                                 
 								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
                                       <input type="checkbox" '; if ($result['widget-type-italic-title']) echo ' checked '; echo ' name="widget-type-italic-title" class="form-radiozag">
-                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                      <label style="margin-top:0 !important;" id="zagrecomend" class="w-form-label">
                                          <a style="color:#333;" class="link">Курсив</a>
                                       </label>
                                 </div> 
 								
 								<div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
                                       <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" class="form-radiozag">
-                                      <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
+                                      <label style="margin-top:0 !important;" id="zagrecomend" class="w-form-label">
                                          <a style="color:#333;" class="link">Подчеркнутый</a>
                                       </label>
                                 </div> 
@@ -2503,48 +2503,17 @@ var myLineChart = new Chart(ctx, {
         //Меняет коэфициент отчислений для площадки
         public static function actionOtchicleniay()
         {
-
-
             $_GET['id']= substr($_GET['id'], 4);
             $sql="UPDATE `ploshadki` SET `otchiclen`='".$_GET['otchiclen']."' WHERE `id` = '".$_GET['id']."';";
             $GLOBALS['db']->query($sql);
             return true;
         }
 
-        public static function actionSpisanie()
-        {
-
-            $sql="SELECT `balans`, `spisanie`,`date` FROM `balans_user` WHERE `user_id`='".$_GET['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$_GET['id']."')";
-            $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-            if (($result) ){
-                if (floatval($result['balans'])>=floatval($_GET['sum'])+floatval($result['spisanie'])){
-                    if ($result['date']==date('Y-m-d')){
-                        $sql = "UPDATE `balans_user` SET `balans` = `balans` - ".$_GET['sum'].",`spisanie` = `spisanie` + ".$_GET['sum']."  WHERE `user_id`='".$_GET['id']."' AND `date`=CURDATE()";
-                    }else{
-                        $balans=floatval($result['balans'])-floatval($_GET['sum']);
-                        $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` = '".$balans."', `spisanie` = '".$_GET['sum']."';";
-                    }
-                    $GLOBALS['db']->query($sql);
-                    echo "Операция выполнена, списано с баланса";
-                    return true;
-                }
-                echo "Ошибка, неправильная сумма";
-                return true;
-            }else{
-                echo "Ошибка, неудалось списать";
-                return true;
-            }
-        }
-
-
         //Меняет коэфициент отчислений для площадки
         public static function actionStat()
         {
             $title='Статистика площадки';
             include PANELDIR.'/views/layouts/header.php';
-
-
-
 
             //Защита от подмены менеджера
             if ($GLOBALS['role']=='manager') {
@@ -2739,11 +2708,9 @@ var myLineChart = new Chart(ctx, {
                     </div>
 		        </form>
 	</div>
-	
-
     <script>
         document.getElementById("title2").innerHTML="Статистика по площадки<br><span class=titlepromo>URL: ' . $aktiv['domen'] . '</span>";
-    </script>     
+    </script>
 </div>';
 
             include PANELDIR . '/views/layouts/footer.php';
@@ -2753,7 +2720,6 @@ var myLineChart = new Chart(ctx, {
         //Удаляет площадку
         public static function actionDel()
         {
-
             $sql="SELECT `domen` FROM `ploshadki` WHERE `id` = ".$_GET['id'];
             $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
             $domen = str_replace(".", "_", $domen);
@@ -2772,7 +2738,6 @@ var myLineChart = new Chart(ctx, {
         //ajax подгрузка подкатегорий
         public static function actionGet_podcategoriya()
         {
-
             $sql="SELECT `id`, `podcategoriya` FROM `podcategoriya` WHERE `id_categoriya`='".$_GET['id']."'";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($result, JSON_UNESCAPED_UNICODE);

@@ -22,12 +22,22 @@ class ArticleController
         <div class="table w-embed" style="overflow: visible;">';
 
         switch ($GLOBALS['role']){
-            case 'admin':
-                {$str="1"; break;}
-            case 'advertiser':
-                {$str="`id_user_advertiser`='".$GLOBALS['user']."'"; break;}
-            default:
-                {$str="`user_id`='".$GLOBALS['user']."'";}
+            case 'admin':{
+                $str="1";
+                break;
+            }
+            case 'advertiser':{
+                $str="`id_user_advertiser`='".$GLOBALS['user']."'";
+
+                $sql="SELECT `balans` FROM `balans_rekl` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_rekl` WHERE `user_id`='".$GLOBALS['user']."')";
+                $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                if ($balans==false)$balans='0.00';
+                echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
+                break;
+            }
+            default:{
+                $str="`user_id`='".$GLOBALS['user']."'";
+            }
         }
 
         switch ($_GET['active']){
@@ -969,7 +979,7 @@ class ArticleController
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
-										
+
 					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">	
 					<div>
                         <div class="text-block-103">Регионы</div>				
@@ -986,7 +996,7 @@ class ArticleController
                         <div>';
                             $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
                             $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                            echo'
+                            echo '
                             <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
                         </div>
                         <div>
@@ -996,7 +1006,7 @@ class ArticleController
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Доступ рекламодателю</div>
                     <div class="div-block-85"></div>
-                                        
+
                     <select name="advertiser" style="width:695px" class="select-field w-select">
                     <option value="">Выберите</option>';
                     if ($GLOBALS['role']=='copywriter'){
@@ -1017,8 +1027,7 @@ class ArticleController
                     <div class="div-block-85"></div>
                     
                     <input type="text" class="text-field-9 w-input" maxlength="256" name="namebrand" placeholder="Название бренда" value="'.$result['namebrand'].'">
-                    
-                    
+                                        
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px; margin-top: 60px;"></div>
 					<input type="submit" value="Сохранить изменения" class="submit-button-6">
                 </form>';
@@ -1186,7 +1195,6 @@ class ArticleController
 
     //Очистка индексов слов
     public static function stopword($id){
-
         $sql ="SELECT `words` FROM `promo` WHERE `id` = '".$id."';";
         $word = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
         $words=explode(',',$word);
@@ -1213,9 +1221,7 @@ class ArticleController
     public static function actionStop_all(){
         {
             UsersController::blockArticle();
-
             ArticleController::stopword($_GET['id']);
-
             $sql ="UPDATE `promo` SET `active`='0' WHERE `main_promo_id`= '".$_GET['id']."';";
             $GLOBALS['db']->query($sql);
             return true;

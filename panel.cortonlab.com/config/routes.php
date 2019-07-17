@@ -11,6 +11,8 @@ switch ($GLOBALS['role']) {
         return array(
             //Финансы
             'finance' => 'fin/admin',
+            'finance-popolnenie' => 'fin/popolnenie',
+            'finance-spisanie' => 'fin/spisanie',
 
             //Вывод и добавление площадок
             'platforms' => 'ploshadki/index',
@@ -18,7 +20,6 @@ switch ($GLOBALS['role']) {
             'platforms-edit' => 'ploshadki/edit',
             'platforms-update' => 'ploshadki/update',
             'platforms-otchicleniay' => 'ploshadki/otchicleniay',
-            'platforms-spisanie' => 'ploshadki/spisanie',
             'platform-stat' => 'ploshadki/stat',
             'platforms-del' => 'ploshadki/del',
             'platforms-get-podcategoriya' => 'ploshadki/get_podcategoriya',
@@ -134,7 +135,7 @@ switch ($GLOBALS['role']) {
             //Авторизация
             'logout' => 'users/logout',
 
-            //Страницы сайта:
+            //Страницы сайта
             '.+' => 'site/all',
             '' => 'site/loginform',
         );break;

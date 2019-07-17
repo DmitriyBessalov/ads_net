@@ -876,7 +876,6 @@ setTimeout(function(){
                     </div>
 		        </form>
 		    </div>
-
 ';
         include PANELDIR . '/views/layouts/footer.php';
         return true;
@@ -911,4 +910,44 @@ setTimeout(function(){
         return true;
     }
 
+    //Списание со счета площадки
+    public static function actionSpisanie()
+    {
+        $sql="SELECT `balans`, `spisanie`,`date` FROM `balans_user` WHERE `user_id`='".$_GET['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$_GET['id']."')";
+        $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if (($result) ){
+            if (floatval($result['balans'])>=floatval($_GET['sum'])+floatval($result['spisanie'])){
+                if ($result['date']==date('Y-m-d')){
+                    $sql = "UPDATE `balans_user` SET `balans` = `balans` - ".$_GET['sum'].",`spisanie` = `spisanie` + ".$_GET['sum']."  WHERE `user_id`='".$_GET['id']."' AND `date`=CURDATE()";
+                }else{
+                    $balans=floatval($result['balans'])-floatval($_GET['sum']);
+                    $sql = "INSERT INTO `balans_user` SET `user_id`='".$_GET['id']."', `date`=CURDATE(), `balans` = '".$balans."', `spisanie` = '".$_GET['sum']."';";
+                }
+                $GLOBALS['db']->query($sql);
+                echo "Операция выполнена, сумма списана с баланса";
+                return true;
+            }
+            echo "Ошибка, неправильная сумма";
+            return true;
+        }else{
+            echo "Ошибка, неудалось списать";
+            return true;
+        }
+    }
+
+    //Пополнение счёта рекламодателя
+    public static function actionPopolnenie()
+    {
+        $sql="SELECT `balans`,`popolnenie`, `date` FROM `balans_rekl` WHERE `user_id`='".$_GET['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_rekl` WHERE `user_id`='".$_GET['id']."')";
+        $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if ($result['date'] == date('Y-m-d')) {
+            $sql = "UPDATE `balans_rekl` SET `balans` = `balans` + " . $_GET['sum'] . ",`popolnenie` = `popolnenie` + " . $_GET['sum'] . "  WHERE `user_id`='" . $_GET['id'] . "' AND `date`=CURDATE()";
+        } else {
+            $balans = floatval($result['balans']) + floatval($_GET['sum']);
+            $sql = "INSERT INTO `balans_rekl` SET `user_id`='" . $_GET['id'] . "', `date`=CURDATE(), `balans` = '" . $balans . "', `popolnenie` = '" . $_GET['sum'] . "';";
+        }
+        $GLOBALS['db']->query($sql);
+        echo "Операция выполнена, счет пополнен";
+        return true;
+    }
 }
