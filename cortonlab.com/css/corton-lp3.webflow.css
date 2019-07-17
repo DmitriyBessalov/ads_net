@@ -2211,6 +2211,15 @@ p {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  font-family: 'Myriadpro Regular';
+  font-size: 20px;
+}
+.singinstyle {
+border: 1px solid;
+padding: 10px 14px;
+border-radius: 8px;
+color: #116dd6;
+margin-left: 10px;
 }
 
 .section-14 {
