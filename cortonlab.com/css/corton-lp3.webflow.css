@@ -2648,6 +2648,9 @@ margin-left: 15px;
 	padding: 40px;
 	background-position: 100% 100%;
 	}
+	.auditdor {
+    padding: 110px 12% 110px !important;
+    }
  }
 @media (max-width: 991px) {
   h2 {
