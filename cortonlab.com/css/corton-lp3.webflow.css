@@ -3071,6 +3071,9 @@ margin-left: 15px;
     line-height: 28px;
 	margin-bottom: 10px;
 }
+.menustyle {
+	display: none;
+}
 .blocagent { 
 	padding: 140px 4% 140px !important;
 }
@@ -3459,9 +3462,6 @@ margin-left: 15px;
   .text-block-21 {
     font-size: 15px;
     line-height: 22px;
-  }
-  .div-block-75 {
-    width: 36px;
   }
   .div-block-76 {
     min-width: 420px;
@@ -4008,9 +4008,6 @@ margin-left: 15px;
     width: 320px;
     font-size: 14px;
     line-height: 20px;
-  }
-  .div-block-75 {
-    width: 36px;
   }
   .section-14 {
     display: block;
