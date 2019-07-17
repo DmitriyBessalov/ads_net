@@ -71,7 +71,10 @@ if (date('w')==7) {
     $sql = "SELECT `platform_id`, SUM(`count`)  as `request` FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
     $current=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT `platform_id`, MAX(`request`) as `request` FROM `nagruzka` GROUP BY `platform_id`";
+    $day=date('w')+1;
+    $lastSaturday = date('Y-m-d', strtotime("-".$day." days"));
+
+    $sql = "SELECT `platform_id`, SUM(`request`) as `request` FROM `nagruzka` WHERE `data`>='".$lastSaturday."' GROUP BY `platform_id`";
     $old=$GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_KEY_PAIR);
 
     $mySQLdatelast = date('Y-m-d', strtotime("-1 days"));
