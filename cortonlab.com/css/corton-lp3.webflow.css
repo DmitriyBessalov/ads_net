@@ -2225,7 +2225,10 @@ margin-left: 10px;
    color: #fff;
    background:#116dd6;    
 }
-
+.menustyle {
+   color: #116dd6;
+   padding: 0 20px;
+}
 .section-14 {
   display: -webkit-box;
   display: -webkit-flex;
