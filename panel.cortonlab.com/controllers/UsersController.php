@@ -85,16 +85,32 @@ class UsersController
             </thead>';
              foreach($result as $i){
                  switch ($i['role']) {
-                     case "admin": $i['role'] = "Администраторы"; break;
-                     case "copywriter": $i['role'] = "Копирайтер"; break;
-                     case "advertiser": $i['role'] = "Рекламодатели"; break;
-                     case "platform": $i['role'] = "Площадки"; break;
-                     case "manager": $i['role'] = "Менеджер";
+                     case "admin": {
+                         $i['role'] = "Администраторы";
+                         break;
+                     }
+                     case "copywriter":{
+                         $i['role'] = "Копирайтер";
+                         break;
+                     }
+                     case "advertiser":{
+                         $i['role'] = "Рекламодатели";
+                         $sql="SELECT `balans` FROM `balans_rekl` WHERE `user_id`='".$i['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_rekl` WHERE `user_id`='".$i['id']."')";
+                         $i['balans']=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                         break;
+                     }
+                     case "platform":{
+                         $i['role'] = "Площадки";
+                         $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$i['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$i['id']."')";
+                         $i['balans']=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                         break;
+                     }
+                     case "manager": {
+                             $i['role'] = "Менеджер";
+                         }
                  };
 
-                 $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$i['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$i['id']."')";
-                 $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                 if (!$balans){$balans='0.00';}
+                 if (!$i['balans']){$i['balans']='0.00';}
                  echo "
             <tr>
               <td style=\"color:#116DD6\">".$i['email']."
@@ -104,7 +120,7 @@ class UsersController
               <td>".$i['role']."</td>
               <td style=\"width: 200px;\">".$i['data_add']."</td>
               <td>".$i['domen']."</td>
-              <td style=\"width: 154px; color: #116DD6;\" id=\"balans_val".$i['id']."\">".$balans."</td>
+              <td style=\"width: 154px; color: #116DD6;\" id=\"balans_val".$i['id']."\">".$i['balans']."</td>
               <td style=\"width:90px; text-align: right; padding-right: 20px;\">
 			      <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\" style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                   <ul class=\"sub-menu\">
@@ -134,8 +150,8 @@ class UsersController
                                     <br>
                                     Площадка: ".$i['domen']."<br>
                                     Email: ".$i['email']." <br><br>
-                                    <input id='sum_spisanie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>
-                                    <p id='status_spisanie".$i['id']."'>Максимальная сумма к выводу ".$balans." руб.</p>
+                                    <input id='sum_spisanie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$i['balans']."\" placeholder='Сумма' value='0.00'> руб.<br><br>
+                                    <p id='status_spisanie".$i['id']."'>Максимальная сумма к выводу ".$i['balans']." руб.</p>
                                     <a id='button_spisanie".$i['id']."' onclick=\"balans_spisanie(".$i['id'].");\" class=\"button-add-site w-button\">Списать с баланса</a>
                                 </div>
                             </div>
@@ -154,7 +170,7 @@ class UsersController
                                     <br>
                                     Рекламодатель: ".$i['domen']."<br>
                                     Email: ".$i['email']." <br><br>
-                                    <input id='sum_popolnenie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$balans."\" placeholder='Сумма' value='0.00'> руб.<br><br>                                    
+                                    <input id='sum_popolnenie".$i['id']."' type=\"number\" step=\"0.01\" min=\"0\" max=\"".$i['balans']."\" placeholder='Сумма' value='0.00'> руб.<br><br>                                    
                                     <p id='status_popolnenie".$i['id']."'></p>
                                     <a id='button_popolnenie".$i['id']."' onclick=\"balans_popolnenie(".$i['id'].");\" class=\"button-add-site w-button\">Пополнить баланс</a>
                                 </div>
