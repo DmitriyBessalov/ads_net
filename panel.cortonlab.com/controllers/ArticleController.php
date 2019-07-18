@@ -129,8 +129,8 @@ class ArticleController
 					<div class="menuarticle">
 					<div class="checkactiv">
 					     <input type="checkbox" ';
-                         if ($_GET['active']) echo 'checked="checked "';
-                         echo ' class="flipswitch all"/> 
+                    if ($_GET['active']) echo 'checked="checked "';
+                    echo ' class="flipswitch all"/> 
 					</div>
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 0.25; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
@@ -209,8 +209,8 @@ class ArticleController
 		<div class="table-right">
 		    <form id="right-form" class="form-333">
 			';
-            if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
-			echo '
+        if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
+        echo '
 			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
 			<p class="filtermenu"><label '; if ($_GET['active']=='1'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="active" value="1" class="form-radio"'; if ($_GET['active']==1){echo ' checked';} echo'>Активные статьи</label></p>
 			<p class="filtermenu"><label '; if ($_GET['active']=='0'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="active" value="0" class="form-radio"'; if ($_GET['active']==0){echo ' checked';} echo'>Статьи на паузе</label></p>
@@ -379,8 +379,8 @@ class ArticleController
                <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td style="width: 20px !important;">';
-               if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}
-               echo '    
+                if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}
+                echo '    
                </td>
               </tr>
              ';
@@ -436,7 +436,7 @@ class ArticleController
                 $_POST['title']=str_replace("\\'",'&#8242;', $_POST['title']);
                 $_POST['title']=str_replace('\\"','&#8243;', $_POST['title']);
                 $_POST['formtext']=str_replace("\\'",'&#8242;', $_POST['formtext']);
-                $_POST['formtext']=str_replace('\\"','&#8243;', $_POST['formtext']);
+                $_POST['formtext']=stripcslashes ($_POST['formtext']);
 
                 preg_match_all("/src=\"data:image\/(jpeg|jpg|gif|png);base64,(.*?)\">/", $_POST['formtext'],$out);
                 mkdir(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id, 0755);
@@ -786,8 +786,8 @@ class ArticleController
                       <a class="aticlevariant btnab'; if ($id!=$result2[3]) echo 'gr'; echo '" style="width: 120px;float:left;margin-right: 12px;" href="https://panel.cortonlab.com/article-edit-content?id='.$result2[3].'">Вариант D</a>';
         };
 
-    echo
-        '</div>
+        echo
+            '</div>
         <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
@@ -844,18 +844,18 @@ class ArticleController
                     <input type="hidden" name="tab" value="анонсы">
                     <input type="hidden" name="id" value="'.$id.'">
                     <div id="anonses">';
-            $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$id."'";
-            $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-            if ($anons_ids!='') {
-                $anons = explode(",", $anons_ids);
-                foreach ($anons as $i) {
-                    $sql = "SELECT * FROM `anons` WHERE `id`='" . $i . "'";
-                    $anon = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $sql="SELECT `anons_ids` FROM `anons_index` WHERE `promo_id`='".$id."'";
+        $anons_ids = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        if ($anons_ids!='') {
+            $anons = explode(",", $anons_ids);
+            foreach ($anons as $i) {
+                $sql = "SELECT * FROM `anons` WHERE `id`='" . $i . "'";
+                $anon = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-                    $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
-                    $dir = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                    $imgdir = '//api.cortonlab.com/img/'.$dir.'/a/';
-                    echo '
+                $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $id . "'";
+                $dir = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                $imgdir = '//api.cortonlab.com/img/'.$dir.'/a/';
+                echo '
                                 <div class="div-block-97-copy">
 								<div class="text-block-103">Настройка анонса</div>
                                     <input type="hidden" name="anons_ids[]" value="'.$anon['id'].'">
@@ -882,9 +882,9 @@ class ArticleController
                                     </div>
                                     <a class="button-10 w-button delanons">Удалить анонс</a>
                                 </div>';
-                };
             };
-            echo '
+        };
+        echo '
                     </div>
                     <input type="hidden" name="del_id" value="">
 					<div style="border-top: 0 solid #E0E1E5 !important; width: 1337px; margin-bottom: 60px;"></div>
@@ -959,13 +959,13 @@ class ArticleController
                             
                             <select name="categoriay" style="width:695px" required="" class="select-field w-select">
                                 <option value="">Выберите</option>';
-                                $sql="SELECT * FROM `categoriya`";
-                                $category = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($category as $y){
-                                    echo '<option '; if ($y['id']==$result['category'])echo 'selected="" '; echo 'value="'.$y['id'].'">'.$y['categoriya'].'</option>';
-                                };
+        $sql="SELECT * FROM `categoriya`";
+        $category = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($category as $y){
+            echo '<option '; if ($y['id']==$result['category'])echo 'selected="" '; echo 'value="'.$y['id'].'">'.$y['categoriya'].'</option>';
+        };
 
-                            echo '
+        echo '
                             </select>
                             <div class="text-block-141 cat">+</div>
                         </div> 
@@ -981,17 +981,17 @@ class ArticleController
                             </div>
                         </div>
                         <div class="div-block-84 word">';
-            if ($result['words']!=""){
-                $word=explode(",", $result['words']);
-                foreach($word as $i) {
-                    echo'
+        if ($result['words']!=""){
+            $word=explode(",", $result['words']);
+            foreach($word as $i) {
+                echo'
                         <div class="div-block-86" >
                             <div class="text-block-114" >'.$i.'</div >
                             <div class="text-block-98" > Удалить</div >
                         </div>';
-                };
             };
-            echo '
+        };
+        echo '
                         </div>
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
@@ -1011,9 +1011,9 @@ class ArticleController
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
                     <div class="div-block-85">
                         <div>';
-                            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
-                            $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                            echo '
+        $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
+        $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        echo '
                             <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
                         </div>
                         <div>
@@ -1026,17 +1026,17 @@ class ArticleController
 
                     <select name="advertiser" style="width:695px" class="select-field w-select">
                     <option value="">Выберите</option>';
-                    if ($GLOBALS['role']=='copywriter'){
-                        $sql="SELECT `id` FROM `users` WHERE `role`='advertiser';";
-                    }else{
-                        $sql="SELECT `id`,`email` FROM `users` WHERE `role`='advertiser';";
-                    }
-                    $advertiser = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                    foreach ($advertiser as $i){
-                        echo '<option '; if ($i['id']==$result['id_user_advertiser'])echo 'selected="" '; echo 'value="'.$i['id'].'">'.$i['id'].'. '.$i['email'].'</option>';
-                    };
+        if ($GLOBALS['role']=='copywriter'){
+            $sql="SELECT `id` FROM `users` WHERE `role`='advertiser';";
+        }else{
+            $sql="SELECT `id`,`email` FROM `users` WHERE `role`='advertiser';";
+        }
+        $advertiser = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($advertiser as $i){
+            echo '<option '; if ($i['id']==$result['id_user_advertiser'])echo 'selected="" '; echo 'value="'.$i['id'].'">'.$i['id'].'. '.$i['email'].'</option>';
+        };
 
-                    echo '
+        echo '
                     </select>
                                         
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
