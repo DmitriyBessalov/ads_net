@@ -1024,7 +1024,7 @@ class ArticleController
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Доступ рекламодателю</div>
                     <div class="div-block-85"></div>
 
-                    <select name="advertiser" style="width:695px" class="select-field w-select">
+                    <select name="advertiser" required="" style="width:695px" class="select-field w-select">
                     <option value="">Выберите</option>';
         if ($GLOBALS['role']=='copywriter'){
             $sql="SELECT `id` FROM `users` WHERE `role`='advertiser';";
