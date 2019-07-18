@@ -432,7 +432,12 @@ class ArticleController
                 }else{
                     $user_id = UsersController::getUserId();
                 }
-                $_POST['formtext']=stripcslashes ($_POST['formtext']);
+
+                $_POST['title']=str_replace("\\'",'&#8242;', $_POST['title']);
+                $_POST['title']=str_replace('\\"','&#8243;', $_POST['title']);
+                $_POST['formtext']=str_replace("\\'",'&#8242;', $_POST['formtext']);
+                $_POST['formtext']=str_replace('\\"','&#8243;', $_POST['formtext']);
+
                 preg_match_all("/src=\"data:image\/(jpeg|jpg|gif|png);base64,(.*?)\">/", $_POST['formtext'],$out);
                 mkdir(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id, 0755);
                 $i=0;
@@ -446,7 +451,7 @@ class ArticleController
                     $i++;
                 }
 
-                $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."' WHERE  ";
+                $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
                 if (!$GLOBALS['db']->exec($sql)){
                     $sql = "INSERT INTO `promo` SET `id`='".$id."', `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."',`region`='ALL';";
                     $GLOBALS['db']->query($sql);
@@ -563,6 +568,12 @@ class ArticleController
             };
 
             for ($i = 0; $i < $count; $i++){
+
+                $_POST['title'][$i]=str_replace("\\'",'&#8242;', $_POST['title'][$i]);
+                $_POST['title'][$i]=str_replace('\\"','&#8243;', $_POST['title'][$i]);
+                $_POST['opisanie'][$i]=str_replace("\\'",'&#8242;', $_POST['opisanie'][$i]);
+                $_POST['opisanie'][$i]=str_replace('\\"','&#8243;', $_POST['opisanie'][$i]);
+
                 if (($_FILES['image290']['type'][$i] == 'image/gif' || $_FILES['image290']['type'][$i] == 'image/jpeg' || $_FILES['image290']['type'][$i] == 'image/png') && ($_FILES['image290']['size'][$i] != 0 and $_FILES['image290']['size'][$i] <= 1024000)) {
                     $hash290 = md5_file($_FILES['image290']['tmp_name'][$i]);
                     $extension290 = substr($_FILES['image290']['type'][$i], 6, 4);
@@ -617,6 +628,12 @@ class ArticleController
             break;
         }case 'форма_заказа' :{
             UsersController::blockArticle();
+
+            $_POST['form-title']=str_replace("\\'",'&#8242;', $_POST['form-title']);
+            $_POST['form-title']=str_replace('\\"','&#8243;', $_POST['form-title']);
+            $_POST['form-text']=str_replace("\\'",'&#8242;', $_POST['form-text']);
+            $_POST['form-text']=str_replace('\\"','&#8243;', $_POST['form-text']);
+
             $sql="UPDATE `promo` SET `form_title`='".$_POST['form-title']."',`form_text`='".$_POST['form-text']."',`form_button`='".$_POST['form-button']."' WHERE `id`='".$_POST['id']."'";
             $GLOBALS['db']->query($sql);
         }
