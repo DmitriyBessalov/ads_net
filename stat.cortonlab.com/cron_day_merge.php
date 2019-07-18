@@ -65,7 +65,7 @@ for ($i = 1; $i <= 4; $i++) {
 $redis->close();
 
 if (date('w')==7) {
-    $sql = "INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) SELECT SUBDATE(CURRENT_DATE, 1), `platform_id`, SUM(`count`)/10 FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
+    $sql = "INSERT INTO `nagruzka`(`data`, `platform_id`, `request`) SELECT SUBDATE(CURRENT_DATE, 1), `platform_id`, SUM(`count`) FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";
     $GLOBALS['dbstat']->query($sql);
 }else{
     $sql = "SELECT `platform_id`, SUM(`count`)  as `request` FROM `words_top10` WHERE `platform_id`!=0 GROUP BY `platform_id`";

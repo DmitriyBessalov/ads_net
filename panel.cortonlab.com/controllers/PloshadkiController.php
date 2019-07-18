@@ -2593,7 +2593,7 @@ var myLineChart = new Chart(ctx, {
                 <div style="margin-top: 7px;">
                     <div class="recommendation-mini-site"></div>
                     <div class="logominitext"> </div>
-        Recommendation
+                        Recommendation
                         <p style="color: #768093; font-size: 12px;">Статус:
                             <span class="nowstatus">';
             if ($aktiv['recomend_aktiv']) {

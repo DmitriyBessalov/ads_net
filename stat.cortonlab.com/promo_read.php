@@ -9,7 +9,8 @@ $redis->select(4);
 $block=$redis->get('r:'.$prosmort_id);
 if ($block){$redis->set('r:'.$prosmort_id, 1, 1296000);$redis->set('s:'.$prosmort_id, 1, 1296000);exit;}else{$redis->set('r:'.$prosmort_id, 1, 1296000);$redis->set('s:'.$prosmort_id, 1, 1296000);}
 
-require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
+$sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$_GET['host']."'";
 $ploshadka_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
 $sql = "SELECT `pay` FROM `stat_promo_prosmotr` WHERE `prosmotr_id` = '".$_GET['prosmort_id']."'";
