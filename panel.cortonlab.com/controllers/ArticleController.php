@@ -747,10 +747,11 @@ class ArticleController
     public static function actionContent()
     {
         $title='Редактирование статьи';
-        include PANELDIR.'/views/layouts/article_header.php';
+
         $id=$_GET['id'];
         $sql="SELECT * FROM `promo` WHERE `id`='".$id."'";
         $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+        include PANELDIR.'/views/layouts/article_header.php';
 
         echo'
         <script type="text/javascript" src="https://panel.cortonlab.com/js/jquery-3.3.1.min.js"></script>
