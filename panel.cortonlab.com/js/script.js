@@ -41,8 +41,8 @@ $(document).ready(function(){
 	
 //Функция для чекбокса для всех вариантов статей
     $('.flipswitch.all').click(function() {
+        id=$(this)[0].id.substr(7,$(this)[0].id.length - 7);
         if ($(this).is(':checked')){
-            var id=$(this).parents('tr:first').children('td')[0].innerHTML;
             var checkbox=$(this);
             $.post("https://panel.cortonlab.com/article-start-all?id="+id,function(data) {
                 switch (data) {
@@ -53,8 +53,6 @@ $(document).ready(function(){
                 }
             });
         } else {
-            $(this).next().text('На паузе');
-            var id=$(this).parents('tr:first').children('td')[0].innerHTML;
             $.post("https://panel.cortonlab.com/article-stop-all?id="+id)
         }
     });
@@ -1034,8 +1032,8 @@ $(document).ready(function(){
 
     //Добавление в список регионов
     $(document).on('click','ul#geo_list > li',function(){
-        let region=$(this).text();
-        region=region.substr(0,region.length - 8);
+        let region=$(this).
+            region=region.substr(0,region.length - 8);text();
         let name=$(this).data('name');
         $('.div-block-84.geo').append('<div class="div-block-86"><div class="text-block-114 isogeolist" data-label="'+name+'">' + region + '</div><div class="text-block-98">Удалить</div></div>');
         $('#geolist').hide();

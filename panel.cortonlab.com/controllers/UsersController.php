@@ -87,10 +87,12 @@ class UsersController
                  switch ($i['role']) {
                      case "admin": {
                          $i['role'] = "Администраторы";
+                         $i['balans']='--';
                          break;
                      }
                      case "copywriter":{
                          $i['role'] = "Копирайтер";
+                         $i['balans']='--';
                          break;
                      }
                      case "advertiser":{
@@ -107,6 +109,7 @@ class UsersController
                      }
                      case "manager": {
                              $i['role'] = "Менеджер";
+                             $i['balans']='--';
                          }
                  };
 

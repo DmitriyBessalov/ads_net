@@ -130,7 +130,7 @@ class ArticleController
 					<div class="checkactiv">
 					     <input type="checkbox" ';
                     if ($_GET['active']) echo 'checked="checked "';
-                    echo ' class="flipswitch all"/> 
+                    echo ' class="flipswitch all"/ id="article'.$i['main_promo_id'].'"> 
 					</div>
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 0.25; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
@@ -529,9 +529,8 @@ class ArticleController
             }
             $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `category`='".$_POST['categoriay']."', `id_user_advertiser`='".$_POST['advertiser']."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
-            $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."' WHERE `promo_id`='".$_POST['id']."';";
+            $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."', `persent_advertiser`='".$_POST['protsent_rekl']."' WHERE `promo_id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
-
             break;
         }case 'анонсы':{
             UsersController::blockArticle();
@@ -959,13 +958,13 @@ class ArticleController
                             
                             <select name="categoriay" style="width:695px" required="" class="select-field w-select">
                                 <option value="">Выберите</option>';
-        $sql="SELECT * FROM `categoriya`";
-        $category = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($category as $y){
-            echo '<option '; if ($y['id']==$result['category'])echo 'selected="" '; echo 'value="'.$y['id'].'">'.$y['categoriya'].'</option>';
-        };
+                                $sql="SELECT * FROM `categoriya`";
+                                $category = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($category as $y){
+                                    echo '<option '; if ($y['id']==$result['category'])echo 'selected="" '; echo 'value="'.$y['id'].'">'.$y['categoriya'].'</option>';
+                                };
 
-        echo '
+                                echo '
                             </select>
                             <div class="text-block-141 cat">+</div>
                         </div> 
@@ -981,44 +980,54 @@ class ArticleController
                             </div>
                         </div>
                         <div class="div-block-84 word">';
-        if ($result['words']!=""){
-            $word=explode(",", $result['words']);
-            foreach($word as $i) {
-                echo'
-                        <div class="div-block-86" >
-                            <div class="text-block-114" >'.$i.'</div >
-                            <div class="text-block-98" > Удалить</div >
-                        </div>';
-            };
-        };
-        echo '
+                            if ($result['words']!=""){
+                                $word=explode(",", $result['words']);
+                                foreach($word as $i) {
+                                    echo'
+                                        <div class="div-block-86" >
+                                            <div class="text-block-114" >'.$i.'</div >
+                                            <div class="text-block-98" > Удалить</div >
+                                        </div>';
+                                };
+                            };
+                            echo '
                         </div>
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 
 					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">	
-					<div>
-                        <div class="text-block-103">Регионы</div>				
-                        <input name="searchgeo" type="text" class="text-field-2 w-input" maxlength="128" placeholder="Поиск" style="width: 760px;">
-                        <div id="geolist" style="display: none;position: relative;top: -11px;z-index: 100;border: 1px solid #E0E1E5 ;"></div>
-                        <input type="hidden" name="geo" value="">
-                        <div class="div-block-84 geo">
+                        <div>
+                            <div class="text-block-103">Регионы</div>				
+                            <input name="searchgeo" type="text" class="text-field-2 w-input" maxlength="128" placeholder="Поиск" style="width: 760px;">
+                            <div id="geolist" style="display: none;position: relative;top: -11px;z-index: 100;border: 1px solid #E0E1E5 ;"></div>
+                            <input type="hidden" name="geo" value="">
+                            <div class="div-block-84 geo">
+                            </div>
                         </div>
                     </div>
-                    </div>
+                    
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
                     <div class="div-block-85">
                         <div>';
-        $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
-        $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-        echo '
-                            <input type="text" class="text-field-9 w-input" maxlength="256" name="stavka" placeholder="0.00" id="stavka" value="'.$stavka.'" required>
+                            $sql="SELECT `stavka` FROM `anons_index` WHERE `promo_id`='".$id."'";
+                            $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                            echo '
+                            <input type="number" class="text-field-9 w-input" step="0.01" maxlength="256" name="stavka" id="stavka" value="'.$stavka.'" required>
                         </div>
                         <div>
                             <div class="text-block-96">₽ за CPG</div>
                         </div>
+                    </div>
+                    
+                    <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
+					<div class="text-block-103" style="padding: 35px 0 0 0;">Процент отчесления рекламодателю</div>
+                    <div class="div-block-85">
+                        <input type="number" min="0" max="100" step="1" class="text-field-9 w-input" maxlength="256" name="protsent_rekl" placeholder="50%" value="50" required>
+                    </div>
+                    <div>
+                        
                     </div>
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Доступ рекламодателю</div>
@@ -1026,17 +1035,17 @@ class ArticleController
 
                     <select name="advertiser" required="" style="width:695px" class="select-field w-select">
                     <option value="">Выберите</option>';
-        if ($GLOBALS['role']=='copywriter'){
-            $sql="SELECT `id` FROM `users` WHERE `role`='advertiser';";
-        }else{
-            $sql="SELECT `id`,`email` FROM `users` WHERE `role`='advertiser';";
-        }
-        $advertiser = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($advertiser as $i){
-            echo '<option '; if ($i['id']==$result['id_user_advertiser'])echo 'selected="" '; echo 'value="'.$i['id'].'">'.$i['id'].'. '.$i['email'].'</option>';
-        };
+                    if ($GLOBALS['role']=='copywriter'){
+                        $sql="SELECT `id` FROM `users` WHERE `role`='advertiser';";
+                    }else{
+                        $sql="SELECT `id`,`email` FROM `users` WHERE `role`='advertiser';";
+                    }
+                    $advertiser = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($advertiser as $i){
+                        echo '<option '; if ($i['id']==$result['id_user_advertiser'])echo 'selected="" '; echo 'value="'.$i['id'].'">'.$i['id'].'. '.$i['email'].'</option>';
+                    };
 
-        echo '
+                    echo '
                     </select>
                                         
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
