@@ -24,12 +24,12 @@ if ($block_ip) {
 $redis->set($ploshadka_id['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 86400);
 $redis->close();
 
-$sql= "SELECT n.stavka, a.promo_id FROM anons a RIGHT OUTER JOIN anons_index n ON a.promo_id = n.promo_id WHERE a.id='".$_GET['anons_id']."'";
+$sql= "SELECT n.stavka, n.`persent_advertiser`, a.promo_id FROM anons a RIGHT OUTER JOIN anons_index n ON a.promo_id = n.promo_id WHERE a.id='".$_GET['anons_id']."'";
 $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $stavka = $promo['stavka'];
 
 if ($_GET['t']=='e'){$stavka=1.25*$stavka;}else{if($_GET['t']=='s'){$stavka=1.15*$stavka;}}
-
+$stavka_advertiser=round($stavka*$promo['persent_advertiser']/100,2);
 $stavka=round($stavka*$ploshadka_id['otchiclen']/100,2);
 
 $sql= "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka."' WHERE  `prosmotr_id` = '".$_GET['prosmort_id']."'";
@@ -57,11 +57,11 @@ if (!$GLOBALS['db']->exec($sql)){
 $sql = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`=".$promo['promo_id'] .";";
 $id_user_advertiser=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-$sql = "UPDATE `balans_rekl` SET `balans` = `balans` - ".$stavka." WHERE `date`=CURDATE() AND `user_id`='".$id_user_advertiser."';";
+$sql = "UPDATE `balans_rekl` SET `balans` = `balans` - ".$stavka_advertiser." WHERE `date`=CURDATE() AND `user_id`='".$id_user_advertiser."';";
 if (!$GLOBALS['db']->exec($sql)){
     $sql="SELECT `balans` FROM `balans_rekl` WHERE `user_id` = '".$id_user_advertiser."' AND `date` =(SELECT MAX(`date`) FROM `balans_rekl` WHERE `user_id` = '".$id_user_advertiser."')";
     $oldbalans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-    $oldbalans=$oldbalans-$stavka;
+    $oldbalans=$oldbalans-$stavka_advertiser;
 
     $sql = "INSERT INTO `balans_rekl` SET `user_id` = '".$id_user_advertiser."', `date` = CURDATE(), `balans` = ".$oldbalans;
     $GLOBALS['db']->query($sql);
