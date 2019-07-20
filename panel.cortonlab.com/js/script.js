@@ -1032,8 +1032,8 @@ $(document).ready(function(){
 
     //Добавление в список регионов
     $(document).on('click','ul#geo_list > li',function(){
-        let region=$(this).
-            region=region.substr(0,region.length - 8);text();
+        let region=$(this).text();
+            region=region.substr(0,region.length - 8);
         let name=$(this).data('name');
         $('.div-block-84.geo').append('<div class="div-block-86"><div class="text-block-114 isogeolist" data-label="'+name+'">' + region + '</div><div class="text-block-98">Удалить</div></div>');
         $('#geolist').hide();
