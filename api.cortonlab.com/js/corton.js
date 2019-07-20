@@ -157,7 +157,8 @@ function corton_promo() {
         if (i>=35)timer35=true;
         if (i>=85)timer85=true;
         if (scrollh<=pageYOffset) scroll=true;
-        var promo_form=document.getElementsByClassName("promo-form");        if (promo_form[0]) {
+        var promo_form=document.getElementsByClassName("promo-form");
+        if (promo_form[0]) {
             if  (promo_form[0].getBoundingClientRect().top - window.innerHeight<=0) {
                 if (i>2) scrollfull=true;
             }
