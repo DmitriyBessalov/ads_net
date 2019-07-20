@@ -39,6 +39,7 @@ function corton_promo() {
         if (xhr.status === 200) {
             result = JSON.parse(xhr.responseText);
             console.log('ajax:', result);
+            if (!result) return false;
         }
         document.title = result['title'];
 
@@ -111,10 +112,13 @@ function corton_promo() {
         }
 
         //Отправка статистики что промо страница загружена
-        var cxhr = new XMLHttpRequest();
-        console.log     ('https://stat.cortonlab.com/promo_load.php?prosmort_id='+get['prosmort_id']+'&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
-        cxhr.open('GET', 'https://stat.cortonlab.com/promo_load.php?prosmort_id='+get['prosmort_id']+'&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
-        cxhr.send();
+        if (widget_promo.scrollHeight>50)
+        {
+            var cxhr = new XMLHttpRequest();
+            console.log     ('https://stat.cortonlab.com/promo_load.php?prosmort_id='+get['prosmort_id']+'&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
+            cxhr.open('GET', 'https://stat.cortonlab.com/promo_load.php?prosmort_id='+get['prosmort_id']+'&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
+            cxhr.send();
+        }
     };
 
     //Таймер когда активна вкладка
@@ -162,7 +166,9 @@ function corton_promo() {
                 if (i>2) scrollfull=true;
             }
         }
-        if (i!=-1) {i++;};
+        if (i!=-1 && widget_promo.scrollHeight>50) {
+            i++;
+        };
     }
     letsGo();
 }
