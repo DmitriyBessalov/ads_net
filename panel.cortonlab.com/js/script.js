@@ -80,7 +80,14 @@ $(document).ready(function(){
     $('.flipswitch.anons').click(function() {
         var id=$(this).parents('tr:first').children('td')[0].innerHTML;
         if ($(this).is(':checked')){
-            $.post("https://panel.cortonlab.com/article-anons-start?id="+id);
+            $.post("https://panel.cortonlab.com/article-anons-start?id="+id,function(data) {
+                switch (data) {
+                    case 'anon':{checkbox.next().text('Неактивна, отсутсвуют анонсы'); checkbox.prop('checked', false); console.log('a'); break;}
+                    case 'word':{checkbox.next().text('Неактивна, отсутсвуют ключевые слова'); checkbox.prop('checked', false); console.log('w'); break;}
+                    case 'true':{checkbox.next().text('Активна'); break;}
+                    default:    {checkbox.next().text('Активна'); alert('Внимание активированно '+data+' варианта статьи');}
+                }
+            });
         } else {
             $.post("https://panel.cortonlab.com/article-anons-stop?id="+id)
         }

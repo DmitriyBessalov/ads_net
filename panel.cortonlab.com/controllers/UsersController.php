@@ -407,6 +407,12 @@ class UsersController
     public static function blockArticle(){
 
 	    if ($GLOBALS['role']=='copywriter') {
+            $_REQUEST['id']=addslashes($_REQUEST['id']);
+
+            if (($_SERVER['REDIRECT_URL']=='/article-anons-stop') or ($_SERVER['REDIRECT_URL']=='/article-anons-start')){
+                $sql = "SELECT `promo_id` FROM `anons` WHERE `id`='" . $_REQUEST['id'] . "';";
+                $_REQUEST['id'] = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+            }
             $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $_REQUEST['id'] . "';";
         } else {
             if ($GLOBALS['role'] == 'advertiser')
