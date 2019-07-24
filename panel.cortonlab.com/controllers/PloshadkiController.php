@@ -335,7 +335,7 @@ var myLineChart = new Chart(ctx, {
                     $count=count($_POST['categoriay']);
 
                     for($i = 0; $i < $count; $i++){
-                        $sql.="INSERT INTO `plarforms_regex_categorii` SET `id_platform`='".$_POST['id']."',`id_categoriya`='".$_POST['categoriay'][$i]."',`type_search`='".$_POST['type_search'][$i]."',`regex`='".$_POST['regex'][$i]."',`value`='".$_POST['znach'][$i]."';";
+                        $sql.="INSERT INTO `plarforms_regex_categorii` SET `id_platform`='".$_POST['id']."',`id_categoriya`='".$_POST['categoriay'][$i]."',`type_search`='".$_POST['type_search'][$i]."',`regex`='".$_POST['regex'][$i]."';";
                     };
 
                     $GLOBALS['db']->query($sql);
@@ -443,8 +443,7 @@ var myLineChart = new Chart(ctx, {
                   <tr class="text-block-115">
                     <td>Категория</td>
                     <td>Тип поиска</td>
-                    <td>Параметр поиска</td>
-                    <td>Значение поиска</td>
+                    <td>Регуляторное выражение</td>
                     <td></td>
                   </tr>';
 
@@ -471,9 +470,6 @@ var myLineChart = new Chart(ctx, {
                     </td>
                     <td>
                         <input type="text" class="text-field-10 w-input" maxlength="256" name="regex[]" value="'.$y['regex'].'" placeholder="Регуляторка url" required="">
-                    </td>
-                    <td>
-                        <input type="text" class="text-field-10 w-input" maxlength="256" name="znach[]" value="'.$y['value'].'" placeholder="" required="">
                     </td>
                     <td style="color:red" class="text-block-98">Удалить</td>
                   </tr>';
@@ -2736,11 +2732,11 @@ var myLineChart = new Chart(ctx, {
         }
 
         //ajax подгрузка подкатегорий
-        public static function actionGet_podcategoriya()
+   /*     public static function actionGet_podcategoriya()
         {
             $sql="SELECT `id`, `podcategoriya` FROM `podcategoriya` WHERE `id_categoriya`='".$_GET['id']."'";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($result, JSON_UNESCAPED_UNICODE);
             return true;
-        }
+        }*/
     };

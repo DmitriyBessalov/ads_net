@@ -838,9 +838,6 @@ $(document).ready(function(){
             "<td>"+
             "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"regex[]\" value=\"\" placeholder=\"Регуляторка url\" required=\"\">"+
             "</td>"+
-            "<td>"+
-            "<input type=\"text\" class=\"text-field-10 w-input\" maxlength=\"256\" name=\"znach[]\" value=\"\" placeholder=\"\" required=\"\">"+
-            "</td>"+
             "<td style=\"color:red\" class=\"text-block-98\">Удалить</td>"+
             "</tr>"
         );

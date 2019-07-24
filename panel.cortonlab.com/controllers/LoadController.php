@@ -19,7 +19,7 @@ class LoadController
 		<div class="table-box">
 		<div class="div-block-102-table">
         <div class="table w-embed">';
-              if (isset($_GET['platform_id'])){
+              if (!isset($_GET['platform_id'])){
                   echo '
                   <table>
                         <thead>
