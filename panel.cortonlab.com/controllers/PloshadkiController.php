@@ -447,7 +447,7 @@ var myLineChart = new Chart(ctx, {
                     <td></td>
                   </tr>';
 
-                $sql = "SELECT `id_categoriya`,`type_search`,`regex`,`value` FROM `plarforms_regex_categorii` WHERE `id_platform`='".addslashes($_REQUEST['id'])."';";
+                $sql = "SELECT `id_categoriya`,`type_search`,`regex` FROM `plarforms_regex_categorii` WHERE `id_platform`='".addslashes($_REQUEST['id'])."';";
                 $regex = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
                 foreach ($regex as $y) {
                     echo '                  
