@@ -839,7 +839,7 @@ $(document).ready(function(){
             "<select name=\"type_search[]\" required=\"\" class=\"select-field w-select\">"+
             "<option selected=\"\" value=\"\">Выберите</option>"+
             "<option value=\"0\">По url</option>"+
-            "<option value=\"1\">По тексту в селекторе</option>"+
+            "<option value=\"1\">По DOM</option>"+
             "</select>"+
             "</td>"+
             "<td>"+

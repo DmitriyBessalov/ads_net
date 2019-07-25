@@ -465,7 +465,7 @@ var myLineChart = new Chart(ctx, {
                     <select name="type_search[]" required="" class="select-field w-select">
                         <option value="">Выберите</option>
                         <option '; if(!$y['type_search']) echo 'selected="" '; echo 'value="0">По url</option>
-                        <option '; if( $y['type_search']) echo 'selected="" '; echo 'value="1">По тексту в селекторе</option>
+                        <option '; if( $y['type_search']) echo 'selected="" '; echo 'value="1">По DOM</option>
                     </select>
                     </td>
                     <td>

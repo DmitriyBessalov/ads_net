@@ -464,27 +464,22 @@ function corton_widget() {
             //console.log('widget_load');
             var top10 = words();
 
-            //    category = style_b.getPropertyValue('--category');
-            //    i  - интересы
-            //    t  - тип определения url или хлебные крошки
-            //    r  - регуляторное выражение
-
-            let category='{"i":["1","2"],"t":["0","1"],"r":[".*",".*"]}';
+            let category = style_b.getPropertyValue('--category');
             const categor = JSON.parse(category);
             category='';
 
             let i=0;
-            while (categor['i'][i]){
-                console.log(categor['i'][i], categor['t'][i], categor['r'][i]);
-                let obj=eval('/('+categor['r'][i]+')/');
-                if (categor['t'][i]==0){
+            while (i<categor.length){
+                console.log(categor[i]['id_categoriya'], categor[i]['type_search'], categor[i]['regex']);
+                let obj=eval('/('+categor[i]['regex']+')/');
+                delete matches;
+                if (categor[i]['type_search']==0){
                     var matches = obj.exec(location.href);
                 }else{
                     var matches = obj.exec(document.body.innerHTML);
                 }
                 if (matches){
-                    console.log(true);
-                    category+='&c[]='+categor['i'][i];
+                    category+='&c[]='+categor[i]['id_categoriya'];
                 }
                 i++;
             }

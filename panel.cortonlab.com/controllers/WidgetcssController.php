@@ -52,16 +52,10 @@ class WidgetcssController
             $block = preg_replace("/[\r\n][\r\n]/",",",$css2['adblock-css']);
             $css.="#corton-promo{--adblock:".$block.";}";
 
-            $sql='SELECT * FROM `plarforms_regex_categorii` WHERE `id_platform`='.$id.';';
+            $sql='SELECT `id_categoriya`,`type_search`,`regex` FROM `plarforms_regex_categorii` WHERE `id_platform`='.$id.';';
             $category=$GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
-            $ch=0;$str='';
-            foreach ($category as $i){
-                $str.="--i".$ch.":".$i['id_categoriya'].";--t".$ch.":".$i['type_search'].";--r".$ch.":".$i['regex'].";";
-                $ch++;
-            };
-
-            $css.="body{--forcibly:".$css2['forcibly'].";--selector:".$css2['selector'].";--selectortitle:".$css2['selector-title'].";--promo:".$result['promo_page'].";--promo_template:".$result['promo_template'].";".$str."}";
+            $css.="body{--forcibly:".$css2['forcibly'].";--selector:".$css2['selector'].";--selectortitle:".$css2['selector-title'].";--promo:".$result['promo_page'].";--promo_template:".$result['promo_template'].";--category:".json_encode($category).";}";
 
             if ($result['recomend_aktiv']) {
                 $sql="SELECT `css`,`widget-position-p`, `widget-parent-id`, `algorithm-output`,`widget-text-title`,`image-shape`,`mobile`, `tablet`, `desktop` FROM `style_recomend` WHERE `id`='".$id."'";

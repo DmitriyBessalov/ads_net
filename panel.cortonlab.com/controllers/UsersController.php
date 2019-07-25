@@ -263,15 +263,12 @@ class UsersController
     //Возвращает role пользователя
     public static function getUserRole()
     {
-
         $sql="SELECT `role` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
-
         return $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
 
     public static function getUserEmail()
     {
-
         $sql="SELECT `email` FROM `users` WHERE `phpsession`='".$_COOKIE['PHPSESSID']."' LIMIT 1;";
         return $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
     }
@@ -405,21 +402,22 @@ class UsersController
 
     //Блокировка доступа к редактированию (просмотру) чужих статей для копирайтеров и рекламодаделей
     public static function blockArticle(){
+        $promo_id=addslashes($_REQUEST['id']);
+
+        if (($_SERVER['REDIRECT_URL']=='/article-anons-stop') or ($_SERVER['REDIRECT_URL']=='/article-anons-start')){
+            $sql = "SELECT `promo_id` FROM `anons` WHERE `id`='".$promo_id."';";
+            $promo_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        }
 
 	    if ($GLOBALS['role']=='copywriter') {
-            $_REQUEST['id']=addslashes($_REQUEST['id']);
-
-            if (($_SERVER['REDIRECT_URL']=='/article-anons-stop') or ($_SERVER['REDIRECT_URL']=='/article-anons-start')){
-                $sql = "SELECT `promo_id` FROM `anons` WHERE `id`='" . $_REQUEST['id'] . "';";
-                $_REQUEST['id'] = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-            }
-            $sql = "SELECT `user_id` FROM `promo` WHERE `id`='" . $_REQUEST['id'] . "';";
+            $sql2 = "SELECT `user_id` FROM `promo` WHERE `id`='".$promo_id."';";
         } else {
             if ($GLOBALS['role'] == 'advertiser')
-                $sql = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`='" . $_GET['id'] . "';";
+                $sql2 = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`='".$promo_id."';";
         }
-        if ($sql) {
-            $id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+        if ($sql2) {
+            $id = $GLOBALS['db']->query($sql2)->fetch(PDO::FETCH_COLUMN);
             if ($id!=$GLOBALS['user']){
                 UsersController::panelstartPage($GLOBALS['role']);
             }
