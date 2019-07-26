@@ -465,23 +465,25 @@ function corton_widget() {
             var top10 = words();
 
             let category = style_b.getPropertyValue('--category');
-            const categor = JSON.parse(category);
-            category='';
+            if (category) {
+                const categor = JSON.parse(category);
+                category = '';
 
-            let i=0;
-            while (i<categor.length){
-                console.log(categor[i]['id_categoriya'], categor[i]['type_search'], categor[i]['regex']);
-                let obj=eval('/('+categor[i]['regex']+')/');
-                delete matches;
-                if (categor[i]['type_search']==0){
-                    var matches = obj.exec(location.href);
-                }else{
-                    var matches = obj.exec(document.body.innerHTML);
+                let i = 0;
+                while (i < categor.length) {
+                    console.log(categor[i]['id_categoriya'], categor[i]['type_search'], categor[i]['regex']);
+                    let obj = eval('/(' + categor[i]['regex'] + ')/');
+                    delete matches;
+                    if (categor[i]['type_search'] == 0) {
+                        var matches = obj.exec(location.href);
+                    } else {
+                        var matches = obj.exec(document.body.innerHTML);
+                    }
+                    if (matches) {
+                        category += '&c[]=' + categor[i]['id_categoriya'];
+                    }
+                    i++;
                 }
-                if (matches){
-                    category+='&c[]='+categor[i]['id_categoriya'];
-                }
-                i++;
             }
 
             var request = 'https://api2.cortonlab.com/widgets.php?words=' + encodeURI(top10.join()) + widget+category;
