@@ -1,117 +1,88 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
+
+$interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
+
+
+$_SERVER['REMOTE_ADDR']='176.59.50.136';
+$_SERVER['HTTP_REFERER']='https://okardio.com/aritmiya/552.html';
+
 require_once('/var/www/www-root/data/www/api2.cortonlab.com/geoip/SxGeo.php');
-require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');$y=0;
+require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
+
 $words=str_replace(',', '\',\'', $_GET['words']);
 
-switch (strlen ($iso)){
-    case 3: $arr['region']="ALL"; break;
-    case 2: $arr['region']="ALL','".$iso; break;
-    default:$arr['region']="ALL','".substr($iso, 0, 2)."','".$iso;
-}
 
-//Найдем ID статей
-$sql="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
-$result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
-$promo_ids = array();
-foreach ($result as $i) {
-    $promo_ids=array_merge($promo_ids, explode(',',$i));
-};
-$promo_ids=array_unique($promo_ids);
+function get_anons($iso, $interes, $words, $block_promo_id)
+{
+    switch (strlen($iso)){
+        case 0:
+            $sql = "SELECT `id` FROM `promo` WHERE `category` IN ('" . $interes . "')";
+            $sql2 = "SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."')";
+            break;
+        case 2:
+            $arr['region'] = "ALL','" . $iso;
+            $sql = "SELECT `id` FROM `promo` WHERE (FIND_IN_SET('" . $iso . "', `region`) OR FIND_IN_SET('ALL', `region`)) AND `category` IN ('" . $interes . "')";
+            $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
+            break;
+        default:
+            $county = substr($iso, 0, 2);
+            $arr['region'] = "ALL','" . $county . "','" . $iso;
+            $sql = "SELECT `id` FROM `promo` WHERE (FIND_IN_SET('" . $county . "', `region`) OR FIND_IN_SET('" . $iso . "', `region`) OR FIND_IN_SET('ALL', `region`)) AND `category` IN ('" . $interes . "')";
+            $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
+    }
 
-//Берем ID Анонсов
-$promo=implode("','" ,$promo_ids);
-$sql="SELECT * FROM `anons_index` WHERE `promo_id` IN ('".$promo."')";
-$result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-$anons_ids = array();
-
-//Премешивание анонсов внутри статьи
-foreach ($result2 as $i) {
-    if ($i['anons_ids']==''){
-        unset($result2[$y]);
-    }else{
-        $f=explode(',',$i['anons_ids']);
-        shuffle($f);
-        $anons_ids=array_merge($anons_ids, $f);
-        $result2[$y]['an_count']=count($f);
-        $result2[$y]['an']=$f;
-        $y++;
+    $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+    $promo_ids = array();
+    foreach ($result as $i) {
+        $promo_ids = array_merge($promo_ids, explode(',', $i));
     };
-};
-$count=count($anons_ids);
 
-preg_match('/\/\/(.*?)\//', $_SERVER['HTTP_REFERER'], $referer);
+    $result = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
+    foreach ($result as $i) {
+        $promo_ids=array_merge($promo_ids, explode(',',$i));
+    };
+    $promo_ids=array_unique($promo_ids);
 
-$sql="SELECT `id`,`promo_page`,`recomend_zag_aktiv`,`natpre_zag_aktiv` FROM `ploshadki` WHERE `domen`='".$referer[1]."'";
-$result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-$arr['p_id'] = $result1['id'];
-
-//Алгорим расчета вероятности выдачи анонса
-$anons=0;
-if ($count==0){
-    //анонсы отсутствуют, вывести заглушки
-    if (($result1['recomend_zag_aktiv'])AND(isset($_GET['r']))){
-        $arr['recomend_zag']=1;
+    foreach ($block_promo_id as $i){
+        if(($key = array_search($i,$promo_ids)) !== FALSE){
+            unset($promo_ids[$key]);
+        }
     }
-    if (($result1['natpre_zag_aktiv'])AND(isset($_GET['e']))){
-        $arr['natpre_zag']=1;
-    }
-} else {
-    $ch=$count_widgets=$_GET['e']+$_GET['r']+$_GET['s'];
-    $d=$count_widgets/$count;
-    if ($d>1){
-        //недостаток виджетов
-        if ($count>=(int)$_GET['r']){
-            $anons=(int)$_GET['r'];
-            $count=$count-(int)$_GET['r'];
+
+    //Берем ID Анонсов
+    $promo=implode("','" , $promo_ids);
+    $sql="SELECT `promo_id`,`anons_ids`,`stavka` FROM `anons_index` WHERE `promo_id` IN ('".$promo."') ORDER BY `stavka` DESC, RAND()";
+    $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+    $anons_ids = array();
+    $y=0;
+
+    $anons_count=0;
+    //Премешивание анонсов внутри статьи
+    foreach ($result2 as $i) {
+        if ($i['anons_ids']==''){
+            unset($result2[$y]);
         }else{
-            if (($result1['natpre_zag_aktiv'])AND(isset($_GET['r']))){
-                $arr['recomend_zag']=1;
-            }
-        }
-
-        if ($count!=0){
-            $count_widgets=$count_widgets-1;
-            $anons++;$count--;
-        }else{
-            if ($result1['natpre_zag_aktiv']) {
-                $arr['natpre_zag'] = 1;
-            }
-        }
-
-        if ($count!=0){
-            $count_widgets=$count_widgets-1;
-            $anons++;
-        }
-    } else
-    if ($d==1){
-        //Вывести каждый виджет по 1 разу
-        $anons=$count;
-    } else
-    if ($d<1) {
-        //Вывеси самые дорогие
-        $anons=$count_widgets;
-    }
-}
-
-$arr['anons_count']=$anons;
-if ($arr['anons_count']!=0) {
-    $arr['promo_page']=$result1['promo_page'];
-    shuffle($result2);
-    //Расчет приоритета выдачи анонса на основе ставки
-    usort($result2, function ($a, $b) {
-        return $b['stavka'] <=> $a['stavka'];
-    });
+            $f = explode(',',$i['anons_ids']);
+            shuffle($f);
+            //$anons_ids=array_merge($anons_ids, $f);
+            $result2[$y]['an_count']=count($f);
+            $anons_count=$anons_count+count($f);
+            $result2[$y]['an']=$f;
+            $y++;
+        };
+    };
 
     $ch = $ch2 = 0;
     $count = count($result2);
-    while ($anons != 0) {
+    while ($anons_count != 0) {
         if ($result2[$ch]['an_count'] > 0) {
             $an[] = (int)$result2[$ch]['an'][$ch2];
             $result2[$ch]['an_count']--;
-            $anons--;
+            $anons_count--;
         }
         $ch++;
         if ($ch == $count) {
@@ -120,11 +91,55 @@ if ($arr['anons_count']!=0) {
         }
     }
 
-    $ann = implode("','", $an);
+    $result2['a']=$an;
+
+    return $result2;
+}
+$arr['region']=$iso;
+$count_widgets=$_GET['e']+$_GET['r']+$_GET['s'];
+
+# условие если есть виджеты c гео
+$block_promo_id=array();
+$arr['anons_count']=0;
+if ($iso != "")
+    $result2=get_anons($iso,$interes,$words,$block_promo_id);
+    $arr['anons_count'] = count($result2['a']);
+
+# условие при недостатке виджетов берем без
+if ($count_widgets>$arr['anons_count']){
+    $iso = '';
+    foreach ($result2 as $i){
+        if (isset($i['promo_id']))
+            $block_promo_id[]=$i['promo_id'];
+    }
+    $result3=get_anons($iso,$interes,$words,$block_promo_id);
+}
+
+
+if (!isset($result2['a'])){
+    $result2['a']=array();
+};
+if (!isset($result3['a'])){
+    $result3['a']=array();
+};
+
+$anons_all=array_merge($result2['a'], $result3['a']);
+
+if (count($anons_all)==0){
+    $arr['anons_count']=0;
+    $show=0;
+} else{
+    $ann = implode("','", $anons_all);
     $sql = "SELECT * FROM `anons` WHERE `id` IN ('" . $ann . "')";
     $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-    $ch = 0;
 
+    while ($count_widgets>count($result))
+        $result=array_merge($result, $result);
+
+    $result = array_slice($result, 0, $count_widgets);
+    $arr['anons_count']=$count_widgets;
+
+    $ch = 0;
     shuffle($result);
     foreach ($result as $i) {
         $arr['anons'][0][] = $result[$ch]['id'];
@@ -135,16 +150,15 @@ if ($arr['anons_count']!=0) {
         $arr['anons'][5][] = $result[$ch]['user_id'];
         $ch++;
     }
-
-    $redis = new Redis();
-    $redis->pconnect('185.75.90.54', 6379);
-    $arr['prosmotr_id'] = $redis->incr("prosmotr_id");
     $show=1;
-}else{
-    $show=0;
 }
-$str= json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-echo $str;
+
+preg_match('/\/\/(.*?)\//', $_SERVER['HTTP_REFERER'], $referer);
+$sql="SELECT `id`,`promo_page` FROM `ploshadki` WHERE `domen`='".$referer[1]."'";
+$result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+$arr['p_id'] = $result1['id'];
+$arr['promo_page']=$result1['promo_page'];
+echo json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 //Cбор статистики слов
 $word_arr=explode("','",$words);

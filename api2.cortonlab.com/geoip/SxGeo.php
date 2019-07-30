@@ -160,6 +160,3 @@ class SxGeo {
 $SxGeo = new SxGeo();
 
 $iso=$SxGeo->getCityFull($_SERVER['REMOTE_ADDR']);
-if ($iso==''){
-    $iso='ALL';
-}
