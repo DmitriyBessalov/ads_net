@@ -855,6 +855,7 @@ p {
 .steap{
    display: inline-block;
    vertical-align: top;
+   height: 300px;
    width: 50%;
    float: left;
 }
