@@ -858,6 +858,11 @@ p {
    height: 300px;
    width: 50%;
 }
+.steapcontent {
+	text-align: center;
+	float: right;
+    width: 360px;
+}
 
 .text-block-4 {
   display: block;
