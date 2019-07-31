@@ -860,7 +860,7 @@ p {
    float: left;
 }
 .steapcontent {
-	text-align: center;
+	text-align: left;
 	float: right;
     width: 360px;
 }
