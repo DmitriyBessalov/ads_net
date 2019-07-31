@@ -55,7 +55,10 @@ class WidgetcssController
             $sql='SELECT `id_categoriya`,`type_search`,`regex` FROM `plarforms_regex_categorii` WHERE `id_platform`='.$id.';';
             $category=$GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
-            $categoryjson=str_replace('\\\\','\\', json_encode($category, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+            $categoryjson=json_encode($category, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $categoryjson=str_replace('\\\\','\\',$categoryjson);
+            $categoryjson=str_replace('/','[\]]',$categoryjson);
+
             $css.="body{--forcibly:".$css2['forcibly'].";--selector:".$css2['selector'].";--selectortitle:".$css2['selector-title'].";--promo:".$result['promo_page'].";--promo_template:".$result['promo_template'].";--category:".$categoryjson.";}";
 
             if ($result['recomend_aktiv']) {
