@@ -2912,6 +2912,7 @@ margin-left: 15px;
     -webkit-align-items: left;
     -ms-flex-align: center;
     align-items: left;
+	margin-bottom: 60px;
   }
   .div-block-52-2 {
 	margin-bottom: 40px;
@@ -3383,6 +3384,7 @@ margin-left: 15px;
   }
   .div-block-53 {
     margin-top: 0px;
+	align-items: center;
   }
   .text-block-15 {
     font-family: 'Myriadpro SemiExt';
@@ -3912,6 +3914,7 @@ margin-left: 15px;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+	align-items: center;
   }
   .text-block-15 {
     margin-top: 10px;
