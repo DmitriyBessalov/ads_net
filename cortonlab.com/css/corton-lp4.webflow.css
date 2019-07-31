@@ -1788,7 +1788,7 @@ p {
   font-size: 22px;
   line-height: 28px;
   font-weight: 400;
-  text-align: left;
+  text-align: center;
 }
 
 .div-block-54 {
@@ -2211,10 +2211,10 @@ p {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  -webkit-box-align: left;
-  -webkit-align-items: left;
-  -ms-flex-align: left;
-  align-items: left;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .div-block-75 {
@@ -2594,7 +2594,7 @@ margin-left: 15px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 320px;
+  height: auto;
   max-width: 300px;
   border-radius: 8px;
   background-color: none;
