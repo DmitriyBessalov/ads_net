@@ -56,7 +56,7 @@ class WidgetcssController
             $category=$GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
             $categoryjson=json_encode($category, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-            $categoryjson=str_replace('/','[/]',$categoryjson);
+            $categoryjson=str_replace('</','<[/]',$categoryjson);
 
             $css.="body{--forcibly:".$css2['forcibly'].";--selector:".$css2['selector'].";--selectortitle:".$css2['selector-title'].";--promo:".$result['promo_page'].";--promo_template:".$result['promo_template'].";--category:".$categoryjson.";}";
 
