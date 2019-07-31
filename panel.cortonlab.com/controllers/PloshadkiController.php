@@ -458,6 +458,7 @@ var myLineChart = new Chart(ctx, {
                     foreach ($categorii as $i) {
                         echo '<option '; if($y['id_categoriya']==$i['id']) echo 'selected="" '; echo ' value="' . $i['id'] . '">' . $i['categoriya'] . '</option>';
                     };
+                    $y['regex']=str_replace('"','&quot;',$y['regex']);
                     echo '
                     </select>
                     </td>
