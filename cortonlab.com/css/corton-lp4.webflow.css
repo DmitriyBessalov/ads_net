@@ -849,6 +849,16 @@ p {
   text-align: left;
 }
 
+.steapsland {
+   width: 100%;
+}
+.steap{
+   display: inline-block;
+   vertical-align: top;
+   height: 300px;
+   width: 50%;
+}
+
 .text-block-4 {
   display: block;
   float: none;
