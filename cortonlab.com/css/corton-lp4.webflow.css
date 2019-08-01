@@ -865,6 +865,11 @@ p {
 	float: right;
     width: 360px;
 }
+.steapcontentright {
+	text-align: right;
+	float: right;
+    width: 360px;
+}
 
 .text-block-4 {
   display: block;
