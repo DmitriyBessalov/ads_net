@@ -152,6 +152,11 @@ $sql="SELECT `id`,`promo_page` FROM `ploshadki` WHERE `domen`='".$referer[1]."'"
 $result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $arr['p_id'] = $result1['id'];
 $arr['promo_page']=$result1['promo_page'];
+
+$redis = new Redis();
+$redis->pconnect('185.75.90.54', 6379);
+$arr['prosmotr_id'] = $redis->incr("prosmotr_id");
+
 echo json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 //Cбор статистики слов
