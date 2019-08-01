@@ -130,7 +130,9 @@ class ArticleController
 					<div class="checkactiv">
 					     <input type="checkbox" ';
                     if ($_GET['active']) echo 'checked="checked "';
-                    echo ' class="flipswitch all"/ id="article'.$i['main_promo_id'].'"> 
+
+                    if ($GLOBALS['role']=='copywriter' or $GLOBALS['role']=='admin') {
+                        echo ' class="flipswitch all" id="article' . $i['main_promo_id'] . '"> 
 					</div>
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 0.25; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
@@ -144,7 +146,25 @@ class ArticleController
 								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
 								 <a href="article-edit-target?id=' . $i['main_promo_id'] . '">Таргетинги</a><br>
 								 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
-                             </ul>
+                             </ul>';
+                    }else{
+                        echo ' class="flipswitch all" style="opacity:0.4;"> 
+					    </div>
+	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 0.25; vertical-align: super; text-decoration: none; color: #768093;">...</a>
+			                 <ul class="sub-menu-content">
+                                 <a href="article-edit-content?id=' . $i['main_promo_id'] . '">Прочитать</a><br>
+								 <a href="javascript:void(0);" style="opacity:0.4;">Управление анонсами</a><br>
+								 <a style="color: #ff0303;opacity:0.4;" href="javascript:void(0);">Удалить</a> 
+								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
+								 <a href="article-stat?id=' . $i['main_promo_id'] . '">Расширенная статистика</a><br>
+								 <a href="javascript:void(0);" style="opacity:0.4;">A/B анализ</a><br>
+								 <a href="javascript:void(0);" style="opacity:0.4;">Анализ ссылок</a><br>
+								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
+								 <a href="javascript:void(0);" style="opacity:0.4;">Таргетинги</a><br>
+								 <a href="javascript:void(0);" style="opacity:0.4;">Лид форма</a><br>
+                             </ul>';
+                    }
+                     echo '
 	                 </div>
 					 </div>
 	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 298px; height: 70px; margin-left: -20px; margin-top: 76px; position: relative;"></div>
@@ -209,7 +229,7 @@ class ArticleController
 		<div class="table-right">
 		    <form id="right-form" class="form-333">
 			';
-        if ($GLOBALS['role']!='admin') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
+        if ($GLOBALS['role']=='copywriter') echo '<a href="/article-edit" class="button-add-site w-button">Создать статью</a>';
         echo '
 			<p class="filtermenu"><label '; if ((!isset($_GET['active'])) OR ($_GET['active']=='all')){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="active" value="all" class="form-radio"'; if ($_GET['active']=='all'){echo ' checked';} echo'>Все статьи</label></p>
 			<p class="filtermenu"><label '; if ($_GET['active']=='1'){echo ' style="font-weight: 600;"';}echo'><input type="radio" name="active" value="1" class="form-radio"'; if ($_GET['active']==1){echo ' checked';} echo'>Активные статьи</label></p>
@@ -469,18 +489,18 @@ class ArticleController
                 $geo = array_unique(explode(',', $_POST['geo']));
                 $_POST['geo'] = implode(',', $geo);
             }
-            $_POST['categoriay']=array_unique($_POST['categoriay']);
 
-            $key = array_search('', $_POST['categoriay']);
-            unset($_POST['categoriay'][$key]);
-
-            foreach ($_POST['categoriay'] as $i) {
-                if (!isset($str))
-                    $str = "INSERT INTO `promo_category`(`promo_id`, `category_id`) VALUES ";
-                $str .= "('".$_POST['id']."', '".$i."'),";
+            foreach($_POST as $key => $value)
+            {
+                if (preg_match("/categoriay(.*?)$/", $key,$matches)) {
+                    if (!isset($str))
+                        $str = "INSERT INTO `promo_category`(`promo_id`, `category_id`) VALUES ";
+                    $str .= "('".$_POST['id']."', '".$matches[1]."'),";
+                }
             }
             if (isset($str))
                 $str = substr($str, 0, -1);
+
             $sql="DELETE FROM `promo_category` WHERE `promo_id`=".$_POST['id'].";".$str;
             $GLOBALS['db']->query($sql);
 
@@ -963,12 +983,12 @@ class ArticleController
         </script>';
         echo '
         <style>
+/* стили Чекбокса */        
 .element-wrapper {
 	padding: 10px;
 }
 
 .checkbox {
-  position: absolute;
   z-index: -1;
   opacity: 0;
 }
@@ -1017,50 +1037,33 @@ class ArticleController
                         
                         <div class="text-block-103">Интересы</div>
                         <div style="display: flex; flex-direction: row;">
-                            <div id="category_select_all">
+                            <div id="category_select_all" style="text-decoration: underline;cursor: pointer; color: #116DD6;font-family: \'Myriadpro Regular\';font-size: 16px;">
                                 Выбрать все
                             </div>
-                            <div id="category_clear_all">
+                            <div id="category_clear_all" style="padding: 0px 0px 0px 45px;text-decoration: underline;cursor: pointer; color: #116DD6; font-family: \'Myriadpro Regular\';font-size: 16px;">
                                 Отменить все
                             </div>
                         </div>
                         
-                        <div class="div-block-84">
-                                
-                                <div class="element-wrapper div-block-86">
-                                  <input type="checkbox" class="checkbox" id="checkbox1" />
-                                  <label for="checkbox1">Checkbox 1</label>
-                                </div>
-                                
-                                <div class="element-wrapper div-block-86">
-                                  <input type="checkbox" class="checkbox" id="checkbox2" />
-                                  <label for="checkbox2">Checkbox 1</label>
-                                </div>
-                                
+                        <div class="div-block-84" style="overflow-y:scroll; height:400px;">';
+                            $sql="SELECT `category_id` FROM `promo_category` WHERE `promo_id`='".$_GET['id']."'";
+                            $category_promo = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+                            $sql="SELECT * FROM `categoriya`";
+                            $category_all = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($category_all as $g){
+                                echo '
+                                    <div class="element-wrapper div-block-86" style="justify-content: normal">
+                                      <input type="checkbox" name="categoriay'.$g['id'].'" class="checkbox" id="checkbox'.$g['id'].'" ';
+                                      if (in_array($g['id'],$category_promo))
+                                          echo 'checked="" ';
+                                      echo '/>
+                                      <label for="checkbox'.$g['id'].'">'.$g['categoriya'].'</label>
+                                    </div>';
+                                };
+
+                            echo '
                         </div>
-                        
-                        <div class="div-block-82">
-                            <div style="display: flex; flex-direction: column;" id="category_list">';
-                                $sql="SELECT * FROM `promo_category` WHERE `promo_id`='".$_GET['id']."'";
-                                $category_promo = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                                $sql="SELECT * FROM `categoriya`";
-                                $category_all = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                                if (count($category_promo)==0)
-                                    $category_promo['null']=0;
-                                foreach ($category_promo as $y) {
-                                    echo '
-                                        <select name="categoriay[]" style="width:695px" class="select-field w-select">
-                                            <option value="">Выберите</option>';
-                                            foreach ($category_all as $g){
-                                                echo '<option '; if ($y['category_id']==$g['id'])echo 'selected="" '; echo 'value="'.$g['id'].'">'.$g['categoriya'].'</option>';
-                                            };
-                                    echo '
-                                        </select>';
-                                }
-                             echo '
-                            </div>
-                            <div class="text-block-141 cat">+</div>
-                        </div> 
                         
 						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 30px; margin-left: -20px; margin-top: 30px;"></div>
 						<div class="text-block-103">Ключевые слова</div>
