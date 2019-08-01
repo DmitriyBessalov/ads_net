@@ -2041,7 +2041,6 @@ p {
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  max-width: 480px;
 }
 .div-block-61two {
   display: -webkit-box;
