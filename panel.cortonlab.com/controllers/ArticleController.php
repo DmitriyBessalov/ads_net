@@ -962,13 +962,83 @@ class ArticleController
         var countries={'.$str.'};
         </script>';
         echo '
+        <style>
+.element-wrapper {
+	padding: 10px;
+}
+
+.checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.checkbox + label {
+  position: relative;
+  vertical-align: middle;
+  padding: 0 0 0 30px;
+  cursor: pointer;
+}
+
+/* Чекбокс в состоянии неактивен */
+.checkbox + label:before {
+  content: \'\';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 19px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Чекбокс в состоянии активен */
+.checkbox + label:after {
+  content: \'\';
+  position: absolute;
+}
+
+/* Фон чекбокса в состоянии активен */
+.checkbox:checked + label:after {
+  position: absolute;
+  top: 2px;
+  left: 3.2px;
+  border: 1px solid white;
+  background: #413548;
+  height: 14px;
+  width: 14px;
+}
+        </style>
         <form method="post" action="/article-update" class="form-2">
                     <div class="div-block-97" style="padding: 30px 0;">
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
                         <input type="hidden" name="words" value="">
                         
-                        <div class="text-block-103">Категории</div>
+                        <div class="text-block-103">Интересы</div>
+                        <div style="display: flex; flex-direction: row;">
+                            <div id="category_select_all">
+                                Выбрать все
+                            </div>
+                            <div id="category_clear_all">
+                                Отменить все
+                            </div>
+                        </div>
+                        
+                        <div class="div-block-84">
+                                
+                                <div class="element-wrapper div-block-86">
+                                  <input type="checkbox" class="checkbox" id="checkbox1" />
+                                  <label for="checkbox1">Checkbox 1</label>
+                                </div>
+                                
+                                <div class="element-wrapper div-block-86">
+                                  <input type="checkbox" class="checkbox" id="checkbox2" />
+                                  <label for="checkbox2">Checkbox 1</label>
+                                </div>
+                                
+                        </div>
+                        
                         <div class="div-block-82">
                             <div style="display: flex; flex-direction: column;" id="category_list">';
                                 $sql="SELECT * FROM `promo_category` WHERE `promo_id`='".$_GET['id']."'";
