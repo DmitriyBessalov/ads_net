@@ -797,6 +797,13 @@ $(document).ready(function(){
         $('[name=words]').val(variable);
     }
     words();
+
+    //Добавление категорий при редактировании статьи
+    $(".text-block-141.cat" ).on( "click", function() {
+        $('#category_list select').last().clone().appendTo('#category_list');
+        $('#category_list select').last().val('');
+    });
+
     //Добавление ключевых слов при редактировании статьи
     $( ".text-block-141.key" ).on( "click", function() {
         var variable = $('#addkey-2').val();

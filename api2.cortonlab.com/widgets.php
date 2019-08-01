@@ -18,18 +18,18 @@ function get_anons($iso, $interes, $words, $block_promo_id)
 {
     switch (strlen($iso)){
         case 0:
-            $sql = "SELECT `id` FROM `promo` WHERE `category` IN ('" . $interes . "')";
+            $sql = "SELECT `promo_id` FROM `promo_category` WHERE `category_id` IN ('" . $interes . "')";
             $sql2 = "SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."')";
             break;
         case 2:
             $arr['region'] = "ALL','" . $iso;
-            $sql = "SELECT `id` FROM `promo` WHERE (FIND_IN_SET('" . $iso . "', `region`) OR FIND_IN_SET('ALL', `region`)) AND `category` IN ('" . $interes . "')";
+            $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p WHERE (FIND_IN_SET('" . $iso . "', p.`region`) OR FIND_IN_SET('ALL', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
             $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
             break;
         default:
             $county = substr($iso, 0, 2);
             $arr['region'] = "ALL','" . $county . "','" . $iso;
-            $sql = "SELECT `id` FROM `promo` WHERE (FIND_IN_SET('" . $county . "', `region`) OR FIND_IN_SET('" . $iso . "', `region`) OR FIND_IN_SET('ALL', `region`)) AND `category` IN ('" . $interes . "')";
+            $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p WHERE (FIND_IN_SET('" . $county . "', p.`region`) FIND_IN_SET('" . $iso . "', p.`region`) OR FIND_IN_SET('ALL', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
             $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
     }
 
