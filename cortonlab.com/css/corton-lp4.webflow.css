@@ -899,6 +899,16 @@ p {
 	   width: 320px;
     }
 }
+@media screen and (max-width: 700px) {
+	.steapcontent {
+	   margin: 40px 20px 0 0;
+       width: 300px;	   
+    }
+    .steapcontentright {
+	   margin: 40px 0px 0 20px;
+	   width: 300px;
+    }
+}
 
 @media screen and (max-width: 600px) {
 	.steapcontent {
