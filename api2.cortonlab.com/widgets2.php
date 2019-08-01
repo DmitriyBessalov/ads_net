@@ -10,7 +10,7 @@ require_once('/var/www/www-root/data/www/api2.cortonlab.com/geoip/SxGeo.php');
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 $words=str_replace(',', '\',\'', $_GET['words']);
-echo 1 ; exit;
+echo 1 ;
 
 function get_anons($iso, $interes, $words, $block_promo_id)
 {
@@ -94,7 +94,7 @@ function get_anons($iso, $interes, $words, $block_promo_id)
 }
 $arr['region']=$iso;
 $count_widgets=$_GET['e']+$_GET['r']+$_GET['s'];
-
+echo 2 ; exit;
 # условие если есть виджеты c гео
 $block_promo_id=array();
 $arr['anons_count']=0;
