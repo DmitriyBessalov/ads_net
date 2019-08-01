@@ -469,6 +469,21 @@ class ArticleController
                 $geo = array_unique(explode(',', $_POST['geo']));
                 $_POST['geo'] = implode(',', $geo);
             }
+            $_POST['categoriay']=array_unique($_POST['categoriay']);
+
+            $key = array_search('', $_POST['categoriay']);
+            unset($_POST['categoriay'][$key]);
+
+            foreach ($_POST['categoriay'] as $i) {
+                if (!isset($str))
+                    $str = "INSERT INTO `promo_category`(`promo_id`, `category_id`) VALUES ";
+                $str .= "('".$_POST['id']."', '".$i."'),";
+            }
+            if (isset($str))
+                $str = substr($str, 0, -1);
+            $sql="DELETE FROM `promo_category` WHERE `promo_id`=".$_POST['id'].";".$str;
+            $GLOBALS['db']->query($sql);
+
             $strtolow=mb_strtolower($_POST['words'], 'UTF-8');
             $words = array_unique(explode(",", $strtolow));
             asort($words);
@@ -955,17 +970,23 @@ class ArticleController
                         
                         <div class="text-block-103">Категории</div>
                         <div class="div-block-82">
-                            
-                            <select name="categoriay" style="width:695px" required="" class="select-field w-select">
-                                <option value="">Выберите</option>';
+                            <div style="display: flex; flex-direction: column;" id="category_list">';
+                                $sql="SELECT * FROM `promo_category` WHERE `promo_id`='".$_GET['id']."'";
+                                $category_promo = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                                 $sql="SELECT * FROM `categoriya`";
-                                $category = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($category as $y){
-                                    echo '<option '; if ($y['id']==$result['category'])echo 'selected="" '; echo 'value="'.$y['id'].'">'.$y['categoriya'].'</option>';
-                                };
-
-                                echo '
-                            </select>
+                                $category_all = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($category_promo as $y) {
+                                    echo '
+                                        <select name="categoriay[]" style="width:695px" class="select-field w-select">
+                                            <option value="">Выберите</option>';
+                                            foreach ($category_all as $g){
+                                                echo '<option '; if ($y['category_id']==$g['id'])echo 'selected="" '; echo 'value="'.$g['id'].'">'.$g['categoriya'].'</option>';
+                                            };
+                                    echo '
+                                        </select>';
+                                }
+                             echo '
+                            </div>
                             <div class="text-block-141 cat">+</div>
                         </div> 
                         
