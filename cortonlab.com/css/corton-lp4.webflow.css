@@ -639,7 +639,7 @@ p {
     box-shadow: 0 8px 16px 0 rgba(41,41,43,.2);
 }
 .circular--play, .circular--play:before {
-    position: absolute;
+    position: relative;
     width: 4.5rem;
     height: 4.5rem;
     border-radius: 50%;
