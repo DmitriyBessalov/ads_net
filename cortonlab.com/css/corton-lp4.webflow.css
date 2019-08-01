@@ -872,6 +872,15 @@ p {
 	margin: 60px 0px 0 140px;
 }
 
+@media screen and (min-width: 1000px) {
+	.steapcontent {
+	   margin: 60px 0px 0 0;	
+    }
+    .steapcontentright {
+	   margin: 60px 0px 0 0;	
+    }
+}
+
 .text-block-4 {
   display: block;
   float: none;
