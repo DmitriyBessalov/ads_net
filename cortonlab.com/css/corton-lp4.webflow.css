@@ -1461,6 +1461,14 @@ p {
   font-weight: 400;
   padding: 0 18%;
 }
+.text-block-14homeadv {
+  font-family: 'Myriadpro Regular';
+  color: #116dd6;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
 .text-block-14contact {
   margin-right: 40px;
   font-family: 'Myriadpro Regular';
@@ -2940,7 +2948,7 @@ margin-left: 15px;
   .text-block-14 {
     width: 560px;
     margin-bottom: 0px;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 28px;
 	padding: 0 14%;
   }
