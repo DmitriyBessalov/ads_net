@@ -863,13 +863,60 @@ p {
 	text-align: left;
 	float: right;
     width: 360px;
-	margin: 40px 140px 0 0;
+	margin: 60px 140px 0 0;
 }
 .steapcontentright {
 	text-align: left;
 	float: left;
     width: 360px;
-	margin: 40px 0px 0 140px;
+	margin: 60px 0px 0 140px;
+}
+
+@media screen and (max-width: 1400px) {
+	.steapcontent {
+	   margin: 60px 60px 0 0;	
+    }
+    .steapcontentright {
+	   margin: 60px 0px 0 60px;	
+    }
+}
+
+@media screen and (max-width: 1000px) {
+	.steapcontent {
+	   margin: 60px 40px 0 0;	
+    }
+    .steapcontentright {
+	   margin: 60px 0px 0 40px;
+    }
+}
+@media screen and (max-width: 840px) {
+	.steapcontent {
+	   margin: 40px 20px 0 0;
+       width: 320px;	   
+    }
+    .steapcontentright {
+	   margin: 40px 0px 0 20px;
+	   width: 320px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+	.steapcontent {
+	   margin: 40px 0px 40px 20px;
+       width: 100%;	   
+	   padding-left: 20px;
+	   padding-right: 20px;
+    }
+    .steapcontentright {
+	   margin: 40px 0px 40px 0px;
+	   width: 100%;
+	   padding-right: 20px;
+	   padding-left: 20px;
+    }
+	.steap {
+		width: 100%;
+		height: auto;
+	}
 }
 
 .text-block-4 {
