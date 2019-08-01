@@ -36,7 +36,7 @@ function get_anons($iso, $interes, $words, $block_promo_id)
     foreach ($result as $i) {
         $promo_ids = array_merge($promo_ids, explode(',', $i));
     };
-
+    echo 6; exit;
     $result = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
     foreach ($result as $i) {
         $promo_ids=array_merge($promo_ids, explode(',',$i));
