@@ -640,8 +640,8 @@ p {
 }
 .circular--play, .circular--play:before {
     position: absolute;
-    width: 6.5rem;
-    height: 6.5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: 50%;
 }
 .input:hover {
