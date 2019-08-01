@@ -776,6 +776,16 @@ p {
   font-weight: 700;
   text-align: center;
 }
+.heading-homeadv {
+  margin-top: 0vw;
+  margin-bottom: 0px;
+  font-family: 'Myriadpro SemiExt';
+  color: #116dd6;
+  font-size: 38px;
+  line-height: 48px;
+  font-weight: 700;
+  text-align: left;
+}
 
 .hblockinfo {
   font-family: 'Myriadpro SemiExt';
