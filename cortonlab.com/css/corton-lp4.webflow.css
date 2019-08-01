@@ -632,7 +632,7 @@ p {
     -webkit-transform: translate(-3.25rem,-3.25rem);
     -ms-transform: translate(-3.25rem,-3.25rem);
     transform: translate(-3.25rem,-3.25rem);
-    background: #0555ff url(../img/icons/play.svg) no-repeat 2.4rem 1.9rem;
+    background: #0555ff url(https://evolt.io/assets/img/icons/play.svg) no-repeat 2.4rem 1.9rem;
     top: 50%;
     left: 50%;
     -webkit-box-shadow: 0 8px 16px 0 rgba(41,41,43,.2);
