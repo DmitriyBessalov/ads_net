@@ -849,6 +849,29 @@ p {
   text-align: left;
 }
 
+.steapsland {
+   width: 100%;
+}
+.steap{
+   display: inline-block;
+   vertical-align: top;
+   height: 300px;
+   width: 50%;
+   float: left;
+}
+.steapcontent {
+	text-align: left;
+	float: right;
+    width: 360px;
+	margin: 40px 140px 0 0;
+}
+.steapcontentright {
+	text-align: left;
+	float: left;
+    width: 360px;
+	margin: 40px 0px 0 140px;
+}
+
 .text-block-4 {
   display: block;
   float: none;
@@ -1785,8 +1808,8 @@ p {
   margin-top: 20px;
   font-family: 'Myriadpro Regular';
   color: #116DD6;
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 20px;
+  line-height: 26px;
   font-weight: 400;
   text-align: center;
 }
@@ -2912,6 +2935,7 @@ margin-left: 15px;
     -webkit-align-items: left;
     -ms-flex-align: center;
     align-items: left;
+	margin-bottom: 60px;
   }
   .div-block-52-2 {
 	margin-bottom: 40px;
@@ -3383,6 +3407,7 @@ margin-left: 15px;
   }
   .div-block-53 {
     margin-top: 0px;
+	align-items: center;
   }
   .text-block-15 {
     font-family: 'Myriadpro SemiExt';
@@ -3912,6 +3937,7 @@ margin-left: 15px;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+	align-items: center;
   }
   .text-block-15 {
     margin-top: 10px;
