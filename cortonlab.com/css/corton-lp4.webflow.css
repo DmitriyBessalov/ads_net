@@ -629,9 +629,9 @@ p {
     display: block;
     padding: 0;
     cursor: pointer!important;
-    -webkit-transform: translate(-3.25rem,-3.25rem);
-    -ms-transform: translate(-3.25rem,-3.25rem);
-    transform: translate(-3.25rem,-3.25rem);
+    -webkit-transform: translate(0.0rem,-12.25rem);
+    -ms-transform: translate(0.0rem,-12.25rem);
+    transform: translate(0.0rem,-12.25rem);
     background: #0555ff url(https://evolt.io/assets/img/icons/play.svg) no-repeat 1.8rem 1.5rem;
     top: 50%;
     left: 50%;
