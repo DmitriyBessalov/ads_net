@@ -975,6 +975,8 @@ class ArticleController
                                 $category_promo = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                                 $sql="SELECT * FROM `categoriya`";
                                 $category_all = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                                if (count($category_promo)==0)
+                                    $category_promo['null']=0;
                                 foreach ($category_promo as $y) {
                                     echo '
                                         <select name="categoriay[]" style="width:695px" class="select-field w-select">
