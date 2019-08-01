@@ -148,7 +148,7 @@ class ArticleController
 								 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
                              </ul>';
                     }else{
-                        echo ' class="flipswitch all" id="article' . $i['main_promo_id'] . '"> 
+                        echo ' class="flipswitch all" style="opacity:0.4;"> 
 					    </div>
 	                     <a class="main-item" href="javascript:void(0);" tabindex="1" style="font-size: 34px; line-height: 0.25; vertical-align: super; text-decoration: none; color: #768093;">...</a>
 			                 <ul class="sub-menu-content">
