@@ -1479,11 +1479,11 @@ p {
 }
 
 .advhome1 {
-	width: 40%;
+	width: 40% !important;
 }
 
 .advhome2 {
-	width: 60%;
+	width: 60% !important;
 }
 
 .div-block-37 {
