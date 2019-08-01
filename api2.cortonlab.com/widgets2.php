@@ -10,7 +10,7 @@ require_once('/var/www/www-root/data/www/api2.cortonlab.com/geoip/SxGeo.php');
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 $words=str_replace(',', '\',\'', $_GET['words']);
-
+echo 1 ; exit;
 
 function get_anons($iso, $interes, $words, $block_promo_id)
 {
