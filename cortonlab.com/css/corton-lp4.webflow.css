@@ -874,19 +874,19 @@ p {
 
 @media screen and (max-width: 1400px) {
 	.steapcontent {
-	   margin: 60px 40px 0 0;	
+	   margin: 60px 60px 0 0;	
     }
     .steapcontentright {
-	   margin: 60px 0px 0 40px;	
+	   margin: 60px 0px 0 60px;	
     }
 }
 
 @media screen and (max-width: 1000px) {
 	.steapcontent {
-	   margin: 60px 20px 0 0;	
+	   margin: 60px 40px 0 0;	
     }
     .steapcontentright {
-	   margin: 60px 0px 0 20px;
+	   margin: 60px 0px 0 40px;
     }
 }
 
