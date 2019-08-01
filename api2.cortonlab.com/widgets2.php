@@ -94,14 +94,14 @@ function get_anons($iso, $interes, $words, $block_promo_id)
 }
 $arr['region']=$iso;
 $count_widgets=$_GET['e']+$_GET['r']+$_GET['s'];
-echo 2 ; exit;
+echo 2 ;
 # условие если есть виджеты c гео
 $block_promo_id=array();
 $arr['anons_count']=0;
 if ($iso != "")
     $result2=get_anons($iso,$interes,$words,$block_promo_id);
     $arr['anons_count'] = count($result2['a']);
-
+echo 3 ; exit;
 # условие при недостатке виджетов берем без
 if ($count_widgets>$arr['anons_count']){
     $iso = '';
