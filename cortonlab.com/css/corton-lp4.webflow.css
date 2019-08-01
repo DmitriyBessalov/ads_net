@@ -858,6 +858,7 @@ p {
    height: 300px;
    width: 50%;
    float: left;
+   padding: 40px 40px 0 0;
 }
 .steapcontent {
 	text-align: left;
