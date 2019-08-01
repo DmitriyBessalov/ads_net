@@ -858,17 +858,18 @@ p {
    height: 300px;
    width: 50%;
    float: left;
-   padding: 40px 40px 0 0;
 }
 .steapcontent {
 	text-align: left;
 	float: right;
     width: 360px;
+	margin: 40px 40px 0 0;
 }
 .steapcontentright {
 	text-align: left;
 	float: left;
     width: 360px;
+	margin: 40px 0px 0 40px;
 }
 
 .text-block-4 {
