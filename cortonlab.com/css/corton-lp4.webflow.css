@@ -1478,14 +1478,6 @@ p {
   font-weight: 400;
 }
 
-.advhome1 {
-	width: 40% !important;
-}
-
-.advhome2 {
-	width: 60% !important;
-}
-
 .div-block-37 {
   position: absolute;
   left: 0px;
@@ -2747,6 +2739,14 @@ margin-left: 15px;
   line-height: 44px;
 }
 
+@media (max-width: 2800px) and (min-width: 1184px) {
+   .advhome1 {
+	   width: 40% !important;
+   }
+   .advhome2 {
+	   width: 60% !important;
+   }
+}
 
 @media (max-width: 1440px) and (min-width: 1024px) {
 .div-block-33, .div-block-43, .div-block-84, .div-block-58 {
@@ -2754,6 +2754,7 @@ margin-left: 15px;
     padding-left: 4%;
   }
 }
+
 
 @media (max-width: 1560px) and (min-width: 1441px) {
 .div-block-33, .div-block-43, .div-block-84, .div-block-58 {
