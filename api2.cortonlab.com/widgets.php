@@ -133,9 +133,6 @@ if (count($anons_all)==0){
     $arr['anons_count']=0;
     $show=0;
 } else{
-    while ($count_widgets>count($anons_all))
-        $anons_all=array_merge($anons_all, $anons_all);
-
     $anons_all = array_slice($anons_all, 0, $count_widgets);
 
     $ann = implode("','", $anons_all);
@@ -143,10 +140,16 @@ if (count($anons_all)==0){
     $sql = "SELECT * FROM `anons` WHERE `id` IN ('" . $ann . "')";
     $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
+
+    while ($count_widgets>count($result))
+        $result=array_merge($result, $result);
+
+    shuffle($result);
+    $result = array_slice($result, 0, $count_widgets);
+
     $arr['anons_count']=$count_widgets;
 
     $ch = 0;
-    shuffle($result);
     foreach ($result as $i) {
         $arr['anons'][0][] = $result[$ch]['id'];
         $arr['anons'][1][] = $result[$ch]['title'];
