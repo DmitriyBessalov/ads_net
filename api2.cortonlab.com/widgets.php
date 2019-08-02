@@ -134,7 +134,7 @@ if (count($anons_all)==0){
     $show=0;
 } else{
     while ($count_widgets>count($anons_all))
-        $count_widgets=array_merge($anons_all, $anons_all);
+        $anons_all=array_merge($anons_all, $anons_all);
 
     $anons_all = array_slice($anons_all, 0, $count_widgets);
 
