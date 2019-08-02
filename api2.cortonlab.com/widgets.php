@@ -15,8 +15,8 @@ function get_anons($iso, $interes, $words, $block_promo_id)
 {
     switch (strlen($iso)){
         case 0:
-            $sql = "SELECT `promo_id` FROM `promo_category` WHERE `category_id` IN ('" . $interes . "')";
-            $sql2 = "SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."')";
+            $sql = "SELECT promo_id FROM promo_category WHERE category_id IN ('" . $interes . "')";
+            $sql2 = "SELECT promo_ids FROM words_index WHERE word IN ('".$words."')";
             break;
         case 2:
             $arr['region'] = "ALL','" . $iso;
@@ -30,15 +30,18 @@ function get_anons($iso, $interes, $words, $block_promo_id)
             $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
     }
 
-    $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+    $result0 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+    $result1 = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
     $promo_ids = array();
-    foreach ($result as $i) {
+
+    foreach ($result0 as $i) {
         $promo_ids = array_merge($promo_ids, explode(',', $i));
     };
-    $result = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
-    foreach ($result as $i) {
+
+    foreach ($result1 as $i) {
         $promo_ids=array_merge($promo_ids, explode(',',$i));
     };
+
     $promo_ids=array_unique($promo_ids);
 
     foreach ($block_promo_id as $i){
@@ -47,9 +50,17 @@ function get_anons($iso, $interes, $words, $block_promo_id)
         }
     }
 
+    # Фильтр на жесткое совпадение
+ //   if (count($promo_ids)){
+ //       $ids = $promo_ids
+
+ //   }
+
     //Берем ID Анонсов
     $promo=implode("','" , $promo_ids);
-    $sql="SELECT `promo_id`,`anons_ids`,`stavka` FROM `anons_index` WHERE `promo_id` IN ('".$promo."') ORDER BY `stavka` DESC, RAND()";
+    $sql="SELECT promo_id, anons_ids, stavka 
+            FROM anons_index WHERE promo_id IN ('".$promo."') 
+            ORDER BY stavka DESC, RAND()";
     $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
     $anons_ids = array();
@@ -122,6 +133,9 @@ if (count($anons_all)==0){
     $arr['anons_count']=0;
     $show=0;
 } else{
+    while ($count_widgets>count($anons_all))
+        $count_widgets=array_merge($anons_all, $anons_all);
+
     $anons_all = array_slice($anons_all, 0, $count_widgets);
 
     $ann = implode("','", $anons_all);
