@@ -560,7 +560,10 @@ class ArticleController
                         }
                 }
             }
-            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `category`='".$_POST['categoriay']."', `id_user_advertiser`='".$_POST['advertiser']."', `namebrand`='".$_POST['namebrand']."' WHERE `id`='".$_POST['id']."';";
+
+            if ($_POST['checkbox_merge']=='on')$_POST['checkbox_merge']=1;
+
+            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `id_user_advertiser`='".$_POST['advertiser']."', `namebrand`='".$_POST['namebrand']."', `merge_key_and_categor`='".$_POST['checkbox_merge']."' WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."', `persent_advertiser`='".$_POST['persent_advertiser']."' WHERE `promo_id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
@@ -1089,6 +1092,13 @@ class ArticleController
                             echo '
                         </div>
                         <div class="text-block-110">Можно добавить до 50-ти ключей. Без пробелов. Минимальное кол-во символов - 4.</div>
+                        <div class="element-wrapper" style="justify-content: normal">
+                              <input type="checkbox" style="margin:10px" name="checkbox_merge" class="checkbox" id="checkbox_merge" ';
+                              if ($result['merge_key_and_categor'])
+                                  echo 'checked="" ';
+                              echo '/>
+                              <label for="checkbox_merge">Жесткое совпадение клячей и категории</label>
+                        </div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 

@@ -798,10 +798,12 @@ $(document).ready(function(){
     }
     words();
 
-    //Добавление категорий при редактировании статьи
-    $(".text-block-141.cat" ).on( "click", function() {
-        $('#category_list select').last().clone().appendTo('#category_list');
-        $('#category_list select').last().val('');
+    //Выделение, снятие всех категорий в таргетингах
+    $("#category_select_all").on( "click", function() {
+        $( ".div-block-86 > .checkbox" ).prop( "checked", true );
+    });
+    $("#category_clear_all").on( "click", function() {
+        $( ".div-block-86 > .checkbox" ).prop( "checked", false );
     });
 
     //Добавление ключевых слов при редактировании статьи
