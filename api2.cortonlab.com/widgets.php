@@ -44,22 +44,30 @@ function get_anons($iso, $interes, $words, $block_promo_id)
 
     $promo_ids=array_unique($promo_ids);
 
+    # Поиск статей где обязательное обязательное совпадение по ключу и площадке
+    if (count($promo_ids)){
+        $ids = implode("','", $promo_ids);
+        $sql="SELECT `id` FROM `promo` WHERE `id` IN ('".$ids."') AND `merge_key_and_categor`=1";
+        $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+        foreach ($result2 as $i){
+            if((in_array($i,$result0)) xor (in_array($i,$result1)))
+            {
+                $block_promo_id[]=$i;
+            }
+        }
+    }
+
+    # Очистка от повторов promo_id
     foreach ($block_promo_id as $i){
         if(($key = array_search($i,$promo_ids)) !== FALSE){
             unset($promo_ids[$key]);
         }
     }
 
-    # Фильтр на жесткое совпадение
- //   if (count($promo_ids)){
- //       $ids = $promo_ids
-
- //   }
-
     //Берем ID Анонсов
     $promo=implode("','" , $promo_ids);
-    $sql="SELECT promo_id, anons_ids, stavka 
-            FROM anons_index WHERE promo_id IN ('".$promo."') 
+    $sql="SELECT promo_id, anons_ids, stavka
+            FROM anons_index WHERE promo_id IN ('".$promo."')
             ORDER BY stavka DESC, RAND()";
     $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
@@ -139,7 +147,6 @@ if (count($anons_all)==0){
 
     $sql = "SELECT * FROM `anons` WHERE `id` IN ('" . $ann . "')";
     $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
-
 
     while ($count_widgets>count($result))
         $result=array_merge($result, $result);
