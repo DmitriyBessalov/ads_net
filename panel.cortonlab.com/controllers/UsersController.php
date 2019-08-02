@@ -413,7 +413,7 @@ class UsersController
             $sql2 = "SELECT `user_id` FROM `promo` WHERE `id`=(SELECT `main_promo_id` FROM `promo` WHERE `id`='".$promo_id."');";
         } else {
             if ($GLOBALS['role'] == 'advertiser')
-                $sql2 = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`=(SELECT `main_promo_id` FROM `promo` WHERE `id`='".$promo_id."';";
+                $sql2 = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`=(SELECT `main_promo_id` FROM `promo` WHERE `id`='".$promo_id."');";
         }
 
         if ($sql2) {
