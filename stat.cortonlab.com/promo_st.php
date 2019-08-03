@@ -29,7 +29,8 @@ $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $stavka = $promo['stavka'];
 
 if ($_GET['t']=='e'){$stavka=1.25*$stavka;}else{if($_GET['t']=='s'){$stavka=1.15*$stavka;}}
-$stavka_advertiser=round($stavka*$promo['persent_advertiser']/100,2);
+#$stavka_advertiser=round($stavka*$promo['persent_advertiser']/100,2);
+$stavka_advertiser=$stavka;
 $stavka=round($stavka*$ploshadka_id['otchiclen']/100,2);
 
 $sql= "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka."' WHERE  `prosmotr_id` = '".$_GET['prosmort_id']."'";
