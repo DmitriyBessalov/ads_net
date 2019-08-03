@@ -5,7 +5,6 @@ header('Content-Type: application/json;');
 $interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
 
-
 require_once('/var/www/www-root/data/www/api2.cortonlab.com/geoip/SxGeo.php');
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
