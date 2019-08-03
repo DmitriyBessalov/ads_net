@@ -623,6 +623,10 @@ p {
   transition: box-shadow 300ms cubic-bezier(.215, .61, .355, 1);
   color: #000;
 }
+.imgauditor {
+	max-width:280px; 
+	margin-bottom:40px;
+}
 
 .circular--play {
     z-index: 2;
@@ -644,6 +648,11 @@ p {
        -ms-transform: translate(-0.8rem,-11.10rem);
        transform: translate(-0.8rem,-11.10rem);
 	}
+	.imgauditor {
+	max-width:240px; 
+	margin-bottom:20px;
+	margin-top:40px;
+   }
 }
 .circular--play, .circular--play:before {
     position: relative;
