@@ -1077,7 +1077,7 @@ class ArticleController
                               if ($result['merge_key_and_categor'])
                                   echo 'checked="" ';
                               echo '/>
-                              <label for="checkbox_merge">Жесткое совпадение клячей и категории</label>
+                              <label for="checkbox_merge">Точное совпадение клячей с категориями</label>
                         </div>
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
@@ -1108,7 +1108,7 @@ class ArticleController
                     </div>
                     
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
-					<div class="text-block-103" style="padding: 35px 0 0 0;">Процент отчесления рекламодателю</div>
+					<div class="text-block-103" style="padding: 35px 0 0 0;">Процент отчесления площадке</div>
                     <div class="div-block-85">
                         <input type="number" min="0" max="100" step="1" class="text-field-9 w-input" maxlength="256" name="persent_advertiser" placeholder="50%" value="'.$stavka['persent_advertiser'].'" required>
                     </div>
