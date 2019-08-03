@@ -1503,7 +1503,7 @@ p {
   font-size: 20px;
   line-height: 26px;
   font-weight: 400;
-  padding: 0 18%;
+  padding: 0 15%;
 }
 .text-block-14homeadv {
   font-family: 'Myriadpro Regular';
@@ -2031,7 +2031,23 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 40%;
+  width: 45%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+.div-block-61type {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 45%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2058,6 +2074,23 @@ p {
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
+.div-block-61twotype {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
 
 .div-block-62 {
   display: -webkit-box;
@@ -3008,7 +3041,7 @@ margin-left: 15px;
     margin-bottom: 0px;
     font-size: 20px;
     line-height: 28px;
-	padding: 0 14%;
+	padding: 0 12%;
   }
   .div-block-43 {
     margin-top: 2vw;
@@ -3475,7 +3508,7 @@ margin-left: 15px;
     margin-bottom: 0px;
     font-size: 18px;
     line-height: 24px;
-	padding: 0 10%;
+	padding: 0 8%;
   }
   .div-block-43 {
     margin-top: 0px;
@@ -3973,7 +4006,7 @@ margin-left: 15px;
     margin-bottom: 0px;
     font-size: 18px;
     line-height: 24px;
-	padding: 0 10%;
+	padding: 0 6%;
   }
   .div-block-43 {
     margin-top: 0vw;
