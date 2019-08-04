@@ -126,6 +126,13 @@
 			     <h1 class="headingsing">Войти в Cortonlab</h1>
 			 </div>
 			 <div class="form-block-3 w-form">
+			     <div class="w-form">
+                     <form method="post" action="https://panel.cortonlab.com/login" id="email-form" name="email-form" data-name="Email Form" class="form-3">
+                         <input type="email" class="text-field w-input" maxlength="256" name="login" data-name="login" placeholder="E-mail" id="email-2" required="">
+                         <input type="password" class="text-field-2 w-input" maxlength="256" name="password" data-name="password" placeholder="Пароль" id="password" required="">
+                          <input type="submit" style="width:100%;" value="Авторизация в системе" data-wait="Пожалуйста ожидайте..." class="submit-button w-button">
+                     </form>
+                 </div>
 			     <form method="post" action="/login" class="form-8">
 				     <label for="login" class="field-label">Ваш адрес электронной почты</label>
 					 <input type="text" class="text-field-11 w-input" autofocus="true" maxlength="256" name="login" data-name="login" id="login" required="">
