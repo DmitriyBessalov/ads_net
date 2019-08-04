@@ -2615,6 +2615,10 @@ margin-left: 15px;
   width: 260px;
 }
 
+.form-3sing {
+  width: 320px;
+}
+
 .select-field {
   height: 50px;
   border: 3px solid #fff;
@@ -3372,6 +3376,9 @@ margin-left: 15px;
   .form-3 {
     width: 260px;
   }
+  .form-3sing {
+  width: 320px;
+}
   .text-block-24 {
     font-size: 17px;
     line-height: 22px;
@@ -3835,6 +3842,9 @@ margin-left: 15px;
   .form-3 {
     width: 260px;
   }
+  .form-3sing {
+  width: 320px;
+}
   .image-18 {
     width: 36px;
     height: auto;
@@ -4390,6 +4400,9 @@ margin-left: 15px;
   .form-3 {
     width: 260px;
   }
+  .form-3sing {
+  width: 320px;
+}
   .text-field {
     font-size: 16px;
   }
