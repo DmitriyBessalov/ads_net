@@ -2979,7 +2979,7 @@ margin-left: 15px;
 }
 @media (max-width: 2800px) and (min-width: 1400px) {
    .advbot {
-	   margin-bottom: 60px;
+	   margin-bottom: 0px;
    }
 }
 
