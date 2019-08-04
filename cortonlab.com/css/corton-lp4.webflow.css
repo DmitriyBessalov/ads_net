@@ -636,6 +636,21 @@ p {
   background: #f6f6f8;
 }
 
+.section-4sing {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 25%;
+  height: 100%;
+  max-width: none;
+  min-height: 100%;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
 .circular--play {
     z-index: 2;
     display: block;
