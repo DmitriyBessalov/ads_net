@@ -641,12 +641,14 @@ p {
     left: 50%;
     -webkit-box-shadow: 0 8px 16px 0 rgba(41,41,43,.2);
     box-shadow: 0 8px 16px 0 rgba(41,41,43,.2);
+	display: none;
 }
 @media screen and (max-width: 600px) {
 	.circular--play {
 	   -webkit-transform: translate(-0.8rem,-11.10rem);
        -ms-transform: translate(-0.8rem,-11.10rem);
        transform: translate(-0.8rem,-11.10rem);
+	   display: none;
 	}
 	.imgauditor {
 	max-width:240px; 
@@ -659,6 +661,7 @@ p {
     width: 4.5rem;
     height: 4.5rem;
     border-radius: 50%;
+	display: none;
 }
 .circular--play:hover {
 	-webkit-box-shadow: 0px 0px 0px 30px rgba(5,85,255,.12);
