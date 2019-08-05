@@ -271,7 +271,7 @@ class ArticleController
                 <th>Показы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Колличество показов анонсов</span></div></th>
                 <th>Клики</th>
 				<th>Прочтения<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div></th>
-                <th><div class="tooltipinfo1 nodisplayone">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших статью</span></div></th>
+                <th class="nodisplayone"><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших статью</span></div></th>
                 <th>Переходы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Колличество переходв из статьи</span></div></th>
                 <th>CTR</th>
                 <th></th>
@@ -735,7 +735,7 @@ class ArticleController
                                 <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                                 <td>' . $promosum['clicking'] . '</td>
 								<td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
-                                <td class="nodisplayone">' . $promosum['doread'] . ' ('.$doread.'%)</td>
+                                <td>' . $promosum['doread'] . ' ('.$doread.'%)</td>
                                 <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                             </tr>';
             }
