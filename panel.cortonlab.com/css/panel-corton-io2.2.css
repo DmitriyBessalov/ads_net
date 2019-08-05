@@ -30,7 +30,7 @@
   color: #116DD6;
 }
 .nodisplayone {
-	display:none;
+	display: none !important;
 }
 .boxsetting {
   width: 760px;
