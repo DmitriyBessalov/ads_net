@@ -10,6 +10,7 @@ require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 $words=str_replace(',', '\',\'', $_GET['words']);
 
+$iso='RU-MOW';
 function get_anons($iso, $interes, $words, $block_promo_id)
 {
     switch (strlen($iso)){
@@ -31,25 +32,21 @@ function get_anons($iso, $interes, $words, $block_promo_id)
 
     $result0 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
     $result1 = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
-    $promo_ids = array();
 
-    foreach ($result0 as $i) {
-        $promo_ids = array_merge($promo_ids, explode(',', $i));
-    };
-
+    $result2 = array();
     foreach ($result1 as $i) {
-        $promo_ids=array_merge($promo_ids, explode(',',$i));
+        $result2 = array_merge($result2, explode(',',$i));
     };
 
-    $promo_ids=array_unique($promo_ids);
+    $promo_ids=array_unique(array_merge($result0, $result2));
 
     # Поиск статей где обязательное обязательное совпадение по ключу и площадке
     if (count($promo_ids)){
         $ids = implode("','", $promo_ids);
         $sql="SELECT `id` FROM `promo` WHERE `id` IN ('".$ids."') AND `merge_key_and_categor`=1";
-        $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
-        foreach ($result2 as $i){
-            if((in_array($i,$result0)) xor (in_array($i,$result1)))
+        $result3 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+        foreach ($result3 as $i){
+            if((in_array($i,$result0)) xor (in_array($i,$result2)))
             {
                 $block_promo_id[]=$i;
             }
