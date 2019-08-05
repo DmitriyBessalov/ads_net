@@ -735,7 +735,7 @@ class ArticleController
                                 <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                                 <td>' . $promosum['clicking'] . '</td>
 								<td  style="width:140px;" class="greentext">' . $promosum['st'] . ' ('.sprintf("%.2f", $protsentst).'%)</td>
-                                <td>' . $promosum['doread'] . ' ('.$doread.'%)</td>
+                                <td class="nodisplayone">' . $promosum['doread'] . ' ('.$doread.'%)</td>
                                 <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                             </tr>';
             }
