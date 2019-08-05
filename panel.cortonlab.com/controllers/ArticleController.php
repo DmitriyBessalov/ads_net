@@ -397,7 +397,7 @@ class ArticleController
 		    <form id="right-form" class="form-333">
 			
             <div class="html-embed-3 w-embed" style="margin-top: 40px;">
-             <input type="hidden" name="id" value="'.$_GET['id'].'">
+             <input  style ="pointer-events: all;" type="hidden" name="id" value="'.$_GET['id'].'">
              <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off" value="'.$datebegin.'">
              <div class="text-block-128">-</div>
 			 <input type="text" name="dateend" class="tcal tcalInput" autocomplete="off" value="'.$dateend.'">
