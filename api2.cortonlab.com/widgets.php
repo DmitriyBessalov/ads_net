@@ -10,7 +10,7 @@ require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 $words=str_replace(',', '\',\'', $_GET['words']);
 
-$iso='RU-MOW';
+#$iso='RU-MOW';
 function get_anons($iso, $interes, $words, $block_promo_id)
 {
     switch (strlen($iso)){
