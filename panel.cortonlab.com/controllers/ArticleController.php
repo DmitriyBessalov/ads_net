@@ -405,6 +405,13 @@ class ArticleController
              <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
 			
             </div>
+			
+			<div class="html-embed-3 w-embed" style="margin-top: 40px;">
+                 <input type="text" name="datebegin" class="tcal tcalInput tcalActive" value="'.$datebegin.'">
+                 <div class="text-block-128">-</div>
+                 <input type="text" name="dateend" class="tcal tcalInput" value="'.$dateend.'">
+            </div>
+			
 			</form>
 		</div>
 		</div>
