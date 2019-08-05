@@ -375,8 +375,8 @@ class ArticleController
                <td>'.$pokaz.'</td>
                <td>' . $promosum['clicking'] . '</td>
 			   <td class="greentext" style="width:140px;">'.$promosum['st'].' ('.sprintf("%.2f", $protsentst).'%)</td>
-               <td>' . $promosum['doread'] . ' ( '.$doread.'%)</td> 
-               <td class="nodisplayone">' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
+               <td class="nodisplayone">' . $promosum['doread'] . ' ( '.$doread.'%)</td> 
+               <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td style="width: 20px !important;">';
                 if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}
