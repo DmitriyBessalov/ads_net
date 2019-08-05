@@ -394,24 +394,14 @@ class ArticleController
         </div>
 		</div>
 		<div class="table-right">
-		    <form id="right-form" class="form-333">
-			
-            <div class="html-embed-3 w-embed" style="margin-top: 40px;">
-             <input  style ="pointer-events: all;" type="hidden" name="id" value="'.$_GET['id'].'">
-             <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off" value="'.$datebegin.'">
-             <div class="text-block-128">-</div>
-			 <input type="text" name="dateend" class="tcal tcalInput" autocomplete="off" value="'.$dateend.'">
-             
-             <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
-			
-            </div>
-			
-			<div class="html-embed-3 w-embed" style="margin-top: 40px;">
-                 <input type="text" name="datebegin" class="tcal tcalInput tcalActive" value="'.$datebegin.'">
+		    <form id="right-form" class="form-333"><br>
+                <div class="html-embed-3 w-embed" style="margin-top: 40px;">
+                 <input type="hidden" name="id" value="'.$_GET['id'].'">
+                 <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off"  value="'.$datebegin.'">
                  <div class="text-block-128">-</div>
-                 <input type="text" name="dateend" class="tcal tcalInput" value="'.$dateend.'">
-            </div>
-			
+                 <input type="text" name="dateend" class="tcal tcalInput" autocomplete="off" value="'.$dateend.'">
+                 <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
+                </div>
 			</form>
 		</div>
 		</div>
