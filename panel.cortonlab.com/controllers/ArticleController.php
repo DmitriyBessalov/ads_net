@@ -267,13 +267,13 @@ class ArticleController
 			    <td>ID</td>	
                 <td>Превью</td>				
                 <th>Заголовок</th>
-                <th><div class="tooltipinfo1">Расход<span class="tooltiptext1">Израсходованные средства с балансов</span></div></th>
-                <th><div class="tooltipinfo1">Показы<span class="tooltiptext1">Количество показов анонсов</span></div></th>
-                <th><div class="tooltipinfo1">Клики<span class="tooltiptext1">Клики по анонсам</span></div></th>
-				<th><div class="tooltipinfo1">Прочтения<span class="tooltiptext1">Целевые прочтения статьи</span></div></th>
-                <th><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших статью</span></div></th>
-                <th><div class="tooltipinfo1">Переходы<span class="tooltiptext1">Клики со статьи / процент от оплаченых прочтений</span></div></th>
-                <th><div class="tooltipinfo1">CTR<span class="tooltiptext1">CTR от кол-ва кликов</span></div></th>
+                <th>Расход</th>
+                <th>Показы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Колличество показов анонсов</span></div></th>
+                <th>Клики</th>
+				<th>Прочтения<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div></th>
+                <th><div class="tooltipinfo1 nodisplayone">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших статью</span></div></th>
+                <th>Переходы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Колличество переходв из статьи</span></div></th>
+                <th>CTR</th>
                 <th></th>
               </tr>
             </thead>';
