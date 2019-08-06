@@ -104,8 +104,8 @@ function corton_promo() {
                 }
 
                 a[i].onclick = function (e) {
-                    console.log('https://stat.cortonlab.com/promo_click.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']);
-                    cxhr.open('GET', 'https://stat.cortonlab.com/promo_click.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']);
+                    console.log('https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']);
+                    cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']);
                     cxhr.send();
                 }
             }
@@ -115,8 +115,8 @@ function corton_promo() {
         if (widget_promo.scrollHeight>50)
         {
             var cxhr = new XMLHttpRequest();
-            console.log     ('https://stat.cortonlab.com/promo_load.php?prosmort_id='+get['prosmort_id']+'&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
-            cxhr.open('GET', 'https://stat.cortonlab.com/promo_load.php?prosmort_id='+get['prosmort_id']+'&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
+            console.log     ('https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
+            cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
             cxhr.send();
         }
     };
@@ -141,14 +141,14 @@ function corton_promo() {
     function letsGo(){
         if (timer85 && scrollfull){
             var cxhr = new XMLHttpRequest();
-            console.log     ('https://stat.cortonlab.com/promo_read.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
-            cxhr.open('GET', 'https://stat.cortonlab.com/promo_read.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
+            console.log     ('https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=r&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
+            cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=r&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
             cxhr.send();
         }else{
             if (timer35 && scroll && st){
                 var cxhr = new XMLHttpRequest();
-                console.log     ('https://stat.cortonlab.com/promo_st.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
-                cxhr.open('GET', 'https://stat.cortonlab.com/promo_st.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
+                console.log     ('https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=s&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
+                cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=s&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
                 cxhr.send();
                 st=false;
             }
