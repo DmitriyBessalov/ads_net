@@ -29,6 +29,9 @@
   text-decoration: underline;
   color: #116DD6;
 }
+.nodisplayone {
+	display: none !important;
+}
 .boxsetting {
   width: 760px;
   padding-left: 20px;
