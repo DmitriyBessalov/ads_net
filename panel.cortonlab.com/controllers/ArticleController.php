@@ -545,7 +545,7 @@ class ArticleController
 
             $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `id_user_advertiser`='".$_POST['advertiser']."', `namebrand`='".$_POST['namebrand']."', `merge_key_and_categor`='".$_POST['checkbox_merge']."' WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
-            $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."', `persent_advertiser`='".$_POST['persent_advertiser']."' WHERE `promo_id`='".$_POST['id']."';";
+            $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."', `persent_platform`='".$_POST['persent_platform']."' WHERE `promo_id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             break;
         }case 'анонсы':{
@@ -1097,7 +1097,7 @@ class ArticleController
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
                     <div class="div-block-85">
                         <div>';
-                            $sql="SELECT `stavka`,`persent_advertiser` FROM `anons_index` WHERE `promo_id`='".$id."'";
+                            $sql="SELECT `stavka`,`persent_platform` FROM `anons_index` WHERE `promo_id`='".$id."'";
                             $stavka = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                             echo '
                             <input type="number" class="text-field-9 w-input" step="0.01" maxlength="256" name="stavka" id="stavka" value="'.$stavka['stavka'].'" required>
@@ -1110,7 +1110,7 @@ class ArticleController
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Процент отчесления площадке</div>
                     <div class="div-block-85">
-                        <input type="number" min="0" max="100" step="1" class="text-field-9 w-input" maxlength="256" name="persent_advertiser" placeholder="50%" value="'.$stavka['persent_advertiser'].'" required>
+                        <input type="number" min="0" max="100" step="1" class="text-field-9 w-input" maxlength="256" name="persent_platform" placeholder="50%" value="'.$stavka['persent_platform'].'" required>
                     </div>
                     <div>
                         
