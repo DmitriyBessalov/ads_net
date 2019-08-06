@@ -7,6 +7,9 @@
         <a href="https://cortonlab.com/terms-of-use.html" class="link-block-3 w-inline-block">
           <div class="text-block-102">Пользовательское соглашение</div>
         </a>
+		<a href="/help.html" class="link-block-3 w-inline-block">
+          <div class="text-block-102">Помощь</div>
+        </a>
         <a href="mail:support@cortonlab.com" class="link-block-3 w-inline-block">
           <div class="text-block-102">support@cortonlab.com</div>
         </a>
