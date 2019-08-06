@@ -31,14 +31,15 @@ $redis->set($action.':'.$prosmort_id, 1, 1296000);
 if (($action=='s') and (!$block))
     $block=$redis->get('r:'.$prosmort_id, 1, 1296000);
 if ($block){
-    exit;
+//    exit;
 }
 
 # Подключение к базе
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 # Берём id площадки
-$domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
+//$domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
+$domen='okardio.com';
 
 $sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -52,12 +53,11 @@ if(($action =='s')or($action =='r')) {
            FROM anons a RIGHT OUTER JOIN anons_index n ON a.promo_id = n.promo_id
            WHERE a.id='".$anons_id."'";
     $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-    $stavka = $promo['stavka'];
 
-    if ($widget=='e'){$stavka=1.25*$stavka;}else{if($widget=='s'){$stavka=1.15*$stavka;}}
-
-    $stavka_ploshadka=round($stavka*$promo['persent_platform']/100,2);
-    $stavka=round($stavka*$platform['otchiclen']/100,2);
+    # Изменение баланса рекламодателя (настройка на странице площадок)
+    $stavka_advertiser=round($promo['stavka']*$platform['otchiclen']/100,2);
+    # Изменение баланса площадки (настройка на странице таргетингов статьи)
+    $stavka_ploshadka=round($stavka_advertiser*$promo['persent_platform']/100,2);
 }
 
 
@@ -85,9 +85,9 @@ if ($action =='l') {
     }
 
     if($action =='s'){
-        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka."' WHERE  `prosmotr_id` = '".$_GET['prosmort_id']."'";
+        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka_advertiser."' WHERE  `prosmotr_id` = '".$_GET['prosmort_id']."'";
     }elseif($action =='r'){
-        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka."', `read` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
+        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka_advertiser."', `read` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
     }elseif($action =='c'){
         $sql = "UPDATE `stat_promo_prosmotr` SET `click` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
     }else{
@@ -102,7 +102,7 @@ if(($action =='s')or($action =='r')) {
     $block_ip=$redis->get($platform['id'].':'.$_SERVER['REMOTE_ADDR']);
     if ($block_ip) {
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 1296000);
-        $antifrod=1;
+//        $antifrod=1;
     }
     $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 86400);
 }
@@ -119,21 +119,21 @@ if(!isset($antifrod)){
             break;
         case 's':
             if ($pay['pay']==0) {
-                $sql = "UPDATE `stat_promo_day_count` SET `st` = `st` + 1, `pay` = `pay` + " . $stavka . "  WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
+                $sql = "UPDATE `stat_promo_day_count` SET `st` = `st` + 1, `pay` = `pay` + " . $stavka_advertiser . "  WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
                 if (!$GLOBALS['dbstat']->exec($sql)){
-                    $sql = "INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `promo_variant`='".$_GET['p_id']."', `st` = 1, `pay` = ".$stavka;
+                    $sql = "INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `promo_variant`='".$_GET['p_id']."', `st` = 1, `pay` = ".$stavka_advertiser;
                     $GLOBALS['dbstat']->query($sql);
                 }
             }
             break;
         case 'r':
             if ($pay['pay']==0) {
-                $sql = "UPDATE `stat_promo_day_count` SET `reading` = `reading` + 1, `st` = `st` + 1, `pay` = `pay` + " . $stavka . " WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
+                $sql = "UPDATE `stat_promo_day_count` SET `reading` = `reading` + 1, `st` = `st` + 1, `pay` = `pay` + " . $stavka_advertiser . " WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
             }else{
                 $sql = "UPDATE `stat_promo_day_count` SET `reading` = `reading` + 1 WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
             }
             if (!$GLOBALS['dbstat']->exec($sql)){
-                $sql = "INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `promo_variant`='".$_GET['p_id']."', `st` = 1, `reading` = 1, `pay` = ".$stavka;
+                $sql = "INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `data` = CURDATE(), `promo_variant`='".$_GET['p_id']."', `st` = 1, `reading` = 1, `pay` = ".$stavka_advertiser;
                 $GLOBALS['dbstat']->query($sql);
             }
             break;
@@ -151,7 +151,7 @@ if(!isset($antifrod)){
     exit;
 }
 
-# Обновляем статистику по рекламодателю
+# Обновляем статистику по площадке
 switch ($action) {
     case 'l':
         $sql = "UPDATE `balans_ploshadki` SET `".$widget."_promo_load`=`".$widget."_promo_load`+1 WHERE `date`=CURDATE() AND `ploshadka_id`='".$platform['id']."'";
@@ -165,9 +165,9 @@ switch ($action) {
         if ($pay['pay']!=0) {
             $stavka=0;
         }
-        $sql = "UPDATE `balans_ploshadki` SET `".$widget."`=".$widget."+1, `".$widget."_balans`=".$widget."_balans+".$stavka."  WHERE `date`=CURDATE() AND `ploshadka_id`='".$platform['id']."'";
+        $sql = "UPDATE `balans_ploshadki` SET `".$widget."`=".$widget."+1, `".$widget."_balans`=".$widget."_balans+".$stavka_ploshadka."  WHERE `date`=CURDATE() AND `ploshadka_id`='".$platform['id']."'";
         if (!$GLOBALS['dbstat']->exec($sql)){
-            $sql = "INSERT INTO `balans_ploshadki` SET `ploshadka_id` = '".$platform['id']."', `date` = CURDATE(), `".$widget."`=".$widget."+1, `".$widget."_balans`=".$widget."_balans+".$stavka;
+            $sql = "INSERT INTO `balans_ploshadki` SET `ploshadka_id` = '".$platform['id']."', `date` = CURDATE(), `".$widget."`=".$widget."+1, `".$widget."_balans`=".$widget."_balans+".$stavka_ploshadka;
             $GLOBALS['dbstat']->query($sql);
         }
         break;
@@ -191,11 +191,11 @@ if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
     $sql = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`=" . $promo['promo_id'] . ";";
     $id_user_advertiser = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-    $sql = "UPDATE `balans_rekl` SET `balans` = `balans` - " . $stavka . " WHERE `date`=CURDATE() AND `user_id`='" . $id_user_advertiser . "';";
+    $sql = "UPDATE `balans_rekl` SET `balans` = `balans` - " . $stavka_advertiser . " WHERE `date`=CURDATE() AND `user_id`='" . $id_user_advertiser . "';";
     if (!$GLOBALS['db']->exec($sql)) {
         $sql = "SELECT `balans` FROM `balans_rekl` WHERE `user_id` = '" . $id_user_advertiser . "' AND `date` =(SELECT MAX(`date`) FROM `balans_rekl` WHERE `user_id` = '" . $id_user_advertiser . "')";
         $oldbalans = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-        $oldbalans = $oldbalans - $stavka;
+        $oldbalans = $oldbalans - $stavka_advertiser;
 
         $sql = "INSERT INTO `balans_rekl` SET `user_id` = '" . $id_user_advertiser . "', `date` = CURDATE(), `balans` = " . $oldbalans;
         $GLOBALS['db']->query($sql);
