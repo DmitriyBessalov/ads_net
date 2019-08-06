@@ -31,7 +31,7 @@ $redis->set($action.':'.$prosmort_id, 1, 1296000);
 if (($action=='s') and (!$block))
     $block=$redis->get('r:'.$prosmort_id, 1, 1296000);
 if ($block){
-//    exit;
+    exit;
 }
 
 # Подключение к базе
@@ -39,8 +39,6 @@ require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 # Берём id площадки
 $domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
-
-//$domen = 'okardio.com';
 
 $sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -150,7 +148,7 @@ if(!isset($antifrod)){
         $sql = "UPDATE `stat_promo_day_count` SET `reading` = `reading` + 1 WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
         $GLOBALS['dbstat']->query($sql);
     }
-//    exit;
+    exit;
 }
 
 # Обновляем статистику по рекламодателю
