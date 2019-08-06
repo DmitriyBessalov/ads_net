@@ -31,15 +31,15 @@ $redis->set($action.':'.$prosmort_id, 1, 1296000);
 if (($action=='s') and (!$block))
     $block=$redis->get('r:'.$prosmort_id, 1, 1296000);
 if ($block){
-//    exit;
+    exit;
 }
 
 # Подключение к базе
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 # Берём id площадки
-//$domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
-$domen='okardio.com';
+$domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
+//$domen='okardio.com';
 
 $sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -102,9 +102,10 @@ if(($action =='s')or($action =='r')) {
     $block_ip=$redis->get($platform['id'].':'.$_SERVER['REMOTE_ADDR']);
     if ($block_ip) {
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 1296000);
-//        $antifrod=1;
+        $antifrod=1;
+    }else{
+        $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 86400);
     }
-    $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 86400);
 }
 $redis->close();
 
