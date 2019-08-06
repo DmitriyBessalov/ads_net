@@ -1229,8 +1229,8 @@ p {
   display: flex;
   margin-top: 150px;
   margin-bottom: 0px;
-  padding-right: 20%;
-  padding-left: 20%;
+  padding-right: 16%;
+  padding-left: 16%;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
