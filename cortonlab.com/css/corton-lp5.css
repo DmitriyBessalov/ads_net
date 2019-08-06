@@ -1198,8 +1198,8 @@ p {
   direction: ltr;
   font-family: 'Myriadpro SemiExt';
   color: #116dd6;
-  font-size: 68px;
-  line-height: 70px;
+  font-size: 54px;
+  line-height: 68px;
   font-weight: 700;
   text-transform: none;
 }
@@ -3175,8 +3175,8 @@ margin-left: 15px;
     width: 100%;
   }
   .text-block-6 {
-    font-size: 52px;
-    line-height: 60px;
+    font-size: 42px;
+    line-height: 52px;
   }
   .text-span-2 {
     line-height: 28px;
@@ -3628,7 +3628,7 @@ margin-left: 15px;
     width: 251px;
   }
   .text-block-6 {
-    font-size: 40px;
+    font-size: 36px;
     line-height: 42px;
   }
   .text-block-7 {
