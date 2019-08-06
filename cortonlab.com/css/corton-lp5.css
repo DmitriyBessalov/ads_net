@@ -1198,8 +1198,8 @@ p {
   direction: ltr;
   font-family: 'Myriadpro SemiExt';
   color: #116dd6;
-  font-size: 68px;
-  line-height: 70px;
+  font-size: 54px;
+  line-height: 68px;
   font-weight: 700;
   text-transform: none;
 }
@@ -1216,8 +1216,8 @@ p {
 .text-span-2 {
   font-family: 'Myriadpro Regular';
   color: #116dd6;
-  font-size: 22px;
-  line-height: 30px;
+  font-size: 28px;
+  line-height: 40px;
   font-weight: 700;
   text-transform: none;
 }
@@ -1229,8 +1229,8 @@ p {
   display: flex;
   margin-top: 150px;
   margin-bottom: 0px;
-  padding-right: 20%;
-  padding-left: 20%;
+  padding-right: 16%;
+  padding-left: 16%;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
@@ -3175,8 +3175,8 @@ margin-left: 15px;
     width: 100%;
   }
   .text-block-6 {
-    font-size: 52px;
-    line-height: 60px;
+    font-size: 42px;
+    line-height: 52px;
   }
   .text-span-2 {
     line-height: 28px;
@@ -3628,7 +3628,7 @@ margin-left: 15px;
     width: 251px;
   }
   .text-block-6 {
-    font-size: 40px;
+    font-size: 36px;
     line-height: 42px;
   }
   .text-block-7 {
