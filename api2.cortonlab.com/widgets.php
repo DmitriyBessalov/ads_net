@@ -40,7 +40,7 @@ function get_anons($iso, $interes, $words, $block_promo_id)
 
     $promo_ids=array_unique(array_merge($result0, $result2));
 
-    # Поиск статей где обязательное обязательное совпадение по ключу и площадке
+    # Поиск статей где обязательное обязательное совпадение по ключу и категория
     if (count($promo_ids)){
         $ids = implode("','", $promo_ids);
         $sql="SELECT `id` FROM `promo` WHERE `id` IN ('".$ids."') AND `merge_key_and_categor`=1";

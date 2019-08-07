@@ -175,7 +175,29 @@ switch ($action) {
     case 'с':
         $sql ="UPDATE `balans_ploshadki` SET `".$widget."_promo_click` = `".$widget."_promo_click` + 1 WHERE `ploshadka_id`='".$platform['id']."' AND `date`=CURDATE();";
         $GLOBALS['dbstat']->query($sql);
+
+
+        # Добавление статистики пререходов со статей
+       /* $sql ="INSERT INTO `promo_perehod`
+                SET `promo_id` = [ VALUE -2 ],
+                    `date` = CURDATE(),
+                    `numlink` = [ VALUE -4 ],
+                    `ancor` = [ VALUE -5 ],
+                    `href` = [ VALUE -6 ],
+                    `count` = 1";
+        if (!$GLOBALS['dbstat']->exec($sql)){
+            $sql ="UPDATE `promo_perehod` 
+                   SET `count` =`count` + 1
+                   WHERE `promo_id` = [ VALUE -2 ],
+                         `date` = CURDATE(),
+                         `numlink` = [ VALUE -4 ],
+                         `ancor` = [ VALUE -5 ],
+                         `href` = [ VALUE -6 ]";
+            $GLOBALS['dbstat']->query($sql);
+        }
+*/
 }
+
 
 if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
     # Изменение баланса плошадки

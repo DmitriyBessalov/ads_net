@@ -251,6 +251,46 @@ class ArticleController
         return true;
     }
 
+    public static function actionArticle_link()
+    {
+        $title='Внешние переходы со статьи';
+        include PANELDIR.'/views/layouts/article_header.php';
+
+        echo '
+		<div class="table-box">
+		<div class="div-block-102-table">
+        <div class="table w-embed">
+          <table>
+            <thead>
+              <tr class="trtop">
+			    <td>ID</td>
+                <td>Анкор</td>
+                <th>Переходы</th>
+                <th>CTR</th>
+              </tr>
+            </thead>
+            
+            
+            
+          </table>
+        </div>
+		</div>
+		<div class="table-right">
+		    <form id="right-form" class="form-333"><br>
+                <div class="html-embed-3 w-embed" style="margin-top: 40px;">
+                 <input type="hidden" name="id" value="'.$_GET['id'].'">
+                 <input type="text" name="datebegin" class="tcal tcalInput" autocomplete="off"  value="'.$datebegin.'">
+                 <div class="text-block-128">-</div>
+                 <input type="text" name="dateend" class="tcal tcalInput" autocomplete="off" value="'.$dateend.'">
+                 <input type="submit" value="Применить" style="left: 0px !important;" class="submit-button-addkey w-button">
+                </div>
+			</form>
+		</div>
+		</div>
+		';
+        include PANELDIR . '/views/layouts/footer.php';
+        return true;
+    }
 
     public static function actionStat()
     {
@@ -269,9 +309,11 @@ class ArticleController
                 <th>Заголовок</th>
                 <th>Расход</th>
                 <th>Показы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Колличество показов анонсов</span></div></th>
-                <th>Клики</th>
-				<th>Прочтения<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div></th>
-                <th class="nodisplayone"><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших статью</span></div></th>
+                <th>Клики<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Клики с анонса на промо статью</span></div></th>
+				<th>Прочтения<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div></th>';
+                if ($GLOBALS['role']!='advertiser')
+                    echo '<th><div class="tooltipinfo1">Дочитываний<span class="tooltiptext1">Кол-во пользователей дочитавших статью</span></div></th>';
+                echo '
                 <th>Переходы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Колличество переходв из статьи</span></div></th>
                 <th>CTR</th>
                 <th></th>
@@ -314,7 +356,9 @@ class ArticleController
             }
             $ch2 = -1;
             foreach ($anon as $anons) {
-                $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as perehod, SUM(`st`) as st, SUM(`perehod`) as clicking FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "') AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
+                # clicking - загрузка промо страницы
+                # perehod - внешний переход из промо статьи
+                $sql = "SELECT SUM(`reading`) as doread, SUM(`pay`) as pay, SUM(`clicking`) as `clicking`, SUM(`st`) as st, SUM(`perehod`) as `perehod` FROM `stat_promo_day_count` WHERE `anons_id` IN ('" . $anons . "') AND `data`>='" . $mySQLdatebegin . "' AND `data`<='" . $mySQLdateend . "'";
                 $promosum = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 if (is_null($promosum['doread'])) {
@@ -325,7 +369,7 @@ class ArticleController
                 $pokaz = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
                 if (is_null($pokaz)) {$pokaz = 0;}
 
-                $protsentperehodov = round(100 / $promosum['st'] * $promosum['perehod'], 2);
+                $protsentperehodov = round(100 / $promosum['st'] * $promosum['clicking'], 2);
                 if ((is_infinite($protsentperehodov)) OR (is_nan($protsentperehodov))){$protsentperehodov=0;}
 
                 if(isset($today)) {
@@ -336,7 +380,7 @@ class ArticleController
                     }
                 }
 
-                $CRT = $promosum['clicking'] / $pokaz;
+                $CRT = $promosum['perehod'] / $pokaz;
 
                 if (is_nan($CRT)) {
                     $CRT = '--';
@@ -348,10 +392,10 @@ class ArticleController
                     }
                 };
                 $anons = str_replace("','", ",", $anons);
-                $PCL=$promosum['pay']/$promosum['perehod'];
+                $PCL=$promosum['pay']/$promosum['clicking'];
                 if ((is_infinite($PCL)) OR (is_nan($PCL))) $PCL = '0';
 
-                $protsentst=100/$promosum['clicking']*$promosum['st'];
+                $protsentst=100/$promosum['perehod']*$promosum['st'];
                 if (is_nan($protsentst) or is_infinite($protsentst))$protsentst=0;
 
                 echo '
@@ -367,16 +411,18 @@ class ArticleController
                     echo '<td></td><td></td>';
                 }
 
-                $doread=round(100/$promosum['clicking']*$promosum['doread'],2);
+                $doread=round(100/$promosum['perehod']*$promosum['doread'],2);
                 if (is_nan($doread) or is_infinite($doread))$doread=0;
 
                 echo '
                <td style="color: #116dd6;">' . sprintf("%.2f", $promosum['pay']) . '</td>
                <td>'.$pokaz.'</td>
-               <td>' . $promosum['clicking'] . '</td>
-			   <td class="greentext" style="width:140px;">'.$promosum['st'].' ('.sprintf("%.2f", $protsentst).'%)</td>
-               <td class="nodisplayone">' . $promosum['doread'] . ' ( '.$doread.'%)</td> 
-               <td>' . $promosum['perehod'] . ' (' . $protsentperehodov . '%)</td>
+               <td>' . $promosum['perehod'] . '</td>
+			   <td class="greentext" style="width:140px;">'.$promosum['st'].' ('.sprintf("%.2f", $protsentst).'%)</td>';
+               if ($GLOBALS['role']!='advertiser')
+                   echo '<td>' . $promosum['doread'] . ' ( '.$doread.'%)</td>';
+               echo '
+               <td>' . $promosum['clicking'] . ' (' . $protsentperehodov . '%)</td>
                <td style="min-width:90px;">' . $CRT . '</td>
                <td style="width: 20px !important;">';
                 if ($ch2 != -1) {echo'<input type="checkbox" '; if ($img['active']) echo 'checked="checked" '; echo 'class="flipswitch anons">';}

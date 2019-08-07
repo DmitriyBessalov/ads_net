@@ -46,6 +46,7 @@ switch ($GLOBALS['role']) {
             'article-stop-all' => 'article/stop_all',
             'article-anons-stop' => 'article/anons_stop',
             'article-anons-start' => 'article/anons_start',
+            'article-link' => 'article/article_link',
 
             //Клики
             'clicks' => 'click/index',
@@ -113,6 +114,7 @@ switch ($GLOBALS['role']) {
             'article-stop-all' => 'article/stop_all',
             'article-anons-stop' => 'article/anons_stop',
             'article-anons-start' => 'article/anons_start',
+            'article-link' => 'article/article_link',
 
             //Слова
             'words' => 'words/index',
@@ -131,6 +133,7 @@ switch ($GLOBALS['role']) {
             'article-edit-content' => 'article/content',
             'article-edit-anons' => 'article/anons',
             'article-stat' => 'article/stat',
+            'article-link' => 'article/article_link',
 
             //Авторизация
             'logout' => 'users/logout',
