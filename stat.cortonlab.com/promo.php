@@ -179,6 +179,8 @@ switch ($action) {
 
         # Добавление статистики пререходов со статей
         preg_match('/\d&href=(.*?)&sub_id1=\d/m', $_SERVER['QUERY_STRING'], $matches);
+        $matches[1]=urldecode($matches[1]);
+
         $sql ="INSERT INTO `promo_perehod`
                 SET `promo_id` = '".$promo['promo_id']."',
                     `date` = CURDATE(),
@@ -189,14 +191,13 @@ switch ($action) {
         if (!$GLOBALS['dbstat']->exec($sql)){
             $sql ="UPDATE `promo_perehod` 
                    SET `count` =`count` + 1
-                   WHERE `promo_id` = '".$promo['promo_id']."',
-                         `date` = CURDATE(),
-                         `numlink` = '".$_GET['sub_id1']."',
-                         `ancor` = '".$_GET['ancor']."',
+                   WHERE `promo_id` = '".$promo['promo_id']."' AND
+                         `date` = CURDATE() AND
+                         `numlink` = '".$_GET['sub_id1']."' AND
+                         `ancor` = '".$_GET['ancor']."' AND
                          `href` = '".$matches[1]."'";
             $GLOBALS['dbstat']->query($sql);
         }
-
 }
 
 
