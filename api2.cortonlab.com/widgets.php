@@ -195,3 +195,5 @@ if (!$GLOBALS['dbstat']->exec($sql)) {
     $sql = "INSERT INTO `words_top10` SET `platform_id`='" . $arr['p_id'] . "', `uri`='".$i."',  `top10`='" . $_GET['words'] . "', `wdget_show`='".$show."',`count`='1'";
     $GLOBALS['dbstat']->query($sql);
 }
+
+#$GLOBALS['dbstat']->query("INSERT INTO `geo-stat`(`ip`, `iso`) VALUES ('".$_SERVER['REMOTE_ADDR']."','".$iso."')");
