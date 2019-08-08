@@ -44,8 +44,8 @@ class ArticleController
             default: {$str.=" AND `active`='1'";$_GET['active']='1';}
         }
 
-        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y');}
-        if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
+        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{if ($GLOBALS['role']=='advertiser'){$datebegin=date('d.m.Y', strtotime("-7 days"));}else{$datebegin=date('d.m.Y');}}
+        if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');}
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
             $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
             $mySQLdateend = date('Y-m-d', strtotime($dateend));
@@ -320,7 +320,7 @@ class ArticleController
               </tr>
             </thead>';
 
-        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y');}
+        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{if ($GLOBALS['role']=='advertiser'){$datebegin=date('d.m.Y', strtotime("-7 days"));}else{$datebegin=date('d.m.Y');}}
         if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
             $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
