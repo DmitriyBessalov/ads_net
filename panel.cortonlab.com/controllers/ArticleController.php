@@ -7,14 +7,6 @@ class ArticleController
         $title='Управление статьями';
         include PANELDIR.'/views/layouts/header.php';
 
-        if ($GLOBALS['role']=='advertiser'){
-            echo '
-                <style>
-                .flipswitch{
-                    
-                }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-                </style>';
-        }
         echo '
 		<div class="table-box">
 		<div class="div-block-102-table">
@@ -142,7 +134,7 @@ class ArticleController
 								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
 								 <a href="article-stat?id=' . $i['main_promo_id'] . '">Расширенная статистика</a><br>
 								 <a href="article-a/b?id=' . $i['main_promo_id'] . '">A/B анализ</a><br>
-								 <a href="article-stat-url?id=' . $i['main_promo_id'] . '">Анализ ссылок</a><br>
+								 <a href="article-link?id=' . $i['main_promo_id'] . '">Анализ ссылок</a><br>
 								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
 								 <a href="article-edit-target?id=' . $i['main_promo_id'] . '">Таргетинги</a><br>
 								 <a href="article-edit-form?id=' . $i['main_promo_id'] . '">Лид форма</a><br>
@@ -158,7 +150,7 @@ class ArticleController
 								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
 								 <a href="article-stat?id=' . $i['main_promo_id'] . '">Расширенная статистика</a><br>
 								 <a href="javascript:void(0);" style="opacity:0.4;">A/B анализ</a><br>
-								 <a href="javascript:void(0);" style="opacity:0.4;">Анализ ссылок</a><br>
+								 <a href="article-link?id=' . $i['main_promo_id'] . '">Анализ ссылок</a><br>
 								 <div style="height:1px; width:100%; background:#e0e5e9; margin: 6px 0;"></div>
 								 <a href="javascript:void(0);" style="opacity:0.4;">Таргетинги</a><br>
 								 <a href="javascript:void(0);" style="opacity:0.4;">Лид форма</a><br>
@@ -245,7 +237,7 @@ class ArticleController
 		</div>
 		
 		</div>
-  
+
 		';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
@@ -253,8 +245,12 @@ class ArticleController
 
     public static function actionArticle_link()
     {
-        $title='Внешние переходы со статьи';
+        $title='Переходы со статьи на сайт рекламодателя';
         include PANELDIR.'/views/layouts/article_header.php';
+        if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{if ($GLOBALS['role']=='advertiser'){$datebegin=date('d.m.Y', strtotime("-7 days"));}else{$datebegin=date('d.m.Y');}}
+        if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
+        $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
+        $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
         echo '
 		<div class="table-box">
@@ -263,15 +259,31 @@ class ArticleController
           <table>
             <thead>
               <tr class="trtop">
-			    <td>ID</td>
-                <td>Анкор</td>
-                <th>Переходы</th>
-                <th>CTR</th>
+			    <td>№ ссылки в статье</td>
+                <td>Текст ссылки</td>
+                <th>URL</th>
+                <th>Количество переходов</th>
               </tr>
             </thead>
-            
-            
-            
+            <tbody>';
+            $sql = "SELECT `numlink`,`ancor`,`href`,`count` FROM `promo_perehod` WHERE `promo_id`='" . $_GET['id'] . "' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+            $result = $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $i){
+                if (strlen($i['href'])>100){
+                    $href=substr($i['href'],0,50).'&nbsp;...';
+                }else{
+                    $href=$i['href'];
+                }
+                $i['numlink']++;
+                echo '<tr>
+                    <td>'.$i['numlink'].'</td>
+                    <td>'.$i['ancor'].'</td>
+                    <td><a href="'.$i['href'].'">'.$href.'</td>
+                    <td>'.$i['count'].'</td>
+                </tr>';
+            }
+
+        echo '</tbody>  
           </table>
         </div>
 		</div>
@@ -308,7 +320,7 @@ class ArticleController
                 <td>Превью</td>				
                 <th>Заголовок</th>
                 <th>Расход</th>
-                <th>Показы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Колличество показов анонсов</span></div></th>
+                <th>Показы<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Количество показов анонсов</span></div></th>
                 <th>Клики<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Клики с анонса на промо статью</span></div></th>
 				<th>Прочтения<div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div></th>';
                 if ($GLOBALS['role']!='advertiser')
@@ -1230,40 +1242,6 @@ class ArticleController
                         <input type="submit" value="Сохранить" class="submit-button-6">
                     </div>
                 </form>';
-        include PANELDIR.'/views/layouts/footer.php';
-        return true;
-    }
-
-    public static function actionStat_url()
-    {
-        $title='Анализ ссылок';
-        include PANELDIR.'/views/layouts/article_header.php';
-
-        echo'
-        <div class="table-box">
-		<div class="div-block-102-table">
-            <div class="table w-embed">
-                <table>
-                    <thead>
-                        <tr class="trtop">
-                            <td>Анкор</td>
-                            <td>URL</td>
-                            <td>Переходы</td>
-                            <td>% Переходов</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>текст</td>
-                            <td>https://example.com</td>
-                            <td>0</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>    
-                </table>
-            </div>
-		</div>	
-        </div>';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
     }

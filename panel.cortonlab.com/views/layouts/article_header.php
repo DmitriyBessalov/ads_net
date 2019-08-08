@@ -37,7 +37,8 @@ if ($GLOBALS['role']=='advertiser'){
     <div class="btncontrolarticle">
        <a href="/article-edit-content?id=' . $result['main_promo_id'] . '" class="btnarticlegr">Редактирование</a>
        <a href="/article-edit-anons?id=' . $result['main_promo_id'] . '" class="btnarticlegr">Управление анонсами</a>
-       <a href="/article-edit-target?id=' . $result['main_promo_id'] . '" class="btnarticlegr">Таргетинги</a>
+       <a href="/article-edit-target?id=' . $result['main_promo_id'] . '" class="btnarticlegr">Таргетинги</a>       
+       <a href="/article-link?id=' . $result['main_promo_id'] . '" class="btnarticlegr">Анализ ссылок</a>
        <a href="/article-edit-form?id=' . $result['main_promo_id'] . '" class="btnarticlegr">Лид форма</a>
        <a href="/article-stat?id=' . $result['main_promo_id'] . '" class="btnarticle" style="border-radius: 4px 0 0 4px;">Cтатистика</a>
        <div class="dropdown">
