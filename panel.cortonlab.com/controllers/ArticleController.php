@@ -259,8 +259,8 @@ class ArticleController
           <table>
             <thead>
               <tr class="trtop">
-			    <td>Номер ссылки в статье</td>
-                <td>Анкор</td>
+			    <td>№ ссылки в статье</td>
+                <td>Текст ссылки</td>
                 <th>URL</th>
                 <th>Количество переходов</th>
               </tr>
