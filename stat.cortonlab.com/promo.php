@@ -39,13 +39,12 @@ require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 # Берём id площадки
 $domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
-//$domen='okardio.com';
 
 $sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-# Берем ставку
-if(($action =='s')or($action =='r')) {
+# Берем ставку и id статьи
+if ($action !='l') {
     $sql= "SELECT 
                n.stavka,
                n.`persent_platform`,
@@ -53,11 +52,6 @@ if(($action =='s')or($action =='r')) {
            FROM anons a RIGHT OUTER JOIN anons_index n ON a.promo_id = n.promo_id
            WHERE a.id='".$anons_id."'";
     $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-    # Изменение баланса рекламодателя (настройка на странице площадок)
-    $stavka_advertiser=round($promo['stavka']*$platform['otchiclen']/100,2);
-    # Изменение баланса площадки (настройка на странице таргетингов статьи)
-    $stavka_ploshadka=round($stavka_advertiser*$promo['persent_platform']/100,2);
 }
 
 
@@ -77,11 +71,18 @@ if ($action =='l') {
         `user-agent`= '" . $_SERVER['HTTP_USER_AGENT'] . "',
         `timestamp` = '" . date('H:i:s') . "'";
 }else{
-    # Узнаём оплачивался ли данный просмотр
-    $sql = "SELECT `pay`,`read` FROM `stat_promo_prosmotr` WHERE `prosmotr_id` = '".$_GET['prosmort_id']."'";
-    $pay = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
-    if ($pay==false){
-        exit;
+    if($action !='c') {
+        # Узнаём оплачивался ли данный просмотр
+        $sql = "SELECT `pay`,`read` FROM `stat_promo_prosmotr` WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
+        $pay = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if ($pay == false) {
+            exit;
+        }
+
+        # Изменение баланса рекламодателя (настройка на странице площадок)
+        $stavka_advertiser = round($promo['stavka'] * $platform['otchiclen'] / 100, 2);
+        # Изменение баланса площадки (настройка на странице таргетингов статьи)
+        $stavka_ploshadka = round($stavka_advertiser * $promo['persent_platform'] / 100, 2);
     }
 
     if($action =='s'){
@@ -172,30 +173,30 @@ switch ($action) {
             $GLOBALS['dbstat']->query($sql);
         }
         break;
-    case 'с':
+    case 'c':
         $sql ="UPDATE `balans_ploshadki` SET `".$widget."_promo_click` = `".$widget."_promo_click` + 1 WHERE `ploshadka_id`='".$platform['id']."' AND `date`=CURDATE();";
         $GLOBALS['dbstat']->query($sql);
 
-
         # Добавление статистики пререходов со статей
-       /* $sql ="INSERT INTO `promo_perehod`
-                SET `promo_id` = [ VALUE -2 ],
+        preg_match('/\d&href=(.*?)&sub_id1=\d/m', $_SERVER['QUERY_STRING'], $matches);
+        $sql ="INSERT INTO `promo_perehod`
+                SET `promo_id` = '".$promo['promo_id']."',
                     `date` = CURDATE(),
-                    `numlink` = [ VALUE -4 ],
-                    `ancor` = [ VALUE -5 ],
-                    `href` = [ VALUE -6 ],
+                    `numlink` = '".$_GET['sub_id1']."',
+                    `ancor` = '".$_GET['ancor']."',
+                    `href` = '".$matches[1]."',
                     `count` = 1";
         if (!$GLOBALS['dbstat']->exec($sql)){
             $sql ="UPDATE `promo_perehod` 
                    SET `count` =`count` + 1
-                   WHERE `promo_id` = [ VALUE -2 ],
+                   WHERE `promo_id` = '".$promo['promo_id']."',
                          `date` = CURDATE(),
-                         `numlink` = [ VALUE -4 ],
-                         `ancor` = [ VALUE -5 ],
-                         `href` = [ VALUE -6 ]";
+                         `numlink` = '".$_GET['sub_id1']."',
+                         `ancor` = '".$_GET['ancor']."',
+                         `href` = '".$matches[1]."'";
             $GLOBALS['dbstat']->query($sql);
         }
-*/
+
 }
 
 
