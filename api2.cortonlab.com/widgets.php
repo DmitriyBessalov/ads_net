@@ -196,4 +196,4 @@ if (!$GLOBALS['dbstat']->exec($sql)) {
     $GLOBALS['dbstat']->query($sql);
 }
 
-$GLOBALS['dbstat']->query("INSERT INTO `geo-stat`(`ip`, `iso`) VALUES ('".$_SERVER['REMOTE_ADDR']."','".$iso."')");
+#$GLOBALS['dbstat']->query("INSERT INTO `geo-stat`(`ip`, `iso`) VALUES ('".$_SERVER['REMOTE_ADDR']."','".$iso."')");
