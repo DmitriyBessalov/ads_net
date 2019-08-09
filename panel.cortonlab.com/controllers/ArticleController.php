@@ -519,7 +519,7 @@ class ArticleController
             }case 'настройка' :{
             UsersController::blockArticle();
             if ($_POST['geo']=='') {
-                $geo[] = $_POST['geo']='ALL';
+                $geo[] = $_POST['geo']='RU';
             }else{
                 $geo = array_unique(explode(',', $_POST['geo']));
                 $_POST['geo'] = implode(',', $geo);
@@ -1147,6 +1147,7 @@ class ArticleController
                             </div>
                         </div>
                     </div>
+                    
                     
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
