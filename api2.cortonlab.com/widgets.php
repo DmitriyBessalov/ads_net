@@ -5,141 +5,108 @@ header('Content-Type: application/json;');
 $interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
 
-require_once('/var/www/www-root/data/www/api2.cortonlab.com/geoip/SxGeo.php');
+#Определение geo
+require_once 'geoip/vendor/autoload.php';
+use GeoIp2\Database\Reader;
+$reader = new Reader('/var/www/www-root/data/www/api2.cortonlab.com/geoip/GeoLite2-City.mmdb');
+
+$_SERVER['REMOTE_ADDR']='185.75.90.54';
+
+$record = $reader->city($_SERVER['REMOTE_ADDR']);
+if ($record->mostSpecificSubdivision->isoCode==''){
+    $arr['region']=$iso=$record->country->isoCode;
+}else{
+    $arr['region']=$iso=$record->country->isoCode.'-'.$record->mostSpecificSubdivision->isoCode;
+}
+
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 $words=str_replace(',', '\',\'', $_GET['words']);
+$count_widgets=$_GET['e']+$_GET['r']+$_GET['s'];
 
-#$iso='RU-MOW';
-function get_anons($iso, $interes, $words, $block_promo_id)
-{
-    switch (strlen($iso)){
-        case 0:
-            $sql = "SELECT promo_id FROM promo_category WHERE category_id IN ('" . $interes . "')";
-            $sql2 = "SELECT promo_ids FROM words_index WHERE word IN ('".$words."')";
-            break;
-        case 2:
-            $arr['region'] = "ALL','" . $iso;
-            $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p WHERE (FIND_IN_SET('" . $iso . "', p.`region`) OR FIND_IN_SET('ALL', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
-            $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
-            break;
-        default:
-            $county = substr($iso, 0, 2);
-            $arr['region'] = "ALL','" . $county . "','" . $iso;
-            $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p WHERE (FIND_IN_SET('" . $county . "', p.`region`) OR FIND_IN_SET('" . $iso . "', p.`region`) OR FIND_IN_SET('ALL', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
-            $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$arr['region']."')";
-    }
+if (strlen($iso)==2) {
+    $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p WHERE (FIND_IN_SET('" . $iso . "', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
+    $sql2 = "SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('" . $words . "') AND `region`='" . $iso . "'";
+}else{
+    $county = substr($iso, 0, 2);
+    $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p WHERE (FIND_IN_SET('" . $county . "', p.`region`) OR FIND_IN_SET('" . $iso . "', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
+    $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$county . "','" . $iso."')";
+}
 
-    $result0 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
-    $result1 = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
+$result0 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
 
-    $result2 = array();
-    foreach ($result1 as $i) {
-        $result2 = array_merge($result2, explode(',',$i));
-    };
+$result1 = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
+$result2 = array();
+foreach ($result1 as $i) {
+    $result2 = array_merge($result2, explode(',',$i));
+};
 
-    $promo_ids=array_unique(array_merge($result0, $result2));
+$promo_ids=array_unique(array_merge($result0, $result2));
 
-    # Поиск статей где обязательное обязательное совпадение по ключу и категория
-    if (count($promo_ids)){
-        $ids = implode("','", $promo_ids);
-        $sql="SELECT `id` FROM `promo` WHERE `id` IN ('".$ids."') AND `merge_key_and_categor`=1";
-        $result3 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
-        foreach ($result3 as $i){
-            if((in_array($i,$result0)) xor (in_array($i,$result2)))
-            {
-                $block_promo_id[]=$i;
-            }
-        }
-    }
-
-    # Очистка от повторов promo_id
-    foreach ($block_promo_id as $i){
-        if(($key = array_search($i,$promo_ids)) !== FALSE){
+# Фильтр статей где обязательное обязательное совпадение по ключу и категория
+if (count($promo_ids)){
+    $ids = implode("','", $promo_ids);
+    $sql="SELECT `id` FROM `promo` WHERE `id` IN ('".$ids."') AND `merge_key_and_categor`=1";
+    $result3 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+    foreach ($result3 as $i){
+        if((in_array($i,$result0)) xor (in_array($i,$result2)))
+        {
+            $key = array_search($i,$promo_ids);
             unset($promo_ids[$key]);
         }
     }
+}
 
-    //Берем ID Анонсов
-    $promo=implode("','" , $promo_ids);
-    $sql="SELECT promo_id, anons_ids, stavka
-            FROM anons_index WHERE promo_id IN ('".$promo."')
-            ORDER BY stavka DESC, RAND()";
-    $result2 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+//Берем ID Анонсов
+$promo=implode("','" , $promo_ids);
+$sql="SELECT promo_id, anons_ids, stavka
+        FROM anons_index WHERE promo_id IN ('".$promo."')
+        ORDER BY stavka DESC, RAND()";
+$anons_all = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
-    $anons_ids = array();
-    $y=0;
+$anons_ids = array();
+$y=0;
 
-    $anons_count=0;
-    //Премешивание анонсов внутри статьи
-    foreach ($result2 as $i) {
-        if ($i['anons_ids']==''){
-            unset($result2[$y]);
-        }else{
-            $f = explode(',',$i['anons_ids']);
-            shuffle($f);
-            //$anons_ids=array_merge($anons_ids, $f);
-            $result2[$y]['an_count']=count($f);
-            $anons_count=$anons_count+count($f);
-            $result2[$y]['an']=$f;
-            $y++;
-        };
+$anons_count=0;
+//Премешивание анонсов внутри статьи
+foreach ($anons_all as $i) {
+    if ($i['anons_ids']==''){
+        unset($anons_all[$y]);
+    }else{
+        $f = explode(',',$i['anons_ids']);
+        shuffle($f);
+        //$anons_ids=array_merge($anons_ids, $f);
+        $anons_all[$y]['an_count']=count($f);
+        $anons_count=$anons_count+count($f);
+        $anons_all[$y]['an']=$f;
+        $y++;
     };
-
-    $ch = $ch2 = 0;
-    $count = count($result2);
-    while ($anons_count != 0) {
-        if ($result2[$ch]['an_count'] > 0) {
-            $an[] = (int)$result2[$ch]['an'][$ch2];
-            $result2[$ch]['an_count']--;
-            $anons_count--;
-        }
-        $ch++;
-        if ($ch == $count) {
-            $ch = 0;
-            $ch2++;
-        }
-    }
-
-    $result2['a']=$an;
-
-    return $result2;
-}
-$arr['region']=$iso;
-$count_widgets=$_GET['e']+$_GET['r']+$_GET['s'];
-# условие если есть виджеты c гео
-$block_promo_id=array();
-$arr['anons_count']=0;
-if ($iso != ""){
-    $result2=get_anons($iso,$interes,$words,$block_promo_id);
-    $arr['anons_count'] = count($result2['a']);
-}
-# условие при недостатке виджетов берем без
-if ($count_widgets>$arr['anons_count']){
-    $iso = '';
-    foreach ($result2 as $i){
-        if (isset($i['promo_id']))
-            $block_promo_id[]=$i['promo_id'];
-    }
-    $result3=get_anons($iso,$interes,$words,$block_promo_id);
-}
-
-if (!isset($result2['a'])){
-    $result2['a']=array();
-};
-if (!isset($result3['a'])){
-    $result3['a']=array();
 };
 
-$anons_all=array_merge($result2['a'], $result3['a']);
+$ch = $ch2 = 0;
+$count = count($anons_all);
+while ($anons_count != 0) {
+    if ($anons_all[$ch]['an_count'] > 0) {
+        $an[] = (int)$anons_all[$ch]['an'][$ch2];
+        $anons_all[$ch]['an_count']--;
+        $anons_count--;
+    }
+    $ch++;
+    if ($ch == $count) {
+        $ch = 0;
+        $ch2++;
+    }
+}
 
-if (count($anons_all)==0){
-    $arr['anons_count']=0;
+
+$arr['anons_count'] = count($an);
+
+if (count($an)==0){
     $show=0;
 } else{
-    $anons_all = array_slice($anons_all, 0, $count_widgets);
+    $an = array_slice($an, 0, $count_widgets);
 
-    $ann = implode("','", $anons_all);
+    $ann = implode("','", $an);
 
     $sql = "SELECT * FROM `anons` WHERE `id` IN ('" . $ann . "')";
     $result = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
