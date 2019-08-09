@@ -601,7 +601,7 @@ class FinController
 		</div>
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>		
 		<div style="width:33%;">   
-		   <div class="text-block-104 tooltipinfo1" style="text-align: left;">Показы анонсов<br>среднесуточное (за сегодня)<span class="tooltiptext1">Считается каждый анонс на странице</span></div>
+		   <div class="text-block-104 tooltipinfo1" style="text-align: left;">Показы анонсов за сутки<span class="tooltiptext1">Считается каждый анонс на странице(за сегодня)</span></div>
            <div style="font-size: 46px;margin-top: 0" class="text-block-105">'.$srednee_show_anons.'('.$show_anons_today.')</div>
 		</div>
 		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>	
@@ -611,7 +611,7 @@ class FinController
 		</div>
 		</div>
 		<div id="containergr2" style="width:725px; height:108px;">
-           <canvas id="d" width="725" height="102"></canvas>
+           <canvas id="d" width="725" height="103"></canvas>
         </div>
     </div>
     <div class="div-block-94" style="margin-right: 0px !important;">
@@ -619,7 +619,7 @@ class FinController
         <div class="text-block-104">Объём заработанных средств площадками</div>
         <div class="text-block-105">'.$result['dohod'].'</div>
 	<div id="containergr" style="width:310px; height:102px;">
-	<canvas id="c" width="315" height="102"></canvas>
+	<canvas id="c" width="310" height="104"></canvas>
 	</div>
     </div>
     <div class="div-block-94">
@@ -627,7 +627,7 @@ class FinController
         <div class="text-block-104">Клики по анонсам</div>
         <div class="text-block-105">'.$result['promo_load'].'</div>
 		<div id="containergr" style="width:310px; height:102px;">
-           <canvas id="b" width="315" height="102"></canvas>
+           <canvas id="b" width="310" height="104"></canvas>
         </div>
     </div>
     <div class="div-block-94">
@@ -635,7 +635,7 @@ class FinController
         <div class="text-block-104">Оплаченные просмотры промо-статей</div>
         <div class="text-block-105">'.$result['pay'].'</div>
 		<div id="containergr" style="width:310px; height:102px;">
-           <canvas id="a" width="315" height="102"></canvas>
+           <canvas id="a" width="310" height="104"></canvas>
         </div>
     </div>
 	<div class="div-block-94" style="margin-right: 0px !important;">
