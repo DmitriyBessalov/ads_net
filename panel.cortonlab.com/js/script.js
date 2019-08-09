@@ -1072,6 +1072,11 @@ $(document).ready(function(){
             console.log( variable[i].dataset.label);
             arr[i]=variable[i].dataset.label;
         }
+        if (arr.length){
+            $('#region_default').remove();
+        }else{
+            $('.div-block-84.geo').html('<div class="text-block-110" id="region_default">по умолчанию Россия</div>');
+        }
         $('[name=geo]').val(arr.join(','));
     }
     geo();
