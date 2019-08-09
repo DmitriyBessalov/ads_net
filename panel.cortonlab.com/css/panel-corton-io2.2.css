@@ -4986,7 +4986,6 @@ input:checked + span {
 #containergr {
   background-image: url(https://panel.cortonlab.com/images/bggraf.png);
   margin-top: 30px;
-  max-width: 300px;
 }
 
 #containergr2 {
