@@ -618,24 +618,24 @@ class FinController
         <div class="text-block-103">Доход площадок</div>
         <div class="text-block-104">Объём заработанных средств площадками</div>
         <div class="text-block-105">'.$result['dohod'].'</div>
-	<div id="containergr" style="width:304px; height:102px;">
-	<canvas id="c" width="315" height="104"></canvas>
+	<div id="containergr" style="width:300px; height:102px;">
+	<canvas id="c" width="310" height="104"></canvas>
 	</div>
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Клики</div>
         <div class="text-block-104">Клики по анонсам</div>
         <div class="text-block-105">'.$result['promo_load'].'</div>
-		<div id="containergr" style="width:304px; height:102px;">
-           <canvas id="b" width="315" height="104"></canvas>
+		<div id="containergr" style="width:300px; height:102px;">
+           <canvas id="b" width="310" height="104"></canvas>
         </div>
     </div>
     <div class="div-block-94">
         <div class="text-block-103">Оплаченные просмотры</div>
         <div class="text-block-104">Оплаченные просмотры промо-статей</div>
         <div class="text-block-105">'.$result['pay'].'</div>
-		<div id="containergr" style="width:304px; height:102px;">
-           <canvas id="a" width="315" height="104"></canvas>
+		<div id="containergr" style="width:300px; height:102px;">
+           <canvas id="a" width="310" height="104"></canvas>
         </div>
     </div>
 	<div class="div-block-94" style="margin-right: 0px !important;">
