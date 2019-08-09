@@ -601,7 +601,7 @@ class FinController
 		</div>
         <div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>		
 		<div style="width:33%;">   
-		   <div class="text-block-104 tooltipinfo1" style="text-align: left;">Показы анонсов<br>среднесуточное (за сегодня)<span class="tooltiptext1">Считается каждый анонс на странице</span></div>
+		   <div class="text-block-104 tooltipinfo1" style="text-align: left;">Показы анонсов за сутки<span class="tooltiptext1">Считается каждый анонс на странице(за сегодня)</span></div>
            <div style="font-size: 46px;margin-top: 0" class="text-block-105">'.$srednee_show_anons.'('.$show_anons_today.')</div>
 		</div>
 		<div style="border-width: 0 0 0 1px; border-style: solid; color:#E0E1E5; padding: 20px; margin-left: 20px;"></div>	
