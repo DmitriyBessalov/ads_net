@@ -610,7 +610,7 @@ class FinController
            <div style="font-size: 46px;" class="text-block-105">'.$persent.'%</div>
 		</div>
 		</div>
-		<div id="containergr2" style="width:725px; height:108px;">
+		<div id="containergr2" style="width:720px; height:108px;">
            <canvas id="d" width="725" height="103"></canvas>
         </div>
     </div>
