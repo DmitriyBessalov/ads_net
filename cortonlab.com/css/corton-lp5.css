@@ -1339,7 +1339,7 @@ p {
 
 @media (max-width: 479px) {
   .section-3sing {
-    width: 100%;
+    width: 100% !important;
   }
   .section-4sing {
     width: 0%;
