@@ -23,10 +23,12 @@ class ClickController
                 <th style="min-width: 120px;">Анонс ID</th>
                 <th>Виджет</th>
                 <th>Referer</th>
-                <th>Прочитано</th>
-                <th>Оплачено</th>
-                <th>Переход</th>
-                <th>Ставка</th>
+                <th>Чтение</th>
+                <th>Дочитывание</th>
+                <th>Клик со&nbsp;статьи</th>
+                <th>Базовая ставка</th>
+                <th>Списано с рекламодателя</th>
+                <th>Оплачено площадке</th>
                 <th>IP</th>';
 		        if ($_GET['useragent']=='on'){
 		            echo '<th>User agent</th>';
@@ -38,7 +40,7 @@ class ClickController
                 $data=date('Y-m-d', strtotime($_GET['date']));
                 $sql="SELECT `id` FROM `ploshadki` WHERE `domen`='".$_GET['domen']."'";
                 $ploshadka_id= $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $sql="SELECT `prosmotr_id`,`tizer`,`anon_id`,`url_ref`,`read`,`pay`,`click`,`user-agent`,`timestamp`,`ip` FROM `stat_promo_prosmotr` WHERE `date`='".$data."' AND `ploshadka_id`='".$ploshadka_id."'";
+                $sql="SELECT `prosmotr_id`,`tizer`,`anon_id`,`url_ref`,`read`,`pay`,`pay_platform`,`click`,`user-agent`,`timestamp`,`ip` FROM `stat_promo_prosmotr` WHERE `date`='".$data."' AND `ploshadka_id`='".$ploshadka_id."'";
                 $clicks = $GLOBALS['dbstat']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
                 foreach($clicks as $value) {
                     $sql = "SELECT n.stavka FROM anons a RIGHT OUTER JOIN anons_index n ON a.promo_id = n.promo_id WHERE a.id='".$value['anon_id']."'";
@@ -55,6 +57,7 @@ class ClickController
                             $value['tizer']='Slider';
                             break;
                     };
+                    if ($value['pay']>0){$read=1;}else{$read=0;}
 
                     echo '
                       <tr>
@@ -62,10 +65,12 @@ class ClickController
                           <td style="font-size: 15px;">'.$value['anon_id'].'</td>
                           <td style="font-size: 14px;">'.$value['tizer'].'</td>
                           <td style="font-size: 11px;">'.$value['url_ref'].'</td>
+                          <td style="font-size: 15px;">'.$read.'</td>
                           <td style="font-size: 15px;">'.$value['read'].'</td>
-                          <td style="font-size: 15px;">'.$value['pay'].'</td>
                           <td style="font-size: 15px;">'.$value['click'].'</td>
                           <td style="font-size: 15px;">'.$stavka.'</td>
+                          <td style="font-size: 15px;">'.$value['pay_platform'].'</td>
+                          <td style="font-size: 15px;">'.$value['pay'].'</td>
                           <td style="font-size: 15px;">'.$value['ip'].'</td>';
                             if ($_GET['useragent']=='on'){
                                 echo '<td style="font-size: 10px;">'.$value['user-agent'].'</td>';

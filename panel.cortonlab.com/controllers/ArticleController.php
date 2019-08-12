@@ -81,7 +81,7 @@ class ArticleController
                         $pokaz = 0;
                     }
 
-                    //обрезка строки title до 50 смволов
+                    //обрезка строки title до 50 символов
                     while (iconv_strlen($promo['title'])>=55){
                         $promo['title'] = substr($promo['title'], 0, strrpos($promo['title'], ' '));
                         $i['title']=true;

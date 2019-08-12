@@ -86,9 +86,9 @@ if ($action =='l') {
     }
 
     if($action =='s'){
-        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka_advertiser."' WHERE  `prosmotr_id` = '".$_GET['prosmort_id']."'";
+        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka_advertiser."', `pay_platform`='".$stavka_ploshadka."' WHERE  `prosmotr_id` = '".$_GET['prosmort_id']."'";
     }elseif($action =='r'){
-        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka_advertiser."', `read` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
+        $sql = "UPDATE `stat_promo_prosmotr` SET `pay` = '".$stavka_advertiser."', `pay_platform`='".$stavka_ploshadka."', `read` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
     }elseif($action =='c'){
         $sql = "UPDATE `stat_promo_prosmotr` SET `click` = '1' WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
     }else{
