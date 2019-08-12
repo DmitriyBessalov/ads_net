@@ -474,10 +474,16 @@ class ArticleController
             case 'статья' :{
                 $data_add = date('Y-m-d');
                 if ($_POST['id'] == "new"){
-                    $sql="SHOW TABLE STATUS FROM `corton` WHERE `name` LIKE 'promo'";
+                    $sql = "SHOW TABLE STATUS FROM `corton` WHERE `name` LIKE 'promo'";
                     $table = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-                    $id=$table['Auto_increment'];
-                }else{UsersController::blockArticle();$id=$_POST['id'];};
+                    $main_promo_id = $id = $table['Auto_increment'];
+                }else{
+                    UsersController::blockArticle();
+                    $id=$_POST['id'];
+                    $sql="SELECT `main_promo_id` FROM `promo` WHERE `id`=".$id;
+                    $main_promo_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                };
+
                 $role=UsersController::checkRole();
                 if (($role=='admin') AND ($id!="")){
                     $sql="SELECT `user_id` FROM `promo` WHERE `id`=".$id;
@@ -489,19 +495,31 @@ class ArticleController
                 $_POST['title']=str_replace("\\'",'&#8242;', $_POST['title']);
                 $_POST['title']=str_replace('\\"','&#8243;', $_POST['title']);
                 $_POST['formtext']=str_replace("\\'",'&#8242;', $_POST['formtext']);
-                $_POST['formtext']=stripcslashes ($_POST['formtext']);
+                $_POST['formtext'] = stripcslashes ($_POST['formtext']);
 
-                preg_match_all("/src=\"data:image\/(jpeg|jpg|gif|png);base64,(.*?)\">/", $_POST['formtext'],$out);
-                mkdir(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id, 0755);
-                $i=0;
-                while ($i<count($out[0])){
-                    $hash=hash('crc32', $out[2][$i]);
-                    $ifp = fopen(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.$hash.'.'.$out[1][$i], "wb");
-                    fwrite($ifp, base64_decode($out[2][$i]));
-                    fclose($ifp);
-                    $replase=' src="https://api.cortonlab.com/img/promo/'.$id.'/'.$hash.'.'.$out[1][$i].'">';
-                    $_POST['formtext']=str_replace($out[0][$i], $replase, $_POST['formtext']);
-                    $i++;
+
+                mkdir(APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$main_promo_id, 0755);
+
+                $expansion=['png','jpeg','jpg','gif'];
+                foreach ($expansion as $i) {
+                    while (true) {
+                        $i2 = 'src="data:image/' . $i . ';base64,';
+                        $poz1 = strpos($_POST['formtext'], $i2);
+                        if ($poz1) {
+                            $poz2 = strpos($_POST['formtext'], '">', $poz1);
+                            $len = strlen($i2);
+                            $imgdata = substr($_POST['formtext'], $poz1 + $len, $poz2 - $poz1 - $len);
+                            $hash = hash ('crc32', $imgdata);
+                            $file = APIDIR.DIRECTORY_SEPARATOR.'img'.DIRECTORY_SEPARATOR.'promo'.DIRECTORY_SEPARATOR.$main_promo_id.DIRECTORY_SEPARATOR.$hash.'.'.$i;
+                            $ifp = fopen($file , "wb");
+                            fwrite($ifp, base64_decode($imgdata));
+                            fclose($ifp);
+                            $replase = 'src="https://api.cortonlab.com/img/promo/'.$main_promo_id.'/'.$hash.'.'.$i;
+                            $_POST['formtext'] = str_replace($i2.$imgdata, $replase, $_POST['formtext']);
+                        } else {
+                            break;
+                        }
+                    }
                 }
 
                 $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
@@ -516,9 +534,9 @@ class ArticleController
                     exit;
                 }
                 break;
-            }case 'настройка' :{
+            }case 'настройка':{
             UsersController::blockArticle();
-            if ($_POST['geo']=='') {
+            if ($_POST['geo']==''){
                 $geo[] = $_POST['geo']='RU';
             }else{
                 $geo = array_unique(explode(',', $_POST['geo']));
@@ -551,9 +569,7 @@ class ArticleController
 
             $words=ArticleController::miniword($words);
             $wordsold=ArticleController::miniword($wordsold);
-
             $wordsall = array_unique(array_merge($words, $wordsold));
-
             $regionall=array_unique(array_merge($geo, $regionold));
 
             foreach($regionall as $iso) {
@@ -717,7 +733,7 @@ class ArticleController
         $title='А/B тестирование';
         include PANELDIR.'/views/layouts/article_header.php';
         echo'
-        <div class="table-box">
+        <div class="table-box">`
 		<div class="div-block-102-table">
             <div class="table w-embed">
                 <table>
