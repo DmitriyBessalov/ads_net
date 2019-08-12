@@ -3926,6 +3926,7 @@ margin-left: 15px;
     font-size: 22px;
     line-height: 28px;
 	margin-bottom: 10px;
+	text-align: left;
 }
 .blocagent {
 	padding: 60px 4% 60px !important;
@@ -4053,6 +4054,7 @@ margin-left: 15px;
     margin-bottom: 20px;
     font-size: 32px;
     line-height: 34px;
+	text-align: left;
   }
   .heading-homeadv {
 	font-size: 32px;
@@ -4169,7 +4171,8 @@ margin-left: 15px;
     margin-bottom: 0px;
     font-size: 18px;
     line-height: 24px;
-	padding: 0 6%;
+	padding: 0%;
+	text-align: left !important;
   }
   .div-block-43 {
     margin-top: 0vw;
