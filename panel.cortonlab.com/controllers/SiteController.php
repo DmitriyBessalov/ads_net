@@ -5,7 +5,7 @@ class SiteController
 
     public static function actionLoginform()
     {
-        header('Location: https://cortonlab.com/#openModal2');
+        header('Location: https://cortonlab.com/singin.html');
         /*echo'<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -45,7 +45,7 @@ class SiteController
   <base href="https://panel.cortonlab.com">
   <title>Corton</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta http-equiv="refresh" content="3;url=https://cortonlab.com" />
+  <meta http-equiv="refresh" content="3;url=https://cortonlab.com/singin.html" />
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
   <link href="css/panel-corton-io.webflow.css" rel="stylesheet" type="text/css">
