@@ -472,7 +472,7 @@
         <div class="div-block-85" style="height: 60px; margin-top: 40px;">
             <div class="div-block-61">
             <div class="div-block-62">  		
-                    <input type="submit" onClick=“window.location=‘#openModal’” action="#openModal" value="Получить доступ" class="submit-buttonwhite w-button" style=""/>			
+                    <input type="submit" onclick='url()' value="Получить доступ" class="submit-buttonwhite w-button" style=""/>			
            </div>
         </div>
     </div>
@@ -558,6 +558,10 @@ $(document).on("click", "nav a", function(e) {
     var top = $(id).offset().top; // получаем координаты блока
     $('body, html').animate({scrollTop: top}, 800); // плавно переходим к блоку
 });
+
+function url(){
+   location.assign('#OpenModal');
+}
 </script>
 <style>
 @media (max-width: 992px) {
