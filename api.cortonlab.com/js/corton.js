@@ -254,10 +254,9 @@ if (corton_complete!=1) {
             let top10=[];
             let val;
             function splitword(wordsss){
-                let arr = wordsss.toLowerCase()
-                let arr2 = arr.match(/[а-яё]{4,}/g);
-                if (arr2 !== null)
-                for (val of arr2){
+                let arr = wordsss.toLowerCase().match(/[а-яё]{4,}/g);
+                if (arr !== null)
+                for (val of arr){
                     const lastchar= val.slice(-1);
                     switch (lastchar) {
                         case 'я':val = val.replace(/ья$|яя$|ая$|ия$|я$/, "");break;
@@ -753,7 +752,7 @@ if (corton_complete!=1) {
                         anons_ids_show.push(anons_idsnew[f]);
                     }
                 }
-                console.log('захвачены',anons_ids_show);
+                //console.log('захвачены',anons_ids_show);
 
                 setTimeout(checkread, 5000, anons_ids_show.join().substr(0));
                 anons_idsnew.splice(0,anons_idsnew.length);
