@@ -164,15 +164,12 @@
     </a>
     
 	<div class="div-block-82">
-    <div class="text-block-17">Вход в систему</div>
+    <div class="text-block-17">Запросить доступы</div>
     <div class="w-form">
-    <form method="post" action="https://panel.cortonlab.com/login"  id="email-form" name="email-form" data-name="Email Form" class="form-3">
+    <form method="post" action="#" data-name="Email Form" class="form-3">
     <input type="email" 
-    class="text-field w-input" maxlength="256" name="login" data-name="login"
-    placeholder="E-mail" id="email-2" required="">
-    <input type="password" class="text-field-2 w-input" maxlength="256" name="password" 
-    data-name="password" placeholder="Пароль" id="password" required="">
-    <input type="submit" style="width:100%;" value="Авторизация в системе" data-wait="Пожалуйста ожидайте..." 
+    class="text-field w-input" maxlength="256" placeholder="Ваш E-mail" id="email-2" required="">
+    <input type="submit" style="width:100%;" value="Получить доступ" data-wait="Пожалуйста ожидайте..." 
     class="submit-button w-button"></form>
     <div class="w-form-done">
     <div>Авторизация</div>
@@ -192,6 +189,9 @@ $(document).on("click", "nav a", function(e) {
     var top = $(id).offset().top; // получаем координаты блока
     $('body, html').animate({scrollTop: top}, 800); // плавно переходим к блоку
 });
+function url(){
+   location.assign('#openModal');
+}
 </script>
 <style>
 @media (max-width: 992px) {
