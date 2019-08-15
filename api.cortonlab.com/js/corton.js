@@ -479,7 +479,7 @@ if (corton_complete!=1) {
 
                     let i = 0;
                     while (i < categor.length) {
-                        console.log(categor[i]['id_categoriya'], categor[i]['type_search'], categor[i]['regex']);
+                        //console.log(categor[i]['id_categoriya'], categor[i]['type_search'], categor[i]['regex']);
                         let obj = eval('/(' + categor[i]['regex'] + ')/');
                         delete matches;
                         if (categor[i]['type_search'] == 0) {
