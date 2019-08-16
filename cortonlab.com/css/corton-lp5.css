@@ -363,6 +363,11 @@ p {
   text-transform: uppercase;
 }
 
+.btnmob {
+   width: 100%;
+   text-align: center;   
+}
+
 .image-2 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
@@ -3786,7 +3791,7 @@ margin-left: 15px;
     line-height: 28px;
   }
   .text-block-h2 {
-    font-size: 24px;
+    font-size: 26px;
     line-height: 1.3;
 }
 
@@ -4330,13 +4335,16 @@ margin-left: 15px;
     width: 100%;
   }
     .text-block-h2 {
-    font-size: 22px;
+    font-size: 24px;
     line-height: 1.3;
+	text-align: center;
+    width: 100%;
 }
   .text-block-18 {
     font-size: 18px;
     line-height: 24px;
 	margin-bottom: 20px;
+	text-align: center;
   }
   .div-block-61 {
     margin-bottom: 40px;
