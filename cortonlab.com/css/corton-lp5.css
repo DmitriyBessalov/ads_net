@@ -1662,6 +1662,7 @@ p {
   margin-top: 40px;
   text-align: left;
   width: 100%;
+  max-width: 570px;
 }
 .text-block-14contact {
   margin-right: 40px;
