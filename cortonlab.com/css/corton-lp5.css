@@ -1660,6 +1660,8 @@ p {
   line-height: 26px;
   font-weight: 400;
   margin-top: 40px;
+  text-align: left;
+  width: 100%;
 }
 .text-block-14contact {
   margin-right: 40px;
