@@ -3946,7 +3946,7 @@ margin-left: 15px;
     font-size: 22px;
     line-height: 28px;
 	margin-bottom: 10px;
-	text-align: left;
+	text-align: center;
 }
 .blocagent {
 	padding: 60px 4% 60px !important;
@@ -4079,6 +4079,7 @@ margin-left: 15px;
   .heading-homeadv {
 	font-size: 32px;
     line-height: 34px;
+	text-align: center;
   }
 
   .image-5 {
