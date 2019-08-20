@@ -2211,6 +2211,9 @@ p {
   margin-bottom: 20px;
   text-align: center;
 }
+  .text-block-h2-3 {
+	  text-align: left;
+  }
 .text-block-h2-2 {
   font-family: 'Myriadpro Regular';
   color: #116dd6;
@@ -3874,7 +3877,9 @@ margin-left: 15px;
     line-height: 1.3;
 	text-align: center;
 }
-
+  .text-block-h2-3 {
+	  text-align: left;
+  }
   .text-block-18 {
     direction: ltr;
     font-size: 18px;
@@ -4459,6 +4464,9 @@ margin-left: 15px;
 	text-align: center;
     width: 100%;
 }
+  .text-block-h2-3 {
+	  text-align: left;
+  }
   .text-block-18 {
     font-size: 18px;
     line-height: 24px;
@@ -4466,6 +4474,9 @@ margin-left: 15px;
 	text-align: center;
   }
   .text-block-h2-2 {
+	  text-align: center;
+  }
+   .text-block-h2-3 {
 	  text-align: center;
   }
   .btnmob {
