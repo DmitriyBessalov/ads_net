@@ -32,8 +32,13 @@ class ArticleController
         }
 
         switch ($_GET['active']){
-            case '0': break;
-            default: {$str.=" AND `active`='1'";$_GET['active']='1';}
+            case '0':
+            case 'all':
+                break;
+            case '1':{
+                $str.=" AND `active`='1'";
+                $_GET['active']='1';
+            }
         }
 
         if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{if ($GLOBALS['role']=='advertiser'){$datebegin=date('d.m.Y', strtotime("-7 days"));}else{$datebegin=date('d.m.Y');}}
@@ -159,54 +164,54 @@ class ArticleController
                      echo '
 	                 </div>
 					 </div>
-	         <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 298px; height: 70px; margin-left: -20px; margin-top: 76px; position: relative;"></div>
-	         <div style="padding-left: 20px; min-height: 143px; border-bottom: 1px solid rgb(224, 229, 233); padding-right: 20px; padding-top: 10px; background: #fff; margin-left: -20px; margin-right: -20px; padding-bottom: 15px; border-radius: 0 0 8px 8px;">
-             <a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">
-			     <div class="text-block-103" style="margin-bottom: 15px; min-height: 44px;">' . $promo['title'] . '</div>
-			 </a>
-             <div class="text-block-104"><span style="margin-right:20px;">' . $promo['namebrand'] . '</span><span>Расход: ' . sprintf("%.2f", $promosum['pay']) . '<span></div>
-		     <div class="text-block-103" style="color:#116DD6 !importante; margin-top: 20px; margin-bottom: 0px; padding-bottom: 5px; display: flex;">
-		         <div style="margin-right:20px; display: flex; min-width: 55px;">
-                     <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">           
-                     <g>
-                     <title>Показы</title>
-                     <ellipse fill="#000000" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="10.031256" cy="9.984176" rx="8.8" ry="8.8" fill-opacity="0.01" id="svg_3" stroke="#116dd6"/>
-                     <ellipse fill="#000000" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="10.071417" cy="9.958791" rx="4.933139" ry="4.933139" fill-opacity="0.01" id="svg_4" stroke="#116dd6"/>
-                     </g>
-                     </svg>
-		             <div style="margin-left: 4px; line-height: 1.2;">' . $pokaz . '</div>
-		         </div>
-		         <div style="margin-right:20px; display: flex; min-width: 55px;">
-		             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
-                     <g>
-                     <title>Дочитывания</title>
-                     <path stroke="#116dd6" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" d="m14.658014,2.974384c-1.185988,-1.151986 -2.465142,-2.074799 -3.514442,-2.200606c-0.057123,-0.00816 -0.116286,-0.01292 -0.17885,-0.014281l-6.905796,0c-0.110167,0 -0.218973,0.042843 -0.296497,0.122407c-0.076844,0.077524 -0.122407,0.186331 -0.122407,0.297178l0,17.511006c0,0.110167 0.042843,0.215572 0.122407,0.295817c0.079565,0.078885 0.18429,0.121727 0.296497,0.121727l12.488238,0c0.110167,0 0.215572,-0.042163 0.295137,-0.121727c0.079565,-0.079565 0.123767,-0.18497 0.123767,-0.295817l0,-11.65247c-0.024481,-1.352598 -1.083982,-2.827603 -2.308052,-4.063234l-0.000001,0l-0.000001,0zm1.468885,15.294759l-11.650429,0l0,-16.673198l6.488933,0l0,0.00136c0.282896,-0.017001 0.52703,0.262495 0.714041,0.901731c0.17001,0.608635 0.212852,1.402241 0.212172,1.952392c0.00136,0.403263 -0.018361,0.673919 -0.018361,0.673919l-0.033322,0.443385l0.446106,0.00476c0.002041,0 1.030939,0.012241 2.040117,0.241414c0.969735,0.209452 1.72798,0.626996 1.798703,1.099623c0.00272,0.042163 0.0034,0.084325 0.00272,0.123767l0,11.230845l-0.00068,0l0,0.000001l0,0.000001z" id="svg_19"/>
-                     <rect stroke="#116dd6" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="4.439774" width="2.867333" height="0.300339" id="svg_1"/>
-                     <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="8.202145" width="6.5" height="0.300339" stroke="#116dd6" id="svg_3"/>
-                     <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="11.658168" width="6.5" height="0.300339" stroke="#116dd6" id="svg_4"/>
-                     <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="15.076573" width="6.5" height="0.300339" stroke="#116dd6" id="svg_5"/>
-                     </g>
-                     </svg>
-		             <div style="margin-left: 4px; line-height: 1.2;">' . $promosum['st'] . '</div>
-		         </div>
-		   
-		         <div style="margin-right:20px; display: flex;">
-		         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
-                 <g>
-                 <title>CTR</title>
-                 <polyline id="svg_1" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
-                 <polyline id="svg_16" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
-                 <polyline id="svg_17" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
-                 <polyline id="svg_18" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
-                 <path stroke="#116dd6" fill="#116dd6" d="m10.59584,15.4117c0.48702,-0.17876 0.88648,-0.34521 0.12995,-0.35008c-0.66813,0.08979 -2.39651,-0.57024 -1.01129,-0.89466c0.86662,-0.33836 2.83885,0.44319 2.84936,-0.89368c-0.15677,-0.83779 -2.70078,-0.18366 -1.86389,-1.30725c0.92169,-0.37687 2.74933,0.51109 3.05851,-0.6551c-0.28343,-1.13076 -2.05619,-0.40911 -2.94724,-0.72162c-0.8638,0.17817 -1.09127,-0.9577 -0.12182,-0.78625c2.24111,-0.12091 4.49786,0.05654 6.73124,-0.1902c0.36077,-0.19983 0.62744,-1.42909 0.17217,-1.51186c-3.25336,-0.06741 -6.51247,-0.00545 -9.76068,-0.20653c-1.16697,-0.01212 -0.27534,-1.25822 0.58698,-0.96558c0.82142,-0.26899 1.14695,-0.97428 1.74982,-1.6707c0.30807,-1.52224 -1.17256,-0.95726 -1.77724,-0.51181c-0.67521,0.44266 -1.83661,1.3615 -2.45272,1.84385c-0.54008,0.39053 -1.78439,0.82388 -2.54131,1.34738c-0.64699,0.22993 -1.35499,0.11546 -1.99046,0.15675c0,2.06248 0,4.12491 0,6.18739c1.79783,0.78283 3.68966,1.47046 5.68279,1.3918c1.16757,-0.00476 2.36867,0.03892 3.50579,-0.26185l0,0l0.00001,0zm-7.40716,0.66151c-0.91777,-0.35263 -1.83387,-0.70976 -2.74332,-1.08338c0.04352,-2.57559 0.08705,-5.15121 0.13057,-7.7268c0.72612,-0.02757 1.80355,0.3326 2.3211,-0.19774c1.39148,-0.4466 2.2949,-1.43439 3.51473,-2.17578c0.85843,-0.67453 1.54411,-0.90475 2.43075,-1.41629c0.67345,-0.31143 1.03808,-0.15239 1.79642,-0.01661c0.33075,0.54124 0.74134,0.82098 0.52828,1.85206c-0.44459,0.22364 -1.02154,1.72671 -0.14786,1.73867c2.43234,0.23308 4.90385,-0.09452 7.31705,0.31285c0.60091,0.81353 0.71551,2.6412 -0.38429,3.1571c-1.05249,0.3043 -2.1622,0.15336 -3.24353,0.18995c-0.00007,0.76964 0.12717,1.7518 -0.72707,2.13841c-0.63077,0.8227 -0.67513,2.03127 -1.69152,2.63327c-0.85483,0.87593 -2.07168,1.14651 -3.25862,1.11763c-1.94627,0.02638 -3.99491,0.21296 -5.84269,-0.52324l0,-0.00006l0,0l0,-0.00002z" id="svg_2" transform="rotate(-90.6750717163086 9.615716934204102,9.964977264404297) "/>
-                 </g>
-                 </svg>
-		         <div style="margin-left: 4px; line-height: 1.2;">' . $CRT . '</div>
-		         </div>
-		       </div>
-	        </div>
-	     </div>
-    </div>';
+                     <div style="background: linear-gradient(0deg, rgb(255, 255, 255), rgb(17, 109, 214, 0.0)); width: 298px; height: 70px; margin-left: -20px; margin-top: 76px; position: relative;"></div>
+                     <div style="padding-left: 20px; min-height: 143px; border-bottom: 1px solid rgb(224, 229, 233); padding-right: 20px; padding-top: 10px; background: #fff; margin-left: -20px; margin-right: -20px; padding-bottom: 15px; border-radius: 0 0 8px 8px;">
+                     <a style="color: #333333; outline: none; text-decoration: none;" href="/article-edit-content?id=' . $i['main_promo_id'] . '">
+                         <div class="text-block-103" style="margin-bottom: 15px; min-height: 44px;">' . $promo['title'] . '</div>
+                     </a>
+                     <div class="text-block-104"><span style="margin-right:20px;">' . $promo['namebrand'] . '</span><span>Расход: ' . sprintf("%.2f", $promosum['pay']) . '<span></div>
+                     <div class="text-block-103" style="color:#116DD6 !importante; margin-top: 20px; margin-bottom: 0px; padding-bottom: 5px; display: flex;">
+                         <div style="margin-right:20px; display: flex; min-width: 55px;">
+                             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">           
+                             <g>
+                             <title>Показы</title>
+                             <ellipse fill="#000000" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="10.031256" cy="9.984176" rx="8.8" ry="8.8" fill-opacity="0.01" id="svg_3" stroke="#116dd6"/>
+                             <ellipse fill="#000000" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" cx="10.071417" cy="9.958791" rx="4.933139" ry="4.933139" fill-opacity="0.01" id="svg_4" stroke="#116dd6"/>
+                             </g>
+                             </svg>
+                             <div style="margin-left: 4px; line-height: 1.2;">' . $pokaz . '</div>
+                         </div>
+                         <div style="margin-right:20px; display: flex; min-width: 55px;">
+                             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                             <g>
+                             <title>Дочитывания</title>
+                             <path stroke="#116dd6" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" d="m14.658014,2.974384c-1.185988,-1.151986 -2.465142,-2.074799 -3.514442,-2.200606c-0.057123,-0.00816 -0.116286,-0.01292 -0.17885,-0.014281l-6.905796,0c-0.110167,0 -0.218973,0.042843 -0.296497,0.122407c-0.076844,0.077524 -0.122407,0.186331 -0.122407,0.297178l0,17.511006c0,0.110167 0.042843,0.215572 0.122407,0.295817c0.079565,0.078885 0.18429,0.121727 0.296497,0.121727l12.488238,0c0.110167,0 0.215572,-0.042163 0.295137,-0.121727c0.079565,-0.079565 0.123767,-0.18497 0.123767,-0.295817l0,-11.65247c-0.024481,-1.352598 -1.083982,-2.827603 -2.308052,-4.063234l-0.000001,0l-0.000001,0zm1.468885,15.294759l-11.650429,0l0,-16.673198l6.488933,0l0,0.00136c0.282896,-0.017001 0.52703,0.262495 0.714041,0.901731c0.17001,0.608635 0.212852,1.402241 0.212172,1.952392c0.00136,0.403263 -0.018361,0.673919 -0.018361,0.673919l-0.033322,0.443385l0.446106,0.00476c0.002041,0 1.030939,0.012241 2.040117,0.241414c0.969735,0.209452 1.72798,0.626996 1.798703,1.099623c0.00272,0.042163 0.0034,0.084325 0.00272,0.123767l0,11.230845l-0.00068,0l0,0.000001l0,0.000001z" id="svg_19"/>
+                             <rect stroke="#116dd6" fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="4.439774" width="2.867333" height="0.300339" id="svg_1"/>
+                             <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="8.202145" width="6.5" height="0.300339" stroke="#116dd6" id="svg_3"/>
+                             <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="11.658168" width="6.5" height="0.300339" stroke="#116dd6" id="svg_4"/>
+                             <rect fill="none" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" fill-opacity="0.01" x="6.65345" y="15.076573" width="6.5" height="0.300339" stroke="#116dd6" id="svg_5"/>
+                             </g>
+                             </svg>
+                             <div style="margin-left: 4px; line-height: 1.2;">' . $promosum['st'] . '</div>
+                         </div>
+                   
+                         <div style="margin-right:20px; display: flex;">
+                         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+                         <g>
+                         <title>CTR</title>
+                         <polyline id="svg_1" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
+                         <polyline id="svg_16" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
+                         <polyline id="svg_17" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
+                         <polyline id="svg_18" points="40.825168608598496,4.222750587355453 " opacity="0.5" fill-opacity="0.01" stroke-linecap="round" stroke-linejoin="null" stroke-dasharray="null" stroke-width="null" stroke="#116dd6" fill="none"/>
+                         <path stroke="#116dd6" fill="#116dd6" d="m10.59584,15.4117c0.48702,-0.17876 0.88648,-0.34521 0.12995,-0.35008c-0.66813,0.08979 -2.39651,-0.57024 -1.01129,-0.89466c0.86662,-0.33836 2.83885,0.44319 2.84936,-0.89368c-0.15677,-0.83779 -2.70078,-0.18366 -1.86389,-1.30725c0.92169,-0.37687 2.74933,0.51109 3.05851,-0.6551c-0.28343,-1.13076 -2.05619,-0.40911 -2.94724,-0.72162c-0.8638,0.17817 -1.09127,-0.9577 -0.12182,-0.78625c2.24111,-0.12091 4.49786,0.05654 6.73124,-0.1902c0.36077,-0.19983 0.62744,-1.42909 0.17217,-1.51186c-3.25336,-0.06741 -6.51247,-0.00545 -9.76068,-0.20653c-1.16697,-0.01212 -0.27534,-1.25822 0.58698,-0.96558c0.82142,-0.26899 1.14695,-0.97428 1.74982,-1.6707c0.30807,-1.52224 -1.17256,-0.95726 -1.77724,-0.51181c-0.67521,0.44266 -1.83661,1.3615 -2.45272,1.84385c-0.54008,0.39053 -1.78439,0.82388 -2.54131,1.34738c-0.64699,0.22993 -1.35499,0.11546 -1.99046,0.15675c0,2.06248 0,4.12491 0,6.18739c1.79783,0.78283 3.68966,1.47046 5.68279,1.3918c1.16757,-0.00476 2.36867,0.03892 3.50579,-0.26185l0,0l0.00001,0zm-7.40716,0.66151c-0.91777,-0.35263 -1.83387,-0.70976 -2.74332,-1.08338c0.04352,-2.57559 0.08705,-5.15121 0.13057,-7.7268c0.72612,-0.02757 1.80355,0.3326 2.3211,-0.19774c1.39148,-0.4466 2.2949,-1.43439 3.51473,-2.17578c0.85843,-0.67453 1.54411,-0.90475 2.43075,-1.41629c0.67345,-0.31143 1.03808,-0.15239 1.79642,-0.01661c0.33075,0.54124 0.74134,0.82098 0.52828,1.85206c-0.44459,0.22364 -1.02154,1.72671 -0.14786,1.73867c2.43234,0.23308 4.90385,-0.09452 7.31705,0.31285c0.60091,0.81353 0.71551,2.6412 -0.38429,3.1571c-1.05249,0.3043 -2.1622,0.15336 -3.24353,0.18995c-0.00007,0.76964 0.12717,1.7518 -0.72707,2.13841c-0.63077,0.8227 -0.67513,2.03127 -1.69152,2.63327c-0.85483,0.87593 -2.07168,1.14651 -3.25862,1.11763c-1.94627,0.02638 -3.99491,0.21296 -5.84269,-0.52324l0,-0.00006l0,0l0,-0.00002z" id="svg_2" transform="rotate(-90.6750717163086 9.615716934204102,9.964977264404297) "/>
+                         </g>
+                         </svg>
+                         <div style="margin-left: 4px; line-height: 1.2;">' . $CRT . '</div>
+                         </div>
+                       </div>
+                    </div>
+                 </div>
+            </div>';
                 }
             }
             if (isset($today)) {
@@ -1155,7 +1160,21 @@ class ArticleController
 
 					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">	
                         <div>
-                            <div class="text-block-103">Регионы</div>				
+                            <div class="text-block-103">Scroll2Site</div>
+                            <input type="checkbox" style="margin:10px" name="scroll2site" class="checkbox" id="Scroll2Site" ';
+                            if ($result['scroll2site'])
+                                  echo 'checked="" ';
+                              echo '/>
+                            <label for="Scroll2Site">Активен</label>		
+                            <input name="scroll2site_text" type="text" value="'.$result['scroll2site_text'].'" maxlength="54" class="text-field-2 w-input" placeholder="Текст" style="width: 760px;">
+                            <input name="scroll2site_url" type="text" value="'.$result['scroll2site_url'].'" class="text-field-2 w-input" placeholder="URL" style="width: 760px;">
+                        </div>
+                    </div>
+                    <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
+                    
+                    <div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">
+                        <div>
+                            <div class="text-block-103">Регионы</div>
                             <input name="searchgeo" type="text" class="text-field-2 w-input" maxlength="128" placeholder="Поиск" style="width: 760px;">
                             <div id="geolist" style="display: none;position: relative;top: -11px;z-index: 100;border: 1px solid #E0E1E5 ;"></div>
                             <input type="hidden" name="geo" value="">
@@ -1163,7 +1182,6 @@ class ArticleController
                             </div>
                         </div>
                     </div>
-                    
                     
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
