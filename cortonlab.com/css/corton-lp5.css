@@ -719,7 +719,7 @@ p {
 	   display: none;
 	}
 	.imgauditor {
-	max-width:240px; 
+	max-width:280px; 
 	margin-bottom:20px;
 	margin-top:40px;
    }
@@ -1660,6 +1660,9 @@ p {
   line-height: 26px;
   font-weight: 400;
   margin-top: 40px;
+  text-align: left;
+  width: 100%;
+  max-width: 570px;
 }
 .text-block-14contact {
   margin-right: 40px;
@@ -2158,6 +2161,17 @@ p {
   text-transform: none;
 }
 
+.text-block-h2 {
+  font-family: 'Myriadpro Regular';
+  color: #116dd6;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  font-size: 28px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
 .blockbiginfo {
 	padding: 40px; 
 	border-radius: 8px;
@@ -2212,7 +2226,7 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 60%;
+  width: 92%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -3430,6 +3444,12 @@ margin-left: 15px;
   font-size: 22px;
   line-height: 28px;
 }
+.div-block-61twotype {
+	width: 100%
+}
+.div-block-61type {
+	width: 100%
+}
 .haudit {
     font-size: 22px;
     line-height: 28px;
@@ -3456,6 +3476,7 @@ margin-left: 15px;
   .text-block-16-2 {
      font-size: 18px;
      line-height: 24px;
+	 margin-top: 10px;
   }
   
   .div-block-74-2 {
@@ -3774,11 +3795,21 @@ margin-left: 15px;
     font-size: 22px;
     line-height: 28px;
   }
+  .text-block-h2 {
+    font-size: 26px;
+    line-height: 1.3;
+	text-align: center;
+}
+
   .text-block-18 {
     direction: ltr;
     font-size: 18px;
     line-height: 24px;
   }
+  .btnmob {
+   width: 100%;
+   text-align: center;   
+}
   .div-block-61 {
     width: 100%;
     margin-bottom: 60px;
@@ -3921,12 +3952,27 @@ margin-left: 15px;
   .hblockinfo {
   font-size: 22px;
   line-height: 28px;
+  text-align: center;
+}
+.div-block-61twotype {
+	width: 100%
+}
+.steapmob {
+	margin-top: -30px;
+}
+.imgadpeapol {
+	width: 100%;
+    text-align: center;
+	margin-top: -20px;
+}
+.div-block-61type {
+	width: 100%
 }
 .haudit {
     font-size: 22px;
     line-height: 28px;
 	margin-bottom: 10px;
-	text-align: left;
+	text-align: center;
 }
 .blocagent {
 	padding: 60px 4% 60px !important;
@@ -3970,6 +4016,7 @@ margin-left: 15px;
   .text-block-16-2 {
 	font-size: 18px;
     line-height: 24px;
+	margin-top: 0px;
   }
   
   .button.contact {
@@ -4054,11 +4101,12 @@ margin-left: 15px;
     margin-bottom: 20px;
     font-size: 32px;
     line-height: 34px;
-	text-align: left;
+	text-align: center;
   }
   .heading-homeadv {
 	font-size: 32px;
     line-height: 34px;
+	text-align: center;
   }
 
   .image-5 {
@@ -4172,7 +4220,10 @@ margin-left: 15px;
     font-size: 18px;
     line-height: 24px;
 	padding: 0%;
-	text-align: left !important;
+	text-align: center !important;
+  }
+  .text-block-14homeadv {
+	  text-align: center;
   }
   .div-block-43 {
     margin-top: 0vw;
@@ -4310,12 +4361,25 @@ margin-left: 15px;
     font-family: 'Myriadpro SemiExt';
     font-size: 18px;
     line-height: 24px;
+	text-align: center;
+    width: 100%;
   }
+    .text-block-h2 {
+    font-size: 24px;
+    line-height: 1.3;
+	text-align: center;
+    width: 100%;
+}
   .text-block-18 {
     font-size: 18px;
     line-height: 24px;
 	margin-bottom: 20px;
+	text-align: center;
   }
+  .btnmob {
+   width: 100%;
+   text-align: center;   
+}
   .div-block-61 {
     margin-bottom: 40px;
   }
