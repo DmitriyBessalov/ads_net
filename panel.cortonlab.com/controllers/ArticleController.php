@@ -31,16 +31,6 @@ class ArticleController
             }
         }
 
-        switch ($_GET['active']){
-            case '0':
-            case 'all':
-                break;
-            case '1':{
-                $str.=" AND `active`='1'";
-                $_GET['active']='1';
-            }
-        }
-
         if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{if ($GLOBALS['role']=='advertiser'){$datebegin=date('d.m.Y', strtotime("-7 days"));}else{$datebegin=date('d.m.Y');}}
         if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');}
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
@@ -54,15 +44,18 @@ class ArticleController
                 $redis->select(1);
             }
 
-            $sql = "SELECT `main_promo_id`, SUM(`active`) as `active` FROM `promo` WHERE ".$str." GROUP BY `main_promo_id` ORDER BY `main_promo_id` DESC";
+            $sql = "SELECT `main_promo_id`, MAX(`active`) as `active` FROM `promo` WHERE `main_promo_id` IN (SELECT `main_promo_id` FROM `promo` WHERE ".$str.") GROUP BY `main_promo_id` ORDER BY `main_promo_id` DESC";
             $main_promo_id = $GLOBALS['db']->query($sql)->fetchall(PDO::FETCH_ASSOC);
 
             foreach ($main_promo_id as $i) {
+
                 $begin = true;
                 if ($_GET['active'] == '0') {
                     if ($i['active'])
                         $begin = false;
-                }
+                }elseif ($_GET['active'] == '1')
+                    if (!$i['active'])
+                        $begin = false;
 
                 if ($begin) {
                     $sql = "SELECT `title`,`namebrand`,`text`  FROM `promo` WHERE `id`='" . $i['main_promo_id'] . "'";
