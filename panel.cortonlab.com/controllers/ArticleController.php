@@ -50,11 +50,9 @@ class ArticleController
             foreach ($main_promo_id as $i) {
 
                 $begin = true;
-                if ($_GET['active'] == '0') {
-                    if ($i['active'])
+                if (($_GET['active'] == '0') and ($i['active']==1)){
                         $begin = false;
-                }elseif ($_GET['active'] == '1')
-                    if (!$i['active'])
+                } elseif (($_GET['active'] == '1') and ($i['active']==0))
                         $begin = false;
 
                 if ($begin) {
