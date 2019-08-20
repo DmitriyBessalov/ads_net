@@ -2211,9 +2211,17 @@ p {
   margin-bottom: 20px;
   text-align: center;
 }
-  .text-block-h2-3 {
-	  text-align: left;
-  }
+.text-block-h2-3 {
+	 font-family: 'Myriadpro Regular';
+     color: #116dd6;
+     font-weight: 600;
+     letter-spacing: 0.5px;
+     text-transform: none;
+     font-size: 28px;
+     line-height: 1.3;
+     margin-bottom: 20px;
+	 text-align: left;
+}
 .text-block-h2-2 {
   font-family: 'Myriadpro Regular';
   color: #116dd6;
