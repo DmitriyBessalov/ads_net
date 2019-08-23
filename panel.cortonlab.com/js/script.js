@@ -1063,8 +1063,8 @@ $(document).ready(function(){
         $('#screenshot_mobile').html('');
         uri=$('[name=scroll2site_url]').val();
         $.post("https://panel.cortonlab.com/article-edit-target-img-upload?id="+id+"&url="+uri,function(data){
-            $('#screenshot_desktop').html('<img src="https://api.cortonlab.com/img/rekl_screenshot_site/'+id+'_desktop.png?timestamp='+Date.now()+'">');
-            $('#screenshot_mobile').html('<img src="https://api.cortonlab.com/img/rekl_screenshot_site/'+id+'_mobile.png?timestamp='+Date.now()+'">');
+            $('#screenshot_desktop').html('<img src="https://185.75.90.54/img/rekl_screenshot_site/'+id+'_desktop.png?timestamp='+Date.now()+'">');
+            $('#screenshot_mobile').html('<img src="https://185.75.90.54/img/rekl_screenshot_site/'+id+'_mobile.png?timestamp='+Date.now()+'">');
         });
     });
     var img = $('#screenshot_desktop > img'); if ($(img).width()<=200){img.remove()}
