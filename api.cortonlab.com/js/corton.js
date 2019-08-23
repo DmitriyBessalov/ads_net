@@ -147,7 +147,7 @@ if (corton_complete!=1) {
                     }
                 };
 
-                h_scroll=promo_content.scrollHeight+70;
+                h_scroll=promo_content.scrollHeight+40;
                 zasvet=0;
 
                 window.addEventListener('scroll', function() {
@@ -161,7 +161,7 @@ if (corton_complete!=1) {
                             image_fon.src="https://api.cortonlab.com/img/rekl_screenshot_site/"+result['id']+"_desktop.png";
                         }
                     }else{
-                        h_scroll=promo_content.scrollHeight+70;
+                        h_scroll=promo_content.scrollHeight+40;
                     }
 
                     if((i<=0)&&(i>=-100)){
