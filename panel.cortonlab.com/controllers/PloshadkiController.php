@@ -1294,6 +1294,66 @@ var myLineChart = new Chart(ctx, {
                                     <option '; if ($result['form-button-text-size']=="30"){echo 'selected ';} echo 'value="30">30 px</option>
                                 </select>
                             </div>
+                            
+                            <div class="html-embed-15 w-embed">
+                                <br>
+                                <br>
+                                <strong class="bold-text-10">Scroll2Site</strong>
+                                
+                                <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['scroll2site_activ']) echo ' checked '; echo ' name="scroll2site_activ" class="form-radiozag">
+                                      <label style="margin-top:0 !important;" class="w-form-label">
+                                         <a style="color:#333;" class="link">Активен</a>
+                                      </label>
+                                </div>
+                                
+                                <label>Цвет блока с надписью</label>
+                                <input value="'.$result['scroll2site_fon_color'].'" name="scroll2site_fon_color" class="jscolor">
+                                <br>
+
+                                <label>Шрифт блока с надписью</label>
+                                <select name="scroll2site_text_font">
+									<option value="">Шрифт</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Arial, Helvetica"){echo 'selected ';} echo 'value="Arial, Helvetica">Arial, Helvetica</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Arial Black, Gadget"){echo 'selected ';} echo 'value="Arial Black, Gadget">Arial Black, Gadget</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Impact, Charcoal"){echo 'selected ';} echo 'value="Impact, Charcoal">Impact, Charcoal</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Tahoma, Geneva"){echo 'selected ';} echo 'value="Tahoma, Geneva">Tahoma, Geneva</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Trebuchet MS, Helvetica"){echo 'selected ';} echo 'value="Trebuchet MS, Helvetica">Trebuchet MS, Helvetica</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Verdana, Geneva"){echo 'selected ';} echo 'value="Verdana, Geneva">Verdana, Geneva</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Georgia"){echo 'selected ';} echo 'value="Georgia">Georgia</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Palatino"){echo 'selected ';} echo 'value="Palatino">Palatino</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Times New Roman"){echo 'selected ';} echo 'value="Times New Roman">Times New Roman</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Open Sans"){echo 'selected ';} echo 'value="Open Sans">Open Sans</option>
+                                    <option '; if ($result['scroll2site_text_font']=="Roboto"){echo 'selected ';} echo 'value="Roboto">Roboto</option>
+                                </select>
+                                <br>
+            
+                                <label>Размер шрифта</label>
+                                <select name="scroll2site_text_size">
+                                    <option value=""></option>
+                                    <option '; if ($result['scroll2site_text_size']=="10"){echo 'selected ';} echo 'value="10">10px / 1em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="11"){echo 'selected ';} echo 'value="11">11px / 1.1em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="12"){echo 'selected ';} echo 'value="12">12px / 1.2em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="13"){echo 'selected ';} echo 'value="13">13px / 1.3em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="14"){echo 'selected ';} echo 'value="14">14px / 1.4em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="15"){echo 'selected ';} echo 'value="15">15px / 1.5em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="16"){echo 'selected ';} echo 'value="16">16px / 1.6em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="17"){echo 'selected ';} echo 'value="17">17px / 1.7em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="18"){echo 'selected ';} echo 'value="18">18px / 1.8em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="19"){echo 'selected ';} echo 'value="19">19px / 1.9em</option>
+                                    <option '; if ($result['scroll2site_text_size']=="20"){echo 'selected ';} echo 'value="20">20px / 2em</option>
+                                </select>
+                                <br>
+
+                                <label>Цвет шрифта</label>
+                                <input value="'.$result['scroll2site_text_color'].'" name="scroll2site_text_color" class="jscolor">
+                                <br>
+                                
+                                <label>Цвет осветления</label>
+                                <input value="'.$result['scroll2site_perehod_color'].'" name="scroll2site_perehod_color" class="jscolor">
+                                <br>
+                                                                                                
+                            </div>    
                         </div>
                         <input type="submit" value="Сохранить" class="button-7 w-button2">
                     </form>

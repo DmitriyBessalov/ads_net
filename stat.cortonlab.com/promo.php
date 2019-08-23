@@ -178,24 +178,42 @@ switch ($action) {
         $GLOBALS['dbstat']->query($sql);
 
         # Добавление статистики пререходов со статей
-        preg_match('/\d&href=(.*?)&sub_id1=\d/m', $_SERVER['QUERY_STRING'], $matches);
-        $matches[1]=urldecode($matches[1]);
+        //preg_match('/\d&href=(.*?)&sub_id1=\d/m', $_SERVER['QUERY_STRING'], $matches);
+        //$matches[1]=urldecode($matches[1]);
+
+        $url_components = parse_url($_GET['href']);
+        parse_str($url_components['query'], $params);
+
+        if (!isset($_GET['ancor'])){
+               $_GET['ancor']=parse_url($_GET['href'], PHP_URL_HOST);
+               $params['sub_id1']='-1';
+        }else{
+            $_GET['href']=substr($_GET['href'], 0, strpos($_GET['href'], "sub_id1="));
+            $char=substr($_GET['href'],-1);
+            if (($char=='&')or($char=='?')){
+                $_GET['href'] = substr($_GET['href'], 0, -1);
+            }
+        }
+        $char=substr($_GET['href'],-1);
+        if ($char=='/'){
+            $_GET['href'] = substr($_GET['href'], 0, -1);
+        }
 
         $sql ="INSERT INTO `promo_perehod`
                 SET `promo_id` = '".$promo['promo_id']."',
                     `date` = CURDATE(),
-                    `numlink` = '".$_GET['sub_id1']."',
+                    `numlink` = '".$params['sub_id1']."',
                     `ancor` = '".$_GET['ancor']."',
-                    `href` = '".$matches[1]."',
+                    `href` = '".$_GET['href']."',
                     `count` = 1";
         if (!$GLOBALS['dbstat']->exec($sql)){
             $sql ="UPDATE `promo_perehod` 
                    SET `count` =`count` + 1
                    WHERE `promo_id` = '".$promo['promo_id']."' AND
                          `date` = CURDATE() AND
-                         `numlink` = '".$_GET['sub_id1']."' AND
+                         `numlink` = '".$params['sub_id1']."' AND
                          `ancor` = '".$_GET['ancor']."' AND
-                         `href` = '".$matches[1]."'";
+                         `href` = '".$_GET['href']."'";
             $GLOBALS['dbstat']->query($sql);
         }
 }

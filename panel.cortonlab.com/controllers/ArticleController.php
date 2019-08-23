@@ -48,7 +48,6 @@ class ArticleController
             $main_promo_id = $GLOBALS['db']->query($sql)->fetchall(PDO::FETCH_ASSOC);
 
             foreach ($main_promo_id as $i) {
-
                 $begin = true;
                 if (($_GET['active'] == '0') and ($i['active']==1)){
                         $begin = false;
@@ -270,7 +269,12 @@ class ArticleController
                 }else{
                     $href=$i['href'];
                 }
-                $i['numlink']++;
+                if($i['numlink']=='-1'){
+                    $i['numlink']='Склолл на сайт';
+                }else{
+                    $i['numlink']++;
+                }
+
                 echo '<tr>
                     <td>'.$i['numlink'].'</td>
                     <td>'.$i['ancor'].'</td>
@@ -609,8 +613,17 @@ class ArticleController
             }
 
             if ($_POST['checkbox_merge']=='on')$_POST['checkbox_merge']=1;
+            if ($_POST['scroll2site']=='on')$_POST['scroll2site']=1;
 
-            $sql="UPDATE `promo` SET `words`='".$strtolow."',`region`='".$_POST['geo']."', `id_user_advertiser`='".$_POST['advertiser']."', `namebrand`='".$_POST['namebrand']."', `merge_key_and_categor`='".$_POST['checkbox_merge']."' WHERE `id`='".$_POST['id']."';";
+            $sql="UPDATE `promo` SET `words`='".$strtolow."',
+                `region`='".$_POST['geo']."',   
+                `id_user_advertiser`='".$_POST['advertiser']."',
+                `namebrand`='".$_POST['namebrand']."',
+                `merge_key_and_categor`='".$_POST['checkbox_merge']."',
+                `scroll2site`='".$_POST['scroll2site']."',
+                `scroll2site_text`='".$_POST['scroll2site_text']."',
+                `scroll2site_url`='".$_POST['scroll2site_url']."'
+             WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."', `persent_platform`='".$_POST['persent_platform']."' WHERE `promo_id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
@@ -1149,16 +1162,24 @@ class ArticleController
                     </div>
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 
-					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">	
+					<div class="div-block-97" style="display: flex;padding: 20px 0 0 0;">
                         <div>
                             <div class="text-block-103">Scroll2Site</div>
                             <input type="checkbox" style="margin:10px" name="scroll2site" class="checkbox" id="Scroll2Site" ';
-                            if ($result['scroll2site'])
-                                  echo 'checked="" ';
-                              echo '/>
+                            if ($result['scroll2site']) {
+                                echo 'checked="" ';
+                            }else{
+                                $disabled='disabled';
+                            }
+                            echo '/>
                             <label for="Scroll2Site">Активен</label>		
-                            <input name="scroll2site_text" type="text" value="'.$result['scroll2site_text'].'" maxlength="54" class="text-field-2 w-input" placeholder="Текст" style="width: 760px;">
-                            <input name="scroll2site_url" type="text" value="'.$result['scroll2site_url'].'" class="text-field-2 w-input" placeholder="URL" style="width: 760px;">
+                            <input name="scroll2site_text" type="text" value="'.$result['scroll2site_text'].'" '.$disabled.' required maxlength="54" class="text-field-2 w-input" placeholder="Текст" style="width: 760px;">
+                            <input name="scroll2site_url" type="text" value="'.$result['scroll2site_url'].'" '.$disabled.' required class="text-field-2 w-input" placeholder="URL" style="width: 760px;">
+                            <div id="load_preview_site" class="submit-button-6">Получить миниатюры</div>
+                            <div style="display: flex;flex-direction: row;">
+                                <div id="screenshot_desktop" style="width: 510px;margin: 25px 0 0 0"><img src="https://api.cortonlab.com/img/rekl_screenshot_site/'.$_GET['id'].'_desktop.png"></div>
+                                <div id="screenshot_mobile" style="width: 239px;margin: 25px 0 0 10px"><img src="https://api.cortonlab.com/img/rekl_screenshot_site/'.$_GET['id'].'_mobile.png"></div>
+                            </div>
                         </div>
                     </div>
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
@@ -1167,7 +1188,7 @@ class ArticleController
                         <div>
                             <div class="text-block-103">Регионы</div>
                             <input name="searchgeo" type="text" class="text-field-2 w-input" maxlength="128" placeholder="Поиск" style="width: 760px;">
-                            <div id="geolist" style="display: none;position: relative;top: -11px;z-index: 100;border: 1px solid #E0E1E5 ;"></div>
+                            <div id="geolist" style="display: none; position: relative; top: -11px;z-index: 100; border: 1px solid #E0E1E5 ;"></div>
                             <input type="hidden" name="geo" value="">
                             <div class="div-block-84 geo">
                             </div>
@@ -1237,6 +1258,13 @@ class ArticleController
             $(\'.div-block-84.geo\').html(str);
         </script>';
         return true;
+    }
+
+    public static function actionTarget_img_upload(){
+        $cmd='cd /var/www/www-root && export QT_QPA_PLATFORM=minimal:enable_fonts && python /home/dmitriy/python/site_to_screenshot/index.py '.$_GET['url'].' '.$_GET['id'];
+        echo shell_exec($cmd);
+        echo true;
+        exit;
     }
 
     public static function actionPromo_form()

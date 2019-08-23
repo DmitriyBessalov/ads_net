@@ -1054,6 +1054,33 @@ $(document).ready(function(){
         geo();
     });
 
+    //Загрузка скриншота миниатюры сайта рекламодателя в таргетингах
+    $(document).on('click','#load_preview_site',function(){
+        var url = new URL(location.href);
+        var searchParams = new URLSearchParams(url.search.substring(1));
+        var id = searchParams.get("id");
+        $('#screenshot_desktop').html('');
+        $('#screenshot_mobile').html('');
+        uri=$('[name=scroll2site_url]').val();
+        $.post("https://panel.cortonlab.com/article-edit-target-img-upload?id="+id+"&url="+uri,function(data){
+            $('#screenshot_desktop').html('<img src="https://api.cortonlab.com/img/rekl_screenshot_site/'+id+'_desktop.png?timestamp='+Date.now()+'">');
+            $('#screenshot_mobile').html('<img src="https://api.cortonlab.com/img/rekl_screenshot_site/'+id+'_mobile.png?timestamp='+Date.now()+'">');
+        });
+    });
+    var img = $('#screenshot_desktop > img'); if ($(img).width()<=200){img.remove()}
+    var img = $('#screenshot_mobile > img');  if ($(img).width()<=200){img.remove()}
+
+    //Активация Scroll2Site в таргетингах
+    $('#Scroll2Site').click(function() {
+        if ($(this).is(':checked')){
+            $('input[name=scroll2site_text]').prop('disabled', false);
+            $('input[name=scroll2site_url]').prop('disabled', false);
+        } else {
+            $('input[name=scroll2site_text]').prop('disabled', true);
+            $('input[name=scroll2site_url]').prop('disabled', true);
+        }
+    });
+
     //Отключение отправки форм по нажатию Enter
     $(document).ready(function() {
         $(window).keydown(function(event){
