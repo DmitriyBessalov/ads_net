@@ -160,6 +160,8 @@ if (corton_complete!=1) {
                         }else{
                             image_fon.src="https://api.cortonlab.com/img/rekl_screenshot_site/"+result['id']+"_desktop.png";
                         }
+                    }else{
+                        h_scroll=promo_content.scrollHeight+70;
                     }
 
                     if((i<=0)&&(i>=-100)){
