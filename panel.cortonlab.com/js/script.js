@@ -1067,8 +1067,8 @@ $(document).ready(function(){
             $('#screenshot_mobile').html('<img src="https://185.75.90.54/img/rekl_screenshot_site/'+id+'_mobile.png?timestamp='+Date.now()+'">');
         });
     });
-    var img = $('#screenshot_desktop > img'); if ($(img).width()<=200){img.remove()}
-    var img = $('#screenshot_mobile > img');  if ($(img).width()<=200){img.remove()}
+    var img = $('#screenshot_desktop > img'); if ($(img).width()<=50){img.remove()}
+    var img = $('#screenshot_mobile > img');  if ($(img).width()<=50){img.remove()}
 
     //Активация Scroll2Site в таргетингах
     $('#Scroll2Site').click(function() {
