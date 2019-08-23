@@ -162,6 +162,7 @@ if (corton_complete!=1) {
                         }
                     }else{
                         h_scroll=promo_content.scrollHeight+62;
+                        scroll_to_site.style.width=corton_promo.offsetWidth+'px';
                     }
 
                     if((i<=0)&&(i>=-100)){
@@ -188,10 +189,16 @@ if (corton_complete!=1) {
                     if (i<-182) {
                         g=window.innerHeight/5-window.innerHeight-i;
                         if (g<=0){
-                            //console.log(i,g,y,'Выдвижение картинки');
+                            console.log(i,g,'Выдвижение картинки');
                             vityagivanie_img.style.height = image_fon.height+'px';
-                            background_color.style.top=g  +'px';
-                            background_color.style.height=image_fon.height +'px';
+                            background_color.style.top=i  +'px';
+                            image_fon.style.top=g +'px';
+                            let h=-g-image_fon.height;
+                            if (h<0){
+                                background_color.style.height=-g-image_fon.height +'px';
+                            }else{
+                                background_color.style.height='0px';
+                            }
                         }else{
                             document.body.style.overflow = 'hidden';
                             osvetlenie_redirert();
