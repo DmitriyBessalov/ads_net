@@ -1263,6 +1263,23 @@ class ArticleController
     public static function actionTarget_img_upload(){
         $cmd='cd /var/www/www-root/data/www/python/site_to_screenshot/ && export QT_QPA_PLATFORM=minimal:enable_fonts && python /var/www/www-root/data/www/python/site_to_screenshot/index.py '.$_GET['url'].' '.$_GET['id'];
         echo shell_exec($cmd);
+
+        $redis = new Redis();
+        $redis->pconnect('185.75.90.54', 6379);
+        $redis->select(0);
+        $cache=$redis->get('cdn_cache_update');
+        if ($cache) $cache_arr=json_decode($cache, true);
+
+        $cache_arr['paths'][]='/img/rekl_screenshot_site/'.$_GET['id'].'_mobile.png';
+        $cache_arr['paths'][]='/img/rekl_screenshot_site/'.$_GET['id'].'_desktop.png';
+
+        $cache_arr['paths']=array_unique($cache_arr['paths']);
+        $cache=json_encode($cache_arr);
+        $redis->set('cdn_cache_update',$cache, 1296000);
+        $redis->close();
+
+        exec('wget -q https://api2.cortonlab.com/update_cache_cdn.php -O - >/dev/null 2>&1');
+
         echo true;
         exit;
     }
