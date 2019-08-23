@@ -194,7 +194,7 @@ if (corton_complete!=1) {
                         if (g<=0){
                             console.log(i,g,'Выдвижение картинки');
                             vityagivanie_img.style.height = image_fon.height+'px';
-                            background_color.style.top=i  +'px';
+                            //background_color.style.top=i  +'px';
                             image_fon.style.top=g +'px';
                             let h=-g-image_fon.height;
                             if (h<0){
