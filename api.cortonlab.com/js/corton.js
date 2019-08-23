@@ -149,16 +149,19 @@ if (corton_complete!=1) {
 
                 h_scroll=promo_content.scrollHeight+62;
                 zasvet=0;
-
+                var imgload=false;
                 window.addEventListener('scroll', function() {
                     var i=promo_content.getBoundingClientRect().top+h_scroll-window.innerHeight;
 
                     if (i<300){
                         //console.log(i,'Подгрузка фона картинки');
-                        if(document.body.clientWidth<480){
-                            image_fon.src="https://api.cortonlab.com/img/rekl_screenshot_site/"+result['id']+"_mobile.png";
-                        }else{
-                            image_fon.src="https://api.cortonlab.com/img/rekl_screenshot_site/"+result['id']+"_desktop.png";
+                        if (!imgload) {
+                            if (document.body.clientWidth < 480) {
+                                image_fon.src = "https://api.cortonlab.com/img/rekl_screenshot_site/" + result['id'] + "_mobile.png";
+                            } else {
+                                image_fon.src = "https://api.cortonlab.com/img/rekl_screenshot_site/" + result['id'] + "_desktop.png";
+                            }
+                            imgload = true;
                         }
                     }else{
                         h_scroll=promo_content.scrollHeight+62;
@@ -197,7 +200,7 @@ if (corton_complete!=1) {
                             if (h<0){
                                 background_color.style.height=-g-image_fon.height +'px';
                             }else{
-                                background_color.style.height='0px';
+                                background_color.style.height='1px';
                             }
                         }else{
                             document.body.style.overflow = 'hidden';
