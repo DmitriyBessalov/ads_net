@@ -1261,7 +1261,7 @@ class ArticleController
     }
 
     public static function actionTarget_img_upload(){
-        $cmd='cd /var/www/www-root && export QT_QPA_PLATFORM=minimal:enable_fonts && python /home/dmitriy/python/site_to_screenshot/index.py '.$_GET['url'].' '.$_GET['id'];
+        $cmd='cd /var/www/www-root && export QT_QPA_PLATFORM=minimal:enable_fonts && python /var/www/www-root/data/www/python/site_to_screenshot/index.py '.$_GET['url'].' '.$_GET['id'];
         echo shell_exec($cmd);
         echo true;
         exit;
