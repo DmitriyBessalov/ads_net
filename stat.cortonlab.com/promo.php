@@ -178,8 +178,6 @@ switch ($action) {
         $GLOBALS['dbstat']->query($sql);
 
         # Добавление статистики пререходов со статей
-        //preg_match('/\d&href=(.*?)&sub_id1=\d/m', $_SERVER['QUERY_STRING'], $matches);
-        //$matches[1]=urldecode($matches[1]);
 
         $url_components = parse_url($_GET['href']);
         parse_str($url_components['query'], $params);

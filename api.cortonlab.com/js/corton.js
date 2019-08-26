@@ -112,7 +112,7 @@ if (corton_complete!=1) {
                 'div#scroll_border{background-color:#' + scroll2site_fon_color + ';min-height:80px;border:1px solid #ddd;width:100%;display:flex;align-items:center;justify-content:center;} '+
                 'div#scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
                 'div#vityagivanie_img{overflow:hidden;} '+
-                'div#background_color{background-color: #000;} '+
+                'div#background_color{background-color: #000;overflow: hidden;} '+
                 'img#image-fon{top:0;opacity:0.97;width:100%;max-width:100%;} '+
                 'div#banner-shadow{z-index:10;position:absolute;top:82px;left:0;width:100%;height:85px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent);} '+
                 'div#osvetlenie{position:fixed;display:none;opacity:0;background-color:#'+scroll2site_perehod_color+';z-index:99999;top:0;left:0;width:100%;height:100%;} '+
@@ -184,7 +184,7 @@ if (corton_complete!=1) {
                     if(i<=-100){
                         let i2=-100-i;
                         //console.log(i,i2,'Остановка футтер');
-                        promo_content.style.padding='0 0 '+i2+'px 0';
+                       // promo_content.style.padding='0 0 '+i2+'px 0';
                     }else{
                         scroll_to_site.style.display='none';
                     }
@@ -202,16 +202,15 @@ if (corton_complete!=1) {
                             }else{
                                 background_color.style.height='1px';
                             }
+
                         }else{
-                            document.body.style.overflow = 'hidden';
-                            osvetlenie_redirert();
+                            //document.body.style.overflow = 'hidden';
+                           // osvetlenie_redirert();
                         }
                     }
                 });
 
                 //console.log('scroll2site');
-            }else{
-                widget_promo.innerHTML=promo;
             }
 
 
