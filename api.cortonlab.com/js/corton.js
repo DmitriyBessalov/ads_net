@@ -69,7 +69,7 @@ if (corton_complete!=1) {
 
             const promo_selector_title = style_b.getPropertyValue('--selectortitle');
 
-            var promo= '<div id="promo_content">'+result['text']+form+logo+'</div><div id="scroll_to_site">0</div><div id="osvetlenie"></div>';
+            var promo= '<div id="promo_content">'+result['text']+form+logo+'</div><div id="scroll_to_site"></div><div id="osvetlenie"></div>';
 
             if (promo_selector_title.length!=0){
                 let ele = document.querySelectorAll(promo_selector_title);
