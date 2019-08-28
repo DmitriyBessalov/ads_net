@@ -190,6 +190,8 @@ input[type="text"]:disabled{
 	z-index: 10;
 	cursor: pointer;
 }
+
+
 .image-preview label {
 	position: absolute;
 	z-index: 5;
@@ -215,6 +217,22 @@ input[type="text"]:disabled{
 }
 .image-preview._180 input {
 	line-height: 180px;
+}
+
+.image-preview._510 {
+	width: 510px;
+	height: 300px;
+}
+.image-preview._510 input {
+	line-height: 510px;
+}
+
+.image-preview._239 {
+	width: 239px;
+	height: 300px;
+}
+.image-preview._239 input {
+	line-height: 239px;
 }
 
 .div-block-148 {

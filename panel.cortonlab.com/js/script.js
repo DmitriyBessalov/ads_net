@@ -942,6 +942,51 @@ $(document).ready(function(){
         reader.readAsDataURL(file);
     });
 
+    //Подгрузка десктоп скриншота в таргетингах
+    $(document).on('change','.image-upload510',function(){
+        var files = this.files;
+        var file = files[0];
+        var reader = new FileReader();
+        var diver=this;
+        reader.addEventListener("load",function(event) {
+            var loadedFile = event.target;
+            if (file.type.match('image')) {
+                $(diver).parent('div').css("background-image", "url("+loadedFile.result+")");
+                $(diver).parent('div').css("background-position", "center center");
+                $(diver).parent('div').css("background-repeat", "no-repeat");
+                $(diver).parent('div').css("background-size", "cover");
+                $(diver).parent('div').children('label').css("background-color", "#e1e2e8");
+                $(diver).parent('div').children('label').html("Скриншот десктоп");
+            } else {
+                alert("This file type is not supported yet.");
+            }
+        });
+        reader.readAsDataURL(file);
+    });
+
+    //Подгрузка мобильного скриншота  в таргетингах
+    $(document).on('change','.image-upload239',function(){
+        var files = this.files;
+        var file = files[0];
+        var reader = new FileReader();
+        var diver=this;
+        reader.addEventListener("load",function(event) {
+            var loadedFile = event.target;
+            if (file.type.match('image')) {
+                $(diver).parent('div').css("background-image", "url("+loadedFile.result+")");
+                $(diver).parent('div').css("background-position", "center center");
+                $(diver).parent('div').css("background-repeat", "no-repeat");
+                $(diver).parent('div').css("background-size", "cover");
+                $(diver).parent('div').children('label').css("background-color", "#e1e2e8");
+                $(diver).parent('div').children('label').html("Скриншот&nbsp;&nbsp; мобильный");
+            } else {
+                alert("This file type is not supported yet.");
+            }
+        });
+        reader.readAsDataURL(file);
+    });
+
+
     //Добавление стилей
     $('#textarea-promo').keyup(function(){widget_promo();});
     $('#textarea-promo2').keyup(function(){widget_promo();});
@@ -1055,7 +1100,7 @@ $(document).ready(function(){
     });
 
     //Загрузка скриншота миниатюры сайта рекламодателя в таргетингах
-    $(document).on('click','#load_preview_site',function(){
+/*    $(document).on('click','#load_preview_site',function(){
         var url = new URL(location.href);
         var searchParams = new URLSearchParams(url.search.substring(1));
         var id = searchParams.get("id");
@@ -1069,15 +1114,19 @@ $(document).ready(function(){
     });
     var img = $('#screenshot_desktop > img'); if ($(img).width()<=50){img.remove()}
     var img = $('#screenshot_mobile > img');  if ($(img).width()<=50){img.remove()}
-
+*/
     //Активация Scroll2Site в таргетингах
     $('#Scroll2Site').click(function() {
         if ($(this).is(':checked')){
             $('input[name=scroll2site_text]').prop('disabled', false);
             $('input[name=scroll2site_url]').prop('disabled', false);
+            $('input[name=screenshot_desktop]').prop('disabled', false);
+            $('input[name=screenshot_mobile]').prop('disabled', false);
         } else {
             $('input[name=scroll2site_text]').prop('disabled', true);
             $('input[name=scroll2site_url]').prop('disabled', true);
+            $('input[name=screenshot_desktop]').prop('disabled', true);
+            $('input[name=screenshot_mobile]').prop('disabled', true);
         }
     });
 
