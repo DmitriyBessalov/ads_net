@@ -615,12 +615,29 @@ class ArticleController
             if ($_POST['checkbox_merge']=='on')$_POST['checkbox_merge']=1;
             if ($_POST['scroll2site']=='on')$_POST['scroll2site']=1;
 
+            $uploaddir = '/var/www/www-root/data/www/api.cortonlab.com/img/advertiser_screenshot_site/';
+
+            if (($_FILES['screenshot_desktop']['type'] == 'image/gif' || $_FILES['screenshot_desktop']['type']== 'image/jpeg' || $_FILES['screenshot_desktop']['type'] == 'image/png') && ($_FILES['screenshot_desktop']['size'] != 0 and $_FILES['screenshot_desktop']['size'] <= 1024000)) {
+                $hash510 = md5_file($_FILES['screenshot_desktop']['tmp_name']).".";
+                $extension510 = substr($_FILES['screenshot_desktop']['type'], 6, 4);
+                $uploadfile = $uploaddir . $hash510 . $extension510;
+                move_uploaded_file($_FILES['screenshot_desktop']['tmp_name'], $uploadfile);
+            }
+            if (($_FILES['screenshot_mobile']['type'] == 'image/gif' || $_FILES['screenshot_mobile']['type']== 'image/jpeg' || $_FILES['screenshot_mobile']['type'] == 'image/png') && ($_FILES['screenshot_mobile']['size'] != 0 and $_FILES['screenshot_mobile']['size'] <= 1024000)) {
+                $hash239 = md5_file($_FILES['screenshot_mobile']['tmp_name']).".";
+                $extension239 = substr($_FILES['screenshot_mobile']['type'], 6, 4);
+                $uploadfile = $uploaddir . $hash239 . $extension239;
+                move_uploaded_file($_FILES['screenshot_mobile']['tmp_name'], $uploadfile);
+            }
+
             $sql="UPDATE `promo` SET `words`='".$strtolow."',
                 `region`='".$_POST['geo']."',   
                 `id_user_advertiser`='".$_POST['advertiser']."',
                 `namebrand`='".$_POST['namebrand']."',
                 `merge_key_and_categor`='".$_POST['checkbox_merge']."',
                 `scroll2site`='".$_POST['scroll2site']."',
+                `scroll2site_img_desktop`='" . $hash510 . $extension510 . "',
+                `scroll2site_img_mobile`='" . $hash239 . $extension239 . "', 
                 `scroll2site_text`='".$_POST['scroll2site_text']."',
                 `scroll2site_url`='".$_POST['scroll2site_url']."'
              WHERE `id`='".$_POST['id']."';";
@@ -1092,7 +1109,7 @@ class ArticleController
   width: 14px;
 }
         </style>
-        <form method="post" action="/article-update" class="form-2">
+        <form method="post" action="/article-update" class="form-2" enctype="multipart/form-data">
                     <div class="div-block-97" style="padding: 30px 0;">
                         <input type="hidden" name="tab" value="настройка">
                         <input type="hidden" name="id" value="'.$id.'">
@@ -1166,20 +1183,35 @@ class ArticleController
                         <div>
                             <div class="text-block-103">Scroll2Site</div>
                             <input type="checkbox" style="margin:10px" name="scroll2site" class="checkbox" id="Scroll2Site" ';
-                            if ($result['scroll2site']) {
+                            if ($result['scroll2site']){
                                 echo 'checked="" ';
                             }else{
                                 $disabled='disabled';
+                            };
+                            if (!$result['scroll2site_img_desktop']){
+                                $required='required=""';
                             }
                             echo '/>
-                            <label for="Scroll2Site">Активен</label>		
+                            <label for="Scroll2Site">Активен</label>
                             <input name="scroll2site_text" type="text" value="'.$result['scroll2site_text'].'" '.$disabled.' required maxlength="54" class="text-field-2 w-input" placeholder="Текст" style="width: 760px;">
                             <input name="scroll2site_url" type="text" value="'.$result['scroll2site_url'].'" '.$disabled.' required class="text-field-2 w-input" placeholder="URL" style="width: 760px;">
-                            <div id="load_preview_site" class="submit-button-6">Получить миниатюры</div>
-                            <div style="display: flex;flex-direction: row;">
-                                <div id="screenshot_desktop" style="width: 510px;margin: 25px 0 0 0"><img src="https://api.cortonlab.com/img/rekl_screenshot_site/'.$_GET['id'].'_desktop.png"></div>
-                                <div id="screenshot_mobile" style="width: 239px;margin: 25px 0 0 10px"><img src="https://api.cortonlab.com/img/rekl_screenshot_site/'.$_GET['id'].'_mobile.png"></div>
+                                                                           
+                            <div class="div-block-142">
+                                <div class="div-block-148" style="width: 510px;height: 300px">
+                                    <div class="image-preview _510" style="background-image:url(//api.cortonlab.com/img/advertiser_screenshot_site/'.$result['scroll2site_img_desktop'].');background-position:center center;background-repeat:no-repeat;background-size:cover;">
+                                        <label for="image-upload510" class="image-label" style="text-align: center;background-color: rgb(225, 226, 232);">Скриншот десктоп</label>
+                                        <input type="file" name="screenshot_desktop" class="image-upload510" accept=".png,.jpeg,.jpg,.gif" '.$required.' '.$disabled.'>
+                                    </div>
+                                </div>
+                                <div class="div-block-147"></div>
+                                <div class="div-block-148" style="width: 239px; margin-left: 10px">
+                                    <div class="image-preview _239" style="background-image:url(//api.cortonlab.com/img/advertiser_screenshot_site/'.$result['scroll2site_img_mobile'].');background-position:center center;background-repeat:no-repeat;background-size:cover;">
+                                        <label for="image-upload239" class="image-label" style="text-align: center;background-color: rgb(225, 226, 232);">Скриншот&nbsp;&nbsp; мобильный</label>
+                                        <input type="file" name="screenshot_mobile" class="image-upload239" accept=".png,.jpeg,.jpg,.gif" '.$required.' '.$disabled.'>
+                                    </div>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
@@ -1194,7 +1226,6 @@ class ArticleController
                             </div>
                         </div>
                     </div>
-                    
 					<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Ставка</div>
                     <div class="div-block-85">
