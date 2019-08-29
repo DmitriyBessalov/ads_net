@@ -677,6 +677,13 @@ if (corton_complete!=1) {
             }else{
                 var promo_page=sCurrentProtocol+result['promo_page'];
             }
+
+            if (result['promo_page'].indexOf("?") > -1) {
+                var promo_page = promo_page + '&';
+            } else {
+                var promo_page = promo_page + '?';
+            }
+
             if (show_recomend==2) {
                 if (result['anons_count'] > 0) {
                     console.log('recomend_anons');
@@ -690,7 +697,7 @@ if (corton_complete!=1) {
                         if (result['anons_count'] > 0) {
                             htmll = htmll +
                                 '<div class="corton-recomendation-section corton-anons" id="anons' + result['anons'][0][w] + 'r">' +
-                                '<a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=r">' +
+                                '<a href="' + promo_page + 'prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=r">' +
                                 '<img src="https://api.cortonlab.com/img/' + result['anons'][5][w] + '/a/' + result['anons'][recomend_image_shape][w] + '">' +
                                 '<p>' + result['anons'][1][w] + '</p>' +
                                 '</a>' +
@@ -718,11 +725,11 @@ if (corton_complete!=1) {
                     if (buttontext == "") buttontext = 'Подробнее';
                     var htmll =
                         '<noindex><div class="corton-anons" id="anons' + result['anons'][0][w] + 'e">' +
-                        '<div class="corton-left"> <a href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] +'&p_id='+result['p_id']+'&t=e"><img src="https://api.cortonlab.com/img/' + result['anons'][5][w] + '/a/' + result['anons'][natpre_image_shape][w] + '" width="290" height="180"></a> </div>' +
+                        '<div class="corton-left"> <a href="' + promo_page + 'prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] +'&p_id='+result['p_id']+'&t=e"><img src="https://api.cortonlab.com/img/' + result['anons'][5][w] + '/a/' + result['anons'][natpre_image_shape][w] + '" width="290" height="180"></a> </div>' +
                         '<div class="corton-right">' +
-                        '<a style="text-decoration: none" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=e"><div class="corton-title">' + result['anons'][1][w] + '</div></a>' +
-                        '<a style="text-decoration: none" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=e"><p class="corton-content">' + result['anons'][2][w] + '</p></a>' +
-                        '<a class="corton-link" href="' + promo_page + '?prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=e">' + buttontext + '</a>' +
+                        '<a style="text-decoration: none" href="' + promo_page + 'prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=e"><div class="corton-title">' + result['anons'][1][w] + '</div></a>' +
+                        '<a style="text-decoration: none" href="' + promo_page + 'prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=e"><p class="corton-content">' + result['anons'][2][w] + '</p></a>' +
+                        '<a class="corton-link" href="' + promo_page + 'prosmort_id=' + result['prosmotr_id'] + '&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=e">' + buttontext + '</a>' +
                         '</div>' +
                         '</div></noindex>';
                     //Расчет позиции NatPrev
@@ -745,14 +752,14 @@ if (corton_complete!=1) {
                     widget_slider.innerHTML =
                         '<noindex><div class="widget-slider" id="widget-slider">' +
                         '<div class="corton-left">' +
-                        '<a href="' + promo_page + '?prosmort_id='+ result['prosmotr_id']+'&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=s">' +
+                        '<a href="' + promo_page + 'prosmort_id='+ result['prosmotr_id']+'&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=s">' +
                         '<img src="https://api.cortonlab.com/img/'+result['anons'][5][w]+'/a/' + result['anons'][4][w] + '" alt="" width="180" height="180">' +
                         '</a>'+
                         '</div>'+
                         '<div class="corton-right">' +
                         '<span class="corton-sign">Рекомендовано для Вас:</span>' +
                         '<div class="corton-title">' +
-                        '<a href="' + promo_page + '?prosmort_id='+ result['prosmotr_id']+'&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=s">' +
+                        '<a href="' + promo_page + 'prosmort_id='+ result['prosmotr_id']+'&anons_id=' + result['anons'][0][w] + '&p_id='+result['p_id']+'&t=s">' +
                         result['anons'][1][w] +
                         '</div>' +
                         '</a>' +

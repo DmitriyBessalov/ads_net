@@ -2615,6 +2615,8 @@ var myLineChart = new Chart(ctx, {
                         $balansperiod[$key]=0;
                     }
                 }
+                $balansperiod['r_show_anons']=round($balansperiod['r_show_anons']/2.2);
+
 
                 if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
                     $today = true;
