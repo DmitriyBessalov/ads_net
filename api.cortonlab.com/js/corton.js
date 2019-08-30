@@ -69,7 +69,7 @@ if (corton_complete!=1) {
 
             const promo_selector_title = style_b.getPropertyValue('--selectortitle');
 
-            var promo= '<div id="corton_promo_content">'+result['text']+form+logo+'</div><div id="corton_scroll_to_site"></div><div id="corton_otstup"></div><div id="corton_osvetlenie"></div>';
+            var promo= '<div id="corton_promo_content">'+result['text']+form+logo+'</div><div id="corton_scroll_to_site"></div><div id="corton_osvetlenie"></div>';
 
             if (promo_selector_title.length!=0){
                 let ele = document.querySelectorAll(promo_selector_title);
@@ -92,7 +92,6 @@ if (corton_complete!=1) {
                 var corton_promo=document.getElementById("corton-promo");
 
                 var scroll_to_site=document.getElementById("corton_scroll_to_site");
-                var otstup=document.getElementById("corton_otstup");
                 var osvetlenie=document.getElementById("corton_osvetlenie");
                 var transept=0;
 
@@ -106,28 +105,26 @@ if (corton_complete!=1) {
                 '<div class="scroll_border scroll_botton"></div>'+
 
                 '<style type="text/css">'+
-                    'div#corton_scroll_to_site{position:absolute;overflow:hidden;flex-direction:column;background-color:#000;visibility: hidden;} '+
+                    'div#corton_scroll_to_site{position: relative;overflow:hidden;flex-direction:column;background-color:#000;visibility: hidden;} '+
                     'div#corton_scroll_to_site>div.scroll_border{background-color:#'+scroll2site_fon_color+';min-height:80px;border:1px solid #ddd;z-index:2;display:flex;align-items:center;justify-content:center;} '+
                     'div#corton_scroll_to_site>div.scroll_botton{min-height:40px;position:sticky;bottom:0;z-index:1;} '+
                     'div#corton_scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
                     'div#corton_image_fon{top:0;height:2000px;box-sizing:border-box;opacity:0.92;display:block;background-size:cover;background-repeat:no-repeat;pointer-events:none;min-height:100%;} '+
-                    'div#corton_banner_shadow{z-index:1;position:absolute;top:80px;left:0;width:100%;height:85px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent);} '+
+                    'div#corton_banner_shadow{z-index:1;position:absolute;left:0;width:100%;height:85px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent);} '+
                     'div#corton_osvetlenie{position:fixed;display:none;opacity:0;background-color:#'+scroll2site_perehod_color+';z-index:99999;top:0;left:0;width:100%;height:100%;} '+
                     '@media (max-width:1024px) {div#corton_scroll_to_site>div.scroll_border {padding: 0px 10px;text-align: center;}}' +
                 '</style>';
 
-                  scroll_to_site.style.width=corton_promo.offsetWidth+'px';
-
-                  var promo_content=document.getElementById("corton_promo_content");
-                  var image_fon=document.getElementById("corton_image_fon");
-                  var scroll_border=document.getElementById("corton_scroll_border");
+                var promo_content=document.getElementById("corton_promo_content");
+                var image_fon=document.getElementById("corton_image_fon");
+                var scroll_border=document.getElementById("corton_scroll_border");
 
                 function osvetlenie_redirert() {
                     transept=transept+0.025;
                     osvetlenie.style.display = 'block';
                     osvetlenie.style.opacity = transept;
                     if (transept<=1){
-                        setTimeout(osvetlenie_redirert, 20);
+                        setTimeout(osvetlenie_redirert, 22);
                     }else{
                         let href=encodeURIComponent(result['scroll2site_url']);
                         console.log('https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
@@ -154,7 +151,15 @@ if (corton_complete!=1) {
                 function scrollreset() {  document.body.scrollTo(0, 0);  }
                 setTimeout(scrollreset, 1);
 
-                scroll_to_site.style.width=corton_promo.clientWidth;
+                scroll_to_site.style.width=corton_promo.clientWidth+'px';;
+
+                if (window.screen.width>1024){
+                    var smesenie1=-100,
+                        smesenie2=window.innerHeight/5-window.innerHeight;
+                }else{
+                    var smesenie1=-40,
+                        smesenie2=window.innerHeight/10-window.innerHeight;
+                }
 
                 function scroll_to_site_position() {
                     //console.log('position');
@@ -166,34 +171,32 @@ if (corton_complete!=1) {
 
                     if (!img_fon_load){
                         //console.log(i,'Подгрузка фона картинки');
-                        if (document.body.clientWidth <= 480) {
-                            // mobile
+                        if (-smesenie1-i <= 480) {
                             image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile']+")";
                         } else {
-                            //desktop
                             image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop']+")";
                         }
                         img_fon_load=1;
                     }
 
-                    if(i<=-100){
-                        let i2=-100-i;
+                    if(i<=smesenie1){
                         //console.log(i,i2,'Выдвижение заголовка перехода');
+                        if (window.screen.width <=480) {
+                            scroll_to_site.style.cssText += "height: " + (smesenie1-i) + "px;visibility:unset;left:"+ (-promo_content.getBoundingClientRect().left) +"px;width:" + window.screen.width + "px;";
+                        }else{
+                            scroll_to_site.style.cssText += "top: " + (pageYOffset+i+window.innerHeight) + "; height: " + (smesenie1-i) + "px;visibility:unset;";
 
-                        scroll_to_site.style.cssText += "top: " + (pageYOffset+i+window.innerHeight) + "; height: " + i2 + "px;visibility:unset";
+                        }
 
-                        //console.log(i,i2,'Остановка футер');
-                        otstup.style.cssText='height:'+i2+'px;display:block';
-
-                        if (i<-182) {
-                            g=window.innerHeight/5-window.innerHeight-i;
+                        if (i<(smesenie1-80)) {
+                            g=smesenie2-i;
                             if (g<=0){
                                 //console.log(i,'Выдвижение картинки');
                                 if (img_position===0){
                                     //console.log(i,window.screen.width,'Определение положения картинки');
                                     if (window.screen.width>1024){
                                         image_fon.style.backgroundAttachment = 'fixed';
-                                        image_fon.style.backgroundSize = corton_promo.clientWidth+'px';
+                                        image_fon.style.backgroundSize = scroll_to_site.clientWidth+'px';
                                         image_fon.style.backgroundPosition = scroll_to_site.getBoundingClientRect().left + 'px ' + (window.innerHeight/5 + scroll_border.scrollHeight) + 'px';
                                     }
                                     img_position=1;
@@ -206,7 +209,6 @@ if (corton_complete!=1) {
                             }
                         }
                     }else{
-                        otstup.style.cssText='display:none';
                         scroll_to_site.style.visibility="hidden";
                     }
                 }
