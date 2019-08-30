@@ -144,20 +144,20 @@ if (corton_complete!=1) {
                 }
 
                 var img_position=0,
-                    img_fon_load=0;
+                    img_fon_load=0,
                     page_ready=0;
 
-                function pageready() {
-                    page_ready=1;
-                }
+                function pageready() { page_ready=1; }
                 setTimeout(pageready, 1000);
+
+                function scrollreset() {  document.body.scrollTo(0, 0);  }
+                setTimeout(scrollreset, 1);
 
                 scroll_to_site.style.width=corton_promo.clientWidth;
 
                 function scroll_to_site_position() {
                     console.log('position');
-                    if (page_ready==0){
-                        document.body.scrollTo(0, 0);
+                    if (page_ready===0){
                         return true;
                     }
 
@@ -165,14 +165,14 @@ if (corton_complete!=1) {
 
                     if (!img_fon_load){
                         console.log(i,'Подгрузка фона картинки');
-                        image_fon.style.backgroundImage="url(http://185.75.90.54/corton.png)";
 
                         if (document.body.clientWidth <= 480) {
-                            //mobile
-                            image_fon.src = "url(http://185.75.90.54/corton.png)";
+                            // mobile
+                            // scroll2site_img_desktop
+                            image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile']+")";
                         } else {
                             //desktop
-                            image_fon.src = "url(http://185.75.90.54/corton.png)";
+                            image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop']+")";
                         }
                         img_fon_load=1;
                     }
