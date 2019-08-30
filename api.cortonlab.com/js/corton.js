@@ -187,9 +187,9 @@ if (corton_complete!=1) {
                         if (i<-182) {
                             g=window.innerHeight/5-window.innerHeight-i;
                             if (g<=0){
-                                console.log(i,'Выдвижение картинки');
+                                //console.log(i,'Выдвижение картинки');
                                 if (img_position===0){
-                                    console.log(i,window.screen.width,'Определение положения картинки');
+                                    //console.log(i,window.screen.width,'Определение положения картинки');
                                     if (window.screen.width>1024){
                                         image_fon.style.backgroundAttachment = 'fixed';
                                         image_fon.style.backgroundSize = corton_promo.clientWidth+'px';

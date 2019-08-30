@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 $_GET = array_map('addslashes', $_GET);
 
 # Проверка входящих параметров
-if (($_GET['t']!='e') XOR ($_GET['t']!='s') XOR ($_GET['t']!='r')){
+if (!(($_GET['t']=='e') OR ($_GET['t']=='s') OR ($_GET['t']=='r'))){
     exit;
 }
 
@@ -101,11 +101,11 @@ $GLOBALS['dbstat']->query($sql);
 if(($action =='s')or($action =='r')) {
     $redis->select(2);
     $block_ip=$redis->get($platform['id'].':'.$_SERVER['REMOTE_ADDR']);
-    if ($block_ip) {
-        $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 1296000);
-        $antifrod=1;
+    if ((int)$block_ip<3) {
+        $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], $block_ip+1, 86400);
     }else{
-        $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 1, 86400);
+        $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 3,1296000);
+        $antifrod=1;
     }
 }
 $redis->close();
@@ -145,10 +145,12 @@ if(!isset($antifrod)){
                 $GLOBALS['dbstat']->query("INSERT INTO `stat_promo_day_count` SET `anons_id` = '".$_GET['anons_id']."', `promo_variant`='".$_GET['p_id']."', `data` = CURDATE(), `clicking` = 1");
             }
     }
-}elseif ($action=='r') {
-    if ($pay['read']==0){
-        $sql = "UPDATE `stat_promo_day_count` SET `reading` = `reading` + 1 WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
-        $GLOBALS['dbstat']->query($sql);
+}else{
+    if ($action=='r') {
+        if ($pay['read']==0){
+            $sql = "UPDATE `stat_promo_day_count` SET `reading` = `reading` + 1 WHERE `data`=CURDATE() AND `anons_id`='" . $_GET['anons_id'] . "' AND `promo_variant`='" . $_GET['p_id'] . "'";
+            $GLOBALS['dbstat']->query($sql);
+        }
     }
     exit;
 }
