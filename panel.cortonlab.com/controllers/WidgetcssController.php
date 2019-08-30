@@ -50,7 +50,7 @@ class WidgetcssController
             }
             $css='@charset "utf-8"; '.$css2['css'];
             $block = preg_replace("/[\r\n][\r\n]/",",",$css2['adblock-css']);
-            $css.="#corton-promo{--adblock:".$block.";--scroll2site_activ:".$css2['scroll2site_activ'].";--scroll2site_fon_color:".$css2['scroll2site_fon_color'].";--scroll2site_text_size:".$css2['scroll2site_text_size'].";--scroll2site_text_font:".$css2['scroll2site_text_font'].";--scroll2site_text_color:".$css2['scroll2site_text_color'].";--scroll2site_perehod_color:".$css2['scroll2site_perehod_color'].";}";
+            $css.="#corton-promo{min-height: 100vh;--adblock:".$block.";--scroll2site_activ:".$css2['scroll2site_activ'].";--scroll2site_fon_color:".$css2['scroll2site_fon_color'].";--scroll2site_text_size:".$css2['scroll2site_text_size'].";--scroll2site_text_font:".$css2['scroll2site_text_font'].";--scroll2site_text_color:".$css2['scroll2site_text_color'].";--scroll2site_perehod_color:".$css2['scroll2site_perehod_color'].";}";
 
             $sql='SELECT `id_categoriya`,`type_search`,`regex` FROM `plarforms_regex_categorii` WHERE `id_platform`='.$id.';';
             $category=$GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
