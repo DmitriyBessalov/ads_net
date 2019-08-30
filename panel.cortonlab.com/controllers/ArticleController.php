@@ -622,12 +622,14 @@ class ArticleController
                 $extension510 = substr($_FILES['screenshot_desktop']['type'], 6, 4);
                 $uploadfile = $uploaddir . $hash510 . $extension510;
                 move_uploaded_file($_FILES['screenshot_desktop']['tmp_name'], $uploadfile);
+                $scroll2site_img = "`scroll2site_img_desktop`='" . $hash510 . $extension510 . "',";
             }
             if (($_FILES['screenshot_mobile']['type'] == 'image/gif' || $_FILES['screenshot_mobile']['type']== 'image/jpeg' || $_FILES['screenshot_mobile']['type'] == 'image/png') && ($_FILES['screenshot_mobile']['size'] != 0 and $_FILES['screenshot_mobile']['size'] <= 1024000)) {
                 $hash239 = md5_file($_FILES['screenshot_mobile']['tmp_name']).".";
                 $extension239 = substr($_FILES['screenshot_mobile']['type'], 6, 4);
                 $uploadfile = $uploaddir . $hash239 . $extension239;
                 move_uploaded_file($_FILES['screenshot_mobile']['tmp_name'], $uploadfile);
+                $scroll2site_img .= "`scroll2site_img_mobile`='" . $hash239 . $extension239 . "', ";
             }
 
             $sql="UPDATE `promo` SET `words`='".$strtolow."',
@@ -636,9 +638,8 @@ class ArticleController
                 `namebrand`='".$_POST['namebrand']."',
                 `merge_key_and_categor`='".$_POST['checkbox_merge']."',
                 `scroll2site`='".$_POST['scroll2site']."',
-                `scroll2site_img_desktop`='" . $hash510 . $extension510 . "',
-                `scroll2site_img_mobile`='" . $hash239 . $extension239 . "', 
                 `scroll2site_text`='".$_POST['scroll2site_text']."',
+                ".$scroll2site_img."
                 `scroll2site_url`='".$_POST['scroll2site_url']."'
              WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
