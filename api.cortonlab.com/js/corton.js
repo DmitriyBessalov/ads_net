@@ -190,6 +190,7 @@ if (corton_complete!=1) {
 
                         if (i<(smesenie1-80)) {
                             g=smesenie2-i;
+                            console.log(smesenie2,g,i,window.screen.width);
                             if (g<=0){
                                 //console.log(i,'Выдвижение картинки');
                                 if (img_position===0){
