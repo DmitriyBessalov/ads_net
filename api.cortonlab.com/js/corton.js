@@ -106,8 +106,8 @@ if (corton_complete!=1) {
 
                 '<style type="text/css">'+
                     'div#corton_scroll_to_site{position: relative;overflow:hidden;flex-direction:column;background-color:#000;visibility: hidden;} '+
-                    'div#corton_scroll_to_site>div.scroll_border{background-color:#'+scroll2site_fon_color+';min-height:80px;border:1px solid #ddd;z-index:2;display:flex;align-items:center;justify-content:center;} '+
-                    'div#corton_scroll_to_site>div.scroll_botton{min-height:40px;position:sticky;bottom:0;z-index:1;} '+
+                    'div#corton_scroll_to_site>div.scroll_border{background-color:#'+scroll2site_fon_color+';min-height:80px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;} '+
+                    'div#corton_scroll_to_site>div.scroll_botton{min-height:40px;position:sticky;bottom:0;border-top: 0;z-index: 2;} '+
                     'div#corton_scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
                     'div#corton_image_fon{top:0;height:2000px;box-sizing:border-box;opacity:0.92;display:block;background-size:contain;background-repeat:no-repeat;pointer-events:none;min-height:100%;} '+
                     'div#corton_banner_shadow{z-index:1;position:absolute;left:0;width:100%;height:85px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent);} '+
@@ -144,9 +144,6 @@ if (corton_complete!=1) {
                 var img_position=0,
                     img_fon_load=0,
                     page_ready=0;
-
-                function pageready() { page_ready=1; }
-                setTimeout(pageready, 1000);
 
                 function scrollreset() {  document.body.scrollTo(0, 0);  }
                 setTimeout(scrollreset, 1);
@@ -189,7 +186,6 @@ if (corton_complete!=1) {
 
                         if (i<(smesenie1-80)) {
                             g=smesenie2-i;
-                            console.log(smesenie2,g,i,window.screen.width);
                             if (g<=0){
                                 //console.log(i,'Выдвижение картинки');
                                 if (img_position===0){
@@ -218,9 +214,14 @@ if (corton_complete!=1) {
                     img_position=0;
                     scroll_to_site.style.width=corton_promo.clientWidth+'px';
                     scroll_to_site_position();
+                });
+
+                function pageready() {
+                    page_ready=1;
+                    scroll_to_site_position();
                 }
 
-                );
+                setTimeout(pageready, 500);
                 //console.log('scroll2site');
             }
 
