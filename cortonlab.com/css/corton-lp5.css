@@ -2340,7 +2340,7 @@ p {
 .text-block-19 {
   font-family: 'Myriadpro Regular', sans-serif;
   color: #116dd6;
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
   text-decoration: none;
 }
@@ -2615,11 +2615,12 @@ p {
   font-size: 20px;
 }
 .singinstyle {
-border: 1px solid #116dd6;
+border: 1px solid #C8DDF5;
 padding: 10px 14px;
 border-radius: 8px;
 color: #116dd6;
 margin-left: 15px;
+background: #C8DDF5;
 }
 .singinstyle:hover {
    color: #fff;
@@ -3430,7 +3431,7 @@ margin-left: 15px;
     padding-top: 40px;
   }
   .text-block-19 {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 20px;
   }
   .text-block-20 {
