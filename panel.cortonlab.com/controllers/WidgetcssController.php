@@ -42,15 +42,15 @@ class WidgetcssController
         $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
         if ($result['status']){
-            $sql="SELECT `forcibly`,`selector`,`selector-title`,`scroll2site_activ`,`scroll2site_fon_color`,`scroll2site_text_size`,`scroll2site_text_font`,`scroll2site_text_color`,scroll2site_perehod_color,scroll2site_img_desktop, scroll2site_img_mobile,`css`,`adblock-css` FROM `style_promo` WHERE `id`='".$id."'";
+            $sql="SELECT `forcibly`,`selector`,`selector-title`,`scroll2site_activ`,`scroll2site_fon_color`,`scroll2site_text_size`,`scroll2site_text_font`,`scroll2site_text_color`,scroll2site_perehod_color,`css`,`adblock-css` FROM `style_promo` WHERE `id`='".$id."'";
             $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             if ($css2==false){
-                $sql="SELECT `forcibly`,`selector`,`selector-title`,`scroll2site_activ`,`scroll2site_fon_color`,`scroll2site_text_size`,`scroll2site_text_font`,`scroll2site_text_color`,scroll2site_perehod_color,scroll2site_img_desktop, scroll2site_img_mobile,`css`,`adblock-css` FROM `style_promo` WHERE `id`='0';";
+                $sql="SELECT `forcibly`,`selector`,`selector-title`,`scroll2site_activ`,`scroll2site_fon_color`,`scroll2site_text_size`,`scroll2site_text_font`,`scroll2site_text_color`,scroll2site_perehod_color,`css`,`adblock-css` FROM `style_promo` WHERE `id`='0';";
                 $css2=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
             }
             $css='@charset "utf-8"; '.$css2['css'];
             $block = preg_replace("/[\r\n][\r\n]/",",",$css2['adblock-css']);
-            $css.="#corton-promo{--adblock:".$block.";--scroll2site_activ:".$css2['scroll2site_activ'].";--scroll2site_fon_color:".$css2['scroll2site_fon_color'].";--scroll2site_text_size:".$css2['scroll2site_text_size'].";--scroll2site_img_desktop:".$css2['scroll2site_img_desktop'].";--scroll2site_img_mobile:".$css2['scroll2site_img_mobile'].";--scroll2site_text_font:".$css2['scroll2site_text_font'].";--scroll2site_text_color:".$css2['scroll2site_text_color'].";--scroll2site_perehod_color:".$css2['scroll2site_perehod_color'].";}";
+            $css.="#corton-promo{--adblock:".$block.";--scroll2site_activ:".$css2['scroll2site_activ'].";--scroll2site_fon_color:".$css2['scroll2site_fon_color'].";--scroll2site_text_size:".$css2['scroll2site_text_size'].";--scroll2site_text_font:".$css2['scroll2site_text_font'].";--scroll2site_text_color:".$css2['scroll2site_text_color'].";--scroll2site_perehod_color:".$css2['scroll2site_perehod_color'].";}";
 
             $sql='SELECT `id_categoriya`,`type_search`,`regex` FROM `plarforms_regex_categorii` WHERE `id_platform`='.$id.';';
             $category=$GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
