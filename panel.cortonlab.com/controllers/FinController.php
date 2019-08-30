@@ -102,7 +102,7 @@ class FinController
                 if (is_nan($r_CTR)) {
                     $r_CTR = '0.00';
                 } else {
-                    $r_CTR = round($r_CTR * 100*2.2);
+                    $r_CTR = round($r_CTR * 100*1.5);
                     if (is_infinite($r_CTR)) $r_CTR = '0.00';
                 };
                 if (is_nan($e_CTR)) {
@@ -149,7 +149,7 @@ class FinController
             <td>' . $r_CTR . ' %</td>
             <td class="bluetext">';
             if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
-                $val= round($balansperiod['r_balans']/($balansperiod['r_show_anons']/2.2)*1100,2);
+                $val= round($balansperiod['r_balans']/($balansperiod['r_show_anons']/1.5)*1100,2);
                 if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
                 echo $val;
             } else {
