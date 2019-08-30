@@ -109,7 +109,7 @@ if (corton_complete!=1) {
                     'div#corton_scroll_to_site>div.scroll_border{background-color:#'+scroll2site_fon_color+';min-height:80px;border:1px solid #ddd;z-index:2;display:flex;align-items:center;justify-content:center;} '+
                     'div#corton_scroll_to_site>div.scroll_botton{min-height:40px;position:sticky;bottom:0;z-index:1;} '+
                     'div#corton_scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
-                    'div#corton_image_fon{top:0;height:2000px;box-sizing:border-box;opacity:0.92;display:block;background-size:cover;background-repeat:no-repeat;pointer-events:none;min-height:100%;} '+
+                    'div#corton_image_fon{top:0;height:2000px;box-sizing:border-box;opacity:0.92;display:block;background-size:contain;background-repeat:no-repeat;pointer-events:none;min-height:100%;} '+
                     'div#corton_banner_shadow{z-index:1;position:absolute;left:0;width:100%;height:85px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent);} '+
                     'div#corton_osvetlenie{position:fixed;display:none;opacity:0;background-color:#'+scroll2site_perehod_color+';z-index:99999;top:0;left:0;width:100%;height:100%;} '+
                     '@media (max-width:1024px) {div#corton_scroll_to_site>div.scroll_border {padding: 0px 10px;text-align: center;}}' +
@@ -124,7 +124,7 @@ if (corton_complete!=1) {
                     osvetlenie.style.display = 'block';
                     osvetlenie.style.opacity = transept;
                     if (transept<=1){
-                        setTimeout(osvetlenie_redirert, 22);
+                        setTimeout(osvetlenie_redirert, 20);
                     }else{
                         let href=encodeURIComponent(result['scroll2site_url']);
                         console.log('https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
@@ -171,7 +171,7 @@ if (corton_complete!=1) {
 
                     if (!img_fon_load){
                         //console.log(i,'Подгрузка фона картинки');
-                        if (-smesenie1-i <= 480) {
+                        if (window.screen.width <=480) {
                             image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile']+")";
                         } else {
                             image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop']+")";
