@@ -63,13 +63,13 @@ if (corton_complete!=1) {
                     '</div>';
             }
 
-            var logo='<a style="float: right; margin-top: 24px;" href="https://cortonlab.com/" target="_blank" title="Powered by Corton">' +
-                '<img style="all:unset; width:80px; height:20px;" src="https://cortonlab.com/images/cortonlogo.png">' +
-                '</a>';
+            var logo='<div style="height: 40px;"><a style="float: right;" href="https://cortonlab.com/" target="_blank" title="Powered by Corton">' +
+                     '<img style="all:unset; width:80px; height:20px;" src="https://cortonlab.com/images/cortonlogo.png">' +
+                     '</a></div>';
 
             const promo_selector_title = style_b.getPropertyValue('--selectortitle');
 
-            var promo= '<div id="promo_content">'+result['text']+form+logo+'</div><div id="scroll_to_site"></div><div id="osvetlenie"></div>';
+            var promo= '<div id="corton_promo_content">'+result['text']+form+logo+'</div><div id="corton_scroll_to_site"></div><div id="corton_otstup"></div><div id="corton_osvetlenie"></div>';
 
             if (promo_selector_title.length!=0){
                 let ele = document.querySelectorAll(promo_selector_title);
@@ -90,40 +90,36 @@ if (corton_complete!=1) {
                 const scroll2site_perehod_color = style_p.getPropertyValue('--scroll2site_perehod_color');
 
                 var corton_promo=document.getElementById("corton-promo");
-                var promo_content=document.getElementById("promo_content");
-                var scroll_to_site=document.getElementById("scroll_to_site");
-                var osvetlenie=document.getElementById("osvetlenie");
+
+                var scroll_to_site=document.getElementById("corton_scroll_to_site");
+                var otstup=document.getElementById("corton_otstup");
+                var osvetlenie=document.getElementById("corton_osvetlenie");
                 var transept=0;
 
                 const regex = /^(https?:\/\/)?(.*?)($|[/?])/;
                 let host = regex.exec(result['scroll2site_url']);
 
                 scroll_to_site.innerHTML= ''+
-                '<div id="scroll_border"><p> ' + result['scroll2site_text'] + ' <a href="'+result['scroll2site_url']+'" class="scroll2site">' + host[2] + '</a></p></div>'+
-                '<div id="vityagivanie_img">'+
-                    '<div id="background_color">' +
-                        '<div id="banner-shadow"></div>'+
-                        '<img id="image-fon">'+
-                    '</div>'+
-                '</div>'+
+                '<div id="corton_scroll_border" class="scroll_border"><p> ' + result['scroll2site_text'] + ' <a href="'+result['scroll2site_url']+'" class="scroll2site">' + host[2] + '</a></p></div>'+
+                '<div id="corton_banner_shadow"></div>'+
+                '<div id="corton_image_fon"></div>'+
+                '<div class="scroll_border scroll_botton"></div>'+
 
                 '<style type="text/css">'+
-                'div#scroll_to_site{position:absolute;top:100px;overflow:hidden;display:none; flex-direction: column;} '+
-                'div#scroll_border{background-color:#' + scroll2site_fon_color + ';min-height:80px;border:1px solid #ddd;width:100%;display:flex;align-items:center;justify-content:center;} '+
-                'div#scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
-                'div#vityagivanie_img{overflow:hidden;} '+
-                'div#background_color{background-color: #000;overflow: hidden;} '+
-                'img#image-fon{top:0;opacity:0.97;width:100%;max-width:100%;} '+
-                'div#banner-shadow{z-index:10;position:absolute;top:82px;left:0;width:100%;height:85px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent);} '+
-                'div#osvetlenie{position:fixed;display:none;opacity:0;background-color:#'+scroll2site_perehod_color+';z-index:99999;top:0;left:0;width:100%;height:100%;} '+
+                    'div#corton_scroll_to_site{position:absolute;overflow:hidden;flex-direction:column;background-color:#000;display:flex;} '+
+                    'div#corton_scroll_to_site>div.scroll_border{background-color:#'+scroll2site_fon_color+';min-height:80px;border:1px solid #ddd;z-index:2;display:flex;align-items:center;justify-content:center;} '+
+                    'div#corton_scroll_to_site>div.scroll_botton{min-height:40px;position:sticky;bottom:0;z-index:1;} '+
+                    'div#corton_scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
+                    'div#corton_image_fon{top:0;height:2000px;box-sizing:border-box;opacity:0.92;display:block;background-size:cover;background-repeat:no-repeat;pointer-events:none;min-height:100%;} '+
+                    'div#corton_banner_shadow{z-index:1;position:absolute;top:80px;left:0;width:100%;height:85px;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent);} '+
+                    'div#corton_osvetlenie{position:fixed;display:none;opacity:0;background-color:#'+scroll2site_perehod_color+';z-index:99999;top:0;left:0;width:100%;height:100%;} '+
                 '</style>';
 
-                scroll_to_site.style.maxWidth=corton_promo.offsetWidth+'px';
-                scroll_to_site.style.width=corton_promo.offsetWidth+'px';
+                  scroll_to_site.style.width=corton_promo.offsetWidth+'px';
 
-                var image_fon=document.getElementById("image-fon");
-                var background_color=document.getElementById("background_color");
-                var vityagivanie_img=document.getElementById("vityagivanie_img");
+                  var promo_content=document.getElementById("corton_promo_content");
+                  var image_fon=document.getElementById("corton_image_fon");
+                  var scroll_border=document.getElementById("corton_scroll_border");
 
                 function osvetlenie_redirert() {
                     transept=transept+0.025;
@@ -145,71 +141,85 @@ if (corton_complete!=1) {
 
                         document.location.href = result['scroll2site_url'] + char + 'sub_id1=-1&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
                     }
-                };
+                }
 
-                h_scroll=promo_content.scrollHeight+62;
-                zasvet=0;
-                var imgload=false;
-                window.addEventListener('scroll', function() {
-                    var i=promo_content.getBoundingClientRect().top+h_scroll-window.innerHeight;
+                var img_position=0,
+                    img_fon_load=0;
+                    page_ready=0;
 
-                    if (i<300){
-                        //console.log(i,'Подгрузка фона картинки');
-                        if (!imgload) {
-                            if (document.body.clientWidth < 480) {
-                                image_fon.src = "https://api.cortonlab.com/img/rekl_screenshot_site/" + result['id'] + "_mobile.png";
-                            } else {
-                                image_fon.src = "https://api.cortonlab.com/img/rekl_screenshot_site/" + result['id'] + "_desktop.png";
-                            }
-                            imgload = true;
+                function pageready() {
+                    page_ready=1;
+                }
+                setTimeout(pageready, 1000);
+
+                scroll_to_site.style.width=corton_promo.clientWidth;
+
+                function scroll_to_site_position() {
+                    console.log('position');
+                    if (page_ready==0){
+                        document.body.scrollTo(0, 0);
+                        return true;
+                    }
+
+                    var i=promo_content.getBoundingClientRect().top+promo_content.scrollHeight-window.innerHeight;
+
+                    if (!img_fon_load){
+                        console.log(i,'Подгрузка фона картинки');
+                        image_fon.style.backgroundImage="url(http://185.75.90.54/corton.png)";
+
+                        if (document.body.clientWidth <= 480) {
+                            //mobile
+                            image_fon.src = "url(http://185.75.90.54/corton.png)";
+                        } else {
+                            //desktop
+                            image_fon.src = "url(http://185.75.90.54/corton.png)";
                         }
-                    }else{
-                        h_scroll=promo_content.scrollHeight+62;
-                        scroll_to_site.style.width=corton_promo.offsetWidth+'px';
-                    }
-
-                    if((i<=0)&&(i>=-100)){
-                        //console.log(i,'Выдвижение футер');
-                        scroll_to_site.style.display='flex';
-                    }
-
-                    if(i<=0){
-                        let i2=-100-i;
-                        //console.log(i,i2,'Выдвижение заголовка перехода');
-                        scroll_to_site.style.display='flex';
-                        scroll_to_site.style.top=pageYOffset+i+window.innerHeight+'px';
-                        scroll_to_site.style.height=i2+'px';
+                        img_fon_load=1;
                     }
 
                     if(i<=-100){
                         let i2=-100-i;
-                        //console.log(i,i2,'Остановка футтер');
-                       // promo_content.style.padding='0 0 '+i2+'px 0';
-                    }else{
-                        scroll_to_site.style.display='none';
-                    }
+                        console.log(i,i2,'Выдвижение заголовка перехода');
 
-                    if (i<-182) {
-                        g=window.innerHeight/5-window.innerHeight-i;
-                        if (g<=0){
-                            console.log(i,g,'Выдвижение картинки');
-                            vityagivanie_img.style.height = image_fon.height+'px';
-                            //background_color.style.top=i  +'px';
-                            image_fon.style.top=g +'px';
-                            let h=-g-image_fon.height;
-                            if (h<0){
-                                background_color.style.height=-g-image_fon.height +'px';
+                        scroll_to_site.style.cssText += "top: " + (pageYOffset+i+window.innerHeight) + "; height: " + i2 + "px;visibility:unset";
+
+                        console.log(i,i2,'Остановка футер');
+                        otstup.style.cssText='height:'+i2+'px;display:block';
+
+                        if (i<-182) {
+                            g=window.innerHeight/5-window.innerHeight-i;
+                            if (g<=0){
+                                console.log(i,'Выдвижение картинки');
+                                if (img_position===0){
+                                    console.log(i,window.screen.width,'Определение положения картинки');
+                                    if (window.screen.width>1024){
+                                        image_fon.style.backgroundAttachment = 'fixed';
+                                        image_fon.style.backgroundSize = corton_promo.clientWidth+'px';
+                                        image_fon.style.backgroundPosition = scroll_to_site.getBoundingClientRect().left + 'px ' + (window.innerHeight/5 + scroll_border.scrollHeight) + 'px';
+                                    }
+                                    img_position=1;
+                                }
                             }else{
-                                background_color.style.height='1px';
+                                console.log('Осветление переход');
+                                scroll_to_site.style.backgroundColor='#FFF';
+                                document.body.style.overflow = 'hidden';
+                                osvetlenie_redirert();
                             }
-
-                        }else{
-                            //document.body.style.overflow = 'hidden';
-                           // osvetlenie_redirert();
                         }
+                    }else{
+                        otstup.style.cssText='display:none';
+                        scroll_to_site.style.visibility="hidden";
                     }
-                });
+                }
 
+                window.addEventListener('scroll', scroll_to_site_position);
+                window.addEventListener("resize", function () {
+                    img_position=0;
+                    scroll_to_site.style.width=corton_promo.clientWidth+'px';
+                    scroll_to_site_position();
+                }
+
+                );
                 //console.log('scroll2site');
             }
 
