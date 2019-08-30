@@ -106,7 +106,7 @@ if (corton_complete!=1) {
                 '<div class="scroll_border scroll_botton"></div>'+
 
                 '<style type="text/css">'+
-                    'div#corton_scroll_to_site{position:absolute;overflow:hidden;flex-direction:column;background-color:#000;display:flex;} '+
+                    'div#corton_scroll_to_site{position:absolute;overflow:hidden;flex-direction:column;background-color:#000;display:none;} '+
                     'div#corton_scroll_to_site>div.scroll_border{background-color:#'+scroll2site_fon_color+';min-height:80px;border:1px solid #ddd;z-index:2;display:flex;align-items:center;justify-content:center;} '+
                     'div#corton_scroll_to_site>div.scroll_botton{min-height:40px;position:sticky;bottom:0;z-index:1;} '+
                     'div#corton_scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
@@ -156,7 +156,7 @@ if (corton_complete!=1) {
                 scroll_to_site.style.width=corton_promo.clientWidth;
 
                 function scroll_to_site_position() {
-                    console.log('position');
+                    //console.log('position');
                     if (page_ready===0){
                         return true;
                     }
@@ -164,11 +164,10 @@ if (corton_complete!=1) {
                     var i=promo_content.getBoundingClientRect().top+promo_content.scrollHeight-window.innerHeight;
 
                     if (!img_fon_load){
-                        console.log(i,'Подгрузка фона картинки');
-
+                        scroll_to_site.style.display='flex';
+                        //console.log(i,'Подгрузка фона картинки');
                         if (document.body.clientWidth <= 480) {
                             // mobile
-                            // scroll2site_img_desktop
                             image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile']+")";
                         } else {
                             //desktop
@@ -179,11 +178,11 @@ if (corton_complete!=1) {
 
                     if(i<=-100){
                         let i2=-100-i;
-                        console.log(i,i2,'Выдвижение заголовка перехода');
+                        //console.log(i,i2,'Выдвижение заголовка перехода');
 
                         scroll_to_site.style.cssText += "top: " + (pageYOffset+i+window.innerHeight) + "; height: " + i2 + "px;visibility:unset";
 
-                        console.log(i,i2,'Остановка футер');
+                        //console.log(i,i2,'Остановка футер');
                         otstup.style.cssText='height:'+i2+'px;display:block';
 
                         if (i<-182) {
@@ -200,7 +199,7 @@ if (corton_complete!=1) {
                                     img_position=1;
                                 }
                             }else{
-                                console.log('Осветление переход');
+                                //console.log('Осветление переход');
                                 scroll_to_site.style.backgroundColor='#FFF';
                                 document.body.style.overflow = 'hidden';
                                 osvetlenie_redirert();
