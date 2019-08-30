@@ -25,11 +25,11 @@ $words=str_replace(',', '\',\'', $_GET['words']);
 $count_widgets=$_GET['e']+$_GET['r']+$_GET['s'];
 
 if (strlen($iso)==2) {
-    $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p ON c.`promo_id`=p.`id` WHERE (FIND_IN_SET('" . $iso . "', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
+    $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p ON c.`promo_id`=p.`id` WHERE (FIND_IN_SET('" . $iso . "', p.`region`)) AND c.`category_id` IN ('" . $interes . "') AND p.`active`=1 GROUP BY c.`promo_id`";
     $sql2 = "SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('" . $words . "') AND `region`='" . $iso . "'";
 }else{
     $county = substr($iso, 0, 2);
-    $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p ON c.`promo_id`=p.`id` WHERE (FIND_IN_SET('" . $county . "', p.`region`) OR FIND_IN_SET('" . $iso . "', p.`region`)) AND c.`category_id` IN ('" . $interes . "') GROUP BY c.`promo_id`";
+    $sql = "SELECT c.`promo_id` FROM `promo_category` c JOIN `promo` p ON c.`promo_id`=p.`id` WHERE (FIND_IN_SET('" . $county . "', p.`region`) OR FIND_IN_SET('" . $iso . "', p.`region`)) AND c.`category_id` AND p.`active`=1 IN ('" . $interes . "') GROUP BY c.`promo_id`";
     $sql2="SELECT `promo_ids` FROM `words_index` WHERE `word` IN ('".$words."') AND `region` IN ('".$county . "','" . $iso."')";
 }
 
