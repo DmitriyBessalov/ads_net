@@ -106,7 +106,7 @@ if (corton_complete!=1) {
                 '<div class="scroll_border scroll_botton"></div>'+
 
                 '<style type="text/css">'+
-                    'div#corton_scroll_to_site{position:absolute;overflow:hidden;flex-direction:column;background-color:#000;display:none;} '+
+                    'div#corton_scroll_to_site{position:absolute;overflow:hidden;flex-direction:column;background-color:#000;visibility: hidden;} '+
                     'div#corton_scroll_to_site>div.scroll_border{background-color:#'+scroll2site_fon_color+';min-height:80px;border:1px solid #ddd;z-index:2;display:flex;align-items:center;justify-content:center;} '+
                     'div#corton_scroll_to_site>div.scroll_botton{min-height:40px;position:sticky;bottom:0;z-index:1;} '+
                     'div#corton_scroll_border>p{font-size:'+ scroll2site_text_size +'px;font-family:' + scroll2site_text_font + ';color:#' + scroll2site_text_color + ';} '+
@@ -164,7 +164,6 @@ if (corton_complete!=1) {
                     var i=promo_content.getBoundingClientRect().top+promo_content.scrollHeight-window.innerHeight;
 
                     if (!img_fon_load){
-                        scroll_to_site.style.display='flex';
                         //console.log(i,'Подгрузка фона картинки');
                         if (document.body.clientWidth <= 480) {
                             // mobile
