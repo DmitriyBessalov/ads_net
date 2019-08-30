@@ -151,8 +151,6 @@ if (corton_complete!=1) {
                 function scrollreset() {  document.body.scrollTo(0, 0);  }
                 setTimeout(scrollreset, 1);
 
-                scroll_to_site.style.width=corton_promo.clientWidth+'px';;
-
                 if (window.screen.width>1024){
                     var smesenie1=-100,
                         smesenie2=window.innerHeight/5-window.innerHeight;
@@ -176,6 +174,7 @@ if (corton_complete!=1) {
                         } else {
                             image_fon.style.backgroundImage="url(https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop']+")";
                         }
+                        scroll_to_site.style.width=corton_promo.clientWidth+'px';
                         img_fon_load=1;
                     }
 
