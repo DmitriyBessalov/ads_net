@@ -430,7 +430,7 @@ class ArticleController
                     echo '<td></td><td></td>';
                 }
 
-                $doread=round(100/$promosum['perehod']*$promosum['doread'],2);
+                $doread=round(100/$promosum['st']*$promosum['doread'],2);
                 if (is_nan($doread) or is_infinite($doread))$doread=0;
 
                 echo '
@@ -452,7 +452,6 @@ class ArticleController
                 $ch2++;
             }
         }else{echo '<tr><td colspan="13">Некоректные даты фильтра</td></tr>';}
-
 
         echo '
           </table>
