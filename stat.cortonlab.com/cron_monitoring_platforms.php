@@ -2,6 +2,11 @@
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
 function notifikation($platform_id, $opisanie, $date, $type){
+    $last_week_date = date('Y-m-d', strtotime("-7 day", strtotime($date)));
+    $sql= "SELECT COUNT(*) FROM `notifications` WHERE `platform_id` = ".$platform_id." AND `opisanie` LIKE '%".$type."%' AND `date`>='".$last_week_date."'";
+    $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    if ($result){exit;};
+
     $sql= "SELECT `domen` FROM `ploshadki` WHERE `id`='".$platform_id."'";
     $domen = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
@@ -50,7 +55,7 @@ foreach ($result as $i){
             if ($med>$i33['r_show_anons']){
                 $ism=round(100 * ($med-$i33['r_show_anons']) / $med);
                 if ($ism>90)
-                    notifikation($i,'Снижение показа виджета Recommendation на '.$ism.'%', $mySQLdatelast);
+                    notifikation($i,'Снижение показа виджета Recommendation на '.$ism.'%', $mySQLdatelast, 'Recommendation');
             }
         }
         if ($i22['e_show_anons']>150){
@@ -58,7 +63,7 @@ foreach ($result as $i){
             if ($med>$i33['e_show_anons']){
                 $ism=round(100 * ($med-$i33['e_show_anons']) / $med);
                 if ($ism>90)
-                    notifikation($i,'Снижение показа виджета Native Preview на '.$ism.'%', $mySQLdatelast);
+                    notifikation($i,'Снижение показа виджета Native Preview на '.$ism.'%', $mySQLdatelast, 'Preview');
             }
         }
         if ($i22['s_show_anons']>150){
@@ -66,7 +71,7 @@ foreach ($result as $i){
             if ($med>$i33['s_show_anons']){
                 $ism=round(100 * ($med-$i33['r_show_anons']) / $med);
                 if ($ism>90)
-                    notifikation($i,'Снижение показа виджета Slider на '.$ism.'%', $mySQLdatelast);
+                    notifikation($i,'Снижение показа виджета Slider на '.$ism.'%', $mySQLdatelast, 'Slider');
             }
         }
         if ($i22['promo_load']>80){
@@ -74,11 +79,11 @@ foreach ($result as $i){
             if ($med>$i33['promo_load']){
                 $ism=round(100 * ($med-$i33['promo_load']) / $med);
                 if ($ism>90)
-                    notifikation($i,'Снижение показа промо статей на '.$ism.'%', $mySQLdatelast);
+                    notifikation($i,'Снижение показа промо статей на '.$ism.'%', $mySQLdatelast, 'промо');
             }
         }
     }else{
-        if (isset($i22))
-            notifikation($i,'Площадка упала', $mySQLdatelast);
+        if (isset($i22) and ($i22['promo_load']>10))
+            notifikation($i,'Площадка упала', $mySQLdatelast, 'упала');
     }
 }
