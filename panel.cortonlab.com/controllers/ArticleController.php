@@ -96,6 +96,13 @@ class ArticleController
 
                     $CRT = $promosum['clicking'] / $pokaz;
 
+                    if ($pokaz>1000000){
+                        $pokaz=floor($pokaz/1000000).'m';
+                    }else{
+                        if ($pokaz > 1000) {
+                            $pokaz = floor($pokaz / 1000).'k';
+                        }
+                    }
                     if (is_nan($CRT)) {
                         $CRT = '--';
                     } else {
