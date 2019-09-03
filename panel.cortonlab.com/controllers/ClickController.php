@@ -69,8 +69,8 @@ class ClickController
                           <td style="font-size: 15px;">'.$value['read'].'</td>
                           <td style="font-size: 15px;">'.$value['click'].'</td>
                           <td style="font-size: 15px;">'.$stavka.'</td>
-                          <td style="font-size: 15px;">'.$value['pay_platform'].'</td>
                           <td style="font-size: 15px;">'.$value['pay'].'</td>
+                          <td style="font-size: 15px;">'.$value['pay_platform'].'</td>
                           <td style="font-size: 15px;">'.$value['ip'].'</td>';
                             if ($_GET['useragent']=='on'){
                                 echo '<td style="font-size: 10px;">'.$value['user-agent'].'</td>';
