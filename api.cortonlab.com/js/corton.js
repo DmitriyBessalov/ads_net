@@ -63,9 +63,21 @@ if (corton_complete!=1) {
                     '</div>';
             }
 
-            var logo='<div style="height: 40px;"><a style="float: right;" href="https://cortonlab.com/" target="_blank" title="Powered by Corton">' +
-                     '<img style="all:unset; width:80px; height:20px;" src="https://cortonlab.com/images/cortonlogo.png">' +
-                     '</a></div>';
+            var style_p = window.getComputedStyle(widget_promo, null);
+            let marker_reklamiy = style_p.getPropertyValue('--marker_reklamiy');
+
+            if (marker_reklamiy==='1'){
+                marker_reklamiy='<p style="line-height: 0; color: #999; font-size: 12px;">Спонсорский материал</p>';
+            }else{
+                marker_reklamiy='';
+            }
+
+            var logo='<div style="height: 40px;display:flex;flex-direction:row-reverse;flex-wrap: wrap-reverse;justify-content: space-between;align-items: stretch;align-content: stretch;">'+
+                     '<a href="https://cortonlab.com/" title="Powered by Corton" style="height:40px;">' +
+                        '<img style="all:unset;width:80px; height:20px;" src="https://cortonlab.com/images/cortonlogo.png" />' +
+                     '</a>' +
+                     marker_reklamiy +
+                '</div>';
 
             const promo_selector_title = style_b.getPropertyValue('--selectortitle');
 
@@ -79,7 +91,6 @@ if (corton_complete!=1) {
                 widget_promo.innerHTML ='<h1>'+result['title']+'</h1>'+promo;
             }
 
-            var style_p = window.getComputedStyle(widget_promo, null);
             const scroll2site_activ = style_p.getPropertyValue('--scroll2site_activ');
             if ((result['scroll2site']==1) && (scroll2site_activ==1))
             {

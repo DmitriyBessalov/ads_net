@@ -1352,15 +1352,22 @@ var myLineChart = new Chart(ctx, {
                                 <label>Цвет осветления</label>
                                 <input value="'.$result['scroll2site_perehod_color'].'" name="scroll2site_perehod_color" class="jscolor">
                                 <br>
-                                                                                                
-                            </div>    
+
+                                <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
+                                      <input type="checkbox" '; if ($result['marker_reklamiy']) echo ' checked '; echo ' name="marker_reklamiy" class="form-radiozag">
+                                      <label style="margin-top:0 !important;" class="w-form-label">
+                                         <a style="color:#333;font-size: 14px;" class="link">Активировать маркер рекламы</a>
+                                      </label>
+                                </div>
+                                                                    
+                            </div>
                         </div>
                         <input type="submit" value="Сохранить" class="button-7 w-button2">
                     </form>
                 </div>
             </div>
 			
-			<div style="padding:  0px 10px 0 30px; width:480px">
+			<div style="padding: 0 10px 0 30px; width:480px">
 			   <div style="margin-bottom: 20px;"><strong class="bold-text-16">Дополнительные стили:</strong>
                     <br>
                </div>
@@ -1370,10 +1377,8 @@ var myLineChart = new Chart(ctx, {
                     <br>
                </div>
                <textarea id="textarea-promo2" style="width:440px; font-size: 14px; padding: 10px; border-radius: 4px; border: 1px solid #E0E1E5; height: 180px; resize: vertical;">'.$result['adblock-css'].'</textarea>
-
             </div>
             
-			
             <div class="div-block-118" style="overflow: auto;">
                 <div><strong class="bold-text-12">Код для установки:</strong>
                     <br>
