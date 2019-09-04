@@ -21,15 +21,15 @@ foreach ($arr as $value) {
     $redis->incr(date('d').':'.$value);
 };
 
-$valueold="";
 $redis->select(3);
+$valueold="";
 foreach ($arr as $value) {
     $value=substr($value, -1);
     $redis->incr(date('d').':'.$ploshadka_id.':'.$value);
-    if ($value!=$valueold){
+    if (($value!=$valueold) and ($value=='r')){
         $sql= "INSERT INTO `widget_prosmotr`(`prosmotr_id`, `widget`, `ploshadka_id`, `date`) VALUES ('".addslashes($_GET['prosmort_id'])."','".$value."','".$ploshadka_id."',CURDATE())";
         $GLOBALS['dbstat']->query($sql);
-        $valueold=$value;
+        $valueold='r';
     }
 
 };
