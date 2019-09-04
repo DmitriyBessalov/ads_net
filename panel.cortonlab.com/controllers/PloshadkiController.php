@@ -1359,7 +1359,6 @@ var myLineChart = new Chart(ctx, {
                                          <a style="color:#333;font-size: 14px;" class="link">Активировать маркер рекламы</a>
                                       </label>
                                 </div>
-                                                                    
                             </div>
                         </div>
                         <input type="submit" value="Сохранить" class="button-7 w-button2">
