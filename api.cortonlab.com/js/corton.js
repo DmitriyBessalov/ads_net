@@ -164,7 +164,7 @@ if (corton_complete!=1) {
                         smesenie2=window.innerHeight/5-window.innerHeight;
                 }else{
                     var smesenie1=-40,
-                        smesenie2=window.innerHeight/10-window.innerHeight;
+                        smesenie2=window.innerHeight/50-window.innerHeight;
                 }
 
                 function scroll_to_site_position() {
