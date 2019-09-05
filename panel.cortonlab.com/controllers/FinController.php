@@ -74,7 +74,7 @@ class FinController
                     $aktiv['recomend_aktiv'] = $aktiv['natpre_aktiv'] = $aktiv['slider_aktiv'] = false;
                 }
 
-                $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load' FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load' FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                 $balansperiod = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                 if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
@@ -86,14 +86,38 @@ class FinController
                     $platforms = explode("','", $strplatform);
 
                     foreach ($platforms as $i) {
-                        $ch = $redis->get(date('d') . ':' . $i . ':r');
-                        if ($ch) $balansperiod['r_show_anons'] += $ch;
+                        //$ch = $redis->get(date('d') . ':' . $i . ':r');
+                        //if ($ch) $balansperiod['r_show_anons'] += $ch;
                         $ch = $redis->get(date('d') . ':' . $i . ':e');
                         if ($ch) $balansperiod['e_show_anons'] += $ch;
                         $ch = $redis->get(date('d') . ':' . $i . ':s');
                         if ($ch) $balansperiod['s_show_anons'] += $ch;
                     };
                 }
+
+
+                if (strtotime($datebegin)<=strtotime(date('04.09.2019'))){
+                    if (strtotime($dateend)<=strtotime(date('04.09.2019'))){
+                        $end=$mySQLdateend;
+                    }else{
+                        $end="2019-09-04";
+                    }
+                    $sql = "SELECT SUM(`r_show_anons`) FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='".$end."'";
+                    $widget_prosmotr_r = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $widget_prosmotr_r=round($widget_prosmotr_r/1.5,0);
+                }
+
+                if (strtotime($dateend)>=strtotime(date('05.09.2019'))){
+                    if (strtotime($datebegin)>=strtotime(date('05.09.2019'))){
+                        $begin=$mySQLdatebegin;
+                    }else{
+                        $begin="2019-09-05";
+                    }
+                    $sql = "SELECT COUNT(*) FROM `widget_prosmotr` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $begin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $widget_prosmotr_r2 = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                }
+
+                $balansperiod['r_show_anons']=$widget_prosmotr_r+$widget_prosmotr_r2;
 
                 $r_CTR = $balansperiod['r_promo_load'] / $balansperiod['r_show_anons'];
                 $e_CTR = $balansperiod['e_promo_load'] / $balansperiod['e_show_anons'];
@@ -102,7 +126,7 @@ class FinController
                 if (is_nan($r_CTR)) {
                     $r_CTR = '0.00';
                 } else {
-                    $r_CTR = round($r_CTR * 100*1.5);
+                    $r_CTR = round($r_CTR * 100);
                     if (is_infinite($r_CTR)) $r_CTR = '0.00';
                 };
                 if (is_nan($e_CTR)) {
@@ -149,7 +173,7 @@ class FinController
             <td>' . $r_CTR . ' %</td>
             <td class="bluetext">';
             if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
-                $val= round($balansperiod['r_balans']/($balansperiod['r_show_anons']/1.5)*1100,2);
+                $val= round($balansperiod['r_balans']/($balansperiod['r_show_anons'])*1100,2);
                 if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
                 echo $val;
             } else {
