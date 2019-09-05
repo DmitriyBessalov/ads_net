@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 
-$_SERVER['HTTP_ORIGIN']='http://okardio.com/dfhgj';
+//$_SERVER['HTTP_ORIGIN']='http://okardio.com/dfhgj';
 
 $domen=parse_url ( $_SERVER['HTTP_ORIGIN'], PHP_URL_HOST );
 $sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
