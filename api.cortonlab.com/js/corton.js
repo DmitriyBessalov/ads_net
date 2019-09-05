@@ -875,9 +875,6 @@ if (corton_complete!=1) {
                         show_recomend = 2;
                         show_widget_aktiv = true;
                     }
-                }else{
-                    setTimeout(onscr, 20);
-                    return false;
                 }
             }
 
@@ -887,9 +884,6 @@ if (corton_complete!=1) {
                         show_natpre = 2;
                         show_widget_aktiv = true;
                     }
-                }else{
-                    setTimeout(onscr, 20);
-                    return false;
                 }
             }
 
@@ -897,9 +891,13 @@ if (corton_complete!=1) {
                 show_slider = 2;
                 show_widget_aktiv=true;
             }
+
             if (show_widget_aktiv){
                 widget_load();
                 show_widget();
+            }else{
+                setTimeout(onscr, 25);
+                return false;
             }
 
             //Добавление просмотренных анонсов
