@@ -869,12 +869,15 @@ if (corton_complete!=1) {
             widget_slider = document.getElementById("corton-slider-widget");
             widget_check();
             var show_widget_aktiv=false;
+            returnfalse=0;
             if (widget_recomend) {
                 if (widget_recomend.getBoundingClientRect().top != 0) {
                     if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 4 < 0) {
                         show_recomend = 2;
                         show_widget_aktiv = true;
                     }
+                }else{
+                    returnfalse=1;
                 }
             }
 
@@ -884,20 +887,22 @@ if (corton_complete!=1) {
                         show_natpre = 2;
                         show_widget_aktiv = true;
                     }
+                }else{
+                    returnfalse=1;
                 }
             }
 
-            if ((show_slider==1)&&(document.body.scrollHeight/2-window.innerHeight/2<pageYOffset)) {
-                show_slider = 2;
-                show_widget_aktiv=true;
+            if (returnfalse){
+                return false;
             }
 
+            //if ((show_slider==1)&&(document.body.scrollHeight/2-window.innerHeight/2<pageYOffset)) {
+            //    show_slider = 2;
+            //    show_widget_aktiv=true;
+            //}
             if (show_widget_aktiv){
                 widget_load();
                 show_widget();
-            }else{
-                setTimeout(onscr, 25);
-                return false;
             }
 
             //Добавление просмотренных анонсов
