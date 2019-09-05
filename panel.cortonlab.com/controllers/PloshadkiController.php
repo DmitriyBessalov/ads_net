@@ -2598,7 +2598,7 @@ var myLineChart = new Chart(ctx, {
             <thead>
                 <tr class="trtop">
                     <td style="min-width: 230px;">Виджет</td>
-                    <td><div class="tooltipinfo1">Показы<span class="tooltiptext1">Показы анонсов</span></div></td>
+                    <td><div class="tooltipinfo1">Показы<span class="tooltiptext1">Показы виджетов</span></div></td>
                     <td style="min-width: 210px;">Клики</td>
                     <td>CTR</td>
                     <td style="min-width: 110px;"><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Оплаченные просмотры (%&nbsp;кликов)</span></div></td>
@@ -2612,14 +2612,36 @@ var myLineChart = new Chart(ctx, {
                 $sql = "SELECT SUM(`recomend_aktiv`) as `recomend_aktiv`, SUM(`natpre_aktiv`) as `natpre_aktiv`, SUM(`slider_aktiv`) as `slider_aktiv`, `domen` FROM `ploshadki` WHERE `id`='".$_GET['id']."'";
                 $aktiv = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-                $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`r_show_anons`) as 'r_show_anons', SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load', SUM(`r_promo_click`) as 'r_promo_click', SUM(`e_promo_click`) as 'e_promo_click', SUM(`s_promo_click`) as 's_promo_click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load', SUM(`r_promo_click`) as 'r_promo_click', SUM(`e_promo_click`) as 'e_promo_click', SUM(`s_promo_click`) as 's_promo_click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                 $balansperiod = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 if (is_null($balansperiod['r_balans'])){
                     foreach ($balansperiod as $key => $value) {
                         $balansperiod[$key]=0;
                     }
                 }
-                $balansperiod['r_show_anons']=round($balansperiod['r_show_anons']/1.5);
+
+                if (strtotime($datebegin)<=strtotime(date('04.09.2019'))){
+                    if (strtotime($dateend)<=strtotime(date('04.09.2019'))){
+                        $end=$mySQLdateend;
+                    }else{
+                        $end="2019-09-04";
+                    }
+                    $sql = "SELECT SUM(`r_show_anons`) FROM `balans_ploshadki` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='".$end."'";
+                    $widget_prosmotr_r = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    $widget_prosmotr_r=round($widget_prosmotr_r/1.5,0);
+                }
+
+                if (strtotime($dateend)>=strtotime(date('05.09.2019'))){
+                    if (strtotime($datebegin)>=strtotime(date('05.09.2019'))){
+                        $begin=$mySQLdatebegin;
+                    }else{
+                        $begin="2019-09-05";
+                    }
+                    $sql = "SELECT COUNT(*) FROM `widget_prosmotr` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $begin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $widget_prosmotr_r2 = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                }
+
+                $balansperiod['r_show_anons']=$widget_prosmotr_r+$widget_prosmotr_r2;
 
 
                 if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
@@ -2628,8 +2650,8 @@ var myLineChart = new Chart(ctx, {
                     $redis->pconnect('185.75.90.54', 6379);
                     $redis->select(3);
 
-                    $ch=$redis->get(date('d').':'.$_GET['id'].':r');
-                    if($ch)$balansperiod['r_show_anons']+=$ch;
+                    //$ch=$redis->get(date('d').':'.$_GET['id'].':r');
+                    //if($ch)$balansperiod['r_show_anons']+=$ch;
                     $ch=$redis->get(date('d').':'.$_GET['id'].':e');
                     if($ch)$balansperiod['e_show_anons']+=$ch;
                     $ch=$redis->get(date('d').':'.$_GET['id'].':s');
@@ -2756,7 +2778,7 @@ var myLineChart = new Chart(ctx, {
         </tr>
     <tbody>';
             }else{echo '<tr><td colspan="7">Некоректные даты фильтра</td></tr>';}
-            echo'
+            echo '
         </table>
     </div>
 	</div>
@@ -2772,7 +2794,7 @@ var myLineChart = new Chart(ctx, {
 		        </form>
 	</div>
     <script>
-        document.getElementById("title2").innerHTML="Статистика по площадки<br><span class=titlepromo>URL: ' . $aktiv['domen'] . '</span>";
+        document.getElementById("title2").innerHTML="Статистика по площадке<br><span class=titlepromo>URL: ' . $aktiv['domen'] . '</span>";
     </script>
 </div>';
 
