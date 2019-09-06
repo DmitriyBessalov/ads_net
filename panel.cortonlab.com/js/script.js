@@ -949,16 +949,26 @@ $(document).ready(function(){
         var reader = new FileReader();
         var diver=this;
 
+        var oldimg=$(diver).parent('div').css("background-image");
         function f() {
             var image = new Image();
             image.src = document.getElementById('imagepreview510').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2');
-            if (image.width<=1024){
+            var input = document.getElementById('screenshot_desktop');
+            var resett=0;
+            if (image.width<1024){
                 alert('Загружена неправильная картинка, минимальная ширина 1024px');
+                resett=1;
             }
-            if (image.width*2>=image.height){
+            if (image.width*2>image.height) {
                 alert('Загружена неправильная картинка, минимальная высота должна быть больше ширины в 2 раза');
+                resett=1;
             }
-            $(diver).parent('div').children('label').html("Скриншот десктоп "+image.width+"x"+image.height+"px");
+            if (resett){
+                input.value = '';
+                $(diver).parent('div').css("background-image", oldimg);
+            }else {
+                $(diver).parent('div').children('label').html("Скриншот десктоп "+image.width+"x"+image.height+"px");
+            }
         }
 
         reader.addEventListener("load",function(event) {
@@ -984,16 +994,26 @@ $(document).ready(function(){
         var reader = new FileReader();
         var diver=this;
 
+        var oldimg=$(diver).parent('div').css("background-image");
         function f() {
             var image = new Image();
             image.src = document.getElementById('imagepreview239').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2');
-            if (image.width<=360){
+            var input = document.getElementById('screenshot_mobile');
+            var resett=0;
+            if (image.width<360){
                 alert('Загружена неправильная картинка, минимальная ширина 360px');
+                resett=1;
             }
-            if (image.width*2>=image.height){
+            if (image.width*2>image.height) {
                 alert('Загружена неправильная картинка, минимальная высота должна быть больше ширины в 2 раза');
+                resett=1;
             }
-            $(diver).parent('div').children('label').html("Скриншот&nbsp;&nbsp; мобильный "+image.width+"x"+image.height+"px");
+            if (resett){
+                input.value = '';
+                $(diver).parent('div').css("background-image", oldimg);
+            }else {
+                $(diver).parent('div').children('label').html("Скриншот десктоп "+image.width+"x"+image.height+"px");
+            }
         }
 
         reader.addEventListener("load",function(event) {
@@ -1012,6 +1032,8 @@ $(document).ready(function(){
         });
         reader.readAsDataURL(file);
     });
+
+
 
 
     //Добавление стилей
