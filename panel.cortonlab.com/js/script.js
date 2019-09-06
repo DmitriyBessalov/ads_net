@@ -948,6 +948,19 @@ $(document).ready(function(){
         var file = files[0];
         var reader = new FileReader();
         var diver=this;
+
+        function f() {
+            var image = new Image();
+            image.src = document.getElementById('imagepreview510').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2');
+            if (image.width<=1024){
+                alert('Загружена неправильная картинка, минимальная ширина 1024px');
+            }
+            if (image.width*2>=image.height){
+                alert('Загружена неправильная картинка, минимальная высота должна быть больше ширины в 2 раза');
+            }
+            $(diver).parent('div').children('label').html("Скриншот десктоп "+image.width+"x"+image.height+"px");
+        }
+
         reader.addEventListener("load",function(event) {
             var loadedFile = event.target;
             if (file.type.match('image')) {
@@ -956,7 +969,7 @@ $(document).ready(function(){
                 $(diver).parent('div').css("background-repeat", "no-repeat");
                 $(diver).parent('div').css("background-size", "cover");
                 $(diver).parent('div').children('label').css("background-color", "#e1e2e8");
-                $(diver).parent('div').children('label').html("Скриншот десктоп");
+                setTimeout(f ,2000);
             } else {
                 alert("This file type is not supported yet.");
             }
@@ -970,6 +983,19 @@ $(document).ready(function(){
         var file = files[0];
         var reader = new FileReader();
         var diver=this;
+
+        function f() {
+            var image = new Image();
+            image.src = document.getElementById('imagepreview239').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2');
+            if (image.width<=360){
+                alert('Загружена неправильная картинка, минимальная ширина 360px');
+            }
+            if (image.width*2>=image.height){
+                alert('Загружена неправильная картинка, минимальная высота должна быть больше ширины в 2 раза');
+            }
+            $(diver).parent('div').children('label').html("Скриншот&nbsp;&nbsp; мобильный "+image.width+"x"+image.height+"px");
+        }
+
         reader.addEventListener("load",function(event) {
             var loadedFile = event.target;
             if (file.type.match('image')) {
@@ -978,7 +1004,8 @@ $(document).ready(function(){
                 $(diver).parent('div').css("background-repeat", "no-repeat");
                 $(diver).parent('div').css("background-size", "cover");
                 $(diver).parent('div').children('label').css("background-color", "#e1e2e8");
-                $(diver).parent('div').children('label').html("Скриншот&nbsp;&nbsp; мобильный");
+                //$(diver).parent('div').children('label').html("Скриншот&nbsp;&nbsp; мобильный 360x720px");
+                setTimeout(f ,2000);
             } else {
                 alert("This file type is not supported yet.");
             }
@@ -1145,7 +1172,7 @@ $(document).ready(function(){
         var arr = [];
         var variable=document.querySelectorAll('.isogeolist');
         for (i = 0; i < variable.length; i++) {
-            console.log( variable[i].dataset.label);
+//            console.log( variable[i].dataset.label);
             arr[i]=variable[i].dataset.label;
         }
         if (arr.length){
