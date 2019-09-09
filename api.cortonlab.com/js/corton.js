@@ -197,6 +197,7 @@ if (corton_complete!=1) {
 
                         if (i<(smesenie1-80)) {
                             g=smesenie2-i;
+                            console.log(g, smesenie2, i);
                             if (g<=0){
                                 //console.log(i,'Выдвижение картинки');
                                 if (img_position===0){
