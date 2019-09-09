@@ -1032,16 +1032,18 @@ $(document).ready(function(){
         reader.readAsDataURL(file);
     });
 
-    s = document.getElementById('imagepreview239').style.backgroundImage;
+    s = document.getElementById('imagepreview239');
     if (s){
+        s=s.style.backgroundImage;
         var image = new Image();
         image.src = 'https:'+s.split('("').pop().split('")').shift();
         if (image.width)
         $('#imagepreview239').children('label').html("Скриншот&nbsp;&nbsp; мобильный "+image.width+"x"+image.height+"px");
     }
 
-    s = document.getElementById('imagepreview510').style.backgroundImage;
+    s = document.getElementById('imagepreview510');
     if (s){
+        s=s.style.backgroundImage;
         var image = new Image();
         image.src = 'https:'+s.split('("').pop().split('")').shift();
         if (image.width)
