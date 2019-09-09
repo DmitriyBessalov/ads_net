@@ -988,14 +988,14 @@ class ArticleController
                                     <div class="div-block-142">
                                         <div class="div-block-148">
                                             <div class="image-preview" style="background-image:url(' . $imgdir . $anon['img_290x180'] . ');background-position:center center;background-repeat:no-repeat;background-size:cover;">
-                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 290x180px</label>
+                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 450x280px</label>
                                                 <input type="file" name="image290[]" class="image-upload290" accept=".png,.jpeg,.jpg,.gif" />
                                             </div>
                                         </div>
                                         <div class="div-block-147"></div>
                                         <div class="div-block-148">
                                             <div class="image-preview _180" style="background-image:url(' . $imgdir . $anon['img_180x180'] . ');background-position:center center;background-repeat:no-repeat;background-size:cover;">
-                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 180x180px</label>
+                                                <label for="image-upload290" style="background-color:#e1e2e8" class="image-label">Обновить изображение 280x280px</label>
                                                 <input type="file" name="image180[]" class="image-upload180" accept=".png,.jpeg,.jpg,.gif" />
                                             </div>
                                         </div>
