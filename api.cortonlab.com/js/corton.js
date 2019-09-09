@@ -927,7 +927,7 @@ if (corton_complete!=1) {
                         anons_ids_show.push(anons_idsnew[f]);
                     }
                 }
-                //console.log('захвачены',anons_ids_show);
+                console.log('захвачены',anons_ids_show);
 
                 setTimeout(checkread, 5000, anons_ids_show.join().substr(0));
                 anons_idsnew.splice(0,anons_idsnew.length);
