@@ -888,9 +888,9 @@ if (corton_complete!=1) {
                 }
             }
 
-            if (show_widget_aktiv==false){
-                return false;
-            }
+//            if (show_widget_aktiv==false){
+//                return false;
+//            }
 
             //if ((show_slider==1)&&(document.body.scrollHeight/2-window.innerHeight/2<pageYOffset)) {
             //    show_slider = 2;
