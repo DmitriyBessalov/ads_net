@@ -862,19 +862,21 @@ if (corton_complete!=1) {
 //            cxhr.send();
 //        }
 
+        var show_widget_aktiv=false;
         //Поиск условия для загрузки виджетов
         function onscr() {
             widget_recomend = document.getElementById("corton-recomendation-widget");
             widget_natpre = document.getElementById("corton-nativepreview-widget");
 //            widget_slider = document.getElementById("corton-slider-widget");
             widget_check();
-            var show_widget_aktiv=false;
             returnfalse=0;
             if (widget_recomend) {
                 if (widget_recomend.getBoundingClientRect().top != 0) {
                     if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 4 < 0) {
                         show_recomend = 2;
                         show_widget_aktiv = true;
+                        widget_load();
+                        show_widget();
                     }
                 }
             }
@@ -884,22 +886,25 @@ if (corton_complete!=1) {
                     if ((show_natpre == 1) && (widget_natpre.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 4 < 0)) {
                         show_natpre = 2;
                         show_widget_aktiv = true;
+                        widget_load();
+                        show_widget();
                     }
                 }
             }
 
-//            if (show_widget_aktiv==false){
-//                return false;
-//            }
+            if (show_widget_aktiv===false){
+                return false;
+            }
 
             //if ((show_slider==1)&&(document.body.scrollHeight/2-window.innerHeight/2<pageYOffset)) {
             //    show_slider = 2;
             //    show_widget_aktiv=true;
             //}
-            if (show_widget_aktiv){
-                widget_load();
-                show_widget();
-            }
+
+           // if (show_widget_aktiv){
+           //     widget_load();
+           //     show_widget();
+           // }
 
             //Добавление просмотренных анонсов
             anons_ids.splice(0,anons_ids.length);
@@ -927,7 +932,7 @@ if (corton_complete!=1) {
                         anons_ids_show.push(anons_idsnew[f]);
                     }
                 }
-                console.log('захвачены',anons_ids_show);
+                //console.log('захвачены',anons_ids_show);
 
                 setTimeout(checkread, 5000, anons_ids_show.join().substr(0));
                 anons_idsnew.splice(0,anons_idsnew.length);
