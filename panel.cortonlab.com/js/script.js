@@ -1024,7 +1024,6 @@ $(document).ready(function(){
                 $(diver).parent('div').css("background-repeat", "no-repeat");
                 $(diver).parent('div').css("background-size", "cover");
                 $(diver).parent('div').children('label').css("background-color", "#e1e2e8");
-                //$(diver).parent('div').children('label').html("Скриншот&nbsp;&nbsp; мобильный 360x720px");
                 setTimeout(f ,2000);
             } else {
                 alert("This file type is not supported yet.");
@@ -1033,8 +1032,21 @@ $(document).ready(function(){
         reader.readAsDataURL(file);
     });
 
+    s = document.getElementById('imagepreview239').style.backgroundImage;
+    if (s){
+        var image = new Image();
+        image.src = 'https:'+s.split('("').pop().split('")').shift();
+        if (image.width)
+        $('#imagepreview239').children('label').html("Скриншот&nbsp;&nbsp; мобильный "+image.width+"x"+image.height+"px");
+    }
 
-
+    s = document.getElementById('imagepreview510').style.backgroundImage;
+    if (s){
+        var image = new Image();
+        image.src = 'https:'+s.split('("').pop().split('")').shift();
+        if (image.width)
+        $('#imagepreview510').children('label').html("Скриншот десктоп "+image.width+"x"+image.height+"px");
+    }
 
     //Добавление стилей
     $('#textarea-promo').keyup(function(){widget_promo();});
