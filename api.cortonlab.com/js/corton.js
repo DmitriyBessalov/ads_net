@@ -159,13 +159,14 @@ if (corton_complete!=1) {
                 function scrollreset() {  document.body.scrollTo(0, 0);  }
                 setTimeout(scrollreset, 1);
 
-                if (window.screen.width>1024){
-                    var smesenie1=-100,
-                        smesenie2=window.innerHeight/5-window.innerHeight;
+                if (window.innerWidth<980){
+                    var footer_max_height=-40,
+                        otstup_perehoda=0
                 }else{
-                    var smesenie1=-40,
-                        smesenie2=window.innerHeight/50-window.innerHeight;
+                    var footer_max_height=-100,
+                        otstup_perehoda=window.innerHeight/5
                 }
+                console.log(window.innerWidth, otstup_perehoda);
 
                 function scroll_to_site_position() {
                     //console.log('position');
@@ -186,18 +187,18 @@ if (corton_complete!=1) {
                         img_fon_load=1;
                     }
 
-                    if(i<=smesenie1){
+                    if(i<=footer_max_height){
                         //console.log(i,i2,'Выдвижение заголовка перехода');
                         if (window.screen.width <=480) {
-                            scroll_to_site.style.cssText += "height: " + (smesenie1-i) + "px;visibility:unset;left:"+ (-promo_content.getBoundingClientRect().left) +"px;width:" + window.screen.width + "px;";
+                            scroll_to_site.style.cssText += "height: " + (footer_max_height-i) + "px;visibility:unset;left:"+ (-promo_content.getBoundingClientRect().left) +"px;width:" + window.screen.width + "px;";
                         }else{
-                            scroll_to_site.style.cssText += "top: " + (pageYOffset+i+window.innerHeight) + "; height: " + (smesenie1-i) + "px;visibility:unset;";
+                            scroll_to_site.style.cssText += "top: " + (pageYOffset+i+window.innerHeight) + "; height: " + (footer_max_height-i) + "px;visibility:unset;";
 
                         }
 
-                        if (i<(smesenie1-80)) {
-                            g=smesenie2-i;
-                            console.log(g, smesenie2, i);
+                        if (i<(footer_max_height-80)) {
+                            g=otstup_perehoda-window.innerHeight-i;
+                            console.log(g, otstup_perehoda-window.innerHeight, i);
                             if (g<=0){
                                 //console.log(i,'Выдвижение картинки');
                                 if (img_position===0){
@@ -205,7 +206,7 @@ if (corton_complete!=1) {
                                     if (window.screen.width>1024){
                                         image_fon.style.backgroundAttachment = 'fixed';
                                         image_fon.style.backgroundSize = scroll_to_site.clientWidth+'px';
-                                        image_fon.style.backgroundPosition = scroll_to_site.getBoundingClientRect().left + 'px ' + (window.innerHeight/5 + scroll_border.scrollHeight) + 'px';
+                                        image_fon.style.backgroundPosition = scroll_to_site.getBoundingClientRect().left + 'px ' + (otstup_perehoda + scroll_border.scrollHeight) + 'px';
                                     }
                                     img_position=1;
                                 }
