@@ -1,11 +1,10 @@
 Header set Content-Type "application/javascript; charset=utf-8"
 
-RewriteEngine On
-AddCharset UTF-8 .js
-RewriteCond %{THE_REQUEST} /([^.]+) [NC]
-RewriteRule .(?:gz)$ corton.js
+#RewriteEngine On
+#AddCharset UTF-8 .js
+#RewriteCond %{THE_REQUEST} /([^.]+) [NC]
 
-#<FilesMatch "\.js.gz$">
-#    AddEncoding gzip .gz
-#	Header set Content-Encoding: gzip
-#</FilesMatch>
+<FilesMatch "\.js.gz$">
+    AddEncoding gzip .gz
+	Header set Content-Encoding: gzip
+</FilesMatch>
