@@ -6790,7 +6790,7 @@ BaseTheme.DEFAULTS = (0, _extend2.default)(true, {}, _theme2.default.DEFAULTS, {
                 reader.onload = function (e) {
                   var range = _this3.quill.getSelection(true);
                   _this3.quill.updateContents(new _quillDelta2.default().retain(range.index).delete(range.length).insert({ image: e.target.result }), _emitter2.default.sources.USER);
-                  _this3.quill.setSelection(range.index + 1, _emitter2.default.sources.SILENT);
+     //             _this3.quill.setSelection(range.index + 1, _emitter2.default.sources.SILENT);
                   fileInput.value = "";
                 };
                 reader.readAsDataURL(fileInput.files[0]);

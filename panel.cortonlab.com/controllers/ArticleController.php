@@ -955,19 +955,13 @@ class ArticleController
                                 idx = elements[key].retain;
                             }
                             if (elements[key].insert != undefined && elements[key].insert.image != undefined){
+                                console.log(idx);
                                 quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small">©&nbsp;Источник</span><p> </p>\', \'user\');
-                                
-                             //   var element = document.querySelectorAll(\'div.ql-editor p > span.ql-size-small\');
-                                  
-                                  
-                                  
-                             //   element.forEach(function(item, i, element) {
-                             //       console.log(i + ": " + item);
-                             //   });
                             }
                         }
                     }
                 });
+                                        
         </script>';
 
         include PANELDIR.'/views/layouts/footer.php';
@@ -1439,13 +1433,8 @@ class ArticleController
                         idx = elements[key].retain;
                     }
                     if (elements[key].insert != undefined && elements[key].insert.image != undefined){
+                        console.log(idx);
                         quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small">©&nbsp;Источник</span><p> </p>\', \'user\');
-                        
-                     //   var element = document.querySelectorAll(\'div.ql-editor p > span.ql-size-small\');
-                        
-                     //   element.forEach(function(item, i, element) {
-                     //       console.log(i + ": " + item);
-                     //   });
                     }
                 }
             }
