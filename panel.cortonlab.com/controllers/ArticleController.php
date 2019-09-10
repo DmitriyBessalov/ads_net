@@ -955,7 +955,7 @@ class ArticleController
                                 idx = elements[key].retain;
                             }
                             if (elements[key].insert != undefined && elements[key].insert.image != undefined){
-                                quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small">©&nbsp;Источник</span><p> </p>\', \'user\');
+                                quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small" style="font-size: 12px; color: #ccc;">©&nbsp;Источник</span><p> </p>\', \'user\');
                                 
                              //   var element = document.querySelectorAll(\'div.ql-editor p > span.ql-size-small\');
                                 
@@ -1437,7 +1437,7 @@ class ArticleController
                         idx = elements[key].retain;
                     }
                     if (elements[key].insert != undefined && elements[key].insert.image != undefined){
-                        quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small">©&nbsp;Источник</span><p> </p>\', \'user\');
+                        quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small" style="font-size: 12px; color: #ccc;">©&nbsp;Источник</span><p> </p>\', \'user\');
                         
                      //   var element = document.querySelectorAll(\'div.ql-editor p > span.ql-size-small\');
                         
