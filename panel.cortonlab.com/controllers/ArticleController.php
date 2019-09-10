@@ -944,6 +944,44 @@ class ArticleController
                 about.value = textt.innerHTML;
                 return true;
             }
+            
+            quill.on(\'text-change\', function(delta, oldDelta, source) {
+                    if (source == \'user\') {
+                        var elements = delta.ops;
+                        var idx;
+            
+                        for (var key in elements) {
+                            if (elements[key].retain != undefined) {
+                                idx = elements[key].retain;
+                            }
+                            if (elements[key].insert != undefined && elements[key].insert.image != undefined){
+                                  quill.clipboard.dangerouslyPasteHTML(idx+1, \'<br></p><p><span class="ql-size-small">©&nbsp;Источник</span></p><p> </p>\', \'user\');
+                                  quill.insertText(quill.getLength(), \'\n\');
+            
+                                  var range = quill.getSelection(true);
+                                  quill.setSelection(range.index + 1,\'silent\');
+                                  quill.insertText(quill.getLength(), \'\n\');
+            //                      console.log(quill.getSelection(true))
+            //                      var fuck = new Delta();
+            //                      quill.updateContents(new Delta().retain(quill.getSelection().index).insert(\'\n\'));
+                            }
+                            if(elements[key].insert != undefined && elements[key].insert == \'\n\'){
+                                var toolbar = quill.getModule(\'toolbar\');
+                                console.log(quill.getBounds(7));
+            //                    console.log(toolbar);
+            //
+            //                    let myBounds = quill.getBounds(10, 0);
+            //                    let Tooltip = Quill.import(\'tooltip\');
+            //                    let myTooltip = new Tooltip(quill);
+            //
+            //                    document.querySelector("#scrolling-container").addEventListener("mouseover", ()=>{
+            //                      myTooltip.show();
+            //                      myTooltip.position(myBounds);
+            //                    });
+                            }
+                        }
+                    }
+                });
         </script>';
 
         include PANELDIR.'/views/layouts/footer.php';
@@ -1404,6 +1442,44 @@ class ArticleController
       about.value = textt.innerHTML;
       return true;
     }
+    
+    quill.on(\'text-change\', function(delta, oldDelta, source) {
+        if (source == \'user\') {
+            var elements = delta.ops;
+            var idx;
+
+            for (var key in elements) {
+                if (elements[key].retain != undefined) {
+                    idx = elements[key].retain;
+                }
+                if (elements[key].insert != undefined && elements[key].insert.image != undefined){
+                      quill.clipboard.dangerouslyPasteHTML(idx+1, \'<br></p><p><span class="ql-size-small">©&nbsp;Источник</span></p><p> </p>\', \'user\');
+                      quill.insertText(quill.getLength(), \'\n\');
+
+                      var range = quill.getSelection(true);
+                      quill.setSelection(range.index + 1, _emitter2.default.sources.SILENT)
+
+//                      console.log(quill.getSelection(true))
+//                      var fuck = new Delta();
+//                      quill.updateContents(new Delta().retain(quill.getSelection().index).insert(\'\n\'));
+                }
+                if(elements[key].insert != undefined && elements[key].insert == \'\n\'){
+                    var toolbar = quill.getModule(\'toolbar\');
+                    console.log(quill.getBounds(7));
+//                    console.log(toolbar);
+//
+//                    let myBounds = quill.getBounds(10, 0);
+//                    let Tooltip = Quill.import(\'tooltip\');
+//                    let myTooltip = new Tooltip(quill);
+//
+//                    document.querySelector("#scrolling-container").addEventListener("mouseover", ()=>{
+//                      myTooltip.show();
+//                      myTooltip.position(myBounds);
+//                    });
+                }
+            }
+        }
+    });
 </script>
 ';
         include PANELDIR . '/views/layouts/footer.php';
