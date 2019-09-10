@@ -166,13 +166,12 @@ switch ($action) {
         break;
     case 's':
     case 'r':
-        if ($pay['pay']!=0) {
-            $stavka_advertiser=$stavka_ploshadka=0;
-        }
-        $sql = "UPDATE `balans_ploshadki` SET `".$widget."`=".$widget."+1, `".$widget."_balans`=".$widget."_balans+".$stavka_ploshadka."  WHERE `date`=CURDATE() AND `ploshadka_id`='".$platform['id']."'";
-        if (!$GLOBALS['dbstat']->exec($sql)){
-            $sql = "INSERT INTO `balans_ploshadki` SET `ploshadka_id` = '".$platform['id']."', `date` = CURDATE(), `".$widget."`=".$widget."+1, `".$widget."_balans`=".$widget."_balans+".$stavka_ploshadka;
-            $GLOBALS['dbstat']->query($sql);
+        if ($pay['pay']==0) {
+            $sql = "UPDATE `balans_ploshadki` SET `" . $widget . "`=" . $widget . "+1, `" . $widget . "_balans`=" . $widget . "_balans+" . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `ploshadka_id`='" . $platform['id'] . "'";
+            if (!$GLOBALS['dbstat']->exec($sql)) {
+                $sql = "INSERT INTO `balans_ploshadki` SET `ploshadka_id` = '" . $platform['id'] . "', `date` = CURDATE(), `" . $widget . "`=" . $widget . "+1, `" . $widget . "_balans`=" . $widget . "_balans+" . $stavka_ploshadka;
+                $GLOBALS['dbstat']->query($sql);
+            }
         }
         break;
     case 'c':
