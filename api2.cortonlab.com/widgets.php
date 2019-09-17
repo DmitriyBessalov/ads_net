@@ -10,7 +10,7 @@ require_once 'geoip/vendor/autoload.php';
 use GeoIp2\Database\Reader;
 $reader = new Reader('/var/www/www-root/data/www/api2.cortonlab.com/geoip/GeoLite2-City.mmdb');
 
-$_SERVER['REMOTE_ADDR']='185.68.146.112';
+//$_SERVER['REMOTE_ADDR']='185.68.146.112';
 
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
