@@ -181,10 +181,7 @@ SET
     `iso` = '".$iso."',
     `promo_id` = '".$promo."',
     `ip` = '".$_SERVER['REMOTE_ADDR']."';";
-
 $GLOBALS['dbstat']->query($sql);
-
-$postgre = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
 
 $sql="INSERT INTO
     `regust_widget`
@@ -199,4 +196,6 @@ SET
     `iso` = '".$iso."',
     `promo_id_list` = '{".$promo."}',
     `remote_ip` = '".$_SERVER['REMOTE_ADDR']."';";
+
+$postgre = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
 $postgre ->query($sql);
