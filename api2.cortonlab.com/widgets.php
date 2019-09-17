@@ -10,7 +10,7 @@ require_once 'geoip/vendor/autoload.php';
 use GeoIp2\Database\Reader;
 $reader = new Reader('/var/www/www-root/data/www/api2.cortonlab.com/geoip/GeoLite2-City.mmdb');
 
-//$_SERVER['REMOTE_ADDR']='185.68.146.112';
+$_SERVER['REMOTE_ADDR']='185.68.146.112';
 
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
@@ -182,6 +182,9 @@ SET
     `promo_id` = '".$promo."',
     `ip` = '".$_SERVER['REMOTE_ADDR']."';";
 $GLOBALS['dbstat']->query($sql);
+
+if (is_null($_GET['r']))$_GET['r']='0';
+if (is_null($_GET['e']))$_GET['e']='f';
 
 $sql="insert into tb_stat_request (view_id, words_list, category_id_list, promo_id_list, url, iso, recomend, native, remote_ip, platform_id) values 
         ('".$arr['prosmotr_id']."','{".$words."}','{".$interes."}','{".$promo."}','".$i."','".$iso."','".$_GET['r']."','".$_GET['e']."','".$_SERVER['REMOTE_ADDR']."','".$arr['p_id']."')";
