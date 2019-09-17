@@ -12,6 +12,11 @@ $reader = new Reader('/var/www/www-root/data/www/api2.cortonlab.com/geoip/GeoLit
 
 //$_SERVER['REMOTE_ADDR']='185.68.146.112';
 
+$redis = new Redis();
+$redis->pconnect('185.75.90.54', 6379);
+$arr['prosmotr_id'] = $redis->incr("prosmotr_id");
+$redis->close();
+
 $record = $reader->city($_SERVER['REMOTE_ADDR']);
 if ($record->mostSpecificSubdivision->isoCode==''){
     $arr['region']=$iso=$record->country->isoCode;
@@ -138,10 +143,6 @@ $result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $arr['p_id'] = $result1['id'];
 $arr['promo_page']=$result1['promo_page'];
 
-$redis = new Redis();
-$redis->pconnect('185.75.90.54', 6379);
-$arr['prosmotr_id'] = $redis->incr("prosmotr_id");
-
 echo json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 //Cбор статистики слов
@@ -159,8 +160,25 @@ $i=parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
 
 $sql = "UPDATE `words_top10` SET `count`=`count`+1   WHERE `platform_id`='".$arr['p_id']."' AND `uri`='".$i."'";
 if (!$GLOBALS['dbstat']->exec($sql)) {
-    $sql = "INSERT INTO `words_top10` SET `platform_id`='" . $arr['p_id'] . "', `uri`='".$i."',  `top10`='" . $_GET['words'] . "', `wdget_show`='".$show."',`count`='1'";
+    $sql = "INSERT INTO `words_top10` SET `platform_id`='" . $arr['p_id'] . "', `uri`='".$i."', `top10`='" . $_GET['words'] . "', `wdget_show`='".$show."',`count`='1'";
     $GLOBALS['dbstat']->query($sql);
 }
 
-#$GLOBALS['dbstat']->query("INSERT INTO `geo-stat`(`ip`, `iso`) VALUES ('".$_SERVER['REMOTE_ADDR']."','".$iso."')");
+$words=str_replace("'","",$words);
+$promo=str_replace("'","",$promo);
+
+$sql="INSERT INTO
+    `regust_widget`
+SET
+    `prosmotr_id` = '".$arr['prosmotr_id']."',
+    `words` = '".$words."',
+    `category` = '".$interes."',
+    `platform_id` = '".$arr['p_id']."',
+    `r` = '".$_GET['r']."',
+    `e` = '".$_GET['e']."',
+    `url` = '".$i."',
+    `iso` = '".$iso."',
+    `promo_id` = '".$promo."',
+    `ip` = '".$_SERVER['REMOTE_ADDR']."';";
+
+$GLOBALS['dbstat']->query($sql);
