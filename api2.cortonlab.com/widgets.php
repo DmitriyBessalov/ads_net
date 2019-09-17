@@ -184,7 +184,7 @@ SET
 $GLOBALS['dbstat']->query($sql);
 
 $sql="INSERT INTO
-    `regust_widget`
+    `tb_stat_reques`
 SET
     `view_id` = '".$arr['prosmotr_id']."',
     `words_list` = '{".$words."}',
