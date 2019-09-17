@@ -183,19 +183,8 @@ SET
     `ip` = '".$_SERVER['REMOTE_ADDR']."';";
 $GLOBALS['dbstat']->query($sql);
 
-$sql="INSERT INTO
-    `tb_stat_reques`
-SET
-    `view_id` = '".$arr['prosmotr_id']."',
-    `words_list` = '{".$words."}',
-    `category_id_list` = '{".$interes."}',
-    `platform_id` = '".$arr['p_id']."',
-    `recomend` = '".$_GET['r']."',
-    `native` = '".$_GET['e']."',
-    `url` = '".$i."',
-    `iso` = '".$iso."',
-    `promo_id_list` = '{".$promo."}',
-    `remote_ip` = '".$_SERVER['REMOTE_ADDR']."';";
+$sql="insert into tb_stat_request (view_id, words_list, category_id_list, promo_id_list, url, iso, recomend, native, remote_ip, platform_id) values 
+        ('".$arr['prosmotr_id']."','{".$words."}','{".$interes."}','{".$promo."}','".$i."','".$iso."','".$_GET['r']."','".$_GET['e']."','".$_SERVER['REMOTE_ADDR']."','".$arr['p_id']."')";
 
 $postgre = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
 $postgre ->query($sql);
