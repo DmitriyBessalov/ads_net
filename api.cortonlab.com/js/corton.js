@@ -67,7 +67,7 @@ if (corton_complete!=1) {
             let marker_reklamiy = style_p.getPropertyValue('--marker_reklamiy');
 
             if (marker_reklamiy==='1'){
-                marker_reklamiy='<p style="line-height: 1.3; color: #999; font-size: 12px;">На правах рекламы</p>';
+                marker_reklamiy='<p style="line-height: 1.3; color: #999; font-size: 12px;">На правах рекламы </p>';
             }else{
                 marker_reklamiy='';
             }
