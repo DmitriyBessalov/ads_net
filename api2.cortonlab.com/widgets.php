@@ -10,7 +10,7 @@ require_once 'geoip/vendor/autoload.php';
 use GeoIp2\Database\Reader;
 $reader = new Reader('/var/www/www-root/data/www/api2.cortonlab.com/geoip/GeoLite2-City.mmdb');
 
-//$_SERVER['REMOTE_ADDR']='185.68.146.112';
+$_SERVER['REMOTE_ADDR']='185.68.146.112';
 
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
@@ -166,6 +166,7 @@ if (!$GLOBALS['dbstat']->exec($sql)) {
 
 $words=str_replace("'","",$words);
 $promo=str_replace("'","",$promo);
+$interes=str_replace("'","",$interes);
 
 $sql="INSERT INTO
     `regust_widget`
@@ -182,3 +183,20 @@ SET
     `ip` = '".$_SERVER['REMOTE_ADDR']."';";
 
 $GLOBALS['dbstat']->query($sql);
+
+$postgre = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
+
+$sql="INSERT INTO
+    `regust_widget`
+SET
+    `view_id` = '".$arr['prosmotr_id']."',
+    `words_list` = '{".$words."}',
+    `category_id_list` = '{".$interes."}',
+    `platform_id` = '".$arr['p_id']."',
+    `recomend` = '".$_GET['r']."',
+    `native` = '".$_GET['e']."',
+    `url` = '".$i."',
+    `iso` = '".$iso."',
+    `promo_id_list` = '{".$promo."}',
+    `remote_ip` = '".$_SERVER['REMOTE_ADDR']."';";
+$postgre ->query($sql);
