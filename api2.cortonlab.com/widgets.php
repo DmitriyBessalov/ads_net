@@ -166,6 +166,7 @@ if (!$GLOBALS['dbstat']->exec($sql)) {
 
 $words=str_replace("'","",$words);
 $promo=str_replace("'","",$promo);
+$interes=str_replace("'","",$interes);
 
 $sql="INSERT INTO
     `regust_widget`
@@ -180,5 +181,13 @@ SET
     `iso` = '".$iso."',
     `promo_id` = '".$promo."',
     `ip` = '".$_SERVER['REMOTE_ADDR']."';";
-
 $GLOBALS['dbstat']->query($sql);
+
+if (is_null($_GET['r']))$_GET['r']='0';
+if (is_null($_GET['e']))$_GET['e']='f';
+
+$sql="insert into tb_stat_request (view_id, words_list, category_id_list, promo_id_list, url, iso, recomend, native, remote_ip, platform_id) values 
+        ('".$arr['prosmotr_id']."','{".$words."}','{".$interes."}','{".$promo."}','".$i."','".$iso."','".$_GET['r']."','".$_GET['e']."','".$_SERVER['REMOTE_ADDR']."','".$arr['p_id']."')";
+
+$postgre = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
+$postgre ->query($sql);
