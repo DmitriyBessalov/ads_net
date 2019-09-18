@@ -1499,6 +1499,7 @@ var myLineChart = new Chart(ctx, {
                                 
                                 <label>Блоков по горизонтали</label>
                                 <select name="widget-format">
+                                    <option '; if ($result['widget-format']=="1"){echo 'selected ';} echo 'value="1">1</option>
                                     <option '; if ($result['widget-format']=="2"){echo 'selected ';} echo 'value="2">2</option>
                                     <option '; if ($result['widget-format']=="3"){echo 'selected ';} echo 'value="3">3</option>
                                     <option '; if ($result['widget-format']=="4"){echo 'selected ';} echo 'value="4">4</option>
