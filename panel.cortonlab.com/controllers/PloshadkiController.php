@@ -1503,6 +1503,7 @@ var myLineChart = new Chart(ctx, {
                                     <option '; if ($result['widget-format']=="2"){echo 'selected ';} echo 'value="2">2</option>
                                     <option '; if ($result['widget-format']=="3"){echo 'selected ';} echo 'value="3">3</option>
                                     <option '; if ($result['widget-format']=="4"){echo 'selected ';} echo 'value="4">4</option>
+                                    <option '; if ($result['widget-format']=="5"){echo 'selected ';} echo 'value="5">5</option>
                                 </select>
                                 <br>
                                 <label>Блоков по вертикали</label>
@@ -1636,7 +1637,7 @@ var myLineChart = new Chart(ctx, {
                                       <label style="margin-top:0px !important;" id="zagrecomend" class="w-form-label">
                                          <a style="color:#333;" class="link">Курсив</a>
                                       </label>
-                                   </div> 
+                                   </div>
 								   
 								   <div style="margin-top: 12px;" class="checkbox-field-4 w-checkbox">
                                       <input type="checkbox" '; if ($result['widget-type-underline-title']) echo ' checked '; echo ' name="widget-type-underline-title" class="form-radiozag">
