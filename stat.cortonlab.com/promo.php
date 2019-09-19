@@ -104,7 +104,7 @@ if(($action =='s')or($action =='r')) {
     if ((int)$block_ip<3) {
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], $block_ip+1, 86400);
     }else{
-        $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 3,1296000);
+        $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 3,86400);
         $antifrod=1;
     }
 }
