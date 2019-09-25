@@ -210,7 +210,7 @@ if (corton_complete!=1) {
                     }
 
                     if (innerWidth<=1024){
-                        image_layer.style.bottom=innerHeight-image_fon_mobile.scrollHeight+'px';
+                        image_layer.style.bottom=innerHeight-image_fon_mobile.scrollHeight-12+'px';
                         if (innerHeight/8>gradient_conteyner.getBoundingClientRect().top){
                             osvetlenie_redirekt();
                         }
