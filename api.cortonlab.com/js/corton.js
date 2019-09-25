@@ -130,7 +130,7 @@ if (corton_complete!=1) {
                         '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;} '+
                         '#corton_gradient_conteyner{height:2000px;position: relative;} '+
                         '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
-                        '#corton_border_title{padding:25px 0 32px;background-color:#fff8d9;height:82px;text-align: center;} '+
+                        '#corton_border_title{padding:25px 0 32px;background-color:#fff8d9;height:82px;max-height:82px;text-align: center;} '+
                         '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative;} '+
                         '#corton_scroll_to_site a{text-decoration:none;color:#000;} '+
                         '#corton_browser_container{display:none;} '+
@@ -141,7 +141,7 @@ if (corton_complete!=1) {
                         '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;z-index:2147483647;} '+
                         '#corton_scroll_to_site a{text-decoration:none;color:#000;} '+
                         '#corton_sticky_container{position:sticky;top:0;} '+
-                        '#corton_border_title{padding:25px 0 32px;font-size:18px;line-height:25px;position:relative;width:100%;font-family: YS Text,Arial,Helvetica,sans-serif;text-align: center;} '+
+                        '#corton_border_title{padding:25px 0 32px;font-size:18px;line-height:25px;position:relative;width:100%;font-family: YS Text,Arial,Helvetica,sans-serif;height:82px;max-height:82px;text-align: center;} '+
                         '#corton_border_title>a{color: #07f;} '+
                         '#corton_overlay{position:absolute;top:-100vh;left:0;width:100%;height:100vh;background:#000;opacity:0;will-change: opacity;pointer-events:none;} '+
                         '#corton_browser_container{position: absolute;width:100%;height:100vh;transform-origin:center top;border-top-left-radius:24px;border-top-right-radius:24px;will-change:transform;box-shadow: 0 0 60px rgba(0,0,0,.3);background-color:#fff;overflow:hidden;} '+
