@@ -954,16 +954,8 @@ $(document).ready(function(){
             var image = new Image();
             image.src = document.getElementById('imagepreview510').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2');
             var input = document.getElementById('screenshot_desktop');
-            var resett=0;
-            if (image.width<1024){
-                alert('Загружена неправильная картинка, минимальная ширина 1024px');
-                resett=1;
-            }
-            if (image.width*2>image.height) {
-                alert('Загружена неправильная картинка, минимальная высота должна быть больше ширины в 2 раза');
-                resett=1;
-            }
-            if (resett){
+            if ((image.width!=1280)||(image.height!=800)){
+                alert('Размер картинки должен быть 1280x800px');
                 input.value = '';
                 $(diver).parent('div').css("background-image", oldimg);
             }else {
@@ -999,20 +991,12 @@ $(document).ready(function(){
             var image = new Image();
             image.src = document.getElementById('imagepreview239').style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2');
             var input = document.getElementById('screenshot_mobile');
-            var resett=0;
-            if (image.width<360){
-                alert('Загружена неправильная картинка, минимальная ширина 360px');
-                resett=1;
-            }
-            if (image.width*2>image.height) {
-                alert('Загружена неправильная картинка, минимальная высота должна быть больше ширины в 2 раза');
-                resett=1;
-            }
-            if (resett){
+            if ((image.width!=720)||(image.height!=1200)){
+                alert('Размер картинки должен быть 720x1200px');
                 input.value = '';
                 $(diver).parent('div').css("background-image", oldimg);
             }else {
-                $(diver).parent('div').children('label').html("Скриншот десктоп "+image.width+"x"+image.height+"px");
+                $(diver).parent('div').children('label').html("Скриншот мобильный "+image.width+"x"+image.height+"px");
             }
         }
 
