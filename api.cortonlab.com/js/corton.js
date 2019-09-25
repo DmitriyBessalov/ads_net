@@ -140,7 +140,7 @@ if (corton_complete!=1) {
                         '#corton_fon{position: relative;z-index:2;background-color: #FFF;padding: 0 20px;} '+
                     '} '+
                     '@media (min-width: 1025px) { '+
-                        '#corton_scroll_to_site{min-height: 130vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;} '+
+                        '#corton_scroll_to_site{min-height: 150vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;} '+
                         '#corton_scroll_to_site a{text-decoration:none;color:#000;} '+
                         '#corton_sticky_container{position:sticky;z-index:1;top:0;} '+
                         '#corton_border_title{padding:25px 0 32px;font-size:18px;line-height:25px;position:relative;width:100%;font-family: YS Text,Arial,Helvetica,sans-serif;text-align: center;} '+
