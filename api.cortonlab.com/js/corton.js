@@ -182,26 +182,29 @@ if (corton_complete!=1) {
 
                 function osvetlenie_redirekt() {
                     osvetlenie.style.opacity='1';
-                    setTimeout(function() {
-                        let href=encodeURIComponent(result['scroll2site_url']);
-                        console.log('https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
-                        cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']  + '&href=' + href);
-                        cxhr.send();
+                    if (page_ready==1){
+                        setTimeout(function() {
+                            let href=encodeURIComponent(result['scroll2site_url']);
+                            console.log('https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
+                            cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']  + '&href=' + href);
+                            cxhr.send();
 
-                        if (result['scroll2site_url'].indexOf("?") > -1) {
-                            var char = '&'
-                        } else {
-                            var char = '?'
-                        }
+                            if (result['scroll2site_url'].indexOf("?") > -1) {
+                                var char = '&'
+                            } else {
+                                var char = '?'
+                            }
 
-                        document.location.href = result['scroll2site_url'] + char + 'sub_id1=-1&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
+                            document.location.href = result['scroll2site_url'] + char + 'sub_id1=-1&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
 
-                    }, 1000);
+                        }, 1000);
+                    }
+                    page_ready=2;
                 }
 
                 setTimeout(function() {
                     document.body.scrollTo(0, 0);
-                }, 100);
+                }, 400);
 
                 window.addEventListener('scroll', function() {
                     if (page_ready==0){
