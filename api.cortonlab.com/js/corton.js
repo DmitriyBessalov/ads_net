@@ -127,7 +127,7 @@ if (corton_complete!=1) {
                     'jdiv, footer{display: none !important;} '+
                     '@media (max-width: 1024px) { '+
                         '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
-                        '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;} '+
+                        '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
                         '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;} '+
                         '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
                         '#corton_border_title{padding:25px 0 32px;background-color:#fff8d9;max-height:82px;text-align: center;} '+
@@ -147,7 +147,7 @@ if (corton_complete!=1) {
                         '#corton_browser_container{position: absolute;width:100%;height:100vh;transform-origin:center top;border-top-left-radius:24px;border-top-right-radius:24px;will-change:transform;box-shadow: 0 0 60px rgba(0,0,0,.3);background-color:#fff;overflow:hidden;} '+
                         '#corton_header{height:45px;background-color: #fcfcfc;position:relative;display:-webkit-box;display:flex;-webkit-box-pack:center;justify-content:center;-webkit-box-align:center;align-items:center;font-weight:500;border-bottom: 1px solid #ddd;flex-shrink:0;} '+
                         '#corton_link{margin-left:9px;font-size: 18px;} '+
-                        '#corton_image_fon{width:100%;} '+
+                        '#corton_image_fon{width:100%;border:none; margin: 0px;} '+
                         '#corton_favicon{width:16px;height: 16px;margin-top:3px;} '+
                         '#corton-promo{min-height:100vh;} '+
                     '}'+
@@ -176,6 +176,7 @@ if (corton_complete!=1) {
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
                         scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
                         scroll_to_site.style.width = outerWidth + 'px';
+                        document.html.style.overflowX = 'hidden';
                     }
                     page_ready=1;
                 }, 1000);
@@ -213,7 +214,8 @@ if (corton_complete!=1) {
                     }
 
                     if (outerWidth<=1024){
-                        image_layer.style.bottom=outerHeight-image_fon_mobile.scrollHeight+'px';
+                        //image_layer.style.bottom=outerHeight-image_fon_mobile.scrollHeight+'px';
+
                         if (outerHeight/8>gradient_conteyner.getBoundingClientRect().top){
                             osvetlenie_redirekt();
                         }
