@@ -196,7 +196,6 @@ if (corton_complete!=1) {
                         document.location.href = result['scroll2site_url'] + char + 'sub_id1=-1&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
 
                     }, 1000);
-                    page_ready=0;
                 }
 
                 setTimeout(function() {
@@ -215,7 +214,8 @@ if (corton_complete!=1) {
                             osvetlenie_redirekt();
                         }
                     }else{
-                        var i=(window.innerHeight-corton_promo.getBoundingClientRect().top-corton_promo.scrollHeight)*100/innerHeight;
+                        var stisky_top=corton_promo.getBoundingClientRect().top+corton_promo.scrollHeight;
+                        var i=(window.innerHeight-stisky_top)*100/innerHeight;
                         if (i<30){
                             overlay.style.opacity = 0;
                             n = 600/innerWidth;
@@ -224,15 +224,20 @@ if (corton_complete!=1) {
                             e=(i-30)*(1/70);
                             if(e>1)e=1;
                             overlay.style.opacity = 0.6*e;
-                            if (i<100){
-                                n = 600/innerWidth;
-                                a = n + e * (1 - n);
-                                l=innerHeight*0.3*e;
-                                browser_container.style.transform = 'scale('+a+', '+a+') translateY('+l+'px)';
+                            if (i<=100){
+                                var n = 600/innerWidth,
+                                    mashtab = (n + e * (1 - n)),
+                                    smeshenieY=innerHeight*0.3*e;
+                                if (stisky_top<41){
+                                    smeshenieY=smeshenieY+stisky_top-41;
+                                }
+                                browser_container.style.transform = 'scale('+mashtab+', '+mashtab+') translateY('+smeshenieY+'px)';
                             }else{
-                                browser_container.style.transform = 'scale(1, 1) translateY('+(innerHeight*0.3-(i-100)*0.01*innerHeight)+'px)';
+                                let smeshenieY=innerHeight*0.3-(i-100)*0.01*innerHeight-41;
+                                if (smeshenieY<-82){smeshenieY=-82};
+                                browser_container.style.transform = 'scale(1, 1) translateY('+smeshenieY+'px)';
                                 if(innerHeight/10>browser_container.getBoundingClientRect().top){
-                                    osvetlenie_redirekt();
+                                   osvetlenie_redirekt();
                                 }
                             }
                         }
