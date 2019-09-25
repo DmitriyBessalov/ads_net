@@ -106,43 +106,41 @@ if (corton_complete!=1) {
                 let host = regex.exec(result['scroll2site_url']);
 
                 var scroll_to_site=document.getElementById("corton_scroll_to_site");
-                scroll_to_site.outerHTML= ''+
-                '<div id="corton_scroll_to_site">'+
- 					'<div id="corton_sticky_container">'+
- 						'<div id="corton_overlay"></div>'+
- 						'<div id="corton_border_title">' + result['scroll2site_text'] + '&nbsp;<a href="'+result['scroll2site_url']+'">'+host[2]+'</a></div>'+
- 						'<div id="corton_browser_container">'+
- 							 '<a href="'+result['scroll2site_url']+'" rel="noopener nofollow">'+
- 							 	'<div id="corton_header">'+
- 							 		'<div id="corton_favicon" style="background-image: url(\'http://favicon.yandex.net/favicon/'+host[2]+'\');"></div>'+
- 							 		'<div id="corton_link">'+host[2]+'</div>'+
- 							 	'</div>'+
- 							 	'<img id="corton_image_fon">'+
- 							 	'</div>'+
- 							 '</a>'+
- 						'</div>'+
- 					'</div>'+
- 				'</div>'+
+                scroll_to_site.innerHTML= ''+
+                '<div id="corton_sticky_container">'+
+                    '<div id="corton_overlay"></div>'+
+                    '<div id="corton_border_title">' + result['scroll2site_text'] + '&nbsp;<a href="'+result['scroll2site_url']+'">'+host[2]+'</a></div>'+
+                    '<div id="corton_browser_container">'+
+                         '<a href="'+result['scroll2site_url']+'" rel="noopener nofollow">'+
+                            '<div id="corton_header">'+
+                                '<div id="corton_favicon" style="background-image: url(\'http://favicon.yandex.net/favicon/'+host[2]+'\');"></div>'+
+                                '<div id="corton_link">'+host[2]+'</div>'+
+                            '</div>'+
+                            '<img id="corton_image_fon">'+
+                            '</div>'+
+                         '</a>'+
+                    '</div>'+
+                '</div>'+
 
                 '<style type="text/css">'+
-                    '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
-                    'footer{display: none !important;} '+
+                    '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
+                    'jdiv, footer{display: none !important;} '+
                     '@media (max-width: 1024px) { '+
-                        '#corton_image_layer{position:sticky;bottom:0;z-index:1;background-color:#000;} '+
+                        '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                         '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;} '+
-                        '#corton_gradient_conteyner{height:2000px;position: relative;z-index:2;} '+
+                        '#corton_gradient_conteyner{height:2000px;position: relative;} '+
                         '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
                         '#corton_border_title{padding:25px 0 32px;background-color:#fff8d9;height:82px;text-align: center;} '+
-                        '#corton_scroll_to_site {width: 100%;z-index:2;position:relative;} '+
+                        '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative;} '+
                         '#corton_scroll_to_site a{text-decoration:none;color:#000;} '+
                         '#corton_browser_container{display:none;} '+
                         '#corton-promo{background-color:#FFFFFF;min-height:100vh;max-width: unset;position: relative;} '+
-                        '#corton_fon{position: relative;z-index:2;background-color: #FFF;padding: 0 20px;} '+
+                        '#corton_fon{position: relative;z-index:2147483647;;background-color: #FFF;padding: 0 20px;} '+
                     '} '+
                     '@media (min-width: 1025px) { '+
-                        '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;} '+
+                        '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;z-index:2147483647;} '+
                         '#corton_scroll_to_site a{text-decoration:none;color:#000;} '+
-                        '#corton_sticky_container{position:sticky;z-index:1;top:0;} '+
+                        '#corton_sticky_container{position:sticky;top:0;} '+
                         '#corton_border_title{padding:25px 0 32px;font-size:18px;line-height:25px;position:relative;width:100%;font-family: YS Text,Arial,Helvetica,sans-serif;text-align: center;} '+
                         '#corton_border_title>a{color: #07f;} '+
                         '#corton_overlay{position:absolute;top:-100vh;left:0;width:100%;height:100vh;background:#000;opacity:0;will-change: opacity;pointer-events:none;} '+
@@ -167,14 +165,17 @@ if (corton_complete!=1) {
                     page_ready=0;
 
                 if (innerWidth<=1024) {
-                    corton_promo.style.width = innerWidth + 'px';
                     corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
+                    corton_promo.style.width = innerWidth + 'px';
                 }
+
                 setTimeout(function() {
                     if (innerWidth<=1024){
                         image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
                     }else{
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
+                        scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
+                        scroll_to_site.style.width = innerWidth + 'px';
                     }
                     page_ready=1;
                 }, 1000);
