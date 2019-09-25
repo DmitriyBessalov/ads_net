@@ -126,7 +126,7 @@ if (corton_complete!=1) {
 
                 '<style type="text/css">'+
                     '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
-                    'footer{display: none} '+
+                    'footer{display: none !important;} '+
                     '@media (max-width: 1024px) { '+
                         '#corton_image_layer{position:sticky;bottom:0;z-index:1;background-color:#000;} '+
                         '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;} '+
