@@ -128,7 +128,7 @@ if (corton_complete!=1) {
                     '@media (max-width: 1024px) { '+
                         '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                         '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;} '+
-                        '#corton_gradient_conteyner{height:2000px;position: relative;} '+
+                        '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;} '+
                         '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
                         '#corton_border_title{padding:25px 0 32px;background-color:#fff8d9;max-height:82px;text-align: center;} '+
                         '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative;} '+
@@ -164,18 +164,18 @@ if (corton_complete!=1) {
                     osvetlenie = document.getElementById("corton_osvetlenie"),
                     page_ready=0;
 
-                if (innerWidth<=1024) {
+                if (outerWidth<=1024) {
                     corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
-                    corton_promo.style.width = innerWidth + 'px';
+                    corton_promo.style.width = outerWidth + 'px';
                 }
 
                 setTimeout(function() {
-                    if (innerWidth<=1024){
+                    if (outerWidth<=1024){
                         image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
                     }else{
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
                         scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
-                        scroll_to_site.style.width = innerWidth + 'px';
+                        scroll_to_site.style.width = outerWidth + 'px';
                     }
                     page_ready=1;
                 }, 1000);
@@ -212,9 +212,9 @@ if (corton_complete!=1) {
                         return true;
                     }
 
-                    if (innerWidth<=1024){
-                        image_layer.style.bottom=innerHeight-image_fon_mobile.scrollHeight-10+'px';
-                        if (innerHeight/8>gradient_conteyner.getBoundingClientRect().top){
+                    if (outerWidth<=1024){
+                        image_layer.style.bottom=outerHeight-image_fon_mobile.scrollHeight+'px';
+                        if (outerHeight/8>gradient_conteyner.getBoundingClientRect().top){
                             osvetlenie_redirekt();
                         }
                     }else{
