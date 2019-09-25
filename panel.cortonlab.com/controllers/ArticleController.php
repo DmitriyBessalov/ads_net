@@ -277,7 +277,7 @@ class ArticleController
                     $href=$i['href'];
                 }
                 if($i['numlink']=='-1'){
-                    $i['numlink']='Склолл на сайт';
+                    $i['numlink']='Scroll to Site';
                 }else{
                     $i['numlink']++;
                 }
