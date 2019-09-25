@@ -1224,14 +1224,14 @@ class ArticleController
                             <div class="div-block-142">
                                 <div class="div-block-148" style="width: 510px;height: 300px">
                                     <div id="imagepreview510" class="image-preview _510" style="background-image:url(//api.cortonlab.com/img/advertiser_screenshot_site/'.$result['scroll2site_img_desktop'].');background-position:center center;background-repeat:no-repeat;background-size:cover;">
-                                        <label for="image-upload510" class="image-label" style="text-align: center;background-color: rgb(225, 226, 232);">Скриншот десктоп</label>
+                                        <label for="image-upload510" class="image-label" style="text-align: center;background-color: rgb(225, 226, 232);">Скриншот десктоп 1280x800px</label>
                                         <input type="file" id="screenshot_desktop" name="screenshot_desktop" class="image-upload510" accept=".png,.jpeg,.jpg,.gif" '.$required.' '.$disabled.'>
                                     </div>
                                 </div>
                                 <div class="div-block-147"></div>
                                 <div class="div-block-148" style="width: 239px; margin-left: 10px">
                                     <div id="imagepreview239" class="image-preview _239" style="background-image:url(//api.cortonlab.com/img/advertiser_screenshot_site/'.$result['scroll2site_img_mobile'].');background-position:center center;background-repeat:no-repeat;background-size:cover;">
-                                        <label for="image-upload239" class="image-label" style="text-align: center;background-color: rgb(225, 226, 232);">Скриншот&nbsp;&nbsp; мобильный</label>
+                                        <label for="image-upload239" class="image-label" style="text-align: center;background-color: rgb(225, 226, 232);">Скриншот&nbsp;&nbsp; мобильный 720x1200px</label>
                                         <input type="file" id="screenshot_mobile" name="screenshot_mobile" class="image-upload239" accept=".png,.jpeg,.jpg,.gif" '.$required.' '.$disabled.'>
                                     </div>
                                 </div>
