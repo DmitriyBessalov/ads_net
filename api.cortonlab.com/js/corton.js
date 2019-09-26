@@ -179,6 +179,7 @@ if (corton_complete!=1) {
                         //document.html.style.overflowX = 'hidden';
                     }
                     page_ready=1;
+                }, 1000);
 
                 function osvetlenie_redirekt() {
                     osvetlenie.style.opacity='1';
