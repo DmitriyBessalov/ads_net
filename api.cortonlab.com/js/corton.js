@@ -174,8 +174,7 @@ if (corton_complete!=1) {
                     }else{
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
                         scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
-                        scroll_to_site.style.width = outerWidth + 'px';
-                        //document.html.style.overflowX = 'hidden';
+                        scroll_to_site.style.width = innerWidth + 'px';
                     }
                     page_ready=1;
                 }, 1000);
