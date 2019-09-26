@@ -165,12 +165,13 @@ if (corton_complete!=1) {
 
                 if (outerWidth<=1024) {
                     corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
-                    corton_promo.style.width = outerWidth + 'px';
+                    corton_promo.style.width = (outerWidth -17)+'px';
                 }
 
                 setTimeout(function() {
                     if (outerWidth<=1024){
                         image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
+                        corton_promo.style.width = outerWidth + 'px';
                     }else{
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
                         scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
