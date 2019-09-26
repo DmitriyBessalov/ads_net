@@ -171,7 +171,7 @@ if (corton_complete!=1) {
                 setTimeout(function() {
                     if (outerWidth<=1024){
                         image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
-                        corton_promo.style.width = outerWidth + 'px';
+                        corton_promo.style.width = innerWidth + 'px';
                     }else{
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
                         scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
