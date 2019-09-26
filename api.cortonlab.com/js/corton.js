@@ -176,10 +176,9 @@ if (corton_complete!=1) {
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
                         scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
                         scroll_to_site.style.width = outerWidth + 'px';
-                        document.html.style.overflowX = 'hidden';
+                        //document.html.style.overflowX = 'hidden';
                     }
                     page_ready=1;
-                }, 1000);
 
                 function osvetlenie_redirekt() {
                     osvetlenie.style.opacity='1';
@@ -214,7 +213,7 @@ if (corton_complete!=1) {
                     }
 
                     if (outerWidth<=1024){
-                        //image_layer.style.bottom=outerHeight-image_fon_mobile.scrollHeight+'px';
+                        image_layer.style.bottom=outerHeight-image_fon_mobile.scrollHeight+'px';
 
                         if (outerHeight/8>gradient_conteyner.getBoundingClientRect().top){
                             osvetlenie_redirekt();
