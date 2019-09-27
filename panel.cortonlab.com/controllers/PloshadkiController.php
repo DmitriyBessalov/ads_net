@@ -111,7 +111,7 @@
                     $sql="SELECT `scroll2site_activ` FROM `style_promo` WHERE `id`='".$i['id']."'";
                     if($GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)) echo
                               "<span style=\"margin-left: 5px;background-color: #27AE60;color:#fff; \" class=\"nowstatus\"'>
-                              +20%
+                              +30%
                               </span>";
                     echo "          
                             </p>

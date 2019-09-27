@@ -81,7 +81,7 @@ if ($action =='l') {
 
         $sql="SELECT `scroll2site_activ` FROM `style_promo` WHERE `id`='".$platform['id']."'";
         if($GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)) {
-            $s2s=1.2;
+            $s2s=1.3;
         }else{
             $s2s=1;
         }
