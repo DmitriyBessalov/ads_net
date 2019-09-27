@@ -916,10 +916,10 @@ setTimeout(function(){
         }
 
         $date=date('Y-m-d', strtotime("-1 month"));
-        $sql="SELECT SUM(`spisanie`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`>'".$date."'";
+        $sql="SELECT MAX(`request_spisanie`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`>'".$date."'";
         $result=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-        if($result!='0.00'){
+        if($result!='0'){
             echo 'date';
             return true;
         }
@@ -928,6 +928,17 @@ setTimeout(function(){
         $platform_id=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
         NotificationsController::addNotification($platform_id, 'Запрошен вывод средств в сумме '.$_GET['summa'].'руб.');
+
+        $sql = "UPDATE `balans_user` SET `request_spisanie` = 1  WHERE `date`=CURDATE() AND `user_id`='".$GLOBALS['user']."'";
+        if (!$GLOBALS['db']->exec($sql)){
+
+            $sql ="SELECT `balans` FROM `balans_user` WHERE `user_id` = '".$GLOBALS['user']."' AND `date` =( SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '".$GLOBALS['user']."')";
+            $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+            $sql = "INSERT INTO `balans_user` SET `user_id`='".$GLOBALS['user']."', `date` = CURDATE(), `request_spisanie` = 1, `balans`='".$balans."'";
+            $GLOBALS['db']->query($sql);
+        }
+
         echo 'true';
         return true;
     }
