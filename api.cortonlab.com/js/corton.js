@@ -109,7 +109,7 @@ if (corton_complete!=1) {
                 scroll_to_site.innerHTML= ''+
                 '<div id="corton_sticky_container">'+
                     '<div id="corton_overlay"></div>'+
-                    '<div id="corton_border_title">' + result['scroll2site_text'] + '&nbsp;<a href="'+result['scroll2site_url']+'">'+host[2]+'</a></div>'+
+                    '<div id="corton_border_title"><p>' + result['scroll2site_text'] + '&nbsp;<a href="'+result['scroll2site_url']+'">'+host[2]+'</a><p></div>'+
                     '<div id="corton_browser_container">'+
                          '<a href="'+result['scroll2site_url']+'" rel="noopener nofollow">'+
                             '<div id="corton_header">'+
@@ -124,30 +124,30 @@ if (corton_complete!=1) {
 
                 '<style type="text/css">'+
                     '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
-                    'jdiv, footer{display: none !important;} '+
+                    '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;} '+
+                    'jdiv,footer{display: none !important;} '+
+                    '#corton-promo img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
                     '@media (max-width: 1024px) { '+
                         '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
-                        '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;} '+
-                        '#corton_gradient_conteyner{height:2000px;position: relative;} '+
+                        '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
+                        '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;} '+
                         '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
-                        '#corton_border_title{padding:25px 0 32px;background-color:#fff8d9;max-height:82px;text-align: center;} '+
                         '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative;} '+
-                        '#corton_scroll_to_site a{text-decoration:none;color:#000;} '+
+                        '#corton_scroll_to_site a{text-decoration:none;} '+
                         '#corton_browser_container{display:none;} '+
                         '#corton-promo{background-color:#FFFFFF;min-height:100vh;max-width: unset;position: relative;} '+
                         '#corton_fon{position: relative;z-index:2147483647;;background-color: #FFF;padding: 0 20px;} '+
                     '} '+
                     '@media (min-width: 1025px) { '+
                         '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;z-index:2147483647;} '+
-                        '#corton_scroll_to_site a{text-decoration:none;color:#000;} '+
+                        '#corton_scroll_to_site a{text-decoration:none;} '+
                         '#corton_sticky_container{position:sticky;top:0;} '+
-                        '#corton_border_title{padding:25px 0 32px;font-size:18px;line-height:25px;position:relative;width:100%;font-family: YS Text,Arial,Helvetica,sans-serif;max-height:82px;text-align: center;} '+
-                        '#corton_border_title>a{color: #07f;} '+
+                        '#corton_border_title{font-size:18px} '+
                         '#corton_overlay{position:absolute;top:-100vh;left:0;width:100%;height:100vh;background:#000;opacity:0;will-change: opacity;pointer-events:none;} '+
                         '#corton_browser_container{position: absolute;width:100%;height:100vh;transform-origin:center top;border-top-left-radius:24px;border-top-right-radius:24px;will-change:transform;box-shadow: 0 0 60px rgba(0,0,0,.3);background-color:#fff;overflow:hidden;} '+
                         '#corton_header{height:45px;background-color: #fcfcfc;position:relative;display:-webkit-box;display:flex;-webkit-box-pack:center;justify-content:center;-webkit-box-align:center;align-items:center;font-weight:500;border-bottom: 1px solid #ddd;flex-shrink:0;} '+
                         '#corton_link{margin-left:9px;font-size: 18px;} '+
-                        '#corton_image_fon{width:100%;} '+
+                        '#corton_image_fon{width:100%;border:none; margin: 0px;} '+
                         '#corton_favicon{width:16px;height: 16px;margin-top:3px;} '+
                         '#corton-promo{min-height:100vh;} '+
                     '}'+
@@ -164,22 +164,6 @@ if (corton_complete!=1) {
                     osvetlenie = document.getElementById("corton_osvetlenie"),
                     page_ready=0;
 
-                if (innerWidth<=1024) {
-                    corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
-                    corton_promo.style.width = innerWidth + 'px';
-                }
-
-                setTimeout(function() {
-                    if (innerWidth<=1024){
-                        image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
-                    }else{
-                        image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
-                        scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
-                        scroll_to_site.style.width = innerWidth + 'px';
-                    }
-                    page_ready=1;
-                }, 1000);
-
                 function osvetlenie_redirekt() {
                     osvetlenie.style.opacity='1';
                     if (page_ready==1){
@@ -194,9 +178,7 @@ if (corton_complete!=1) {
                             } else {
                                 var char = '?'
                             }
-
                             document.location.href = result['scroll2site_url'] + char + 'sub_id1=-1&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
-
                         }, 1000);
                     }
                     page_ready=2;
@@ -206,49 +188,71 @@ if (corton_complete!=1) {
                     document.body.scrollTo(0, 0);
                 }, 400);
 
-                window.addEventListener('scroll', function() {
-                    if (page_ready==0){
+                function s2s_position() {
+                    if (page_ready == 0) {
                         document.body.scrollTo(0, 0);
                         return true;
                     }
 
-                    if (innerWidth<=1024){
-                        image_layer.style.bottom=innerHeight-image_fon_mobile.scrollHeight-10+'px';
-                        if (innerHeight/8>gradient_conteyner.getBoundingClientRect().top){
+                    if (outerWidth <= 1024) {
+                        image_layer.style.bottom = outerHeight - image_fon_mobile.scrollHeight + 'px';
+
+                        if (outerHeight / 8 > gradient_conteyner.getBoundingClientRect().top) {
                             osvetlenie_redirekt();
                         }
-                    }else{
-                        var stisky_top=corton_promo.getBoundingClientRect().top+corton_promo.scrollHeight;
-                        var i=(window.innerHeight-stisky_top)*100/innerHeight;
-                        if (i<30){
+                    } else {
+                        var stisky_top = corton_promo.getBoundingClientRect().top + corton_promo.scrollHeight;
+                        var i = (window.innerHeight - stisky_top) * 100 / innerHeight;
+                        if (i < 30) {
                             overlay.style.opacity = 0;
-                            n = 600/innerWidth;
-                            browser_container.style.transform = 'scale('+n+', '+n+') translateY(0)';
-                        }else{
-                            e=(i-30)*(1/70);
-                            if(e>1)e=1;
-                            overlay.style.opacity = 0.6*e;
-                            if (i<=100){
-                                var n = 600/innerWidth,
+                            n = 600 / innerWidth;
+                            browser_container.style.transform = 'scale(' + n + ', ' + n + ') translateY(0)';
+                        } else {
+                            e = (i - 30) * (1 / 70);
+                            if (e > 1) e = 1;
+                            overlay.style.opacity = 0.6 * e;
+                            if (i <= 100) {
+                                var n = 600 / innerWidth,
                                     mashtab = (n + e * (1 - n)),
-                                    smeshenieY=innerHeight*0.3*e;
-                                if (stisky_top<41){
-                                    smeshenieY=smeshenieY+stisky_top-41;
+                                    smeshenieY = innerHeight * 0.3 * e;
+                                if (stisky_top < 41) {
+                                    smeshenieY = smeshenieY + stisky_top - 41;
                                 }
-                                browser_container.style.transform = 'scale('+mashtab+', '+mashtab+') translateY('+smeshenieY+'px)';
-                            }else{
-                                let smeshenieY=innerHeight*0.3-(i-100)*0.01*innerHeight-41;
-                                if (smeshenieY<-82){smeshenieY=-82};
-                                browser_container.style.transform = 'scale(1, 1) translateY('+smeshenieY+'px)';
-                                if(innerHeight/10>browser_container.getBoundingClientRect().top){
-                                   osvetlenie_redirekt();
+                                browser_container.style.transform = 'scale(' + mashtab + ', ' + mashtab + ') translateY(' + smeshenieY + 'px)';
+                            } else {
+                                let smeshenieY = innerHeight * 0.3 - (i - 100) * 0.01 * innerHeight - 41;
+                                if (smeshenieY < -82) {
+                                    smeshenieY = -82
+                                }
+                                ;
+                                browser_container.style.transform = 'scale(1, 1) translateY(' + smeshenieY + 'px)';
+                                if (innerHeight / 10 > browser_container.getBoundingClientRect().top) {
+                                    osvetlenie_redirekt();
                                 }
                             }
                         }
                     }
-                });
-
+                }
             }
+
+            window.addEventListener("scroll", s2s_position);
+
+            if (outerWidth<=1024) {
+                corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
+                corton_promo.style.width = outerWidth + 'px';
+            }
+
+            setTimeout(function() {
+                if (outerWidth<=1024){
+                    image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
+                }else{
+                    image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
+                    scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
+                    scroll_to_site.style.width = document.documentElement.clientWidth + 'px';
+                }
+                page_ready=1;
+                s2s_position();
+            }, 1000);
 
             var promo_form=document.getElementById("corton-form");
             if (promo_form) {
@@ -340,8 +344,8 @@ if (corton_complete!=1) {
                 }
                 setTimeout(letsGo,1000);
             };
-            if (i>=35)timer35=true;
-            if (i>=85)timer85=true;
+            if (i>=15)timer35=true;
+            if (i>=20)timer85=true;
             if (scrollh<=pageYOffset) scroll=true;
             var promo_form=document.getElementsByClassName("promo-form");
             if (promo_form[0]) {
