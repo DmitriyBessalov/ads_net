@@ -21,9 +21,9 @@ class FinController
             <thead>
                 <tr class="trtop">
                     <td style="min-width: 230px;">Виджет</td>
-                    <td style="min-width: 210px;">Просмотры виджетов
-                    <td style="min-width: 210px;">Целевые просмотры статей
-                        <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div>
+                    <td style="min-width: 210px;">Показы
+                    <td style="min-width: 210px;">Просмотры статей
+                        <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Оплаченные просмотры спонсорских статей</span></div>
                     </td>
                     <td style="min-width: 110px;">CTR
                     </td>
