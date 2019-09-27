@@ -79,7 +79,11 @@ if ($action =='l') {
             exit;
         }
 
-        $sql="SELECT `scroll2site_activ` FROM `style_promo` WHERE `id`='".$platform['id']."'";
+        $sql="SELECT `scroll2site` FROM `promo` p
+                JOIN `style_promo` s
+                ON p.`scroll2site` = s.`scroll2site_activ`
+                WHERE p.`id`='".$promo['id']."' AND s.`id`='".$platform['id']."';";
+
         if($GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)) {
             $s2s=1.3;
         }else{
