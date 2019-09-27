@@ -79,8 +79,15 @@ if ($action =='l') {
             exit;
         }
 
+        $sql="SELECT `scroll2site_activ` FROM `style_promo` WHERE `id`='".$platform['id']."'";
+        if($GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)) {
+            $s2s=1.2;
+        }else{
+            $s2s=1;
+        }
+
         # Изменение баланса рекламодателя (настройка на странице площадок)
-        $stavka_advertiser = round($promo['stavka'] * $platform['otchiclen'] / 100, 2);
+        $stavka_advertiser = round($promo['stavka'] * $platform['otchiclen']*$s2s / 100, 2);
         # Изменение баланса площадки (настройка на странице таргетингов статьи)
         $stavka_ploshadka = round($stavka_advertiser * $promo['persent_platform'] / 100, 2);
     }
