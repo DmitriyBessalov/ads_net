@@ -345,7 +345,7 @@ if (corton_complete!=1) {
                 setTimeout(letsGo,1000);
             };
             if (i>=15)timer35=true;
-            if (i>=85)timer85=true;
+            if (i>=20)timer85=true;
             if (scrollh<=pageYOffset) scroll=true;
             var promo_form=document.getElementsByClassName("promo-form");
             if (promo_form[0]) {
