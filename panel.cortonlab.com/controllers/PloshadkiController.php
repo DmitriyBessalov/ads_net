@@ -107,7 +107,13 @@
                     echo "    </span>
                               <span style=\"margin-left: 5px;\" class=\"nowstatus\" id='otchic".$i['id']."'>
                               %: ".$i['otchiclen']."
-                              </span>
+                              </span>";
+                    $sql="SELECT `scroll2site_activ` FROM `style_promo` WHERE `id`='".$i['id']."'";
+                    if($GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)) echo
+                              "<span style=\"margin-left: 5px;background-color: #27AE60;color:#fff; \" class=\"nowstatus\"'>
+                              +30%
+                              </span>";
+                    echo "          
                             </p>
                             <p style=\"color: #768093; font-size: 12px;\">Менеджер: ".$i['manager']."</p>
 						  </div>

@@ -867,7 +867,7 @@ $(document).ready(function(){
                 '<input type="hidden" name="anons_ids[]" value="new">' +
                 '<div class="div-block-142">' +
                     '<div class="div-block-145">' +
-                        '<input type="text" class="text-field-6 _1 w-input" maxlength="55" name="title[]" placeholder="Заголовок анонса статьи до 55 символов" id="title-3" required="">' +
+                        '<input type="text" class="text-field-6 _1 w-input" maxlength="60" name="title[]" placeholder="Заголовок анонса статьи до 60 символов" id="title-3" required="">' +
                         '<textarea name="opisanie[]" placeholder="Описание от 90 до 130 символов" maxlength="130" class="textarea-7 w-input"></textarea>' +
                     '</div>' +
                 '</div>' +
