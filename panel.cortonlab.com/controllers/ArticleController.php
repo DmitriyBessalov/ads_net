@@ -929,11 +929,7 @@ class ArticleController
             var quill = new Quill(\'#editor-container\', {
                 modules: {
                     toolbar: [
-<<<<<<< HEAD
                         [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
-=======
-                        [{ size: [\'small\', false, \'large\', \'huge\']}, { header: \'2\' },  "bold", "italic", "underline", { header: \'6\' }, { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
->>>>>>> 85437dd12529153d623b98b0bfea4681ba755e73
                     ]
                 },
                 scrollingContainer: "#scrolling-container",
@@ -1003,7 +999,7 @@ class ArticleController
                                     <input type="hidden" name="anons_ids[]" value="'.$anon['id'].'">
                                     <div class="div-block-142">
                                         <div class="div-block-145">
-                                            <input type="text" value="'.$anon['title'].'" class="text-field-6 _1 w-input" maxlength="60" name="title[]" placeholder="Заголовок анонса статьи до 60 символов" id="title-3" required="">
+                                            <input type="text" value="'.$anon['title'].'" class="text-field-6 _1 w-input" maxlength="55" name="title[]" placeholder="Заголовок анонса статьи до 55 символов" id="title-3" required="">
                                             <textarea name="opisanie[]" placeholder="Описание от 90 до 130 символов" maxlength="130" class="textarea-7 w-input">' . $anon['snippet'] . '</textarea>
                                         </div>
                                     </div>
@@ -1411,7 +1407,7 @@ class ArticleController
     var quill = new Quill(\'#editor-container\', {
       modules: {
         toolbar: [
-          [{ size: [\'small\', false, \'large\', \'huge\']},{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
+          [{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
         ]
       },
       scrollingContainer: "#scrolling-container",

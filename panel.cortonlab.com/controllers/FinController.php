@@ -14,6 +14,11 @@ class FinController
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
         echo '
+<!-- <div class="message-box">
+    <p><span style="font-weight:400; color: #fff;">Обновление от 16.05.2019.</span> Теперь вывод балансов можно запрашивать в личном кабинете. Для этого нажмите на иконку пользователя и выберите пункт "Вывод балансов".</p>
+    <span class="close-button">Понял, больше не показывать.</span>
+</div> -->	
+
 <div class="table-box">
     <div class="div-block-102-table">
     <div class="table w-embed">
@@ -21,8 +26,7 @@ class FinController
             <thead>
                 <tr class="trtop">
                     <td style="min-width: 230px;">Виджет</td>
-                    <td style="min-width: 210px;">Просмотры виджетов
-                    <td style="min-width: 210px;">Целевые просмотры статей
+                    <td style="min-width: 210px;">Целевые просмотры
                         <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Целевые / оплаченные просмотры партнерских материалов</span></div>
                     </td>
                     <td style="min-width: 110px;">CTR
@@ -35,6 +39,7 @@ class FinController
                 </tr>
             </thead>';
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
+
 
             $sql = "SELECT p.`id`, p.`domen`, u.`email`, p.`user_id` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
             $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -164,7 +169,6 @@ class FinController
                     </div>
                 </div>
             </td>
-            <td>'.$balansperiod['r_show_anons'].'</td>
             <td>' . $balansperiod['r'] . '</td>
             <td>' . $r_CTR . ' %</td>
             <td class="bluetext">';
@@ -209,7 +213,6 @@ class FinController
                     </div>
                 </div>
             </td>
-            <td>'.$balansperiod['e_show_anons'].'</td>
             <td>' . $balansperiod['e'] . '</td>
             <td>' . $e_CTR . ' %</td>
             <td class="bluetext">';
@@ -254,7 +257,6 @@ class FinController
                     </div>
                 </div>
             </td>
-            <td>'.$balansperiod['s_show_anons'].'</td>
             <td>' . $balansperiod['s'] . '</td>
             <td>' . $s_CTR . ' %</td>
             <td class="bluetext">';

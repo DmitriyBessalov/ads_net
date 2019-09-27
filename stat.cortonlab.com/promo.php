@@ -79,19 +79,8 @@ if ($action =='l') {
             exit;
         }
 
-        $sql="SELECT `scroll2site` FROM `promo` p
-                JOIN `style_promo` s
-                ON p.`scroll2site` = s.`scroll2site_activ`
-                WHERE p.`id`='".$promo['id']."' AND s.`id`='".$platform['id']."';";
-
-        if($GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)) {
-            $s2s=1.3;
-        }else{
-            $s2s=1;
-        }
-
         # Изменение баланса рекламодателя (настройка на странице площадок)
-        $stavka_advertiser = round($promo['stavka'] * $platform['otchiclen']*$s2s / 100, 2);
+        $stavka_advertiser = round($promo['stavka'] * $platform['otchiclen'] / 100, 2);
         # Изменение баланса площадки (настройка на странице таргетингов статьи)
         $stavka_ploshadka = round($stavka_advertiser * $promo['persent_platform'] / 100, 2);
     }
