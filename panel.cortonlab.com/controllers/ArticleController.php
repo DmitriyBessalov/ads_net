@@ -929,7 +929,9 @@ class ArticleController
             var quill = new Quill(\'#editor-container\', {
                 modules: {
                     toolbar: [
+
                         [{ size: [\'small\', false, \'large\', \'huge\']}, { header: \'2\' },  "bold", "italic", "underline", { header: \'6\' }, { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
+
                     ]
                 },
                 scrollingContainer: "#scrolling-container",
