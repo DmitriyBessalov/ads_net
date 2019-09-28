@@ -1816,7 +1816,7 @@ p {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  padding: 80px 20% 140px;
+  padding: 0px 20% 140px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
