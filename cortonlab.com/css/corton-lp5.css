@@ -1153,6 +1153,11 @@ p {
 }
 .backhomestart {
 	background-image: url(/images/backhomestart.png);
+	width: 100%;
+    min-width: 700px;
+    min-height: 400px;
+	max-width:1920px;
+	margin-top: 20px;
 }
 .div-block-19 {
   display: -webkit-box;
@@ -1672,7 +1677,6 @@ p {
 }
 
 .text-block-14 {
-  margin-right: 40px;
   font-family: 'Myriadpro Regular';
   color: #768093;
   font-size: 20px;
