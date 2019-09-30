@@ -10,7 +10,7 @@ if(!empty($_POST['email'] )) {
          <b>IP: </b>'.$_SERVER['REMOTE_ADDR'].'</br>';
     $headers  = "Content-type: text/html; charset=UTF-8 \r\nFrom: <info@cortonlab.com>\r\n";
     $result = mail($to, $subject, $message, $headers);
-    echo "<p class=\"textred\">Запрос отправлет</p>";
+    echo "<p class=\"textred\">Запрос отправлен</p>";
 }else{
     echo "<p class=\"textred\">Email не введён</p>";
 }
