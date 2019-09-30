@@ -127,6 +127,7 @@ if (corton_complete!=1) {
                     '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;} '+
                     'jdiv,footer{display: none !important;} '+
                     '#corton-promo img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
+                    '#corton_border_title p {text-align: center;} '+
                     '@media (max-width: 1024px) { '+
                         '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                         '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
@@ -152,7 +153,6 @@ if (corton_complete!=1) {
                         '#corton-promo{min-height:100vh;} '+
                     '}'+
                 '</style>';
-
 
                 var corton_promo=document.getElementById("corton-promo"),
                     overlay=document.getElementById("corton_overlay"),
