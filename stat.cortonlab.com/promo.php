@@ -82,7 +82,7 @@ if ($action =='l') {
         $sql="SELECT `scroll2site` FROM `promo` p
                 JOIN `style_promo` s
                 ON p.`scroll2site` = s.`scroll2site_activ`
-                WHERE p.`id`='".$promo['id']."' AND s.`id`='".$platform['id']."';";
+                WHERE p.`id`='".$promo['promo_id']."' AND s.`id`='".$platform['id']."';";
 
         if($GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)) {
             $s2s=1.3;
