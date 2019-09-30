@@ -1155,9 +1155,10 @@ p {
 	background-image: url(/images/backhomestart.png);
 	width: 100%;
     min-width: 700px;
-    min-height: 400px;
+    min-height: 440px;
 	max-width:1920px;
 	margin-top: 20px;
+	
 }
 .div-block-19 {
   display: -webkit-box;
