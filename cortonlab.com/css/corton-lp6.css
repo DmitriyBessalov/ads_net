@@ -1158,7 +1158,7 @@ p {
     min-height: 440px;
 	max-width:1920px;
 	margin-top: 20px;
-	
+	background-repeat: no-repeat;
 }
 .div-block-19 {
   display: -webkit-box;
