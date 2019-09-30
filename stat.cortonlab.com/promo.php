@@ -254,9 +254,3 @@ if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
         $GLOBALS['db']->query($sql);
     }
 }
-
-
-
-
-
-
