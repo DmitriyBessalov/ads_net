@@ -33,7 +33,7 @@ setcookie('SESS_ID', $stat_arr['unique_user'], time() + (86400 * 365), "/",".cor
 function statpostgres($stat_arr) {
 
     $sql="SELECT `type` FROM `ploshadki` WHERE `id`='".$stat_arr['platform_id']."'";
-    $stat_arr['platform_type'] = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+    $stat_arr['platform_type'] = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
     $GLOBALS['postgre'] = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
 
