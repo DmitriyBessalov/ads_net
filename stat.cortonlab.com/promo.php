@@ -1,5 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
+header("Access-Control-Allow-Credentials: true");
 $_GET = array_map('addslashes', $_GET);
 
 # Проверка входящих параметров

@@ -1,6 +1,8 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
+header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json;');
+require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 
 $interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
@@ -10,18 +12,17 @@ require_once 'geoip/vendor/autoload.php';
 use GeoIp2\Database\Reader;
 $reader = new Reader('/var/www/www-root/data/www/api2.cortonlab.com/geoip/GeoLite2-City.mmdb');
 
-//$_SERVER['REMOTE_ADDR']='185.68.146.112';
 
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
-$arr['prosmotr_id'] = $redis->incr("prosmotr_id");
+$stat_arr['view_id']=$arr['prosmotr_id'] = $redis->incr("prosmotr_id");
 $redis->close();
 
 $record = $reader->city($_SERVER['REMOTE_ADDR']);
 if ($record->mostSpecificSubdivision->isoCode==''){
     $arr['region']=$iso=$record->country->isoCode;
 }else{
-    $arr['region']=$iso=$record->country->isoCode.'-'.$record->mostSpecificSubdivision->isoCode;
+    $stat_arr['iso']=$arr['region']=$iso=$record->country->isoCode.'-'.$record->mostSpecificSubdivision->isoCode;
 }
 
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
@@ -127,6 +128,7 @@ if (count($an)==0){
     $ch = 0;
     foreach ($result as $i) {
         $arr['anons'][0][] = $result[$ch]['id'];
+        $stat_arr2['preview_id'][]=$i['id'];
         $arr['anons'][1][] = $result[$ch]['title'];
         $arr['anons'][2][] = $result[$ch]['snippet'];
         $arr['anons'][3][] = $result[$ch]['img_290x180'];
@@ -140,7 +142,7 @@ if (count($an)==0){
 preg_match('/\/\/(.*?)\//', $_SERVER['HTTP_REFERER'], $referer);
 $sql="SELECT `id`,`promo_page` FROM `ploshadki` WHERE `domen`='".$referer[1]."'";
 $result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
-$arr['p_id'] = $result1['id'];
+$stat_arr['platform_id']=$arr['p_id'] = $result1['id'];
 $arr['promo_page']=$result1['promo_page'];
 
 echo json_encode($arr,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -164,9 +166,10 @@ if (!$GLOBALS['dbstat']->exec($sql)) {
     $GLOBALS['dbstat']->query($sql);
 }
 
-$words=str_replace("'","",$words);
-$promo=str_replace("'","",$promo);
-$interes=str_replace("'","",$interes);
+$stat_arr['words_list']=$words=str_replace("'","",$words);
+$stat_arr['promo_id_list']=$promo=str_replace("'","",$promo);
+$stat_arr['preview_id_list']=implode(',' ,$stat_arr2['preview_id']);
+$stat_arr['category_id_list']=$interes=str_replace("'","",$interes);
 
 $sql="INSERT INTO
     `regust_widget`
@@ -186,8 +189,13 @@ $GLOBALS['dbstat']->query($sql);
 if (is_null($_GET['r']))$_GET['r']='0';
 if (is_null($_GET['e']))$_GET['e']='f';
 
-$sql="insert into tb_stat_request (view_id, words_list, category_id_list, promo_id_list, url, iso, recomend, native, remote_ip, platform_id) values 
-        ('".$arr['prosmotr_id']."','{".$words."}','{".$interes."}','{".$promo."}','".$i."','".$iso."','".$_GET['r']."','".$_GET['e']."','".$_SERVER['REMOTE_ADDR']."','".$arr['p_id']."')";
+$stat_arr['recomend']=$_GET['r'];
+$stat_arr['native']=$_GET['e'];
 
-$postgre = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
-$postgre ->query($sql);
+$stat_arr['is_load_widget']=1;
+
+statpostgres($stat_arr);
+
+$sql="insert into tb_stat_request (view_id, words_list, category_id_list, promo_id_list, url, iso, recomend, native, remote_ip, platform_id) values 
+    ('".$arr['prosmotr_id']."','{".$words."}','{".$interes."}','{".$promo."}','".$i."','".$iso."','".$_GET['r']."','".$_GET['e']."','".$_SERVER['REMOTE_ADDR']."','".$arr['p_id']."')";
+$GLOBALS['postgre'] -> query($sql);
