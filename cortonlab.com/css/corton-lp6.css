@@ -2773,6 +2773,9 @@ background: #C8DDF5;
 	margin-top:40px;
 	box-shadow: 0 12px 24px 0 rgba(41,41,43,.09);
 }
+.submit-butstarthome:hover {
+	background: #ffffff26;
+}
 .submit-buttonwhite {
     width: auto;
     height: 34px;
