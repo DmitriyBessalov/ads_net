@@ -1548,7 +1548,7 @@ p {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #fff;
+  background-image: linear-gradient(to right, #448fe5, #3987e2, #2d7ede, #2076da, #116dd6);
 }
 
 .imgstart {
