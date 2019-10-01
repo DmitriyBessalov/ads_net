@@ -2758,6 +2758,19 @@ background: #C8DDF5;
     border-radius: 8px;
 	padding: 16px 20px 33px 20px;
 }
+.submit-butstarthome {
+    width: auto;
+    height: 34px;
+    color: #fff;
+    background-color: transparent;
+    font-family: 'Myriadpro Regular';
+    font-size: 18px;
+    border: 2px solid #fff;
+    font-weight: 400;
+    border-radius: 8px;
+    padding: 16px 20px 33px 20px;
+    line-height: 20px;
+}
 .submit-buttonwhite {
     width: auto;
     height: 34px;
