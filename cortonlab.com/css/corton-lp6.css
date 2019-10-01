@@ -1151,7 +1151,15 @@ p {
   width: 600px;
   height: 520px;
 }
-
+.backhomestart {
+	background-image: url(/images/backhomestart.png);
+	width: 100%;
+    min-width: 700px;
+    min-height: 440px;
+	max-width:1920px;
+	margin-top: 20px;
+	background-repeat: no-repeat;
+}
 .div-block-19 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1540,7 +1548,7 @@ p {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #fff;
+  background-image: linear-gradient(to right, #448fe5, #3987e2, #2d7ede, #2076da, #116dd6);
 }
 
 .imgstart {
@@ -1670,7 +1678,6 @@ p {
 }
 
 .text-block-14 {
-  margin-right: 40px;
   font-family: 'Myriadpro Regular';
   color: #768093;
   font-size: 20px;
@@ -1819,7 +1826,7 @@ p {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  padding: 80px 20% 0px;
+  padding: 80px 20% 100px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -2750,6 +2757,24 @@ background: #C8DDF5;
     font-weight: 400;
     border-radius: 8px;
 	padding: 16px 20px 33px 20px;
+}
+.submit-butstarthome {
+    width: auto;
+    height: 34px;
+    color: #fff;
+    background-color: transparent;
+    font-family: 'Myriadpro Regular';
+    font-size: 18px;
+    border: 2px solid #fff;
+    font-weight: 400;
+    border-radius: 8px;
+    padding: 16px 40px 33px 40px;
+    line-height: 20px;
+	margin-top:40px;
+	box-shadow: 0 12px 24px 0 rgba(41,41,43,.09);
+}
+.submit-butstarthome:hover {
+	background: #ffffff26;
 }
 .submit-buttonwhite {
     width: auto;
