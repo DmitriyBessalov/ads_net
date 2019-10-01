@@ -2771,6 +2771,7 @@ background: #C8DDF5;
     padding: 16px 40px 33px 40px;
     line-height: 20px;
 	margin-top:40px;
+	box-shadow: 0 12px 24px 0 rgba(41,41,43,.09);
 }
 .submit-buttonwhite {
     width: auto;
