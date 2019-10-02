@@ -1,7 +1,9 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
+header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json; charset=UTF-8');
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
+//require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 
 //Выдача промо статьи
 $sql="SELECT @main_promo_id:=`promo_id` FROM `anons` WHERE `id`='".addslashes($_GET['anons_id'])."';";
@@ -11,3 +13,5 @@ $sql="SELECT * FROM (SELECT `id`,`title`,`text` FROM `promo` WHERE `main_promo_i
 $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
 echo json_encode($result ,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+//statpostgres($stat_arr);
