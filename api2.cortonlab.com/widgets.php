@@ -2,7 +2,9 @@
 header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json;');
+$kuki=2;
 require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
+$stat_arr['is_load_widget']=1;
 
 $interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
@@ -94,7 +96,6 @@ while ($anons_count != 0) {
     }
 }
 
-
 $arr['anons_count'] = count($an);
 
 if (count($an)==0){
@@ -181,8 +182,6 @@ if (is_null($_GET['e']))$_GET['e']='f';
 
 $stat_arr['recomend']=$_GET['r'];
 $stat_arr['native']=$_GET['e'];
-
-$stat_arr['is_load_widget']=1;
 
 statpostgres($stat_arr);
 

@@ -27,6 +27,7 @@ if (isset($_COOKIE['SESS_ID'])){
     $stat_arr['unique_user']=$_COOKIE['SESS_ID'];
 }else{
     $stat_arr['unique_user']= substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 26);
+    if ($kuki!=2) $stat_arr['is_baned']=0;
 }
 setcookie('SESS_ID', $stat_arr['unique_user'], time() + (86400 * 365), "/",".cortonlab.com");
 
@@ -39,6 +40,10 @@ function statpostgres($stat_arr) {
     if (isset($stat_arr['platform_id'])) {
         $sql = "SELECT `type` FROM `ploshadki` WHERE `id`='" . $stat_arr['platform_id'] . "'";
         $stat_arr['platform_type'] = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    }
+
+    if (!isset($stat_arr['platform_type'])) {
+        $stat_arr['is_baned']=1;
     }
 
     $GLOBALS['postgre'] = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');

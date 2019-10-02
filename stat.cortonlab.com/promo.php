@@ -2,11 +2,7 @@
 header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header("Access-Control-Allow-Credentials: true");
 $_GET = array_map('addslashes', $_GET);
-
-# Проверка входящих параметров
-if (!(($_GET['t']=='e') OR ($_GET['t']=='s') OR ($_GET['t']=='r'))){
-    exit;
-}
+//require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 
 $widget=$_GET['t'];
 #  r: recomend
@@ -18,6 +14,18 @@ $action=$_GET['a'];
 #  s: чтение
 #  r: дочитывание
 #  c: клик с промо статьи
+
+//switch ($action){
+//    case 'l':break;
+//    case 's':break;
+//    case 'r':break;
+//    case 'c':;
+//}
+
+# Проверка входящих параметров
+if (!(($_GET['t']=='e') OR ($_GET['t']=='s') OR ($_GET['t']=='r'))){
+    exit;
+}
 
 $prosmort_id=(int)$_GET['prosmort_id'];
 $anons_id=(int)$_GET['anons_id'];
