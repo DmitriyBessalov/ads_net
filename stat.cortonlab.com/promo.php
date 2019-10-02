@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header("Access-Control-Allow-Credentials: true");
 $_GET = array_map('addslashes', $_GET);
-//require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
+require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 
 $widget=$_GET['t'];
 #  r: recomend
@@ -15,21 +15,29 @@ $action=$_GET['a'];
 #  r: дочитывание
 #  c: клик с промо статьи
 
-//switch ($action){
-//    case 'l':break;
-//    case 's':break;
-//    case 'r':break;
-//    case 'c':;
-//}
+switch ($action){
+    case 's':$stat_arr['is_read_post']=1;break;
+    case 'r':$stat_arr['is_total_read_post']=1;break;
+    case 'c':$stat_arr['redirect_link']=-2;
+}
+
+$stat_arr['view_id']=$prosmort_id=(int)$_GET['prosmort_id'];
+$stat_arr['preview_id_list']=$anons_id=(int)$_GET['anons_id'];
+if ($_GET['t']=='r') $stat_arr['recomend']=1;
+if ($_GET['t']=='e') $stat_arr['native']=1;
 
 # Проверка входящих параметров
 if (!(($_GET['t']=='e') OR ($_GET['t']=='s') OR ($_GET['t']=='r'))){
+    $stat_arr['is_baned']=1;
+    statpostgres($stat_arr);
     exit;
 }
 
-$prosmort_id=(int)$_GET['prosmort_id'];
-$anons_id=(int)$_GET['anons_id'];
-if (($anons_id==0) OR ($prosmort_id==0)) exit;
+if (($anons_id==0) OR ($prosmort_id==0)) {
+    $stat_arr['is_baned']=1;
+    statpostgres($stat_arr);
+    exit;
+}
 
 # Защита от повторных запросов
 $redis = new Redis();
@@ -40,6 +48,8 @@ $redis->set($action.':'.$prosmort_id, 1, 1296000);
 if (($action=='s') and (!$block))
     $block=$redis->get('r:'.$prosmort_id, 1, 1296000);
 if ($block){
+    $stat_arr['is_baned']=1;
+    statpostgres($stat_arr);
     exit;
 }
 
@@ -51,6 +61,7 @@ $domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
 $sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+$stat_arr['platform_id']=$platform['id'];
 
 # Берем ставку и id статьи
 if ($action !='l') {
@@ -62,11 +73,15 @@ if ($action !='l') {
            WHERE a.id='".$anons_id."'";
     $promo = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
-
+$stat_arr['promo_id_list']=$promo['promo_id'];
 
 # Обновляет информацию по переходу на статью
 if ($action =='l') {
-    if ($_GET['ref']=="") exit;
+    if ($_GET['ref']=="") {
+        $stat_arr['is_baned']=1;
+        statpostgres($stat_arr);
+        exit;
+    };
     $sql = "INSERT INTO 
         `stat_promo_prosmotr`
     SET
@@ -85,6 +100,8 @@ if ($action =='l') {
         $sql = "SELECT `pay`,`read` FROM `stat_promo_prosmotr` WHERE `prosmotr_id` = '" . $_GET['prosmort_id'] . "'";
         $pay = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
         if ($pay == false) {
+            $stat_arr['is_baned']=1;
+            statpostgres($stat_arr);
             exit;
         }
 
@@ -126,6 +143,7 @@ if(($action =='s')or($action =='r')) {
     }else{
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 3,86400);
         $antifrod=1;
+        $stat_arr['is_baned']=1;
     }
 }
 $redis->close();
@@ -218,6 +236,8 @@ switch ($action) {
             $_GET['href'] = substr($_GET['href'], 0, -1);
         }
 
+        $stat_arr['redirect_link']=$params['sub_id1'];
+
         $sql ="INSERT INTO `promo_perehod`
                 SET `promo_id` = '".$promo['promo_id']."',
                     `date` = CURDATE(),
@@ -237,6 +257,7 @@ switch ($action) {
         }
 }
 
+if ($action !='l')statpostgres($stat_arr);
 
 if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
     # Изменение баланса плошадки
