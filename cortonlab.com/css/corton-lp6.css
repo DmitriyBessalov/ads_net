@@ -2753,7 +2753,7 @@ background: #C8DDF5;
     background-color: #fff;
     font-family: 'Myriadpro Regular';
     font-size: 18px;
-	border: 1px solid #116dd6;
+	border: 2px solid #116dd6;
     font-weight: 400;
     border-radius: 8px;
 	padding: 16px 20px 33px 20px;
@@ -4353,7 +4353,7 @@ background: #C8DDF5;
   }
     .div-block-43homestart {
     margin-top: 0vw;
-    padding: 20px 4% 20px;
+    padding: 20px 4% 40px;
     -webkit-box-pack: start;
     -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
