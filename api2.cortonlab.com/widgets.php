@@ -177,11 +177,15 @@ SET
     `ip` = '".$_SERVER['REMOTE_ADDR']."';";
 $GLOBALS['dbstat']->query($sql);
 
-if (is_null($_GET['r']))$_GET['r']='0';
-if (is_null($_GET['e']))$_GET['e']='f';
 
+if (is_null($_GET['r']))$_GET['r']='0';
 $stat_arr['recomend']=$_GET['r'];
-$stat_arr['native']=$_GET['e'];
+
+if (is_null($_GET['e'])){
+    $_GET['e']='f';
+}else{
+    $stat_arr['native']=$_GET['e'];
+}
 
 statpostgres($stat_arr);
 
