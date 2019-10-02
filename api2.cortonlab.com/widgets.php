@@ -8,22 +8,12 @@ $interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
 
 #Определение geo
-require_once 'geoip/vendor/autoload.php';
-use GeoIp2\Database\Reader;
-$reader = new Reader('/var/www/www-root/data/www/api2.cortonlab.com/geoip/GeoLite2-City.mmdb');
-
+require_once '/var/www/www-root/data/www/api2.cortonlab.com/geoip/geoip.php';
 
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
 $stat_arr['view_id']=$arr['prosmotr_id'] = $redis->incr("prosmotr_id");
 $redis->close();
-
-$record = $reader->city($_SERVER['REMOTE_ADDR']);
-if ($record->mostSpecificSubdivision->isoCode==''){
-    $arr['region']=$iso=$record->country->isoCode;
-}else{
-    $stat_arr['iso']=$arr['region']=$iso=$record->country->isoCode.'-'.$record->mostSpecificSubdivision->isoCode;
-}
 
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 

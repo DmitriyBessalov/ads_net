@@ -7,12 +7,12 @@ $stat_arr= [
     'category_id_list'=>null,
     'preview_id_list'=>null,
     'platform_type'=>null,
-    'is_show_preview'=>'0',
-    'is_click_preview'=>'0',
-    'is_read_post'=>'0',
-    'is_total_read_post'=>'0',
-    'is_load_widget'=>'0',
-    'is_baned'=>'0',
+    'is_show_preview'=>null,
+    'is_click_preview'=>null,
+    'is_read_post'=>null,
+    'is_total_read_post'=>null,
+    'is_load_widget'=>null,
+    'is_baned'=>null,
     'native'=>null,
     'redirect_type'=>null,
     'promo_id_list'=>null,
@@ -32,8 +32,14 @@ setcookie('SESS_ID', $stat_arr['unique_user'], time() + (86400 * 365), "/",".cor
 
 function statpostgres($stat_arr) {
 
-    $sql="SELECT `type` FROM `ploshadki` WHERE `id`='".$stat_arr['platform_id']."'";
-    $stat_arr['platform_type'] = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    if (isset($stat_arr['iso'])) {
+        require_once '/var/www/www-root/data/www/api2.cortonlab.com/geoip/geoip.php';
+    }
+
+    if (isset($stat_arr['platform_id'])) {
+        $sql = "SELECT `type` FROM `ploshadki` WHERE `id`='" . $stat_arr['platform_id'] . "'";
+        $stat_arr['platform_type'] = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    }
 
     $GLOBALS['postgre'] = new PDO('pgsql:host=185.75.90.54;dbname=corton', 'corton', 'Qwe!23');
 
@@ -79,6 +85,6 @@ function statpostgres($stat_arr) {
         '".$stat_arr['recomend']."',
         '".$stat_arr['remote_ip']."',
         '".$stat_arr['platform_id']."')";
-
+    $sql=str_replace("''","null",$sql);
     $GLOBALS['postgre'] ->query($sql);
 };
