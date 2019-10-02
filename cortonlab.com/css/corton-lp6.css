@@ -595,7 +595,14 @@ p {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
+.list-cl2 {
+	padding: 20px 0 0px 20px;
+	text-align: left;
+}
+.list-cl2 li {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
 .form-2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2236,7 +2243,7 @@ p {
 
 .text-block-18 {
   font-family: 'Myriadpro Regular';
-  color: #768093;
+  color: #116dd6;
   font-size: 20px;
   line-height: 26px;
 }
@@ -2625,12 +2632,8 @@ p {
   font-size: 20px;
 }
 .singinstyle {
-border: 1px solid #C8DDF5;
-padding: 10px 14px;
-border-radius: 8px;
 color: #116dd6;
 margin-left: 15px;
-background: #C8DDF5;
 }
 .singinstyle:hover {
    color: #fff;
@@ -2742,9 +2745,10 @@ background: #C8DDF5;
     background-color: #116dd6;
     font-family: 'Myriadpro Regular';
     font-size: 18px;
+	border: 2px solid #116dd6;
     font-weight: 400;
     border-radius: 8px;
-	padding: 16px 18px 33px 18px;
+	padding: 16px 16px 33px 16px;
 }
 .submit-buttongrey {
     width: auto;
@@ -2756,7 +2760,7 @@ background: #C8DDF5;
 	border: 2px solid #116dd6;
     font-weight: 400;
     border-radius: 8px;
-	padding: 16px 20px 33px 20px;
+	padding: 16px 16px 33px 16px;
 }
 .submit-butstarthome {
     width: auto;
