@@ -9,7 +9,7 @@ if(!empty($_POST['email'] )) {
          <b>Еmail: </b>'.$_POST['email'].'</br>
          <b>IP: </b>'.$_SERVER['REMOTE_ADDR'].'</br>';
     $headers  = "Content-type: text/html; charset=UTF-8 \r\nFrom: <dmitriy@bessalov.ru>\r\n";
-    $result = mail($to, $subject, $message);
+    $result = mail($to, $subject, $message, $headers);
     if (!$result){
         echo "<p class=\"textred\">Системная ошибка</p>";
     }else{
