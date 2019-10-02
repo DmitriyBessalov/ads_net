@@ -2,25 +2,25 @@
 if ($_SERVER['REMOTE_ADDR']=='192.168.1.153')$_SERVER['REMOTE_ADDR']='185.68.146.112';
 
 $stat_arr= [
-    'view_id'=>null,
-    'words_list'=>null,
-    'category_id_list'=>null,
-    'preview_id_list'=>null,
-    'platform_type'=>null,
-    'is_show_preview'=>null,
-    'is_click_preview'=>null,
-    'is_read_post'=>null,
-    'is_total_read_post'=>null,
-    'is_load_widget'=>null,
-    'is_baned'=>null,
-    'native'=>null,
-    'redirect_type'=>null,
-    'promo_id_list'=>null,
+    'view_id'=>'null',
+    'words_list'=>'null',
+    'category_id_list'=>'null',
+    'preview_id_list'=>'null',
+    'platform_type'=>'null',
+    'is_show_preview'=>'null',
+    'is_click_preview'=>'null',
+    'is_read_post'=>'null',
+    'is_total_read_post'=>'null',
+    'is_load_widget'=>'null',
+    'is_baned'=>'null',
+    'native'=>'null',
+    'redirect_type'=>'null',
+    'promo_id_list'=>'null',
     'url'=>urldecode($_SERVER['HTTP_REFERER']),
-    'iso'=>null,
-    'recomend'=>null,
+    'iso'=>'null',
+    'recomend'=>'null',
     'remote_ip'=>$_SERVER['REMOTE_ADDR'],
-    'platform_id'=>null
+    'platform_id'=>'null'
 ];
 
 if (isset($_COOKIE['SESS_ID'])){
@@ -85,6 +85,6 @@ function statpostgres($stat_arr) {
         '".$stat_arr['recomend']."',
         '".$stat_arr['remote_ip']."',
         '".$stat_arr['platform_id']."')";
-    $sql=str_replace("''","null",$sql);
+    $sql=str_replace("'null'","null",$sql);
     $GLOBALS['postgre'] ->query($sql);
 };
