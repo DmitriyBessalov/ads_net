@@ -6,8 +6,8 @@ if(!empty($_POST['email'] )) {
     $subject = "Corton лендинг форма";
     $message = '
          <h3>Получен запрос на добавление '.$_POST['type'].'</h3></br>
-         <b>Еmail: </b>'.$_POST['email'].'</br>
-         <b>IP: </b>'.$_SERVER['REMOTE_ADDR'].'</br>';
+         <b>Еmail: </b>'.$_POST['email'].'<br>
+         <b>IP: </b>'.$_SERVER['REMOTE_ADDR'].'<br>';
     $headers  = "Content-type: text/html; charset=UTF-8 \r\nFrom: <info@cortonlab.com>\r\n";
     $result = mail($to, $subject, $message, $headers);
     if (!$result){
