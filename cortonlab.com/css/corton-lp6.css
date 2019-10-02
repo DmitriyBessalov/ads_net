@@ -595,7 +595,12 @@ p {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
+.list-cl2 {
+	padding: 20px;
+}
+.list-cl2 li {
+margin-bottom: 10px;
+}
 .form-2 {
   display: -webkit-box;
   display: -webkit-flex;
