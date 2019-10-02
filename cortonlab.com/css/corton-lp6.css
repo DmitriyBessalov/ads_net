@@ -597,6 +597,7 @@ p {
 }
 .list-cl2 {
 	padding: 20px 0 0px 20px;
+	text-align: left;
 }
 .list-cl2 li {
     margin-bottom: 10px;
@@ -2631,12 +2632,8 @@ p {
   font-size: 20px;
 }
 .singinstyle {
-border: 1px solid #C8DDF5;
-padding: 10px 14px;
-border-radius: 8px;
 color: #116dd6;
 margin-left: 15px;
-background: #C8DDF5;
 }
 .singinstyle:hover {
    color: #fff;
@@ -2750,7 +2747,7 @@ background: #C8DDF5;
     font-size: 18px;
     font-weight: 400;
     border-radius: 8px;
-	padding: 16px 18px 33px 18px;
+	padding: 16px 16px 33px 16px;
 }
 .submit-buttongrey {
     width: auto;
@@ -2762,7 +2759,7 @@ background: #C8DDF5;
 	border: 2px solid #116dd6;
     font-weight: 400;
     border-radius: 8px;
-	padding: 16px 20px 33px 20px;
+	padding: 16px 16px 33px 16px;
 }
 .submit-butstarthome {
     width: auto;
