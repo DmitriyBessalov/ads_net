@@ -2644,6 +2644,11 @@ margin-left: 15px;
 	height: 12px;
 	border-radius: 20px;
 	border: 2px solid #116dd6;
+	margin-right: 10px;
+    margin-top: 7px;
+}
+.li-cl {
+	display: flex;
 }
 .section-14 {
   display: -webkit-box;
