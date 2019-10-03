@@ -2647,6 +2647,15 @@ margin-left: 15px;
 	margin-right: 10px;
     margin-top: 7px;
 }
+.imgicon {
+	text-align:left;
+}
+
+@media (max-width: 480px) and (min-width: 100px) {
+	.imgicon {
+	text-align:center;
+    }
+}
 .li-cl {
 	display: flex;
 	margin-bottom: 10px;
