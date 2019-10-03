@@ -2640,10 +2640,10 @@ margin-left: 15px;
    padding: 0 15px;
 }
 .circle-cl {
-	width: 8px;
-	height: 8px;
+	width: 10px;
+	height: 10px;
 	border-radius: 20px;
-	border: 2px solid #116dd6;
+	border: 3px solid #116dd6;
 }
 .section-14 {
   display: -webkit-box;
