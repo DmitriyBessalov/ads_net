@@ -2640,10 +2640,10 @@ margin-left: 15px;
    padding: 0 15px;
 }
 .circle-cl {
-	width: 13px;
-	height: 13px;
+	width: 12px;
+	height: 12px;
 	border-radius: 20px;
-	border: 3px solid #116dd6;
+	border: 2px solid #116dd6;
 	margin-right: 10px;
     margin-top: 7px;
 }
