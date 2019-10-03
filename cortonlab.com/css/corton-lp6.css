@@ -596,7 +596,7 @@ p {
   padding-bottom: 10px;
 }
 .list-cl2 {
-	padding: 20px 0 0px 20px;
+	padding-top: 20px;
 	text-align: left;
 }
 .list-cl2 li {
@@ -2649,6 +2649,8 @@ margin-left: 15px;
 }
 .li-cl {
 	display: flex;
+	margin-bottom: 10px;
+    font-weight: 700;
 }
 .section-14 {
   display: -webkit-box;
