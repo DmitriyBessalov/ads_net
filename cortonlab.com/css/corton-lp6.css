@@ -2639,6 +2639,12 @@ margin-left: 15px;
    color: #116dd6;
    padding: 0 15px;
 }
+.circle-cl {
+	width: 8px;
+	height: 8px;
+	border-radius: 20px;
+	border: 1px solid #116dd6;
+}
 .section-14 {
   display: -webkit-box;
   display: -webkit-flex;
