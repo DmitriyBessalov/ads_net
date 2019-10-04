@@ -596,7 +596,7 @@ p {
   padding-bottom: 10px;
 }
 .list-cl2 {
-	padding: 20px 0 0px 20px;
+	padding-top: 20px;
 	text-align: left;
 }
 .list-cl2 li {
@@ -1686,7 +1686,7 @@ p {
 
 .text-block-14 {
   font-family: 'Myriadpro Regular';
-  color: #768093;
+  color: #116dd6;
   font-size: 20px;
   line-height: 26px;
   font-weight: 400;
@@ -1694,7 +1694,7 @@ p {
 }
 .text-block-14homeadv {
   font-family: 'Myriadpro Regular';
-  color: #768093;
+  color: #116dd6;
   font-size: 20px;
   line-height: 26px;
   font-weight: 400;
@@ -2114,7 +2114,7 @@ p {
 .text-block-16-2 {
   margin-top: 10px;
   font-family: 'Myriadpro Regular';
-  color: #768093;
+  color: #116dd6;
   font-size: 20px;
   line-height: 26px;
   font-weight: 400;
@@ -2635,13 +2635,32 @@ p {
 color: #116dd6;
 margin-left: 15px;
 }
-.singinstyle:hover {
-   color: #fff;
-   background:#116dd6;    
-}
 .menustyle {
    color: #116dd6;
    padding: 0 15px;
+}
+.circle-cl {
+	width: 12px;
+	height: 12px;
+	border-radius: 20px;
+	border: 2px solid #116dd6;
+	margin-right: 10px;
+    margin-top: 7px;
+}
+.imgicon {
+	text-align:left;
+	width: 100%
+}
+
+@media (max-width: 480px) and (min-width: 100px) {
+	.imgicon {
+	text-align:center;
+    }
+}
+.li-cl {
+	display: flex;
+	margin-bottom: 10px;
+    font-weight: 700;
 }
 .section-14 {
   display: -webkit-box;
