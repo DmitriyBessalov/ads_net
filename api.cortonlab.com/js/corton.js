@@ -918,7 +918,8 @@ if (corton_complete!=1) {
             anons_ids_old=anons_ids.join();
         }
 
-        window.onscroll = function(){onscr();};
+        window.addEventListener("scroll", onscr);
+
         onscr();
 
         if (first_widget_check){
