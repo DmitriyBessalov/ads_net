@@ -110,7 +110,7 @@ if (corton_complete!=1) {
                 scroll_to_site.innerHTML= ''+
                 '<div id="corton_sticky_container">'+
                     '<div id="corton_overlay"></div>'+
-                    '<div id="corton_border_title"><p>' + result['scroll2site_text'] + '&nbsp;<a href="'+result['scroll2site_url']+'">'+host[2]+'</a><p></div>'+
+                    '<div id="corton_border_title"><div>' + result['scroll2site_text'] + '&nbsp;<a href="'+result['scroll2site_url']+'">'+host[2]+'</a></div></div>'+
                     '<div id="corton_browser_container">'+
                          '<a href="'+result['scroll2site_url']+'" rel="noopener nofollow">'+
                             '<div id="corton_header">'+
