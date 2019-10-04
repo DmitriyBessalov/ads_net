@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REMOTE_ADDR']=='192.168.1.153')$_SERVER['REMOTE_ADDR']='185.68.146.112';
+if ($_SERVER['REMOTE_ADDR']=='192.168.1.153')$_SERVER['REMOTE_ADDR']='31.135.208.56';
 
 $stat_arr= [
     'view_id'=>'null',
@@ -20,7 +20,8 @@ $stat_arr= [
     'iso'=>'null',
     'recomend'=>'null',
     'remote_ip'=>$_SERVER['REMOTE_ADDR'],
-    'platform_id'=>'null'
+    'platform_id'=>'null',
+    'url_request'=>urldecode($_SERVER['REQUEST_URI'])
 ];
 
 if (isset($_COOKIE['SESS_ID'])){
@@ -65,6 +66,7 @@ function statpostgres($stat_arr) {
         redirect_link,
         promo_id_list,
         url,
+        url_request,
         iso,
         recomend,
         remote_ip,
@@ -86,6 +88,7 @@ function statpostgres($stat_arr) {
         '".$stat_arr['redirect_link']."',
         '{".$stat_arr['promo_id_list']."}',
         '".$stat_arr['url']."',
+        '".$stat_arr['url_request']."',
         '".$stat_arr['iso']."',
         '".$stat_arr['recomend']."',
         '".$stat_arr['remote_ip']."',
