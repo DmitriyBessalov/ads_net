@@ -2657,6 +2657,16 @@ margin-left: 15px;
 	text-align:center;
     }
 }
+
+.imgmini {
+	margin-bottom:20px;
+}
+@media (max-width: 480px) and (min-width: 100px) {
+	.imgmini {
+	    max-width: 25px;
+    }
+}
+
 .li-cl {
 	display: flex;
 	margin-bottom: 10px;
