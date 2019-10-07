@@ -2672,6 +2672,11 @@ margin-left: 15px;
 	margin-bottom: 10px;
     font-weight: 700;
 }
+@media (max-width: 479px) {
+	.li-cl {
+		padding-left: 8%;
+	}
+}
 .section-14 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -4553,8 +4558,6 @@ margin-left: 15px;
   }
   .div-block-62 {
     margin-bottom: 40px;
-	padding-left: 18%;
-    margin-top: -20px;
   }
   .div-block-63 {
     margin-top: 40px;
