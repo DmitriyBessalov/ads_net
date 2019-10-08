@@ -280,7 +280,8 @@ p {
   width: 25%;
 }
 .backs2s {
-	 background-image: url(/images/back-s2s.jpg);
+	 background-image: url(/images/back-s2s.jpg) !important;
+	 border-radius: 8px;
 }
 .button {
   display: inline-block;
