@@ -3109,7 +3109,7 @@ margin-left: 15px;
 
 
 @media (max-width: 1024px) {
-.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58 {
+.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocks2s {
     padding-right: 6%;
     padding-left: 6%;
   }
@@ -3137,7 +3137,7 @@ margin-left: 15px;
 }
 
 @media (max-width: 1440px) and (min-width: 1024px) {
-.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58 {
+.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocks2s {
     padding-right: 4%;
     padding-left: 4%;
   }
@@ -3145,7 +3145,7 @@ margin-left: 15px;
 
 
 @media (max-width: 1560px) and (min-width: 1441px) {
-.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocagent {
+.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocks2s, .blocagent {
     padding-right: 7%;
     padding-left: 7%;
   }
@@ -3460,7 +3460,7 @@ margin-left: 15px;
     -ms-flex-direction: column;
     flex-direction: column;
   }
-  .div-block-58 {
+  .div-block-58, .blocks2s {
     padding: 60px 4% 0px;
   }
   .div-block-59 {
@@ -3946,7 +3946,7 @@ margin-left: 15px;
   .image-13 {
     width: 216px;
   }
-  .div-block-58 {
+  .div-block-58, .blocks2s{
     padding: 60px 4% 0px;
   }
   .div-block-60 {
@@ -4545,7 +4545,7 @@ margin-left: 15px;
   .image-13 {
     width: 180px;
   }
-  .div-block-58 {
+  .div-block-58, .blocks2s {
     padding: 60px 4% 0px;
   }
   .div-block-60 {
