@@ -282,7 +282,7 @@ p {
 
 .s2sh1 {
 	margin-bottom: 30px !important;
-	text-align: left;
+	text-align: left !important;
 }
 .blocks2s {
 	 padding: 100px 16% 140px;
@@ -2217,6 +2217,7 @@ p {
   -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-box-align: center;
+   margin-bottom: 40px;
 }
 
 .text-block-17 {
