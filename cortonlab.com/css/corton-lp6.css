@@ -282,6 +282,7 @@ p {
 .backs2s {
 	 background-image: url(/images/back-s2s.jpg) !important;
 	 border-radius: 8px;
+	 min-width:410px;
 }
 .button {
   display: inline-block;
