@@ -2213,9 +2213,6 @@ p {
   -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .text-block-17 {
@@ -3492,9 +3489,6 @@ margin-left: 15px;
     -ms-flex-pack: start;
     justify-content: flex-start;
     -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
   }
   .text-block-18 {
     font-family: 'Myriadpro Regular';
@@ -3974,9 +3968,6 @@ margin-left: 15px;
     -ms-flex-pack: start;
     justify-content: flex-start;
     -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
   }
   .text-block-17 {
     font-size: 22px;
