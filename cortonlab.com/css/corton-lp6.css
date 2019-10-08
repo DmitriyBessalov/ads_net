@@ -3978,6 +3978,7 @@ margin-left: 15px;
     -ms-flex-pack: start;
     justify-content: flex-start;
     -webkit-box-align: center;
+	margin-bottom: 0px;
   }
   .text-block-17 {
     font-size: 22px;
@@ -4574,6 +4575,7 @@ margin-left: 15px;
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
+	margin-bottom: 0px;
   }
   .text-block-17 {
     margin-bottom: 10px;
