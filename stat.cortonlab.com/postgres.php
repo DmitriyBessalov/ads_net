@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REMOTE_ADDR']=='192.168.1.153')$_SERVER['REMOTE_ADDR']='31.135.208.56';
+
 
 $stat_arr= [
     'view_id'=>'null',
