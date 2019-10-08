@@ -513,11 +513,7 @@ if (corton_complete!=1) {
         }
 
         function widget_check() {
-            console.log('widget_check');
-
-            //if (location.host=='eva.ru'){
-            //    widget ='';
-            //}
+//            console.log('widget_check');
 
             //Подготовка к получению данных виджетов
             if (widget_recomend && show_recomend == 0) {
@@ -651,7 +647,7 @@ if (corton_complete!=1) {
         function widget_load() {
             if (widget_load_status==0) {
                 widget_load_status=1;
-                console.log('widget_load');
+                //console.log('widget_load');
                 var top10 = words();
 
                 let category = style_b.getPropertyValue('--category');
@@ -701,16 +697,16 @@ if (corton_complete!=1) {
             if (widget_load_status!=2){
                 if (wait!=200) {
                     wait++;
-                    console.log('show_widget wait');
+                    //console.log('show_widget wait');
                     setTimeout(show_widget, 30);
                     return false;
                 }else {
                     wait!=0;
-                    console.log('show_widget end');
+                    //console.log('show_widget end');
                     return false;
                 }
             }
-            console.log('show_widget',result);
+            //console.log('show_widget',result);
             const sCurrentProtocol = document.location.protocol == "https:" ? "https://" : "http://";
             if (window.location.hostname === 'demo.cortonlab.com') {
                 var promo_page='https://demo.cortonlab.com'+result['promo_page'];
@@ -870,7 +866,7 @@ if (corton_complete!=1) {
             returnfalse=0;
             if (widget_recomend) {
                 if (widget_recomend.getBoundingClientRect().top != 0) {
-                    if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 2 < 0) {
+                    if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight < 0) {
                         show_recomend = 2;
                         show_widget_aktiv = true;
                         widget_load();
@@ -881,7 +877,7 @@ if (corton_complete!=1) {
 
             if (widget_natpre) {
                 if (widget_natpre.getBoundingClientRect().top != 0) {
-                    if ((show_natpre == 1) && (widget_natpre.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 4 < 0)) {
+                    if ((show_natpre == 1) && (widget_natpre.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 2 < 0)) {
                         show_natpre = 2;
                         show_widget_aktiv = true;
                         widget_load();
