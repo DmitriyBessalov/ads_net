@@ -282,7 +282,8 @@ p {
 .backs2s {
 	 background-image: url(/images/back-s2s4.jpg) !important; 
 	 border-radius: 8px;
-	 min-height: 410px;
+	 min-height: 460px;
+	 background-size: cover;
 }
 .s2sh1 {
 	margin-bottom: 30px !important;
