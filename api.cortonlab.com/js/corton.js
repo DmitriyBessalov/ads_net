@@ -870,7 +870,7 @@ if (corton_complete!=1) {
             returnfalse=0;
             if (widget_recomend) {
                 if (widget_recomend.getBoundingClientRect().top != 0) {
-                    if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 4 < 0) {
+                    if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 2 < 0) {
                         show_recomend = 2;
                         show_widget_aktiv = true;
                         widget_load();
