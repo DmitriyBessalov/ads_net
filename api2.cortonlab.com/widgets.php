@@ -9,6 +9,8 @@ $stat_arr['is_load_widget']=1;
 $interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
 
+if ($_SERVER['REMOTE_ADDR']=='192.168.1.153')$_SERVER['REMOTE_ADDR']='185.68.146.112';
+
 #Определение geo
 require_once '/var/www/www-root/data/www/api2.cortonlab.com/geoip/geoip.php';
 

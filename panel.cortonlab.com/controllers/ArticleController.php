@@ -1047,7 +1047,6 @@ class ArticleController
         $sql="UPDATE `anons_index` SET `anons_ids`=(SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $promo_id . "' AND `active`='1') WHERE `promo_id`='".$promo_id."'";
         $GLOBALS['db']->query($sql);
         return true;
-
     }
 
     public static function actionAnons_stop()
@@ -1061,7 +1060,6 @@ class ArticleController
 
         $sql="UPDATE `anons_index` SET `anons_ids`=(SELECT GROUP_CONCAT(`id`) as `id` FROM `anons` WHERE `promo_id`='" . $promo_id . "' AND `active`='1') WHERE `promo_id`='".$promo_id."'";
         $GLOBALS['db']->query($sql);
-
         return true;
     }
 

@@ -513,6 +513,12 @@ if (corton_complete!=1) {
         }
 
         function widget_check() {
+            console.log('widget_check');
+
+            //if (location.host=='eva.ru'){
+            //    widget ='';
+            //}
+
             //Подготовка к получению данных виджетов
             if (widget_recomend && show_recomend == 0) {
                 var style_r = window.getComputedStyle(widget_recomend, null);
@@ -645,7 +651,7 @@ if (corton_complete!=1) {
         function widget_load() {
             if (widget_load_status==0) {
                 widget_load_status=1;
-                //console.log('widget_load');
+                console.log('widget_load');
                 var top10 = words();
 
                 let category = style_b.getPropertyValue('--category');
@@ -695,13 +701,16 @@ if (corton_complete!=1) {
             if (widget_load_status!=2){
                 if (wait!=200) {
                     wait++;
+                    console.log('show_widget wait');
                     setTimeout(show_widget, 30);
                     return false;
                 }else {
                     wait!=0;
+                    console.log('show_widget end');
                     return false;
                 }
             }
+            console.log('show_widget',result);
             const sCurrentProtocol = document.location.protocol == "https:" ? "https://" : "http://";
             if (window.location.hostname === 'demo.cortonlab.com') {
                 var promo_page='https://demo.cortonlab.com'+result['promo_page'];
@@ -745,10 +754,18 @@ if (corton_complete!=1) {
                     if (typeof(result['recomend_zag']) != "undefined" && result['recomend_zag'] !== null && result['recomend_zag'] != false) {
                         zaglushka( 'recomendation');
                     }else{
-                        widget_recomend.remove();;
+                        widget_recomend.remove();
                     }
                 }
-                show_recomend=3;
+                if (location.host=='eva.ru') {
+                    widget_recomend.classList.add('corton-recomendation-widget');
+                    widget_recomend.removeAttribute('id');
+                    widget_load_status=0;
+                    show_recomend = 0;
+                    w=0;
+                }else{
+                    show_recomend=3;
+                }
             }
             if (show_natpre==2){
                 if (result['anons_count'] > 0) {
@@ -775,6 +792,9 @@ if (corton_complete!=1) {
                     }
                 }
                 show_natpre=3;
+            }
+            if (location.host=='eva.ru'){
+                w=0;
             }
         }
 
@@ -845,7 +865,7 @@ if (corton_complete!=1) {
         function onscr() {
             widget_recomend = document.getElementById("corton-recomendation-widget");
             widget_natpre = document.getElementById("corton-nativepreview-widget");
-//            widget_slider = document.getElementById("corton-slider-widget");
+            //widget_slider = document.getElementById("corton-slider-widget");
             widget_check();
             returnfalse=0;
             if (widget_recomend) {
@@ -947,7 +967,7 @@ if (corton_complete!=1) {
         cortonrequest.send();
     }
 
-    //Получение ответа отправленой формы статьи
+    // Получение ответа отправленой формы статьи
     function getcortonrequest()
     {
         if (window.XMLHttpRequest) {return new XMLHttpRequest();}
