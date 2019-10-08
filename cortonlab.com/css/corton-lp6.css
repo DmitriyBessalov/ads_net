@@ -2203,7 +2203,6 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 30px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -3969,7 +3968,6 @@ margin-left: 15px;
   }
   .div-block-60-s2s {
     height: auto;
-    margin-top: 30px;
     -webkit-box-pack: start;
     -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
