@@ -285,7 +285,7 @@ p {
 	 min-height: 410px;
 }
 .s2sh1 {
-	margin-bottom: 20px;
+	margin-bottom: 20px !important;
 }
 .button {
   display: inline-block;
