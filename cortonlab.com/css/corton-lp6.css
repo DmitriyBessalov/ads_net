@@ -1063,10 +1063,6 @@ p {
 	   margin: 40px 0px 0 20px;
 	   width: 260px;
     }
-	.blocks2s-1 {
-	    margin-left: -60px;
-         margin-right: -60px;
-    }
 }
 
 @media screen and (max-width: 600px) {
