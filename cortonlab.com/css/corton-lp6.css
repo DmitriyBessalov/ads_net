@@ -282,6 +282,7 @@ p {
 
 .s2sh1 {
 	margin-bottom: 30px !important;
+	text-align: left;
 }
 .blocks2s {
 	 padding: 100px 16% 140px;
@@ -1371,6 +1372,9 @@ p {
   }
   .section-4sing {
     width: 0%;
+  }
+  .s2sh1 {
+	text-align: center;
   }
 }
 .section-3sing {
