@@ -1033,6 +1033,9 @@ p {
 	.blocagent {
 		padding: 140px 16% 140px !important;
 	}
+	.backs2s {
+	    min-height: 320px;
+    }
 }
 @media screen and (max-width: 1000px) {
 	.steapcontent {
@@ -1040,6 +1043,9 @@ p {
     }
     .steapcontentright {
 	   margin: 60px 0px 0 40px;
+    }
+		.backs2s {
+	    min-height: 310px;
     }
 }
 @media screen and (max-width: 840px) {
@@ -1050,6 +1056,9 @@ p {
     .steapcontentright {
 	   margin: 40px 0px 0 20px;
 	   width: 320px;
+    }
+	.backs2s {
+	    min-height: 280px;
     }
 }
 @media screen and (max-width: 700px) {
