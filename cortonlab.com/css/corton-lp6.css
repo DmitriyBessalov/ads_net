@@ -284,7 +284,7 @@ p {
 	margin-bottom: 30px !important;
 }
 .blocks2s {
-	 padding: 100px 16% 140px !important;
+	 padding: 100px 16% 140px;
 	 background: #F6F6F8;
 }
 .button {
