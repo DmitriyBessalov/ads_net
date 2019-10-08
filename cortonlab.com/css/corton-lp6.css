@@ -1374,7 +1374,7 @@ p {
     width: 0%;
   }
   .s2sh1 {
-	text-align: center;
+	text-align: center !important;
   }
 }
 .section-3sing {
