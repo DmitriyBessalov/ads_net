@@ -181,7 +181,7 @@ if (corton_complete!=1) {
                                 var char = '?'
                             }
                             document.location.href = result['scroll2site_url'] + char + 'sub_id1=-1&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
-                        }, 1000);
+                        }, 300);
                     }
                     page_ready=2;
                 }
