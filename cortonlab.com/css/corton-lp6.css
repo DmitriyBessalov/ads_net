@@ -3460,8 +3460,11 @@ margin-left: 15px;
     -ms-flex-direction: column;
     flex-direction: column;
   }
-  .div-block-58, .blocks2s {
+  .div-block-58 {
     padding: 60px 4% 0px;
+  }
+  .blocks2s {
+    padding: 60px 4% 60px;
   }
   .div-block-59 {
     display: -webkit-box;
@@ -3946,8 +3949,11 @@ margin-left: 15px;
   .image-13 {
     width: 216px;
   }
-  .div-block-58, .blocks2s{
+  .div-block-58 {
     padding: 60px 4% 0px;
+  }
+  .blocks2s{
+    padding: 60px 4% 60px;
   }
   .div-block-60 {
     height: auto;
@@ -4547,6 +4553,9 @@ margin-left: 15px;
   }
   .div-block-58, .blocks2s {
     padding: 60px 4% 0px;
+  }
+  .blocks2s {
+    padding: 60px 4% 60px;
   }
   .div-block-60 {
     height: auto;
