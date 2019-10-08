@@ -279,7 +279,19 @@ p {
 .feature-content.icons.numbers {
   width: 25%;
 }
-
+.backs2s {
+	 background-image: url(/images/back-s2s4.jpg) !important; 
+	 border-radius: 8px;
+	 min-height: 460px;
+	 background-size: cover;
+}
+.s2sh1 {
+	margin-bottom: 30px !important;
+}
+.blocks2s {
+	 padding: 100px 16% 140px !important;
+	 background: #F6F6F8;
+}
 .button {
   display: inline-block;
   margin-right: 0px;
@@ -2153,7 +2165,6 @@ p {
 .div-block-58 {
   width: 100%;
   padding: 60px 16% 140px;
-  background-color: #fff;
 }
 
 .text-span-15 {
@@ -2657,10 +2668,25 @@ margin-left: 15px;
 	text-align:center;
     }
 }
+
+.imgmini {
+	margin-bottom:20px;
+}
+@media (max-width: 480px) and (min-width: 100px) {
+	.imgmini {
+	    max-width: 25px;
+    }
+}
+
 .li-cl {
 	display: flex;
 	margin-bottom: 10px;
     font-weight: 700;
+}
+@media (max-width: 479px) {
+	.li-cl {
+		padding-left: 8%;
+	}
 }
 .section-14 {
   display: -webkit-box;
