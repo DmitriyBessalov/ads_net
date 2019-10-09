@@ -279,17 +279,13 @@ p {
 .feature-content.icons.numbers {
   width: 25%;
 }
-.backs2s {
-	 background-image: url(/images/back-s2s4.jpg) !important; 
-	 border-radius: 8px;
-	 min-height: 460px;
-	 background-size: cover;
-}
+
 .s2sh1 {
 	margin-bottom: 30px !important;
+	text-align: left !important;
 }
 .blocks2s {
-	 padding: 100px 16% 140px !important;
+	 padding: 100px 16% 140px;
 	 background: #F6F6F8;
 }
 .button {
@@ -1041,6 +1037,9 @@ p {
     .steapcontentright {
 	   margin: 60px 0px 0 40px;
     }
+		.backs2s {
+	    min-height: 310px;
+    }
 }
 @media screen and (max-width: 840px) {
 	.steapcontent {
@@ -1050,6 +1049,9 @@ p {
     .steapcontentright {
 	   margin: 40px 0px 0 20px;
 	   width: 320px;
+    }
+	.backs2s {
+	    min-height: 280px;
     }
 }
 @media screen and (max-width: 700px) {
@@ -1080,6 +1082,10 @@ p {
 		width: 100%;
 		height: auto;
 	}
+	.blocks2s-1 {
+	    margin-left: -6%;
+         margin-right: -6%;
+    }
 }
 
 .text-block-4 {
@@ -1370,6 +1376,9 @@ p {
   }
   .section-4sing {
     width: 0%;
+  }
+  .s2sh1 {
+	text-align: center !important;
   }
 }
 .section-3sing {
@@ -2165,6 +2174,7 @@ p {
 .div-block-58 {
   width: 100%;
   padding: 60px 16% 140px;
+  background: #fff;
 }
 
 .text-span-15 {
@@ -2202,7 +2212,6 @@ p {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 30px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
@@ -2213,6 +2222,7 @@ p {
   -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-box-align: center;
+   margin-bottom: 40px;
 }
 
 .text-block-17 {
@@ -3108,7 +3118,7 @@ margin-left: 15px;
 
 
 @media (max-width: 1024px) {
-.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58 {
+.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocks2s {
     padding-right: 6%;
     padding-left: 6%;
   }
@@ -3136,7 +3146,7 @@ margin-left: 15px;
 }
 
 @media (max-width: 1440px) and (min-width: 1024px) {
-.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58 {
+.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocks2s {
     padding-right: 4%;
     padding-left: 4%;
   }
@@ -3144,7 +3154,7 @@ margin-left: 15px;
 
 
 @media (max-width: 1560px) and (min-width: 1441px) {
-.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocagent {
+.div-block-33, .div-block-43, .div-block-43homestart, .div-block-84, .div-block-58, .blocks2s, .blocagent {
     padding-right: 7%;
     padding-left: 7%;
   }
@@ -3461,6 +3471,9 @@ margin-left: 15px;
   }
   .div-block-58 {
     padding: 60px 4% 0px;
+  }
+  .blocks2s {
+    padding: 60px 4% 60px;
   }
   .div-block-59 {
     display: -webkit-box;
@@ -3948,6 +3961,9 @@ margin-left: 15px;
   .div-block-58 {
     padding: 60px 4% 0px;
   }
+  .blocks2s{
+    padding: 60px 4% 60px;
+  }
   .div-block-60 {
     height: auto;
     margin-top: 30px;
@@ -3962,12 +3978,12 @@ margin-left: 15px;
   }
   .div-block-60-s2s {
     height: auto;
-    margin-top: 30px;
     -webkit-box-pack: start;
     -webkit-justify-content: flex-start;
     -ms-flex-pack: start;
     justify-content: flex-start;
     -webkit-box-align: center;
+	margin-bottom: 0px;
   }
   .text-block-17 {
     font-size: 22px;
@@ -4011,7 +4027,7 @@ margin-left: 15px;
     justify-content: flex-start;
 }
   .div-block-62 {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   .div-block-63 {
     margin-bottom: 0px;
@@ -4544,8 +4560,11 @@ margin-left: 15px;
   .image-13 {
     width: 180px;
   }
-  .div-block-58 {
+  .div-block-58, .blocks2s {
     padding: 60px 4% 0px;
+  }
+  .blocks2s {
+    padding: 60px 4% 60px;
   }
   .div-block-60 {
     height: auto;
@@ -4561,6 +4580,7 @@ margin-left: 15px;
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
+	margin-bottom: 0px;
   }
   .text-block-17 {
     margin-bottom: 10px;
@@ -4587,6 +4607,8 @@ margin-left: 15px;
   }
   .text-block-h2-2 {
 	  text-align: center;
+	  font-size: 24px;
+      line-height: 28px;
   }
    .text-block-h2-3 {
 	  text-align: center;
@@ -4599,6 +4621,9 @@ margin-left: 15px;
     margin-bottom: 40px;
   }
   .div-block-62 {
+    margin-bottom: 20px;
+  }
+  .btnbotstart {
     margin-bottom: 40px;
   }
   .div-block-63 {
