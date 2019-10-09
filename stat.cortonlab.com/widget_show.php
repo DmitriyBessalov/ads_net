@@ -32,6 +32,9 @@ $stat_arr['preview_id_list']=implode(',',$stat_arr2['preview_id_list']);
 
 $redis->select(3);
 $valueold="";
+
+$stat_arr['recomend']=(int)0;
+
 foreach ($arr as $value) {
     $value=substr($value, -1);
     if ($value=='e'){
