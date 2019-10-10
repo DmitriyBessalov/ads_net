@@ -798,7 +798,6 @@ if (corton_complete!=1) {
         var anons_ids_old='';
         var anons_ids_new;
         var anons_ids_show=[];
-//        var anons_ids_read=[];
         var anons_ids_read2=[];
         var anons_ids_send=[];
         var anons_idsnew;
@@ -828,12 +827,8 @@ if (corton_complete!=1) {
                 if_arr=anons_ids_send.indexOf(anons_ids_send[q])+1;
                 if(if_arr){
                     for (y = 0; y < anons_ids_send.length; y++) {
-                        if(anons_ids_send[y]==check[q]){
-                        //    if_arr=anons_ids_read.indexOf(anons_ids_send[q])+1;
-                        //    if(!if_arr){
-                        //        anons_ids_read.push(anons_ids_send[q]);
+                        if(anons_ids_send[y]===check[q]){
                                 anons_ids_read2.push(anons_ids_send[q]);
-                        //    }
                         }
                     }
                 }
