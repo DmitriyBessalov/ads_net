@@ -15,16 +15,16 @@ class LoadController
         select
             c.idx,
             c.category,
-            CASE WHEN count(*) = 1 
-                    THEN 0 
-                    ELSE count(*) 
+            CASE WHEN count(*) = 1
+                    THEN 0
+                    ELSE count(*)
             END
-        from 
+        from
             tb_platform_stat_request p
         right OUTER join
-            tb_category c 
-        on 
-            p.category_id_list[1]=c.idx 
+            tb_category c
+        on
+            p.category_id_list[1]=c.idx
         group by 1
         order by 3 desc, 1 asc";
         $category = $GLOBALS['postgre']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -54,8 +54,7 @@ class LoadController
             tb1.view_id=tb2.view_id and
             tb1.is_load_widget and
             tb2.is_read_post and
-            tb2.is_baned is null and
-            tb2.\"timestamp\" > '2019-10-08 12:30:00'
+            tb2.is_baned is null
         group by 1
         order by 1 asc";
         $promo_pokaz = $GLOBALS['postgre']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
