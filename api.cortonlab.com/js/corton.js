@@ -235,26 +235,26 @@ if (corton_complete!=1) {
                         }
                     }
                 }
-            }
 
-            window.addEventListener("scroll", s2s_position);
+                window.addEventListener("scroll", s2s_position);
 
-            if (outerWidth<=1024) {
-                corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
-                corton_promo.style.width = outerWidth + 'px';
-            }
-
-            setTimeout(function() {
-                if (outerWidth<=1024){
-                    image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
-                }else{
-                    image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
-                    scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
-                    scroll_to_site.style.width = document.documentElement.clientWidth + 'px';
+                if (outerWidth<=1024) {
+                    corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
+                    corton_promo.style.width = outerWidth + 'px';
                 }
-                page_ready=1;
-                s2s_position();
-            }, 1000);
+
+                setTimeout(function() {
+                    if (outerWidth<=1024){
+                        image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
+                    }else{
+                        image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
+                        scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
+                        scroll_to_site.style.width = document.documentElement.clientWidth + 'px';
+                    }
+                    page_ready=1;
+                    s2s_position();
+                }, 1000);
+            }
 
             var promo_form=document.getElementById("corton-form");
             if (promo_form) {
