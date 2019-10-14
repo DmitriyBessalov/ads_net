@@ -513,7 +513,7 @@ if (corton_complete!=1) {
         }
 
         function widget_check() {
-            console.log('corton: widget_check');
+//            console.log('corton: widget_check');
 
             //Подготовка к получению данных виджетов
             if (widget_recomend && show_recomend == 0) {
@@ -654,7 +654,7 @@ if (corton_complete!=1) {
         function widget_load() {
             if (widget_load_status==0) {
                 widget_load_status=1;
-                console.log('corton: widget_load');
+//                console.log('corton: widget_load');
                 var top10 = words();
 
                 let category = style_b.getPropertyValue('--category');
@@ -914,7 +914,7 @@ if (corton_complete!=1) {
             let show_widg = [];
 
             last_wiggets=document.getElementsByClassName('corton-anons');
-            console.log(show_widget_aktiv, last_wiggets.length);
+            //console.log(show_widget_aktiv, last_wiggets.length);
 
             for (i = 0; i < last_wiggets.length; i++) {
                 var h=last_wiggets[i].getBoundingClientRect().top;
@@ -1031,7 +1031,6 @@ if (corton_complete!=1) {
             } else {
                 widget_recomend = document.getElementById("corton-recomendation-widget");
                 widget_natpre = document.getElementById("corton-nativepreview-widget");
-//                widget_slider = document.getElementById("corton-slider-widget");
                 if (widget_recomend || widget_natpre || widget_slider) {
                     corton_widget();
                     return true;
