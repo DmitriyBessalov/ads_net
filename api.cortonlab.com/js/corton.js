@@ -937,7 +937,7 @@ if (corton_complete!=1) {
 
         if (first_widget_check){
             first_widget_check=false;
-            setTimeout(onscr, 500)
+            setTimeout(onscr, 500);
             setTimeout(onscr, 5000);
         }
     }
