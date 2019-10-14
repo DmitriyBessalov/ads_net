@@ -762,7 +762,7 @@ if (corton_complete!=1) {
                 }
                 if (location.host=='eva.ru') {
                     widget_load_status=0;
-                    console.log('corton: widget_load_status=0');
+                    //console.log('corton: widget_load_status=0');
                     show_recomend = 0;
                 }else{
                     show_recomend = 3;
