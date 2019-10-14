@@ -16,7 +16,7 @@ if (corton_complete!=1) {
     //Обработка промо статьи
     function corton_promo() {
         if (window.location.hostname === 'demo.cortonlab.com'){
-            console.log(corton_url);
+            console.log('corton: '+corton_url);
             const promo_forcibly = style_b.getPropertyValue('--forcibly');
             const promo_selector = style_b.getPropertyValue('--selector');
             if (promo_forcibly==='1'){
@@ -24,7 +24,7 @@ if (corton_complete!=1) {
                 sel[0].innerHTML=
                 '<div id="corton-promo"></div>';
             }
-            console.log(promo_forcibly,promo_selector);
+            console.log('corton: '+promo_forcibly,promo_selector);
         }
 
         var widget_promo=document.getElementById("corton-promo");
@@ -33,7 +33,7 @@ if (corton_complete!=1) {
         var h3=0;
         var request ='https://api2.cortonlab.com/promo.php'+location.search;
         let result=[];
-        console.log(request);
+        console.log('corton:'+request);
         var xhr = new XMLHttpRequest();
         xhr.open('GET', request,true);
         xhr.withCredentials = true;
@@ -42,7 +42,7 @@ if (corton_complete!=1) {
             if (xhr.readyState != 4) {return}
             if (xhr.status === 200) {
                 result = JSON.parse(xhr.responseText);
-                console.log('ajax:', result);
+                console.log('corton: ajax:', result);
                 if (!result) return false;
             }
             document.title = result['title'];
@@ -170,7 +170,7 @@ if (corton_complete!=1) {
                     if (page_ready==1){
                         setTimeout(function() {
                             let href=encodeURIComponent(result['scroll2site_url']);
-                            console.log('https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
+                            console.log('corton: https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
                             cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']  + '&href=' + href);
                             cxhr.withCredentials = true;
                             cxhr.send();
@@ -289,14 +289,14 @@ if (corton_complete!=1) {
                     }else{
                         link=a[i].getAttribute('href') + char + 'sub_id1=' + i + '&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
                     }
-                    console.log(link);
+                    console.log('corton: '+link);
                     a[i].setAttribute('href', link);
 
                     //console.log('promolink', a[i].getAttribute('href'));
 
                     a[i].onclick = function (e) {
                         let href=encodeURIComponent(this.href);
-                        console.log('https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&ancor=' + this.outerText + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] +'&href=' + href );
+                        console.log('corton: https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&ancor=' + this.outerText + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] +'&href=' + href );
                         cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&ancor=' + this.outerText + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] +'&href=' + href );
                         cxhr.withCredentials = true;
                         cxhr.send();
@@ -308,7 +308,7 @@ if (corton_complete!=1) {
             if (widget_promo.scrollHeight>50)
             {
                 var cxhr = new XMLHttpRequest();
-                console.log     ('https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
+                console.log     ('corton: https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
                 cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
                 cxhr.withCredentials = true;
                 cxhr.send();
@@ -335,14 +335,14 @@ if (corton_complete!=1) {
         function letsGo(){
             if (timer85 && scrollfull){
                 var cxhr = new XMLHttpRequest();
-                console.log     ('https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=r&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
+                console.log     ('corton: https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=r&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
                 cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=r&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
                 cxhr.withCredentials = true;
                 cxhr.send();
             }else{
                 if (timer35 && scroll && st){
                     var cxhr = new XMLHttpRequest();
-                    console.log     ('https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=s&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
+                    console.log     ('corton: https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=s&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
                     cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&host='+location.hostname+'&a=s&anons_id=' + get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']);
                     cxhr.withCredentials = true;
                     cxhr.send();
@@ -494,7 +494,7 @@ if (corton_complete!=1) {
             }
 
             top10 = top10.slice(0, 10);
-            console.log(top10);
+            //console.log(top10);
 
             return top10;
         }
@@ -513,18 +513,22 @@ if (corton_complete!=1) {
         }
 
         function widget_check() {
-//            console.log('widget_check');
+            console.log('corton: widget_check');
 
             //Подготовка к получению данных виджетов
             if (widget_recomend && show_recomend == 0) {
                 var style_r = window.getComputedStyle(widget_recomend, null);
                 gadget = style_r.getPropertyValue('--' + device);
-                if (gadget == 1) {
+                if (gadget == 1 || location.host=='eva.ru') {
                     var height = style_r.getPropertyValue('--hsize');
                     if (height == "") height = 0;
                     var width = style_r.getPropertyValue('--wsize');
                     if (width == "") width = 0;
                     recomend_image_shape = style_r.getPropertyValue('--image_shape');
+                    if (location.host=='eva.ru'){
+                        recomend_image_shape=3;
+                        width=4;height=1;
+                    }
                     count = parseInt(width) * parseInt(height);
                     if (count !== 0) {
                         if (recomend_algorithm_output === '1') {
@@ -586,9 +590,12 @@ if (corton_complete!=1) {
             if (widget_natpre && show_natpre == 0) {
                 var style_e = window.getComputedStyle(widget_natpre, null);
                 gadget = style_e.getPropertyValue('--' + device);
-                if (gadget == 1) {
+                if (gadget == 1 || location.host=='eva.ru') {
                     buttontext = style_e.getPropertyValue('--buttontext');
                     natpre_image_shape = style_e.getPropertyValue('--image_shape');
+                    if (location.host=='eva.ru'){
+                        natpre_image_shape=3;
+                    }
                     if (natpre_algorithm_output === '1') {
                         widget = widget + '&e=1';
                         show_natpre = 1;
@@ -647,7 +654,7 @@ if (corton_complete!=1) {
         function widget_load() {
             if (widget_load_status==0) {
                 widget_load_status=1;
-                //console.log('widget_load');
+                console.log('corton: widget_load');
                 var top10 = words();
 
                 let category = style_b.getPropertyValue('--category');
@@ -674,7 +681,7 @@ if (corton_complete!=1) {
 
                 var request = 'https://api2.cortonlab.com/widgets.php?words=' + encodeURI(top10.join()) + widget+category;
                 if (location.hostname=='demo.cortonlab.com'){request='https://api2.cortonlab.com/widgets-demo.php?words=' + encodeURI(top10.join())+'&sheme='+document.cookie.match(/scheme=(.+?);/)+'&host='+document.cookie.match(/host=(.+?);/) + widget;}
-                console.log(decodeURI(request));
+                console.log('corton: '+decodeURI(request));
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', request, true);
                 xhr.withCredentials = true;
@@ -685,7 +692,7 @@ if (corton_complete!=1) {
                     }
                     if (xhr.status === 200) {
                         result = JSON.parse(xhr.responseText);
-                        console.log('ajax:', result);
+                        console.log('corton: ajax:', result);
                         widget_load_status=2;
                     }
                 }
@@ -697,16 +704,16 @@ if (corton_complete!=1) {
             if (widget_load_status!=2){
                 if (wait!=200) {
                     wait++;
-                    //console.log('show_widget wait');
+//                    console.log('corton: show_widget wait');
                     setTimeout(show_widget, 30);
                     return false;
                 }else {
                     wait!=0;
-                    //console.log('show_widget end');
+//                    console.log('corton: show_widget end');
                     return false;
                 }
             }
-            //console.log('show_widget',result);
+//            console.log('corton: show_widget',result);
             const sCurrentProtocol = document.location.protocol == "https:" ? "https://" : "http://";
             if (window.location.hostname === 'demo.cortonlab.com') {
                 var promo_page='https://demo.cortonlab.com'+result['promo_page'];
@@ -722,7 +729,7 @@ if (corton_complete!=1) {
 
             if (show_recomend==2) {
                 if (result['anons_count'] > 0) {
-                    console.log('recomend_anons');
+                    console.log('corton: recomend_anons');
                     if (titletext != "") titletext = '<div class="corton-title">' + titletext + '</div>';
                     var htmll = '<div>' +
                         '<noindex><div class="corton-recomendation-wrapper 4x1">' +
@@ -754,18 +761,16 @@ if (corton_complete!=1) {
                     }
                 }
                 if (location.host=='eva.ru') {
-                    widget_recomend.classList.add('corton-recomendation-widget');
-                    widget_recomend.removeAttribute('id');
                     widget_load_status=0;
+                    console.log('corton: widget_load_status=0');
                     show_recomend = 0;
-                    w=0;
                 }else{
-                    show_recomend=3;
+                    show_recomend = 3;
                 }
             }
             if (show_natpre==2){
                 if (result['anons_count'] > 0) {
-                    console.log('natpre_anons');
+                    console.log('corton: natpre_anons');
                     if (buttontext == "") buttontext = 'Подробнее';
                     var htmll =
                         '<noindex><div class="corton-anons" id="anons' + result['anons'][0][w] + 'e">' +
@@ -787,7 +792,11 @@ if (corton_complete!=1) {
                         widget_natpre.remove();
                     }
                 }
-                show_natpre=3;
+                if (location.host=='eva.ru') {
+                    show_natpre = 0;
+                }else{
+                    show_natpre=3;
+                }
             }
             if (location.host=='eva.ru'){
                 w=0;
@@ -795,150 +804,141 @@ if (corton_complete!=1) {
         }
 
         //Проверка тизеров на длительность прочтения в 2 секунды
-        var anons_ids_old='';
-        var anons_ids_new;
-        var anons_ids_show=[];
-        var anons_ids_read2=[];
-        var anons_ids_send=[];
-        var anons_idsnew;
-        var anons_idsold;
-        var check;
-        var if_arr;
-        function checkread(show) {
-            check=show.split(',');
-            var elements = document.getElementsByClassName('corton-anons');
-            for (q = 0; q < elements.length; q++) {
-                var id = elements[q].id;
-                id=id.substring(5);
-
-                var h=elements[q].getBoundingClientRect().top;
-                var h2=h+elements[q].scrollHeight-window.innerHeight;
-
+        var anons_ids_read=[];
+        function checkread(show_widg) {
+            for (i = 0; i < show_widg.length; i++) {
+                var h=show_widg[i].getBoundingClientRect().top;
+                var h2=h+show_widg[i].scrollHeight-window.innerHeight;
                 if ((h > 0) && (h2 < 0)) {
                     {
-                        if(!elements[q].classList.contains('read')){
-                            anons_ids_send.push(id);
-                            elements[q].classList.add('read');
-                        }
-                    }
-                }
-            }
-            for (q = 0; q < check.length; q++) {
-                if_arr=anons_ids_send.indexOf(anons_ids_send[q])+1;
-                if(if_arr){
-                    for (y = 0; y < anons_ids_send.length; y++) {
-                        if(anons_ids_send[y]===check[q]){
-                                anons_ids_read2.push(anons_ids_send[q]);
+                        if(!show_widg[i].classList.contains('read')){
+                            var id = show_widg[i].id;
+                            id=id.substring(5);
+                            anons_ids_read.push(id);
+                            show_widg[i].classList.add('read');
                         }
                     }
                 }
             }
 
-            if(0<anons_ids_read2.length){
+            if(0<anons_ids_read.length){
                 var cxhr = new XMLHttpRequest();
-                console.log('https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read2.join());
-                cxhr.open('GET', 'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read2.join());
+                console.log('corton: https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read.join());
+                cxhr.open('GET', 'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read.join());
                 cxhr.withCredentials = true;
                 cxhr.send();
-                anons_ids_read2.splice(0,anons_ids_read2.length);
             }
-            anons_ids_send.splice(0,anons_ids_send.length);
+            anons_ids_read.splice(0,anons_ids_read.length);
         }
 
-        //проверка прочтения слайдера
-//        function checkreadslider(slider_anons_id) {
-//            var cxhr = new XMLHttpRequest();
-//            console.log('https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+slider_anons_id);
-//            cxhr.open('GET', 'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+slider_anons_id);
-//            cxhr.withCredentials = true;
-//            cxhr.send();
-//        }
+        var show_widget_aktiv=false,
+        max_recomend = 0,
+        max_natpre = 0,
+        max_recomend_old = 0,
+        max_natpre_old = 0;
 
-        var show_widget_aktiv=false;
         //Поиск условия для загрузки виджетов
         function onscr() {
             widget_recomend = document.getElementById("corton-recomendation-widget");
             widget_natpre = document.getElementById("corton-nativepreview-widget");
-            //widget_slider = document.getElementById("corton-slider-widget");
-            widget_check();
-            returnfalse=0;
+
+            if (location.host=='eva.ru') {
+                while(widget_recomend) {
+                    widget_recomend.classList.add('corton-recomendation-widget');
+                    widget_recomend.removeAttribute('id');
+                    widget_recomend = document.getElementById("corton-recomendation-widget");
+                }
+                while(widget_natpre){
+                    widget_natpre.classList.add('corton-nativepreview-widget');
+                    widget_natpre.removeAttribute('id');
+                    widget_natpre = document.getElementById("corton-nativepreview-widget");
+                }
+                const widget_recomend_all = document.getElementsByClassName("corton-recomendation-widget");
+                if(widget_recomend_all.length!=0){
+                    max_recomend=widget_recomend_all.length;
+                    widget_recomend=widget_recomend_all[widget_recomend_all.length-1];
+                }
+                const widget_natpre_all = document.getElementsByClassName("corton-nativepreview-widget");
+                if(widget_natpre_all.length!==0) {
+                    max_natpre=widget_natpre_all.length;
+                    widget_natpre = widget_natpre_all[widget_natpre_all.length - 1];
+                }
+                if (max_recomend!==max_recomend_old || max_natpre!==max_natpre_old ){
+                    max_recomend_old=max_recomend;
+                    max_natpre_old=max_natpre;
+                    console.log('corton: '+max_recomend,max_natpre);
+                    widget_check();
+                }
+            }else{
+                widget_check();
+            }
+            show_widget_recomend = show_widget_natpre = false;
+
             if (widget_recomend) {
-                if (widget_recomend.getBoundingClientRect().top != 0) {
-                    if (show_recomend == 1 && widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight < 0) {
-                        show_recomend = 2;
-                        show_widget_aktiv = true;
-                        widget_load();
-                        show_widget();
+                if (widget_recomend.getBoundingClientRect().top !== 0) {
+                    if (widget_recomend.getBoundingClientRect().top - window.innerHeight - window.innerHeight < 0) {
+                        if(!widget_recomend.classList.contains('load')) {
+                            show_recomend = 2;
+                            show_widget_aktiv = true;
+                            widget_recomend.classList.add('load');
+                            show_widget_recomend=true;
+                        }
                     }
                 }
             }
 
             if (widget_natpre) {
-                if (widget_natpre.getBoundingClientRect().top != 0) {
-                    if ((show_natpre == 1) && (widget_natpre.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 2 < 0)) {
-                        show_natpre = 2;
-                        show_widget_aktiv = true;
-                        widget_load();
-                        show_widget();
+                if (widget_natpre.getBoundingClientRect().top !== 0) {
+                    if (widget_natpre.getBoundingClientRect().top - window.innerHeight - window.innerHeight / 2 < 0) {
+                        if(!widget_natpre.classList.contains('load')) {
+                            show_natpre = 2;
+                            show_widget_aktiv = true;
+                            widget_natpre.classList.add('load');
+                            show_widget_natpre=true;
+                        }
                     }
                 }
             }
+
 
             if (show_widget_aktiv===false){
                 return false;
-            }
+            } else
 
-            //if ((show_slider==1)&&(document.body.scrollHeight/2-window.innerHeight/2<pageYOffset)) {
-            //    show_slider = 2;
-            //    show_widget_aktiv=true;
-            //}
+                if (show_widget_recomend || show_widget_natpre){
+                    widget_load();
+                    show_widget();
+                }
 
-           // if (show_widget_aktiv){
-           //     widget_load();
-           //     show_widget();
-           // }
 
-            //Добавление просмотренных анонсов
-            anons_ids.splice(0,anons_ids.length);
-            var elements = document.getElementsByClassName('corton-anons');
-            for (i = 0; i < elements.length; i++) {
-                var id = elements[i].id;
-                id=id.substring(5);
+            let show_widg = [];
 
-                var h=elements[i].getBoundingClientRect().top;
-                var h2=h+elements[i].scrollHeight-window.innerHeight;
+            last_wiggets=document.getElementsByClassName('corton-anons');
+            console.log(show_widget_aktiv, last_wiggets.length);
+
+            for (i = 0; i < last_wiggets.length; i++) {
+                var h=last_wiggets[i].getBoundingClientRect().top;
+                var h2=h+last_wiggets[i].scrollHeight-window.innerHeight;
 
                 if ((h > 0) && (h2 < 0)) {
                     {
-                        anons_ids.push(id);
+                        show_widg.push(last_wiggets[i]);
                     }
                 }
             }
-            anons_ids_show.splice(0,anons_ids_show.length);
-            anons_ids_new=anons_ids.join();
-            if (anons_ids_old!=anons_ids_new && anons_ids_new!=""){
-                anons_idsnew=anons_ids_new.split(',');
-                anons_idsold=anons_ids_old.split(',');
-                for (f = 0; f < anons_idsnew.length; f++) {
-                    if(!anons_idsold.indexOf(anons_idsnew[f]) !== -1){
-                        anons_ids_show.push(anons_idsnew[f]);
-                    }
-                }
-                //console.log('захвачены',anons_ids_show);
-
-                setTimeout(checkread, 2000, anons_ids_show.join().substr(0));
-                anons_idsnew.splice(0,anons_idsnew.length);
-            }
-            anons_ids_old=anons_ids.join();
+            if (show_widg.length!=0)
+                setTimeout(function() {
+                    checkread(show_widg);
+                }, 2000);
         }
 
         window.addEventListener("scroll", onscr);
-
         onscr();
 
         if (first_widget_check){
             first_widget_check=false;
-            setTimeout(onscr, 500);
+            setTimeout(onscr, 500)
+            setTimeout(onscr, 5000);
         }
     }
 
@@ -1004,7 +1004,7 @@ if (corton_complete!=1) {
                 const promo_selector = style_b.getPropertyValue('--selector');
                 let sel = document.querySelectorAll(promo_selector);
                 if (sel[0]) {
-                    console.log(url);
+                    console.log('corton: '+url);
                     corton_promo();
                     return true;
                 } else {
@@ -1014,7 +1014,6 @@ if (corton_complete!=1) {
                 if (document.readyState === "complete") {
                     const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
                     const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
-//                    const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
 
                     if (recomend_algorithm_output !== '1' || natpre_algorithm_output !== '0' || slider_algorithm_output !== '1') {
                         corton_widget();
