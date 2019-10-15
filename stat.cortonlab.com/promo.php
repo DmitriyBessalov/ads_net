@@ -49,8 +49,8 @@ if (($action=='s') and (!$block))
     $block=$redis->get('r:'.$prosmort_id, 1, 1296000);
 if ($block){
     $stat_arr['is_baned']=1;
-    statpostgres($stat_arr);
-    exit;
+//    statpostgres($stat_arr);
+//    exit;
 }
 
 # Подключение к базе
@@ -79,8 +79,8 @@ $stat_arr['promo_id_list']=$promo['promo_id'];
 if ($action =='l') {
     if ($_GET['ref']=="") {
         $stat_arr['is_baned']=1;
-        statpostgres($stat_arr);
-        exit;
+//        statpostgres($stat_arr);
+//        exit;
     };
     $sql = "INSERT INTO 
         `stat_promo_prosmotr`
@@ -142,8 +142,8 @@ if(($action =='s')or($action =='r')) {
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], $block_ip+1, 86400);
     }else{
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 3,86400);
-        $antifrod=1;
-        $stat_arr['is_baned']=1;
+//        $antifrod=1;
+//        $stat_arr['is_baned']=1;
     }
 }
 $redis->close();
@@ -282,5 +282,25 @@ if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
 
         $sql = "INSERT INTO `balans_rekl` SET `user_id` = '" . $id_user_advertiser . "', `date` = CURDATE(), `balans` = " . $oldbalans;
         $GLOBALS['db']->query($sql);
+    }
+
+    #Остановка при достижении нуля на балансе
+    $sql = "SELECT `balans` FROM `balans_rekl` WHERE `user_id` = '" . $id_user_advertiser . "' AND `date` =(SELECT MAX(`date`) FROM `balans_rekl` WHERE `user_id` = '" . $id_user_advertiser . "')";
+    $oldbalans = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    if ($oldbalans<=0){
+
+        require_once('/var/www/www-root/data/www/panel.cortonlab.com/controllers/NotificationsController.php');
+        require_once('/var/www/www-root/data/www/panel.cortonlab.com/controllers/ArticleController.php');
+
+        $sql = "SELECT `email` FROM `users` WHERE `id`=". $id_user_advertiser;
+        $user_email = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        NotificationsController::addNotification(0,'Рекламная кампания пользователя '.$user_email.' остановлена');
+
+        $sql = "SELECT `id` FROM `promo` WHERE `id_user_advertiser`=". $id_user_advertiser;
+        $promo_ids = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+        foreach ($promo_ids as $i){
+            $_GET['id']=$i;
+            ArticleController::actionStop();
+        }
     }
 }
