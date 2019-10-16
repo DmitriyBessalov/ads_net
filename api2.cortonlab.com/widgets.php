@@ -41,6 +41,10 @@ foreach ($result1 as $i) {
     $result2 = array_merge($result2, explode(',',$i));
 };
 
+$result1=implode("','",$result2);
+$sql2="SELECT `id` FROM `promo` WHERE `active`=1 AND `id` IN ('".$result1."')";
+$result2 = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
+
 $promo_ids=array_unique(array_merge($result0, $result2));
 
 # Фильтр статей где обязательное обязательное совпадение по ключу и категория
