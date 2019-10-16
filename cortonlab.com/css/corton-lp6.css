@@ -1236,7 +1236,9 @@ p {
   font-weight: 700;
   text-transform: none;
 }
-
+.pixelblock {
+	margin-top:40px;
+}
 .text-block-7 {
   margin-top: 40px;
   margin-bottom: 40px;
