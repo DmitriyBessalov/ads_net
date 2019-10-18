@@ -166,14 +166,15 @@ for(var i=0; i<s2s.length; i++) {
             scroll_to_site.style.width = outerWidth + 'px';
         }
 
+        if (outerWidth<=1024){
+            image_fon_mobile.src=s2s[i][3];
+        }else{
+            image_fon.src=s2s[i][2];
+            scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
+            scroll_to_site.style.width = document.documentElement.clientWidth + 'px';
+        }
+
         setTimeout(function() {
-            if (outerWidth<=1024){
-                image_fon_mobile.src=s2s[i][3];
-            }else{
-                image_fon.src=s2s[i][2];
-                scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
-                scroll_to_site.style.width = document.documentElement.clientWidth + 'px';
-            }
             page_ready=1;
             s2s_position();
         }, 1000);
