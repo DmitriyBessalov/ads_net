@@ -413,8 +413,15 @@ var myLineChart = new Chart(ctx, {
 
                 echo '
                 </select>
-				<div style="width: 1337px; margin-bottom: 60px;"></div>
-				';
+                
+                <select name="type" class="select-field w-select">
+                    <option value="CPG">Модель оплаты</option>
+                    <option value="CPG">CPG за прочтения статей</option>
+                    <option value="CPM">CPM за показы виджетов</option>
+                </select>
+                <input type="number" class="text-field-10 w-input" maxlength="256" name="CPM_cost" value="'.$result['CTR'].'" placeholder="Стоимость за 1000 показов виджета" required="">
+                <div style="width: 1337px; margin-bottom: 60px;"></div>';
+
                 if ($result['type']=='demo')
                 echo'
 			    <div class="text-block-103">Данные для демо</div>
@@ -423,8 +430,9 @@ var myLineChart = new Chart(ctx, {
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CPM" value="'.$result['CPM'].'" placeholder="CPM, руб." required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CPG" value="'.$result['CPG'].'" placeholder="CPG, pуб." required="">
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="demo-annons" value="'.$result['demo-annons'].'" placeholder="id анонсов через запятую" required="">
-                <div>
-                '; echo'
+                <div>';
+
+                echo '
 				</div>
 			  </div>
 			  <div class="div-block-102">

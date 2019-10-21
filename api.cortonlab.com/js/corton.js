@@ -71,7 +71,7 @@ if (corton_complete!=1) {
                 var ist='';
                 console.log(result);
                 if (result['istochnic']!==''){
-                    ist='<div style="background: #ececec; border-radius: 16px;width: 16px;height: 16px;text-align: center;padding-top:2px;"><div style="color: rgba(153,153,153,0.8); margin: -3px 0 0 0;font-size: 12px;padding: " class="tooltipinfo1">?<div class="tooltiptext1">'+result['istochnic']+'</div></div></div>';
+                    ist='<p style="line-height: 1.3; color: #999; font-size: 12px;margin: 0 0 0 25px;">Источники </p><div style="background: #ececec; border-radius: 16px;height: 16px;width:16px;text-align: center;padding-top:2px;margin: -1px 0 0px 3px;"><div style="color: rgba(153,153,153,0.8); margin: -3px 0 0 0;font-size: 12px;" class="tooltipinfo1">?<div class="tooltiptext1" style="opacity: 0.6">'+result['istochnic']+'</div></div></div>';
                 };
                 marker_reklamiy='<div style="display: flex;flex-direction: row;" ><p style="line-height: 1.3; color: #999; font-size: 12px;margin: unset;">На правах рекламы </p> '+ist+
                     '<style>' +
