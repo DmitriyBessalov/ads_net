@@ -528,9 +528,10 @@ class ArticleController
                     }
                 }
 
-                $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
+
+                $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`istochnic`='".$_POST['istochnic']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
                 if (!$GLOBALS['db']->exec($sql)){
-                    $sql = "INSERT INTO `promo` SET `id`='".$id."', `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`data_add`='".$data_add."',`region`='ALL';";
+                    $sql = "INSERT INTO `promo` SET `id`='".$id."', `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`istochnic`='".$_POST['istochnic']."',`data_add`='".$data_add."',`region`='ALL';";
                     $GLOBALS['db']->query($sql);
                     $id=$GLOBALS['db']->lastInsertId();
                     $sql = "UPDATE `promo` SET  `main_promo_id`='".$id."' WHERE  `id`='".$id."';";
@@ -908,7 +909,7 @@ class ArticleController
 
         echo
             '</div>
-        <form method="post" id="formtextsend" action="/article-update" class="form-2">
+            <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
                     <div class="div-block-97">
@@ -917,21 +918,22 @@ class ArticleController
                             <input name="formtext" type="hidden">
                             <div id="toolbar_position"></div>
                             <div id="editor-container">
-                        '.$result['text'].'
+                                '.$result['text'].'
+                            </div>
                         </div>
-                        </div>
-                            <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
+                        
+                        <div class="text-block-103" style="margin-top: 20px;margin-bottom: unset">Источник</div>
+                        <textarea name="istochnic" maxlength="120" class="textarea-7 w-input">'.$result['istochnic'].'</textarea>
+                        <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
                     </div>
-        </form>
+            </form>
 		</div>
         </div>
         <script>
             var quill = new Quill(\'#editor-container\', {
                 modules: {
                     toolbar: [
-
                         [{ size: [\'small\', false, \'large\', \'huge\']}, { header: \'2\' },  "bold", "italic", "underline", { header: \'6\' }, { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
-
                     ]
                 },
                 scrollingContainer: "#scrolling-container",

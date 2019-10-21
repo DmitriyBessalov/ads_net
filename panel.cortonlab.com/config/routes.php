@@ -29,7 +29,7 @@ switch ($GLOBALS['role']) {
 
             //Статьи
             'articles' => 'article/index',
-            'article-edit' => 'article/edit',//Убрать из проекта
+            'article-edit' => 'article/edit', //Убрать из проекта
             'article-a/b' => 'article/a_b',
 			'article-edit-content' => 'article/content',
 			'article-edit-anons' => 'article/anons',

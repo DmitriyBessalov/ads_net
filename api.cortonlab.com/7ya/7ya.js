@@ -173,7 +173,6 @@ for(var i=0; i<s2s.length; i++) {
             scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
             scroll_to_site.style.width = document.documentElement.clientWidth + 'px';
         }
-
         setTimeout(function() {
             page_ready=1;
             s2s_position();

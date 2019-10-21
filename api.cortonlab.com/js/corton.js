@@ -68,7 +68,16 @@ if (corton_complete!=1) {
             let marker_reklamiy = style_p.getPropertyValue('--marker_reklamiy');
 
             if (marker_reklamiy==='1'){
-                marker_reklamiy='<p style="line-height: 1.3; color: #999; font-size: 12px;">На правах рекламы </p>';
+                var ist='';
+                console.log(result);
+                if (result['istochnic']!==''){
+                    ist='<div style="background: #ececec; border-radius: 16px;width: 16px;height: 16px;text-align: center;padding-top:2px;"><div style="color: rgba(153,153,153,0.8); margin: -3px 0 0 0;font-size: 12px;padding: " class="tooltipinfo1">?<div class="tooltiptext1">'+result['istochnic']+'</div></div></div>';
+                };
+                marker_reklamiy='<div style="display: flex;flex-direction: row;" ><p style="line-height: 1.3; color: #999; font-size: 12px;margin: unset;">На правах рекламы </p> '+ist+
+                    '<style>' +
+                    '.tooltipinfo1 .tooltiptext1 {visibility: hidden;width: 220px;background-color: #333333;color: #fff; text-align: center;border-radius: 4px;padding: 5px 5px;position: relative;z-index: 2147483647;top: 12px;margin-left: -110px;font-size: 16px;}'+
+                    '.tooltipinfo1:hover .tooltiptext1 {visibility: visible;}' +
+                    '</style>';
             }else{
                 marker_reklamiy='';
             }
@@ -114,7 +123,7 @@ if (corton_complete!=1) {
                     '<div id="corton_browser_container">'+
                          '<a href="'+result['scroll2site_url']+'" rel="noopener nofollow">'+
                             '<div id="corton_header">'+
-                                '<div id="corton_favicon" style="background-image: url(\'http://favicon.yandex.net/favicon/'+host[2]+'\');"></div>'+
+                                '<div id="corton_favicon" style="background-image: url(\'https://favicon.yandex.net/favicon/'+host[2]+'\');"></div>'+
                                 '<div id="corton_link">'+host[2]+'</div>'+
                             '</div>'+
                             '<img id="corton_image_fon">'+
@@ -124,24 +133,24 @@ if (corton_complete!=1) {
                 '</div>'+
 
                 '<style type="text/css">'+
-                    '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
+                    '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483646;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
                     '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;} '+
                     'jdiv,footer{display: none !important;} '+
                     '#corton-promo img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
                     '#corton_border_title p {text-align: center;} '+
                     '@media (max-width: 1024px) { '+
-                        '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
+                        '#corton_image_layer{position:sticky;bottom:0;z-index:2147483645;background-color:#000;} '+
                         '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
-                        '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;} '+
+                        '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483646;} '+
                         '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
-                        '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative;} '+
+                        '#corton_scroll_to_site {width: 100%;z-index:2147483646;position:relative;} '+
                         '#corton_scroll_to_site a{text-decoration:none;} '+
                         '#corton_browser_container{display:none;} '+
                         '#corton-promo{background-color:#FFFFFF;min-height:100vh;max-width: unset;position: relative;} '+
-                        '#corton_fon{position: relative;z-index:2147483647;;background-color: #FFF;padding: 0 20px;} '+
+                        '#corton_fon{position: relative;z-index:2147483646;background-color: #FFF;padding: 0 20px;} '+
                     '} '+
                     '@media (min-width: 1025px) { '+
-                        '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;z-index:2147483647;} '+
+                        '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;z-index:2147483646;} '+
                         '#corton_scroll_to_site a{text-decoration:none;} '+
                         '#corton_sticky_container{position:sticky;top:0;} '+
                         '#corton_border_title{font-size:18px} '+
