@@ -94,7 +94,7 @@
 
                     $grafik.='"0"';
                     echo "<tr>
-                      <td style=\"text-align: left; min-width: 345px;\">
+                      <td style=\"text-align: left; min-width: 405px;\">
 					  <div style=\"margin-top: 7px;\">
 					      <div class=\"logomini\"'>
 					        <img style='margin-top: 8px;' src='https://favicon.yandex.net/favicon/".$i['domen']."'>
