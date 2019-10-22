@@ -328,7 +328,7 @@ var myLineChart = new Chart(ctx, {
                         `user_id` = '".$_POST['user_id']."',
                         `demo-annons`='".$_POST['demo-annons']."',
                         `model_pay`='".$_POST['model_pay']."',
-                        `CPM_cost`='".$_POST['CPM_cost']."',
+                        `CPM_stavka`='".$_POST['CPM_stavka']."',
                         `CTR`='".$_POST['CTR']."',
                         `CPM`='".$_POST['CPM']."',
                         `CPG`='".$_POST['CPG']."'
@@ -421,7 +421,7 @@ var myLineChart = new Chart(ctx, {
                     <option '; if ($result['model_pay']=='CPG' ) echo "selected"; echo ' value="CPG">CPG за прочтения статей</option>
                     <option '; if ($result['model_pay']=='CPM' ) echo "selected"; echo ' value="CPM">CPM за показы виджетов</option>
                 </select>
-                <input type="number" class="text-field-10 w-input" maxlength="256" name="CPM_cost" value="'.$result['CPM_stavka'].'" placeholder="Стоимость за 1000 показов виджета">
+                <input type="number" class="text-field-10 w-input" maxlength="256" name="CPM_stavka" value="'.$result['CPM_stavka'].'" placeholder="Стоимость за 1000 показов виджета">
                 <div style="width: 1337px; margin-bottom: 60px;"></div>';
 
                 if ($result['type']=='demo')
