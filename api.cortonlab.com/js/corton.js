@@ -71,12 +71,13 @@ if (corton_complete!=1) {
                 var ist='';
                 console.log(result);
                 if (result['istochnic']!==''){
-                    ist='<p style="line-height: 1.3; color: #999; font-size: 12px;margin: 0 0 0 25px;">Источники </p><div style="background: #ececec; border-radius: 16px;height: 16px;width:16px;text-align: center;padding-top:2px;margin: -1px 0 0px 3px;"><div style="color: rgba(153,153,153,0.8); margin: -3px 0 0 0;font-size: 12px;" class="tooltipinfo1">?<div class="tooltiptext1" style="opacity: 0.6">'+result['istochnic']+'</div></div></div>';
+                    result['istochnic']=result['istochnic'].replace(/"/g,"&#34;");
+                    result['istochnic']=result['istochnic'].replace(/'''/g,"&#39;");
+                    ist='<p style="line-height: 1.3; color: #999; font-size: 12px;margin: 0 0 0 25px;">Источники </p><div style="background: #ececec; border-radius: 16px;height: 16px;width:16px;text-align: center;padding-top:2px;margin: -1px 0 0 3px;"><p style="color: rgba(153,153,153,0.8); top: -12px;font-size: 12px;" class="tooltipinfo" title="'+result['istochnic']+'">?</p></div>';
                 };
                 marker_reklamiy='<div style="display: flex;flex-direction: row;" ><p style="line-height: 1.3; color: #999; font-size: 12px;margin: unset;">На правах рекламы </p> '+ist+
                     '<style>' +
-                    '.tooltipinfo1 .tooltiptext1 {visibility:hidden;width:320px;background-color:#333333;color:#fff;text-align: center;border-radius:4px;padding:5px 5px;position:relative;z-index: 2147483647;top: 12px;margin-left: -110px;font-size: 11px;line-height: 1.1;text-align: left;}'+
-                    '.tooltipinfo1:hover .tooltiptext1 {visibility: visible;}' +
+                    '.tooltipinfo {position: relative;display: inline-block; border-bottom: 1px dotted black;}'+
                     '</style>';
             }else{
                 marker_reklamiy='';
