@@ -115,7 +115,9 @@
                               </span>";
                     echo "          
                             </p>
-                            <p style=\"color: #768093; font-size: 12px;\">Менеджер: ".$i['manager']."</p>
+                            <p style=\"color: #768093; font-size: 12px;margin-bottom: 0;\">Менеджер: ".$i['manager']."</p>
+                            <p style=\"color: #768093; font-size: 12px;\">Оборот CPG : ____ Оборот CPM : ____ </p>
+                            
 						  </div>
 					  </div>
 					  </td>

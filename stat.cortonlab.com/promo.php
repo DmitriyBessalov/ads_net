@@ -49,8 +49,8 @@ if (($action=='s') and (!$block))
     $block=$redis->get('r:'.$prosmort_id, 1, 1296000);
 if ($block){
     $stat_arr['is_baned']=1;
-//    statpostgres($stat_arr);
-//    exit;
+    statpostgres($stat_arr);
+    exit;
 }
 
 # Подключение к базе
@@ -79,8 +79,8 @@ $stat_arr['promo_id_list']=$promo['promo_id'];
 if ($action =='l') {
     if ($_GET['ref']=="") {
         $stat_arr['is_baned']=1;
-//        statpostgres($stat_arr);
-//        exit;
+        statpostgres($stat_arr);
+        exit;
     };
     $sql = "INSERT INTO 
         `stat_promo_prosmotr`
@@ -142,8 +142,8 @@ if(($action =='s')or($action =='r')) {
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], $block_ip+1, 86400);
     }else{
         $redis->set($platform['id'].':'.$_SERVER['REMOTE_ADDR'], 3,86400);
-//        $antifrod=1;
-//        $stat_arr['is_baned']=1;
+        $antifrod=1;
+        $stat_arr['is_baned']=1;
     }
 }
 $redis->close();
