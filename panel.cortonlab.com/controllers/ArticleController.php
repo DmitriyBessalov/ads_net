@@ -923,7 +923,7 @@ class ArticleController
                         </div>
                         
                         <div class="text-block-103" style="margin-top: 20px;margin-bottom: unset">Источник</div>
-                        <textarea name="istochnic" maxlength="120" class="textarea-7 w-input">'.$result['istochnic'].'</textarea>
+                        <textarea name="istochnic" style="min-height:180px" maxlength="1000" class="textarea-7 w-input">'.$result['istochnic'].'</textarea>
                         <button class="submit-button-6 w-button" type="submit">'; if($title=='Редактирование статьи'){echo 'Сохранить статью';}else{echo 'Далее';}; echo'</button>
                     </div>
             </form>
