@@ -168,20 +168,20 @@ $stat_arr['promo_id_list']=$promo=str_replace("'","",$promo);
 $stat_arr['preview_id_list']=implode(',' ,$stat_arr2['preview_id']);
 $stat_arr['category_id_list']=$interes=str_replace("'","",$interes);
 
-$sql="INSERT INTO
-    `regust_widget`
-SET
-    `prosmotr_id` = '".$arr['prosmotr_id']."',
-    `words` = '".$words."',
-    `category` = '".$interes."',
-    `platform_id` = '".$arr['p_id']."',
-    `r` = '".$_GET['r']."',
-    `e` = '".$_GET['e']."',
-    `url` = '".$i."',
-    `iso` = '".$iso."',
-    `promo_id` = '".$promo."',
-    `ip` = '".$_SERVER['REMOTE_ADDR']."';";
-$GLOBALS['dbstat']->query($sql);
+//$sql="INSERT INTO
+//    `regust_widget`
+//SET
+//    `prosmotr_id` = '".$arr['prosmotr_id']."',
+//    `words` = '".$words."',
+//    `category` = '".$interes."',
+//    `platform_id` = '".$arr['p_id']."',
+//    `r` = '".$_GET['r']."',
+//    `e` = '".$_GET['e']."',
+//    `url` = '".$i."',
+//    `iso` = '".$iso."',
+//    `promo_id` = '".$promo."',
+//    `ip` = '".$_SERVER['REMOTE_ADDR']."';";
+//$GLOBALS['dbstat']->query($sql);
 
 
 if (is_null($_GET['r']))$_GET['r']='0';
