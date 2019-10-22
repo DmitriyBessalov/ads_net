@@ -75,7 +75,7 @@ if (corton_complete!=1) {
                 };
                 marker_reklamiy='<div style="display: flex;flex-direction: row;" ><p style="line-height: 1.3; color: #999; font-size: 12px;margin: unset;">На правах рекламы </p> '+ist+
                     '<style>' +
-                    '.tooltipinfo1 .tooltiptext1 {visibility: hidden;width: 220px;background-color: #333333;color: #fff; text-align: center;border-radius: 4px;padding: 5px 5px;position: relative;z-index: 2147483647;top: 12px;margin-left: -110px;font-size: 16px;}'+
+                    '.tooltipinfo1 .tooltiptext1 {visibility:hidden;width:320px;background-color:#333333;color:#fff;text-align: center;border-radius:4px;padding:5px 5px;position:relative;z-index: 2147483647;top: 12px;margin-left: -110px;font-size: 11px;line-height: 1.1;text-align: left;}'+
                     '.tooltipinfo1:hover .tooltiptext1 {visibility: visible;}' +
                     '</style>';
             }else{
