@@ -327,6 +327,8 @@ var myLineChart = new Chart(ctx, {
                         `natpro_zag_aktiv` = '".$zagnatpro."',
                         `user_id` = '".$_POST['user_id']."',
                         `demo-annons`='".$_POST['demo-annons']."',
+                        `model_pay`='".$_POST['model_pay']."',
+                        `CPM_cost`='".$_POST['CPM_cost']."',
                         `CTR`='".$_POST['CTR']."',
                         `CPM`='".$_POST['CPM']."',
                         `CPG`='".$_POST['CPG']."'
@@ -355,7 +357,7 @@ var myLineChart = new Chart(ctx, {
             public static function form()
             {
                 if (addslashes($_REQUEST['id'])!='') {
-                    $sql = "SELECT  `domen`, `type`, `user_id`, `status`, `recomend_aktiv`, `recomend_zag_aktiv`, `natpre_aktiv`, `natpre_zag_aktiv`, `natpro_aktiv`, `natpro_zag_aktiv`, `slider_aktiv`,`demo-annons`,`CTR`,`CPM`,`CPG`,`promo_page` FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
+                    $sql = "SELECT * FROM `ploshadki` WHERE `id`='".addslashes($_REQUEST['id'])."';";
                     $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
                 }else{
                     $result['status']=1;
@@ -414,12 +416,12 @@ var myLineChart = new Chart(ctx, {
                 echo '
                 </select>
                 
-                <select name="type" class="select-field w-select">
+                <select name="model_pay" class="select-field w-select">
                     <option value="CPG">Модель оплаты</option>
-                    <option value="CPG">CPG за прочтения статей</option>
-                    <option value="CPM">CPM за показы виджетов</option>
+                    <option '; if ($result['model_pay']=='CPG' ) echo "selected"; echo ' value="CPG">CPG за прочтения статей</option>
+                    <option '; if ($result['model_pay']=='CPM' ) echo "selected"; echo ' value="CPM">CPM за показы виджетов</option>
                 </select>
-                <input type="number" class="text-field-10 w-input" maxlength="256" name="CPM_cost" value="'.$result['CTR'].'" placeholder="Стоимость за 1000 показов виджета" required="">
+                <input type="number" class="text-field-10 w-input" maxlength="256" name="CPM_cost" value="'.$result['CPM_stavka'].'" placeholder="Стоимость за 1000 показов виджета">
                 <div style="width: 1337px; margin-bottom: 60px;"></div>';
 
                 if ($result['type']=='demo')
