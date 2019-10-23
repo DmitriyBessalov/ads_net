@@ -59,7 +59,7 @@ require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 # Берём id площадки
 $domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
-$sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$domen."'";
+$sql= "SELECT `id`,`otchiclen`,`user_id`,`model_pay` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $stat_arr['platform_id']=$platform['id'];
 
