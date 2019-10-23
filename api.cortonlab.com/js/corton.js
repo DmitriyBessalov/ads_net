@@ -320,7 +320,7 @@ if (corton_complete!=1) {
             if (widget_promo.scrollHeight>50)
             {
                 var cxhr = new XMLHttpRequest();
-                console.log     ('corton: https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
+                console.log ('corton: https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
                 cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id='+get['prosmort_id']+'&a=l&anons_id='+get['anons_id']+'&t='+get['t'] + '&p_id=' + result['id']+'&ref='+document.referrer);
                 cxhr.withCredentials = true;
                 cxhr.send();
@@ -691,6 +691,8 @@ if (corton_complete!=1) {
                 }
 
                 var request = 'https://api2.cortonlab.com/widgets.php?words=' + encodeURI(top10.join()) + widget+category;
+                console.log('corton: '+decodeURI(request));
+
                 if (location.hostname=='demo.cortonlab.com'){request='https://api2.cortonlab.com/widgets-demo.php?words=' + encodeURI(top10.join())+'&sheme='+document.cookie.match(/scheme=(.+?);/)+'&host='+document.cookie.match(/host=(.+?);/) + widget;}
                 console.log('corton: '+decodeURI(request));
                 var xhr = new XMLHttpRequest();
@@ -703,8 +705,8 @@ if (corton_complete!=1) {
                     }
                     if (xhr.status === 200) {
                         result = JSON.parse(xhr.responseText);
-                        //console.log('corton: ajax:', result['anons_count']);
-                        //console.log('corton: w:', show_natpre,show_recomend)
+                        console.log('corton: ajax:', result);
+                        console.log('corton: w:', show_natpre,show_recomend);
                         widget_load_status=2;
 
                         const sCurrentProtocol = document.location.protocol == "https:" ? "https://" : "http://";
