@@ -69,7 +69,7 @@ if (corton_complete!=1) {
 
             if (marker_reklamiy==='1'){
                 var ist='';
-                console.log(result['istochnic']);
+   //             console.log(result['istochnic']);
                 if ((result['istochnic']!=='') && (innerWidth>1000)) {
                     result['istochnic'] = result['istochnic'].replace(/"/g, "&#34;");
                     result['istochnic'] = result['istochnic'].replace(/'''/g, "&#39;");
@@ -107,6 +107,10 @@ if (corton_complete!=1) {
                 widget_promo.innerHTML ='<div id="corton_fon"><h1>'+result['title']+'</h1>'+promo+'</div>';
             }
 
+            refElem=document.createElement('div');
+            refElem.id="corton-promo-end";
+            widget_promo.parentNode.insertBefore(refElem, widget_promo.nextSibling);
+
             const scroll2site_activ = style_p.getPropertyValue('--scroll2site_activ');
             if ((result['scroll2site']==1) && (scroll2site_activ==1))
             {
@@ -135,6 +139,7 @@ if (corton_complete!=1) {
                     '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;text-align: center} '+
                     'jdiv,footer{display: none !important;} '+
                     '#corton-promo img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
+                    '#corton-promo-end {height: 130vh}'+
                     '#corton_border_title p {text-align: center;} '+
                     '@media (max-width: 1024px) { '+
                         '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
