@@ -16,7 +16,7 @@ if (corton_complete!=1) {
     //Обработка промо статьи
     function corton_promo() {
         if (window.location.hostname === 'demo.cortonlab.com'){
-            //console.log('corton: '+corton_url);
+            console.log('corton: '+corton_url);
             const promo_forcibly = style_b.getPropertyValue('--forcibly');
             const promo_selector = style_b.getPropertyValue('--selector');
             if (promo_forcibly==='1'){
@@ -24,7 +24,7 @@ if (corton_complete!=1) {
                 sel[0].innerHTML=
                 '<div id="corton-promo"></div>';
             }
-            //console.log('corton: '+promo_forcibly,promo_selector);
+            console.log('corton: '+promo_forcibly,promo_selector);
         }
 
         var widget_promo=document.getElementById("corton-promo");
@@ -33,7 +33,7 @@ if (corton_complete!=1) {
         var h3=0;
         var request ='https://api2.cortonlab.com/promo.php'+location.search;
         let result=[];
-        //console.log('corton:'+request);
+        console.log('corton:'+request);
         var xhr = new XMLHttpRequest();
         xhr.open('GET', request,true);
         xhr.withCredentials = true;
@@ -42,7 +42,7 @@ if (corton_complete!=1) {
             if (xhr.readyState != 4) {return}
             if (xhr.status === 200) {
                 result = JSON.parse(xhr.responseText);
-                //console.log('corton: ajax:', result);
+                console.log('corton: ajax:', result);
                 if (!result) return false;
             }
             document.title = result['title'];
@@ -69,23 +69,20 @@ if (corton_complete!=1) {
 
             if (marker_reklamiy==='1'){
                 var ist='';
-                console.log(result);
-                if (result['istochnic']!==''){
-                    result['istochnic']=result['istochnic'].replace(/"/g,"&#34;");
-                    result['istochnic']=result['istochnic'].replace(/'''/g,"&#39;");
-                    ist='<p style="line-height: 1.3; color: #999; font-size: 12px;margin: 0 0 0 25px;">Источники </p><div style="background: #ececec; border-radius: 16px;height: 16px;width:16px;text-align: center;padding-top:2px;margin: -1px 0 0 3px;"><p style="color: rgba(153,153,153,0.8); top: -12px;font-size: 12px;" class="tooltipinfo" title="'+result['istochnic']+'">?</p></div>';
-                };
-                marker_reklamiy='<div style="display: flex;flex-direction: row;" ><p style="line-height: 1.3; color: #999; font-size: 12px;margin: unset;">На правах рекламы </p> '+ist+
-                    '<style>' +
-                    '.tooltipinfo {position: relative;display: inline-block; border-bottom: 1px dotted black;}'+
-                    '</style>';
+                console.log(result['istochnic']);
+                if ((result['istochnic']!=='') && (innerWidth>1000)) {
+                    result['istochnic'] = result['istochnic'].replace(/"/g, "&#34;");
+                    result['istochnic'] = result['istochnic'].replace(/'''/g, "&#39;");
+                    ist='<p style="line-height: 1.3; color: #999; font-size: 12px;" title="'+result['istochnic']+'">Источники</p>';
+                }
+                marker_reklamiy=ist+'<p style="line-height: 1.3; color: #999; font-size: 12px;">На правах рекламы</p>';
             }else{
                 marker_reklamiy='';
             }
 
             var logo='<div style="height: 40px;display:flex;flex-direction:row-reverse;flex-wrap: wrap-reverse;justify-content: space-between;align-items: stretch;align-content: stretch;">'+
                      '<a href="https://cortonlab.com/" title="Powered by Corton" style="height:40px;max-width: 110px;">' +
-                        '<img style="all:unset;width:100px; height:auto; border: none;" src="https://cortonlab.com/images/cortonlogo.png" />' +
+                        '<img style="all:unset;width:80px; height:20px; border: none;" src="https://cortonlab.com/images/cortonlogo.png" />' +
                      '</a>' +
                      marker_reklamiy +
                 '</div>';
@@ -134,24 +131,24 @@ if (corton_complete!=1) {
                 '</div>'+
 
                 '<style type="text/css">'+
-                    '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483646;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
-                    '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;} '+
+                    '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
+                    '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;text-align: center} '+
                     'jdiv,footer{display: none !important;} '+
                     '#corton-promo img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
                     '#corton_border_title p {text-align: center;} '+
                     '@media (max-width: 1024px) { '+
-                        '#corton_image_layer{position:sticky;bottom:0;z-index:2147483645;background-color:#000;} '+
+                        '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                         '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
-                        '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483646;} '+
+                        '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;} '+
                         '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
-                        '#corton_scroll_to_site {width: 100%;z-index:2147483646;position:relative;} '+
+                        '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative;} '+
                         '#corton_scroll_to_site a{text-decoration:none;} '+
                         '#corton_browser_container{display:none;} '+
                         '#corton-promo{background-color:#FFFFFF;min-height:100vh;max-width: unset;position: relative;} '+
-                        '#corton_fon{position: relative;z-index:2147483646;background-color: #FFF;padding: 0 20px;} '+
+                        '#corton_fon{position: relative;z-index:2147483647;;background-color: #FFF;padding: 0 20px;} '+
                     '} '+
                     '@media (min-width: 1025px) { '+
-                        '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;z-index:2147483646;} '+
+                        '#corton_scroll_to_site{min-height: 160vh;position:absolute;left:0;background-color:#fff8d9;width:100%;transition:1s;z-index:2147483647;} '+
                         '#corton_scroll_to_site a{text-decoration:none;} '+
                         '#corton_sticky_container{position:sticky;top:0;} '+
                         '#corton_border_title{font-size:18px} '+
@@ -180,7 +177,7 @@ if (corton_complete!=1) {
                     if (page_ready==1){
                         setTimeout(function() {
                             let href=encodeURIComponent(result['scroll2site_url']);
-                            //console.log('corton: https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
+                            console.log('corton: https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] + '&href=' + href);
                             cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id']  + '&href=' + href);
                             cxhr.withCredentials = true;
                             cxhr.send();
@@ -299,14 +296,14 @@ if (corton_complete!=1) {
                     }else{
                         link=a[i].getAttribute('href') + char + 'sub_id1=' + i + '&utm_source=corton&utm_medium=CPG&utm_campaign=' + result['id'] + '&utm_content=' + get['anons_id'] + '&utm_term=' + get['p_id'];
                     }
-                    //console.log('corton: '+link);
+                    console.log('corton: '+link);
                     a[i].setAttribute('href', link);
 
                     //console.log('promolink', a[i].getAttribute('href'));
 
                     a[i].onclick = function (e) {
                         let href=encodeURIComponent(this.href);
-                        //console.log('corton: https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&ancor=' + this.outerText + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] +'&href=' + href );
+                        console.log('corton: https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&ancor=' + this.outerText + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] +'&href=' + href );
                         cxhr.open('GET', 'https://stat.cortonlab.com/promo.php?prosmort_id=' + get['prosmort_id'] + '&host=' + location.hostname + '&ancor=' + this.outerText + '&a=c&anons_id=' + get['anons_id'] + '&t=' + get['t'] + '&p_id=' + result['id'] +'&href=' + href );
                         cxhr.withCredentials = true;
                         cxhr.send();
@@ -440,7 +437,7 @@ if (corton_complete!=1) {
         var device=Device();
 
         function zaglushka(tizer) {
-            //console.log('zag_'+tizer);
+            console.log('zag_'+tizer);
             var elem = document.getElementById('corton-'+tizer+'-widget',);
             elem.outerHTML='<iframe width="100%" height="300px" frameborder="0" scrolling="no" id="'+tizer+'-iframe" src="//'+location.hostname+'/corton_stub_'+tizer+'.html" /></iframe>';
         }
@@ -523,7 +520,7 @@ if (corton_complete!=1) {
         }
 
         function widget_check() {
-            //console.log('corton: widget_check');
+            console.log('corton: widget_check');
 
             //Подготовка к получению данных виджетов
             if (widget_recomend && show_recomend == 0) {
@@ -662,7 +659,7 @@ if (corton_complete!=1) {
 
         //Запрос кода виджетов
         function widget_load() {
-            //console.log('corton: w_l', widget_load_status);
+            console.log('corton: w_l', widget_load_status);
             if (widget_load_status==0) {
                 widget_load_status=1;
                 var top10 = words();
@@ -690,7 +687,7 @@ if (corton_complete!=1) {
 
                 var request = 'https://api2.cortonlab.com/widgets.php?words=' + encodeURI(top10.join()) + widget+category;
                 if (location.hostname=='demo.cortonlab.com'){request='https://api2.cortonlab.com/widgets-demo.php?words=' + encodeURI(top10.join())+'&sheme='+document.cookie.match(/scheme=(.+?);/)+'&host='+document.cookie.match(/host=(.+?);/) + widget;}
-                //console.log('corton: '+decodeURI(request));
+                console.log('corton: '+decodeURI(request));
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', request, true);
                 xhr.withCredentials = true;
@@ -701,8 +698,8 @@ if (corton_complete!=1) {
                     }
                     if (xhr.status === 200) {
                         result = JSON.parse(xhr.responseText);
-                        //console.log('corton: ajax:', result['anons_count']);
-                        //console.log('corton: w:', show_natpre,show_recomend)
+                        console.log('corton: ajax:', result['anons_count']);
+                        console.log('corton: w:', show_natpre,show_recomend)
                         widget_load_status=2;
 
                         const sCurrentProtocol = document.location.protocol == "https:" ? "https://" : "http://";
@@ -720,7 +717,7 @@ if (corton_complete!=1) {
 
                         if (show_recomend==2 || show_recomend==1) {
                             if (result['anons_count'] > 0) {
-                                //console.log('corton: recomend_anons');
+                                console.log('corton: recomend_anons');
                                 if (titletext != "") titletext = '<div class="corton-title">' + titletext + '</div>';
                                 var htmll = '<div>' +
                                     '<noindex><div class="corton-recomendation-wrapper 4x1">' +
@@ -760,7 +757,7 @@ if (corton_complete!=1) {
                         }
                         if (show_natpre==2 || show_natpre==1){
                             if (result['anons_count'] > 0) {
-                                //console.log('corton: natpre_anons');
+                                console.log('corton: natpre_anons');
                                 if (buttontext == "") buttontext = 'Подробнее';
                                 var htmll =
                                     '<noindex><div class="corton-anons" id="anons' + result['anons'][0][w] + 'e">' +
@@ -791,6 +788,9 @@ if (corton_complete!=1) {
                         if (location.host=='eva.ru'){
                             w=0;
                         }
+
+                    }else{
+                        console.log('corton: error');
                     }
                 }
             }
@@ -868,7 +868,7 @@ if (corton_complete!=1) {
                 if (max_recomend!==max_recomend_old || max_natpre!==max_natpre_old ){
                     max_recomend_old=max_recomend;
                     max_natpre_old=max_natpre;
-                    //console.log('corton: '+max_recomend,max_natpre);
+                    console.log('corton: '+max_recomend,max_natpre);
                     widget_check();
                     widget_load_status=0;
                 }
@@ -1007,7 +1007,7 @@ if (corton_complete!=1) {
                 const promo_selector = style_b.getPropertyValue('--selector');
                 let sel = document.querySelectorAll(promo_selector);
                 if (sel[0]) {
-                    //console.log('corton: '+url);
+                    console.log('corton: '+url);
                     corton_promo();
                     return true;
                 } else {
