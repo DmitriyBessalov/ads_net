@@ -82,7 +82,7 @@ if (corton_complete!=1) {
 
             var logo='<div style="height: 40px;display:flex;flex-direction:row-reverse;flex-wrap: wrap-reverse;justify-content: space-between;align-items: stretch;align-content: stretch;">'+
                      '<a href="https://cortonlab.com/" title="Powered by Corton" style="height:40px;max-width: 110px;">' +
-                        '<img style="all:unset;width:80px; height:20px; border: none;" src="https://cortonlab.com/images/cortonlogo.png" />' +
+                        '<img style="all:unset;width:80px; height:18px; border: none;" src="https://cortonlab.com/images/cortonlogo.png" />' +
                      '</a>' +
                      marker_reklamiy +
                 '</div>';
