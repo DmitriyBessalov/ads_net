@@ -117,7 +117,6 @@
                             </p>
                             <p style=\"color: #768093; font-size: 12px;margin-bottom: 0;\">Менеджер: ".$i['manager']."</p>
                             <p style=\"color: #768093; font-size: 12px;\">Оборот CPG : ____ Оборот CPM : ____ </p>
-                            
 						  </div>
 					  </div>
 					  </td>
@@ -423,11 +422,11 @@ var myLineChart = new Chart(ctx, {
                     <option '; if ($result['model_pay']=='CPG' ) echo "selected"; echo ' value="CPG">CPG за прочтения статей</option>
                     <option '; if ($result['model_pay']=='CPM' ) echo "selected"; echo ' value="CPM">CPM за показы виджетов</option>
                 </select>
-                <input type="number" class="text-field-10 w-input" maxlength="256" name="CPM_stavka" value="'.$result['CPM_stavka'].'" placeholder="Стоимость за 1000 показов виджета">
+                <input type="number" min="0" max="10000" step="10" class="text-field-10 w-input" name="CPM_stavka" value="'.$result['CPM_stavka'].'" placeholder="Стоимость за 1000 показов виджета">
                 <div style="width: 1337px; margin-bottom: 60px;"></div>';
 
                 if ($result['type']=='demo')
-                echo'
+                echo '
 			    <div class="text-block-103">Данные для демо</div>
                 </div>
                   <input type="text" class="text-field-10 w-input" maxlength="256" style="width: 740px; margin-left: 20px;" name="CTR" value="'.$result['CTR'].'" placeholder="CTR, %" required="">
