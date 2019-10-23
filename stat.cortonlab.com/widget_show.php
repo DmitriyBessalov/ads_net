@@ -7,7 +7,7 @@ $stat_arr['is_show_preview']=1;
 
 $domen=parse_url ( $_SERVER['HTTP_ORIGIN'], PHP_URL_HOST );
 
-$sql= "SELECT `id`,`otchiclen`,`user_id`,`model_pay` FROM `ploshadki` WHERE `domen`='".$domen."'";
+$sql= "SELECT `id`,`otchiclen`,`user_id`,`model_pay`,`CPM_stavka` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
 $stat_arr['view_id']=addslashes($_GET['prosmort_id']);

@@ -260,23 +260,22 @@ if ($action !='l')statpostgres($stat_arr);
 
 if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
     # Изменение баланса плошадки
-        # Модель оплаты за прочтения статей
-        if($platform['model_pay']=='CPG'){
-            $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . ", `CPG`= `CPG` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
-        }else {
-            $sql = "UPDATE `balans_user` SET `CPG`= `CPG` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+    # Модель оплаты за прочтения статей
+    if($platform['model_pay']=='CPG'){
+        $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . ", `CPG`= `CPG` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+    }else {
+        $sql = "UPDATE `balans_user` SET `CPG`= `CPG` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+    }
+    if (!$GLOBALS['db']->exec($sql)) {
+        if($platform['model_pay']=='CPG') {
+            $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
+            $oldbalans = $stavka_ploshadka + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."', `CPG`=  '".$stavka_ploshadka."'";
+        }else{
+            $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `CPG`=  '".$stavka_ploshadka."'";
         }
-        if (!$GLOBALS['db']->exec($sql)) {
-            if($platform['model_pay']=='CPG') {
-                $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
-                $oldbalans = $stavka_ploshadka + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-                $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."', `CPG`=  '".$stavka_ploshadka."'";
-            }else{
-                $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `CPG`=  '".$stavka_ploshadka."'";
-            }
-            $GLOBALS['db']->query($sql);
-        }
-
+        $GLOBALS['db']->query($sql);
+    }
 
     # Изменение баланса рекламодателя
     $sql = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`=" . $promo['promo_id'] . ";";
