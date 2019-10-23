@@ -6,12 +6,14 @@ require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 $stat_arr['is_show_preview']=1;
 
 $domen=parse_url ( $_SERVER['HTTP_ORIGIN'], PHP_URL_HOST );
-$sql= "SELECT `id` FROM `ploshadki` WHERE `domen`='".$domen."'";
+
+$sql= "SELECT `id`,`otchiclen`,`user_id`,`model_pay` FROM `ploshadki` WHERE `domen`='".$domen."'";
+$platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
 $stat_arr['view_id']=addslashes($_GET['prosmort_id']);
 
-$stat_arr['platform_id']=$ploshadka_id = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-if (!$ploshadka_id){
+$stat_arr['platform_id']=$ploshadka_id = $platform['id'];
+if (!$platform){
     $stat_arr['is_baned']=1;
     $stat_arr['preview_id_list']=addslashes($_GET['anons_ids']);
     statpostgres($stat_arr);
@@ -52,4 +54,23 @@ foreach ($arr as $value) {
     }
 };
 $redis->close();
+
+# Модель оплаты за показы виджетов
+    $platform['CPM_stavka']=$platform['CPM_stavka']/1000;
+    if($platform['model_pay']=='CPM') {
+        $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $platform['CPM_stavka'] . ", `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+    }else{
+        $sql = "UPDATE `balans_user` SET `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+    }
+    if (!$GLOBALS['db']->exec($sql)) {
+        if($platform['model_pay']=='CPM') {
+            $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
+            $oldbalans = $platform['CPM_stavka'] + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."',`CPM`='" . $platform['CPM_stavka'] . "'";
+        }else{
+            $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `CPM`='" . $platform['CPM_stavka'] . "'";
+        }
+        $GLOBALS['db']->query($sql);
+    }
+
 statpostgres($stat_arr);
