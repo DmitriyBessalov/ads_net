@@ -59,7 +59,7 @@ require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
 # Берём id площадки
 $domen = parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST);
 
-$sql= "SELECT `id`,`otchiclen`,`user_id`,`model_pay`,`CPM_stavka` FROM `ploshadki` WHERE `domen`='".$domen."'";
+$sql= "SELECT `id`,`otchiclen`,`user_id` FROM `ploshadki` WHERE `domen`='".$domen."'";
 $platform = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $stat_arr['platform_id']=$platform['id'];
 
@@ -261,30 +261,28 @@ if ($action !='l')statpostgres($stat_arr);
 if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
     # Изменение баланса плошадки
         # Модель оплаты за прочтения статей
-        $platform['CPM_stavka']=$platform['CPM_stavka']/1000;
-
         if($platform['model_pay']=='CPG'){
-            $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . ", `CPG`= `CPG` + " . $stavka_ploshadka . ",`CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+            $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . ", `CPG`= `CPG` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
             if (!$GLOBALS['db']->exec($sql)) {
                 $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
                 $oldbalans = $stavka_ploshadka + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-                $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."', `CPG`=  '".$stavka_ploshadka."',`CPM`='" . $platform['CPM_stavka'] . "'";
+                $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."', `CPG`=  '".$stavka_ploshadka."'";
                 $GLOBALS['db']->query($sql);
             }
         }
 
         # Модель оплаты за показы виджетов
-        if($platform['model_pay']=='CPM'){
-            $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $platform['CPM_stavka'] . ", `CPG`= `CPG` + " . $stavka_ploshadka . ", `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
-            if (!$GLOBALS['db']->exec($sql)) {
-                $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
-                $oldbalans = $platform['CPM_stavka'] + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-                $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."', `CPG`=  '".$stavka_ploshadka."',`CPM`='" . $platform['CPM_stavka'] . "'";
-                $GLOBALS['db']->query($sql);
-            }
-        }
+   //     if($platform['model_pay']=='CPM'){
+   //         $platform['CPM_stavka']=$platform['CPM_stavka']/1000;
+   //         $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $platform['CPM_stavka'] . ", `CPG`= `CPG` + " . $stavka_ploshadka . ", `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+   //         if (!$GLOBALS['db']->exec($sql)) {
+   //             $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
+   //             $oldbalans = $platform['CPM_stavka'] + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+   //
+   //             $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."', `CPG`=  '".$stavka_ploshadka."',`CPM`='" . $platform['CPM_stavka'] . "'";
+   //             $GLOBALS['db']->query($sql);
+   //         }
+   //     }
 
     # Изменение баланса рекламодателя
     $sql = "SELECT `id_user_advertiser` FROM `promo` WHERE `id`=" . $promo['promo_id'] . ";";
