@@ -1676,6 +1676,20 @@ p {
         max-height: 28px;
 	}
 }
+@media (max-width: 599px) and (min-width: 200px) {
+	.div-block-33-fix {
+		display: block;
+		padding-right: 2%;
+        padding-left: 2%;
+		padding: 0px 0 60px;
+	}
+	.logoblock {
+		padding-bottom: 30px;
+	}
+	.logoprt {
+        max-height: 22px;
+	}
+}
 .div-block-34 {
   display: -webkit-box;
   display: -webkit-flex;
