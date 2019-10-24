@@ -1654,6 +1654,7 @@ p {
 		display: block;
 		padding-right: 2%;
         padding-left: 2%;
+		text-align: center;
 	}
 	.logoblock {
 		padding-bottom: 40px;
@@ -1668,6 +1669,7 @@ p {
 		padding-right: 2%;
         padding-left: 2%;
 		padding: 0px 0 60px;
+		text-align: center;
 	}
 	.logoblock {
 		padding-bottom: 40px;
@@ -1682,6 +1684,7 @@ p {
 		padding-right: 2%;
         padding-left: 2%;
 		padding: 0px 0 60px;
+		text-align: center;
 	}
 	.logoblock {
 		padding-bottom: 30px;
