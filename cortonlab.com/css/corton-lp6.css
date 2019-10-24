@@ -1667,6 +1667,9 @@ p {
 	.logoprt {
         max-height: 32px;
 	}
+	.minlg {
+	    max-height: 46px;
+	}
 }
 @media (max-width: 1099px) and (min-width: 600px) {
 	.div-block-33-fix {
@@ -1681,6 +1684,9 @@ p {
 	}
 	.logoprt {
         max-height: 26px;
+	}
+	.minlg {
+	    max-height: 40px;
 	}
 }
 @media (max-width: 599px) and (min-width: 460px) {
@@ -1697,6 +1703,9 @@ p {
 	.logoprt {
         max-height: 22px;
 	}
+	.minlg {
+	    max-height: 36px;
+	}
 }
 @media (max-width: 459px) and (min-width: 200px) {
 	.div-block-33-fix {
@@ -1711,6 +1720,9 @@ p {
 	}
 	.logoprt {
         max-height: 18px;
+	}
+	.minlg {
+	    max-height: 36px;
 	}
 }
 .div-block-34 {
