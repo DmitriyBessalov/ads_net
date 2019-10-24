@@ -1667,6 +1667,7 @@ p {
 		display: block;
 		padding-right: 2%;
         padding-left: 2%;
+		padding: 0px 0 60px;
 	}
 	.logoblock {
 		padding-bottom: 40px;
