@@ -259,16 +259,6 @@ switch ($action) {
 if ($action !='l')statpostgres($stat_arr);
 
 if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
-    # Изменение баланса плошадки
-//    $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . " WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
-//    if (!$GLOBALS['db']->exec($sql)) {
-//        $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
-//        $oldbalans = $stavka_ploshadka + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-
-//        $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = " . $oldbalans;
-//        $GLOBALS['db']->query($sql);
-//    }
-
     # Модель оплаты за прочтения статей
     if($platform['model_pay']=='CPG'){
         $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . ", `CPG`= `CPG` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
@@ -284,6 +274,12 @@ if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
         }
         $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."', `CPG`=  '".$stavka_ploshadka."'";
         $GLOBALS['db']->query($sql);
+    }
+
+    $sql = "UPDATE `balans_ploshadki` SET `cpg`= `cpg` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `ploshadka_id`='" . $platform['id'] . "'";
+    if (!$GLOBALS['dbstat']->exec($sql)) {
+        $sql = "INSERT INTO `balans_ploshadki` SET `ploshadka_id` = '" . $platform['id'] . "', `date` = CURDATE(), `cpg`=  '".$stavka_ploshadka."'";
+        $GLOBALS['dbstat']->query($sql);
     }
 
     # Изменение баланса рекламодателя

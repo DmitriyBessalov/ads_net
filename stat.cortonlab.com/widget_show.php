@@ -73,4 +73,10 @@ $redis->close();
         $GLOBALS['db']->query($sql);
     }
 
+    $sql = "UPDATE `balans_ploshadki` SET `cpm`= `cpm` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `ploshadka_id`='" . $platform['id'] . "'";
+    if (!$GLOBALS['dbstat']->exec($sql)) {
+        $sql = "INSERT INTO `balans_ploshadki` SET `ploshadka_id` = '" . $platform['id'] . "', `date` = CURDATE(), `cpm`=  '".$platform['CPM_stavka']."'";
+        $GLOBALS['dbstat']->query($sql);
+    }
+
 statpostgres($stat_arr);
