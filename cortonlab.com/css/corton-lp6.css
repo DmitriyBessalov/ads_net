@@ -937,6 +937,11 @@ p {
   width: 192px;
 }
 
+.logoprt {
+	max-height: 46px;
+	width: auto;
+}
+
 .div-block-14 {
   margin-top: 80px;
   margin-bottom: 30px;
@@ -3822,6 +3827,9 @@ margin-left: 15px;
   .image-5 {
     width: 160px;
   }
+  .logoprt {
+	max-height: 40px;
+}
   .div-block-15 {
     display: none;
     padding-right: 2%;
@@ -4351,6 +4359,9 @@ margin-left: 15px;
   .image-5 {
     width: 145px;
   }
+  .logoprt {
+	max-height: 35px;
+}
   .div-block-15 {
     display: none;
     opacity: 0;
