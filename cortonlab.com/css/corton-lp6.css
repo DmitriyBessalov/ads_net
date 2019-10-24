@@ -1627,7 +1627,8 @@ p {
 }
 
 .slick-slide img {
-    width: 100%;
+    width: auto;
+    max-height: 48px;
 }
 
 .slick-slider
