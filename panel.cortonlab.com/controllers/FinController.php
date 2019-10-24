@@ -407,8 +407,7 @@ class FinController
 			';
         include PANELDIR . '/views/layouts/footer.php';
         if (isset($today)) {$redis->close();}
-//        if ($balans==false)$balans='0.00';
-        $balans='Временно недоступен';
+        if ($balans==false)$balans='0.00';
         echo '<script>$(".text-block-balans").html("'.$balans.' р.");</script>';
         return true;
     }
