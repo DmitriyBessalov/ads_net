@@ -114,12 +114,13 @@
                               +30%
                               </span>";
 
-                   // $sql="SELECT `CPM`,`CPG` FROM `balans_ploshadki` WHERE `user_id`= and `date`and `date`";
+                    $sql="SELECT sum(`cpm`) as cpm, sum(`cpg`) as cpg  FROM `balans_ploshadki` WHERE `ploshadka_id`=".$i['id']." AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $oborot=$GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                     echo "          
                             </p>
                             <p style=\"color: #768093; font-size: 12px;margin-bottom: 0;\">Менеджер: ".$i['manager']."</p>
-                            <p style=\"color: #768093; font-size: 12px;\">Оборот CPG : ____ Оборот CPM : ____ </p>
+                            <p style=\"color: #768093; font-size: 12px;\">Оборот CPG : ".$oborot['cpg']." Оборот CPM : ".$oborot['cpm']." </p>
 						  </div>
 					  </div>
 					  </td>
