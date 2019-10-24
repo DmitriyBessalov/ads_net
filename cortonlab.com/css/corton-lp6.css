@@ -1649,6 +1649,14 @@ p {
   align-items: center;
 }
 
+@media (max-width: 1600px) and (min-width: 1100px) {
+	.div-block-33-fix {
+		display: block;
+	}
+	.logoblock {
+	}
+}
+
 .div-block-34 {
   display: -webkit-box;
   display: -webkit-flex;
