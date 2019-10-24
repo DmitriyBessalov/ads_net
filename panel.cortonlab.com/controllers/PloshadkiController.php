@@ -117,6 +117,9 @@
                     $sql="SELECT sum(`cpm`) as cpm, sum(`cpg`) as cpg  FROM `balans_ploshadki` WHERE `ploshadka_id`=".$i['id']." AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                     $oborot=$GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
+                    $oborot['cpg']=round($oborot['cpg'] ,2);
+                    $oborot['cpm']=round($oborot['cpm'] ,2);
+
                     echo "          
                             </p>
                             <p style=\"color: #768093; font-size: 12px;margin-bottom: 0;\">Менеджер: ".$i['manager']."</p>
