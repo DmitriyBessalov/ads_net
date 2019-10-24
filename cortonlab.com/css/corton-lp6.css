@@ -1632,6 +1632,7 @@ p {
   width: 100%;
   padding-right: 2%;
   padding-left: 2%;
+  padding: 0px 0 120px;
   clear: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
