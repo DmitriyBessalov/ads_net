@@ -260,16 +260,16 @@ if ($action !='l')statpostgres($stat_arr);
 
 if((($action =='s')or($action =='r')) and ($pay['pay']==0)) {
     # Изменение баланса плошадки
-    $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . " WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
-    if (!$GLOBALS['db']->exec($sql)) {
-        $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
-        $oldbalans = $stavka_ploshadka + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+//    $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . " WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+//    if (!$GLOBALS['db']->exec($sql)) {
+//        $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
+//        $oldbalans = $stavka_ploshadka + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-        $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = " . $oldbalans;
-        $GLOBALS['db']->query($sql);
-    }
+//        $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = " . $oldbalans;
+//        $GLOBALS['db']->query($sql);
+//    }
+
     # Модель оплаты за прочтения статей
-
     if($platform['model_pay']=='CPG'){
         $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $stavka_ploshadka . ", `CPG`= `CPG` + " . $stavka_ploshadka . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
     }else {

@@ -113,6 +113,9 @@
                               "<span style=\"margin-left: 5px;background-color: #27AE60;color:#fff; \" class=\"nowstatus\"'>
                               +30%
                               </span>";
+
+                   // $sql="SELECT `CPM`,`CPG` FROM `balans_ploshadki` WHERE `user_id`= and `date`and `date`";
+
                     echo "          
                             </p>
                             <p style=\"color: #768093; font-size: 12px;margin-bottom: 0;\">Менеджер: ".$i['manager']."</p>
