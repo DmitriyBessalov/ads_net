@@ -1630,8 +1630,8 @@ p {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  padding-right: 4%;
-  padding-left: 4%;
+  padding-right: 2%;
+  padding-left: 2%;
   clear: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
