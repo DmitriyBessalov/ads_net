@@ -942,6 +942,11 @@ p {
 	width: auto;
 	padding: 0px 20px;
 }
+.minlg {
+	max-height: 52px;
+	width: auto;
+	padding: 0px 20px;
+}
 
 .div-block-14 {
   margin-top: 80px;
