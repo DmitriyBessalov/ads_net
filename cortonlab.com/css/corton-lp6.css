@@ -1659,10 +1659,22 @@ p {
 		padding-bottom: 40px;
 	}
 	.logoprt {
-        max-height: 40px;
+        max-height: 34px;
 	}
 }
-
+@media (max-width: 1099px) and (min-width: 600px) {
+	.div-block-33-fix {
+		display: block;
+		padding-right: 2%;
+        padding-left: 2%;
+	}
+	.logoblock {
+		padding-bottom: 40px;
+	}
+	.logoprt {
+        max-height: 28px;
+	}
+}
 .div-block-34 {
   display: -webkit-box;
   display: -webkit-flex;
