@@ -1678,7 +1678,7 @@ p {
         max-height: 28px;
 	}
 }
-@media (max-width: 599px) and (min-width: 200px) {
+@media (max-width: 599px) and (min-width: 460px) {
 	.div-block-33-fix {
 		display: block;
 		padding-right: 2%;
@@ -1691,6 +1691,11 @@ p {
 	}
 	.logoprt {
         max-height: 25px;
+	}
+}
+@media (max-width: 459px) and (min-width: 200px) {
+	.logoblock {
+		padding-bottom: 18px;
 	}
 }
 .div-block-34 {
