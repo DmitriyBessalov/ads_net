@@ -56,21 +56,21 @@ foreach ($arr as $value) {
 $redis->close();
 
 # Модель оплаты за показы виджетов
-//    $platform['CPM_stavka']=$platform['CPM_stavka']/1000;
-//    if($platform['model_pay']=='CPM') {
-//        $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $platform['CPM_stavka'] . ", `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
-//    }else{
-//        $sql = "UPDATE `balans_user` SET `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
-//    }
-//    if (!$GLOBALS['db']->exec($sql)) {
-//        if($platform['model_pay']=='CPM') {
-//            $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
-//            $oldbalans = $platform['CPM_stavka'] + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-//            $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."',`CPM`='" . $platform['CPM_stavka'] . "'";
-//        }else{
-//            $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `CPM`='" . $platform['CPM_stavka'] . "'";
-//        }
-//        $GLOBALS['db']->query($sql);
-//    }
+    $platform['CPM_stavka']=$platform['CPM_stavka']/1000;
+    if($platform['model_pay']=='CPM') {
+        $sql = "UPDATE `balans_user` SET `balans` = `balans` + " . $platform['CPM_stavka'] . ", `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+    }else{
+        $sql = "UPDATE `balans_user` SET `CPM`= `CPM` + " . $platform['CPM_stavka'] . "  WHERE `date`=CURDATE() AND `user_id`='" . $platform['user_id'] . "'";
+    }
+    if (!$GLOBALS['db']->exec($sql)) {
+        $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "' AND `date` =(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id` = '" . $platform['user_id'] . "')";
+        if($platform['model_pay']=='CPM') {
+            $oldbalans = $platform['CPM_stavka'] + $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        }else{
+            $oldbalans = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+        }
+        $sql = "INSERT INTO `balans_user` SET `user_id` = '" . $platform['user_id'] . "', `date` = CURDATE(), `balans` = '".$oldbalans."',`CPM`='" . $platform['CPM_stavka'] . "'";
+        $GLOBALS['db']->query($sql);
+    }
 
 statpostgres($stat_arr);

@@ -694,7 +694,7 @@ if (corton_complete!=1) {
                 console.log('corton: '+decodeURI(request));
 
                 if (location.hostname=='demo.cortonlab.com'){request='https://api2.cortonlab.com/widgets-demo.php?words=' + encodeURI(top10.join())+'&sheme='+document.cookie.match(/scheme=(.+?);/)+'&host='+document.cookie.match(/host=(.+?);/) + widget;}
-                console.log('corton: '+decodeURI(request));
+                
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', request, true);
                 xhr.withCredentials = true;
