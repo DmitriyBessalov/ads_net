@@ -2,7 +2,6 @@
 
 class FinController
 {
-
     public static function actionPlatform()
     {
         $title='Статистика кабинета';
@@ -46,6 +45,7 @@ class FinController
 
             $sql = "SELECT `balans` FROM `balans_user` WHERE `user_id`='" . $GLOBALS['user'] . "' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='" . $GLOBALS['user'] . "')";
             $balans = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+            $balans=round($balans,2);
             if (is_null($balans)) $balans = 0;
 
             if (count($result) != 1) $domen = "";
