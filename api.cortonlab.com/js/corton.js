@@ -531,13 +531,13 @@ if (corton_complete!=1) {
             if (widget_recomend && show_recomend == 0) {
                 var style_r = window.getComputedStyle(widget_recomend, null);
                 gadget = style_r.getPropertyValue('--' + device);
-                if (gadget == 1 || location.host=='eva.ru') {
+                if (gadget == 1 || location.host=='eva.ru'||location.host=='teleprogramma.pro') {
                     var height = style_r.getPropertyValue('--hsize');
                     if (height == "") height = 0;
                     var width = style_r.getPropertyValue('--wsize');
                     if (width == "") width = 0;
                     recomend_image_shape = style_r.getPropertyValue('--image_shape');
-                    if (location.host=='eva.ru'){
+                    if (location.host=='eva.ru'||location.host=='teleprogramma.pro'){
                         recomend_image_shape=3;
                         width=4;height=1;
                     }
@@ -602,10 +602,10 @@ if (corton_complete!=1) {
             if (widget_natpre && show_natpre == 0) {
                 var style_e = window.getComputedStyle(widget_natpre, null);
                 gadget = style_e.getPropertyValue('--' + device);
-                if (gadget == 1 || location.host=='eva.ru') {
+                if (gadget == 1 || location.host=='eva.ru'||location.host=='teleprogramma.pro') {
                     buttontext = style_e.getPropertyValue('--buttontext');
                     natpre_image_shape = style_e.getPropertyValue('--image_shape');
-                    if (location.host=='eva.ru'){
+                    if (location.host=='eva.ru'||location.host=='teleprogramma.pro'){
                         natpre_image_shape=3;
                     }
                     if (natpre_algorithm_output === '1') {
@@ -755,7 +755,7 @@ if (corton_complete!=1) {
                                     widget_recomend.remove();
                                 }
                             }
-                            if (location.host=='eva.ru') {
+                            if (location.host=='eva.ru'||location.host=='teleprogramma.pro') {
                                 //console.log('corton: widget_load_status=0');
                                 show_recomend = 0;
                             }else{
@@ -786,13 +786,13 @@ if (corton_complete!=1) {
                                     widget_natpre.remove();
                                 }
                             }
-                            if (location.host=='eva.ru') {
+                            if (location.host=='eva.ru'||location.host=='teleprogramma.pro') {
                                 show_natpre = 0;
                             }else{
                                 show_natpre=3;
                             }
                         }
-                        if (location.host=='eva.ru'){
+                        if (location.host=='eva.ru'||location.host=='teleprogramma.pro'){
                             w=0;
                         }
 
@@ -840,7 +840,7 @@ if (corton_complete!=1) {
             widget_recomend = document.getElementById("corton-recomendation-widget");
             widget_natpre = document.getElementById("corton-nativepreview-widget");
 
-            if (location.host=='eva.ru') {
+            if (location.host=='eva.ru'||location.host=='teleprogramma.pro') {
                 while(widget_recomend) {
                     widget_recomend.classList.add('corton-recomendation-widget');
                     widget_recomend.removeAttribute('id');
