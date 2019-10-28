@@ -321,6 +321,7 @@ var myLineChart = new Chart(ctx, {
                     if ($_POST['zagrecomend']=='on'){$zagrecomend=1;}else{$zagrecomend=0;};
                     if ($_POST['zagnatprev']=='on'){$zagnatprev=1;}else{$zagnatprev=0;};
                     if ($_POST['zagnatpro']=='on'){$zagnatpro=1;}else{$zagnatpro=0;};
+                    if ($_POST['medblok']=='on'){$medblok=1;}else{$medblok=0;};
                     $sql="
                     UPDATE
                         `ploshadki`
@@ -339,7 +340,8 @@ var myLineChart = new Chart(ctx, {
                         `CPM_stavka`='".$_POST['CPM_stavka']."',
                         `CTR`='".$_POST['CTR']."',
                         `CPM`='".$_POST['CPM']."',
-                        `CPG`='".$_POST['CPG']."'
+                        `CPG`='".$_POST['CPG']."',
+                        `medblok`='".$medblok."'
                     WHERE `id`='".$_POST['id']."';";
                     $GLOBALS['db']->query($sql);
 
@@ -499,10 +501,21 @@ var myLineChart = new Chart(ctx, {
                     <td style="color:red" class="text-block-98">Удалить</td>
                   </tr>';
                 };
-                echo'               
+
+                if ($result['medblok']) $medblok="checked";
+                echo'
                 </table>
+                
+                <div class="checkbox-field-4 w-checkbox" style="margin-top: 20px;">
+                      <input type="checkbox" name="medblok" '.$medblok.' class="form-radiozag">
+                      <label id="medblok" class="w-form-label">
+                      <a class="link">Без медицины и здоровья</a>
+                      </label>
+                </div>
+                
                 <div class="text-block-118" id="addcategory">Добавить категорию</div>
               </div>
+              
               </div>
               <div class="div-block-102">
 			  <div class="boxsetting">
@@ -517,6 +530,7 @@ var myLineChart = new Chart(ctx, {
                 </div>
 			  </div>
               </div>   
+              
               <div class="div-block-102">
 			  <div class="boxsetting">
                 <div class="text-block-103">Настройка промо-страницы</div>

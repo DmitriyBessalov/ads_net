@@ -34,7 +34,6 @@ if (strlen($iso)==2) {
 }
 
 $result0 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
-
 $result1 = $GLOBALS['db']->query($sql2)->fetchALL(PDO::FETCH_COLUMN);
 $result2 = array();
 foreach ($result1 as $i) {
@@ -49,7 +48,21 @@ $promo_ids=array_unique(array_merge($result0, $result2));
 
 # Фильтр статей где обязательное обязательное совпадение по ключу и категория
 if (count($promo_ids)){
+    $domen=parse_url ($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST );
+    $sql= "SELECT `medblok` FROM `ploshadki` WHERE `domen`='".$domen."'";
+    $medblok = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
     $ids = implode("','", $promo_ids);
+    if ($medblok) {
+        $sql="SELECT `promo_id` FROM `promo_category` WHERE `category_id`=31 AND `promo_id` IN ('".$ids."')";
+        $medblok_ids = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+        foreach ($medblok_ids as $i){
+            $key = array_search($i,$promo_ids);
+            unset($promo_ids[$key]);
+        }
+        $ids = implode("','", $promo_ids);
+    }
+
     $sql="SELECT `id` FROM `promo` WHERE `id` IN ('".$ids."') AND `merge_key_and_categor`=1";
     $result3 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
     foreach ($result3 as $i){
