@@ -136,7 +136,7 @@ if (corton_complete!=1) {
 
                 '<style type="text/css">'+
                     '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
-                    '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;text-align: center} '+
+                    '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; padding: 0px 10px; justify-content: center; align-items: center;text-align: center} '+
                     'jdiv,footer{display: none !important;} '+
                     '#corton-promo img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
                     '#corton-promo-end {height: 130vh}'+
