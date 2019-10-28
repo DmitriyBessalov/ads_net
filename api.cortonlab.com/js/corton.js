@@ -804,6 +804,7 @@ if (corton_complete!=1) {
         //Проверка тизеров на длительность прочтения в 2 секунды
         var anons_ids_read=[];
         function checkread(show_widg) {
+            var tizer;
             for (i = 0; i < show_widg.length; i++) {
                 var h=show_widg[i].getBoundingClientRect().top;
                 var h2=h+show_widg[i].scrollHeight-window.innerHeight;
@@ -817,12 +818,29 @@ if (corton_complete!=1) {
                         }
                     }
                 }
+                if (!tizer){
+                    tizer = show_widg[i].parentNode.parentNode.parentNode.parentNode.parentNode;
+                    if(tizer.id!=='corton-recomendation-widget'){
+                        tizer = undefined;
+                    }
+                }
             }
 
             if(0<anons_ids_read.length){
+                widget_read='';
+                if (tizer){
+                    widget_read='&f=1';
+                    var cortonanons=tizer.getElementsByClassName("corton-anons");
+                    for (i = 0; i < cortonanons.length; i++) {
+                        if(!cortonanons[i].classList.contains('read')){
+                            widget_read='&f=0';
+                        }
+                    }
+                }
+
                 var cxhr = new XMLHttpRequest();
-                console.log('corton: https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read.join());
-                cxhr.open('GET', 'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read.join());
+                console.log('corton: https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read.join()+widget_read);
+                cxhr.open('GET', 'https://stat.cortonlab.com/widget_show.php?prosmort_id='+result['prosmotr_id']+'&anons_ids='+anons_ids_read.join()+widget_read);
                 cxhr.withCredentials = true;
                 cxhr.send();
             }
