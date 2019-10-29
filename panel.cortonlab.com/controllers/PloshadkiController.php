@@ -75,8 +75,8 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <td>0</td>
+                <td>0</td>
                 <td></td>
                 <td id="all_dohod">--</td>
                 <td id="all_rashod">--</td>
