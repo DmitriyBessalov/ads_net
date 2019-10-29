@@ -62,7 +62,7 @@
               <tr class="trtop">
                 <td>Площадка</td>
                 <td>Виджеты</td>
-                <td>Визиты</td>
+
                 <td>Клики</td>
                 <td><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей и процент от кликов</span></div></td>
                 <td style="width: 111px;"><div class="tooltipinfo1">График<span class="tooltiptext1">График по просмотрам за последние 7 дней</span></div></td>
@@ -155,7 +155,6 @@
                         <div class=\"slider-mini\""; if (!$i['slider_aktiv']) {echo " style='opacity: 0.3;'";}; echo"><span class=\"tooltiptext4\">Slider</span></div>
                        </div>
                       </td>
-                      <td>--</td>
                       <td>".$platform['click']."</td>
                       <td class=\"greentext\" style=\"min-width: 140px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
 					  <td style=\"width: 160px;\" >
