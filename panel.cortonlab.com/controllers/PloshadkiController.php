@@ -78,7 +78,6 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
                 <td id="all_dohod">--</td>
                 <td id="all_rashod">--</td>
                 <td id="all_corton">--</td>
