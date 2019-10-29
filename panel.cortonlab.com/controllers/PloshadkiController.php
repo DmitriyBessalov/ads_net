@@ -150,8 +150,6 @@
                        <div class=\"backwig\">
                         <div class=\"recommendation-mini\""; if (!$i['recomend_aktiv']) {echo " style='opacity: 0.3;'";}; echo"><span class=\"tooltiptext1\">Recommendation</span></div>
                         <div class=\"nativepreview-mini\""; if (!$i['natpre_aktiv']) {echo " style='opacity: 0.3;'";}; echo"><span class=\"tooltiptext2\">Native Preview</span></div>
-                        <div class=\"nativepro-mini\""; if (!$i['natpro_aktiv']) {echo " style='opacity: 0.3;'";}; echo"><span class=\"tooltiptext3\">Native Pro</span></div>
-                        <div class=\"slider-mini\""; if (!$i['slider_aktiv']) {echo " style='opacity: 0.3;'";}; echo"><span class=\"tooltiptext4\">Slider</span></div>
                        </div>
                       </td>
                       <td>".$platform['click']."</td>
