@@ -1004,7 +1004,7 @@ class ArticleController
                                     <div class="div-block-142">
                                         <div class="div-block-145">
                                             <input type="text" value="'.$anon['title'].'" class="text-field-6 _1 w-input" maxlength="60" name="title[]" placeholder="Заголовок анонса статьи до 60 символов" id="title-3" required="">
-                                            <textarea name="opisanie[]" placeholder="Описание от 90 до 120 символов" maxlength="120" class="textarea-7 w-input">' . $anon['snippet'] . '</textarea>
+                                            <textarea name="opisanie[]" required="" placeholder="Описание от 90 до 120 символов" maxlength="120" class="textarea-7 w-input">' . $anon['snippet'] . '</textarea>
                                         </div>
                                     </div>
                                     <div class="div-block-142">
