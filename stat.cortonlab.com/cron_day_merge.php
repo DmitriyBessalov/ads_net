@@ -5,8 +5,8 @@ $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);
 
 //Удаляем старые просмотры
-$sql="DELETE FROM `stat_promo_prosmotr` WHERE `date`<='".date('Y-m-d', strtotime('-7 day'))."'";
-$GLOBALS['dbstat']->query($sql);
+//$sql="DELETE FROM `stat_promo_prosmotr` WHERE `date`<='".date('Y-m-d', strtotime('-7 day'))."'";
+//$GLOBALS['dbstat']->query($sql);
 
 // Сжимать файл corton.js
 $data = implode("", file("/var/www/www-root/data/www/api.cortonlab.com/js/corton.js"));
