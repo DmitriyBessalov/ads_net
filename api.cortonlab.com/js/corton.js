@@ -531,13 +531,13 @@ if (corton_complete!=1) {
             if (widget_recomend && show_recomend == 0) {
                 var style_r = window.getComputedStyle(widget_recomend, null);
                 gadget = style_r.getPropertyValue('--' + device);
-                if (gadget == 1 || location.host=='eva.ru'||location.host=='teleprogramma.pro') {
+                if (gadget == 1 || location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru') {
                     var height = style_r.getPropertyValue('--hsize');
                     if (height == "") height = 0;
                     var width = style_r.getPropertyValue('--wsize');
                     if (width == "") width = 0;
                     recomend_image_shape = style_r.getPropertyValue('--image_shape');
-                    if (location.host=='eva.ru'||location.host=='teleprogramma.pro'){
+                    if (location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru'){
                         recomend_image_shape=3;
                         width=4;height=1;
                     }
@@ -602,10 +602,10 @@ if (corton_complete!=1) {
             if (widget_natpre && show_natpre == 0) {
                 var style_e = window.getComputedStyle(widget_natpre, null);
                 gadget = style_e.getPropertyValue('--' + device);
-                if (gadget == 1 || location.host=='eva.ru'||location.host=='teleprogramma.pro') {
+                if (gadget == 1 || location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru') {
                     buttontext = style_e.getPropertyValue('--buttontext');
                     natpre_image_shape = style_e.getPropertyValue('--image_shape');
-                    if (location.host=='eva.ru'||location.host=='teleprogramma.pro'){
+                    if (location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru'){
                         natpre_image_shape=3;
                     }
                     if (natpre_algorithm_output === '1') {
@@ -755,7 +755,7 @@ if (corton_complete!=1) {
                                     widget_recomend.remove();
                                 }
                             }
-                            if (location.host=='eva.ru'||location.host=='teleprogramma.pro') {
+                            if (location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru') {
                                 //console.log('corton: widget_load_status=0');
                                 show_recomend = 0;
                             }else{
@@ -786,13 +786,13 @@ if (corton_complete!=1) {
                                     widget_natpre.remove();
                                 }
                             }
-                            if (location.host=='eva.ru'||location.host=='teleprogramma.pro') {
+                            if (location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru') {
                                 show_natpre = 0;
                             }else{
                                 show_natpre=3;
                             }
                         }
-                        if (location.host=='eva.ru'||location.host=='teleprogramma.pro'){
+                        if (location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru'){
                             w=0;
                         }
 
@@ -858,7 +858,7 @@ if (corton_complete!=1) {
             widget_recomend = document.getElementById("corton-recomendation-widget");
             widget_natpre = document.getElementById("corton-nativepreview-widget");
 
-            if (location.host=='eva.ru'||location.host=='teleprogramma.pro') {
+            if (location.host=='eva.ru'||location.host=='teleprogramma.pro'||location.host=='www.kleo.ru') {
                 while(widget_recomend) {
                     widget_recomend.classList.add('corton-recomendation-widget');
                     widget_recomend.removeAttribute('id');
@@ -870,7 +870,7 @@ if (corton_complete!=1) {
                     widget_natpre = document.getElementById("corton-nativepreview-widget");
                 }
                 const widget_recomend_all = document.getElementsByClassName("corton-recomendation-widget");
-                if(widget_recomend_all.length!=0){
+                if(widget_recomend_all.length!==0){
                     max_recomend=widget_recomend_all.length;
                     widget_recomend=widget_recomend_all[widget_recomend_all.length-1];
                 }
@@ -928,6 +928,15 @@ if (corton_complete!=1) {
                 }
             }
 
+            if (location.host==='eva.ru' && innerWidth<1000) {
+                if(!widget_recomend.classList.contains('wait')) {
+                    show_widget_aktiv = true;
+                    show_recomend = 2;
+                    widget_recomend.classList.add('wait');
+                    widget_recomend.classList.add(max_recomend);
+                    show_widget_recomend=true;
+                }
+            }
 
             if (show_widget_aktiv===false){
                 return false;
