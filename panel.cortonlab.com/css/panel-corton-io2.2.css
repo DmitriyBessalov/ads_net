@@ -4396,7 +4396,6 @@ input[name=active] {
   background-image: url(/images/rec-act.png);
   background-size: cover;
   position: relative;
-  margin-bottom:10px;
 }
 
 .recommendation-mini-site {
@@ -4451,7 +4450,6 @@ input[name=active] {
   background-image: url(/images/nat-act.png);
   background-size: cover;
   position: relative;
-  margin-bottom:10px;
 }
 
 .nativepreview-mini-site {
