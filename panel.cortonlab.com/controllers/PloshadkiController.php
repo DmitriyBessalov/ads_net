@@ -7,7 +7,13 @@
                 $title = 'Площадки в системе';
                 include PANELDIR . '/views/layouts/header.php';
 
-                if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{$datebegin=date('d.m.Y', strtotime("-1 month"));}
+                if (isset($_GET['datebegin'])){$datebegin=$_GET['datebegin'];}else{
+                    if (strtotime("-1 month")>strtotime('23.10.2019')){
+                        $datebegin=date('d.m.Y', strtotime("-1 month"));
+                    }else{
+                        $datebegin=date('d.m.Y', strtotime("23.10.2019"));
+                    }
+                }
                 if (isset($_GET['dateend'])){$dateend=$_GET['dateend'];}else{$dateend=date('d.m.Y');};
                 $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
                 $mySQLdateend = date('Y-m-d', strtotime($dateend));
@@ -60,11 +66,25 @@
                 <td>Клики</td>
                 <td><div class="tooltipinfo1">Просмотры<span class="tooltiptext1">Целевые/оплаченные просмотры промо-статей и процент от кликов</span></div></td>
                 <td style="width: 111px;"><div class="tooltipinfo1">График<span class="tooltiptext1">График по просмотрам за последние 7 дней</span></div></td>
-                <td>Доход</td>
+                <td>Доход площадки</td>
+                <td>Расход рекламодателя</td>
+                <td>Доход Cortonlab</td>
                 <td style="width: 110px;"></td>
               </tr>
-            </thead>';
-
+            </thead>
+            <tr>
+                <td>Все площадки</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td id="all_dohod">--</td>
+                <td id="all_rashod">--</td>
+                <td id="all_corton">--</td>
+                <td></td>
+            </tr>';
+                $all_platform['dohod']=$all_platform['rashod_rekl']=0;
                 foreach ($result as $i) {
                     $sql="SELECT SUM(`r_balans`)+SUM(`e_balans`)+SUM(`s_balans`) as 'dohod', SUM(`r`)+SUM(`e`)+SUM(`s`) as 'prosmotr',SUM(`r_promo_load`)+SUM(`e_promo_load`)+SUM(`s_promo_load`)as 'click' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'  AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                     $platform = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -135,7 +155,7 @@
                         <div class=\"slider-mini\""; if (!$i['slider_aktiv']) {echo " style='opacity: 0.3;'";}; echo"><span class=\"tooltiptext4\">Slider</span></div>
                        </div>
                       </td>
-                      <td>0</td>
+                      <td>--</td>
                       <td>".$platform['click']."</td>
                       <td class=\"greentext\" style=\"min-width: 140px;\">".$platform['prosmotr']." (".$protsent_prochteniy."%)</td>
 					  <td style=\"width: 160px;\" >
@@ -192,8 +212,20 @@ var myLineChart = new Chart(ctx, {
 });
                       </script>
 					  </td>
-					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>
-                      <td style=\"width: 111px; text-align: right; padding-right: 20px\";>
+					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>";
+
+                    $sql="SELECT SUM(`pay`) FROM `stat_promo_prosmotr` WHERE `ploshadka_id`=".$i['id']." AND `date`>='" . $mySQLdatebegin ."' AND `date`<='" . $mySQLdateend ."'";
+                    $platform['rashod_rekl']=$GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    if(!$platform['rashod_rekl'])$platform['rashod_rekl']=0;
+
+                    $all_platform['dohod']+=$platform['dohod'];
+                    $all_platform['rashod_rekl']+=$platform['rashod_rekl'];
+
+                    $platform['corton_dohod']=$platform['rashod_rekl']-$platform['dohod'];
+
+                    echo "<td>".$platform['rashod_rekl']."</td><td>".$platform['corton_dohod']."</td>";
+
+                    echo "<td style=\"width: 111px; text-align: right; padding-right: 20px\";>
 						 <a class=\"main-item\" href=\"javascript:void(0);\" tabindex=\"1\"  style=\"font-size: 34px; line-height: 1px; vertical-align: super; text-decoration: none; color: #768093;\">...</a> 
                          <ul class=\"sub-menu\">
                               <a href='platforms-edit?id=" . $i['id'] . "'>Настройка</a><br>
@@ -223,9 +255,13 @@ var myLineChart = new Chart(ctx, {
                       </td>
                   </tr>";
                 };
-                echo "</table>\n
-							
+                $all_platform['corton_dohod']=$all_platform['rashod_rekl']-$all_platform['dohod'];
+                echo "</table>
 				<script>
+				    $('#all_dohod').html(".$all_platform['dohod'].");
+				    $('#all_rashod').html(".$all_platform['rashod_rekl'].");
+				    $('#all_corton').html(".$all_platform['corton_dohod'].");
+				
                     $(\".polzunok\").slider({min:0,max:200,range:\"min\",animate:\"slow\",slide:function(event, ui){
                         $('#'+this.id+' span').html(\"<b>&lt;</b>\"+ui.value+\"%<b>&gt;</b>\");
                         $.get(\"https://panel.cortonlab.com/platforms-otchicleniay?id=\"+this.id+\"&otchiclen=\"+ui.value);
