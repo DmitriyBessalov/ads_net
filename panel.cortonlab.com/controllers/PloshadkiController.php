@@ -73,7 +73,7 @@
               </tr>
             </thead>
             <tr>
-                <td>Все площадки</td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
