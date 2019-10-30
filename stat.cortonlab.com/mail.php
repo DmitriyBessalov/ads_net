@@ -10,10 +10,10 @@ if ($_GET['host']==""){
     $host=$_GET['host'];
 }
 $name=$_GET['name'];
-if($name!="") exit;
+if($name=="") exit;
 
 $phone=$_GET['phone'];
-if($phone!="") exit;
+if($phone=="") exit;
 
 $message = '
  <h3>Получена новая заявка</h3> </br>

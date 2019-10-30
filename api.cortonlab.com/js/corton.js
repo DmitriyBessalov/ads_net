@@ -238,7 +238,7 @@ if (corton_complete!=1) {
                                 if (smeshenieY < -82) {
                                     smeshenieY = -82
                                 }
-                                ;
+
                                 browser_container.style.transform = 'scale(1, 1) translateY(' + smeshenieY + 'px)';
                                 if (innerHeight / 10 > browser_container.getBoundingClientRect().top) {
                                     osvetlenie_redirekt();
