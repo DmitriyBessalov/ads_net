@@ -621,6 +621,7 @@ class ArticleController
 
             if ($_POST['checkbox_merge']=='on')$_POST['checkbox_merge']=1;
             if ($_POST['scroll2site']=='on')$_POST['scroll2site']=1;
+            if ($_POST['medblock']=='on')$_POST['medblock']=1;
 
             $uploaddir = '/var/www/www-root/data/www/api.cortonlab.com/img/advertiser_screenshot_site/';
 
@@ -646,6 +647,7 @@ class ArticleController
                 `merge_key_and_categor`='".$_POST['checkbox_merge']."',
                 `scroll2site`='".$_POST['scroll2site']."',
                 `scroll2site_text`='".$_POST['scroll2site_text']."',
+                `medblock`='".$_POST['medblock']."',
                 ".$scroll2site_img."
                 `scroll2site_url`='".$_POST['scroll2site_url']."'
              WHERE `id`='".$_POST['id']."';";
@@ -1176,7 +1178,7 @@ class ArticleController
                         <div class="element-wrapper" style="justify-content: normal">
                               <input type="checkbox" style="margin:10px" name="medblock" class="checkbox" id="checkbox_merge"';
 
-                              if ($result['medblok']) echo 'checked="" ';
+                              if ($result['medblock']) echo 'checked="" ';
 
                               echo '>
                               <label for="checkbox_merge">Медицинская тематика</label>

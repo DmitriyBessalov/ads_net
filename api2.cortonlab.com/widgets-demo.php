@@ -1,4 +1,7 @@
 <?php
+exit;
+
+
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json;');
 $_GET = array_map('addslashes', $_GET);

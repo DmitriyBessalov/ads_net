@@ -54,7 +54,7 @@ if (count($promo_ids)){
 
     $ids = implode("','", $promo_ids);
     if ($medblok) {
-        $sql="SELECT `promo_id` FROM `promo_category` WHERE `category_id`=31 AND `promo_id` IN ('".$ids."')";
+        $sql="SELECT `id` FROM `promo` WHERE `medblock`='1' AND `id` IN ('".$ids."')";
         $medblok_ids = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
         foreach ($medblok_ids as $i){
             $key = array_search($i,$promo_ids);
