@@ -529,9 +529,9 @@ class ArticleController
                 }
 
 
-                $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`istochnic`='".$_POST['istochnic']."',`data_add`='".$data_add."',`medblock`='".$_POST['medblock']."' WHERE  `id`='".$id."'";
+                $sql="UPDATE `promo` SET  `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`istochnic`='".$_POST['istochnic']."',`data_add`='".$data_add."' WHERE  `id`='".$id."'";
                 if (!$GLOBALS['db']->exec($sql)){
-                    $sql = "INSERT INTO `promo` SET `id`='".$id."', `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`istochnic`='".$_POST['istochnic']."',`medblock`='".$_POST['medblock']."',`data_add`='".$data_add."',`region`='ALL';";
+                    $sql = "INSERT INTO `promo` SET `id`='".$id."', `user_id`='".$user_id."', `title`='".$_POST['title']."',`text`='".$_POST['formtext']."',`istochnic`='".$_POST['istochnic']."',`data_add`='".$data_add."',`region`='ALL';";
                     $GLOBALS['db']->query($sql);
                     $id=$GLOBALS['db']->lastInsertId();
                     $sql = "UPDATE `promo` SET  `main_promo_id`='".$id."' WHERE  `id`='".$id."';";
@@ -1174,7 +1174,11 @@ class ArticleController
                         </div>
                         
                         <div class="element-wrapper" style="justify-content: normal">
-                              <input type="checkbox" style="margin:10px" name="medblock" class="checkbox" id="checkbox_merge">
+                              <input type="checkbox" style="margin:10px" name="medblock" class="checkbox" id="checkbox_merge"';
+
+                              if ($result['medblok']) echo 'checked="" ';
+
+                              echo '>
                               <label for="checkbox_merge">Медицинская тематика</label>
                         </div>
                       
