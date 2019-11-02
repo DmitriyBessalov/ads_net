@@ -63,7 +63,6 @@ for(var i=0; i<s2s.length; i++) {
                 '#corton_border_title p {text-align: center;} '+
                 '.article_info {float: unset !important;}' +
                 '@media (max-width: 1024px) { '+
-                'body,html {overflow-x: hidden;width: 100%;}'+
                 '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                 '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
                 '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;top: -10px;} '+
@@ -88,8 +87,7 @@ for(var i=0; i<s2s.length; i++) {
                 '#corton-promos{min-height:unset !important;} '+
                 '}'+
             '</style>';
-            var corton_promos=document.getElementById("corton-promos"),
-                corton_fon=document.getElementById("corton_fon"),
+            var corton_fon=document.getElementById("corton_fon"),
                 scroll_to_site = document.getElementById("corton_scroll_to_site"),
                 overlay=document.getElementById("corton_overlay"),
                 browser_container=document.getElementById("corton_browser_container"),
@@ -141,7 +139,7 @@ for(var i=0; i<s2s.length; i++) {
                 //corton_promos.style.left = -articleall.getBoundingClientRect().left+ 'px';
                 corton_promos.style.width = outerWidth +'px';
             } else {
-                var i = (window.innerHeight - corton_promo.getBoundingClientRect().top) * 100 / innerHeight;
+                var i = (window.innerHeight - corton_promos.getBoundingClientRect().top) * 100 / innerHeight;
                 console.log(i);
 
                 scroll_to_site.style.left = -corton_promos.getBoundingClientRect().left+25 + 'px';
