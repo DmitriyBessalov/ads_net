@@ -138,12 +138,12 @@ for(var i=0; i<s2s.length; i++) {
                 }
 
                 corton_promos.style.left = -articleall.getBoundingClientRect().left+ 'px';
-                corton_promos.style.width = innerWidth +'px';
+                corton_promos.style.width = outerWidth +'px';
             } else {
                 var i = (window.innerHeight - corton_promo.getBoundingClientRect().top) * 100 / innerHeight;
                 console.log(i);
 
-                scroll_to_site.style.left = -corton_promos.getBoundingClientRect().left+25 + 'px';
+                //scroll_to_site.style.left = -corton_promos.getBoundingClientRect().left+25 + 'px';
                 scroll_to_site.style.width = innerWidth -17+ 'px';
 
 
