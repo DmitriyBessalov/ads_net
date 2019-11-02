@@ -5,7 +5,7 @@ const cortonjson='['+
         '"https://www.7ya.ru/article/Sekrety-uspeshnoj-sjemki-na-smartfon/",'+
         '"https://www.netprint.ru/lp/7ya_50foto?utm_source=partners&utm_medium=article&utm_campaign=2019",'+
         '"https://api.cortonlab.com/7ya/1-pc.jpg",'+
-        '"https://api.cortonlab.com/7ya/1-mob.jpg"'+
+        '"https://api.cortonlab.com/7ya/1-mob.png"'+
     '],['+
         '"https://www.7ya.ru/article/Vybiraem-repetitora-pravilno-sovety-kotorye-pomogut-izbezhat-oshibok/",'+
         '"https://tutor.ru/general?utm_source=semya&utm_medium=pr&utm_campaign=art1",'+
@@ -27,43 +27,50 @@ for(var i=0; i<s2s.length; i++) {
         const regex = /^(https?:\/\/)?(.*?)($|[/?])/;
         let host = regex.exec(s2s[i][1]);
 
-        var tags = document.getElementsByClassName('article_info');
+        var corton_promos = document.createElement("div"),
+            article = document.getElementsByClassName("articlebody");
+            corton_promos.id='corton-promos';
 
-        tags[0].innerHTML= ''+
-            '<div id="corton-promo"></div>'+
+        article[0].after(corton_promos);
+
+        corton_promos.innerHTML= ''+
+            '<div id="corton_fon" style="min-height: 130vh"></div>'+
             '<div id="corton_scroll_to_site">'+
-            '<div id="corton_sticky_container">'+
-            '<div id="corton_overlay"></div>'+
-            '<div id="corton_border_title"><div>Листая дальше вы перейдёте на: &nbsp;<a href="'+s2s[i][1]+'">'+host[2]+'</a></div></div>'+
-            '<div id="corton_browser_container">'+
-            '<a href="'+s2s[i][1]+'" rel="noopener nofollow">'+
-            '<div id="corton_header">'+
-            '<div id="corton_favicon" style="background-image: url(\'https://favicon.yandex.net/favicon/'+host[2]+'\');"></div>'+
-            '<div id="corton_link">'+host[2]+'</div>'+
+                '<div id="corton_sticky_container">'+
+                    '<div id="corton_overlay"></div>'+
+                    '<div id="corton_border_title"><div>Листая дальше вы перейдёте на: &nbsp;<a href="'+s2s[i][1]+'">'+host[2]+'</a></div></div>'+
+                    '<div id="corton_browser_container">'+
+                        '<a href="'+s2s[i][1]+'" rel="noopener nofollow">'+
+                        '<div id="corton_header">'+
+                            '<div id="corton_favicon" style="background-image: url(\'https://favicon.yandex.net/favicon/'+host[2]+'\');"></div>'+
+                            '<div id="corton_link">'+host[2]+'</div>'+
+                        '</div>'+
+                        '<img id="corton_image_fon">'+
+                        '</a>'+
+                    '</div>'+
+                '</div>'+
             '</div>'+
-            '<img id="corton_image_fon">'+
+            '<div id="corton_gradient_conteyner"><div id="corton_gradient"></div></div>'+
+            '<div id="corton_image_layer" style="bottom: 46px;">' +
+                '<img id="corton_image_fon_mobile" src="https://api.cortonlab.com/img/advertiser_screenshot_site/49f8e7f1e1f7a1bad4bd0ca5e1f34382.png">'+
             '</div>'+
-            '</a>'+
-            '</div>'+
-            '</div>'+
-            '</div>'+
-
+            '<div id="corton-promo-end" style="height: 130vh;"></div>'+
             '<style type="text/css">'+
                 '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
                 '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;} '+
                 'footer, .ocenka_teaser {display: none !important;} '+
-                '#corton-promo img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
+                '#corton-promos img {max-width:100% !important;box-shadow:unset !important;border:unset !important;} '+
                 '#corton_border_title p {text-align: center;} '+
                 '.article_info {float: unset !important;}' +
                 '@media (max-width: 1024px) { '+
                 '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                 '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
-                '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;} '+
+                '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;top: -10px;} '+
                 '#corton_gradient{width:100%;height:100px;background-image:linear-gradient(rgba(0,0,0,0.1),rgba(255,0,0,0));} '+
-                '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative;} '+
+                '#corton_scroll_to_site {width: 100%;z-index:2147483647;position:relative; top: -10px;} '+
                 '#corton_scroll_to_site a{text-decoration:none;} '+
                 '#corton_browser_container{display:none;} '+
-                '#corton-promo {background-color:#FFFFFF;max-width: unset;position: relative;} '+
+                '#corton-promos {background-color:#FFFFFF;max-width: unset;position: relative;} '+
                 '#corton_fon {position: relative;z-index:2147483647;background-color: #FFF;padding: 0 20px;} '+
                 '}'+
                 '@media (min-width: 1025px) { '+
@@ -77,10 +84,11 @@ for(var i=0; i<s2s.length; i++) {
                 '#corton_link{margin-left:9px;font-size: 18px;} '+
                 '#corton_image_fon{width:100%;border:none; margin: 0px;} '+
                 '#corton_favicon{width:16px;height: 16px;margin-top:3px;} '+
-                '#corton-promo{min-height:unset !important;} '+
+                '#corton-promos{min-height:unset !important;} '+
                 '}'+
             '</style>';
-            var corton_promo=document.getElementById("corton-promo"),
+            var corton_promos=document.getElementById("corton-promos"),
+                corton_fon=document.getElementById("corton_fon"),
                 scroll_to_site = document.getElementById("corton_scroll_to_site"),
                 overlay=document.getElementById("corton_overlay"),
                 browser_container=document.getElementById("corton_browser_container"),
@@ -89,9 +97,12 @@ for(var i=0; i<s2s.length; i++) {
                 image_layer = document.getElementById("corton_image_layer"),
                 gradient_conteyner = document.getElementById("corton_gradient_conteyner"),
                 osvetlenie = document.getElementById("corton_osvetlenie"),
-                page_ready=0,
+                content_container=document.getElementById("content_container"),
+                articleall=document.getElementById("article"),
+                page_ready=0;
 
-                article = document.getElementById("article");
+        content_container.style.overflow='unset';
+        corton_fon.prepend(article[0]);
 
         function osvetlenie_redirekt() {
             console.log('переход');
@@ -108,16 +119,16 @@ for(var i=0; i<s2s.length; i++) {
             document.body.scrollTo(0, 0);
         }, 400);
 
+
+
+
         function s2s_position() {
             if (page_ready === 0) {
                 document.body.scrollTo(0, 0);
                 return true;
             }
 
-            scroll_to_site.style.left = -article.getBoundingClientRect().left+25 + 'px';
-            scroll_to_site.style.width = innerWidth -17+ 'px';
-
-            var stisky_top = corton_promo.getBoundingClientRect().top + corton_promo.scrollHeight;
+            var stisky_top = corton_promos.getBoundingClientRect().top + corton_promos.scrollHeight;
 
             if (outerWidth <= 1024) {
                 image_layer.style.bottom = outerHeight - image_fon_mobile.scrollHeight + 'px';
@@ -125,9 +136,16 @@ for(var i=0; i<s2s.length; i++) {
                 if (outerHeight / 8 > gradient_conteyner.getBoundingClientRect().top) {
                     osvetlenie_redirekt();
                 }
+
+                corton_promos.style.left = -articleall.getBoundingClientRect().left+ 'px';
+                corton_promos.style.width = innerWidth +'px';
             } else {
                 var i = (window.innerHeight - corton_promo.getBoundingClientRect().top) * 100 / innerHeight;
                 console.log(i);
+
+                scroll_to_site.style.left = -corton_promos.getBoundingClientRect().left+25 + 'px';
+                scroll_to_site.style.width = innerWidth -17+ 'px';
+
 
                 if (i < 30) {
                     overlay.style.opacity = 0;

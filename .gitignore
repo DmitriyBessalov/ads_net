@@ -1,6 +1,6 @@
 /api.cortonlab.com/js/.htaccess
 /api.cortonlab.com/js/corton.js
 /.idea/
-/api.cortonlab.com/css/
+/api.cortonlab.com/css/*.css.gz
 /api.cortonlab.com/img/
 /python/site_to_screenshot/ghostdriver.log
