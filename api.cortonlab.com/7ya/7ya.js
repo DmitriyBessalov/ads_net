@@ -16,7 +16,7 @@ const cortonjson='['+
         '"https://shop.evalar.ru/catalog/item/baby-formula-bears-immunity/?utm_source=7ya_septemberRW&utm_medium=article&utm_campaign=mishki%7C%7Carticle%7C%7C7ya_september%7C%7Cmain%7C%7Crw",'+
         '"https://api.cortonlab.com/7ya/3-pc.png",'+
         '"https://api.cortonlab.com/7ya/3-mob.png"'+
-    ']',['+
+    '],['+
         '"https://www.7ya.ru/special/kinder-doppelherz/",'+
         '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
         '"https://api.cortonlab.com/7ya/4-pc.png",'+
