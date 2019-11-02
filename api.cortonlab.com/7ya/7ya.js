@@ -63,6 +63,7 @@ for(var i=0; i<s2s.length; i++) {
                 '#corton_border_title p {text-align: center;} '+
                 '.article_info {float: unset !important;}' +
                 '@media (max-width: 1024px) { '+
+                'body,html {overflow-x: hidden;width: 100%;}'+
                 '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                 '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
                 '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;top: -10px;} '+
