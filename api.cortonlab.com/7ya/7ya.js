@@ -55,6 +55,7 @@ for(var i=0; i<s2s.length; i++) {
                 '<img id="corton_image_fon_mobile" src="https://api.cortonlab.com/img/advertiser_screenshot_site/49f8e7f1e1f7a1bad4bd0ca5e1f34382.png">'+
             '</div>'+
             '<div id="corton-promo-end" style="height: 130vh;"></div>'+
+            '<div id="corton_osvetlenie" style="height: 130vh;"></div>'+
             '<style type="text/css">'+
                 '#corton_osvetlenie{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background-color:#FFF;opacity:0;pointer-events:none;transition:opacity 1s ease-in;} '+
                 '#corton_border_title{background-color:#fff8d9;max-height:82px;height:82px;display: flex; justify-content: center; align-items: center;} '+
@@ -63,6 +64,7 @@ for(var i=0; i<s2s.length; i++) {
                 '#corton_border_title p {text-align: center;} '+
                 '.article_info {float: unset !important;}' +
                 '@media (max-width: 1024px) { '+
+                '#corton_fon{min-height: 130vh;}'+
                 '#corton_image_layer{position:sticky;bottom:0;z-index:2147483646;background-color:#000;} '+
                 '#corton_image_fon_mobile{width: 100%; max-width: 100% !important;opacity:.95;position: relative;top:0;border:none; margin: 0px;} '+
                 '#corton_gradient_conteyner{height:2000px;position: relative;z-index: 2147483647;top: -10px;} '+
@@ -102,16 +104,16 @@ for(var i=0; i<s2s.length; i++) {
 
         content_container.style.overflow='unset';
         corton_fon.prepend(article[0]);
-
+        link=s2s[i][1];
         function osvetlenie_redirekt() {
             console.log('переход');
-            //osvetlenie.style.opacity='1';
-            //if (page_ready===1){
-            //    setTimeout(function() {
-            //        document.location.href = s2s[i][1];
-            //    }, 300);
-            //}
-            //page_ready=2;
+            osvetlenie.style.opacity='1';
+            if (page_ready===1){
+                setTimeout(function() {
+                    document.location.href = link;
+                }, 300);
+            }
+            page_ready=2;
         }
 
         setTimeout(function() {
@@ -139,7 +141,7 @@ for(var i=0; i<s2s.length; i++) {
                 //corton_promos.style.left = -articleall.getBoundingClientRect().left+ 'px';
                 corton_promos.style.width = outerWidth +'px';
             } else {
-                var i = (window.innerHeight - corton_promos.getBoundingClientRect().top) * 100 / innerHeight;
+                var i = (window.innerHeight - scroll_to_site.getBoundingClientRect().top) * 100 / innerHeight;
                 console.log(i);
 
                 scroll_to_site.style.left = -corton_promos.getBoundingClientRect().left+25 + 'px';
