@@ -43,7 +43,7 @@ for(var i=0; i<s2s.length; i++) {
             '<div id="corton_scroll_to_site">'+
                 '<div id="corton_sticky_container">'+
                     '<div id="corton_overlay"></div>'+
-                    '<div id="corton_border_title"><div>Листая дальше вы перейдёте на: &nbsp;<a href="'+s2s[i][1]+'">'+host[2]+'</a></div></div><div style="text-align: center; color: #c5c5c5; margin-bottom: 10px; font-size: 12px; ">Powered by Cortonlab</div>'+
+                    '<div id="corton_border_title"><div>Листая дальше вы перейдёте на: &nbsp;<a href="'+s2s[i][1]+'">'+host[2]+'</a></div></div><div style="text-align: center; color: #d0d0d0; margin-bottom: 10px; font-size: 12px; ">Powered by Cortonlab</div>'+
                     '<div id="corton_browser_container">'+
                         '<a href="'+s2s[i][1]+'" rel="noopener nofollow">'+
                         '<div id="corton_header">'+
