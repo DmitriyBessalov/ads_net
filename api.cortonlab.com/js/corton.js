@@ -252,11 +252,14 @@ if (corton_complete!=1) {
 
                 if (outerWidth<=1024) {
                     corton_promo.style.left = -gradient_conteyner.getBoundingClientRect().left + 'px';
-                    corton_promo.style.width = outerWidth + 'px';
+                    if (outerWidth>1) {
+                        corton_promo.style.width = outerWidth + 'px';
+                    }
                 }
 
                 setTimeout(function() {
                     if (innerWidth<=1024){
+                        corton_promo.style.width = outerWidth + 'px';
                         image_fon_mobile.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_mobile'];
                     }else{
                         image_fon.src="https://api.cortonlab.com/img/advertiser_screenshot_site/"+result['scroll2site_img_desktop'];
