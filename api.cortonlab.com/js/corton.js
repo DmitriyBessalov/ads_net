@@ -362,7 +362,7 @@ if (corton_complete!=1) {
                 }
                 setTimeout(letsGo,1000);
             };
-            if (i>=15)timer35=true;
+            if (i>=7)timer35=true;
             if (i>=20)timer85=true;
             if (scrollh<=pageYOffset) scroll=true;
             var promo_form=document.getElementsByClassName("promo-form");
@@ -377,7 +377,7 @@ if (corton_complete!=1) {
             }
             if (i!=-1 && widget_promo.scrollHeight>50) {
                 i++;
-            };
+            }
         }
         letsGo();
     }
@@ -386,7 +386,6 @@ if (corton_complete!=1) {
     function corton_widget() {
         var show_recomend=0;
         var show_natpre=0;
-//        var show_slider=0;
         var gadget='';
         var count=0;
         var result;
@@ -405,7 +404,6 @@ if (corton_complete!=1) {
 
         const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
         const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
-//        const slider_algorithm_output = style_b.getPropertyValue('--slider-algorithm-output');
 
         //Определение устройства пользователя
         function Device() {
@@ -820,7 +818,7 @@ if (corton_complete!=1) {
                 }
                 if (!tizer){
                     tizer = show_widg[i].parentNode.parentNode.parentNode.parentNode.parentNode;
-                    if(tizer.id!=='corton-recomendation-widget'){
+                    if((tizer.id!=='corton-recomendation-widget') && (!tizer.classList.contains('corton-recomendation-widget'))){
                         tizer = undefined;
                     }
                 }
