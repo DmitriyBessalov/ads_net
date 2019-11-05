@@ -16,6 +16,11 @@ const cortonjson='['+
         '"https://shop.evalar.ru/catalog/item/baby-formula-bears-immunity/?utm_source=7ya_septemberRW&utm_medium=article&utm_campaign=mishki%7C%7Carticle%7C%7C7ya_september%7C%7Cmain%7C%7Crw",'+
         '"https://api.cortonlab.com/7ya/3-pc.png",'+
         '"https://api.cortonlab.com/7ya/3-mob.png"'+
+    '],['+
+        '"https://www.7ya.ru/special/kinder-doppelherz/",'+
+        '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
+        '"https://api.cortonlab.com/7ya/4-pc.png",'+
+        '"https://api.cortonlab.com/7ya/4-mob.png"'+
     ']'+
 ']',
 s2s=JSON.parse(cortonjson);
@@ -38,7 +43,7 @@ for(var i=0; i<s2s.length; i++) {
             '<div id="corton_scroll_to_site">'+
                 '<div id="corton_sticky_container">'+
                     '<div id="corton_overlay"></div>'+
-                    '<div id="corton_border_title"><div>Листая дальше вы перейдёте на: &nbsp;<a href="'+s2s[i][1]+'">'+host[2]+'</a></div></div>'+
+                    '<div id="corton_border_title"><div>Листая дальше вы перейдёте на: &nbsp;<a href="'+s2s[i][1]+'">'+host[2]+'</a></div></div><div style="text-align: center; color: #d0d0d0; margin-bottom: 10px; font-size: 12px; ">Powered by Cortonlab</div>'+
                     '<div id="corton_browser_container">'+
                         '<a href="'+s2s[i][1]+'" rel="noopener nofollow">'+
                         '<div id="corton_header">'+
