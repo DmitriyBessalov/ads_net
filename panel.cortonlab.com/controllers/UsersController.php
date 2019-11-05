@@ -105,6 +105,7 @@ class UsersController
                          $i['role'] = "Площадки";
                          $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$i['id']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$i['id']."')";
                          $i['balans']=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                         $i['balans']=round($i['balans'],2);
                          break;
                      }
                      case "manager": {

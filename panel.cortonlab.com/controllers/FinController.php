@@ -419,7 +419,11 @@ class FinController
 
         $sql="SELECT `balans` FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."' AND `date`=(SELECT MAX(`date`) FROM `balans_user` WHERE `user_id`='".$GLOBALS['user']."')";
         $balans=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
-        if (is_null($balans))$balans=0;
+        if (is_null($balans)){
+            $balans=0;
+        }else{
+            $balans=round($balans,2);
+        }
 
         if ($balans<5000){
             $disable=' disabled="disabled" ';
