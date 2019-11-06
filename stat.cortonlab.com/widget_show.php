@@ -75,7 +75,7 @@ foreach ($arr as $value) {
     }
 
     $redis->incr(date('d').':'.$ploshadka_id.':'.$value);
-    if (($value!=$valueold) and ($value=='r')){
+    if (($value!=$valueold) and ($value=='r') and ($_GET['f']==1)){
         $sql= "INSERT INTO `widget_prosmotr`(`prosmotr_id`, `ploshadka_id`, `date`) VALUES ('".addslashes($_GET['prosmort_id'])."','".$ploshadka_id."',CURDATE())";
         $GLOBALS['dbstat']->query($sql);
         $valueold='r';
