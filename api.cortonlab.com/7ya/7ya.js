@@ -125,9 +125,6 @@ for(var i=0; i<s2s.length; i++) {
             document.body.scrollTo(0, 0);
         }, 400);
 
-
-
-
         function s2s_position() {
             if (page_ready === 0) {
                 document.body.scrollTo(0, 0);
