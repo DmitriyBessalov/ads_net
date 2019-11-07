@@ -193,6 +193,7 @@ setTimeout(function(){
                     scroll_to_site.style.width = outerWidth + 'px';
                     gradient_conteyner.style.left= -gradient_conteyner.getBoundingClientRect().left+'px';
                     gradient_conteyner.style.width = outerWidth + 'px';
+                    image_layer.style.visibility='hidden';
                     image_fon_mobile.src=s2s[i][3];
                 }else{
                     scroll_to_site.style.left = -scroll_to_site.getBoundingClientRect().left + 'px';
