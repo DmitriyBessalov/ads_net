@@ -73,7 +73,7 @@ if (corton_complete!=1) {
                 if ((result['istochnic']!=='') && (innerWidth>1000)) {
                     result['istochnic'] = result['istochnic'].replace(/"/g, "&#34;");
                     result['istochnic'] = result['istochnic'].replace(/'''/g, "&#39;");
-                    ist='<p style="line-height: 1.3; color: #999; font-size: 12px;" title="'+result['istochnic']+'">Источники</p>';
+                    ist='<p style="line-height: 1.3; color: #999; font-size: 12px;cursor: help;" title="'+result['istochnic']+'">Источники</p>';
                 }
                 marker_reklamiy=ist+'<p style="line-height: 1.3; color: #999; font-size: 12px;">На правах рекламы</p>';
             }else{
