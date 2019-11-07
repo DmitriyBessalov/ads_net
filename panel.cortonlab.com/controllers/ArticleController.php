@@ -1176,12 +1176,12 @@ class ArticleController
                         </div>
                         
                         <div class="element-wrapper" style="justify-content: normal">
-                              <input type="checkbox" style="margin:10px" name="medblock" class="checkbox" id="checkbox_merge"';
+                              <input type="checkbox" style="margin:10px" name="medblock" class="checkbox" id="medblock"';
 
                               if ($result['medblock']) echo 'checked="" ';
 
                               echo '>
-                              <label for="checkbox_merge">Медицинская тематика</label>
+                              <label for="medblock">Медицинская тематика</label>
                         </div>
                       
 						<div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 30px; margin-left: -20px; margin-top: 30px;"></div>
