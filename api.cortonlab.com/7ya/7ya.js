@@ -145,9 +145,9 @@ setTimeout(function(){
                             image_layer.style.visibility='hidden';
                         }else{
                             image_layer.style.visibility='visible';
-                            image_layer.style.top=gradient_conteyner.getBoundingClientRect().top-70+'px';
-                            image_fon_mobile.style.top=-gradient_conteyner.getBoundingClientRect().top+70+'px';
-                            image_fon_mobile_end.style.top=-gradient_conteyner.getBoundingClientRect().top+70+'px';
+                            image_layer.style.top=gradient_conteyner.getBoundingClientRect().top-65+'px';
+                            image_fon_mobile.style.top=-gradient_conteyner.getBoundingClientRect().top+65+'px';
+                            image_fon_mobile_end.style.top=-gradient_conteyner.getBoundingClientRect().top+65+'px';
                         }
 
                         if (outerHeight / 8 > scroll_to_site.getBoundingClientRect().top) {
