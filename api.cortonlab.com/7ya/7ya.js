@@ -127,6 +127,7 @@ setTimeout(function(){
                     page_ready=2;
                 }
 
+
                 setTimeout(function() {
                     document.body.scrollTo(0, 0);
                 }, 400);
