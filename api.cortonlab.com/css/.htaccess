@@ -1,0 +1,10 @@
+<FilesMatch "\.css.gz$">
+	AddEncoding gzip .gz
+	ForceType text/css
+	Header set Content-Encoding: gzip
+</FilesMatch>
+
+RewriteEngine On
+RewriteCond %{THE_REQUEST} /([^.]+) [NC]
+RewriteRule kleo_ru.css.gz www_kleo_ru.css.gz
+RewriteRule kiz_ru.css.gz www_kiz_ru.css.gz
