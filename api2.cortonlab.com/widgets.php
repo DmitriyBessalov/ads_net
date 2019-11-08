@@ -150,6 +150,7 @@ if (count($an)==0){
 }
 
 preg_match('/\/\/(.*?)\//', $_SERVER['HTTP_REFERER'], $referer);
+if ($referer[1]=='kiz.ru')$referer[1]='www.kiz.ru';
 $sql="SELECT `id`,`promo_page` FROM `ploshadki` WHERE `domen`='".$referer[1]."'";
 $result1 = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 $stat_arr['platform_id']=$arr['p_id'] = $result1['id'];
