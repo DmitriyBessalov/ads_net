@@ -142,7 +142,7 @@
                     $sql="SELECT `model_pay` FROM `ploshadki` WHERE `id`='".$i['id']."'";
                     $model=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
 
-                    if ($model='CPG'){
+                    if ($model=='CPG'){
                         $CPG='class="nowstatus"';
                         $CPM='';
                     }else{
