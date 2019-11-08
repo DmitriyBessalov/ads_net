@@ -139,10 +139,23 @@
                     $oborot['cpg']=round($oborot['cpg'] ,2);
                     $oborot['cpm']=round($oborot['cpm'] ,2);
 
+                    $sql="SELECT `model_pay` FROM `ploshadki` WHERE `id`='".$i['id']."'";
+                    $model=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+
+                    if ($model='CPG'){
+                        $CPG='class="nowstatus"';
+                        $CPM='';
+                    }else{
+                        $CPG='';
+                        $CPM='class="nowstatus"';
+                    }
                     echo "          
                             </p>
                             <p style=\"color: #768093; font-size: 12px;margin-bottom: 0;\">Менеджер: ".$i['manager']."</p>
-                            <p style=\"color: #768093; font-size: 12px;\">Оборот CPG : ".$oborot['cpg']." Оборот CPM : ".$oborot['cpm']." </p>
+                            <p style=\"color: #768093; font-size: 12px;\">
+                                <span ".$CPG.">Оборот CPG : ".$oborot['cpg']."</span>
+                                <span ".$CPM.">Оборот CPM : ".$oborot['cpm']."</span>
+                            </p>
 						  </div>
 					  </div>
 					  </td>
@@ -300,26 +313,7 @@ var myLineChart = new Chart(ctx, {
 		
 		</div>
 		
-        <div class="div-block-98">
-          <div>
-            <div class="text-block-111">&lt;</div>
-          </div>
-          <div>
-            <div class="text-block-111">1</div>
-          </div>
-          <div>
-            <div class="text-block-111">2</div>
-          </div>
-          <div>
-            <div class="text-block-111">3</div>
-          </div>
-          <div>
-            <div class="text-block-111">4</div>
-          </div>
-          <div>
-            <div class="text-block-111">&gt;</div>
-          </div>
-        </div>
+
         <div class="black-fon modalhide"></div>
 		';
                 include PANELDIR . '/views/layouts/footer.php';
