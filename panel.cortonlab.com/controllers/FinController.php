@@ -80,7 +80,7 @@ class FinController
                         $aktiv['recomend_aktiv'] = $aktiv['natpre_aktiv'] = $aktiv['slider_aktiv'] = false;
                     }
 
-                    $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load', sum(`r_cpm`) as 'r_cpm',sum(`e_cpm`)as 'e_cpm', FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $sql = "SELECT SUM(`r_balans`) as `r_balans`,SUM(`e_balans`) as `e_balans`, SUM(`s_balans`) as `s_balans`, SUM(`r`) as `r`, SUM(`e`) as `e`, SUM(`s`) as `s`, SUM(`e_show_anons`) as 'e_show_anons', SUM(`s_show_anons`) as 's_show_anons', SUM(`r_promo_load`) as 'r_promo_load', SUM(`e_promo_load`) as 'e_promo_load', SUM(`s_promo_load`) as 's_promo_load', sum(`r_cpm`) as 'r_cpm',sum(`e_cpm`)as 'e_cpm' FROM `balans_ploshadki` WHERE `ploshadka_id` in ('" . $strplatform . "') AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                     $balansperiod = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                     if ((strtotime($datebegin) <= strtotime(date('d.m.Y'))) AND (strtotime($dateend) >= strtotime(date('d.m.Y')))) {
@@ -100,9 +100,6 @@ class FinController
                             //if ($ch) $balansperiod['s_show_anons'] += $ch;
                         };
                     }
-
-
-
 
                     if (strtotime($datebegin)<=strtotime(date('04.09.2019'))){
                         if (strtotime($dateend)<=strtotime(date('04.09.2019'))){
@@ -152,8 +149,13 @@ class FinController
 
                     if (is_null($balansperiod['r'])) {
                         $balansperiod['r'] = $balansperiod['e'] = $balansperiod['s'] = 0;
-                        $balansperiod['r_balans'] = $balansperiod['e_balans'] = $balansperiod['s_balans'] = '0.00';
+                        $balansperiod['r_cpm'] = $balansperiod['e_cpm'] = $balansperiod['r_balans'] = $balansperiod['e_balans'] = $balansperiod['s_balans'] = '0.00';
                     };
+
+                    if ($old_model_pay=='CPM'){
+                        $balansperiod['r_balans'] = round($balansperiod['r_cpm'] ,2);
+                        $balansperiod['e_balans'] = round($balansperiod['e_cpm'] ,2);
+                    }
 
                 }else{
                     echo '<tr><h2 style="color: #c40028;">Отсутствуют подключённые площадки</h2></tr>';
