@@ -147,7 +147,7 @@
                         $CPM='';
                     }else{
                         $CPG='';
-                        if ($oborot['cpg']>$oborot['cpm']){
+                        if ($oborot['cpg']>=$oborot['cpm']){
                             $CPM='class="nowstatus"';
                         }else{
                             $CPM='class="nowstatus" style="background:red;"';
