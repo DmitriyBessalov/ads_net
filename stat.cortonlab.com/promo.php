@@ -76,6 +76,7 @@ $stat_arr['promo_id_list']=$promo['promo_id'];
 
 # Обновляет информацию по переходу на статью
 if ($action =='l') {
+    if ($domen!='www.kiz.ru')
     if ($_GET['ref']=="") {
         $stat_arr['is_baned']=1;
         statpostgres($stat_arr);
