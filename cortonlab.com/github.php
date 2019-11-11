@@ -1,5 +1,5 @@
 <?php
-echo exec('cd /var/www/www-root/data/www && git reset --hard HEAD && git pull git@github.com:DmitriyBessalov/corton.git');
+echo exec('cd /var/www/www-root/data/www && git reset --hard origin/master && git pull git@github.com:DmitriyBessalov/corton.git');
 
 $redis = new Redis();
 $redis->pconnect('185.75.90.54', 6379);

@@ -133,7 +133,7 @@
                               +30%
                               </span>";
 
-                    $sql="SELECT sum(`cpm`) as cpm, sum(`cpg`) as cpg  FROM `balans_ploshadki` WHERE `ploshadka_id`=".$i['id']." AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $sql="SELECT sum(`r_cpm`)+sum(`e_cpm`) as cpm, sum(`cpg`) as cpg  FROM `balans_ploshadki` WHERE `ploshadka_id`=".$i['id']." AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
                     $oborot=$GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
                     $oborot['cpg']=round($oborot['cpg'] ,2);
