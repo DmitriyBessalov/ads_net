@@ -18,11 +18,11 @@ setTimeout(function(){
             '"https://api.cortonlab.com/7ya/3-pc.png",'+
             '"https://api.cortonlab.com/7ya/3-mob.png"'+
         '],['+
-            '"//www.7ya.ru/special/kinder-doppelherz/",'+
-            '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
-            '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
-            '"https://api.cortonlab.com/7ya/4-mob.jpg"'+
-        ']'+
+        '"https://www.7ya.ru/article/Chto-vredit-zreniyu-rebenka/",'+
+        '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
+        '"https://api.cortonlab.com/7ya/4-pc.png",'+
+        '"https://api.cortonlab.com/7ya/4-mob.png"'+
+    ']'+
     ']',
     s2s=JSON.parse(cortonjson);
 
