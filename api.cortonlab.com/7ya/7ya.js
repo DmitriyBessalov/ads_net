@@ -25,8 +25,8 @@ setTimeout(function(){
         '],['+
             '"https://www.7ya.ru/article/Chto-vredit-zreniyu-rebenka/",'+
             '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
-            '"https://api.cortonlab.com/7ya/4-pc.png",'+
-            '"https://api.cortonlab.com/7ya/4-mob.png"'+
+            '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
+            '"https://api.cortonlab.com/7ya/4-mob.jpg"'+
     ']'+
     ']',
     s2s=JSON.parse(cortonjson);
