@@ -3,22 +3,22 @@ setTimeout(function(){
 
     const cortonjson='['+
         '['+
-            '"https://www.7ya.ru/article/Sekrety-uspeshnoj-sjemki-na-smartfon/",'+
+            '"//www.7ya.ru/article/Sekrety-uspeshnoj-sjemki-na-smartfon/",'+
             '"https://www.netprint.ru/lp/7ya_50foto?utm_source=partners&utm_medium=article&utm_campaign=2019",'+
             '"https://api.cortonlab.com/7ya/1-pc.jpg",'+
             '"https://api.cortonlab.com/7ya/1-mob.png"'+
         '],['+
-            '"https://www.7ya.ru/article/Vybiraem-repetitora-pravilno-sovety-kotorye-pomogut-izbezhat-oshibok/",'+
+            '"//www.7ya.ru/article/Vybiraem-repetitora-pravilno-sovety-kotorye-pomogut-izbezhat-oshibok/",'+
             '"https://tutor.ru/general?utm_source=semya&utm_medium=pr&utm_campaign=art1",'+
             '"https://api.cortonlab.com/7ya/2-pc.png",'+
             '"https://api.cortonlab.com/7ya/2-mob.png"'+
         '],['+
-            '"https://www.7ya.ru/article/Shkola-Sadik-Uspokoit-rebenka-i-povysit-immunitet/",'+
+            '"//www.7ya.ru/article/Shkola-Sadik-Uspokoit-rebenka-i-povysit-immunitet/",'+
             '"https://shop.evalar.ru/catalog/item/baby-formula-bears-immunity/?utm_source=7ya_septemberRW&utm_medium=article&utm_campaign=mishki%7C%7Carticle%7C%7C7ya_september%7C%7Cmain%7C%7Crw",'+
             '"https://api.cortonlab.com/7ya/3-pc.png",'+
             '"https://api.cortonlab.com/7ya/3-mob.png"'+
         '],['+
-            '"https://www.7ya.ru/special/kinder-doppelherz/",'+
+            '"//www.7ya.ru/special/kinder-doppelherz/",'+
             '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
             '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
             '"https://api.cortonlab.com/7ya/4-mob.jpg"'+
@@ -27,7 +27,7 @@ setTimeout(function(){
     s2s=JSON.parse(cortonjson);
 
     for(var i=0; i<s2s.length; i++) {
-        if (s2s[i][0]===location.href)
+        if(location.href.indexOf(s2s[i][0])!==-1)
         {
             console.log(s2s[i][0]);
             const regex = /^(https?:\/\/)?(.*?)($|[/?])/;
