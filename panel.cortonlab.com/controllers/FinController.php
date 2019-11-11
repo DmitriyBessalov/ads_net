@@ -12,6 +12,20 @@ class FinController
         $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
+        $sql = "SELECT p.`id`, p.`domen`, u.`email`, p.`user_id`, p.`model_pay` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
+        $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $old_model_pay=$balansall = 0;
+        foreach ($result as $i) {
+            $arrplatform[] = $i['id'];
+            $domen = $i['domen'];
+
+            if ($old_model_pay==0)
+                $old_model_pay=$i['model_pay'];
+
+            if ($old_model_pay!=$i['model_pay'])
+                $old_model_pay=1;
+        };
+
         echo '
 <div class="table-box">
     <div class="div-block-102-table">
@@ -25,29 +39,18 @@ class FinController
                         <div class="tooltipinfo2" style="font-size: 14px;">?<span class="tooltiptext1">Оплаченные просмотры спонсорских статей</span></div>
                     </td>
                     <td style="min-width: 110px;">CTR виджета
-                    </td>
+                    </td>';
+                    if ($old_model_pay=='CPG')
+                    echo '
                     <td class="bluetext" style="min-width: 120px; font-weight: 600;">eCPM
                         <div class="tooltipinfo2" style="font-size: 14px; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Доход на 1000 показов анонсов</span></div>
-                    </td>
+                    </td>';
+                    echo '
                     <td style="min-width: 130px;">Доход</td>
 					<td style="min-width: 140px;">Код виджета</td>
                 </tr>
             </thead>';
         if ((strtotime($datebegin)<=strtotime($dateend)) AND (strtotime($datebegin)<=strtotime(date('d.m.Y')))) {
-
-            $sql = "SELECT p.`id`, p.`domen`, u.`email`, p.`user_id`, p.`model_pay` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
-            $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            $old_model_pay=$balansall = 0;
-            foreach ($result as $i) {
-                $arrplatform[] = $i['id'];
-                $domen = $i['domen'];
-
-                if ($old_model_pay==0)
-                    $old_model_pay=$i['model_pay'];
-
-                if ($old_model_pay!=$i['model_pay'])
-                    $old_model_pay=1;
-            };
 
             if ($old_model_pay!=1){
 
@@ -178,16 +181,22 @@ class FinController
             </td>
             <td>'.$balansperiod['r_show_anons'].'</td>
             <td>' . $balansperiod['r'] . '</td>
-            <td>' . $r_CTR . ' %</td>
-            <td class="bluetext">';
-            if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
-                $val= round($balansperiod['r_balans']/($balansperiod['r_show_anons'])*1100,2);
-                if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
-                echo $val;
-            } else {
-                echo '0.00';
-            }
-            echo ' р.</td>
+            <td>' . $r_CTR . ' %</td>';
+            if ($old_model_pay=='CPG') {
+                echo '
+                <td class="bluetext">';
+                if (($aktiv['recomend_aktiv']) AND ($balansperiod['r'] != 0)) {
+                    $val = round($balansperiod['r_balans'] / ($balansperiod['r_show_anons']) * 1100, 2);
+                    if ((is_nan($val)) or (is_infinite($val))) {
+                        $val = '0.00';
+                    }
+                    echo $val;
+                } else {
+                    echo '0.00';
+                }
+                echo ' р.</td>';
+            };
+            echo '
             <td>' . $balansperiod['r_balans'] . ' р.</td>
 			<td>
 		        <a class="main-itemcode" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
@@ -223,16 +232,21 @@ class FinController
             </td>
             <td>'.$balansperiod['e_show_anons'].'</td>
             <td>' . $balansperiod['e'] . '</td>
-            <td>' . $e_CTR . ' %</td>
-            <td class="bluetext">';
-            if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
-                $val= round($balansperiod['e_balans']/$balansperiod['e_show_anons']*1100,2);
-                if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
-                echo $val;
-            } else {
-                echo '0.00';
+            <td>' . $e_CTR . ' %</td>';
+            if ($old_model_pay=='CPG')
+            {
+                echo'
+                <td class="bluetext">';
+                if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
+                    $val= round($balansperiod['e_balans']/$balansperiod['e_show_anons']*1100,2);
+                    if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
+                    echo $val;
+                } else {
+                    echo '0.00';
+                }
+                echo ' р.</td>';
             }
-            echo ' р.</td>
+            echo'
             <td>' . $balansperiod['e_balans'] . ' р.</td>
 			<td>
 			   <a class="main-itemcode2" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
@@ -248,7 +262,7 @@ class FinController
                 </ul>
 			</td>
         </tr>
-        <tr>
+        <!--tr>
             <td style="text-align: left; width: 260px;">
                 <div style="margin-top: 7px;">
                     <div class="slider-mini-site"></div>
@@ -293,7 +307,7 @@ class FinController
                 </ul>
 			</td>
         </tr>
-        <!--tr>
+        <tr>
             <td style="text-align: left; width: 260px;">
                 <div style="margin-top: 7px;">
                     <div class="nativepro-mini-site"></div>
