@@ -225,7 +225,13 @@ var myLineChart = new Chart(ctx, {
 });
                       </script>
 					  </td>
-					  <td class=\"bluetext\">" . $platform['dohod'] . "</td>";
+					  <td class=\"bluetext\">";
+                    if ($model=='CPM') {
+                        $sql="SELECT SUM(`r_cpm`)+SUM(`e_cpm`) FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'";
+                        $platform['dohod']=$GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    }
+                      echo $platform['dohod'];
+                      echo  "</td>";
 
                     $sql="SELECT SUM(`pay`) FROM `stat_promo_prosmotr` WHERE `ploshadka_id`=".$i['id']." AND `date`>='" . $mySQLdatebegin ."' AND `date`<='" . $mySQLdateend ."'";
                     $platform['rashod_rekl']=$GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
@@ -314,9 +320,7 @@ var myLineChart = new Chart(ctx, {
             </div>
 			</form>
 		</div>
-		
 		</div>
-		
 
         <div class="black-fon modalhide"></div>
 		';
