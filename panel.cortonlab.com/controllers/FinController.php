@@ -12,7 +12,7 @@ class FinController
         $mySQLdatebegin = date('Y-m-d', strtotime($datebegin));
         $mySQLdateend = date('Y-m-d', strtotime($dateend));
 
-        $sql = "SELECT p.`id`, p.`domen`, u.`email`, p.`user_id`, p.`model_pay` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
+        $sql = "SELECT p.`id`, p.`domen`, u.`email`, p.`user_id`, p.`model_pay`,p.`CPM_stavka` FROM `ploshadki` p JOIN `users` u ON p.`user_id`=u.`id` WHERE `phpsession`='" . $_COOKIE['PHPSESSID'] . "'";
         $result = $GLOBALS['db']->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         $old_model_pay=$balansall = 0;
         foreach ($result as $i) {
@@ -41,13 +41,10 @@ class FinController
                     echo '
                     </td>
                     <td style="min-width: 110px;">CTR виджета
-                    </td>';
-                    if ($old_model_pay=='CPG')
-                    echo '
+                    </td>
                     <td class="bluetext" style="min-width: 120px; font-weight: 600;">eCPM
                         <div class="tooltipinfo2" style="font-size: 14px; font-weight: 400 !important;">?<span class="tooltiptext1" style="font-weight: 400 !important;">Доход на 1000 показов анонсов</span></div>
-                    </td>';
-                    echo '
+                    </td>
                     <td style="min-width: 130px;">Доход</td>
 					<td style="min-width: 140px;">Код виджета</td>
                 </tr>
@@ -188,9 +185,8 @@ class FinController
             <td>'.$balansperiod['r_show_anons'].'</td>
             <td>' . $balansperiod['r'] . '</td>
             <td>' . $r_CTR . ' %</td>';
+            echo '<td>';
             if ($old_model_pay=='CPG') {
-                echo '
-                <td class="bluetext">';
                 if (($aktiv['recomend_aktiv']) AND ($balansperiod['r'] != 0)) {
                     $val = round($balansperiod['r_balans'] / ($balansperiod['r_show_anons']) * 1100, 2);
                     if ((is_nan($val)) or (is_infinite($val))) {
@@ -200,9 +196,14 @@ class FinController
                 } else {
                     echo '0.00';
                 }
-                echo ' р.</td>';
-            };
-            echo '
+            }else{
+                if (count($result)==1) {
+                    echo $result['0']['CPM_stavka'];
+                }else{
+                    echo '--';
+                }
+            }
+            echo ' р.</td>
             <td>' . $balansperiod['r_balans'] . ' р.</td>
 			<td>
 		        <a class="main-itemcode" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
@@ -239,20 +240,25 @@ class FinController
             <td>'.$balansperiod['e_show_anons'].'</td>
             <td>' . $balansperiod['e'] . '</td>
             <td>' . $e_CTR . ' %</td>';
-            if ($old_model_pay=='CPG')
-            {
-                echo'
-                <td class="bluetext">';
-                if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
-                    $val= round($balansperiod['e_balans']/$balansperiod['e_show_anons']*1100,2);
-                    if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
+            echo '<td>';
+            if ($old_model_pay=='CPG') {
+                if (($aktiv['natpre_aktiv']) AND ($balansperiod['e'] != 0)) {
+                    $val = round($balansperiod['e_balans'] / ($balansperiod['e_show_anons']) * 1100, 2);
+                    if ((is_nan($val)) or (is_infinite($val))) {
+                        $val = '0.00';
+                    }
                     echo $val;
                 } else {
                     echo '0.00';
                 }
-                echo ' р.</td>';
+            }else{
+                if (count($result)==1) {
+                    echo $result['0']['CPM_stavka'];
+                }else{
+                    echo '--';
+                }
             }
-            echo'
+            echo ' р.</td>
             <td>' . $balansperiod['e_balans'] . ' р.</td>
 			<td>
 			   <a class="main-itemcode2" href="javascript:void(0);" tabindex="1" style="font-size: 16px; text-decoration: none; color: #333333;">
