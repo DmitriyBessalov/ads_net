@@ -115,7 +115,7 @@ if (corton_complete!=1) {
                             '<span class="tooltiptext">'+result['istochnic']+'</span>'+
                         '</div>'
                 }
-                marker_reklamiy=ist+'<p style="line-height: 1.3; color: #999; font-size: 12px !important; position: relative; top: 6px;">На правах рекламы</p>';
+                marker_reklamiy='<p></p><p></p><p></p><p></p><p></p>'+ist+'<p style="line-height: 1.3; color: #999; font-size: 12px !important; position: relative; top: 6px;">На правах рекламы</p>';
             }else{
                 marker_reklamiy='';
             }
