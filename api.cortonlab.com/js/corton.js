@@ -69,16 +69,53 @@ if (corton_complete!=1) {
 
             if (marker_reklamiy==='1'){
                 var ist='';
-   //           console.log(result['istochnic']);
                 if ((result['istochnic']!=='') && (innerWidth>1000)) {
                     result['istochnic'] = result['istochnic'].replace(/"/g, "&#34;");
                     result['istochnic'] = result['istochnic'].replace(/'''/g, "&#39;");
-                    ist='<p> </p>' +
-                        '<p style="line-height: 1.3; color: #999; font-size: 12px !important;cursor: help; top: -12px; position: relative;" title="'+result['istochnic']+'  ">Источники' +
-                            '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="22" height="22" viewBox="0 0 172 172" style=" fill:#000000;position: relative;top: 5px;left: 2px;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#999999"><path d="M86,14.33333c-39.49552,0 -71.66667,32.17115 -71.66667,71.66667c0,39.49552 32.17115,71.66667 71.66667,71.66667c39.49552,0 71.66667,-32.17115 71.66667,-71.66667c0,-39.49552 -32.17115,-71.66667 -71.66667,-71.66667zM86,28.66667c31.74921,0 57.33333,25.58412 57.33333,57.33333c0,31.74921 -25.58412,57.33333 -57.33333,57.33333c-31.74921,0 -57.33333,-25.58412 -57.33333,-57.33333c0,-31.74921 25.58412,-57.33333 57.33333,-57.33333zM78.83333,50.16667v14.33333h14.33333v-14.33333zM78.83333,78.83333v43h14.33333v-43z"></path></g></g></svg>' +
-                        '</p>';
+                    ist='<style>' +
+                        '.tooltip {' +
+                        '  position: relative;' +
+                        '  display: inline-block;' +
+                        '}' +
+                        '.tooltip .tooltiptext {' +
+                        '  visibility: hidden;' +
+                        '  width: max-content;' +
+                        '  max-width:300px;' +
+                        '  background-color: #ececec;' +
+                        '  color: #101010;' +
+                        '  text-align: left;' +
+                        '  border-radius: 6px;' +
+                        '  position: absolute;' +
+                        '  z-index: 666;' +
+                        '  bottom: 150%;' +
+                        '  left: 0%;' +
+                        '  font-size:12px;' +
+                        '  padding:10px;' +
+                        '}' +
+                        '.block-tooltip {' +
+                        '  font-size:12px;' +
+                        '}' +
+                        '.tooltip:hover .tooltiptext {' +
+                        '  visibility: visible;' +
+                        '}' +
+                        '</style>' +
+                        '<div class="tooltip">'+
+                            '<div class="block-tooltip" style="line-height: 1.3; color: #999; font-size: 12px !important;">Источники'+
+                            '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 172 172" style="position: relative; top: 3px; left: 2px; fill:#000000;">'+
+                            '<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">'+
+                            '<path d="M0,172v-172h172v172z" fill="none">'+
+                            '</path>'+
+                            '<g fill="#999999">'+
+                            '<path d="M86,14.33333c-39.49552,0 -71.66667,32.17115 -71.66667,71.66667c0,39.49552 32.17115,71.66667 71.66667,71.66667c39.49552,0 71.66667,-32.17115 71.66667,-71.66667c0,-39.49552 -32.17115,-71.66667 -71.66667,-71.66667zM86,28.66667c31.74921,0 57.33333,25.58412 57.33333,57.33333c0,31.74921 -25.58412,57.33333 -57.33333,57.33333c-31.74921,0 -57.33333,-25.58412 -57.33333,-57.33333c0,-31.74921 25.58412,-57.33333 57.33333,-57.33333zM78.83333,50.16667v14.33333h14.33333v-14.33333zM78.83333,78.83333v43h14.33333v-43z">'+
+                            '</path>'+
+                            '</g>'+
+                            '</g>'+
+                            '</svg>'+
+                            '</div>'+
+                            '<span class="tooltiptext">'+result['istochnic']+'</span>'+
+                        '</div>'
                 }
-                marker_reklamiy=ist+'<p style="line-height: 1.3; color: #999; font-size: 12px !important;">На правах рекламы</p>';
+                marker_reklamiy=ist+'<p style="line-height: 1.3; color: #999; font-size: 12px !important; position: relative; top: 6px;">На правах рекламы</p>';
             }else{
                 marker_reklamiy='';
             }
