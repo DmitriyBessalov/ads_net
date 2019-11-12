@@ -2746,6 +2746,16 @@ var myLineChart = new Chart(ctx, {
                 if ((is_nan($eCTR)) or (is_infinite($eCTR))) {$eCTR = '0';}
                 if ((is_nan($sCTR)) or (is_infinite($sCTR))) {$sCTR = '0';}
 
+                $sql="SELECT `model_pay`,`CPM_stavka` FROM `ploshadki` WHERE `id`='".$_GET['id']."'";
+                $model_pay=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+                if ($model_pay['model_pay']=='CPM') {
+                    $sql = "SELECT sum(`r_cpm`) as 'r_cpm',sum(`e_cpm`)as 'e_cpm' FROM `balans_ploshadki` WHERE `ploshadka_id`='".$_GET['id']."' AND `date`>='" . $mySQLdatebegin . "' AND `date`<='" . $mySQLdateend . "'";
+                    $cpm = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
+                    $balansperiod['r_balans']=round($cpm['r_cpm'],2);
+                    $balansperiod['e_balans']=round($cpm['e_cpm'],2);
+                }
+
                 echo '
         <tbody>
         <tr>
@@ -2771,13 +2781,16 @@ var myLineChart = new Chart(ctx, {
             <td>'.$rCTR.' %</td>
             <td>'.$balansperiod['r'];$val=round(100/$balansperiod['r_promo_load']*$balansperiod['r'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
             <td>';
-            if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
-                $val= round($balansperiod['r_balans']/$balansperiod['r_show_anons']*1100,2);
-                if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
-                echo $val;
-            } else {
-                echo '0.00';
-            }
+                if ($model_pay['model_pay']=='CPM') {
+                    echo $model_pay['CPM_stavka'];
+                }else
+                if (($aktiv['recomend_aktiv'])AND($balansperiod['r']!=0)) {
+                    $val= round($balansperiod['r_balans']/$balansperiod['r_show_anons']*1100,2);
+                    if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
+                    echo $val;
+                } else {
+                    echo '0.00';
+                }
             echo'&nbsp;p</td>
             <td>'.$balansperiod['r_promo_click'].'</td>
             <td class="bluetext">' . $balansperiod['r_balans'] . '&nbsp;р.</td>
@@ -2806,6 +2819,9 @@ var myLineChart = new Chart(ctx, {
             <td>'.$eCTR.' %</td>
             <td>'.$balansperiod['e'];$val=round(100/$balansperiod['e_promo_load']*$balansperiod['e'],2);if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
             <td>';
+                if ($model_pay['model_pay']=='CPM') {
+                    echo $model_pay['CPM_stavka'];
+                }else
                 if (($aktiv['natpre_aktiv'])AND($balansperiod['e']!=0)) {
                     $val= round($balansperiod['e_balans']/$balansperiod['e_show_anons']*1100,2);
                     if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
@@ -2840,6 +2856,9 @@ var myLineChart = new Chart(ctx, {
             <td>'.$sCTR.' %</td>  
             <td>'.$balansperiod['s']; $val=round(100/$balansperiod['s_promo_load']*$balansperiod['s'],2); if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}echo' ('.$val.'%)</td>
             <td>';
+                if ($model_pay['model_pay']=='CPM') {
+                    echo $model_pay['CPM_stavka'];
+                }else
                 if (($aktiv['slider_aktiv'])AND($balansperiod['s']!=0)) {
                     $val= round($balansperiod['s_balans']/$balansperiod['s_show_anons']*1100,2);
                     if ((is_nan($val)) or (is_infinite($val))) {$val = '0.00';}
