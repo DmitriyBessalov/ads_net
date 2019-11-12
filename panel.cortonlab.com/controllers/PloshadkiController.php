@@ -195,8 +195,6 @@ var data = {
 var options = {
   title: { display: false},
   legend:{ display:false },
-  //maintainAspectRatio : false,
-  //responsive: false,
   tooltips: {enabled: false},
   animation: {
       duration : 1800,  
@@ -229,6 +227,9 @@ var myLineChart = new Chart(ctx, {
                     if ($model=='CPM') {
                         $sql="SELECT SUM(`r_cpm`)+SUM(`e_cpm`) FROM `balans_ploshadki` WHERE `ploshadka_id`='".$i['id']."'";
                         $platform['dohod']=$GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                        if (is_null($platform['dohod'])) {
+                            $platform['dohod'] = '0.00';
+                        }
                     }
                       echo $platform['dohod'];
                       echo  "</td>";
