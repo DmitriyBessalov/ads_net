@@ -80,7 +80,7 @@ if (corton_complete!=1) {
                         '.tooltip .tooltiptext {' +
                         '  visibility: hidden;' +
                         '  width: max-content;' +
-                        '  max-width:300px;' +
+                        '  max-width:320px;' +
                         '  background-color: #ececec;' +
                         '  color: #101010;' +
                         '  text-align: left;' +
@@ -91,6 +91,7 @@ if (corton_complete!=1) {
                         '  left: 0%;' +
                         '  font-size:12px;' +
                         '  padding:10px;' +
+						'  line-height:13px;' +
                         '}' +
                         '.block-tooltip {' +
                         '  font-size:12px;' +
