@@ -334,18 +334,21 @@ class UsersController
 
     //Авторизация
     public static function actionLogin(){
-        $session=substr(sha1(rand()), 0, 26);
-        setcookie ( 'PHPSESSID', $session, time () + 10000000 , '/');
-
         $email=$_POST['login'];
         $password=md5($_POST['password']);
         $ip=$_SERVER['REMOTE_ADDR'];
-        $sql="SELECT `password_md5`, `role` FROM `users` WHERE (`email`='".$email."') AND (`aktiv`='1') LIMIT 1;";
+        $sql="SELECT `id`,`password_md5`, `role`,`phpsession` FROM `users` WHERE (`email`='".$email."') AND (`aktiv`='1') LIMIT 1;";
         $user = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
         if ($user['password_md5'] === $password) {
-             $sql = "UPDATE `users` SET `phpsession` = '" . $session . "',`last_ip`='" . $ip . "' WHERE `email`='" . $email . "';";
-             $GLOBALS['db']->query($sql);
-             UsersController::panelStartPage($user['role']);
+            if ($user['id']==2){
+                setcookie ( 'PHPSESSID', $user['phpsession'], time () + 10000000 , '/');
+            }else{
+                $session=substr(sha1(rand()), 0, 26);
+                setcookie ( 'PHPSESSID', $session, time () + 10000000 , '/');
+                $sql = "UPDATE `users` SET `phpsession` = '" . $session . "',`last_ip`='" . $ip . "' WHERE `email`='" . $email . "';";
+                $GLOBALS['db']->query($sql);
+            }
+            UsersController::panelStartPage($user['role']);
         }else{
              SiteController::actionLoginform();
         };
