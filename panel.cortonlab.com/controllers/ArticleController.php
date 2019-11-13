@@ -649,7 +649,8 @@ class ArticleController
                 `scroll2site_text`='".$_POST['scroll2site_text']."',
                 `medblock`='".$_POST['medblock']."',
                 ".$scroll2site_img."
-                `scroll2site_url`='".$_POST['scroll2site_url']."'
+                `scroll2site_url`='".$_POST['scroll2site_url']."',
+                `scroll2site_url_text`='".$_POST['scroll2site_url_text']."'
              WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);
             $sql="UPDATE `anons_index` SET `stavka`='".$_POST['stavka']."', `persent_platform`='".$_POST['persent_platform']."' WHERE `promo_id`='".$_POST['id']."';";
@@ -1234,6 +1235,7 @@ class ArticleController
                             <label for="Scroll2Site">Активен</label>
                             <input name="scroll2site_text" type="text" value="'.$result['scroll2site_text'].'" '.$disabled.' required maxlength="54" class="text-field-2 w-input" placeholder="Текст" style="width: 760px;">
                             <input name="scroll2site_url" type="text" value="'.$result['scroll2site_url'].'" '.$disabled.' required class="text-field-2 w-input" placeholder="URL" style="width: 760px;">
+                            <input name="scroll2site_url_text" type="text" value="'.$result['scroll2site_url_text'].'" '.$disabled.' class="text-field-2 w-input" placeholder="Анкор ссылки" style="width: 760px;">
                                                                            
                             <div class="div-block-142">
                                 <div class="div-block-148" style="width: 510px;height: 300px">

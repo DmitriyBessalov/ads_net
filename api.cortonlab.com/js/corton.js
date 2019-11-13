@@ -155,7 +155,11 @@ if (corton_complete!=1) {
             if ((result['scroll2site']==1) && (scroll2site_activ==1))
             {
                 const regex = /^(https?:\/\/)?(.*?)($|[/?])/;
-                let host = regex.exec(result['scroll2site_url']);
+                host = regex.exec(result['scroll2site_url']);
+
+                if(result['scroll2site_url_text']!=''){
+                    host[2] = result['scroll2site_url_text'];
+                }
 
                 var scroll_to_site=document.getElementById("corton_scroll_to_site");
                 scroll_to_site.innerHTML= ''+

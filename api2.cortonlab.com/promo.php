@@ -15,7 +15,7 @@ if ($_GET['t']=='e') $stat_arr['native']=1;
 $sql="SELECT @main_promo_id:=`promo_id` FROM `anons` WHERE `id`='".addslashes($_GET['anons_id'])."';";
 $GLOBALS['db']->query($sql);
 $sql="SELECT * FROM (SELECT `id`,`title`,`text`,`istochnic` FROM `promo` WHERE `main_promo_id`=@main_promo_id AND `active`=1 ORDER BY RAND() LIMIT 1) as x,
-                    (SELECT `form_title`,`form_text`,`form_button`,`scroll2site`,`scroll2site_text`,`scroll2site_url`,`scroll2site_img_desktop`,`scroll2site_img_mobile` FROM `promo` WHERE `id`=@main_promo_id) as y";
+                    (SELECT `form_title`,`form_text`,`form_button`,`scroll2site`,`scroll2site_text`,`scroll2site_url`,`scroll2site_url_text`,`scroll2site_img_desktop`,`scroll2site_img_mobile` FROM `promo` WHERE `id`=@main_promo_id) as y";
 $result = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
 echo json_encode($result ,JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
