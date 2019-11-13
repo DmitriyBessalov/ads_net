@@ -102,7 +102,7 @@ if (corton_complete!=1) {
                         '</style>' +
                         '<div class="tooltip">'+
                             '<div class="block-tooltip" style="line-height: 1.3; color: #999; font-size: 12px !important;">Источники'+
-                            '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 172 172" style="position: relative; top: 3px; left: 2px; fill:#000000;">'+
+                            '<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 172 172" style="position: relative; top: 4px; left: 2px; fill:#000000;">'+
                             '<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">'+
                             '<path d="M0,172v-172h172v172z" fill="none">'+
                             '</path>'+
