@@ -432,6 +432,13 @@ if (corton_complete!=1) {
 
     //Обработка виджетов
     function corton_widget() {
+        const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
+        const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
+        if (!(recomend_algorithm_output!=='' || natpre_algorithm_output!=='')){
+            setTimeout(corton_widget,250);
+            return true;
+        }
+
         var show_recomend=0;
         var show_natpre=0;
         var gadget='';
@@ -449,15 +456,6 @@ if (corton_complete!=1) {
         var natpre_image_shape;
 
         const corton_body2=document.getElementsByTagName("body");
-
-        const recomend_algorithm_output = style_b.getPropertyValue('--recomend-algorithm-output');
-
-        if (recomend_algorithm_output==''){
-            setTimeout(corton_widget,500);
-            return true;
-        }
-
-        const natpre_algorithm_output = style_b.getPropertyValue('--natpre-algorithm-output');
 
         //Определение устройства пользователя
         function Device() {
