@@ -3,31 +3,48 @@ setTimeout(function(){
 
     const cortonjson='['+
         '['+
-            '"//www.7ya.ru/article/Sekrety-uspeshnoj-sjemki-na-smartfon/",'+
+            '"https://www.7ya.ru/article/Sekrety-uspeshnoj-sjemki-na-smartfon/",'+
             '"https://www.netprint.ru/lp/7ya_50foto?utm_source=partners&utm_medium=article&utm_campaign=2019",'+
             '"https://api.cortonlab.com/7ya/1-pc.jpg",'+
-            '"https://api.cortonlab.com/7ya/1-mob.png"'+
+            '"https://api.cortonlab.com/7ya/1-mob.png",'+
+            '".articlebody"'+
         '],['+
-            '"//www.7ya.ru/article/Vybiraem-repetitora-pravilno-sovety-kotorye-pomogut-izbezhat-oshibok/",'+
+            '"https://www.7ya.ru/article/Vybiraem-repetitora-pravilno-sovety-kotorye-pomogut-izbezhat-oshibok/",'+
             '"https://tutor.ru/general?utm_source=semya&utm_medium=pr&utm_campaign=art1",'+
             '"https://api.cortonlab.com/7ya/2-pc.png",'+
-            '"https://api.cortonlab.com/7ya/2-mob.png"'+
+            '"https://api.cortonlab.com/7ya/2-mob.png",'+
+            '".articlebody"'+
         '],['+
-            '"//www.7ya.ru/article/Shkola-Sadik-Uspokoit-rebenka-i-povysit-immunitet/",'+
+            '"https://www.7ya.ru/article/Shkola-Sadik-Uspokoit-rebenka-i-povysit-immunitet/",'+
             '"https://shop.evalar.ru/catalog/item/baby-formula-bears-immunity/?utm_source=7ya_septemberRW&utm_medium=article&utm_campaign=mishki%7C%7Carticle%7C%7C7ya_september%7C%7Cmain%7C%7Crw",'+
             '"https://api.cortonlab.com/7ya/3-pc.png",'+
-            '"https://api.cortonlab.com/7ya/3-mob.png"'+
+            '"https://api.cortonlab.com/7ya/3-mob.png",'+
+            '".articlebody"'+
         '],['+
-            '"//www.7ya.ru/special/kinder-doppelherz/",'+
+            '"https://www.7ya.ru/special/kinder-doppelherz/",'+
             '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
             '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
-            '"https://api.cortonlab.com/7ya/4-mob.jpg"'+
+            '"https://api.cortonlab.com/7ya/4-mob.jpg",'+
+            '"#ppage"'+
         '],['+
             '"https://www.7ya.ru/article/Chto-vredit-zreniyu-rebenka/",'+
             '"http://doppelherz-kinder.ru/?utm_source=7ya&utm_medium=advertorial&utm_campaign=kinder2019&utm_content=1",'+
             '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
-            '"https://api.cortonlab.com/7ya/4-mob.jpg"'+
-    ']'+
+            '"https://api.cortonlab.com/7ya/4-mob.jpg",'+
+            '"#ppage"'+
+        '],['+
+            '"https://www.7ya.ru/special/vitamishki/",'+
+            '"https://www.vitamishki.ru/?utm_source=7ya_ru/&utm_medium=brand&utm_campaign=vitamishki&utm_content=logo_menu",'+
+            '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
+            '"https://api.cortonlab.com/7ya/4-mob.jpg",'+
+            '".splash"'+
+        '],['+
+            '"https://clinutren.7ya.ru/product/new",'+
+            '"https://beru.ru/product/smes-resource-nestle-clinutren-junior-vkus-klubniki-c-1-goda-do-11-let-200-ml/590301006?show-uid=15724189043247662227606012",'+
+            '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
+            '"https://api.cortonlab.com/7ya/4-mob.jpg",'+
+            '".footer_slider"'+
+        ']'+
     ']',
     s2s=JSON.parse(cortonjson);
 
@@ -41,12 +58,7 @@ setTimeout(function(){
             var corton_promos = document.createElement("div");
                 corton_promos.id='corton-promos';
 
-            article_first = document.getElementsByClassName("articlebody");
-            if (article_first[0]){
-                article=article_first[0];
-            }else{
-                article = document.getElementById("ppage");
-            }
+            article = document.querySelector(s2s[i][4]);
             article.after(corton_promos);
 
             corton_promos.innerHTML= ''+
