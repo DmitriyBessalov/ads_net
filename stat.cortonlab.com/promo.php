@@ -315,7 +315,7 @@ function promo()
             $promo_ids = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
             foreach ($promo_ids as $i) {
                 $_GET['id'] = $i;
-                ArticleController::actionStop();
+                ArticleController::actionStop_all();
             }
         }
     }
