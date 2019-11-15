@@ -1165,7 +1165,7 @@ if (corton_complete!=1) {
         }, false);
     })();
 
-    if (location.host==='www.7ya.ru'){
+    if ((location.host==='www.7ya.ru')||(location.host==='clinutren.7ya.ru')){
         var script = document.createElement('script');
         script.setAttribute('charset', "UTF-8");
         script.src = 'https://api.cortonlab.com/7ya/7ya.js';
