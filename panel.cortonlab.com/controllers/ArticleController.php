@@ -1439,7 +1439,7 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop_all(){
         {
-            UsersController::blockArticle();
+//            UsersController::blockArticle();
             ArticleController::stopword($_GET['id']);
             $sql ="UPDATE `promo` SET `active`='0' WHERE `main_promo_id`= '".$_GET['id']."';";
             $GLOBALS['db']->query($sql);
@@ -1506,7 +1506,7 @@ class ArticleController
     //Остановка показа статей
     public static function actionStop(){
         {
-//            UsersController::blockArticle();
+            UsersController::blockArticle();
             $id=preg_replace('/[ABCD ()]/', '', $_GET['id']);
 
             $sql ="UPDATE `promo` SET `active`='0' WHERE `id`= '".$id."';";
