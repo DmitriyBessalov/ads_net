@@ -35,14 +35,14 @@ setTimeout(function(){
         '],['+
             '"https://www.7ya.ru/special/vitamishki/",'+
             '"https://www.vitamishki.ru/?utm_source=7ya_ru/&utm_medium=brand&utm_campaign=vitamishki&utm_content=logo_menu",'+
-            '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
-            '"https://api.cortonlab.com/7ya/4-mob.jpg",'+
+            '"https://api.cortonlab.com/7ya/5-pc.jpg",'+
+            '"https://api.cortonlab.com/7ya/5-mob.jpg",'+
             '".splash"'+
         '],['+
             '"https://clinutren.7ya.ru/product/new",'+
             '"https://beru.ru/product/smes-resource-nestle-clinutren-junior-vkus-klubniki-c-1-goda-do-11-let-200-ml/590301006?show-uid=15724189043247662227606012",'+
-            '"https://api.cortonlab.com/7ya/4-pc.jpg",'+
-            '"https://api.cortonlab.com/7ya/4-mob.jpg",'+
+            '"https://api.cortonlab.com/7ya/6-pc.jpg",'+
+            '"https://api.cortonlab.com/7ya/6-mob.png",'+
             '".footer_slider"'+
         ']'+
     ']',
