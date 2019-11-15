@@ -932,45 +932,8 @@ class ArticleController
             </form>
 		</div>
         </div>
-        <script>
-            var quill = new Quill(\'#editor-container\', {
-                modules: {
-                    toolbar: [
-                        [{ size: [\'small\', false, \'large\', \'huge\']}, { header: \'2\' },  "bold", "italic", "underline", { header: \'6\' }, { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
-                    ]
-                },
-                scrollingContainer: "#scrolling-container",
-                placeholder: "Написать что-то ценное...",
-                theme: "snow"
-            });
-            
-            var form = document.querySelector(\'#formtextsend\');
-            form.onsubmit = function() {
-                var about = document.querySelector(\'input[name=formtext]\');
-                var textt = document.querySelector(\'.ql-editor\');
-                about.value = textt.innerHTML;
-                return true;
-            }
-            
-            quill.on(\'text-change\', function(delta, oldDelta, source) {
-                    if (source == \'user\') {
-                        var elements = delta.ops;
-                        var idx;
-            
-                        for (var key in elements) {
-                            if (elements[key].retain != undefined) {
-                                idx = elements[key].retain;
-                            }
-                            if (elements[key].insert != undefined && elements[key].insert.image != undefined){
-                                console.log(idx);
-                                quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small">©&nbsp;Источник</span><p> </p>\', \'user\');
-                            }
-                        }
-                    }
-                });
-                                        
-        </script>';
-
+        ';
+        include PANELDIR.'/views/layouts/quill.html';
         include PANELDIR.'/views/layouts/footer.php';
         return true;
     }
@@ -1403,7 +1366,7 @@ class ArticleController
                 <form method="post" id="formtextsend" action="/article-update" class="form-2">
                     <input type="hidden" name="tab" value="статья">
                     <input type="hidden" name="id" value="'.$id.'" class="w-checkbox-input">
-                    <div class="div-block-97" style="width: 1337px">
+                    <div class="div-block-97" style="width: 1337px;margin-left: 20px;">
 					<div class="text-block-103">Контент статьи</div>
                         <div style="width: 1337px;">
                             <input type="text" class="text-field-4 w-input" style=" width: 760px;" maxlength="256" name="title" value="'.$result['title'].'" placeholder="Заголовок" id="title" required="">
@@ -1418,45 +1381,8 @@ class ArticleController
                     </div>
                 </form>
             </div>
-    </div>
-<script>
-    var quill = new Quill(\'#editor-container\', {
-      modules: {
-        toolbar: [
-          [{ size: [\'small\', false, \'large\', \'huge\']},{ header: \'2\' }, "bold", "italic", "underline", { list: \'ordered\' }, { list: \'bullet\' }, "image", "video", "blockquote", "link", "clean"]
-        ]
-      },
-      scrollingContainer: "#scrolling-container",
-      placeholder: "Написать что-то ценное...",
-      theme: "snow"
-    });
-    
-    var form = document.querySelector(\'#formtextsend\');
-    form.onsubmit = function() {
-      var about = document.querySelector(\'input[name=formtext]\');
-      var textt = document.querySelector(\'.ql-editor\');
-      about.value = textt.innerHTML;
-      return true;
-    }
-    
-        quill.on(\'text-change\', function(delta, oldDelta, source) {
-            if (source == \'user\') {
-                var elements = delta.ops;
-                var idx;
-    
-                for (var key in elements) {
-                    if (elements[key].retain != undefined) {
-                        idx = elements[key].retain;
-                    }
-                    if (elements[key].insert != undefined && elements[key].insert.image != undefined){
-                        console.log(idx);
-                        quill.clipboard.dangerouslyPasteHTML(idx+1, \'<span class="ql-size-small">©&nbsp;Источник</span><p> </p>\', \'user\');
-                    }
-                }
-            }
-         });
-</script>
-';
+    </div>';
+        include PANELDIR . '/views/layouts/quill.html';
         include PANELDIR . '/views/layouts/footer.php';
         return true;
     }

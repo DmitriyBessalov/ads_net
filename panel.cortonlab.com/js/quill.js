@@ -11488,14 +11488,3 @@ module.exports = __webpack_require__(63);
 /******/ ])["default"];
 });
 
-window.onscroll = function(){
-    let toolbar=document.querySelector('div.ql-toolbar.ql-snow');
-    let toolbar_position=document.querySelector('#toolbar_position');
-    if (toolbar && toolbar_position.getBoundingClientRect().top<=0){
-        toolbar.style.position='fixed';
-        toolbar_position.style.margin = "0 0 52px 0";
-    }else {
-        if (toolbar)  toolbar.style.position = 'relative';
-        toolbar_position.style.margin = "0 0 0 0";
-    }
-};

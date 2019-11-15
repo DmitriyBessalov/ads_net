@@ -760,32 +760,32 @@ $(document).ready(function(){
     }
 
     //переключение табов при редактирование статьи
-    $( "#tab1" ).on( "click", function() {
-        $(".w-tab-pane").removeClass("w--tab-active");
-        $(".w-tab-link").removeClass("w--current");
-        $("#tab1").addClass("w--current");
-        $("#tab1block").addClass("w--tab-active");
-    });
-    $( "#tab2" ).on( "click", function() {
-        $(".w-tab-pane").removeClass("w--tab-active");
-        $(".w-tab-link").removeClass("w--current");
-        $("#tab2").addClass("w--current");
-        $("#tab2block").addClass("w--tab-active");
-    });
-    $( "#tab3" ).on( "click", function() {
-        $(".w-tab-pane").removeClass("w--tab-active");
-        $(".w-tab-link").removeClass("w--current");
-        $("#tab3").addClass("w--current");
-        $("#tab3block").addClass("w--tab-active");
-        let toolbar=document.querySelector('div.ql-toolbar.ql-snow');
-        if (toolbar)  toolbar.style.position = 'relative';
-    });
-    $( "#tab4" ).on( "click", function() {
-        $(".w-tab-pane").removeClass("w--tab-active");
-        $(".w-tab-link").removeClass("w--current");
-        $("#tab4").addClass("w--current");
-        $("#tab4block").addClass("w--tab-active");
-    });
+    // $( "#tab1" ).on( "click", function() {
+    //     $(".w-tab-pane").removeClass("w--tab-active");
+    //     $(".w-tab-link").removeClass("w--current");
+    //     $("#tab1").addClass("w--current");
+    //     $("#tab1block").addClass("w--tab-active");
+    // });
+    // $( "#tab2" ).on( "click", function() {
+    //     $(".w-tab-pane").removeClass("w--tab-active");
+    //     $(".w-tab-link").removeClass("w--current");
+    //     $("#tab2").addClass("w--current");
+    //     $("#tab2block").addClass("w--tab-active");
+    // });
+    // $( "#tab3" ).on( "click", function() {
+    //     $(".w-tab-pane").removeClass("w--tab-active");
+    //     $(".w-tab-link").removeClass("w--current");
+    //     $("#tab3").addClass("w--current");
+    //     $("#tab3block").addClass("w--tab-active");
+    //     let toolbar=document.querySelector('div.ql-toolbar.ql-snow');
+    //     if (toolbar)  toolbar.style.position = 'relative';
+    // });
+    // $( "#tab4" ).on( "click", function() {
+    //     $(".w-tab-pane").removeClass("w--tab-active");
+    //     $(".w-tab-link").removeClass("w--current");
+    //     $("#tab4").addClass("w--current");
+    //     $("#tab4block").addClass("w--tab-active");
+    // });
 
     //Подключение слов в форму ключи
     function words() {

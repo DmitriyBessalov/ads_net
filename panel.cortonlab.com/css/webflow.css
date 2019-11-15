@@ -111,7 +111,7 @@ input.w-button {
 	margin-top: 16px;
 	background: none;
 }
-}
+
 html[data-w-dynpage] [data-w-cloak] {
   color: transparent !important;
 }
@@ -1824,4 +1824,12 @@ textarea.w-select {
 }
 .w-condition-invisible {
   display: none !important;
+}
+.ql-image{
+  position: static;
+}
+#img_vstavka_sboku{
+  overflow:hidden;
+  position: absolute;
+  height: 0;
 }

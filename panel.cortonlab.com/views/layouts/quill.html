@@ -1,0 +1,111 @@
+<script>
+    var quill = new Quill('#editor-container', {
+        modules: {
+            toolbar: [
+                [{ size: ['small', false, 'large', 'huge']}, { header: '2' },  "bold", "italic", "underline", { header: '6' }, { list: 'ordered' }, { list: 'bullet' }, "image", "video", "blockquote", "link", "clean"]
+            ]
+        },
+        scrollingContainer: "#scrolling-container",
+        placeholder: "Написать что-то ценное...",
+        theme: "snow"
+    });
+
+    var form = document.querySelector('#formtextsend');
+    form.onsubmit = function() {
+        var about = document.querySelector('input[name=formtext]');
+        var textt = document.querySelector('.ql-editor');
+        about.value = textt.innerHTML;
+        return true;
+    }
+
+    var img_vstavka_sboku_top;
+
+    var qlimage = document.querySelector('.ql-image');
+    g=document.createElement('div');
+    g.id='img_vstavka_sboku';
+    qlimage.appendChild(g);
+    g.innerHTML="<img src='/images/photo.png'>";
+
+    function imgvstavkasbokutop() {
+        let toolbar=document.querySelector('div.ql-toolbar.ql-snow');
+        let toolbar_position=document.querySelector('#toolbar_position');
+        if (toolbar && toolbar_position.getBoundingClientRect().top<=0){
+            toolbar.style.position='fixed';
+            toolbar_position.style.margin = "0 0 52px 0";
+            if (img_vstavka_sboku_top+toolbar_position.getBoundingClientRect().top>-5){
+                g.style.top=img_vstavka_sboku_top+toolbar_position.getBoundingClientRect().top+39+'px';
+                g.style.height='20px';
+            }else{
+                hideImgVstavka();
+            }
+        }else {
+            if (toolbar)  toolbar.style.position = 'relative';
+            toolbar_position.style.margin = "0 0 0 0";
+            g.style.top=img_vstavka_sboku_top+39+'px';
+            g.style.height='20px';
+        }
+    }
+
+    function showImgVstavka(){
+        var range = quill.getSelection(true),
+            length = quill.getLength(),
+            text,oldtext;
+
+        if (range.index==0){
+            oldtext = "\n";
+        }else{
+            oldtext = quill.getText(range.index-1, 1);
+        }
+
+        if (range.index==length-1){
+            text = "\n";
+        }else{
+            text = quill.getText(range.index, 1);
+        }
+
+        if ((text=='\n')&&(oldtext=='\n')){
+            var e = quill.getBounds(range);
+            g.style.left= '-30px';
+            img_vstavka_sboku_top=e.top;
+            imgvstavkasbokutop();
+        }else{
+            hideImgVstavka();
+        }
+    }
+
+    function hideImgVstavka(){
+        g.style.height='0';
+    }
+
+    quill.on('text-change', function(delta, oldDelta, source) {
+        setTimeout(showImgVstavka,100);
+        if (source == 'user') {
+            var elements = delta.ops;
+            var idx;
+
+            for (var key in elements) {
+                if (elements[key].retain != undefined) {
+                    idx = elements[key].retain;
+                }
+                if (elements[key].insert != undefined && elements[key].insert.image != undefined){
+                    console.log(idx);
+                    quill.clipboard.dangerouslyPasteHTML(idx+1, '<span class="ql-size-small">©&nbsp;Источник</span><p> </p>', 'user');
+                }
+            }
+        }
+    });
+
+    quill.on("selection-change", function(t,e) {
+        if (t!==null) {
+            showImgVstavka();
+        }else{
+            hideImgVstavka();
+        }
+    });
+
+    window.onscroll = function(){
+        imgvstavkasbokutop();
+    };
+
+
+</script>
