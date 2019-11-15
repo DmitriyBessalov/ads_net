@@ -79,7 +79,7 @@ setTimeout(function(){
                 '</div>'+
                 '<div id="corton_gradient_conteyner"><div id="corton_gradient"></div></div>'+
                 '<div id="corton_image_layer">' +
-                    '<img id="corton_image_fon_mobile" src="https://api.cortonlab.com/img/advertiser_screenshot_site/49f8e7f1e1f7a1bad4bd0ca5e1f34382.png">'+
+                    '<img id="corton_image_fon_mobile" src="">'+
                     '<div id="corton_image_fon_mobile_end"></div>'+
                 '</div>'+
                 '<div id="corton-promo-end" style="height: 130vh;"></div>'+
