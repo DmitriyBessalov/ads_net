@@ -1,5 +1,5 @@
 setTimeout(function(){
-    document.body.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 
     const cortonjson='['+
         '['+
@@ -146,12 +146,12 @@ setTimeout(function(){
 
 
                 setTimeout(function() {
-                    document.body.scrollTo(0, 0);
+                    window.scrollTo(0, 0);
                 }, 400);
 
                 function s2s_position() {
                     if (page_ready === 0) {
-                        document.body.scrollTo(0, 0);
+                        window.scrollTo(0, 0);
                         return true;
                     }
 

@@ -8914,7 +8914,9 @@ var Clipboard = function (_Module) {
       if (e.defaultPrevented || !this.quill.isEnabled()) return;
       var range = this.quill.getSelection();
       var delta = new _quillDelta2.default().retain(range.index);
+
       var scrollTop = this.quill.scrollingContainer.scrollTop;
+        console.log(_quill2.default.sources.SILENT);
 //      this.container.focus();
       this.quill.selection.update(_quill2.default.sources.SILENT);
       setTimeout(function () {
