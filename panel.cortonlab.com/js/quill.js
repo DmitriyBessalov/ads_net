@@ -4319,11 +4319,12 @@ var Scroll = function (_Parchment$Scroll) {
     value: function update(mutations) {
       if (this.batch === true) return;
       var source = _emitter2.default.sources.USER;
+      console.log (source);
       if (typeof mutations === 'string') {
         source = mutations;
       }
       if (!Array.isArray(mutations)) {
-        mutations = this.observer.takeRecords();
+          mutations = this.observer.takeRecords();
       }
       if (mutations.length > 0) {
         this.emitter.emit(_emitter2.default.events.SCROLL_BEFORE_UPDATE, source, mutations);
@@ -7114,6 +7115,9 @@ var ScrollBlot = /** @class */ (function (_super) {
     function ScrollBlot(node) {
         var _this = _super.call(this, node) || this;
         _this.scroll = _this;
+
+
+
         _this.observer = new MutationObserver(function (mutations) {
             _this.update(mutations);
         });
@@ -8910,6 +8914,8 @@ var Clipboard = function (_Module) {
     key: 'onPaste',
     value: function onPaste(e) {
       var _this2 = this;
+
+      //e.
 
       if (e.defaultPrevented || !this.quill.isEnabled()) return;
       var range = this.quill.getSelection();

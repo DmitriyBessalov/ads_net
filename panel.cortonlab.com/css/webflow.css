@@ -1831,5 +1831,5 @@ textarea.w-select {
 #img_vstavka_sboku{
   overflow:hidden;
   position: absolute;
-  height: 0;
+  height: 0px;
 }
