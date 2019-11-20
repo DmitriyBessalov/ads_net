@@ -1167,7 +1167,7 @@ $(document).ready(function(){
         if ($(this).is(':checked')){
             $('input[name=scroll2site_text]').prop('disabled', false);
             $('input[name=scroll2site_url]').prop('disabled', false);
-            $('input[name=scroll2site_url_text]').prop('disabled', true);
+            $('input[name=scroll2site_url_text]').prop('disabled', false);
             $('input[name=screenshot_desktop]').prop('disabled', false);
             $('input[name=screenshot_mobile]').prop('disabled', false);
         } else {
