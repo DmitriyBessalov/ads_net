@@ -8920,8 +8920,7 @@ var Clipboard = function (_Module) {
       var delta = new _quillDelta2.default().retain(range.index);
 
       var scrollTop = this.quill.scrollingContainer.scrollTop;
-        console.log(_quill2.default.sources.SILENT);
-//      this.container.focus();
+      this.container.focus();
       this.quill.selection.update(_quill2.default.sources.SILENT);
       setTimeout(function () {
         delta = delta.concat(_this2.convert()).delete(range.length);
@@ -8931,6 +8930,7 @@ var Clipboard = function (_Module) {
         _this2.quill.scrollingContainer.scrollTop = scrollTop;
         _this2.quill.removeFormat(range.index, delta.length()- range.length);
         _this2.quill.removeFormat(range.index, delta.length()- range.length);
+        console.log(range.index, delta.length()- range.length);
         _this2.quill.focus();
       }, 1);
     }
