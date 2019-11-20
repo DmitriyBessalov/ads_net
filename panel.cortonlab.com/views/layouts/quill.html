@@ -6,7 +6,7 @@
             ]
         },
         scrollingContainer: "#scrolling-container",
-        placeholder: "Написать что-то ценное...",
+        placeholder: "Написать статью...",
         theme: "snow"
     });
 
@@ -88,7 +88,7 @@
                     idx = elements[key].retain;
                 }
                 if (elements[key].insert != undefined && elements[key].insert.image != undefined){
-                    console.log(idx);
+                   // console.log(idx);
                     quill.clipboard.dangerouslyPasteHTML(idx+1, '<span class="ql-size-small">©&nbsp;Источник</span><p> </p>', 'user');
                 }
             }
