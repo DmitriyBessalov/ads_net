@@ -4319,7 +4319,7 @@ var Scroll = function (_Parchment$Scroll) {
     value: function update(mutations) {
       if (this.batch === true) return;
       var source = _emitter2.default.sources.USER;
-      console.log (source);
+
       if (typeof mutations === 'string') {
         source = mutations;
       }
@@ -8928,9 +8928,9 @@ var Clipboard = function (_Module) {
         // range.length contributes to delta.length()
         _this2.quill.setSelection(delta.length() - range.length, _quill2.default.sources.SILENT);
         _this2.quill.scrollingContainer.scrollTop = scrollTop;
-        _this2.quill.removeFormat(range.index, delta.length()- range.length);
-        _this2.quill.removeFormat(range.index, delta.length()- range.length);
-        console.log(range.index, delta.length()- range.length);
+        for (var iq = 0; iq < 3; iq++) {
+            _this2.quill.removeFormat(range.index, delta.length()- range.length);
+        }
         _this2.quill.focus();
       }, 1);
     }
