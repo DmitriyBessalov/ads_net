@@ -49,14 +49,25 @@ $promo_ids=array_unique(array_merge($result0, $result2));
 # Фильтр статей где обязательное обязательное совпадение по ключу и категория
 if (count($promo_ids)){
     $domen=parse_url ($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST );
-    $sql= "SELECT `medblok` FROM `ploshadki` WHERE `domen`='".$domen."'";
-    $medblok = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    $sql= "SELECT `medblok`,`finblok` FROM `ploshadki` WHERE `domen`='".$domen."'";
+    $blok = $GLOBALS['db']->query($sql)->fetch(PDO::FETCH_ASSOC);
 
     $ids = implode("','", $promo_ids);
-    if ($medblok) {
-        $sql="SELECT `id` FROM `promo` WHERE `medblock`='1' AND `id` IN ('".$ids."')";
-        $medblok_ids = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
-        foreach ($medblok_ids as $i){
+
+    if ($blok['medblok']) {
+        $sql="SELECT `id` FROM `promo` WHERE `medblok`='1' AND `id` IN ('".$ids."')";
+        $blok_ids = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+        foreach ($blok_ids as $i){
+            $key = array_search($i,$promo_ids);
+            unset($promo_ids[$key]);
+        }
+        $ids = implode("','", $promo_ids);
+    }
+
+    if ($blok['finblok']) {
+        $sql="SELECT `id` FROM `promo` WHERE `finblok`='1' AND `id` IN ('".$ids."')";
+        $blok_ids = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+        foreach ($blok_ids as $i){
             $key = array_search($i,$promo_ids);
             unset($promo_ids[$key]);
         }
