@@ -82,6 +82,19 @@ class ArticleController
                         $i['title']=true;
                     }if($i['title']) $promo['title'].=' ...';
 
+                    $sql="SELECT SUM(`pay`) FROM `stat_promo_day_count` WHERE `data`=CURRENT_DATE() and `anons_id` in ('".$anons."')";
+                    $CPG= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+                    if (is_null($CPG)) {
+                        $CPG=0;
+                    }
+
+                    $sql="SELECT max_rashod FROM `promo` WHERE `id` ='".$i['main_promo_id']."'";
+                    $max_rashod=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)-20;
+
+                    if ($max_rashod<=$CPG){
+                        $promo['title'].=' (приостановлена)';
+                    }
+
                     preg_match('/src="(https:\/\/api\.cortonlab\.com\/img\/promo\/.*?)"/',$promo['text'],$matches);
 
                     if (isset($today)) {
