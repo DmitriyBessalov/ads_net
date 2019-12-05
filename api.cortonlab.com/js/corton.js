@@ -1144,7 +1144,12 @@ if (corton_complete!=1) {
         corton_body = document.getElementsByTagName("body");
         if (corton_body.length !== 0) {
             style_b = window.getComputedStyle(corton_body[0], null);
-            corton_delay();
+            const promo_forcibly = style_b.getPropertyValue('--forcibly');
+            if (promo_forcibly){
+                corton_delay();
+            }else{
+                setTimeout(corton_get_body, 35);
+            }
         } else {
             setTimeout(corton_get_body, 40);
         }
