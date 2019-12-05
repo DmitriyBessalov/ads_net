@@ -647,9 +647,11 @@ class ArticleController
                 `merge_key_and_categor`='".$_POST['checkbox_merge']."',
                 `scroll2site`='".$_POST['scroll2site']."',
                 `scroll2site_text`='".$_POST['scroll2site_text']."',
+                `max_rashod`='".$_POST['max_rashod']."',
                 `medblock`='".$_POST['medblock']."',
                 ".$scroll2site_img."
                 `scroll2site_url`='".$_POST['scroll2site_url']."',
+                
                 `scroll2site_url_text`='".$_POST['scroll2site_url_text']."'
              WHERE `id`='".$_POST['id']."';";
             $GLOBALS['db']->query($sql);

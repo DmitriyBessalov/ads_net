@@ -113,10 +113,6 @@ $sql="SELECT promo_id, anons_ids, stavka
         ORDER BY stavka DESC, RAND()";
 $anons_all = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
 
-//$promo=implode("','" , $promo_ids);
-//$max_rashod="SELECT `id`,`max_rashod` FROM `promo` WHERE `id` IN  ('".$promo."')";
-//$result3 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
-
 $anons_ids = array();
 $y=0;
 
@@ -217,21 +213,6 @@ $stat_arr['words_list']=$words=str_replace("'","",$words);
 $stat_arr['promo_id_list']=$promo=str_replace("'","",$promo);
 $stat_arr['preview_id_list']=implode(',' ,$stat_arr2['preview_id']);
 $stat_arr['category_id_list']=$interes=str_replace("'","",$interes);
-
-//$sql="INSERT INTO
-//    `regust_widget`
-//SET
-//    `prosmotr_id` = '".$arr['prosmotr_id']."',
-//    `words` = '".$words."',
-//    `category` = '".$interes."',
-//    `platform_id` = '".$arr['p_id']."',
-//    `r` = '".$_GET['r']."',
-//    `e` = '".$_GET['e']."',
-//    `url` = '".$i."',
-//    `iso` = '".$iso."',
-//    `promo_id` = '".$promo."',
-//    `ip` = '".$_SERVER['REMOTE_ADDR']."';";
-//$GLOBALS['dbstat']->query($sql);
 
 
 if (is_null($_GET['r']))$_GET['r']='0';
