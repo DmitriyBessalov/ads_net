@@ -1251,6 +1251,13 @@ class ArticleController
                     </div>
                     <div>
                         
+                    <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>
+					<div class="text-block-103" style="padding: 35px 0 0 0;">Максимальный расход в сутки</div>
+                    <div class="div-block-85">
+                        <input type="number" min="0" max="1000000" step="0.01" class="text-field-9 w-input" maxlength="256" name="max_rashod" placeholder="50%" value="'.$result['max_rashod'].'" required>
+                    </div>
+                    <div>
+                        
                     </div>
                     <div style="border-top: 1px solid #E0E1E5 !important; width: 1337px; margin-bottom: 40px; margin-top: 40px; margin-left: -20px;"></div>				
 					<div class="text-block-103" style="padding: 35px 0 0 0;">Доступ рекламодателю</div>

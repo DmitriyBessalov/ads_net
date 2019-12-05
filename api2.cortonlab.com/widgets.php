@@ -85,12 +85,37 @@ if (count($promo_ids)){
     }
 }
 
+foreach ($promo_ids as $i) {
+
+    $sql = "SELECT `id` FROM `anons` WHERE `promo_id`='" . $i . "'";
+    $anons= $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
+    $anons=implode("','" , $anons);
+
+    $sql="SELECT SUM(`pay`) FROM `stat_promo_day_count` WHERE `data`=CURRENT_DATE() and `anons_id` in ('".$anons."')";
+    $CPG= $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_COLUMN);
+    if (is_null($CPG)) {
+        $CPG=0;
+    }
+
+    $sql="SELECT max_rashod FROM `promo` WHERE `id` ='".$i."'";
+    $max_rashod=$GLOBALS['db']->query($sql)->fetch(PDO::FETCH_COLUMN)-20;
+
+    if ($max_rashod<=$CPG){
+        $key = array_search($i,$promo_ids);
+        unset($promo_ids[$key]);
+    }
+}
+
 //Берем ID Анонсов
 $promo=implode("','" , $promo_ids);
 $sql="SELECT promo_id, anons_ids, stavka
         FROM anons_index WHERE promo_id IN ('".$promo."')
         ORDER BY stavka DESC, RAND()";
 $anons_all = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+
+//$promo=implode("','" , $promo_ids);
+//$max_rashod="SELECT `id`,`max_rashod` FROM `promo` WHERE `id` IN  ('".$promo."')";
+//$result3 = $GLOBALS['db']->query($sql)->fetchALL(PDO::FETCH_COLUMN);
 
 $anons_ids = array();
 $y=0;
