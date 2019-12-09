@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json;');
 $kuki=2;
-require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
+//require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 $stat_arr['is_load_widget']=1;
 
 $interes = addslashes(implode("','",$_GET['c']));
