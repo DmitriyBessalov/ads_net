@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header("Access-Control-Allow-Credentials: true");
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
-require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
+//require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 $stat_arr['is_show_preview']=1;
 
 $domen=parse_url ( $_SERVER['HTTP_ORIGIN'], PHP_URL_HOST );
@@ -18,7 +18,7 @@ $stat_arr['platform_id']=$ploshadka_id = $platform['id'];
 if (!$platform){
     $stat_arr['is_baned']=1;
     $stat_arr['preview_id_list']=addslashes($_GET['anons_ids']);
-    statpostgres($stat_arr);
+//    statpostgres($stat_arr);
     exit;
 };
 
@@ -89,4 +89,4 @@ if ($_GET['f']==1){
 
 echo 1;
 
-statpostgres($stat_arr);
+//statpostgres($stat_arr);

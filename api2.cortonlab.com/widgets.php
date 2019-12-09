@@ -3,13 +3,13 @@ header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json;');
 $kuki=2;
-require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
+//require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 $stat_arr['is_load_widget']=1;
 
 $interes = addslashes(implode("','",$_GET['c']));
 $_GET = array_map('addslashes', $_GET);
 
-if ($_SERVER['REMOTE_ADDR']=='192.168.1.153')$_SERVER['REMOTE_ADDR']='185.68.146.112';
+//if ($_SERVER['REMOTE_ADDR']=='192.168.1.153')$_SERVER['REMOTE_ADDR']='185.68.146.112';
 
 #Определение geo
 require_once '/var/www/www-root/data/www/api2.cortonlab.com/geoip/geoip.php';
@@ -224,8 +224,8 @@ if (is_null($_GET['e'])){
     $stat_arr['native']=$_GET['e'];
 }
 
-statpostgres($stat_arr);
+//statpostgres($stat_arr);
 
-$sql="insert into tb_stat_request (view_id, words_list, category_id_list, promo_id_list, url, iso, recomend, native, remote_ip, platform_id) values 
-    ('".$arr['prosmotr_id']."','{".$words."}','{".$interes."}','{".$promo."}','".$i."','".$iso."','".$_GET['r']."','".$_GET['e']."','".$_SERVER['REMOTE_ADDR']."','".$arr['p_id']."')";
-$GLOBALS['postgre'] -> query($sql);
+//$sql="insert into tb_stat_request (view_id, words_list, category_id_list, promo_id_list, url, iso, recomend, native, remote_ip, platform_id) values
+//    ('".$arr['prosmotr_id']."','{".$words."}','{".$interes."}','{".$promo."}','".$i."','".$iso."','".$_GET['r']."','".$_GET['e']."','".$_SERVER['REMOTE_ADDR']."','".$arr['p_id']."')";
+//$GLOBALS['postgre'] -> query($sql);

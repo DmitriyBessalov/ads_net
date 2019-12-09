@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
 header("Access-Control-Allow-Credentials: true");
 header('Content-Type: application/json; charset=UTF-8');
 require_once('/var/www/www-root/data/www/panel.cortonlab.com/config/db.php');
-require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
+//require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 $stat_arr['is_click_preview']=1;
 $stat_arr['view_id']=$_GET['prosmort_id'];
 $stat_arr['preview_id_list']=$_GET['anons_id'];
@@ -25,4 +25,4 @@ if ($result){
 }else{
     $stat_arr['is_baned']=1;
 }
-statpostgres($stat_arr);
+//statpostgres($stat_arr);

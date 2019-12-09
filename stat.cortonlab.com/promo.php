@@ -5,7 +5,7 @@ header("Access-Control-Allow-Credentials: true");
 function promo()
 {
     $_GET = array_map('addslashes', $_GET);
-    require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
+//    require_once('/var/www/www-root/data/www/stat.cortonlab.com/postgres.php');
 
     $widget = $_GET['t'];
 #  r: recomend
@@ -37,13 +37,13 @@ function promo()
 # Проверка входящих параметров
     if (!(($_GET['t'] == 'e') OR ($_GET['t'] == 's') OR ($_GET['t'] == 'r'))) {
         $stat_arr['is_baned'] = 1;
-        statpostgres($stat_arr);
+ //       statpostgres($stat_arr);
         exit;
     }
 
     if (($anons_id == 0) OR ($prosmort_id == 0)) {
         $stat_arr['is_baned'] = 1;
-        statpostgres($stat_arr);
+//        statpostgres($stat_arr);
         exit;
     }
 
@@ -57,7 +57,7 @@ function promo()
         $block = $redis->get('r:' . $prosmort_id, 1, 1296000);
     if ($block) {
         $stat_arr['is_baned'] = 1;
-        statpostgres($stat_arr);
+//        statpostgres($stat_arr);
         exit;
     }
 
@@ -87,7 +87,7 @@ function promo()
         if ($domen != 'www.kiz.ru')
             if ($_GET['ref'] == "") {
                 $stat_arr['is_baned'] = 1;
-                statpostgres($stat_arr);
+//                statpostgres($stat_arr);
                 exit;
             };
         $sql = "INSERT INTO 
@@ -109,7 +109,7 @@ function promo()
             $pay = $GLOBALS['dbstat']->query($sql)->fetch(PDO::FETCH_ASSOC);
             if ($pay == false) {
                 $stat_arr['is_baned'] = 1;
-                statpostgres($stat_arr);
+                //statpostgres($stat_arr);
                 exit;
             }
 
@@ -265,7 +265,7 @@ function promo()
             }
     }
 
-    if ($action != 'l') statpostgres($stat_arr);
+    //if ($action != 'l') statpostgres($stat_arr);
 
     if ((($action == 's') or ($action == 'r')) and ($pay['pay'] == 0)) {
         # Модель оплаты за прочтения статей
