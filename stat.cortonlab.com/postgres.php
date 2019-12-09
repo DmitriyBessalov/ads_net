@@ -96,5 +96,5 @@ function statpostgres($stat_arr) {
         '".$stat_arr['platform_id']."')";
     $sql=str_replace("'null'","null",$sql);
     $sql=str_replace("{}","null",$sql);
-    $GLOBALS['postgre'] ->query($sql);
+//    $GLOBALS['postgre'] ->query($sql);
 };
